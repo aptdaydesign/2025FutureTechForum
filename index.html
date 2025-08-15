@@ -1,341 +1,1904 @@
-<!doctype html>
-<html lang="zh-Hant">
+
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>半導體產業 前瞻趨勢論壇｜活動頁</title>
-<meta name="description" content="生成式 AI、HPC 與先進製程驅動產業變革，論壇聚焦晶片設計與智慧製造，掌握供應鏈新局。">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700;800&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#0c0f14; --fg:#f5f7fa; --muted:#b9c0ce; --brand:#4ea1ff; --brand-2:#7bd389;
-  --card:#151a22; --line:#232a35;
-}
-*{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:var(--fg);font-family:"Noto Sans TC",system-ui,-apple-system,Segoe UI,Roboto,Arial,"PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.6}
-a{color:var(--brand);text-decoration:none}
-a:hover{text-decoration:underline}
-.container{max-width:1080px;margin:0 auto;padding:0 20px}
-section{padding:72px 0;border-top:1px solid var(--line)}
-h1,h2,h3{line-height:1.25;margin:0 0 16px}
-h1{font-size:clamp(28px,4vw,44px);font-weight:800}
-h2{font-size:clamp(22px,3vw,28px);font-weight:800}
-h3{font-size:clamp(18px,2.4vw,22px);font-weight:700}
-p,li{color:var(--muted);font-size:16px}
-.badge{display:inline-block;padding:6px 10px;border:1px solid var(--line);border-radius:999px;font-size:12px;color:var(--muted);margin-right:8px}
-.btn{display:inline-flex;align-items:center;gap:10px;background:var(--brand);color:#0b1220;border:none;padding:14px 20px;border-radius:10px;font-weight:800;cursor:pointer;box-shadow:0 6px 24px rgba(78,161,255,.25)}
-.btn.secondary{background:transparent;color:var(--fg);border:1px solid var(--line);box-shadow:none}
-.btn:active{transform:translateY(1px)}
-/* Top bar */
-.topbar{position:sticky;top:0;z-index:50;background:rgba(12,15,20,.7);backdrop-filter:saturate(160%) blur(10px);border-bottom:1px solid var(--line)}
-.nav{display:flex;justify-content:space-between;align-items:center;height:62px}
-.nav .left{display:flex;align-items:center;gap:14px}
-.nav .right{display:flex;gap:10px}
-.anchor{display:flex;gap:18px;font-size:14px}
-.anchor a{color:var(--muted)}
-.anchor a:hover{color:var(--fg)}
-/* Hero */
-.hero{position:relative;padding:96px 0 64px;background:
-linear-gradient(180deg,rgba(17,22,31,.65),rgba(17,22,31,.9)),
-url('https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat}
-.hero .kpis{display:flex;gap:18px;flex-wrap:wrap;margin:18px 0}
-.hero .kpi{background:rgba(255,255,255,.06);border:1px solid var(--line);padding:10px 12px;border-radius:10px;font-size:13px;color:#e7ecf7}
-.hero .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
-.countdown{display:flex;gap:10px;margin-top:16px}
-.cd{background:#131824;border:1px solid var(--line);padding:10px 12px;border-radius:10px;text-align:center;min-width:70px}
-.cd b{display:block;font-size:20px}
-/* Features */
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
-.card h3{margin-bottom:6px}
-@media (max-width:860px){.grid3{grid-template-columns:1fr}}
-/* Agenda */
-.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
-.tab{padding:8px 12px;border:1px solid var(--line);border-radius:999px;cursor:pointer}
-.tab.active{background:var(--brand-2);color:#0f1a14;border-color:transparent;font-weight:800}
-.agenda{display:grid;grid-template-columns:1fr 2fr;gap:16px}
-.slot{display:grid;grid-template-columns:120px 1fr;gap:14px;align-items:start;padding:14px;border-bottom:1px dashed var(--line)}
-.slot .time{color:#c9d3e3;font-weight:700}
-.slot .title{color:#eaf1ff;font-weight:700}
-.slot .speaker{color:var(--muted);font-size:14px}
-@media (max-width:860px){.agenda{grid-template-columns:1fr}.slot{grid-template-columns:100px 1fr}}
-/* Speakers */
-.speakers{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.speaker{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
-.speaker img{width:100%;height:200px;object-fit:cover}
-.speaker .meta{padding:12px}
-.speaker .meta .name{font-weight:800}
-@media (max-width:1024px){.speakers{grid-template-columns:repeat(3,1fr)}}
-@media (max-width:720px){.speakers{grid-template-columns:repeat(2,1fr)}}
-/* Goodies */
-.goodies{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.good{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
-@media (max-width:860px){.goodies{grid-template-columns:1fr}}
-/* Map & Notes */
-.map{width:100%;height:300px;border:0;border-radius:12px;filter:grayscale(.2)}
-ol.notes{padding-left:18px}
-footer{padding:32px 0;color:#94a0b3;border-top:1px solid var(--line);text-align:center}
-.share{display:flex;gap:10px;flex-wrap:wrap}
-.share a{border:1px solid var(--line);padding:8px 10px;border-radius:999px;color:var(--muted)}
-/* Floating CTA */
-.fab{position:fixed;right:16px;bottom:16px;z-index:60}
-.fab .btn{border-radius:999px;padding:14px 18px}
-</style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <title>半導體產業 前瞻趨勢論壇</title>
+  <meta property="og:title" content="半導體產業 前瞻趨勢論壇" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.digitimes.com.tw/seminar/TechForum_20250904/" />
+  <meta property="og:image" content="https://www.digitimes.com.tw/seminar/TechForum_20250904/img/webtitle.jpg" />
+  <meta property="og:description"
+    content="生成式 AI、高效能運算晶片與先進製程正驅動 2025 年全球半導體產業持續成長，然而，美中地緣政治緊張亦帶來產能布局的重組與供應鏈風險。台灣，站在技術與戰略的交叉點，正扮演推動全球半導體創新升級的核心角色。本次 DIGITIMES Tech Forum 將聚焦 AI 時代的晶片設計與智慧製造，匯聚產業專家、揭示技術熱點、直擊地緣挑戰，為您解構 2025年半導體產業的「機會」與「變局」，助您掌握未來產業走向。" />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <link rel="stylesheet" href="assets/css/all.min.css?v=20250724.1">
+
+  <script src="https://www.digitimes.com.tw/seminar/include/gtm.js"></script>
 </head>
+
 <body>
-<header class="topbar">
-  <div class="container nav">
-    <div class="left">
-      <strong>Tech Forum</strong>
-      <nav class="anchor">
-        <a href="#about">活動介紹</a>
-        <a href="#agenda">活動議程</a>
-        <a href="#speakers">講師陣容</a>
-        <a href="#gifts">活動好禮</a>
-        <a href="#venue">會場位置</a>
-        <a href="#notes">注意事項</a>
-      </nav>
+  <div class="wrap" id="wrap">
+
+    <div class="fix_aside">
+      <button class="button">
+        <a href="https://www.digitimes.com.tw/OnLine/DataInput.asp?ProdGroup=05HAE0904-0" target="_blank">
+          <p class="button__text">
+            <span style="--index: 0;">立</span>
+            <span style="--index: 1;">即</span>
+            <span style="--index: 2;">報</span>
+            <span style="--index: 3;">名</span>
+            <span style="--index: 4;"> </span>
+            <span style="--index: 5;"> </span>
+            <span style="--index: 6;">立</span>
+            <span style="--index: 7;">即</span>
+            <span style="--index: 8;">報</span>
+            <span style="--index: 9;">名</span>
+            <span style="--index: 10;"> </span>
+            <span style="--index: 11;"> </span>
+          </p>
+
+          <div class="button__circle">
+            <svg viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg" class="button__icon" width="14">
+              <path
+                d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z"
+                fill="currentColor"></path>
+            </svg>
+
+            <svg viewBox="0 0 14 15" fill="none" width="14" xmlns="http://www.w3.org/2000/svg"
+              class="button__icon button__icon--copy">
+              <path
+                d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z"
+                fill="currentColor"></path>
+            </svg>
+          </div>
+        </a>
+      </button>
+      <!-- <a class="item is_calendar" href="assets/calendar.ics" target="_blank" data-toggle="tooltip" data-placement="left"
+        title="點擊下載並開啟加入行事曆">
+        <img src="assets/images/icons/calendar.svg">
+      </a> -->
+      <a class="item" href="https://www.digitimes.com.tw/OnLine/query.asp?ProdGroup=05HAE0904-0" target="_blank">
+        <p>報名<br>查詢</p>
+      </a>
+      <a class="item scrollTop js_page_scroll" href="#wrap"></a>
     </div>
-    <div class="right">
-      <a class="btn" href="#register">立即報名</a>
-      <a class="btn secondary" href="#register">報名查詢</a>
-    </div>
+
+    <nav>
+      <div class="nav_area">
+        <ul>
+          <li>
+            <a class="js_page_scroll" href="#intro">活動介紹</a>
+          </li>
+          <li>
+            <a class="js_page_scroll" href="#agenda">活動議程</a>
+          </li>
+          <li>
+            <a class="js_page_scroll" href="#speaker">講師陣容</a>
+          </li>
+          <li>
+            <a href="https://www.digitimes.com.tw/OnLine/DataInput.asp?ProdGroup=05HAE0904-0" target="_blank"
+              class="active">立即報名</a>
+          </li>
+          <!-- <li>
+            <a href="https://www.digitimes.com.tw/OnLine/query.asp?ProdGroup=05HAE0904-0" target="_blank">報名查詢</a>
+          </li>
+          <li>
+            <a class="js_page_scroll" href="#detail">參加辦法</a>
+          </li> -->
+        </ul>
+      </div>
+
+      <div class="nav_mobile">
+        <div class="nav_mobile-btn">
+          <div class="nav_mobile-btn-line HBLine0"></div>
+          <div class="nav_mobile-btn-line HBLine1"></div>
+          <div class="nav_mobile-btn-line HBLine2"></div>
+        </div>
+      </div>
+
+      <div class="nav_sns">
+        <div class="hover">
+          <span class="hover_holder" title="分享">
+            <img src="assets/images/icons/svg_share.svg" alt="SHARE">
+          </span>
+          <div class="hover_menu">
+            <a class="hover_item sns_fb share-to" data-sns="facebook" data-toggle="tooltip" data-placement="left"
+              title="分享到FaceBook">
+              <img src="assets/images/icons/svg_fb.svg" alt="FACEBOOK">
+            </a>
+            <a class="hover_item sns_line share-to" data-sns="line" data-toggle="tooltip" data-placement="left"
+              title="分享到Line">
+              <img src="assets/images/icons/svg_line.svg" alt="LINE">
+            </a>
+            <a class="hover_item sns_twitter share-to" data-sns="twitter" data-toggle="tooltip" data-placement="left"
+              title="分享到twitter">
+              <img src="assets/images/icons/svg_twitter.svg" alt="twitter">
+            </a>
+            <a class="hover_item sns_linkedin share-to" data-sns="linkedin" data-toggle="tooltip" data-placement="left"
+              title="分享到linkedin">
+              <img src="assets/images/icons/svg_linkedin.svg" alt="linkedin">
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <header>
+      <div class="mainBG" id="kv">
+        <div class="num">
+          <div class="num-inner" data-aos="fade-down" data-aos-duration="1200" data-aos-delay="500"
+            data-aos-anchor="#kv">
+            <img src="assets/images/kv/num.png">
+          </div>
+        </div>
+
+        <div class="line">
+          <div class="line-inner" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="400"
+            data-aos-anchor="#kv">
+            <img src="assets/images/kv/line.png">
+          </div>
+        </div>
+
+        <div class="halo">
+          <div class="halo-inner" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="700"
+            data-aos-anchor="#kv">
+            <img src="assets/images/kv/halo.png">
+          </div>
+        </div>
+
+        <div class="bg">
+          <div class="bg-inner" data-aos="zoom-out" data-aos-duration="1000" data-aos-delay="0" data-aos-anchor="#kv">
+            <img src="assets/images/kv/bg.jpg">
+          </div>
+        </div>
+        <!-- <img src="img/webtitle.jpg" class="bg"> -->
+      </div>
+
+      <div class="solid" data-aos="zoom-out" data-aos-duration="1000" data-aos-delay="200" data-aos-anchor="#kv">
+        <div class="ball">
+          <div class="ball-inner">
+            <img src="assets/images/kv/ball.png?v=20250723.1">
+          </div>
+        </div>
+
+        <div class="dots1">
+          <div class="dots1-inner">
+            <img src="assets/images/kv/dots1.png">
+          </div>
+        </div>
+
+        <div class="dots2">
+          <div class="dots2-inner">
+            <img src="assets/images/kv/dots2.png">
+          </div>
+        </div>
+
+        <div class="dots3">
+          <div class="dots3-inner">
+            <img src="assets/images/kv/dots3.png">
+          </div>
+        </div>
+
+        <div class="dots4">
+          <div class="dots4-inner">
+            <img src="assets/images/kv/dots4.png">
+          </div>
+        </div>
+
+        <div class="ball_light">
+          <div class="ball_light-inner">
+            <img src="assets/images/kv/ball_light.png">
+          </div>
+        </div>
+
+        <div class="ball_shadow">
+          <div class="ball_shadow-inner">
+            <img src="assets/images/kv/ball_shadow.png">
+          </div>
+        </div>
+      </div>
+
+      <img src="assets/images/kv/logo.svg" alt="Digitimes TechForum Computex 2025" class="logo" data-aos="fade-right"
+        data-aos-duration="1000" data-aos-anchor="#kv" data-aos-delay="400">
+
+      <div class="title">
+        <div class="inner">
+          <img src="assets/images/kv/t1.png?v=20250724.1" alt="前瞻預測" class="t1" data-aos="fade-up"
+            data-aos-duration="1000" data-aos-delay="500" data-aos-anchor="#kv">
+
+          <img src="assets/images/kv/t2.png?v=20250724.1" alt="" class="t2" data-aos="fade-up" data-aos-duration="1000"
+            data-aos-delay="600" data-aos-anchor="#kv">
+
+          <img src="assets/images/kv/t3.png" alt="元大金融廣場" class="t3" data-aos="fade-up" data-aos-duration="1000"
+            data-aos-delay="700" data-aos-anchor="#kv">
+
+          <div class="timer" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800" data-aos-anchor="#kv">
+            <div class="tb d">
+              <span>00</span></div>
+            <div class="tb h">
+              <span>00</span></div>
+            <div class="tb m">
+              <span>00</span></div>
+            <div class="tb s">
+              <span>00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="sc_intro" id="intro">
+        <div class="container">
+          <div class="sc_intro-cnt">
+            <p class="main_tit" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="100"
+              data-aos-anchor="#intro">
+              重塑全球半導體新秩序的關鍵時刻<span>？</span>
+            </p>
+            <p class="text" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200" data-aos-anchor="#intro">
+              生成式 AI、高效能運算晶片與先進製程正驅動 2025 年全球半導體產業持續成長，然而，美中地緣政治緊張亦帶來產能布局的重組與供應鏈風險。台灣，站在技術與戰略的交叉點，正扮演推動全球半導體創新升級的核心角色。
+            </p>
+
+            <p class="text" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="300" data-aos-anchor="#intro">
+              本次 DIGITIMES Tech Forum 將聚焦 AI 時代的晶片設計與智慧製造，匯聚產業專家、揭示技術熱點、直擊地緣挑戰，為您解構 2025年半導體產業的「機會」與「變局」，助您掌握未來產業走向。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sc_highlight" id="highlight">
+        <div class="container">
+          <div class="sc_highlight-cnt" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="400"
+            data-aos-anchor="#highlight">
+            <h3 class="tit">
+              Tech Forum <br class="d-none d-md-block">Key Focus
+            </h3>
+            <div class="item">
+              <img src="assets/images/intro/熱門技術全掌握.svg" alt="熱門技術全掌握">
+              <p class="subtit">熱門技術全掌握</p>
+              <p class="text">熱門AI 晶片、先進封裝、矽光子與 HBM 技術，一次掌握！</p>
+            </div>
+
+            <div class="item">
+              <img src="assets/images/intro/供應鏈重塑全解析.svg" alt="供應鏈重塑全解析">
+              <p class="subtit">供應鏈重塑全解析</p>
+              <p class="text">從地緣博弈到產能布局，全面剖析台廠因應之道與布局策略！</p>
+            </div>
+
+            <div class="item">
+              <img src="assets/images/intro/台灣角色全面布局.svg" alt="台灣角色全面布局">
+              <p class="subtit">台灣角色全面布局</p>
+              <p class="text">深入探討台灣如何憑藉技術與生態優勢，成為全球半導體不可或缺的力量！</p>
+            </div>
+          </div>
+
+          <div class="cta" data-aos="zoom-in" data-aos-duration="1200" data-aos-delay="600"
+            data-aos-anchor="#highlight">
+            <a href="https://www.digitimes.com.tw/OnLine/DataInput.asp?ProdGroup=05HAE0904-0" target="_blank"
+              class="cta-btn">
+              <div class="cta-btn-inner">
+                <p class="text">立即報名</p>
+                <img class="arrow-right" src="assets/images/icons/arrow-right-w.svg">
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="sc_agenda" id="agenda">
+        <div class="container">
+          <h3 class="tit" data-aos="fade-down" data-aos-duration="1200" data-aos-delay="100" data-aos-anchor="#agenda">
+            活動議程
+          </h3>
+
+          <!-- 網頁版 -->
+          <div class="agenda_cnt d-none d-lg-block">
+            <div class="ag_wrap">
+              <div class="ag_table">
+                <div class="ag_row tr_one" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200"
+                  data-aos-anchor="#agenda">
+                  <div class="td td_light">
+                    <div class="time">09:30-10:00</div>
+                    <div class="title">
+                      <div class="sub">報到</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ag_row tr_one" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="300"
+                  data-aos-anchor="#agenda">
+                  <div class="td">
+                    <div class="time">10:00-10:25</div>
+                    <div class="title">
+                      <div class="sub">半導體在全球ICT供應鏈的核心地位與展望</div>
+                      <!-- <button class="sub-btn" data-bs-target="#agd0708_1" data-bs-toggle="modal">議程大綱</button> -->
+                    </div>
+                    <div class="speaker">
+                      <div class="name">黃欽勇<span class="job">/ DIGITIMES暨IC之音 董事長</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ag_row tr_one" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="400"
+                  data-aos-anchor="#agenda">
+                  <div class="td">
+                    <div class="time">10:25-10:50</div>
+                    <div class="title">
+                      <div class="sub">智慧產業共生成長的挑戰：AI與半導體</div>
+                      <!-- <button class="sub-btn" data-bs-target="#agd2" data-bs-toggle="modal">議程大綱</button> -->
+                    </div>
+                    <div class="speaker">
+                      <div class="name">盧超群<span class="job">/ 鈺創科技 董事長</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ag_row tr_one" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="500"
+                  data-aos-anchor="#agenda">
+                  <div class="td">
+                    <div class="time">10:50-11:15</div>
+                    <div class="title">
+                      <div class="sub">製程 X 封裝 半導體產業的機會與挑戰</div>
+                      <!-- <button class="sub-btn" data-bs-target="#agd0708_1" data-bs-toggle="modal">議程大綱</button> -->
+                    </div>
+                    <div class="speaker">
+                      <div class="name">郭皇志<span class="job">/ 美國國家儀器 台灣區總經理</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ag_row tr_one" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="600"
+                  data-aos-anchor="#agenda">
+                  <div class="td">
+                    <div class="time">11:15-11:40</div>
+                    <div class="title">
+                      <div class="sub">半導體先進製造趨勢分析</div>
+                      <button class="sub-btn" data-bs-target="#agd4" data-bs-toggle="modal">議程大綱</button>
+                    </div>
+                    <div class="speaker">
+                      <div class="name">陳澤嘉<span class="job">/ DIGITIMES 分析師</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ag_row tr_one" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="700"
+                  data-aos-anchor="#agenda">
+                  <div class="td td_light">
+                    <div class="time">11:40-13:30</div>
+                    <div class="title">
+                      <div class="sub">中場休息</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ag_row tr_split">
+                  <div class="ag_track" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="800"
+                    data-aos-anchor="#agenda">
+                    <div class="track"><span>A</span> 先進封測</div>
+                  </div>
+                  <div class="ag_track" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="800"
+                    data-aos-anchor="#agenda" v>
+                    <div class="track"><span>B</span> 關稅下的供應鏈變局&手機AP競爭布局</div>
+                  </div>
+                </div>
+
+                <div class="ag_row tr_split">
+                  <div class="td" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="900"
+                    data-aos-anchor="#agenda">
+                    <div class="time">13:30-13:55</div>
+                    <div class="title">
+                      <div class="sub">從GPU到ASIC的轉折時代：<br>AI加速器市場剖析與前瞻</div>
+                      <button class="sub-btn" data-bs-target="#agdA1" data-bs-toggle="modal">議程大綱</button>
+                    </div>
+                    <div class="speaker">
+                      <div class="name">翁書婷<span class="job">/ DIGITIMES 分析師</span></div>
+                    </div>
+                  </div>
+
+                  <div class="td" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="900"
+                    data-aos-anchor="#agenda">
+                    <div class="time">13:30-13:55</div>
+                    <div class="title">
+                      <div class="sub">伺服器主要EMS業者供應鏈變化 : <br>對比各業者美國工廠關稅前與後觀點</div>
+                      <button class="sub-btn" data-bs-target="#agdB1" data-bs-toggle="modal">議程大綱</button>
+                    </div>
+                    <div class="speaker">
+                      <div class="name">周延<span class="job">/ DIGITIMES 分析師</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ag_row tr_split">
+                  <div class="td" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="1000"
+                    data-aos-anchor="#agenda">
+                    <div class="time">13:55-14:20</div>
+                    <div class="title">
+                      <div class="sub">Engineering the future of AI: Powered by HBM and packaging breakthroughs</div>
+                      <!-- <button class="sub-btn" data-bs-target="#agd0708_1" data-bs-toggle="modal">議程大綱</button> -->
+                    </div>
+                    <div class="speaker">
+                      <div class="name">張玉琳<span class="job">/ 台灣美光 先進封裝暨測試營運副總裁</span></div>
+                    </div>
+                  </div>
+
+                  <div class="td" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="1000"
+                    data-aos-anchor="#agenda">
+                    <div class="time">13:55-14:20</div>
+                    <div class="title">
+                      <div class="sub">世界的台積電還有對手嗎？<br>管制、關稅與戰爭風險下的半導體競爭新局浮現</div>
+                      <button class="sub-btn" data-bs-target="#agdB2" data-bs-toggle="modal">議程大綱</button>
+                    </div>
+                    <div class="speaker">
+                      <div class="name">林俊吉<span class="job">/ DIGITIMES 資深分析師</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ag_row tr_split">
+                  <div class="td" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="1100"
+                    data-aos-anchor="#agenda">
+                    <div class="time">14:20-14:45</div>
+                    <div class="title">
+                      <div class="sub">Panel Discussion</div>
+                      <!-- <button class="sub-btn" data-bs-target="#agd0708_1" data-bs-toggle="modal">議程大綱</button> -->
+                    </div>
+                    <div class="speaker">
+                      <p>主持人：</p>
+                      <div class="name">陳奭璁<span class="job">/ DIGITIMES 資深主編兼總監</span></div>
+                      <p>與談人：</p>
+                      <div class="name">張玉琳<span class="job">/ 台灣美光 先進封裝暨測試營運副總裁</span></div>
+                      <div class="name">翁書婷<span class="job">/ DIGITIMES 分析師</span></div>
+                      <div class="name">陳玉娟<span class="job">/ DIGITIMES 資深記者</span></div>
+                    </div>
+                  </div>
+
+                  <div class="td" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="1100"
+                    data-aos-anchor="#agenda">
+                    <div class="time">14:20-14:45</div>
+                    <div class="title">
+                      <div class="sub">Panel Discussion</div>
+                      <!-- <button class="sub-btn" data-bs-target="#agd0708_1" data-bs-toggle="modal">議程大綱</button> -->
+                    </div>
+                    <div class="speaker">
+                      <p>主持人：</p>
+                      <div class="name">何致中<span class="job">/ DIGITIMES 主編</span></div>
+                      <p>與談人：</p>
+                      <div class="name">林俊吉<span class="job">/ DIGITIMES 資深分析師</span></div>
+                      <div class="name">周延<span class="job">/ DIGITIMES 分析師</span></div>
+                      <div class="name">杜念魯<span class="job">/ DIGITIMES 資深記者</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ag_row tr_one" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="1200"
+                  data-aos-anchor="#agenda">
+                  <div class="td td_light">
+                    <div class="time">14:45-15:10</div>
+                    <div class="title">
+                      <div class="sub">茶歇</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ag_row tr_split">
+                  <div class="td" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="1300"
+                    data-aos-anchor="#agenda">
+                    <div class="time">15:10-15:35</div>
+                    <div class="title">
+                      <div class="sub">從傳統到光學加速，矽光子驅動 AI GPU 互連擴展演進</div>
+                      <button class="sub-btn" data-bs-target="#agdA4" data-bs-toggle="modal">議程大綱</button>
+                    </div>
+                    <div class="speaker">
+                      <div class="name">張正陽<span class="job">/ 合聖科技 技術長</span></div>
+                    </div>
+                  </div>
+
+                  <div class="td" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="1300"
+                    data-aos-anchor="#agenda">
+                    <div class="time">15:10-15:35</div>
+                    <div class="title">
+                      <div class="sub">手機紅海後的戰略轉向 蘋果與三星的下一步棋</div>
+                      <button class="sub-btn" data-bs-target="#agdB5" data-bs-toggle="modal">議程大綱</button>
+                    </div>
+                    <div class="speaker">
+                      <div class="name">簡琮訓<span class="job">/ DIGITIMES 分析師</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ag_row tr_split">
+                  <div class="td" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="1400"
+                    data-aos-anchor="#agenda">
+                    <div class="time">15:35-16:00</div>
+                    <div class="title">
+                      <div class="sub">中國崛起，2026全球功率半導體挑戰重重</div>
+                      <button class="sub-btn" data-bs-target="#agdA6" data-bs-toggle="modal">議程大綱</button>
+                    </div>
+                    <div class="speaker">
+                      <div class="name">姚嘉洋<span class="job">/ DIGITIMES 分析師</span></div>
+                    </div>
+                  </div>
+
+                  <div class="td" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="1400"
+                    data-aos-anchor="#agenda">
+                    <div class="time">15:35-16:00</div>
+                    <div class="title">
+                      <div class="sub">高通與聯發科新戰場 手機AP雙雄的雲端AI ASIC對決</div>
+                      <button class="sub-btn" data-bs-target="#agdB6" data-bs-toggle="modal">議程大綱</button>
+                    </div>
+                    <div class="speaker">
+                      <div class="name">陳辰妃<span class="job">/ DIGITIMES 分析師</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ag_row tr_split">
+                  <div class="td" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="1500"
+                    data-aos-anchor="#agenda">
+                    <div class="time">16:00-16:25</div>
+                    <div class="title">
+                      <div class="sub">Panel Discussion</div>
+                      <!-- <button class="sub-btn" data-bs-target="#agd0708_1" data-bs-toggle="modal">議程大綱</button> -->
+                    </div>
+                    <div class="speaker">
+                      <p>主持人：</p>
+                      <div class="name">韓青秀<span class="job">/ DIGITIMES 資深記者</span></div>
+                      <p>與談人：</p>
+                      <div class="name">姚嘉洋<span class="job">/ DIGITIMES 分析師</span></div>
+                      <div class="name">黃女瑛<span class="job">/ DIGITIMES 資深記者</span></div>
+                    </div>
+                  </div>
+
+                  <div class="td" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="1500"
+                    data-aos-anchor="#agenda">
+                    <div class="time">16:00-16:25</div>
+                    <div class="title">
+                      <div class="sub">Panel Discussion</div>
+                      <!-- <button class="sub-btn" data-bs-target="#agd0708_1" data-bs-toggle="modal">議程大綱</button> -->
+                    </div>
+                    <div class="speaker">
+                      <p>主持人：</p>
+                      <div class="name">廖家宜<span class="job">/ DIGITIMES 記者</span></div>
+                      <p>與談人：</p>
+                      <div class="name">簡琮訓<span class="job">/ DIGITIMES 分析師</span></div>
+                      <div class="name">陳辰妃<span class="job">/ DIGITIMES 分析師</span></div>
+                      <div class="name">王君毅<span class="job">/ DIGITIMES 資深記者兼副總監</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ag_row tr_one" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="1600"
+                  data-aos-anchor="#agenda">
+                  <div class="td td_light">
+                    <div class="time">16:25</div>
+                    <div class="title">
+                      <div class="sub">自由交流</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 手機版 -->
+          <div class="agenda_cnt d-block d-lg-none" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200"
+            data-aos-anchor="#agenda">
+            <div class="ag_wrap">
+              <div class="ag_table">
+                <div class="td td_light">
+                  <div class="time">09:30-10:00</div>
+                  <div class="title">
+                    <div class="sub">報到</div>
+                  </div>
+                </div>
+
+                <div class="td">
+                  <div class="time">10:00-10:25</div>
+                  <div class="title">
+                    <div class="sub">半導體在全球ICT供應鏈的核心地位與展望</div>
+                  </div>
+                  <div class="speaker">
+                    <div class="name">黃欽勇<span class="job">/ DIGITIMES暨IC之音 董事長</span></div>
+                  </div>
+                </div>
+
+                <div class="td">
+                  <div class="time">10:25-10:50</div>
+                  <div class="title">
+                    <div class="sub">智慧產業共生成長的挑戰：AI與半導體</div>
+                  </div>
+                  <div class="speaker">
+                    <div class="name">盧超群<span class="job">/ 鈺創科技 董事長</span></div>
+                  </div>
+                </div>
+
+                <div class="td">
+                  <div class="time">10:50-11:15</div>
+                  <div class="title">
+                    <div class="sub">製程 X 封裝 半導體產業的機會與挑戰</div>
+                  </div>
+                  <div class="speaker">
+                    <div class="name">郭皇志<span class="job">/ 美國國家儀器 台灣區總經理</span></div>
+                  </div>
+                </div>
+
+                <div class="td">
+                  <div class="time">11:15-11:40</div>
+                  <div class="title">
+                    <div class="sub">半導體先進製造趨勢分析</div>
+                    <button class="sub-btn" data-bs-target="#agd4" data-bs-toggle="modal">議程大綱</button>
+                  </div>
+                  <div class="speaker">
+                    <div class="name">陳澤嘉<span class="job">/ DIGITIMES 分析師</span></div>
+                  </div>
+                </div>
+
+                <div class="td td_light">
+                  <div class="time">11:40-13:30</div>
+                  <div class="title">
+                    <div class="sub">中場休息</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="ag_wrap">
+              <div class="ag_track" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="800"
+                data-aos-anchor="#agenda">
+                <div class="track"><span>A</span> 先進封測</div>
+              </div>
+
+              <div class="td">
+                <div class="time">13:30-13:55</div>
+                <div class="title">
+                  <div class="sub">從GPU到ASIC的轉折時代：<br>AI加速器市場剖析與前瞻</div>
+                  <button class="sub-btn" data-bs-target="#agdA1" data-bs-toggle="modal">議程大綱</button>
+                </div>
+                <div class="speaker">
+                  <div class="name">翁書婷<span class="job">/ DIGITIMES 分析師</span></div>
+                </div>
+              </div>
+
+              <div class="td">
+                <div class="time">13:55-14:20</div>
+                <div class="title">
+                  <div class="sub">Engineering the future of AI: Powered by HBM and packaging breakthroughs</div>
+                </div>
+                <div class="speaker">
+                  <div class="name">張玉琳<span class="job">/ 台灣美光 先進封裝暨測試營運副總裁</span></div>
+                </div>
+              </div>
+
+              <div class="td">
+                <div class="time">14:20-14:45</div>
+                <div class="title">
+                  <div class="sub">Panel Discussion</div>
+                </div>
+                <div class="speaker">
+                  <p>主持人：</p>
+                  <div class="name">陳奭璁<span class="job">/ DIGITIMES 資深主編兼總監</span></div>
+                  <p>與談人：</p>
+                  <div class="name">張玉琳<span class="job">/ 台灣美光 先進封裝暨測試營運副總裁</span></div>
+                  <div class="name">翁書婷<span class="job">/ DIGITIMES 分析師</span></div>
+                  <div class="name">陳玉娟<span class="job">/ DIGITIMES 資深記者</span></div>
+                </div>
+              </div>
+
+              <div class="td td_light">
+                <div class="time">14:45-15:10</div>
+                <div class="title">
+                  <div class="sub">茶歇</div>
+                </div>
+              </div>
+
+              <div class="td">
+                <div class="time">15:10-15:35</div>
+                <div class="title">
+                  <div class="sub">從傳統到光學加速，矽光子驅動 AI GPU 互連擴展演進</div>
+                  <button class="sub-btn" data-bs-target="#agdA4" data-bs-toggle="modal">議程大綱</button>
+                </div>
+                <div class="speaker">
+                  <div class="name">張正陽<span class="job">/ 合聖科技 技術長</span></div>
+                </div>
+              </div>
+
+              <div class="td">
+                <div class="time">15:35-16:00</div>
+                <div class="title">
+                  <div class="sub">中國崛起，2026全球功率半導體挑戰重重</div>
+                  <button class="sub-btn" data-bs-target="#agdA6" data-bs-toggle="modal">議程大綱</button>
+                </div>
+                <div class="speaker">
+                  <div class="name">姚嘉洋<span class="job">/ DIGITIMES 分析師</span></div>
+                </div>
+              </div>
+
+              <div class="td">
+                <div class="time">16:00-16:25</div>
+                <div class="title">
+                  <div class="sub">Panel Discussion</div>
+                </div>
+                <div class="speaker">
+                  <p>主持人：</p>
+                  <div class="name">韓青秀<span class="job">/ DIGITIMES 資深記者</span></div>
+
+                  <p>與談人：</p>
+                  <div class="name">姚嘉洋<span class="job">/ DIGITIMES 分析師</span></div>
+                  <div class="name">黃女瑛<span class="job">/ DIGITIMES 資深記者</span></div>
+                </div>
+              </div>
+
+              <div class="td td_light">
+                <div class="time">16:25</div>
+                <div class="title">
+                  <div class="sub">自由交流</div>
+                </div>
+              </div>
+
+              <div class="ag_track" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="800"
+                data-aos-anchor="#agenda">
+                <div class="track"><span>B</span> 關稅下的供應鏈變局&<br>手機AP競爭布局</div>
+              </div>
+
+              <div class="td">
+                <div class="time">13:30-13:55</div>
+                <div class="title">
+                  <div class="sub">伺服器主要EMS業者供應鏈變化 : 對比各業者美國工廠關稅前與後觀點</div>
+                  <button class="sub-btn" data-bs-target="#agdB1" data-bs-toggle="modal">議程大綱</button>
+                </div>
+                <div class="speaker">
+                  <div class="name">周延<span class="job">/ DIGITIMES 分析師</span></div>
+                </div>
+              </div>
+
+              <div class="td">
+                <div class="time">13:55-14:20</div>
+                <div class="title">
+                  <div class="sub">世界的台積電還有對手嗎？<br>
+                    管制、關稅與戰爭風險下的半導體競爭新局浮現</div>
+                  <button class="sub-btn" data-bs-target="#agdB2" data-bs-toggle="modal">議程大綱</button>
+                </div>
+                <div class="speaker">
+                  <div class="name">林俊吉<span class="job">/ DIGITIMES 資深分析師</span></div>
+                </div>
+              </div>
+
+              <div class="td">
+                <div class="time">14:20-14:45</div>
+                <div class="title">
+                  <div class="sub">Panel Discussion</div>
+                </div>
+                <div class="speaker">
+                  <p>主持人：</p>
+                  <div class="name">何致中<span class="job">/ DIGITIMES 主編</span></div>
+                  <p>與談人：</p>
+                  <div class="name">林俊吉<span class="job">/ DIGITIMES 資深分析師</span></div>
+                  <div class="name">周延<span class="job">/ DIGITIMES 分析師</span></div>
+                  <div class="name">杜念魯<span class="job">/ DIGITIMES 資深記者</span></div>
+                </div>
+              </div>
+
+              <div class="td td_light">
+                <div class="time">14:45-15:10</div>
+                <div class="title">
+                  <div class="sub">茶歇</div>
+                </div>
+              </div>
+
+              <div class="td">
+                <div class="time">15:10-15:35</div>
+                <div class="title">
+                  <div class="sub">手機紅海後的戰略轉向 蘋果與三星的下一步棋</div>
+                  <button class="sub-btn" data-bs-target="#agdB5" data-bs-toggle="modal">議程大綱</button>
+                </div>
+                <div class="speaker">
+                  <div class="name">簡琮訓<span class="job">/ DIGITIMES 分析師</span></div>
+                </div>
+              </div>
+
+              <div class="td">
+                <div class="time">15:35-16:00</div>
+                <div class="title">
+                  <div class="sub">高通與聯發科新戰場 手機AP雙雄的雲端AI ASIC對決</div>
+                  <button class="sub-btn" data-bs-target="#agdB6" data-bs-toggle="modal">議程大綱</button>
+                </div>
+                <div class="speaker">
+                  <div class="name">陳辰妃<span class="job">/ DIGITIMES 分析師</span></div>
+                </div>
+              </div>
+
+              <div class="td">
+                <div class="time">16:00-16:25</div>
+                <div class="title">
+                  <div class="sub">Panel Discussion</div>
+                </div>
+                <div class="speaker">
+                  <p>主持人：</p>
+                  <div class="name">廖家宜<span class="job">/ DIGITIMES 記者</span></div>
+                  <p>與談人：</p>
+                  <div class="name">簡琮訓<span class="job">/ DIGITIMES 分析師</span></div>
+                  <div class="name">陳辰妃<span class="job">/ DIGITIMES 分析師</span></div>
+                  <div class="name">王君毅<span class="job">/ DIGITIMES 資深記者兼副總監</span></div>
+                </div>
+              </div>
+
+              <div class="td td_light">
+                <div class="time">16:25</div>
+                <div class="title">
+                  <div class="sub">自由交流</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p class="tip" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="1700" data-aos-anchor="#agenda">
+            **活動主辦單位保留議程內容變更、活動流程變更之所有權**
+          </p>
+        </div>
+      </section>
+
+      <section class="sc_speaker" id="speaker">
+        <h3 class="tit" data-aos="fade-down" data-aos-duration="1200" data-aos-delay="100" data-aos-anchor="#speaker">
+          講師陣容
+        </h3>
+
+        <div class="sc_speaker-cnt" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200"
+          data-aos-anchor="#speaker">
+          <div class="spk" data-bs-toggle="modal" data-bs-target="#spk1">
+            <div class="pic">
+              <img src="assets/images/spk/黃欽勇.png" alt="黃欽勇">
+            </div>
+            <div class="info">
+              <p class="name">黃欽勇</p>
+              <p class="job">DIGITIMES暨IC之音 董事長</p>
+            </div>
+          </div>
+
+          <div class="spk" data-bs-toggle="modal" data-bs-target="#spk2">
+            <div class="pic">
+              <img src="assets/images/spk/盧超群.png" alt="盧超群">
+            </div>
+            <div class="info">
+              <p class="name">盧超群</p>
+              <p class="job">鈺創科技 董事長
+              </p>
+            </div>
+          </div>
+
+          <div class="spk" data-bs-toggle="modal" data-bs-target="#spk3">
+            <div class="pic">
+              <img src="assets/images/spk/郭皇志.png" alt="郭皇志">
+            </div>
+            <div class="info">
+              <p class="name">郭皇志</p>
+              <p class="job">美國國家儀器 台灣區總經理</p>
+            </div>
+          </div>
+
+          <div class="spk" data-bs-toggle="modal" data-bs-target="#spk4">
+            <div class="pic">
+              <img src="assets/images/spk/張玉琳.png" alt="張玉琳">
+            </div>
+            <div class="info">
+              <p class="name">張玉琳</p>
+              <p class="job">美光科技
+                副總裁暨台中封測廠總經理
+              </p>
+            </div>
+          </div>
+
+          <div class="spk" data-bs-toggle="modal" data-bs-target="#spk5">
+            <div class="pic">
+              <img src="assets/images/spk/張正陽.png" alt="張正陽">
+            </div>
+            <div class="info">
+              <p class="name">張正陽</p>
+              <p class="job">合聖科技 技術長</p>
+            </div>
+          </div>
+
+          <div class="spk" data-bs-toggle="modal" data-bs-target="#spk6">
+            <div class="pic">
+              <img src="assets/images/spk/陳澤嘉.png" alt="陳澤嘉">
+            </div>
+            <div class="info">
+              <p class="name">陳澤嘉</p>
+              <p class="job">DIGITIMES 分析師</p>
+            </div>
+          </div>
+
+          <div class="spk" data-bs-toggle="modal" data-bs-target="#spk7">
+            <div class="pic">
+              <img src="assets/images/spk/翁書婷.png" alt="翁書婷">
+            </div>
+            <div class="info">
+              <p class="name">翁書婷</p>
+              <p class="job">DIGITIMES 分析師</p>
+            </div>
+          </div>
+
+          <div class="spk" data-bs-toggle="modal" data-bs-target="#spk8">
+            <div class="pic">
+              <img src="assets/images/spk/姚嘉洋.png" alt="姚嘉洋">
+            </div>
+            <div class="info">
+              <p class="name">姚嘉洋</p>
+              <p class="job">DIGITIMES 分析師</p>
+            </div>
+          </div>
+
+          <div class="spk" data-bs-toggle="modal" data-bs-target="#spk9">
+            <div class="pic">
+              <img src="assets/images/spk/周延.png" alt="周延">
+            </div>
+            <div class="info">
+              <p class="name">周延</p>
+              <p class="job">DIGITIMES 分析師</p>
+            </div>
+          </div>
+
+          <div class="spk" data-bs-toggle="modal" data-bs-target="#spk10">
+            <div class="pic">
+              <img src="assets/images/spk/林俊吉.png" alt="林俊吉">
+            </div>
+            <div class="info">
+              <p class="name">林俊吉</p>
+              <p class="job">DIGITIMES 資深分析師</p>
+            </div>
+          </div>
+
+          <div class="spk" data-bs-toggle="modal" data-bs-target="#spk11">
+            <div class="pic">
+              <img src="assets/images/spk/簡琮訓.png" alt="簡琮訓">
+            </div>
+            <div class="info">
+              <p class="name">簡琮訓</p>
+              <p class="job">DIGITIMES 分析師</p>
+            </div>
+          </div>
+
+          <div class="spk" data-bs-toggle="modal" data-bs-target="#spk12">
+            <div class="pic">
+              <img src="assets/images/spk/陳辰妃.png?v=20250723.1" alt="陳辰妃">
+            </div>
+            <div class="info">
+              <p class="name">陳辰妃</p>
+              <p class="job">DIGITIMES 分析師</p>
+            </div>
+          </div>
+
+          <div class="spk noinfo" data-bs-toggle="modal" data-bs-target="#spk13">
+            <div class="pic">
+              <img src="assets/images/spk/陳玉娟.png" alt="陳玉娟">
+            </div>
+            <div class="info">
+              <p class="name">陳玉娟</p>
+              <p class="job">DIGITIMES 資深記者</p>
+            </div>
+          </div>
+
+          <div class="spk noinfo" data-bs-toggle="modal" data-bs-target="#spk14">
+            <div class="pic">
+              <img src="assets/images/spk/黃女瑛.png" alt="黃女瑛">
+            </div>
+            <div class="info">
+              <p class="name">黃女瑛</p>
+              <p class="job">DIGITIMES 資深記者</p>
+            </div>
+          </div>
+
+          <div class="spk noinfo" data-bs-toggle="modal" data-bs-target="#spk15">
+            <div class="pic">
+              <img src="assets/images/spk/杜念魯.png" alt="杜念魯">
+            </div>
+            <div class="info">
+              <p class="name">杜念魯</p>
+              <p class="job">DIGITIMES 資深記者</p>
+            </div>
+          </div>
+
+          <div class="spk noinfo" data-bs-toggle="modal" data-bs-target="#spk16">
+            <div class="pic">
+              <img src="assets/images/spk/王君毅.png" alt="王君毅">
+            </div>
+            <div class="info">
+              <p class="name">王君毅</p>
+              <p class="job">DIGITIMES 資深記者兼副總監</p>
+            </div>
+          </div>
+
+          <div class="spk noinfo" data-bs-toggle="modal" data-bs-target="#spk17">
+            <div class="pic">
+              <img src="assets/images/spk/陳奭璁.png" alt="陳奭璁">
+            </div>
+            <div class="info">
+              <p class="name">陳奭璁</p>
+              <p class="job">DIGITIMES 資深主編兼總監</p>
+            </div>
+          </div>
+
+          <div class="spk noinfo" data-bs-toggle="modal" data-bs-target="#spk18">
+            <div class="pic">
+              <img src="assets/images/spk/韓青秀.png" alt="韓青秀">
+            </div>
+            <div class="info">
+              <p class="name">韓青秀</p>
+              <p class="job">DIGITIMES 資深記者</p>
+            </div>
+          </div>
+
+          <div class="spk noinfo" data-bs-toggle="modal" data-bs-target="#spk19">
+            <div class="pic">
+              <img src="assets/images/spk/何致中.png" alt="何致中">
+            </div>
+            <div class="info">
+              <p class="name">何致中</p>
+              <p class="job">DIGITIMES 主編</p>
+            </div>
+          </div>
+
+          <div class="spk noinfo" data-bs-toggle="modal" data-bs-target="#spk20">
+            <div class="pic">
+              <img src="assets/images/spk/廖家宜.png" alt="廖家宜">
+            </div>
+            <div class="info">
+              <p class="name">廖家宜</p>
+              <p class="job">DIGITIMES 記者</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sc_gift" id="gift">
+        <div class="container">
+          <h3 class="tit" data-aos="fade-down" data-aos-duration="1200" data-aos-delay="100" data-aos-anchor="#gift">
+            活動好禮
+          </h3>
+
+          <div class="sc_gift-cnt" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200"
+            data-aos-anchor="#gift">
+            <div class="item">
+              <p class="type">報到禮</p>
+              <img src="assets/images/gift/報到禮.jpg" alt="《矽島的危與機》乙本">
+              <p class="name">《矽島的危與機》乙本</p>
+            </div>
+
+            <div class="item">
+              <p class="type">飲品招待券</p>
+              <img src="assets/images/gift/飲品招待券.jpg" alt="現場飲料兌換券 乙張">
+              <p class="name">現場飲料兌換券 乙張</p>
+            </div>
+
+            <div class="item">
+              <p class="type">現場活動禮</p>
+              <img src="assets/images/gift/現場活動禮.jpg" alt="刮刮樂 乙張">
+              <p class="name">刮刮樂 乙張 送完為止</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sc_cta" id="cta">
+        <div class="container">
+          <div class="cta" data-aos="zoom-in" data-aos-duration="1200" data-aos-delay="200" data-aos-anchor="#cta">
+            <p>我們誠摯邀請您撥冗蒞臨，與眾多業界先進共同交流洞見、掌握趨勢脈動！</p>
+            <div class="cta" data-aos="zoom-in" data-aos-duration="1200" data-aos-delay="300" data-aos-anchor="#cta">
+              <a href="https://www.digitimes.com.tw/OnLine/DataInput.asp?ProdGroup=05HAE0904-0" target="_blank"
+                class="cta-btn">
+                <div class="cta-btn-inner">
+                  <p class="text">立即報名</p>
+                  <img class="arrow-right" src="assets/images/icons/arrow-right-w.svg">
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sc_location" id="location">
+        <div class="container">
+          <h3 class="tit" data-aos="fade-down" data-aos-duration="1200" data-aos-delay="100"
+            data-aos-anchor="#location">
+            會場位置
+          </h3>
+
+          <div class="location_cnt" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200"
+            data-aos-anchor="#location">
+            <div class="loc_map">
+              <div class="text">
+                <p class="loc">元大金融廣場 國際會議廳</p>
+                <p class="address">台北市大安區仁愛路三段157號3F </p>
+              </div>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.8727814747085!2d121.54068977529887!3d25.038391077813614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442abd130e130fd%3A0xa0a21fac92650b70!2zMTA25Y-w5YyX5biC5aSn5a6J5Y2A5LuB5oSb6Lev5LiJ5q61MTU36Jmf!5e0!3m2!1szh-TW!2stw!4v1742788113275!5m2!1szh-TW!2stw"
+                width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sc_detail" id="detail">
+        <div class="container">
+          <h3 class="tit">注意事項</h3>
+
+          <div class="detail_cnt">
+            <ol class="list">
+              <li>
+                <p>一、 活動參加辦法</p>
+                <ul>
+                  <li>本活動採<strong>「免費預先線上報名制」</strong>，須完成報名及登錄手續。主辦單位保留最終報名審核權，並將以活動主題與參與者屬性為優先考量依據。</li>
+                  <li>報名截止日為<strong>2025年9月1日</strong>，主辦單位得視報名狀況調整報名截止時間。</li>
+                  <li>報名後若無法參加，請指派其他人選並提前通知主辦單位。</li>
+                </ul>
+              </li>
+
+              <li>
+                <p>二、審核與通知</p>
+                <ul>
+                  <li>通過審核者，主辦單位將於活動前一天寄送含「報到編號／QR Code」的出席通知信至您報名時所填電子信箱。</li>
+                  <li>未通過審核者亦會收到婉拒通知。若未收到任何信件，請至活動網站查詢報名狀態。</li>
+                </ul>
+              </li>
+
+              <li>
+                <p>三、報名須知</p>
+                <ul>
+                  <li>請勿冒用或偽造他人身份進行報名，違者將依法處理。</li>
+                  <li>主辦單位保留報名資格之最終解釋與變更權利，恕不另行通知。</li>
+                </ul>
+              </li>
+
+              <li>
+                <p>四、取消報名</p>
+                <ul>
+                  <li>需取消報名者，請於活動3日前來電或 Email 通知。活動當日恕不接受取消，且未出席者不提供活動簡報 PDF 檔。</li>
+                </ul>
+              </li>
+
+              <li>
+                <p>五、講義</p>
+                <ul>
+                  <li>活動結束後，主辦單位將於 7 個工作日後提供論壇議程簡報 PDF 講義。惟因智慧財產權保護，倘若外部講師未授權提供，該講師之講義將不予提供下載。</li>
+                </ul>
+              </li>
+
+              <li>
+                <p>六、特殊情況</p>
+                <ul>
+                  <li>DIGITIMES或主辦單位保留修改本活動規則之權利，毋須另行作出解釋或通知。</li>
+                  <li>本次活動若適逢天災(地震、颱風等)不可抗拒之因素，將延期舉辦時間另行通知。</li>
+                  <li>若因不可預測之突發因素，主辦單位得保留活動課程及講師之變更權利。</li>
+                </ul>
+              </li>
+            </ol>
+          </div>
+          <div class="policy_cnt">
+            <a href="http://www.digitimes.com.tw/svc/DIGITIMES_privacy_v2.asp" target="_blank"
+              class="btn btn-outline-light" style="width:250px; display:block; margin:auto;">DIGITIMES
+              隱私權聲明</a>
+          </div>
+        </div>
+      </section>
+    </main>
   </div>
-</header>
 
-<main>
-  <!-- HERO -->
-  <section class="hero">
-    <div class="container">
-      <span class="badge">生成式 AI</span>
-      <span class="badge">HPC</span>
-      <span class="badge">先進製程</span>
-      <h1>重塑全球半導體新秩序的關鍵時刻？</h1>
-      <p>聚焦 AI 時代的晶片設計與智慧製造，直面供應鏈與地緣挑戰，掌握 2025 產業「機會」與「變局」。</p>
-      <div class="kpis">
-        <div class="kpi">📅 2025/09/04（四）09:30–16:30</div>
-        <div class="kpi">📍 元大金融廣場國際會議廳，台北市仁愛路三段157號3F</div>
-        <div class="kpi">🎟️ 免費報名｜主辦方將進行資格審核</div>
-      </div>
-      <div class="cta">
-        <a class="btn" href="#register">立即報名</a>
-        <a class="btn secondary" href="#agenda">瀏覽議程</a>
-      </div>
-      <div class="countdown" id="countdown" aria-label="活動倒數">
-        <div class="cd"><b id="dd">00</b>天</div>
-        <div class="cd"><b id="hh">00</b>時</div>
-        <div class="cd"><b id="mm">00</b>分</div>
-        <div class="cd"><b id="ss">00</b>秒</div>
-      </div>
-    </div>
-  </section>
+  <!-- modal -->
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="container">
-      <h2>Tech Forum · Key Focus</h2>
-      <p>以下亮點可依你的實際議題調整：</p>
-      <div class="grid3">
-        <div class="card">
-          <h3>熱門技術全掌握</h3>
-          <p>熱門 AI 晶片、先進封裝、矽光子與 HBM 技術，一次掌握。</p>
-        </div>
-        <div class="card">
-          <h3>供應鏈重塑全解析</h3>
-          <p>從地緣博弈到產能布局，解讀台廠因應之道與策略。</p>
-        </div>
-        <div class="card">
-          <h3>台灣角色全面布局</h3>
-          <p>發揮技術與生態優勢，成為全球半導體關鍵力量。</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- AGENDA -->
-  <section id="agenda">
-    <div class="container">
-      <h2>活動議程</h2>
-      <div class="tabs" role="tablist">
-        <button class="tab active" data-track="all" role="tab" aria-selected="true">全體</button>
-        <button class="tab" data-track="A" role="tab">軌 A｜先進封測</button>
-        <button class="tab" data-track="B" role="tab">軌 B｜供應鏈與手機 AP</button>
-      </div>
-
-      <div id="agenda-wrap">
-        <!-- 全體 -->
-        <div class="agenda" data-track="all">
-          <div>
-            <div class="slot"><div class="time">09:30-10:00</div><div><div class="title">報到</div></div></div>
-            <div class="slot"><div class="time">10:00-10:25</div><div><div class="title">半導體在全球 ICT 供應鏈的核心地位與展望</div><div class="speaker">講者 A／單位</div></div></div>
-            <div class="slot"><div class="time">10:25-10:50</div><div><div class="title">智慧產業共生成長的挑戰：AI 與半導體</div><div class="speaker">講者 B／單位</div></div></div>
-            <div class="slot"><div class="time">10:50-11:15</div><div><div class="title">製程 × 封裝：機會與挑戰</div><div class="speaker">講者 C／單位</div></div></div>
-            <div class="slot"><div class="time">11:15-11:40</div><div><div class="title">先進製造趨勢分析</div><div class="speaker">講者 D／單位</div></div></div>
-            <div class="slot"><div class="time">11:40-13:30</div><div><div class="title">中場休息</div></div></div>
+  <div>
+    <!-- agd START -->
+    <!-- <div class="modal fade" id="agd2" tabindex="-1" aria-labelledby="agd2" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="agd2">智慧產業共生成長的挑戰：AI與半導體</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div>
-            <div class="slot"><div class="time">14:45-15:10</div><div><div class="title">茶歇</div></div></div>
-            <div class="slot"><div class="time">16:00-16:25</div><div><div class="title">Panel Discussion</div><div class="speaker">主持人／與談人</div></div></div>
-            <div class="slot"><div class="time">16:25-</div><div><div class="title">自由交流</div></div></div>
+          <div class="modal-body">
+            <ul>
+              <li>先進製程趨勢分析</li>
+              <li>先進封裝趨勢分析</li>
+              <li>產業重大議題分析</li>
+            </ul>
           </div>
         </div>
+      </div>
+    </div> -->
 
-        <!-- 軌 A -->
-        <div class="agenda" data-track="A" hidden>
-          <div>
-            <div class="slot"><div class="time">13:30-13:55</div><div><div class="title">從 GPU 到 ASIC 的轉折時代：AI 加速器市場前瞻</div><div class="speaker">講者 E／DIGI 分析師</div></div></div>
-            <div class="slot"><div class="time">13:55-14:20</div><div><div class="title">HBM 與先進封裝突破</div><div class="speaker">講者 F／企業職稱</div></div></div>
-            <div class="slot"><div class="time">15:10-15:35</div><div><div class="title">矽光子驅動 AI GPU 互連擴展</div><div class="speaker">講者 G／CTO</div></div></div>
-            <div class="slot"><div class="time">15:35-16:00</div><div><div class="title">2026 功率半導體挑戰</div><div class="speaker">講者 H／分析師</div></div></div>
+    <div class="modal fade" id="agd4" tabindex="-1" aria-labelledby="agd4" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="agd4">半導體先進製造趨勢分析</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div>
-            <div class="slot"><div class="time">14:20-14:45</div><div><div class="title">Panel：封裝與製造</div><div class="speaker">主持人＋與談人</div></div></div>
-            <div class="slot"><div class="time">16:00-16:25</div><div><div class="title">Panel：後摩爾與材料</div><div class="speaker">主持人＋與談人</div></div></div>
-          </div>
-        </div>
-
-        <!-- 軌 B -->
-        <div class="agenda" data-track="B" hidden>
-          <div>
-            <div class="slot"><div class="time">13:30-13:55</div><div><div class="title">EMS 供應鏈變化：美國工廠關稅前後</div><div class="speaker">講者 I／分析師</div></div></div>
-            <div class="slot"><div class="time">13:55-14:20</div><div><div class="title">世界的晶圓代工競局：管制、關稅與戰爭風險</div><div class="speaker">講者 J／資深分析師</div></div></div>
-            <div class="slot"><div class="time">15:10-15:35</div><div><div class="title">手機紅海後的戰略轉向</div><div class="speaker">講者 K／分析師</div></div></div>
-            <div class="slot"><div class="time">15:35-16:00</div><div><div class="title">手機 AP 雙雄的雲端 AI ASIC 對決</div><div class="speaker">講者 L／分析師</div></div></div>
-          </div>
-          <div>
-            <div class="slot"><div class="time">14:20-14:45</div><div><div class="title">Panel：關稅下的供應鏈變局</div><div class="speaker">主持人＋與談人</div></div></div>
-            <div class="slot"><div class="time">16:00-16:25</div><div><div class="title">Panel：手機生態與 AI</div><div class="speaker">主持人＋與談人</div></div></div>
+          <div class="modal-body">
+            <ul>
+              <li>先進製程趨勢分析</li>
+              <li>先進封裝趨勢分析</li>
+              <li>產業重大議題分析</li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- SPEAKERS -->
-  <section id="speakers">
-    <div class="container">
-      <h2>講師陣容</h2>
-      <div class="speakers">
-        <article class="speaker"><img src="https://picsum.photos/800/600?1" alt=""><div class="meta"><div class="name">講者姓名</div><div class="title">公司／職稱</div></div></article>
-        <article class="speaker"><img src="https://picsum.photos/800/600?2" alt=""><div class="meta"><div class="name">講者姓名</div><div class="title">公司／職稱</div></div></article>
-        <article class="speaker"><img src="https://picsum.photos/800/600?3" alt=""><div class="meta"><div class="name">講者姓名</div><div class="title">公司／職稱</div></div></article>
-        <article class="speaker"><img src="https://picsum.photos/800/600?4" alt=""><div class="meta"><div class="name">講者姓名</div><div class="title">公司／職稱</div></div></article>
+    <div class="modal fade" id="agdA1" tabindex="-1" aria-labelledby="agdA1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="agdA1">從GPU到ASIC的轉折時代：AI加速器市場剖析與前瞻</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              <li>2025年全球雲端AI加速器市場動態</li>
+              <li>2026年雲端AI加速器市場展望</li>
+              <li>美國出口禁令形塑中國AI加速器市場</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
 
-  <!-- GIFTS -->
-  <section id="gifts">
-    <div class="container">
-      <h2>活動好禮</h2>
-      <div class="goodies">
-        <div class="good"><h3>報到禮</h3><p>範例：新書乙本、飲品招待券乙張</p></div>
-        <div class="good"><h3>現場活動禮</h3><p>範例：刮刮樂乙張（送完為止）</p></div>
-        <div class="good"><h3>交流獎勵</h3><p>範例：完成問卷抽限量好禮</p></div>
+    <div class="modal fade" id="agdA4" tabindex="-1" aria-labelledby="agdA4" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="agdA4">從傳統到光學加速，矽光子驅動 AI GPU 互連擴展演進</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              <li>AI GPU互連擴展演進</li>
+              <li>Photonic Switch, 共同封裝光學與矽光子發展近況</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
 
-  <!-- REGISTER -->
-  <section id="register">
-    <div class="container">
-      <h2>立即報名</h2>
-      <p>本活動採「免費預先線上報名制」，主辦方將依主題與參與者屬性審核。</p>
-      <!-- 你可嵌入 Google 表單、KKTIX、Accupass 等報名系統 -->
-      <div class="card">
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf-placeholder/viewform?embedded=true" width="100%" height="520" frameborder="0" marginheight="0" marginwidth="0">載入中…</iframe>
+    <div class="modal fade" id="agdA6" tabindex="-1" aria-labelledby="agdA6" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="agdA6">中國崛起，2026全球功率半導體挑戰重重</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              <li>全球功率半導體產業近況盤點</li>
+              <li>中系供應鏈的崛起與Wolfspeed的下一步</li>
+              <li>2026年的展望與挑戰</li>
+            </ul>
+          </div>
+        </div>
       </div>
-      <div class="share" style="margin-top:16px">
-        <a href="#" aria-label="share-facebook">Facebook</a>
-        <a href="#" aria-label="share-line">LINE</a>
-        <a href="#" aria-label="share-x">X / Twitter</a>
-        <a href="#" aria-label="share-linkedin">LinkedIn</a>
+    </div>
+
+    <div class="modal fade" id="agdB1" tabindex="-1" aria-labelledby="agdB1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="agdB1">伺服器主要EMS業者供應鏈變化 : 對比各業者美國工廠關稅前與後觀點</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              <li>台系伺服器EMS主要工廠全球分布</li>
+              <li>台系伺服器EMS工廠供應鏈分析：以美國各廠為例</li>
+              <li>分析與結論</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
 
-  <!-- VENUE -->
-  <section id="venue">
-    <div class="container">
-      <h2>會場位置</h2>
-      <p>元大金融廣場 國際會議廳｜台北市大安區仁愛路三段157號3F</p>
-      <iframe class="map" loading="lazy" allowfullscreen
-        src="https://www.google.com/maps?q=台北市大安區仁愛路三段157號&output=embed"></iframe>
+    <div class="modal fade" id="agdB2" tabindex="-1" aria-labelledby="agdB2" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="agdB2">世界的台積電還有對手嗎？<br>
+              管制、關稅與戰爭風險下的半導體競爭新局浮現</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              <li>產業內的競爭</li>
+              <li>國家級的對手</li>
+              <li>成功者的詛咒</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-  </section>
 
-  <!-- NOTES -->
-  <section id="notes">
-    <div class="container">
-      <h2>注意事項</h2>
-      <ol class="notes">
-        <li><b>報名辦法：</b>免費預先線上報名；主辦單位保留審核權。</li>
-        <li><b>審核與通知：</b>通過者將於活動前一天寄送含報到編號/QR Code 的通知信。</li>
-        <li><b>取消報名：</b>請於活動 3 日前 Email/來電通知；未出席者不提供簡報 PDF。</li>
-        <li><b>講義：</b>活動後 7 個工作日提供可公開之投影片下載。</li>
-        <li><b>特殊情況：</b>主辦保留課程與講師變更權；天災等因素將另行通知延期。</li>
-      </ol>
+    <div class="modal fade" id="agdB5" tabindex="-1" aria-labelledby="agdB5" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="agdB5">手機紅海後的戰略轉向 蘋果與三星的下一步棋</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              <li>AI驅動的下一波硬體革命</li>
+              <li>蘋果的轉型布局：生態圈深耕與AI硬體升級</li>
+              <li>三星的多線策略：半導體重建與跨裝置生態強化</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-  </section>
-</main>
 
-<footer>
-  <div class="container">
-    <p>© 2025 主辦單位名稱．隱私權聲明｜聯絡信箱 contact@example.com</p>
+    <div class="modal fade" id="agdB6" tabindex="-1" aria-labelledby="agdB6" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="agdB6">高通與聯發科新戰場 手機AP雙雄的雲端AI ASIC對決</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              <li>手機AP與ASIC產業現況</li>
+              <li>聯發科ASIC策略分析</li>
+              <li>高通ASIC策略分析</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- agd END -->
+
+    <!-- spk START -->
+    <div class="modal fade" id="spk1" tabindex="-1" aria-labelledby="spk1Label" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="spk1Label">黃欽勇</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="sub">經歷</p>
+            <ul>
+              <li>DIGITIMES創辦人暨電子時報社長， 近40年產業分析師資歷</li>
+              <li>玉山科技協會 理事</li>
+              <li>國立臺灣大學、國立陽明交通大學 兼任教授</li>
+            </ul>
+
+            <p class="sub">出版著作</p>
+            <p>天選矽島、決勝矽紀元、矽島的危與機、東方之盾、斷鏈之後、科技島鏈、巧借東風、出擊、西進與長征、電腦王國等著作</p>
+
+            <p class="sub">國外研究經驗</p>
+            <ul>
+              <li>美國、法國、英國、愛爾蘭、比利時、印度、泰國、日本、加拿大、澳洲、新加坡、越南、馬來西亞、大陸、以色列、土耳其、菲律賓、亞美尼亞等國演講</li>
+              <li>亞洲開發銀行、GSA、SEMI、日本MAP、PC Expo、漢諾威電腦展、台北電腦展、Oracle Open World講師</li>
+              <li>微軟、台積電、松下、友達、應材等多家公司與印度、泰國政府委託研究案</li>
+              <li>走訪上百個亞太地區電子工業基地</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="spk2" tabindex="-1" aria-labelledby="spk2Label" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="spk2Label">盧超群</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="sub">現職</p>
+            <ul>
+                <li>鈺創科技、鈺群科技、鈺立微電子 暨 帝濶 智慧等公司 董事長及創辦人</li>
+                <li>台灣大學特聘研究講座教授暨傑出校友</li>
+            </ul>
+
+            <p class="sub">學歷</p>
+            <ul>
+              <li>美國史丹福大學電子工程碩士及博士</li>
+              <li>國立台灣大學電機系學士 (第一名畢業)</li>
+            </ul>
+
+            <p class="sub">主要工作經歷</p>
+            <ul>
+              <li>榮任台灣半導體產業協會 (TSIA)、世界半導體理事高峰會 (WSC)、全球半導體聯盟 (GSA)、台灣人工智慧晶片聯盟 (AI-on-Chip Taiwan Alliance,
+                AITA)等產業協會理事長</li>
+              <li>IEEE 固態電路技術 最高榮譽獎章(IEEE Donald O. Pederson Award in Solid-State Circuits), IEEE Fellow</li>
+              <li>美國國家工程院(National Academy of Engineering, NAE)及發明 學院(National Academy of Inventors (NAI)院士</li>
+              <li>連續創辦多家以科技創新落實為主題之積體電路公司，擔任董事 長暨技術領袖 (Etron, GUC, Ardentec, eEver, eYs3D &
+                DeCloak)</li>
+              <li>美國 IBM 研究總部/ CEO 室策劃經理，其多項半導體發明引領
+                IBM 成就全球第一座 8 吋晶圓廠; 榮獲 IBM Corporate Award</li>
+              <li>創立鈺創公司(‘91)與工研院開創國人自主研發先進次微米技術三 年內落實台灣第一座 8 吋晶圓廠並量產 DRAM/ Logic/ SRAM 亦 為世界記錄; 行政院長頒發傑出科技榮譽獎章</li>
+              <li>開創Known-Good-Die(‘00)矽技術及產品促成「IC異質整合產業」 互補於摩爾定律共同成長，為今日發展 AI 不可或缺之技術</li>
+              <li>迄今累計已獲准 60 件美國專利，另有 70 件美國專利正在審查 中，全球已獲准專利共 191 件</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="spk3" tabindex="-1" aria-labelledby="spk3Label" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="spk3Label">郭皇志</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>郭皇志現任NI（National
+              Instruments）台灣區總經理，專注於推動半導體、通訊及製造等關鍵產業的創新測試解決方案。他帶領團隊制定並執行多元成長策略，涵蓋直營業務、通路發展、平台技術及垂直市場拓展，致力於強化台灣在全球半導體供應鏈中的戰略角色。
+            </p>
+            <p>
+              郭皇志在NI深耕超過20年，歷經應用工程、技術行銷、區域及亞太多國業務管理等職務，累積豐富的跨國經驗與卓越領導成就。他曾主導大中華區及亞太市場的組織轉型與銷售策略，帶領團隊實現業務突破與市場擴張，並成功打造高效能且具前瞻視野的組織文化。
+            </p>
+            <p>憑藉對半導體產業生態鏈的深刻洞察，郭皇志持續探索新興市場與技術趨勢，積極與產業夥伴攜手推動創新，為未來3至5年的產業發展布局。
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="spk4" tabindex="-1" aria-labelledby="spk4Label" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="spk4Label">張玉琳</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>張玉琳為台灣美光先進封裝暨測試營運副總裁，負責領導台灣美光後段封測營運，包含先進封裝與測試技術、3D封裝及覆晶技術等。</p>
+
+            <p>張玉琳於2021年加入美光後，重建並組成了強大團隊，大幅降低供應成本，並確保產品品質，創下組裝量產產品良率和新品導入良率的歷史新高紀錄。</p>
+
+            <p>張玉琳在業界擁有20多年的豐富經驗，在加入美光前曾任職於恩智浦半導體公司，擔任副總裁暨高雄廠區總經理一職，並曾創下最短交貨週期紀錄，使產量達歷史新高，並提升客戶滿意度。
+            </p>
+            <p>
+              張玉琳畢業於國立中山大學，擁有機械工程碩士及學士學位。
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="spk5" tabindex="-1" aria-labelledby="spk5Label" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="spk5Label">張正陽</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>張正陽博士現任 合聖科技 (AuthenX) 技術長（CTO），負責領導研發部門，專注於矽光子、光電元件與光通訊技術的創新發展。</p>
+
+            <p>在投身產業界之前，張博士曾任國立中央大學教授，研究領域聚焦於奈微米光學與光電學。他的研究包括光通訊、固態照明以及生物光子學等領域。</p>
+            <p>他於美國麻省理工學院（MIT）取得材料科學與工程博士學位。
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="spk6" tabindex="-1" aria-labelledby="spk6Label" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="spk6Label">陳澤嘉</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="sub">經歷</p>
+            <p>
+              陳澤嘉於2019年加入DIGITIMES研究中心，擁有超過10年的產業分析經驗。陳澤嘉專注於晶圓代工與先進封裝技術研究，並擴展至IC封測和IC設計產業的發展分析。陳澤嘉在半導體供應鏈資訊、廠商競合策略以及技術趨勢觀察方面具備豐富經驗。<br>
+
+              在加入DIGITIMES前，陳澤嘉曾在中華經濟研究院擔任分析師，專注於區域整合、兩岸產業競合及政府科技政策研究。近年，隨著地緣政治對半導體產業影響的加劇，陳澤嘉憑藉深厚的研究基礎，提供區域半導體供應鏈發展與競爭態勢的分析，為業界提供有價值的趨勢觀察和決策參考。
+            </p>
+
+            <p class="sub">研究領域</p>
+            <ul>
+              <li>晶圓代工產業趨勢觀察</li>
+              <li>先進封裝技術趨勢研究</li>
+              <li>地緣政治與半導體供應鏈</li>
+              <li>IC封測產業趨勢觀察</li>
+              <li>AI與IC設計發展趨勢研究</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="spk7" tabindex="-1" aria-labelledby="spk7Label" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="spk7Label">翁書婷</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="sub">經歷</p>
+            <p>
+              翁書婷於2019年7月加入DIGITIMES研究中心，擁有超過5年的產業分析經驗，專精於半導體產業數據分析。翁書婷透過深入的數據洞察，揭示市場動態背後的驅動力、競爭格局以及發展挑戰，並基於此提出具前瞻性的產業見解，為業界提供策略建議。<br>
+
+              隨著生成式AI近年來的快速崛起，翁書婷專注於雲端AI半導體的供需分析，深入研究AI晶片的發展趨勢及應用商機，致力於揭示此領域的新興機會。<br>
+
+              除雲端AI半導體外，翁書婷也曾深入調查智慧型手機應用處理器(AP)市場的動態，對於智慧型手機AP市場及主要業者的發展策略有著敏銳的觀察。
+            </p>
+
+            <p class="sub">研究領域</p>
+            <ul>
+              <li>雲端AI加速器(GPU&ASIC)出貨調查與產業洞察</li>
+              <li>雲端AI半導體產業(Cloud AI Semi)</li>
+              <li>智慧型手機應用處理器市場調查</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="spk8" tabindex="-1" aria-labelledby="spk8Label" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="spk8Label">姚嘉洋</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="sub">經歷</p>
+            <p>
+              姚嘉洋過去曾從事產業科技媒體與產業研究機構長達十五年左右的時間，過去擔任產業分析師期間，多次接受國內天下、遠見與中國等多家財經媒體專訪，就半導體領域的發展動態提出觀察，受訪次數多達百餘次。近年亦跨入科技Podcast領域，訪談科技與半導體產業等多位高階主管。對於晶片應用與相關產業十分熟悉，涉獵的應用領域涵蓋手機、車用電子與HPC等晶片技術及其相關業者。<br>
+
+              姚嘉洋擅長產業脈絡研究藉此洞察國際大廠的未來走向，對於各類晶片技術發展動向亦有一定程度的掌握，故對半導體產業長期的發展動向有極高的掌握度。
+            </p>
+
+            <p class="sub">研究領域</p>
+            <ul>
+              <li>EDA/矽智財/IC設計/歐美日IDM</li>
+              <li>應用領域：物聯網、車用、HPC</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="spk9" tabindex="-1" aria-labelledby="spk9Label" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="spk9Label">周延</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="sub">經歷</p>
+            <p>
+              周延為DIGITIMES提供電子製造業者、半導體業者在亞洲的供應鏈布局等洞見分析。他專精於東南亞、印度電子業者的基礎建設、供應鏈、群聚布局與分析，提供客戶前往東南亞、印度設廠布局時做先期了解，做好可能的風險與成本評估。<br>
+
+              周延在職涯期間，憑借了解韓文、越南文等優勢，持續撰寫三星等南韓大型電子業者在越南、印度布局等有關報告；並協助越南客戶了解台灣電子業者海外設廠布局等各式專案。且在地緣政治影響投資日益重要的國際氛圍下，周延透過政治經濟學的教育背景，可透過國際政治經濟學的學理結合資料分析，提供業者更多洞見資訊。
+            </p>
+
+            <p class="sub">研究領域</p>
+            <ul>
+              <li>三星電子工廠全球布局</li>
+              <li>越南電子產業發展</li>
+              <li>馬來西亞封測產業發展</li>
+              <li>地緣政治影響產業布局議題</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="spk10" tabindex="-1" aria-labelledby="spk10Label" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="spk10Label">林俊吉</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="sub">經歷</p>
+            <p>
+              林俊吉在DIGITIMES的主研究領域為行動裝置產業鏈，涵蓋智慧型手機供應鏈、相關應用與廠商競合。此外，Luke亦在半導體及AI領域有所涉獵，包含晶圓代工大廠競合、地緣政治下的半導體供應鏈布局、資料中心AI晶片供應鏈。Luke在上述領域可提供產品技術、廠商策略及競合、市場走向與出貨規模等分析及預測。<br>
+
+              林俊吉於 2007年 4 月加入DIGITIMES ，在分析師產業擁有17年的經驗。他的背景包括電信服務產品規劃、網通產品銷售技術支援與業務開發等經驗。
+            </p>
+
+            <p class="sub">研究領域</p>
+            <ul>
+              <li>智慧型手機與相關應用及供應鏈</li>
+              <li>AI及on-device AI應用及相關供應鏈</li>
+              <li>晶圓代工大廠競合</li>
+              <li>地緣政治下供應鏈再全球化</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="spk11" tabindex="-1" aria-labelledby="spk11Label" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="spk11Label">簡琮訓</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="sub">經歷</p>
+            <p>
+              簡琮訓於2019年加入DIGITIMES研究中心，擔任通訊領域半導體分析師。簡琮訓專注於無線通訊晶片及智慧型手機應用處理器(AP)產業鏈研究，議題涵蓋產品發展、業者競合、市場分析及產業發展等多個面向，並提供精確的手機AP出貨數據，為市場及客戶營運決策提供可靠依據。<br>
+
+              簡琮訓擁有豐富的產業背景。在加入DIGITIMES研究中心前，簡琮訓曾擔任宏達電的研發工程師，參與多款知名手機的通訊技術開發。基於深厚的通訊技術背景，簡琮訓能夠在快速演進的通訊技術領域中，持續為通訊晶片產業提供深入且獨到的觀察與見解。
+            </p>
+
+            <p class="sub">研究領域</p>
+            <ul>
+              <li>無線通訊晶片趨勢發展與觀察</li>
+              <li>智慧型手機應用處理器市場調查</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="spk12" tabindex="-1" aria-labelledby="spk12Label" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="spk12Label">陳辰妃</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="sub">經歷</p>
+            <p>
+              陳辰妃在擔任分析師前，已擁有超過20年的軟韌體開發與產品管理經驗，曾參與過嵌入式系統軟韌體設計、大型網路設備管理系統建置，以及物聯網應用等專案。曾任職於多家科技公司，擔任過軟體專案經理、副理等職位，領導多項產品開發專案。<br>
+              在DIGITIMES擔任產業分析師超過5年，專注於AI、雲端運算及物聯網生態系與晶片的趨勢分析，對於關鍵趨勢有宏觀且獨到的見解。
+            </p>
+
+            <p class="sub">研究領域</p>
+            <ul>
+              <li>AI晶片產業與市場、應用</li>
+              <li>AI與雲端運算產業應用趨勢觀察</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- spk END -->
   </div>
-</footer>
 
-<!-- Floating CTA -->
-<div class="fab"><a class="btn" href="#register">立即報名</a></div>
 
-<script>
-// 倒數（以台北時區 2025-09-04 09:30 起算）
-const target = new Date('2025-09-04T09:30:00+08:00').getTime();
-const dd=document.getElementById('dd'),hh=document.getElementById('hh'),mm=document.getElementById('mm'),ss=document.getElementById('ss');
-setInterval(()=>{
-  const now = Date.now();
-  let t = Math.max(0, target - now);
-  const d = Math.floor(t/86400000); t%=86400000;
-  const h = Math.floor(t/3600000);  t%=3600000;
-  const m = Math.floor(t/60000);    t%=60000;
-  const s = Math.floor(t/1000);
-  if(dd){dd.textContent=String(d).padStart(2,'0');}
-  if(hh){hh.textContent=String(h).padStart(2,'0');}
-  if(mm){mm.textContent=String(m).padStart(2,'0');}
-  if(ss){ss.textContent=String(s).padStart(2,'0');}
-},1000);
+  <script src="assets/js/libs/jquery-3.4.1.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
+  </script>
+  <script src="assets/js/libs/greenSock/gsap.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/ScrollTrigger.min.js"></script> -->
+  <script type="text/javascript" src="https://www.digitimes.com.tw/seminar/snsShare/jquery.snsShare.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="assets/js/main.js"></script>
 
-// 議程分軌切換
-const tabs=[...document.querySelectorAll('.tab')];
-const decks=[...document.querySelectorAll('.agenda')];
-tabs.forEach(tb=>tb.addEventListener('click',()=>{
-  tabs.forEach(t=>t.classList.remove('active'));
-  tb.classList.add('active');
-  const tk=tb.dataset.track;
-  decks.forEach(d=>{
-    const show = d.dataset.track===tk;
-    d.hidden=!show;
-  });
-  if(tk==='all'){decks.forEach(d=>{if(d.dataset.track==='all') d.hidden=false;});}
-}));
+  <script>
+    $(function () {
+      $('.share-to').snsShare('半導體產業 前瞻趨勢論壇',
+        'https://www.digitimes.com.tw/seminar/TechForum_20250904/');
 
-// 分享連結
-document.querySelectorAll('.share a').forEach(a=>{
-  a.addEventListener('click',e=>{
-    e.preventDefault();
-    const url=encodeURIComponent(location.href);
-    const text=encodeURIComponent(document.title);
-    const map={
-      'share-facebook':`https://www.facebook.com/sharer/sharer.php?u=${url}`,
-      'share-line':`https://line.me/R/msg/text/?${text}%0A${url}`,
-      'share-x':`https://twitter.com/intent/tweet?text=${text}&url=${url}`,
-      'share-linkedin':`https://www.linkedin.com/sharing/share-offsite/?url=${url}`
-    };
-    const id=a.getAttribute('aria-label');
-    window.open(map[id],'_blank','width=800,height=600');
-  });
-});
-</script>
+      //timer start
+      const d = document.querySelector(".d");
+      const h = document.querySelector(".h");
+      const m = document.querySelector(".m");
+      const s = document.querySelector(".s");
+      setInterval(function () {
+        let nowTime = new Date();
+        let endTime = new Date("2025-09-04T10:00:00.000+08:00"); // "西元年-月-日T時:分:秒.毫秒 時區(+/-)"
+        let offsetTime = (endTime - nowTime) / 1000; //以秒為單位
+        let sec = parseInt(offsetTime % 60); //秒
+        let min = parseInt(offsetTime / 60) % 60; //分
+        let hr = parseInt((offsetTime / 60 / 60) % 24); //時
+        let day = parseInt(offsetTime / 24 / 60 / 60); //日
+        // console.log(day,hr,min,sec);
+        if (endTime > nowTime) {
+          if (sec < 10) {
+            sec = "0" + sec;
+          }
+          if (min < 10) {
+            min = "0" + min;
+          }
+          if (hr < 10) {
+            hr = "0" + hr;
+          }
+          if (day < 10) {
+            day = "0" + day;
+          }
+          s.textContent = sec;
+          h.textContent = hr;
+          m.textContent = min;
+          d.textContent = day;
+        }
+      }, 1000);
+      //timer end
+    });
+  </script>
+
+  <script>
+    let numTl = gsap.timeline({
+      yoyo: true,
+      repeat: -1,
+    });
+
+    numTl.to(".num", {
+      opacity: 1,
+      duration: 0.3,
+      ease: "steps(1)"
+    }, 1)
+
+    numTl.to(".num", {
+      opacity: 1,
+      top: "-10px",
+      duration: 0.1,
+      ease: "steps(1)"
+    }, 1.5)
+
+    numTl.to(".num", {
+      opacity: 0,
+      top: "-10px",
+      duration: 0.1,
+      ease: "steps(1)"
+    }, 2)
+
+    numTl.to(".num", {
+      opacity: 1,
+      top: "-50px",
+      duration: 0.25,
+      ease: "steps(1)"
+    }, 2.25)
+    numTl.to(".num", {
+      opacity: 0,
+      top: "-50px",
+      duration: 0.25,
+      ease: "steps(1)"
+    }, 3)
+
+    numTl.to(".num", {
+      opacity: 1,
+      top: "-80px",
+      duration: 0.5,
+      ease: "steps(1)"
+    }, 3.3)
+    numTl.to(".num", {
+      opacity: 0,
+      top: "-80px",
+      duration: 0.5,
+      ease: "steps(1)"
+    }, 4)
+
+    numTl.to(".num", {
+      opacity: 1,
+      top: "0px",
+      duration: 0.45,
+      ease: "steps(1)"
+    }, 4.25)
+    numTl.to(".num", {
+      opacity: 0,
+      top: "0px",
+      duration: 0.45,
+      ease: "steps(1)"
+    }, 4.5)
+
+    numTl.to(".num", {
+      opacity: 1,
+      top: "-30px",
+      duration: 0.2,
+      ease: "steps(1)"
+    }, 5.75)
+    numTl.to(".num", {
+      opacity: 0,
+      top: "-30px",
+      duration: 0.2,
+      ease: "steps(1)"
+    }, 6);
+
+    gsap.to(".halo", {
+      opacity: 1,
+      scale: 1.1,
+      duration: 3,
+      ease: "none",
+      yoyo: true,
+      repeat: -1,
+      repeatDelay: 5,
+    });
+
+    let ballTl = gsap.timeline({
+      // yoyo:true,
+      repeat: -1,
+      ease: "power1.inOut"
+    });
+
+    ballTl.to(".ball", {
+      scale: 1.025,
+      rotate: "-3deg",
+      duration: 2.5,
+    }, 2);
+    // ballTl.to(".ball_shadow", {
+    //   scale: 1.025,
+    //   duration: 1,
+    //   top: "81%",
+    //   left:"57%",
+    //   opacity:1,
+    // }, 2);
+
+    ballTl.to(".dots1", {
+      scale: 1,
+      opacity: 1,
+      duration: 0.5,
+    }, 2.5);
+    ballTl.to(".dots2", {
+      scale: 1.025,
+      opacity: 1,
+      duration: 0.75,
+    }, 2.75);
+    ballTl.to(".dots3", {
+      scale: 1.05,
+      opacity: 1,
+      duration: 0.8,
+    }, 3);
+    ballTl.to(".dots4", {
+      scale: 1.05,
+      opacity: 1,
+      duration: 1,
+    }, 3.5);
+    ballTl.to(".ball_light", {
+      scale: 1.075,
+      opacity: 1,
+      duration: 3,
+    }, 3.65);
+    ballTl.to(".ball_light", {
+      scale: 1,
+      opacity: 0,
+      duration: 5,
+    });
+
+    ballTl.to(".dots1", {
+      // scale:0,
+      opacity: 0,
+      duration: 0.25,
+    });
+    ballTl.to(".dots2", {
+      // scale:0,
+      opacity: 0,
+      duration: 0.25,
+    });
+    ballTl.to(".dots3", {
+      // scale:0,
+      opacity: 0,
+      duration: 0.25,
+    });
+    ballTl.to(".dots4", {
+      // scale:0,
+      opacity: 0,
+      duration: 0.25,
+    });
+
+    ballTl.to(".ball", {
+      scale: 0.975,
+      rotate: "0deg",
+      duration: 1,
+    });
+    // ballTl.to(".ball_shadow", {
+    //   scale: 0.975,
+    //   duration: 1,
+    //   top: "79%",
+    //   left:"58%",
+    //   opacity:0.75,
+    // });
+  </script>
 </body>
+
 </html>
