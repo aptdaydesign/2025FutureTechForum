@@ -13,66 +13,80 @@
   html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,"PingFang TC","Heiti TC",sans-serif}
   .en{font-family:"Roboto","Noto Sans TC",system-ui,Arial,sans-serif}
 
-  /* === HERO（16:9 等比；圖片以 1920×1080 百分比定位） === */
+  /* === HERO（16:9 等比；三張圖依 1920×1080 百分比定位） === */
   .hero-wrapper{
     position:relative; width:100vw; margin:0;
     aspect-ratio:16/9; overflow:hidden;
     background:#0b0c0f url("assets/img/hero-bg.png") center/cover no-repeat;
   }
   .hero-img{position:absolute; max-width:100%; height:auto; pointer-events:none; user-select:none}
-  /* 依 1920×1080 的座標與寬度 */
   .hero-logo{     top:calc( 60/1080*100%); left:calc(100/1920*100%); width:calc(634/1920*100%) }
   .hero-title{    top:calc(375/1080*100%); left:calc(100/1920*100%); width:calc(887/1920*100%) }
   .hero-subtitle{ top:calc(725/1080*100%); left:calc(100/1920*100%); width:calc(878/1920*100%) }
 
-  /* === 橫向活動選單：滿版 1920×315，字級跟高度等比 === */
+  /* === 橫向活動選單：滿版 4 欄；上下各 40px 內距；分隔線隨寬縮放 === */
   :root{
     --tab-default:#501cf2;   /* 未選 */
     --tab-active:#d90085;    /* 選取 */
-    /* 橫幅實際高度（最小 140px，等比到 315px） */
-    --barH: clamp(140px, 100vw * (315 / 1920), 315px);
-    /* 1920px 寬時為 2px 的分隔線，會隨寬度縮放 */
-    --dividerW: 0.104vw;   /* 2 / 1920 * 100vw */
+    --dividerW: calc(2 / 1920 * 100vw); /* 1920 寬時 2px，隨寬縮放 */
   }
   .event-bar{
     position:relative; width:100vw;
     margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw);
-    height:var(--barH); overflow:hidden;
+    overflow:hidden; background:#000;
   }
   .event-bar .bar{
-    position:absolute; inset:0; display:grid; grid-template-columns:repeat(4,1fr);
+    position:relative; display:grid; grid-template-columns:repeat(4,1fr);
   }
+
   .bar-item{
     --bg:var(--tab-default);
     background:var(--bg); color:#fff;
     appearance:none; border:none; outline:none; box-shadow:none;
-    display:grid; align-content:center; justify-items:center; text-align:center; line-height:1.15;
-    padding: calc(var(--barH) * 0.06) calc(12px + var(--barH) * 0.02);
-    border-right: var(--dividerW) solid #fff;          /* 只畫中間白線 */
+    display:grid; align-content:center; justify-items:center; text-align:center;
+    padding-block: 40px;                 /* ← 上下各 40px（你要求） */
+    padding-inline: clamp(12px, 2vw, 32px);
+    border-right: var(--dividerW) solid #fff;   /* 只畫中間白線 */
     cursor:pointer; user-select:none;
   }
   .bar-item:first-child{border-left:none}
   .bar-item:last-child{border-right:none}
   .bar-item[aria-current="true"]{ --bg:var(--tab-active) }
 
-  /* 文字跟著高度等比；日期/時間強制 Roboto */
-  .bar-item .t1{ font-weight:900; letter-spacing:.02em; font-size:clamp(14px, calc(var(--barH)*0.085), 34px) }
-  .bar-item .t2{ font-weight:900; margin-top:calc(var(--barH)*0.03); font-size:clamp(20px, calc(var(--barH)*0.13), 72px); font-family:"Roboto","Noto Sans TC",system-ui,Arial,sans-serif }
-  .bar-item .t3{ font-weight:800; margin-top:calc(var(--barH)*0.02); opacity:.95; font-size:clamp(12px, calc(var(--barH)*0.07), 32px); font-family:"Roboto","Noto Sans TC",system-ui,Arial,sans-serif }
+  /* 文字大小：用 vw 等比，並設最小/最大；行距 & 段間距加大 */
+  .bar-item .t1{
+    font-weight:900; letter-spacing:.02em;
+    font-size: clamp(14px, 1.2vw, 28px);
+    line-height: 1.3;
+    margin: 0 0 10px;                    /* 與日期的間距 */
+  }
+  .bar-item .t2{
+    font-weight:900;
+    font-size: clamp(20px, 2.4vw, 56px);
+    line-height: 1.25;                   /* 日期行距 */
+    margin: 0 0 10px;                    /* 與時間的間距 */
+    font-family:"Roboto","Noto Sans TC",system-ui,Arial,sans-serif;
+  }
+  .bar-item .t3{
+    font-weight:800; opacity:.95;
+    font-size: clamp(12px, 1.4vw, 28px);
+    line-height: 1.3;                    /* 時間行距 */
+    margin: 0;
+    font-family:"Roboto","Noto Sans TC",system-ui,Arial,sans-serif;
+  }
 
-  /* 手機 ≤480px：改 2×2 排 */
+  /* 手機 ≤480px：改 2×2 排，保留可縮放分隔線 */
   @media (max-width:480px){
-    .event-bar{ height: calc(var(--barH) * 2) }
     .event-bar .bar{ grid-template-columns:repeat(2,1fr) }
     .bar-item{ border-right: var(--dividerW) solid #fff; border-bottom: var(--dividerW) solid #fff }
-    .bar-item:nth-child(2n){ border-right:none }
-    .bar-item:nth-last-child(-n+2){ border-bottom:none }
+    .bar-item:nth-child(2n){ border-right:none }          /* 每列最右不畫線 */
+    .bar-item:nth-last-child(-n+2){ border-bottom:none }  /* 最後一列不畫底線 */
   }
 </style>
 </head>
 <body>
 
-<!-- HERO：只疊你的三張圖，絕不改內容 -->
+<!-- HERO -->
 <section class="hero-wrapper" aria-label="Hero">
   <img class="hero-img hero-logo"     src="assets/img/hero-logo.png"     alt="">
   <img class="hero-img hero-title"    src="assets/img/hero-title.png"    alt="">
@@ -106,7 +120,7 @@
 </nav>
 
 <script>
-  // 切換選取顏色（之後可在這裡連動內容）
+  // 點選切換顏色（之後可在這裡連動內容）
   document.querySelectorAll('.bar-item').forEach(btn=>{
     btn.addEventListener('click', ()=>{
       document.querySelectorAll('.bar-item')
