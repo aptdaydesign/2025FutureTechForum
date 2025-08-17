@@ -3,31 +3,31 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Hero（SVG 像素對版）</title>
+<title>Hero — 1920×1080 像素對版</title>
 <style>
-  /* 讓 SVG 等比自適應：寬度 100%，高度自動 */
+  /* 讓 SVG 等比縮放，避免任何高度寫死造成失真 */
+  html,body{margin:0;background:#000}
   .hero-svg{display:block;width:100%;height:auto}
-  body{margin:0;background:#000}
 </style>
 </head>
 <body>
 
-<!-- 以 viewBox 1920×1080 精準對版 -->
+<!-- 以「設計稿座標系」直接排：viewBox=1920×1080 -->
 <svg class="hero-svg" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg" aria-label="Hero">
-  <!-- 背景：1920×1080 -->
+  <!-- 背景（你給的是 1920×1080） -->
   <image href="assets/img/hero-bg.png" x="0" y="0" width="1920" height="1080" />
 
-  <!-- 左邊統一 100px 對齊線 -->
-  <!-- Logo：上 60px、左 100px；尺寸 634×87 -->
+  <!-- 左對齊線 = 100px -->
+  <!-- Logo：x=100, y=60, 寬=634, 高=87 -->
   <image href="assets/img/hero-logo.png" x="100" y="60" width="634" height="87" />
 
-  <!-- 主標：頂端 230px、左 100px；尺寸 887×236 -->
+  <!-- 主標：x=100, y=230, 寬=887, 高=236 -->
   <image href="assets/img/hero-title.png" x="100" y="230" width="887" height="236" />
 
-  <!-- 副標（FutureTech Forum）：貼主標下緣並略留空隙
-       主標底緣 = 230 + 236 = 466；建議留 20px → 486
-       若要更接近你的版，改 y 值即可（例如 500/510） -->
-  <image href="assets/img/hero-subtitle.png" x="100" y="486" width="878" height="232" />
+  <!-- 副標（FutureTech Forum）：貼著主標下緣
+       主標底緣 = 230 + 236 = 466 → 副標頂緣 y=466
+       （這就是你圖上「沒有多餘間距」的擺法） -->
+  <image href="assets/img/hero-subtitle.png" x="100" y="466" width="878" height="232" />
 </svg>
 
 </body>
