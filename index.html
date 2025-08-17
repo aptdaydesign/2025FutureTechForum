@@ -3,87 +3,70 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Hero 對版（1920×1080）</title>
+<title>Hero 對版（assets/img）</title>
 <style>
-/* ===== 全站歸零，避免額外間距 ===== */
-*{box-sizing:border-box}
-html,body{height:100%}
-body{margin:0;background:#000;}
+  :root{
+    /* 設計稿基準：1920x1080 */
+    --ref-w: 1920;
+    --ref-h: 1080;
+    --hero-aspect: calc(var(--ref-w) / var(--ref-h));
 
-/* ===== 設計稿基準：你的背景圖是 1920×1080 ===== */
-:root{
-  --ref-w: 1920;         /* 設計稿寬 */
-  --ref-h: 1080;         /* 設計稿高 */
-  --hero-aspect: calc(var(--ref-w)/var(--ref-h));
+    /* 依 PDF 的像素座標（左 100px；上 60/230/330；寬 634/887/878） */
+    --x: 100;
 
-  /* === 直接填「設計稿像素」：左上角座標(x,y) + 寬度(w) === */
-  /* 左上角白色機關 Logo（hero-logo.png）*/
-  --logo-x: 84;   --logo-y: 48;   --logo-w: 260;
+    --logo-y: 60;   --logo-w: 634;
+    --title-y: 230; --title-w: 887;
+    --sub-y: 330;   --sub-w: 878;
 
-  /* 主標（hero-title.png）— 白色大標 */
-  --title-x: 160; --title-y: 230; --title-w: 1180;
+    /* 視需要可把暗角調淡或拿掉 */
+    --vignette-top: .18;
+    --vignette-btm: .50;
+  }
 
-  /* 副標（hero-subtitle.png）— 英文細字：避開主標，預設往下 */
-  --subtitle-x: 160; --subtitle-y: 430; --subtitle-w: 820;
+  *{box-sizing:border-box}
+  html,body{height:100%} body{margin:0;background:#000}
 
-  /* 是否加暗角提升可讀性（0~0.6） */
-  --vignette-a-top: .18;
-  --vignette-a-btm: .50;
-}
+  /* Hero 依 16:9 等比縮放，位置用百分比換算自像素 */
+  .hero{position:relative; width:100%; aspect-ratio:var(--hero-aspect); overflow:hidden; color:#fff}
+  .hero-bg{position:absolute; inset:0; background:#0b0c0f url("assets/img/hero-bg.png") center/cover no-repeat; z-index:0}
+  .hero::after{content:""; position:absolute; inset:0; z-index:1;
+    background:linear-gradient(180deg, rgba(0,0,0,var(--vignette-top)), rgba(0,0,0,var(--vignette-btm)));
+  }
 
-/* ===== HERO（依 1920×1080 等比縮放） ===== */
-.hero{
-  position:relative; width:100%; aspect-ratio:var(--hero-aspect);
-  overflow:hidden; color:#fff; isolation:isolate;
-}
-.hero-bg{
-  position:absolute; inset:0;
-  background: #0b0c0f url("assets/img/hero-bg.png") center/cover no-repeat;
-  z-index:0;
-}
-.hero::after{
-  /* 輕微暗角，避免文字被高彩背景吃掉；不需要可刪 */
-  content:""; position:absolute; inset:0; z-index:1;
-  background:linear-gradient(180deg, rgba(0,0,0,var(--vignette-a-top)), rgba(0,0,0,var(--vignette-a-btm)));
-}
+  .layer{position:absolute; z-index:2; pointer-events:none; user-select:none; filter:drop-shadow(0 2px 6px rgba(0,0,0,.22))}
+  .at-left-100{ left: calc(var(--x) / var(--ref-w) * 100%) }
 
-/* 三張圖層用「像素→百分比」定位；不會隨寬高比跑掉 */
-.px-abs{
-  position:absolute; z-index:2; pointer-events:none; user-select:none;
-  filter: drop-shadow(0 2px 6px rgba(0,0,0,.22)); /* 讓白字更清楚 */
-}
-.hero-logo{
-  left: calc(var(--logo-x) / var(--ref-w) * 100%);
-  top:  calc(var(--logo-y) / var(--ref-h) * 100%);
-  width: calc(var(--logo-w) / var(--ref-w) * 100%);
-}
-.hero-title{
-  left: calc(var(--title-x) / var(--ref-w) * 100%);
-  top:  calc(var(--title-y) / var(--ref-h) * 100%);
-  width: calc(var(--title-w) / var(--ref-w) * 100%);
-}
-.hero-subtitle{
-  left: calc(var(--subtitle-x) / var(--ref-w) * 100%);
-  top:  calc(var(--subtitle-y) / var(--ref-h) * 100%);
-  width: calc(var(--subtitle-w) / var(--ref-w) * 100%);
-}
+  .hero-logo{
+    top:  calc(var(--logo-y) / var(--ref-h) * 100%);
+    width:calc(var(--logo-w) / var(--ref-w) * 100%);
+  }
+  .hero-title{
+    top:  calc(var(--title-y) / var(--ref-h) * 100%);
+    width:calc(var(--title-w) / var(--ref-w) * 100%);
+  }
+  .hero-sub{
+    top:  calc(var(--sub-y) / var(--ref-h) * 100%);
+    width:calc(var(--sub-w) / var(--ref-w) * 100%);
+  }
 
-/* =====（可選）除錯格線：在 <section class="hero debug"> 使用 ===== */
-.hero.debug{
-  background-image:
-    linear-gradient(rgba(0,140,255,.12) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,140,255,.12) 1px, transparent 1px);
-  background-size: calc(100%/12) calc(100%/12);
-}
+  /* （除錯）加上 class="hero debug" 可看格線 */
+  .hero.debug{
+    background-image:
+      linear-gradient(rgba(0,140,255,.12) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,140,255,.12) 1px, transparent 1px);
+    background-size: calc(100%/12) calc(100%/12);
+  }
 </style>
 </head>
 <body>
 
 <section class="hero" aria-label="Hero">
   <div class="hero-bg" aria-hidden="true"></div>
-  <img class="px-abs hero-logo"     src="assets/img/hero-logo.png"     alt="機關識別">
-  <img class="px-abs hero-title"    src="assets/img/hero-title.png"    alt="主標題">
-  <img class="px-abs hero-subtitle" src="assets/img/hero-subtitle.png" alt="副標題">
+
+  <!-- 三張透明 PNG，皆以「左 100px」對齊 -->
+  <img class="layer at-left-100 hero-logo" src="assets/img/hero-logo.png"     alt="Logo">
+  <img class="layer at-left-100 hero-title" src="assets/img/hero-title.png"    alt="主標">
+  <img class="layer at-left-100 hero-sub"   src="assets/img/hero-subtitle.png" alt="副標與時間">
 </section>
 
 </body>
