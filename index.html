@@ -5,129 +5,131 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>前瞻科技系列論壇｜FutureTech Forum</title>
 <meta name="description" content="全球科技與頂尖人才的創新交融 · Sep–Dec 2025 · Taipei, Taiwan" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700;800&display=swap" rel="stylesheet">
-
 <style>
 :root{
-  --bg:#0b1222; --fg:#e7eeff; --muted:#c2ccea;
-  --line:#1b2442; --brand:#58b8ff; --accent:#78d9bd; --deep:#121a31;
-  --tab-inactive:#1a2342; --tab-active:#2d59ff;
+  --bg:#0b1222; --deep:#0a1222; --fg:#e8f0ff; --muted:#c4d0ea;
+  --line:#1c2749; --brand:#2d59ff; --accent:#7ee6c0; --tab:#1a2342;
+  --tabActive:#3b66ff; --chip:#182243;
 }
-*{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:var(--fg);font-family:"Noto Sans TC",-apple-system,Segoe UI,Roboto,Arial,"PingFang TC","Microsoft JhengHei",sans-serif}
-a{color:var(--brand);text-decoration:none}
-img{display:block;max-width:100%}
+*{box-sizing:border-box} html,body{margin:0;background:var(--bg);color:var(--fg);
+  font-family:"Noto Sans TC",-apple-system,Segoe UI,Roboto,Arial,"PingFang TC","Microsoft JhengHei",sans-serif}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
 .container{max-width:1200px;margin:0 auto;padding:0 20px}
 
-/* ===== HERO ===== */
-.hero{position:relative;min-height:78vh;display:grid;place-items:center;overflow:hidden;isolation:isolate}
-.hero::before{content:"";position:absolute;inset:0;z-index:-2;background:url(assets/img/hero-bg.png) center/cover no-repeat}
-.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:
-  radial-gradient(70% 60% at 70% 20%, rgba(78,161,255,.18), transparent 60%),
-  linear-gradient(180deg, rgba(5,8,18,.15), rgba(5,8,18,.7))}
+/* ---------- HERO ---------- */
+.hero{position:relative;min-height:86vh;display:grid;align-items:center}
+.hero::before{content:"";position:absolute;inset:0;background:url(assets/img/hero-bg.png) center/cover no-repeat;z-index:-2}
+.hero::after{content:"";position:absolute;inset:0;background:
+  radial-gradient(80% 60% at 70% 10%, rgba(70,140,255,.18), transparent 60%),
+  linear-gradient(180deg, rgba(6,9,18,.0), rgba(6,9,18,.55) 70%, rgba(6,9,18,.8));z-index:-1}
+.hero-inner{display:grid;gap:14px;align-items:center}
+.hero-pad{height:10vh} /* 給 sticky nav 交界更順 */
+.logo{position:absolute;top:22px;left:22px;width:min(38vw,220px);opacity:0;transform:translateX(-16px)}
+.title{width:min(90vw,980px);opacity:0;transform:translateY(18px)}
+.subtitle{width:min(86vw,820px);opacity:0;transform:translateY(18px)}
+.hero.in .title{animation:rise .8s ease forwards}
+.hero.in .subtitle{animation:rise .8s ease .15s forwards}
+.hero.in .logo{animation:slideIn .8s ease .25s forwards}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideIn{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:translateX(0)}}
 
-.logo{position:absolute;top:18px;left:18px;width:min(36vw,220px);opacity:0;transform:translateX(-14px)}
-.title-wrap{display:grid;gap:12px;justify-items:center;text-align:center}
-.title-img,.subtitle-img{width:min(92vw,980px);height:auto;opacity:0;transform:translateY(16px)}
+/* ---------- 右側懸浮欄 ---------- */
+.fix-aside{position:fixed;right:18px;top:22vh;display:flex;flex-direction:column;gap:14px;z-index:60}
+.fix-aside .ring{width:108px;height:108px;border-radius:50%;background:#ff9800;color:#10151f;
+  display:grid;place-items:center;font-weight:900;box-shadow:0 10px 30px rgba(0,0,0,.35);cursor:pointer}
+.fix-aside .pill{width:112px;min-height:84px;border-radius:16px;padding:10px;background:#ffffff10;
+  border:1px solid #ffffff25;backdrop-filter:blur(10px);display:grid;place-items:center;font-weight:800}
+.fix-aside .top{width:112px;height:84px;border-radius:16px;background:#ffffff10;border:1px solid #ffffff25;
+  display:grid;place-items:center;cursor:pointer}
+.fix-aside .pill:hover,.fix-aside .top:hover{background:#ffffff18}
+@media (max-width:980px){.fix-aside{display:none}}
 
-@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-@keyframes slideInRight{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:translateX(0)}}
-.in .title-img{animation:rise .8s ease forwards}
-.in .subtitle-img{animation:rise .8s ease .2s forwards}
-.in .logo{animation:slideInRight .8s ease .3s forwards}
-
-/* ===== 書籤選單（滾過 hero 才出現） ===== */
-.bookmark{position:sticky;top:-1px;z-index:50;transform:translateY(-100%);opacity:0;
-  background:rgba(10,15,30,.78);backdrop-filter:saturate(160%) blur(10px);
-  border-bottom:1px solid var(--line);transition:transform .28s ease,opacity .28s ease}
+/* ---------- 書籤式選單（滾過 hero 才出現） ---------- */
+.bookmark{position:sticky;top:-1px;transform:translateY(-100%);opacity:0;z-index:50;
+  background:rgba(10,16,32,.84);backdrop-filter:saturate(160%) blur(10px);
+  border-bottom:1px solid var(--line);transition:transform .25s ease,opacity .25s ease}
 .bookmark.show{transform:translateY(0);opacity:1}
-.bookmark .nav{display:flex;gap:10px;align-items:center;justify-content:flex-end;height:60px}
-.tag{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;
-  color:#cfe0ff;background:rgba(255,255,255,.02);padding:8px 16px;font-weight:700}
-.tag.active{background:linear-gradient(180deg,var(--accent),var(--brand));color:#0a1222;border-color:transparent}
-.cta{display:inline-flex;align-items:center;justify-content:center;padding:10px 16px;border-radius:12px;
-  background:var(--brand);color:#081324;font-weight:800}
+.bookmark .nav{height:64px;display:flex;align-items:center;justify-content:flex-end;gap:10px}
+.chip{padding:8px 16px;border-radius:999px;background:var(--chip);border:1px solid #223059;color:#cfe0ff;font-weight:800}
+.chip.active{background:linear-gradient(180deg,var(--accent),var(--brand));color:#0a1222;border-color:transparent}
+.cta{padding:10px 16px;border-radius:12px;background:var(--brand);color:#07122c;font-weight:900}
 
-/* ===== 區塊 ===== */
+/* ---------- 區塊 ---------- */
 section.block{padding:84px 0;border-top:1px solid var(--line)}
-h2{margin:0 0 16px;font-weight:800}
-p{margin:0 0 12px;color:var(--muted)}
+h2{margin:0 0 14px;font-weight:900}
+p{margin:0 0 10px;color:var(--muted)}
 
-/* ===== 系列活動 Tabs ===== */
-.tabs{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 22px}
-.tab{background:var(--tab-inactive);color:#cfe0ff;padding:10px 14px;border-radius:999px;border:1px solid #223059;cursor:pointer}
-.tab.active{background:var(--tab-active);color:white;border-color:transparent}
-.tab-panels{position:relative}
-.panel{display:none}
-.panel.active{display:block}
+/* ---------- Tabs + 面板 ---------- */
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 22px}
+.tab{background:var(--tab);color:#cfe0ff;border:1px solid #223059;border-radius:999px;padding:10px 14px;cursor:pointer}
+.tab.active{background:var(--tabActive);border-color:transparent;color:#fff}
+.tab-panels .panel{display:none}
+.tab-panels .panel.active{display:block}
 
-/* ===== 活動內容 + CTA ===== */
-.event-cta{margin:18px 0 0;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-.event-cta .cta{padding:12px 18px;border-radius:12px}
+/* ---------- CTA Row ---------- */
+.event-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
 
-/* ===== 講者卡 ===== */
+/* ---------- Speakers ---------- */
 .speakers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.speaker{background:linear-gradient(180deg,#10182f,#0e162a);border:1px solid #1f2b4d;border-radius:16px;overflow:hidden}
-.speaker .pic{aspect-ratio:1/1;background:#1b2442;display:grid;place-items:center}
+.speaker{background:linear-gradient(180deg,#10172e,#0f162a);border:1px solid #1f2a4d;border-radius:16px;overflow:hidden}
+.speaker .pic{aspect-ratio:1/1;background:#1b2342;display:grid;place-items:center}
 .speaker img{width:100%;height:100%;object-fit:cover}
 .speaker .info{padding:12px 14px}
-.speaker .name{font-weight:800}
+.speaker .name{font-weight:900}
 .speaker .role{color:var(--muted);font-size:.95rem}
 
-/* ===== 毛玻璃議程 ===== */
+/* ---------- Agenda (Glass) ---------- */
 .agenda{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-.card{
-  position:relative;padding:16px;border-radius:16px;
-  background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
-  border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(10px)
-}
-.time{font-weight:800}
-.topic{font-weight:700;margin:6px 0}
+.card{padding:16px;border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(10px)}
+.time{font-weight:900}
+.topic{font-weight:800;margin:6px 0}
 .place{color:var(--muted)}
-@media (max-width:980px){
-  .agenda{grid-template-columns:1fr}
-  .speakers{grid-template-columns:1fr 1fr}
-}
-@media (max-width:640px){
-  .speakers{grid-template-columns:1fr}
-}
-footer{padding:40px 0;border-top:1px solid var(--line);background:var(--deep)}
+@media (max-width:980px){.agenda{grid-template-columns:1fr}.speakers{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.speakers{grid-template-columns:1fr}}
+
+/* ---------- Footer ---------- */
+footer{padding:44px 0;border-top:1px solid var(--line);background:#0a1328}
 .partner-logos{display:flex;flex-wrap:wrap;gap:18px;align-items:center}
-.partner-logos img{height:38px;width:auto;filter:drop-shadow(0 2px 6px rgba(0,0,0,.2))}
-@media (prefers-reduced-motion: reduce){
-  .in .title-img,.in .subtitle-img,.in .logo{animation:none;opacity:1;transform:none}
-}
+.partner-logos img{height:40px;width:auto;filter:drop-shadow(0 2px 6px rgba(0,0,0,.25))}
 </style>
 </head>
 <body>
 
-<!-- HERO -->
 <header class="hero" id="hero">
-  <img class="logo" src="assets/img/hero-logo.png" alt="主辦單位 Logo">
-  <div class="title-wrap">
-    <img class="title-img"    src="assets/img/hero-title.png" alt="前瞻科技系列論壇｜FutureTech Forum">
-    <img class="subtitle-img" src="assets/img/hero-subtitle.png" alt="全球科技與頂尖人才的創新交融 · Sep–Dec 2025 · Taipei, Taiwan">
+  <img class="logo" src="assets/img/hero-logo.png" alt="科政中心 Logo">
+  <div class="container hero-inner">
+    <img class="title" src="assets/img/hero-title.png" alt="前瞻科技系列論壇｜FutureTech Forum">
+    <img class="subtitle" src="assets/img/hero-subtitle.png" alt="全球科技與頂尖人才的創新交融 · Sep–Dec 2025 · Taipei, Taiwan">
   </div>
+  <div class="hero-pad"></div>
 </header>
 
-<!-- 書籤選單 -->
+<!-- 右側懸浮欄 -->
+<aside class="fix-aside" aria-label="快速操作">
+  <a class="ring" href="#register" title="立即報名">立即<br>報名</a>
+  <a class="pill" href="#" target="_blank" rel="noopener" title="報名查詢">報名<br>查詢</a>
+  <a class="top" href="#hero" title="回到頂部">▲</a>
+</aside>
+
+<!-- 書籤式選單 -->
 <nav class="bookmark" id="bookmark">
   <div class="container nav">
-    <a class="tag" data-goto="#about">活動簡介</a>
-    <a class="tag" data-goto="#speakers">主要講者</a>
-    <a class="tag" data-goto="#agenda">議程</a>
-    <a class="cta" href="#register">立即報名</a>
+    <a class="chip" data-goto="#about">活動簡介</a>
+    <a class="chip" data-goto="#speakers">主要講者</a>
+    <a class="chip" data-goto="#agenda">議程</a>
+    <a class="cta"  href="#register">立即報名</a>
   </div>
 </nav>
 
-<!-- 活動簡介 + 系列活動切換 -->
+<!-- 活動簡介 + 系列活動 -->
 <section id="about" class="block">
   <div class="container">
     <h2>活動簡介</h2>
-    <p>這裡放你的活動介紹文案（可替換）。下方為系列論壇四場活動的切換，預設顯示第一場。未選為深藍紫、選到變色並展開內容。</p>
+    <p>此區為活動說明文案（先放占位，之後你替換即可）。下方為系列論壇四場活動切換，未選為深藍紫，選到後高亮且展開內容。</p>
 
-    <!-- tabs -->
     <div class="tabs" id="tabs">
       <button class="tab active" data-panel="p1">活動一</button>
       <button class="tab" data-panel="p2">活動二</button>
@@ -135,196 +137,40 @@ footer{padding:40px 0;border-top:1px solid var(--line);background:var(--deep)}
       <button class="tab" data-panel="p4">活動四</button>
     </div>
 
-    <!-- panels -->
     <div class="tab-panels">
-      <!-- Panel 1（其他面板先複製同樣結構，之後換文案/講者/時間地點） -->
       <div class="panel active" id="p1">
         <p><strong>主題：</strong>AI × 先進製程 × 產業新局</p>
         <p><strong>時間：</strong>2025/09/04（Thu）10:00–16:30</p>
         <p><strong>地點：</strong>台北‧元大金融廣場 國際會議廳</p>
         <div class="event-cta">
           <a class="cta" href="#" target="_blank" rel="noopener">立即報名</a>
-          <a class="tag" data-goto="#agenda">查看議程</a>
+          <a class="chip" data-goto="#agenda">查看議程</a>
         </div>
       </div>
-
       <div class="panel" id="p2">
-        <p><strong>主題：</strong>（活動二主題，之後替換）</p>
-        <p><strong>時間：</strong>（活動二時間）</p>
-        <p><strong>地點：</strong>（活動二地點）</p>
-        <div class="event-cta">
-          <a class="cta" href="#" target="_blank">立即報名</a>
-          <a class="tag" data-goto="#agenda">查看議程</a>
-        </div>
+        <p><strong>主題：</strong>（活動二主題）</p><p><strong>時間：</strong>（活動二時間）</p><p><strong>地點：</strong>（活動二地點）</p>
+        <div class="event-cta"><a class="cta" href="#" target="_blank">立即報名</a><a class="chip" data-goto="#agenda">查看議程</a></div>
       </div>
-
       <div class="panel" id="p3">
-        <p><strong>主題：</strong>（活動三主題）</p>
-        <p><strong>時間：</strong>（活動三時間）</p>
-        <p><strong>地點：</strong>（活動三地點）</p>
-        <div class="event-cta">
-          <a class="cta" href="#" target="_blank">立即報名</a>
-          <a class="tag" data-goto="#agenda">查看議程</a>
-        </div>
+        <p><strong>主題：</strong>（活動三主題）</p><p><strong>時間：</strong>（活動三時間）</p><p><strong>地點：</strong>（活動三地點）</p>
+        <div class="event-cta"><a class="cta" href="#" target="_blank">立即報名</a><a class="chip" data-goto="#agenda">查看議程</a></div>
       </div>
-
       <div class="panel" id="p4">
-        <p><strong>主題：</strong>（活動四主題）</p>
-        <p><strong>時間：</strong>（活動四時間）</p>
-        <p><strong>地點：</strong>（活動四地點）</p>
-        <div class="event-cta">
-          <a class="cta" href="#" target="_blank">立即報名</a>
-          <a class="tag" data-goto="#agenda">查看議程</a>
-        </div>
+        <p><strong>主題：</strong>（活動四主題）</p><p><strong>時間：</strong>（活動四時間）</p><p><strong>地點：</strong>（活動四地點）</p>
+        <div class="event-cta"><a class="cta" href="#" target="_blank">立即報名</a><a class="chip" data-goto="#agenda">查看議程</a></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 主要講者（3×4 = 12 張，若圖未上傳會顯示灰底佔位） -->
+<!-- 主要講者：12 張（若無圖會自顯示佔位文字） -->
 <section id="speakers" class="block">
   <div class="container">
     <h2>主要講者</h2>
     <div class="speakers">
-      <!-- 活動1 -->
-      <article class="speaker">
-        <div class="pic"><img src="assets/img/speaker1-1.png" alt="Speaker 1-1" onerror="this.onerror=null;this.style.display='none';this.parentElement.textContent='No Image';"></div>
-        <div class="info"><div class="name">講者 1-1</div><div class="role">（職稱）</div></div>
-      </article>
-      <article class="speaker">
-        <div class="pic"><img src="assets/img/speaker1-2.png" alt="Speaker 1-2" onerror="this.onerror=null;this.style.display='none';this.parentElement.textContent='No Image';"></div>
-        <div class="info"><div class="name">講者 1-2</div><div class="role">（職稱）</div></div>
-      </article>
-      <article class="speaker">
-        <div class="pic"><img src="assets/img/speaker1-3.png" alt="Speaker 1-3" onerror="this.onerror=null;this.style.display='none';this.parentElement.textContent='No Image';"></div>
-        <div class="info"><div class="name">講者 1-3</div><div class="role">（職稱）</div></div>
-      </article>
-
-      <!-- 活動2 -->
-      <article class="speaker">
-        <div class="pic"><img src="assets/img/speaker2-1.png" alt="Speaker 2-1" onerror="this.onerror=null;this.style.display='none';this.parentElement.textContent='No Image';"></div>
-        <div class="info"><div class="name">講者 2-1</div><div class="role">（職稱）</div></div>
-      </article>
-      <article class="speaker">
-        <div class="pic"><img src="assets/img/speaker2-2.png" alt="Speaker 2-2" onerror="this.onerror=null;this.style.display='none';this.parentElement.textContent='No Image';"></div>
-        <div class="info"><div class="name">講者 2-2</div><div class="role">（職稱）</div></div>
-      </article>
-      <article class="speaker">
-        <div class="pic"><img src="assets/img/speaker2-3.png" alt="Speaker 2-3" onerror="this.onerror=null;this.style.display='none';this.parentElement.textContent='No Image';"></div>
-        <div class="info"><div class="name">講者 2-3</div><div class="role">（職稱）</div></div>
-      </article>
-
-      <!-- 活動3 -->
-      <article class="speaker">
-        <div class="pic"><img src="assets/img/speaker3-1.png" alt="Speaker 3-1" onerror="this.onerror=null;this.style.display='none';this.parentElement.textContent='No Image';"></div>
-        <div class="info"><div class="name">講者 3-1</div><div class="role">（職稱）</div></div>
-      </article>
-      <article class="speaker">
-        <div class="pic"><img src="assets/img/speaker3-2.png" alt="Speaker 3-2" onerror="this.onerror=null;this.style.display='none';this.parentElement.textContent='No Image';"></div>
-        <div class="info"><div class="name">講者 3-2</div><div class="role">（職稱）</div></div>
-      </article>
-      <article class="speaker">
-        <div class="pic"><img src="assets/img/speaker3-3.png" alt="Speaker 3-3" onerror="this.onerror=null;this.style.display='none';this.parentElement.textContent='No Image';"></div>
-        <div class="info"><div class="name">講者 3-3</div><div class="role">（職稱）</div></div>
-      </article>
-
-      <!-- 活動4 -->
-      <article class="speaker">
-        <div class="pic"><img src="assets/img/speaker4-1.png" alt="Speaker 4-1" onerror="this.onerror=null;this.style.display='none';this.parentElement.textContent='No Image';"></div>
-        <div class="info"><div class="name">講者 4-1</div><div class="role">（職稱）</div></div>
-      </article>
-      <article class="speaker">
-        <div class="pic"><img src="assets/img/speaker4-2.png" alt="Speaker 4-2" onerror="this.onerror=null;this.style.display='none';this.parentElement.textContent='No Image';"></div>
-        <div class="info"><div class="name">講者 4-2</div><div class="role">（職稱）</div></div>
-      </article>
-      <article class="speaker">
-        <div class="pic"><img src="assets/img/speaker4-3.png" alt="Speaker 4-3" onerror="this.onerror=null;this.style.display='none';this.parentElement.textContent='No Image';"></div>
-        <div class="info"><div class="name">講者 4-3</div><div class="role">（職稱）</div></div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- 議程（毛玻璃卡） -->
-<section id="agenda" class="block">
-  <div class="container">
-    <h2>議程</h2>
-    <div class="agenda">
-      <div class="card">
-        <div class="time">10:00–10:25</div>
-        <div class="topic">半導體在全球 ICT 供應鏈的核心地位與展望</div>
-        <div class="place">講者 A｜台北</div>
-      </div>
-      <div class="card">
-        <div class="time">10:25–10:50</div>
-        <div class="topic">智慧產業共生成長的挑戰：AI 與半導體</div>
-        <div class="place">講者 B｜台北</div>
-      </div>
-      <div class="card">
-        <div class="time">10:50–11:15</div>
-        <div class="topic">製程 × 封裝：機會與挑戰</div>
-        <div class="place">講者 C｜台北</div>
-      </div>
-      <div class="card">
-        <div class="time">11:15–11:40</div>
-        <div class="topic">半導體先進製造趨勢分析</div>
-        <div class="place">講者 D｜台北</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 報名 -->
-<section id="register" class="block">
-  <div class="container" style="text-align:center">
-    <h2>立即報名</h2>
-    <p><a class="cta" href="#" target="_blank" rel="noopener">前往報名</a></p>
-  </div>
-</section>
-
-<!-- 主/協辦 -->
-<footer>
-  <div class="container">
-    <h2 style="margin-bottom:14px">主辦 / 協辦單位</h2>
-    <div class="partner-logos">
-      <img src="assets/img/organizer-logo.png" alt="Organizer">
-      <img src="assets/img/partner-logo.png" alt="Partner">
-    </div>
-  </div>
-</footer>
-
-<script>
-/* 進場動畫觸發 */
-const hero = document.getElementById('hero');
-const ioIn = new IntersectionObserver(es => es.forEach(e=>{ if(e.isIntersecting) hero.classList.add('in') }), {threshold:.6});
-ioIn.observe(hero);
-
-/* 書籤顯示 */
-const bm = document.getElementById('bookmark');
-const ioBm = new IntersectionObserver(es => es.forEach(e=>{ bm.classList.toggle('show', !e.isIntersecting) }), {threshold:.01});
-ioBm.observe(hero);
-
-/* 平滑捲動 + active 標示 */
-document.querySelectorAll('.bookmark .tag').forEach(tag=>{
-  tag.addEventListener('click', e=>{
-    const to = document.querySelector(tag.dataset.goto || tag.getAttribute('href'));
-    if(to){ e.preventDefault(); to.scrollIntoView({behavior:'smooth'}); }
-    document.querySelectorAll('.bookmark .tag').forEach(x=>x.classList.remove('active'));
-    tag.classList.add('active');
-  });
-});
-
-/* Tabs 切換 */
-const tabs = document.querySelectorAll('.tab');
-const panels = document.querySelectorAll('.panel');
-tabs.forEach(t=>{
-  t.addEventListener('click', ()=>{
-    tabs.forEach(x=>x.classList.remove('active'));
-    panels.forEach(p=>p.classList.remove('active'));
-    t.classList.add('active');
-    document.getElementById(t.dataset.panel).classList.add('active');
-  });
-});
-</script>
-</body>
-</html>
+      <!-- 1 -->
+      <article class="speaker"><div class="pic"><img src="assets/img/speaker1-1.png" alt="Speaker 1-1" onerror="this.remove();this.parentElement.textContent='No Image';"></div><div class="info"><div class="name">講者 1-1</div><div class="role">（職稱）</div></div></article>
+      <article class="speaker"><div class="pic"><img src="assets/img/speaker1-2.png" alt="Speaker 1-2" onerror="this.remove();this.parentElement.textContent='No Image';"></div><div class="info"><div class="name">講者 1-2</div><div class="role">（職稱）</div></div></article>
+      <article class="speaker"><div class="pic"><img src="assets/img/speaker1-3.png" alt="Speaker 1-3" onerror="this.remove();this.parentElement.textContent='No Image';"></div><div class="info"><div class="name">講者 1-3</div><div class="role">（職稱）</div></div></article>
+      <!-- 2 -->
+      <article class="speaker"><div class=
