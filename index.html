@@ -9,7 +9,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
-
 /* ===== Akrobat local font files ===== */
 @font-face{
   font-family: 'Akrobat';
@@ -83,10 +82,8 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
 .bar-item:first-child{border-left:none}
 .bar-item:last-child{border-right:none}
 
-/* ✅ 修正：選中時背景變色 */
 .bar-item[aria-current="true"]{ background:var(--tab-active) }
 
-/* ====== 字體樣式 ====== */
 .bar-item .t1{
   white-space:nowrap;
   font-weight:500;
@@ -98,7 +95,7 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
 }
 .bar-item .t2{
   font-weight:500;
-  font-size:calc(var(--f2) * 1.5); /* 日期更大 */
+  font-size:calc(var(--f2) * 1.5);
   line-height:1.25;
   margin:0 0 6px;
   letter-spacing:0.025em;
@@ -108,7 +105,7 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
 .bar-item .t3{
   font-weight:500;
   opacity:.95;
-  font-size:calc(var(--f2) * 0.95); /* 時間更大 */
+  font-size:calc(var(--f2) * 0.95);
   line-height:1.3;
   margin:0;
   letter-spacing:0.025em;
@@ -121,10 +118,46 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
   .bar-item{ border-right:var(--dividerW) solid #fff; border-bottom:var(--dividerW) solid #fff }
   .bar-item:nth-child(2n){ border-right:none }
   .bar-item:nth-last-child(-n+2){ border-bottom:none }
-
   .bar-item .t1{ letter-spacing:0.02em; }
   .bar-item .t2{ letter-spacing:0.015em; }
   .bar-item .t3{ letter-spacing:0.015em; }
+}
+
+/* ===== 活動資訊區塊 ===== */
+.event-info{
+  background:#112240;
+  padding:60px 20px;
+}
+.event-info .inner{
+  max-width:960px;
+  margin:0 auto;
+  line-height:1.8;
+}
+.event-info h2{
+  font-size:1.5rem;
+  margin:0 0 20px;
+  font-weight:700;
+}
+.event-info h2 span{
+  color:#ff5e99;
+}
+.event-info ul{
+  margin:20px 0;
+  padding-left:20px;
+}
+.event-info li{
+  margin-bottom:10px;
+}
+.register-btn{
+  display:inline-block;
+  margin-top:30px;
+  padding:16px 40px;
+  background:#ff5e00;
+  color:#fff;
+  font-size:1.25rem;
+  font-weight:700;
+  text-decoration:none;
+  border-radius:8px;
 }
 </style>
 </head>
@@ -161,8 +194,31 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
   </div>
 </nav>
 
+<section class="event-info" id="s1-info">
+  <div class="inner">
+    <h2>活動簡介 <span>| About the Forum</span></h2>
+    <p>
+      在人工智慧與先進技術重塑全球產業的浪潮中，<strong>半導體產業</strong>站在變革最前線，是推動創新與進步的核心引擎。
+      面對技術快速演進與國際競爭，培育高素質、跨領域的半導體人才已成為國家戰略重點。
+    </p>
+    <p>
+      本論壇匯聚來自<strong>台積電、美國加州大學</strong>以及<strong>產學界領袖</strong>，深入探討人工智慧時代半導體人才的需求、教育策略與全球布局，
+      並剖析未來關鍵技能，打造跨國人才交流平台。
+    </p>
+
+    <h2>活動亮點 <span>| Highlights</span></h2>
+    <ul>
+      <li><strong>國際級產業對話：</strong>台積電五大事業群高階主管分享未來人才需求與技術前瞻。</li>
+      <li><strong>學術深度解析：</strong>David Horsley 教授剖析頂尖半導體人才的教育路徑與關鍵倡議。</li>
+      <li><strong>跨國交流：</strong>連線 Stanford 現場，探討 AI 時代半導體專業的必備技能與應用領域。</li>
+      <li><strong>政策與產業鏈結：</strong>呼應「AI 新十大全球倡議」與人才培育政策，推動技術與人才並進。</li>
+    </ul>
+
+    <a href="#" class="register-btn">立即報名</a>
+  </div>
+</section>
+
 <script>
-// 點擊時切換 aria-current，讓被選取的 bar 變成 #d90085
 document.querySelectorAll('.bar-item').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     document.querySelectorAll('.bar-item')
