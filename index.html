@@ -1,134 +1,113 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <title>Hero 測試</title>
-  <style>
-    body, html { margin: 0; padding: 0; }
+<meta charset="utf-8" />
+<title>Hero + Event Bar</title>
+<style>
+  /* === 共用 === */
+  html,body{margin:0;background:#000;font-family: -apple-system,BlinkMacSystemFont,"Noto Sans TC","Segoe UI",Arial,sans-serif}
+  :root{
+    /* event bar 依 1920 寬縮放字級 */
+    --scale: calc(100vw / 1920);
+    --tab-default:#501cf2;
+    --tab-active:#d90085;
+  }
 
-    /* 讓 hero 區域永遠維持 16:9 比例（→ 與下方滿版寬度一致） */
-    .hero-wrapper {
-      position: relative;
-      width: 100vw;          /* ← 改：用滿版寬度 */
-      /* max-width: 1920px;  ← 移除，以免比下方選單窄 */
-      margin: 0;             /* ← 不要置中，避免左右留白 */
-      aspect-ratio: 16 / 9;
-      background: url('assets/img/hero-bg.png') no-repeat center center;
-      background-size: cover;
-      overflow: hidden;
-    }
+  /* === HERO：16:9 等比，圖片百分比定位 === */
+  .hero-wrapper{
+    position:relative; width:100vw; margin:0;
+    aspect-ratio:16/9; overflow:hidden;
+    background:#0b0c0f url("assets/img/hero-bg.png") center/cover no-repeat;
+  }
+  .hero-img{position:absolute; max-width:100%; height:auto; pointer-events:none; user-select:none}
+  .hero-logo{
+    top:calc(60 / 1080 * 100%); left:calc(100 / 1920 * 100%);
+    width:calc(634 / 1920 * 100%);
+  }
+  .hero-title{
+    top:calc(375 / 1080 * 100%); left:calc(100 / 1920 * 100%);
+    width:calc(887 / 1920 * 100%);
+  }
+  .hero-subtitle{
+    top:calc(725 / 1080 * 100%); left:calc(100 / 1920 * 100%);
+    width:calc(878 / 1920 * 100%);
+  }
 
-    .hero-img {
-      position: absolute;
-      max-width: 100%;
-      height: auto;
-    }
-    .hero-logo {
-      top: calc(60 / 1080 * 100%);
-      left: calc(100 / 1920 * 100%);
-      width: calc(634 / 1920 * 100%);
-    }
-    .hero-title {
-      top: calc(375 / 1080 * 100%);
-      left: calc(100 / 1920 * 100%);
-      width: calc(887 / 1920 * 100%);
-    }
-    .hero-subtitle {
-      top: calc(725 / 1080 * 100%);
-      left: calc(100 / 1920 * 100%);
-      width: calc(878 / 1920 * 100%);
-    }
+  /* === 橫向活動選單：滿版 1920×315，比例固定 === */
+  .event-bar{
+    position:relative; width:100vw;
+    margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw);
+    aspect-ratio:1920/315; overflow:hidden; background:#000;
+  }
+  .event-bar .bar{
+    position:absolute; inset:0; display:grid; grid-template-columns:repeat(4,1fr);
+  }
 
-    /* ===== 橫向活動選單（滿版 1920×315） ===== */
-    :root{
-      --bar-w: 1920; --bar-h: 315;
-      --tab-default: #501cf2;  /* 未選 */
-      --tab-active:  #d90085;  /* 已選 */
-    }
-    .event-bar{
-      position: relative;
-      width: 100vw;               /* 滿版寬 */
-      margin-left: calc(50% - 50vw);  /* 出血 */
-      margin-right: calc(50% - 50vw);
-      aspect-ratio: calc(var(--bar-w) / var(--bar-h));
-      overflow: hidden;
-    }
-    .event-bar .bar{
-      position: absolute; inset:0;
-      display: grid; grid-template-columns: repeat(4, 1fr);
-    }
-    .bar-item{
-      --bg: var(--tab-default);
-      background: var(--bg);
-      color: #fff;
-      display: grid;
-      grid-auto-rows: 1fr;
-      align-content: center;
-      justify-items: center;
-      text-align: center;
-      line-height: 1.2;
-      padding: 18px 12px;
-      border-right: 2pt solid #fff; /* 中間分隔線 2pt；左右無線 */
-      cursor: pointer; user-select: none;
-    }
-    .bar-item:first-child{ border-left: none; }
-    .bar-item:last-child{ border-right: none; }
-    .bar-item .t1{ font-weight:900; font-size: clamp(16px, 1.4vw, 22px); letter-spacing:.02em; }
-    .bar-item .t2{ font-weight:900; font-size: clamp(22px, 2vw, 32px); margin-top:10px; }
-    .bar-item .t3{ font-weight:800; font-size: clamp(14px, 1.2vw, 18px); opacity:.95; margin-top:6px; }
-    .bar-item[aria-current="true"]{ --bg: var(--tab-active); }
-    @media (max-width: 640px){
-      .bar-item{ padding: 12px 8px; }
-      .bar-item .t2{ margin-top: 6px; }
-      .bar-item .t3{ margin-top: 4px; }
-    }
-  </style>
+  .bar-item{
+    --bg: var(--tab-default);
+    background:var(--bg); color:#fff;
+    appearance:none; border:none; outline:none; box-shadow:none;
+    display:grid; align-content:center; justify-items:center; text-align:center;
+    line-height:1.15;
+    padding:calc(18px * var(--scale)) calc(12px * var(--scale));
+    border-right:2pt solid #fff;   /* 只要中間白線 */
+    cursor:pointer; user-select:none;
+  }
+  .bar-item:first-child{border-left:none}
+  .bar-item:last-child{border-right:none} /* 左右兩側不畫線 */
+  .bar-item[aria-current="true"]{--bg:var(--tab-active)}
+
+  /* 文字大小按 1920 等比縮放並設下限 */
+  .bar-item .t1{font-weight:900;font-size:clamp(12px, calc(22px * var(--scale)), 26px);letter-spacing:.02em}
+  .bar-item .t2{font-weight:900;margin-top:calc(10px * var(--scale));font-size:clamp(18px, calc(40px * var(--scale)), 48px)}
+  .bar-item .t3{font-weight:800;margin-top:calc(6px * var(--scale));font-size:clamp(12px, calc(22px * var(--scale)), 24px);opacity:.95}
+</style>
 </head>
 <body>
 
-  <!-- HERO -->
-  <section class="hero-wrapper">
-    <img src="assets/img/hero-logo.png"     alt="logo"     class="hero-img hero-logo">
-    <img src="assets/img/hero-title.png"    alt="title"    class="hero-img hero-title">
-    <img src="assets/img/hero-subtitle.png" alt="subtitle" class="hero-img hero-subtitle">
-  </section>
+<!-- HERO -->
+<section class="hero-wrapper">
+  <img src="assets/img/hero-logo.png"     alt="logo"     class="hero-img hero-logo">
+  <img src="assets/img/hero-title.png"    alt="title"    class="hero-img hero-title">
+  <img src="assets/img/hero-subtitle.png" alt="subtitle" class="hero-img hero-subtitle">
+</section>
 
-  <!-- 橫向活動選單 -->
-  <nav class="event-bar" aria-label="系列論壇切換">
-    <div class="bar" id="eventBar">
-      <button type="button" class="bar-item" data-id="s1" aria-current="true">
-        <div class="t1">系列論壇 ➊</div>
-        <div class="t2">2025.09.26</div>
-        <div class="t3">07:30 – 11:00</div>
-      </button>
-      <button type="button" class="bar-item" data-id="s2" aria-current="false">
-        <div class="t1">系列論壇 ➋</div>
-        <div class="t2">2025.10.14</div>
-        <div class="t3">10:30 – 12:30</div>
-      </button>
-      <button type="button" class="bar-item" data-id="s3" aria-current="false">
-        <div class="t1">系列論壇 ➌</div>
-        <div class="t2">2025.11.22</div>
-        <div class="t3">09:00 – 16:00</div>
-      </button>
-      <button type="button" class="bar-item" data-id="s4" aria-current="false">
-        <div class="t1">系列論壇 ➍</div>
-        <div class="t2">2025.12.15</div>
-        <div class="t3">08:30 – 16:30</div>
-      </button>
-    </div>
-  </nav>
+<!-- 橫向活動選單 -->
+<nav class="event-bar" aria-label="系列論壇切換">
+  <div class="bar" id="eventBar">
+    <button type="button" class="bar-item" data-id="s1" aria-current="true">
+      <div class="t1">系列論壇 ➊</div>
+      <div class="t2">2025.09.26</div>
+      <div class="t3">07:30 – 11:00</div>
+    </button>
+    <button type="button" class="bar-item" data-id="s2" aria-current="false">
+      <div class="t1">系列論壇 ➋</div>
+      <div class="t2">2025.10.14</div>
+      <div class="t3">10:30 – 12:30</div>
+    </button>
+    <button type="button" class="bar-item" data-id="s3" aria-current="false">
+      <div class="t1">系列論壇 ➌</div>
+      <div class="t2">2025.11.22</div>
+      <div class="t3">09:00 – 16:00</div>
+    </button>
+    <button type="button" class="bar-item" data-id="s4" aria-current="false">
+      <div class="t1">系列論壇 ➍</div>
+      <div class="t2">2025.12.15</div>
+      <div class="t3">08:30 – 16:30</div>
+    </button>
+  </div>
+</nav>
 
-  <script>
-    // 點選切換選取色（之後可在這裡呼叫你的 render(...)）
-    document.querySelectorAll('.bar-item').forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        document.querySelectorAll('.bar-item').forEach(b=>{
-          b.setAttribute('aria-current', b===btn ? 'true':'false');
-        });
-        // TODO: render(btn.dataset.id)
-      });
+<script>
+  // 點選切換顏色（之後可在這裡連動下方內容）
+  document.querySelectorAll('.bar-item').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.bar-item')
+        .forEach(b=>b.setAttribute('aria-current', b===btn ? 'true':'false'));
+      // TODO: render(btn.dataset.id)
     });
-  </script>
+  });
+</script>
+
 </body>
 </html>
