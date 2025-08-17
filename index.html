@@ -1,134 +1,258 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>活動頁面</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Noto Sans TC', 'Montserrat', sans-serif;
-      background-color: #0d1b34;
-      color: #fff;
-      line-height: 1.6;
-    }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>前瞻科技系列論壇</title>
 
-    /* Hero 區塊 */
-    .hero {
-      background: url('hero.jpg') no-repeat center center/cover;
-      height: 400px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: #fff;
-    }
+<!-- 字型：只保留 300 / 400 / 500 -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Montserrat:wght@500&display=swap" rel="stylesheet">
 
-    .hero h1 {
-      font-size: 3rem;
-      font-weight: 500;
-      margin: 0;
-    }
+<style>
+/* ===== Akrobat local font files ===== */
+@font-face{
+  font-family: 'Akrobat';
+  src: url('assets/fonts/Akrobat-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face{
+  font-family: 'Akrobat';
+  src: url('assets/fonts/Akrobat-SemiBold.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
 
-    /* 主內容 */
-    .container {
-      max-width: 1600px;
-      margin: 0 auto;
-      padding: 80px 160px;
-    }
+html,body{margin:0;background:#000;color:#fff}
+html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,"PingFang TC","Heiti TC",sans-serif}
 
-    /* 標題樣式 */
-    h2 {
-      font-size: 2.2rem;   /* 放大標題 */
-      font-weight: 500;
-      margin-bottom: 20px;
-    }
+/* ===== HERO ===== */
+.hero-wrapper{
+  position:relative; width:100vw;
+  aspect-ratio:16/9; overflow:hidden;
+  background:#0b0c0f url("assets/img/hero-bg.png") center/cover no-repeat;
+}
+.hero-img{position:absolute; max-width:100%; height:auto; pointer-events:none; user-select:none; opacity:0}
 
-    .section p,
-    .section li {
-      font-size: 1.25rem;  /* 放大內文 */
-      font-weight: 400;
-    }
+.hero-logo{     top:calc( 60/1080*100%); left:calc(70/1920*100%); width:calc(634/1920*100%);
+  animation: slideInLeft 1s ease-out forwards 0.2s; }
+.hero-title{    top:calc(375/1080*100%); left:calc(100/1920*100%); width:calc(887/1920*100%);
+  animation: slideInUp 1s ease-out forwards 0.6s; }
+.hero-subtitle{ top:calc(725/1080*100%); left:calc(100/1920*100%); width:calc(878/1920*100%);
+  animation: slideInUp 1s ease-out forwards 1s; }
 
-    /* 立即報名按鈕 */
-    .cta-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: #f48c06;
-      color: #fff;
-      font-size: 1.6rem;   /* 放大字體 */
-      font-weight: 500;
-      padding: 18px 50px;
-      border-radius: 50px;
-      border: 4px solid #fff;  /* 適中粗度 */
-      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-      text-decoration: none;
-      transition: all 0.3s ease;
-      margin-top: 40px;
-    }
+@keyframes slideInLeft {
+  from { transform:translateX(-50px); opacity:0 }
+  to   { transform:translateX(0); opacity:1 }
+}
+@keyframes slideInUp {
+  from { transform:translateY(50px); opacity:0 }
+  to   { transform:translateY(0); opacity:1 }
+}
 
-    .cta-btn span {
-      margin-right: 12px; /* 文字與箭頭間距 */
-    }
+/* ===== 橫向活動選單 ===== */
+:root{
+  --tab-default:#501cf2;
+  --tab-active:#d90085;
+  --dividerW: calc(2 / 1920 * 100vw);
+  --f2: clamp(20px, 2.4vw, 56px);
+  --pink:#ff5e99;
+}
+.event-bar{ width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); background:#000 }
+.event-bar .bar{ display:grid; grid-template-columns:repeat(4,1fr) }
 
-    .cta-btn:hover {
-      background: #f48c06;
-      border-color: transparent;
-      transform: scale(0.95);
-      box-shadow: none;
-    }
+.bar-item{
+  --bg:var(--tab-default);
+  background:var(--bg); color:#fff;
+  appearance:none; border:none; outline:none; box-shadow:none;
+  display:grid; align-content:center; justify-items:center; text-align:center;
+  padding-block:20px;
+  padding-inline:clamp(12px, 2vw, 32px);
+  border-right:var(--dividerW) solid #fff;
+  cursor:pointer; user-select:none;
+}
+.bar-item:first-child{border-left:none}
+.bar-item:last-child{border-right:none}
 
-    /* RWD */
-    @media (max-width: 768px) {
-      .container {
-        padding: 40px 20px;
-      }
-      h2 {
-        font-size: 1.8rem;
-      }
-      .section p,
-      .section li {
-        font-size: 1rem;
-      }
-      .cta-btn {
-        font-size: 1.3rem;
-        padding: 14px 36px;
-      }
-    }
-  </style>
+.bar-item[aria-current="true"]{ background:var(--tab-active) }
+
+.bar-item .t1{
+  white-space:nowrap;
+  font-weight:500;
+  font-size:var(--f2);
+  line-height:1.25;
+  margin:0 0 10px;
+  letter-spacing:0.03em;
+}
+.bar-item .t2{
+  font-weight:500;
+  font-size:calc(var(--f2) * 1.5);
+  line-height:1.25;
+  margin:0 0 6px;
+  letter-spacing:0.025em;
+  font-family:"Akrobat","Noto Sans TC",sans-serif;
+}
+.bar-item .t3{
+  font-weight:500;
+  opacity:.95;
+  font-size:calc(var(--f2) * 0.95);
+  line-height:1.3;
+  margin:0;
+  letter-spacing:0.025em;
+  font-family:"Akrobat","Noto Sans TC",sans-serif;
+}
+
+/* 手機調整 */
+@media (max-width:480px){
+  .event-bar .bar{ grid-template-columns:repeat(2,1fr) }
+  .bar-item{ border-right:var(--dividerW) solid #fff; border-bottom:var(--dividerW) solid #fff }
+  .bar-item:nth-child(2n){ border-right:none }
+  .bar-item:nth-last-child(-n+2){ border-bottom:none }
+}
+
+/* ===== 活動資訊區塊（背景 #112240） ===== */
+.event-info{
+  background:#112240;
+  padding-block:60px;
+}
+.event-info .inner{
+  /* 回到最初的 max-width + padding */
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 20px;
+  line-height:1.8;
+  font-weight:300;
+}
+
+/* 標題：改為 500 */
+.event-info h2{
+  font-size:1.5rem;
+  margin:0 0 20px;
+  font-weight:500;
+}
+.event-info h2 span{
+  color:#fff;
+  font-family:"Akrobat","Noto Sans TC",sans-serif;
+  font-weight:500;
+}
+
+/* 內容粗體：Medium + 粉色 */
+.event-info b,
+.event-info strong{
+  color:var(--pink);
+  font-weight:500;
+}
+.event-info p,
+.event-info li{ font-weight:300; }
+
+.event-info ul{
+  margin:20px 0;
+  padding-left:20px;
+}
+.event-info li{ margin-bottom:10px; }
+
+/* 立即報名（修正版） */
+.register-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:40px auto 0;
+  width:190px;
+  height:60px;
+  background:transparent;
+  color:#fff;
+  border:6px solid #fff; /* 白框加粗一點，但不是9px */
+  border-radius:999px;
+  text-decoration:none;
+  font-size:1.875rem; /* 放大 1.5 倍 */
+  letter-spacing:.04em;
+  font-weight:500; /* Medium */
+  box-shadow:0 16px 36px rgba(0,0,0,.42);
+  transition:all .25s ease;
+}
+.register-btn:hover{
+  background:#ff7a00; /* 橘色底 */
+  border-color:transparent;
+  transform:scale(0.9); /* 縮小10% */
+}
+.register-btn:active{
+  transform:scale(0.85);
+}
+.register-btn:focus-visible{
+  outline:3px solid rgba(255,255,255,.6);
+  outline-offset:3px;
+}
+</style>
 </head>
 <body>
 
-  <!-- Hero 區塊 -->
-  <div class="hero">
-    <h1>活動主題標題</h1>
+<section class="hero-wrapper" aria-label="Hero">
+  <img class="hero-img hero-logo"     src="assets/img/hero-logo.png"     alt="">
+  <img class="hero-img hero-title"    src="assets/img/hero-title.png"    alt="">
+  <img class="hero-img hero-subtitle" src="assets/img/hero-subtitle.png" alt="">
+</section>
+
+<nav class="event-bar" aria-label="系列論壇切換">
+  <div class="bar" id="eventBar">
+    <button type="button" class="bar-item" data-id="s1" aria-current="true">
+      <div class="t1">系列論壇 ①</div>
+      <div class="t2">2025.09.26</div>
+      <div class="t3">07:30 – 11:00</div>
+    </button>
+    <button type="button" class="bar-item" data-id="s2" aria-current="false">
+      <div class="t1">系列論壇 ②</div>
+      <div class="t2">2025.10.14</div>
+      <div class="t3">10:30 – 12:30</div>
+    </button>
+    <button type="button" class="bar-item" data-id="s3" aria-current="false">
+      <div class="t1">系列論壇 ③</div>
+      <div class="t2">2025.11.22</div>
+      <div class="t3">09:00 – 16:00</div>
+    </button>
+    <button type="button" class="bar-item" data-id="s4" aria-current="false">
+      <div class="t1">系列論壇 ④</div>
+      <div class="t2">2025.12.15</div>
+      <div class="t3">08:30 – 16:30</div>
+    </button>
   </div>
+</nav>
 
-  <!-- 活動內容 -->
-  <div class="container">
-    <div class="section">
-      <h2>活動簡介 | About the Forum</h2>
-      <p>在人工智慧與先進技術重塑全球產業的浪潮中，<strong style="color:#ff4d8d;">半導體產業</strong>站在變革最前線，是推動創新與進步的核心引擎。面對技術快速演進與國際競爭，培育高素質、跨領域的半導體人才已成為國家戰略重點。</p>
-      <p>本論壇匯聚來自<strong style="color:#ff4d8d;">台積電、美國加州大學</strong>以及<strong style="color:#ff4d8d;">產學界領袖</strong>，深入探討人工智慧時代半導體人才的需求、教育策略與全球布局，並剖析未來關鍵技能，打造跨國人才交流平台。</p>
-    </div>
+<section class="event-info" id="s1-info">
+  <div class="inner">
+    <h2>活動簡介<span>｜About the Forum</span></h2>
+    <p>
+      在人工智慧與先進技術重塑全球產業的浪潮中，<strong>半導體產業</strong>站在變革最前線，是推動創新與進步的核心引擎。
+      面對技術快速演進與國際競爭，培育高素質、跨領域的半導體人才已成為國家戰略重點。
+    </p>
+    <p>
+      本論壇匯聚來自<strong>台積電、美國加州大學</strong>以及<strong>產學界領袖</strong>，深入探討人工智慧時代半導體人才的需求、教育策略與全球布局，
+      並剖析未來關鍵技能，打造跨國人才交流平台。
+    </p>
 
-    <div class="section">
-      <h2>活動亮點 | Highlights</h2>
-      <ul>
-        <li><strong style="color:#ff4d8d;">國際級產業對話：</strong>台積電五大事業群高階主管分享未來人才需求與技術前瞻。</li>
-        <li><strong style="color:#ff4d8d;">學術深度解析：</strong>David Horsley 教授剖析頂尖半導體人才的教育路徑與關鍵倡議。</li>
-        <li><strong style="color:#ff4d8d;">跨國交流：</strong>連線 Stanford 現場，探討 AI 時代半導體專業的必備技能與應用領域。</li>
-        <li><strong style="color:#ff4d8d;">政策與產業鏈結：</strong>呼應「AI 新十大全球倡議」與人才培育政策，推動技術與人才並進。</li>
-      </ul>
-    </div>
-
+    <h2>活動亮點<span>｜Highlights</span></h2>
+    <ul>
+      <li><strong>國際級產業對話：</strong>台積電五大事業群高階主管分享未來人才需求與技術前瞻。</li>
+      <li><strong>學術深度解析：</strong>David Horsley 教授剖析頂尖半導體人才的教育路徑與關鍵倡議。</li>
+      <li><strong>跨國交流：</strong>連線 Stanford 現場，探討 AI 時代半導體專業的必備技能與應用領域。</li>
+      <li><strong>政策與產業鏈結：</strong>呼應「AI 新十大全球倡議」與人才培育政策，推動技術與人才並進。</li>
+    </ul>
     <!-- CTA 按鈕 -->
     <div style="text-align:center;">
       <a href="#" class="cta-btn"><span>免費參加</span> →</a>
     </div>
+    <a href="#" class="register-btn">立即報名</a>
   </div>
+</section>
 
+<script>
+document.querySelectorAll('.bar-item').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.bar-item')
+      .forEach(b=> b.setAttribute('aria-current', b === btn ? 'true' : 'false'));
+  });
+});
+</script>
 </body>
 </html>
