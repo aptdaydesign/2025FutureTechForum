@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
+
 /* ===== Akrobat local font files ===== */
 @font-face{
   font-family: 'Akrobat';
@@ -65,6 +66,7 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
   --tab-active:#d90085;
   --dividerW: calc(2 / 1920 * 100vw);
   --f2: clamp(20px, 2.4vw, 56px);
+  --pink:#ff5e99;           /* 活動資訊區用到的粉色 */
 }
 .event-bar{ width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); background:#000 }
 .event-bar .bar{ display:grid; grid-template-columns:repeat(4,1fr) }
@@ -123,7 +125,7 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
   .bar-item .t3{ letter-spacing:0.015em; }
 }
 
-/* ===== 活動資訊區塊 ===== */
+/* ===== 活動資訊區塊（背景 #112240） ===== */
 .event-info{
   background:#112240;
   padding:60px 20px;
@@ -139,8 +141,15 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
   font-weight:700;
 }
 .event-info h2 span{
-  color:#ff5e99;
+  color:var(--pink);
 }
+/* ⭐ 加粗文字一律粉色（僅限活動資訊區） */
+.event-info b,
+.event-info strong{
+  color:var(--pink);
+  font-weight:900;
+}
+
 .event-info ul{
   margin:20px 0;
   padding-left:20px;
@@ -148,16 +157,37 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
 .event-info li{
   margin-bottom:10px;
 }
+
+/* ⭐ 立即報名：白色外框、陰影、近距變色 */
 .register-btn{
   display:inline-block;
   margin-top:30px;
   padding:16px 40px;
-  background:#ff5e00;
+  background:transparent;                 /* 透明底 */
   color:#fff;
-  font-size:1.25rem;
-  font-weight:700;
+  border:2px solid #fff;                  /* 白色外框 */
+  border-radius:48px;
   text-decoration:none;
-  border-radius:8px;
+  font-size:1.25rem;
+  font-weight:900;
+  box-shadow:0 10px 24px rgba(0,0,0,.35); /* 陰影 */
+  transition: transform .12s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease, border-color .2s ease, filter .2s ease;
+}
+.register-btn:hover{
+  background:#fff;                        /* 接近時變色：白底 */
+  color:#112240;                          /* 與區塊底色相呼應 */
+  border-color:#fff;
+  transform:translateY(-1px);
+  box-shadow:0 14px 28px rgba(0,0,0,.4);
+  filter:brightness(1.02);
+}
+.register-btn:active{
+  transform:translateY(0);
+  box-shadow:0 8px 18px rgba(0,0,0,.32);
+}
+.register-btn:focus-visible{
+  outline:3px solid rgba(255,255,255,.6);
+  outline-offset:3px;
 }
 </style>
 </head>
@@ -196,7 +226,7 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
 
 <section class="event-info" id="s1-info">
   <div class="inner">
-    <h2>活動簡介 <span>| About the Forum</span></h2>
+    <h2>活動簡介 <span>｜ About the Forum</span></h2>
     <p>
       在人工智慧與先進技術重塑全球產業的浪潮中，<strong>半導體產業</strong>站在變革最前線，是推動創新與進步的核心引擎。
       面對技術快速演進與國際競爭，培育高素質、跨領域的半導體人才已成為國家戰略重點。
@@ -206,7 +236,7 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
       並剖析未來關鍵技能，打造跨國人才交流平台。
     </p>
 
-    <h2>活動亮點 <span>| Highlights</span></h2>
+    <h2>活動亮點 <span>｜ Highlights</span></h2>
     <ul>
       <li><strong>國際級產業對話：</strong>台積電五大事業群高階主管分享未來人才需求與技術前瞻。</li>
       <li><strong>學術深度解析：</strong>David Horsley 教授剖析頂尖半導體人才的教育路徑與關鍵倡議。</li>
