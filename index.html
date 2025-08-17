@@ -1,262 +1,122 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>前瞻科技系列論壇</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>系列論壇</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Montserrat:wght@500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background: #112240;
+      color: #fff;
+      font-family: "Noto Sans TC", sans-serif;
+    }
 
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    .event-info {
+      background: #112240;
+      padding: 80px 0;
+    }
 
-<style>
-/* ===== Akrobat local font files ===== */
-@font-face{
-  font-family: 'Akrobat';
-  src: url('assets/fonts/Akrobat-Regular.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face{
-  font-family: 'Akrobat';
-  src: url('assets/fonts/Akrobat-SemiBold.otf') format('opentype');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
+    .event-info .inner {
+      max-width: calc(100% - 320px); /* 左右各160px */
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 20px; /* 手機安全距 */
+      line-height: 1.8;
+      font-weight: 300;
+    }
 
-html,body{margin:0;background:#000;color:#fff}
-html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,"PingFang TC","Heiti TC",sans-serif}
+    .event-info h2 {
+      font-size: 2.2rem;
+      font-weight: 500; /* Bold但不是Heavy */
+      color: #ff7a00;
+      margin: 0 0 24px;
+    }
 
-/* ===== HERO ===== */
-.hero-wrapper{
-  position:relative; width:100vw;
-  aspect-ratio:16/9; overflow:hidden;
-  background:#0b0c0f url("assets/img/hero-bg.png") center/cover no-repeat;
-}
-.hero-img{position:absolute; max-width:100%; height:auto; pointer-events:none; user-select:none; opacity:0}
+    .event-info h2 span {
+      font-family: "Akrobat", sans-serif;
+      font-weight: 500;
+      color: #fff; /* 後方英文改白色 */
+      margin-left: 12px;
+    }
 
-.hero-logo{     top:calc( 60/1080*100%); left:calc(70/1920*100%); width:calc(634/1920*100%);
-  animation: slideInLeft 1s ease-out forwards 0.2s; }
-.hero-title{    top:calc(375/1080*100%); left:calc(100/1920*100%); width:calc(887/1920*100%);
-  animation: slideInUp 1s ease-out forwards 0.6s; }
-.hero-subtitle{ top:calc(725/1080*100%); left:calc(100/1920*100%); width:calc(878/1920*100%);
-  animation: slideInUp 1s ease-out forwards 1s; }
+    .event-info p {
+      font-size: 1.15rem;
+      margin: 0 0 20px;
+      font-weight: 300;
+    }
 
-@keyframes slideInLeft {
-  from { transform:translateX(-50px); opacity:0 }
-  to   { transform:translateX(0); opacity:1 }
-}
-@keyframes slideInUp {
-  from { transform:translateY(50px); opacity:0 }
-  to   { transform:translateY(0); opacity:1 }
-}
+    /* 立即報名按鈕 */
+    .register-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 40px auto 0;
+      padding: 22px 64px;
+      background: #ff7a00;
+      color: #fff;
+      border: 3px solid #fff;   /* 白框加粗 */
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 1.8rem;        /* 放大字體 */
+      letter-spacing: .04em;
+      font-weight: 500;         /* Medium */
+      box-shadow: 0 16px 36px rgba(0,0,0,.42);
+      transition: all .25s ease;
+      width: fit-content;
+    }
 
-/* ===== 橫向活動選單 ===== */
-:root{
-  --tab-default:#501cf2;
-  --tab-active:#d90085;
-  --dividerW: calc(2 / 1920 * 100vw);
-  --f2: clamp(20px, 2.4vw, 56px);
-  --pink:#ff5e99;
-}
-.event-bar{ width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); background:#000 }
-.event-bar .bar{ display:grid; grid-template-columns:repeat(4,1fr) }
+    .register-btn:hover {
+      background: #ff7a00;
+      border-color: #ff7a00;
+      transform: scale(0.9); /* 縮小10% */
+    }
 
-.bar-item{
-  --bg:var(--tab-default);
-  background:var(--bg); color:#fff;
-  appearance:none; border:none; outline:none; box-shadow:none;
-  display:grid; align-content:center; justify-items:center; text-align:center;
-  padding-block:20px;
-  padding-inline:clamp(12px, 2vw, 32px);
-  border-right:var(--dividerW) solid #fff;
-  cursor:pointer; user-select:none;
-}
-.bar-item:first-child{border-left:none}
-.bar-item:last-child{border-right:none}
+    /* RWD 調整 */
+    @media (max-width: 1024px) {
+      .event-info h2 {
+        font-size: 1.8rem;
+      }
+      .event-info p {
+        font-size: 1rem;
+      }
+      .register-btn {
+        font-size: 1.2rem;
+        padding: 16px 40px;
+      }
+    }
 
-.bar-item[aria-current="true"]{ background:var(--tab-active) }
-
-.bar-item .t1{
-  white-space:nowrap;
-  font-weight:500;
-  font-size:var(--f2);
-  line-height:1.25;
-  margin:0 0 10px;
-  letter-spacing:0.03em;
-}
-.bar-item .t2{
-  font-weight:500;
-  font-size:calc(var(--f2) * 1.5);
-  line-height:1.25;
-  margin:0 0 6px;
-  letter-spacing:0.025em;
-  font-variant-numeric:lining-nums proportional-nums;
-  font-family:"Akrobat","Noto Sans TC",sans-serif;
-}
-.bar-item .t3{
-  font-weight:500;
-  opacity:.95;
-  font-size:calc(var(--f2) * 0.95);
-  line-height:1.3;
-  margin:0;
-  letter-spacing:0.025em;
-  font-family:"Akrobat","Noto Sans TC",sans-serif;
-}
-
-/* 手機調整 */
-@media (max-width:480px){
-  .event-bar .bar{ grid-template-columns:repeat(2,1fr) }
-  .bar-item{ border-right:var(--dividerW) solid #fff; border-bottom:var(--dividerW) solid #fff }
-  .bar-item:nth-child(2n){ border-right:none }
-  .bar-item:nth-last-child(-n+2){ border-bottom:none }
-  .bar-item .t1{ letter-spacing:0.02em; }
-  .bar-item .t2{ letter-spacing:0.015em; }
-  .bar-item .t3{ letter-spacing:0.015em; }
-}
-
-/* ===== 活動資訊區塊 ===== */
-.event-info{
-  background:#112240;
-  padding-block:60px;
-}
-.event-info .inner{
-  width:min(1600px, calc(100% - 40px));
-  margin:0 auto;
-  line-height:1.8;
-  font-weight:300;
-}
-
-/* 標題 */
-.event-info h2{
-  font-size: clamp(1.8rem, 2.5vw, 2.8rem);
-  margin:0 0 24px;
-  font-weight:500 !important;
-}
-.event-info h2 span{
-  color:#fff;
-  font-family:"Akrobat","Noto Sans TC",sans-serif;
-  font-weight:500;
-}
-
-/* 內容 */
-.event-info p,
-.event-info li{
-  font-weight:300;
-  font-size: clamp(1.1rem, 1.4vw, 1.5rem);
-}
-
-.event-info b,
-.event-info strong{
-  color:var(--pink);
-  font-weight:500;
-}
-
-.event-info ul{
-  margin:20px 0;
-  padding-left:20px;
-}
-.event-info li{ margin-bottom:10px; }
-
-/* 立即報名按鈕 */
-.register-btn{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin:40px auto 0;
-  padding:22px 64px;
-  min-width:320px;
-  background:#ff7a00;
-  color:#fff;
-  border:2px solid #fff;       /* 白框縮小 */
-  border-radius:999px;
-  text-decoration:none;
-  font-size:2.25rem;           /* 放大1.5倍 */
-  letter-spacing:.04em;
-  font-weight:500;
-  box-shadow:0 16px 36px rgba(0,0,0,.42);
-  transition:all .25s ease;
-}
-.register-btn:hover{
-  background:#ff7a00;          /* 全橘底 */
-  border-color:transparent;    /* 白框消失 */
-  transform:scale(0.9);        /* 縮小10% */
-}
-.register-btn:active{
-  transform:scale(0.92);
-  box-shadow:0 12px 24px rgba(0,0,0,.36);
-}
-.register-btn:focus-visible{
-  outline:3px solid rgba(255,255,255,.6);
-  outline-offset:3px;
-}
-</style>
+    @media (max-width: 600px) {
+      .event-info {
+        padding: 40px 0;
+      }
+      .event-info .inner {
+        max-width: 100%;
+        padding: 0 20px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<section class="hero-wrapper" aria-label="Hero">
-  <img class="hero-img hero-logo"     src="assets/img/hero-logo.png"     alt="">
-  <img class="hero-img hero-title"    src="assets/img/hero-title.png"    alt="">
-  <img class="hero-img hero-subtitle" src="assets/img/hero-subtitle.png" alt="">
-</section>
+  <section class="event-info">
+    <div class="inner">
+      <h2>活動簡介 <span>About the Forum</span></h2>
+      <p>
+        本論壇將聚焦於產業最新趨勢，邀請國內外重量級講者分享第一手觀點，
+        提供與會者洞察未來發展的最佳平台。
+      </p>
 
-<nav class="event-bar" aria-label="系列論壇切換">
-  <div class="bar" id="eventBar">
-    <button type="button" class="bar-item" data-id="s1" aria-current="true">
-      <div class="t1">系列論壇 ①</div>
-      <div class="t2">2025.09.26</div>
-      <div class="t3">07:30 – 11:00</div>
-    </button>
-    <button type="button" class="bar-item" data-id="s2" aria-current="false">
-      <div class="t1">系列論壇 ②</div>
-      <div class="t2">2025.10.14</div>
-      <div class="t3">10:30 – 12:30</div>
-    </button>
-    <button type="button" class="bar-item" data-id="s3" aria-current="false">
-      <div class="t1">系列論壇 ③</div>
-      <div class="t2">2025.11.22</div>
-      <div class="t3">09:00 – 16:00</div>
-    </button>
-    <button type="button" class="bar-item" data-id="s4" aria-current="false">
-      <div class="t1">系列論壇 ④</div>
-      <div class="t2">2025.12.15</div>
-      <div class="t3">08:30 – 16:30</div>
-    </button>
-  </div>
-</nav>
+      <h2>活動亮點 <span>Highlights</span></h2>
+      <p>
+        精彩議程、專業分享、產業交流機會，帶領參與者掌握最關鍵的產業脈動，
+        並建立寶貴的人脈資源。
+      </p>
 
-<section class="event-info" id="s1-info">
-  <div class="inner">
-    <h2>活動簡介<span>｜About the Forum</span></h2>
-    <p>
-      在人工智慧與先進技術重塑全球產業的浪潮中，<strong>半導體產業</strong>站在變革最前線，是推動創新與進步的核心引擎。
-      面對技術快速演進與國際競爭，培育高素質、跨領域的半導體人才已成為國家戰略重點。
-    </p>
-    <p>
-      本論壇匯聚來自<strong>台積電、美國加州大學</strong>以及<strong>產學界領袖</strong>，深入探討人工智慧時代半導體人才的需求、教育策略與全球布局，
-      並剖析未來關鍵技能，打造跨國人才交流平台。
-    </p>
+      <a href="#" class="register-btn">立即報名</a>
+    </div>
+  </section>
 
-    <h2>活動亮點<span>｜Highlights</span></h2>
-    <ul>
-      <li><strong>國際級產業對話：</strong>台積電五大事業群高階主管分享未來人才需求與技術前瞻。</li>
-      <li><strong>學術深度解析：</strong>David Horsley 教授剖析頂尖半導體人才的教育路徑與關鍵倡議。</li>
-      <li><strong>跨國交流：</strong>連線 Stanford 現場，探討 AI 時代半導體專業的必備技能與應用領域。</li>
-      <li><strong>政策與產業鏈結：</strong>呼應「AI 新十大全球倡議」與人才培育政策，推動技術與人才並進。</li>
-    </ul>
-
-    <a href="#" class="register-btn">立即報名</a>
-  </div>
-</section>
-
-<script>
-document.querySelectorAll('.bar-item').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    document.querySelectorAll('.bar-item')
-      .forEach(b=> b.setAttribute('aria-current', b === btn ? 'true' : 'false'));
-  });
-});
-</script>
 </body>
 </html>
