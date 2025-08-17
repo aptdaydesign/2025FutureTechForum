@@ -9,7 +9,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
-
 /* ===== Akrobat local font files ===== */
 @font-face{
   font-family: 'Akrobat';
@@ -140,66 +139,66 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
   font-weight:300; /* 正文 Light */
 }
 
-/* 標題：中文/整體用 Bold；英文子標用 Akrobat Bold */
+/* 標題：中文/整體用 Bold；英文子標用 Akrobat Bold（白色） */
 .event-info h2{
   font-size:1.5rem;
   margin:0 0 20px;
   font-weight:700 !important;  /* ⭐ 強制 Bold，避免 Heavy */
 }
-  .event-info h2 span{
+.event-info h2 span{
   color:#fff; /* ⭐ 英文改白色 */
   font-family:"Akrobat","Noto Sans TC",sans-serif;
   font-weight:700; /* Akrobat Bold */
 }
 
-/* 內容粗體：Bold + 粉色（維持既有） */
-  .event-info b,
-  .event-info strong{
-    color:var(--pink);
-    font-weight:700;
-  }
-  .event-info p,
-  .event-info li{ font-weight:300; }
+/* 內容粗體：Bold + 粉色 */
+.event-info b,
+.event-info strong{
+  color:var(--pink);
+  font-weight:700;
+}
+.event-info p,
+.event-info li{ font-weight:300; }
 
-  .event-info ul{
-    margin:20px 0;
-    padding-left:20px;
-  }
-  .event-info li{ margin-bottom:10px; }
+.event-info ul{
+  margin:20px 0;
+  padding-left:20px;
+}
+.event-info li{ margin-bottom:10px; }
 
-  /* 立即報名（置中、橘底、白框、陰影） */
-  .register-btn{
-    display:flex;                   /* 置中文字 */
-    align-items:center;
-    justify-content:center;
-    margin:40px auto 0;             /* ⭐ 置中 */
-    padding:22px 64px;              /* 放大 */
-    min-width: 320px;
-    background:#ff7a00;             /* ⭐ 橘底 */
-    color:#fff;
-    border:3px solid #fff;          /* 白色外框 */
-    border-radius:999px;
-    text-decoration:none;
-    font-size:1.5rem;               /* 更大字 */
-    letter-spacing:.04em;
-    font-weight:900;
-    box-shadow:0 16px 36px rgba(0,0,0,.42); /* 陰影 */
-    transition:transform .12s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease, border-color .2s ease, filter .2s ease;
-  }
-  .register-btn:hover{
-    background:#ffa044;             /* hover 加亮 */
-    transform:translateY(-1px);
-    box-shadow:0 20px 40px rgba(0,0,0,.44);
-    filter:brightness(1.02);
-  }
-  .register-btn:active{
-    transform:translateY(0);
-    box-shadow:0 12px 24px rgba(0,0,0,.36);
-  }
-  .register-btn:focus-visible{
-    outline:3px solid rgba(255,255,255,.6);
-    outline-offset:3px;
-  }
+/* 立即報名（置中、橘底、白框、陰影） */
+.register-btn{
+  display:flex;                   /* 置中文字 */
+  align-items:center;
+  justify-content:center;
+  margin:40px auto 0;             /* ⭐ 置中 */
+  padding:22px 64px;              /* 放大 */
+  min-width: 320px;
+  background:#ff7a00;             /* 橘底 */
+  color:#fff;
+  border:3px solid #fff;          /* 白色外框 */
+  border-radius:999px;
+  text-decoration:none;
+  font-size:1.5rem;               /* 更大字 */
+  letter-spacing:.04em;
+  font-weight:500;                /* Medium */
+  box-shadow:0 16px 36px rgba(0,0,0,.42); /* 陰影 */
+  transition:transform .12s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease, border-color .2s ease, filter .2s ease;
+}
+.register-btn:hover{
+  background:#ffa044;             /* hover 加亮 */
+  transform:translateY(-1px);
+  box-shadow:0 20px 40px rgba(0,0,0,.44);
+  filter:brightness(1.02);
+}
+.register-btn:active{
+  transform:translateY(0);
+  box-shadow:0 12px 24px rgba(0,0,0,.36);
+}
+.register-btn:focus-visible{
+  outline:3px solid rgba(255,255,255,.6);
+  outline-offset:3px;
+}
 </style>
 </head>
 <body>
