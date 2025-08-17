@@ -134,13 +134,70 @@ a{color:inherit}
 <body>
 
 <!-- ================= Hero（與 PDF 等比） ================= -->
-<section class="hero" aria-label="Hero">
-  <div class="hero-bg"></div>
-  <!-- 三個透明 PNG 圖層（按像素鎖點轉為百分比定位） -->
-  <img class="px-abs hero-logo"     src="assets/img/hero-logo.png"     alt="品牌Logo">
-  <img class="px-abs hero-title"    src="assets/img/hero-title.png"    alt="主標題">
-  <img class="px-abs hero-subtitle" src="assets/img/hero-subtitle.png" alt="副標題">
-</section>
+:root{
+  /* 你的設計稿 / 圖檔基準尺寸：1920×1080 */
+  --ref-w: 1920;
+  --ref-h: 1080;
+  --hero-aspect: calc(var(--ref-w) / var(--ref-h));
+
+  /* === 依設計稿像素填入（以下是我先給的安全值：不重疊、比例接近） === */
+  /* 左上 LOGO（assets/img/hero-logo.png） */
+  --logo-x: 84;    /* px from left */
+  --logo-y: 48;    /* px from top  */
+  --logo-w: 260;   /* px width     */
+
+  /* 主標（assets/img/hero-title.png） */
+  --title-x: 150;
+  --title-y: 255;
+  --title-w: 1030;
+
+  /* 副標（assets/img/hero-subtitle.png） */
+  --subtitle-x: 150;
+  --subtitle-y: 470;   /* ← 往下，避免與主標重疊 */
+  --subtitle-w: 760;
+
+  /* 其餘顏色維持你現有設定即可 */
+}
+
+/* ===== Hero（像素鎖點） ===== */
+.hero{
+  position:relative; width:100%; aspect-ratio:var(--hero-aspect);
+  overflow:hidden; color:#fff;
+}
+.hero-bg{
+  position:absolute; inset:0;
+  background:#0b0c0f url("assets/img/hero-bg.png") center/cover no-repeat;
+}
+.hero::after{
+  content:""; position:absolute; inset:0;
+  /* 輕微暗角，讓白字更清楚（可調淡或移除） */
+  background:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.50));
+  z-index:1;
+}
+
+/* 以 1920×1080 的像素換算為百分比定位 */
+.px-abs{position:absolute; z-index:2; pointer-events:none; user-select:none; filter:drop-shadow(0 2px 6px rgba(0,0,0,.22))}
+.hero-logo{
+  left: calc(var(--logo-x) / var(--ref-w) * 100%);
+  top:  calc(var(--logo-y) / var(--ref-h) * 100%);
+  width: calc(var(--logo-w) / var(--ref-w) * 100%);
+}
+.hero-title{
+  left: calc(var(--title-x) / var(--ref-w) * 100%);
+  top:  calc(var(--title-y) / var(--ref-h) * 100%);
+  width: calc(var(--title-w) / var(--ref-w) * 100%);
+}
+.hero-subtitle{
+  left: calc(var(--subtitle-x) / var(--ref-w) * 100%);
+  top:  calc(var(--subtitle-y) / var(--ref-h) * 100%);
+  width: calc(var(--subtitle-w) / var(--ref-w) * 100%);
+}
+
+/* （可選）除錯格線：把 .hero 加上 class="hero debug" 即可顯示藍色參考格 */
+.hero.debug{background-image:linear-gradient(rgba(0,128,255,.12) 1px, transparent 1px),
+                               linear-gradient(90deg, rgba(0,128,255,.12) 1px, transparent 1px);
+            background-size: calc(100%/12) calc(100%/12)}
+
 
 <!-- ================= 主辦／協辦 帶（獨立區，不在 hero 內） ================= -->
 <section class="sponsor-strip" aria-label="主辦與協辦">
