@@ -66,7 +66,6 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
   --tab-active:#d90085;
   --dividerW: calc(2 / 1920 * 100vw);
   --f2: clamp(20px, 2.4vw, 56px);
-  --line-gap: clamp(8px, 0.9vw, 18px);   /* 三行間距一致用 */
 }
 .event-bar{ width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); background:#000 }
 .event-bar .bar{ display:grid; grid-template-columns:repeat(4,1fr) }
@@ -84,27 +83,24 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
 .bar-item:first-child{border-left:none}
 .bar-item:last-child{border-right:none}
 
-/* ✅ 選中時背景變色，並同步更新 --bg 讓圓圈數字依底色顯示（視覺簍空） */
-.bar-item[aria-current="true"]{
-  background:var(--tab-active);
-  --bg:var(--tab-active);
-}
+/* ✅ 修正：選中時背景變色 */
+.bar-item[aria-current="true"]{ background:var(--tab-active) }
 
-/* ====== 字體樣式（字距一致 + 日期/時間加大） ====== */
+/* ====== 字體樣式 ====== */
 .bar-item .t1{
   white-space:nowrap;
   font-weight:500;
   font-size:var(--f2);
   line-height:1.25;
-  margin:0 0 var(--line-gap);
+  margin:0 0 10px;
   letter-spacing:0.03em;
   font-family:"Noto Sans TC",sans-serif;
 }
 .bar-item .t2{
   font-weight:500;
-  font-size:calc(var(--f2) * 1.18);   /* 日期加大 */
+  font-size:calc(var(--f2) * 1.32); /* 日期放大 */
   line-height:1.25;
-  margin:0 0 var(--line-gap);
+  margin:0 0 10px;
   letter-spacing:0.025em;
   font-variant-numeric:lining-nums proportional-nums;
   font-family:"Akrobat","Noto Sans TC",sans-serif;
@@ -112,32 +108,14 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
 .bar-item .t3{
   font-weight:500;
   opacity:.95;
-  font-size:calc(var(--f2) * 0.95);   /* 時間也加大 */
+  font-size:calc(var(--f2) * 0.8);
   line-height:1.3;
   margin:0;
   letter-spacing:0.025em;
-  font-variant-numeric:lining-nums proportional-nums;
   font-family:"Akrobat","Noto Sans TC",sans-serif;
 }
 
-/* —— 白色圓形 + 中間依底色顯示的數字（視覺簍空） —— */
-.badge{
-  display:inline-grid; place-items:center;
-  width:1.55em; height:1.55em;
-  border-radius:50%;
-  background:#fff;
-  margin-left:.35em;
-  vertical-align:middle;
-}
-.badge > span{
-  font-family:"Noto Sans TC",sans-serif;
-  font-weight:900;
-  font-size:.85em;
-  line-height:1;
-  color:var(--bg);  /* 用底色，所以看起來像簍空 */
-}
-
-/* 手機調整：縮小字距避免太鬆（其餘維持） */
+/* 手機調整 */
 @media (max-width:480px){
   .event-bar .bar{ grid-template-columns:repeat(2,1fr) }
   .bar-item{ border-right:var(--dividerW) solid #fff; border-bottom:var(--dividerW) solid #fff }
@@ -161,22 +139,22 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
 <nav class="event-bar" aria-label="系列論壇切換">
   <div class="bar" id="eventBar">
     <button type="button" class="bar-item" data-id="s1" aria-current="true">
-      <div class="t1">系列論壇 <span class="badge"><span>1</span></span></div>
+      <div class="t1">系列論壇 ➊</div>
       <div class="t2">2025.09.26</div>
       <div class="t3">07:30 – 11:00</div>
     </button>
     <button type="button" class="bar-item" data-id="s2" aria-current="false">
-      <div class="t1">系列論壇 <span class="badge"><span>2</span></span></div>
+      <div class="t1">系列論壇 ➋</div>
       <div class="t2">2025.10.14</div>
       <div class="t3">10:30 – 12:30</div>
     </button>
     <button type="button" class="bar-item" data-id="s3" aria-current="false">
-      <div class="t1">系列論壇 <span class="badge"><span>3</span></span></div>
+      <div class="t1">系列論壇 ➌</div>
       <div class="t2">2025.11.22</div>
       <div class="t3">09:00 – 16:00</div>
     </button>
     <button type="button" class="bar-item" data-id="s4" aria-current="false">
-      <div class="t1">系列論壇 <span class="badge"><span>4</span></span></div>
+      <div class="t1">系列論壇 ➍</div>
       <div class="t2">2025.12.15</div>
       <div class="t3">08:30 – 16:30</div>
     </button>
@@ -184,7 +162,7 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
 </nav>
 
 <script>
-// 點擊時切換 aria-current，讓被選取的 bar 變成 #d90085（圓圈數字顏色也會跟著底色變）
+// 點擊時切換 aria-current，讓被選取的 bar 變成 #d90085
 document.querySelectorAll('.bar-item').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     document.querySelectorAll('.bar-item')
