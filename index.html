@@ -1,205 +1,291 @@
-<!DOCTYPE html>
-<html lang="zh-Hant-TW">
+<!doctype html>
+<html lang="zh-Hant">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>前瞻科技系列論壇｜FutureTech Forum</title>
-  <meta name="format-detection" content="telephone=no" />
-  <style>
-    :root{
-      --nav-bg: rgba(18, 22, 34, .82);
-      --ink: #e74c3c;        /* 你的紅色標識色，可改 */
-      --text: #e9edf1;
-      --muted:#a7b0c0;
-      --maxw: 1200px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-      Roboto, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
-      color:#fff; background:#0f1a27;
-    }
-    /* ========== HERO ========== */
-    .hero{
-      position:relative;
-      width:100%;
-      height:100vh;          /* 佔滿一個視窗高度 */
-      min-height:640px;      /* 避免太扁 */
-      isolation:isolate;     /* 讓內層濾鏡不外溢 */
-      overflow:hidden;
-      display:flex; align-items:center; justify-content:center;
-    }
-    .hero::before{
-      content:"";
-      position:absolute; inset:0;
-      background: url("images/hero-bg.png") center/cover no-repeat;
-      transform:scale(1.02);
-      filter:saturate(1.05);
-      z-index:-2;
-    }
-    /* 漸層遮罩，讓下緣與內容銜接更柔順 */
-    .hero::after{
-      content:"";
-      position:absolute; inset:auto 0 0 0; height:30%;
-      background:linear-gradient(180deg, rgba(15,26,39,0) 0%, rgba(15,26,39,.85) 60%, rgba(15,26,39,1) 100%);
-      z-index:-1;
-    }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>前瞻科技系列論壇｜FutureTech Forum</title>
+<style>
+  :root{
+    /* ===== Hero 調整區 ===== */
+    --hero-aspect: 16/9;           /* 你的 hero-bg 為寬螢幕比例，維持 16:9 */
+    --hero-pad: clamp(16px,3vw,32px);
 
-    /* LOGO：從左滑入 */
-    .hero-logo{
-      position:absolute; top:42px; left:64px;
-      width:210px; max-width:28vw; height:auto;
-      opacity:0; transform:translateX(-48px);
-      animation:slideInLeft .9s .15s ease-out forwards;
-    }
+    /* 固定圖層（百分比越直覺）：left/top 以 Hero 內框為百分比 */
+    --logo-left: 6%;
+    --logo-top: 7%;
+    --logo-w: 13%;                 /* Logo 寬度百分比 */
 
-    /* 置中的標題群組 */
-    .hero-stack{
-      display:flex; flex-direction:column; align-items:center; text-align:center;
-      gap:min(2.8vh,28px);
-      padding:0 24px; width:100%;
-    }
-    .hero-title,
-    .hero-subtitle{
-      display:block; height:auto; max-width:min(860px, 86vw);
-      opacity:0; transform:translateY(42px);
-      will-change: transform, opacity;
-    }
-    .hero-title{ animation:fadeUp 1s .25s ease-out forwards; }
-    .hero-subtitle{ max-width:min(640px, 78vw); animation:fadeUp 1s .45s ease-out forwards; }
+    --title-left: 6%;
+    --title-top: 28%;
+    --title-w: 48%;
 
-    /* 活動時間小字（若要保留，可開啟） */
-    .hero-meta{
-      margin-top:4px; letter-spacing:.04em; color:var(--muted); font-size:14px;
-      opacity:0; transform:translateY(30px);
-      animation:fadeUp .9s .6s ease-out forwards;
-    }
+    --subtitle-left: 6%;
+    --subtitle-top: 48%;
+    --subtitle-w: 44%;
 
-    /* ========== 右上書籤選單（滾過 hero 才出現） ========== */
-    .bookmark{
-      position:fixed; top:20px; right:20px; z-index:50;
-      display:flex; gap:8px; padding:10px 12px; border-radius:14px;
-      background:var(--nav-bg); backdrop-filter:saturate(140%) blur(8px);
-      box-shadow:0 4px 18px rgba(0,0,0,.28);
-      opacity:0; transform:translateY(-12px); pointer-events:none;
-      transition:opacity .25s ease, transform .25s ease;
-    }
-    .bookmark.show{ opacity:1; transform:none; pointer-events:auto; }
-    .bookmark a{
-      color:#fff; text-decoration:none; font-weight:600; font-size:14px;
-      padding:8px 12px; border-radius:10px; line-height:1;
-      transition:background .2s ease, color .2s ease, transform .1s ease;
-    }
-    .bookmark a:hover{ background:rgba(255,255,255,.12) }
-    .bookmark .cta{
-      background:linear-gradient(180deg, #ff6b4a, #e63f2e); color:#fff;
-      border:none;
-    }
-    .bookmark .cta:hover{ transform:translateY(-1px) }
+    /* 右下角主辦／協辦 Logo 列 */
+    --org-right: 4%;
+    --org-bottom: 6%;
+    --org-w: 22%;
+    --partner-gap: 10px;
 
-    /* ========== 內容段落（佔位用，之後可替換） ========== */
-    .section{padding:80px 20px}
-    .container{max-width:var(--maxw); margin:0 auto}
-    h2{margin:0 0 14px; font-size:28px}
-    p{color:#cfd7e3; line-height:1.8}
+    /* 色彩 */
+    --ink:#0b0c0f; --bg:#fff; --muted:#5f6570;
+    --accent:#3b82f6; --accent-2:#0ea5e9;
+    --tab-bg:#f2f4f7; --tab-border:#e5e7eb;
+    --chip-bg:#eef2ff; --chip-ink:#3730a3;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; font-family: ui-sans-serif, -apple-system,"Noto Sans TC","Segoe UI",Arial,"PingFang TC","Heiti TC",sans-serif; color:var(--ink); background:var(--bg)}
+  .wrap{max-width:1200px; margin:auto; padding:0 var(--hero-pad)}
 
-    /* ========== 動畫 ========== */
-    @keyframes slideInLeft{
-      from{opacity:0; transform:translateX(-48px)}
-      to  {opacity:1; transform:translateX(0)}
-    }
-    @keyframes fadeUp{
-      from{opacity:0; transform:translateY(42px)}
-      to  {opacity:1; transform:translateY(0)}
-    }
+  /* ===== Hero ===== */
+  .hero{position:relative; width:100%; aspect-ratio:var(--hero-aspect); overflow:hidden; color:#fff;}
+  .hero-bg{position:absolute; inset:0; background:#0b0c0f url("assets/img/hero-bg.png") center/cover no-repeat}
+  .hero-layer{position:absolute; z-index:2; pointer-events:none; user-select:none; image-rendering:auto; filter:drop-shadow(0 2px 6px rgba(0,0,0,.2))}
+  .hero-logo{left:var(--logo-left); top:var(--logo-top); width:var(--logo-w)}
+  .hero-title{left:var(--title-left); top:var(--title-top); width:var(--title-w)}
+  .hero-subtitle{left:var(--subtitle-left); top:var(--subtitle-top); width:var(--subtitle-w)}
+  .hero::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.5)); z-index:1}
 
-    /* ========== RWD ========== */
-    @media (max-width: 1024px){
-      .hero{ min-height:560px }
-      .hero-logo{ top:28px; left:24px; width:min(28vw, 160px) }
-    }
-    @media (max-width: 640px){
-      .hero{ min-height:520px }
-      .bookmark{ gap:6px; padding:8px 10px }
-      .bookmark a{ font-size:13px; padding:8px 10px }
-    }
-  </style>
+  /* 主辦/協辦群組（右下角） */
+  .brand-strip{position:absolute; right:var(--org-right); bottom:var(--org-bottom); width:var(--org-w); z-index:3; display:flex; flex-direction:column; gap:var(--partner-gap); align-items:flex-end}
+  .brand-strip img{width:100%; height:auto; pointer-events:none; filter:drop-shadow(0 1px 4px rgba(0,0,0,.2))}
+
+  /* ===== Tabs ===== */
+  .event-tabs{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:16px auto 0; padding:0 var(--hero-pad); max-width:1200px}
+  .event-tab{display:block; text-align:center; padding:14px 10px; border:1px solid var(--tab-border); border-radius:14px; background:var(--tab-bg); cursor:pointer; font-weight:800; transition:.15s ease}
+  .event-tab:hover{transform:translateY(-1px); box-shadow:0 6px 18px rgba(0,0,0,.06)}
+  .event-tab .date{display:block; font-size:14px}
+  .event-tab .time{display:block; font-size:13px; color:var(--muted)}
+  .event-tab.active{color:#fff; border-color:transparent; background:linear-gradient(135deg,var(--accent),var(--accent-2)); box-shadow:0 10px 24px rgba(59,130,246,.25)}
+
+  /* ===== Content ===== */
+  .section{padding:24px 0}
+  .card{background:#fff; border:1px solid #e7e7ea; border-radius:16px; padding:22px; box-shadow:0 2px 12px rgba(0,0,0,.03)}
+  .h2{font-size:clamp(22px,2.6vw,30px); margin:0 0 10px; font-weight:800}
+  .muted{color:var(--muted)}
+  .grid{display:grid; gap:18px}
+  @media (min-width:860px){ .grid-2{grid-template-columns:1.1fr .9fr} }
+  .chips{display:flex; flex-wrap:wrap; gap:8px}
+  .chip{background:var(--chip-bg); color:var(--chip-ink); padding:6px 10px; border-radius:999px; font-size:13px; font-weight:700}
+  .btn{display:inline-flex; align-items:center; gap:8px; padding:12px 18px; border-radius:12px; font-weight:800; text-decoration:none; background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#fff; box-shadow:0 8px 18px rgba(14,165,233,.25)}
+
+  .agenda{list-style:none; margin:0; padding:0}
+  .agenda li{display:grid; grid-template-columns:110px 1fr; gap:14px; padding:12px 0; border-bottom:1px dashed #e8e8ee}
+  .agenda li:last-child{border-bottom:none}
+
+  .speakers{display:grid; gap:16px; grid-template-columns:repeat(3,1fr)}
+  .speaker{background:#fafafa; border:1px solid #efeff3; border-radius:14px; padding:10px; text-align:center}
+  .speaker img{width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:10px; background:#ddd}
+  .speaker .name{font-weight:800; margin-top:8px}
+  .speaker .role{font-size:13px; color:var(--muted)}
+</style>
 </head>
 <body>
 
-  <!-- 右上書籤式選單（捲過 hero 才顯示） -->
-  <nav class="bookmark" id="bookmark">
-    <a href="#intro">活動簡介</a>
-    <a href="#speakers">主要講者</a>
-    <a href="#agenda">議程</a>
-    <a class="cta" href="#register">立即報名</a>
-  </nav>
+<!-- ============== HERO ============== -->
+<section class="hero" aria-label="Hero">
+  <div class="hero-bg"></div>
 
-  <!-- HERO 主視覺 -->
-  <header class="hero" id="hero">
-    <img class="hero-logo" src="images/hero-logo.png" alt="主辦 Logo" />
-    <div class="hero-stack">
-      <!-- 你要做成 PNG 動畫出現的主/副標 -->
-      <img class="hero-title" src="images/hero-title.png" alt="前瞻科技系列論壇｜FutureTech Forum" />
-      <img class="hero-subtitle" src="images/hero-subtitle.png" alt="全球科技與頂尖人才的創新交融" />
-      <div class="hero-meta">Sep – Dec 2025｜Taipei, Taiwan</div>
-    </div>
-  </header>
+  <!-- 固定位置圖層（依變數控制） -->
+  <img class="hero-layer hero-logo" src="assets/img/hero-logo.png" alt="品牌Logo">
+  <img class="hero-layer hero-title" src="assets/img/hero-title.png" alt="主標題">
+  <img class="hero-layer hero-subtitle" src="assets/img/hero-subtitle.png" alt="副標題">
 
-  <!-- 以下是占位段落（方便測試捲動與錨點），之後可替換成你的真實內容 -->
-  <section id="intro" class="section">
-    <div class="container">
-      <h2>活動簡介</h2>
-      <p>這裡放活動介紹文字。之後會接系列活動選擇、活動內容與 CTA 區塊。</p>
+  <!-- 右下角主辦/協辦（各自是一張完整白底透明 PNG） -->
+  <div class="brand-strip">
+    <img src="assets/img/organizer-logo.png" alt="主辦單位">
+    <img src="assets/img/partner-logo.png" alt="合作夥伴">
+  </div>
+</section>
+
+<!-- ============== 四場活動切換 ============== -->
+<nav class="event-tabs" aria-label="系列論壇切換">
+  <button class="event-tab active" data-id="s1" aria-current="true">
+    <span class="date">系列論壇 ❶｜2025.09.26</span>
+    <span class="time">07:30 – 11:00</span>
+  </button>
+  <button class="event-tab" data-id="s2">
+    <span class="date">系列論壇 ❷｜2025.10.14</span>
+    <span class="time">10:30 – 12:30</span>
+  </button>
+  <button class="event-tab" data-id="s3">
+    <span class="date">系列論壇 ❸｜2025.11.22</span>
+    <span class="time">09:00 – 16:00</span>
+  </button>
+  <button class="event-tab" data-id="s4">
+    <span class="date">系列論壇 ❹｜2025.12.15</span>
+    <span class="time">08:30 – 16:30</span>
+  </button>
+</nav>
+
+<!-- ============== 內容 ============== -->
+<main class="wrap section">
+  <div id="event-root" class="grid grid-2">
+    <section class="card" aria-live="polite">
+      <div>
+        <div class="muted" style="font-weight:800;letter-spacing:.02em">前瞻科技系列論壇｜FutureTech Forum</div>
+        <h2 class="h2" id="title">Empowering the Future of Semiconductor: Bridging Industry and Academia</h2>
+        <div class="chips" id="chips">
+          <span class="chip">未來半導體人才趨勢論壇：產學對話</span>
+          <span class="chip">Taipei, Taiwan</span>
+          <span class="chip">On-site + Online</span>
+        </div>
+      </div>
+
+      <div style="margin-top:16px">
+        <div><span class="chip" style="background:#fafafa;color:#374151;border:1px solid #e5e7eb">日期</span> <strong id="date">2025/09/26（五）</strong>　
+          <span class="chip" style="background:#fafafa;color:#374151;border:1px solid #e5e7eb">時間</span> <strong id="time">07:30 – 11:00</strong></div>
+        <div style="margin-top:10px"><span class="chip" style="background:#fafafa;color:#374151;border:1px solid #e5e7eb">地點</span> <span id="venue">美國 史丹佛大學；臺灣 科政大樓 ×F 會議室（線上同步）</span></div>
+      </div>
+
+      <div style="margin-top:16px">
+        <h3 style="margin:0 0 8px;font-weight:800">議程｜Agenda</h3>
+        <ul id="agenda" class="agenda"></ul>
+      </div>
+    </section>
+
+    <aside class="card">
+      <h3 style="margin:0 0 12px;font-weight:800">主要講者｜Key Speakers</h3>
+      <div class="speakers" id="speakers"></div>
+      <div style="display:flex;justify-content:center;margin-top:14px">
+        <a id="cta" class="btn" href="#" target="_blank" rel="noopener">立即報名</a>
+      </div>
+    </aside>
+  </div>
+
+  <section class="section">
+    <div class="card">
+      <h3 style="margin:0 0 12px;font-weight:800">活動簡介｜About the Forum</h3>
+      <p id="about">
+        在人工智慧與先進技術重塑全球產業的浪潮中，半導體產業站在變革最前線，是推動創新與進步的核心引擎。
+        面對技術快速演進與國際競爭，培育高素質、跨領域的半導體人才已成為國家戰略重點。
+      </p>
+      <h4 style="margin:14px 0 10px;font-weight:800">活動亮點｜Highlights</h4>
+      <ul id="highlights">
+        <li>國際級產業對話：台積電五大事業群高階主管分享未來人才需求與技術前瞻。</li>
+        <li>學術深度解析：David Horsley 教授剖析頂尖半導體人才的教育路徑與關鍵倡議。</li>
+        <li>跨國交流：連線 Stanford 現場，探討 AI 時代半導體專業的必備技能與應用領域。</li>
+        <li>政策與產業連結：呼應「AI 新十大建設」與前瞻人才培育政策，推動技術與人才並進。</li>
+      </ul>
     </div>
   </section>
+</main>
 
-  <section id="speakers" class="section">
-    <div class="container">
-      <h2>主要講者</h2>
-      <p>這裡放講者區塊。圖片命名稍後我再給你完整建議與尺寸。</p>
+<script>
+const eventData = {
+  s1: {
+    title: "Empowering the Future of Semiconductor: Bridging Industry and Academia",
+    tags: ["未來半導體人才趨勢論壇：產學對話","Taipei, Taiwan","On-site + Online"],
+    date: "2025/09/26（五）",
+    time: "07:30 – 11:00",
+    venue: "美國 史丹佛大學；臺灣 科政大樓 ×F 會議室（線上同步）",
+    cta: "#",
+    speakers: [
+      {img:"assets/img/speakers/speaker1-1.png", name:"Prof. David Horsley", role:"教授｜加州大學戴維斯分校"},
+      {img:"assets/img/speakers/speaker1-2.png", name:"Dr. H.S. Philip Wong", role:"台積電首席科學家｜史丹佛大學教授"},
+      {img:"assets/img/speakers/speaker1-3.png", name:"TSMC Managers", role:"研發／設計／營運／IT／人資 等"}
+    ],
+    agenda: [
+      {time:"07:30 – 08:00", item:"開場致詞與歡迎致詞", desc:"吳誠文（國科會主委）、黃錫瑜（國研院科政中心主任）"},
+      {time:"08:05 – 08:25", item:"專題演講｜未來半導體人才", desc:"David Horsley（加州大學戴維斯分校 教授）"},
+      {time:"08:25 – 09:15", item:"台積電觀點", desc:"沈文冰（智慧應用整合處 副處長）、Tzung-Hua Lin（R&D Manager）、Steve Wang（Design Technology Platforms Manager）、Chun-Yu Lin（HR Manager）、TBC（Operation Manager）"},
+      {time:"09:15 – 09:25", item:"Q&A 現場提問", desc:"主持：黃漢森（台積電 首席科學家）｜與談：台積電不同業務單位經理"},
+      {time:"09:25 – 09:45", item:"綜合座談", desc:"主持：黃漢森（台積電 首席科學家）｜與談：台積電不同業務單位經理"},
+      {time:"09:25 – 09:30", item:"線上發放滿意度問卷", desc:"—"}
+    ],
+    about: [
+      "在人工智慧與先進技術重塑全球產業的浪潮中，半導體產業站在變革最前線，是推動創新與進步的核心引擎。",
+      "面對技術快速演進與國際競爭，培育高素質、跨領域的半導體人才已成為國家戰略重點。"
+    ],
+    highlights: [
+      "國際級產業對話：台積電五大事業群高階主管分享未來人才需求與技術前瞻。",
+      "學術深度解析：David Horsley 教授剖析頂尖半導體人才的教育路徑與關鍵倡議。",
+      "跨國交流：連線 Stanford 現場，探討 AI 時代半導體專業的必備技能與應用領域。",
+      "政策與產業連結：呼應「AI 新十大建設」與前瞻人才培育政策，推動技術與人才並進。"
+    ]
+  },
+  s2:{ title:"（待公布）FutureTech Forum ❷", tags:["Taipei, Taiwan","On-site + Online"], date:"2025/10/14（二）", time:"10:30 – 12:30", venue:"（待公布）", cta:"#",
+    speakers:[
+      {img:"assets/img/speakers/speaker2-1.png", name:"Speaker A", role:"Role / Org"},
+      {img:"assets/img/speakers/speaker2-2.png", name:"Speaker B", role:"Role / Org"},
+      {img:"assets/img/speakers/speaker2-3.png", name:"Speaker C", role:"Role / Org"}
+    ],
+    agenda:[
+      {time:"10:30 – 10:40", item:"Opening", desc:"—"},
+      {time:"10:40 – 11:20", item:"Keynote", desc:"—"},
+      {time:"11:20 – 12:30", item:"Panel & Q&A", desc:"—"}
+    ],
+    about:["—"], highlights:["—"]
+  },
+  s3:{ title:"（待公布）FutureTech Forum ❸", tags:["Taipei, Taiwan","On-site + Online"], date:"2025/11/22（六）", time:"09:00 – 16:00", venue:"（待公布）", cta:"#",
+    speakers:[
+      {img:"assets/img/speakers/speaker3-1.png", name:"Speaker A", role:"Role / Org"},
+      {img:"assets/img/speakers/speaker3-2.png", name:"Speaker B", role:"Role / Org"},
+      {img:"assets/img/speakers/speaker3-3.png", name:"Speaker C", role:"Role / Org"}
+    ],
+    agenda:[
+      {time:"09:00 – 09:20", item:"Opening", desc:"—"},
+      {time:"09:20 – 12:00", item:"Talks", desc:"—"},
+      {time:"13:30 – 16:00", item:"Panel / Workshop", desc:"—"}
+    ],
+    about:["—"], highlights:["—"]
+  },
+  s4:{ title:"（待公布）FutureTech Forum ❹", tags:["Taipei, Taiwan","On-site + Online"], date:"2025/12/15（一）", time:"08:30 – 16:30", venue:"（待公布）", cta:"#",
+    speakers:[
+      {img:"assets/img/speakers/speaker4-1.png", name:"Speaker A", role:"Role / Org"},
+      {img:"assets/img/speakers/speaker4-2.png", name:"Speaker B", role:"Role / Org"},
+      {img:"assets/img/speakers/speaker4-3.png", name:"Speaker C", role:"Role / Org"}
+    ],
+    agenda:[
+      {time:"08:30 – 09:00", item:"Opening", desc:"—"},
+      {time:"09:00 – 12:00", item:"Talks", desc:"—"},
+      {time:"14:00 – 16:30", item:"Panel / Wrap-up", desc:"—"}
+    ],
+    about:["—"], highlights:["—"]
+  }
+};
+
+const $ = s => document.querySelector(s);
+const el = {
+  tabs: document.querySelectorAll('.event-tab'),
+  title: $('#title'), chips: $('#chips'),
+  date: $('#date'), time: $('#time'), venue: $('#venue'),
+  agenda: $('#agenda'), speakers: $('#speakers'), cta: $('#cta'),
+  about: $('#about'), highlights: $('#highlights')
+};
+
+function render(id){
+  const d = eventData[id]; if(!d) return;
+  el.title.textContent = d.title;
+  el.chips.innerHTML = d.tags.map(t=>`<span class="chip">${t}</span>`).join('');
+  el.date.textContent = d.date; el.time.textContent = d.time; el.venue.textContent = d.venue;
+  el.cta.href = d.cta || "#";
+  el.speakers.innerHTML = (d.speakers||[]).map(s=>`
+    <div class="speaker">
+      <img src="${s.img}" alt="${s.name}">
+      <div class="name">${s.name}</div>
+      <div class="role">${s.role}</div>
     </div>
-  </section>
+  `).join('');
+  el.agenda.innerHTML = (d.agenda||[]).map(a=>`
+    <li>
+      <div><strong>${a.time}</strong></div>
+      <div><div style="font-weight:800">${a.item}</div><div class="muted">${a.desc||""}</div></div>
+    </li>
+  `).join('');
+  el.about.textContent = (d.about||[]).join(" ");
+  el.highlights.innerHTML = (d.highlights||[]).map(h=>`<li>${h}</li>`).join("");
 
-  <section id="agenda" class="section">
-    <div class="container">
-      <h2>議程</h2>
-      <p>這裡之後會放你要的「毛玻璃卡片」風格議程。</p>
-    </div>
-  </section>
-
-  <section id="register" class="section">
-    <div class="container">
-      <h2>立即報名</h2>
-      <p>放報名按鈕或外連。</p>
-    </div>
-  </section>
-
-  <footer class="section" style="padding-top:30px;padding-bottom:60px">
-    <div class="container" style="display:flex;gap:28px;align-items:center;flex-wrap:wrap">
-      <img src="images/organizer-logo.png" alt="主辦單位" style="height:40px" />
-      <img src="images/partner-logo.png" alt="協辦單位" style="height:36px;opacity:.9" />
-    </div>
-  </footer>
-
-  <script>
-    // 書籤選單：當頁面捲超過 hero 高度 60% 時顯示
-    (function(){
-      const bookmark = document.getElementById('bookmark');
-      const hero = document.getElementById('hero');
-
-      function onScroll(){
-        const heroRect = hero.getBoundingClientRect();
-        const past = heroRect.bottom < window.innerHeight * 0.4;
-        if(past) bookmark.classList.add('show');
-        else bookmark.classList.remove('show');
-      }
-      onScroll();
-      document.addEventListener('scroll', onScroll, {passive:true});
-      window.addEventListener('resize', onScroll);
-    })();
-  </script>
+  document.querySelectorAll('.event-tab').forEach(b=>{
+    const active = b.dataset.id===id;
+    b.classList.toggle('active', active);
+    b.setAttribute('aria-current', active ? 'true':'false');
+  });
+}
+render('s1');
+document.querySelectorAll('.event-tab').forEach(b=>b.addEventListener('click', ()=>render(b.dataset.id)));
+</script>
 </body>
 </html>
