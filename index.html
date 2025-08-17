@@ -1,267 +1,205 @@
-<!doctype html>
-<html lang="zh-Hant">
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>前瞻科技系列論壇｜FutureTech Forum</title>
-<meta name="description" content="全球科技與頂尖人才的創新交融 · Sep–Dec 2025 · Taipei, Taiwan" />
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700;800&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#0b1222; --deep:#0a1222; --fg:#e8f0ff; --muted:#c4d0ea;
-  --line:#1c2749; --brand:#2d59ff; --accent:#7ee6c0; --tab:#1a2342;
-  --tabActive:#3b66ff; --chip:#182243;
-}
-*{box-sizing:border-box} html,body{margin:0;background:var(--bg);color:var(--fg);
-  font-family:"Noto Sans TC",-apple-system,Segoe UI,Roboto,Arial,"PingFang TC","Microsoft JhengHei",sans-serif}
-a{color:inherit;text-decoration:none}
-img{max-width:100%;display:block}
-.container{max-width:1200px;margin:0 auto;padding:0 20px}
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>前瞻科技系列論壇｜FutureTech Forum</title>
+  <meta name="format-detection" content="telephone=no" />
+  <style>
+    :root{
+      --nav-bg: rgba(18, 22, 34, .82);
+      --ink: #e74c3c;        /* 你的紅色標識色，可改 */
+      --text: #e9edf1;
+      --muted:#a7b0c0;
+      --maxw: 1200px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
+      color:#fff; background:#0f1a27;
+    }
+    /* ========== HERO ========== */
+    .hero{
+      position:relative;
+      width:100%;
+      height:100vh;          /* 佔滿一個視窗高度 */
+      min-height:640px;      /* 避免太扁 */
+      isolation:isolate;     /* 讓內層濾鏡不外溢 */
+      overflow:hidden;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:0;
+      background: url("images/hero-bg.png") center/cover no-repeat;
+      transform:scale(1.02);
+      filter:saturate(1.05);
+      z-index:-2;
+    }
+    /* 漸層遮罩，讓下緣與內容銜接更柔順 */
+    .hero::after{
+      content:"";
+      position:absolute; inset:auto 0 0 0; height:30%;
+      background:linear-gradient(180deg, rgba(15,26,39,0) 0%, rgba(15,26,39,.85) 60%, rgba(15,26,39,1) 100%);
+      z-index:-1;
+    }
 
-/* ---------- HERO ---------- */
-.hero{position:relative;min-height:86vh;display:grid;align-items:center}
-.hero::before{content:"";position:absolute;inset:0;background:url(assets/img/hero-bg.png) center/cover no-repeat;z-index:-2}
-.hero::after{content:"";position:absolute;inset:0;background:
-  radial-gradient(80% 60% at 70% 10%, rgba(70,140,255,.18), transparent 60%),
-  linear-gradient(180deg, rgba(6,9,18,.0), rgba(6,9,18,.55) 70%, rgba(6,9,18,.8));z-index:-1}
-.hero-inner{display:grid;gap:14px;align-items:center}
-.hero-pad{height:10vh} /* 給 sticky nav 交界更順 */
-.logo{position:absolute;top:22px;left:22px;width:min(38vw,220px);opacity:0;transform:translateX(-16px)}
-.title{width:min(90vw,980px);opacity:0;transform:translateY(18px)}
-.subtitle{width:min(86vw,820px);opacity:0;transform:translateY(18px)}
-.hero.in .title{animation:rise .8s ease forwards}
-.hero.in .subtitle{animation:rise .8s ease .15s forwards}
-.hero.in .logo{animation:slideIn .8s ease .25s forwards}
-@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-@keyframes slideIn{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:translateX(0)}}
+    /* LOGO：從左滑入 */
+    .hero-logo{
+      position:absolute; top:42px; left:64px;
+      width:210px; max-width:28vw; height:auto;
+      opacity:0; transform:translateX(-48px);
+      animation:slideInLeft .9s .15s ease-out forwards;
+    }
 
-/* ---------- 右側懸浮欄 ---------- */
-.fix-aside{position:fixed;right:18px;top:22vh;display:flex;flex-direction:column;gap:14px;z-index:60}
-.fix-aside .ring{width:108px;height:108px;border-radius:50%;background:#ff9800;color:#10151f;
-  display:grid;place-items:center;font-weight:900;box-shadow:0 10px 30px rgba(0,0,0,.35);cursor:pointer}
-.fix-aside .pill{width:112px;min-height:84px;border-radius:16px;padding:10px;background:#ffffff10;
-  border:1px solid #ffffff25;backdrop-filter:blur(10px);display:grid;place-items:center;font-weight:800}
-.fix-aside .top{width:112px;height:84px;border-radius:16px;background:#ffffff10;border:1px solid #ffffff25;
-  display:grid;place-items:center;cursor:pointer}
-.fix-aside .pill:hover,.fix-aside .top:hover{background:#ffffff18}
-@media (max-width:980px){.fix-aside{display:none}}
+    /* 置中的標題群組 */
+    .hero-stack{
+      display:flex; flex-direction:column; align-items:center; text-align:center;
+      gap:min(2.8vh,28px);
+      padding:0 24px; width:100%;
+    }
+    .hero-title,
+    .hero-subtitle{
+      display:block; height:auto; max-width:min(860px, 86vw);
+      opacity:0; transform:translateY(42px);
+      will-change: transform, opacity;
+    }
+    .hero-title{ animation:fadeUp 1s .25s ease-out forwards; }
+    .hero-subtitle{ max-width:min(640px, 78vw); animation:fadeUp 1s .45s ease-out forwards; }
 
-/* ---------- 書籤式選單（滾過 hero 才出現） ---------- */
-.bookmark{position:sticky;top:-1px;transform:translateY(-100%);opacity:0;z-index:50;
-  background:rgba(10,16,32,.84);backdrop-filter:saturate(160%) blur(10px);
-  border-bottom:1px solid var(--line);transition:transform .25s ease,opacity .25s ease}
-.bookmark.show{transform:translateY(0);opacity:1}
-.bookmark .nav{height:64px;display:flex;align-items:center;justify-content:flex-end;gap:10px}
-.chip{padding:8px 16px;border-radius:999px;background:var(--chip);border:1px solid #223059;color:#cfe0ff;font-weight:800}
-.chip.active{background:linear-gradient(180deg,var(--accent),var(--brand));color:#0a1222;border-color:transparent}
-.cta{padding:10px 16px;border-radius:12px;background:var(--brand);color:#07122c;font-weight:900}
+    /* 活動時間小字（若要保留，可開啟） */
+    .hero-meta{
+      margin-top:4px; letter-spacing:.04em; color:var(--muted); font-size:14px;
+      opacity:0; transform:translateY(30px);
+      animation:fadeUp .9s .6s ease-out forwards;
+    }
 
-/* ---------- 區塊 ---------- */
-section.block{padding:84px 0;border-top:1px solid var(--line)}
-h2{margin:0 0 14px;font-weight:900}
-p{margin:0 0 10px;color:var(--muted)}
+    /* ========== 右上書籤選單（滾過 hero 才出現） ========== */
+    .bookmark{
+      position:fixed; top:20px; right:20px; z-index:50;
+      display:flex; gap:8px; padding:10px 12px; border-radius:14px;
+      background:var(--nav-bg); backdrop-filter:saturate(140%) blur(8px);
+      box-shadow:0 4px 18px rgba(0,0,0,.28);
+      opacity:0; transform:translateY(-12px); pointer-events:none;
+      transition:opacity .25s ease, transform .25s ease;
+    }
+    .bookmark.show{ opacity:1; transform:none; pointer-events:auto; }
+    .bookmark a{
+      color:#fff; text-decoration:none; font-weight:600; font-size:14px;
+      padding:8px 12px; border-radius:10px; line-height:1;
+      transition:background .2s ease, color .2s ease, transform .1s ease;
+    }
+    .bookmark a:hover{ background:rgba(255,255,255,.12) }
+    .bookmark .cta{
+      background:linear-gradient(180deg, #ff6b4a, #e63f2e); color:#fff;
+      border:none;
+    }
+    .bookmark .cta:hover{ transform:translateY(-1px) }
 
-/* ---------- Tabs + 面板 ---------- */
-.tabs{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 22px}
-.tab{background:var(--tab);color:#cfe0ff;border:1px solid #223059;border-radius:999px;padding:10px 14px;cursor:pointer}
-.tab.active{background:var(--tabActive);border-color:transparent;color:#fff}
-.tab-panels .panel{display:none}
-.tab-panels .panel.active{display:block}
+    /* ========== 內容段落（佔位用，之後可替換） ========== */
+    .section{padding:80px 20px}
+    .container{max-width:var(--maxw); margin:0 auto}
+    h2{margin:0 0 14px; font-size:28px}
+    p{color:#cfd7e3; line-height:1.8}
 
-/* ---------- CTA Row ---------- */
-.event-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    /* ========== 動畫 ========== */
+    @keyframes slideInLeft{
+      from{opacity:0; transform:translateX(-48px)}
+      to  {opacity:1; transform:translateX(0)}
+    }
+    @keyframes fadeUp{
+      from{opacity:0; transform:translateY(42px)}
+      to  {opacity:1; transform:translateY(0)}
+    }
 
-/* ---------- Speakers ---------- */
-.speakers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.speaker{background:linear-gradient(180deg,#10172e,#0f162a);border:1px solid #1f2a4d;border-radius:16px;overflow:hidden}
-.speaker .pic{aspect-ratio:1/1;background:#1b2342;display:grid;place-items:center}
-.speaker img{width:100%;height:100%;object-fit:cover}
-.speaker .info{padding:12px 14px}
-.speaker .name{font-weight:900}
-.speaker .role{color:var(--muted);font-size:.95rem}
-
-/* ---------- Agenda (Glass) ---------- */
-.agenda{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-.card{padding:16px;border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
-  border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(10px)}
-.time{font-weight:900}
-.topic{font-weight:800;margin:6px 0}
-.place{color:var(--muted)}
-@media (max-width:980px){.agenda{grid-template-columns:1fr}.speakers{grid-template-columns:1fr 1fr}}
-@media (max-width:640px){.speakers{grid-template-columns:1fr}}
-
-/* ---------- Footer ---------- */
-footer{padding:44px 0;border-top:1px solid var(--line);background:#0a1328}
-.partner-logos{display:flex;flex-wrap:wrap;gap:18px;align-items:center}
-.partner-logos img{height:40px;width:auto;filter:drop-shadow(0 2px 6px rgba(0,0,0,.25))}
-</style>
+    /* ========== RWD ========== */
+    @media (max-width: 1024px){
+      .hero{ min-height:560px }
+      .hero-logo{ top:28px; left:24px; width:min(28vw, 160px) }
+    }
+    @media (max-width: 640px){
+      .hero{ min-height:520px }
+      .bookmark{ gap:6px; padding:8px 10px }
+      .bookmark a{ font-size:13px; padding:8px 10px }
+    }
+  </style>
 </head>
 <body>
 
-<header class="hero" id="hero">
-  <img class="logo" src="assets/img/hero-logo.png" alt="科政中心 Logo">
-  <div class="container hero-inner">
-    <img class="title" src="assets/img/hero-title.png" alt="前瞻科技系列論壇｜FutureTech Forum">
-    <img class="subtitle" src="assets/img/hero-subtitle.png" alt="全球科技與頂尖人才的創新交融 · Sep–Dec 2025 · Taipei, Taiwan">
-  </div>
-  <div class="hero-pad"></div>
-</header>
+  <!-- 右上書籤式選單（捲過 hero 才顯示） -->
+  <nav class="bookmark" id="bookmark">
+    <a href="#intro">活動簡介</a>
+    <a href="#speakers">主要講者</a>
+    <a href="#agenda">議程</a>
+    <a class="cta" href="#register">立即報名</a>
+  </nav>
 
-<!-- 右側懸浮欄 -->
-<aside class="fix-aside" aria-label="快速操作">
-  <a class="ring" href="#register" title="立即報名">立即<br>報名</a>
-  <a class="pill" href="#" target="_blank" rel="noopener" title="報名查詢">報名<br>查詢</a>
-  <a class="top" href="#hero" title="回到頂部">▲</a>
-</aside>
-
-<!-- 書籤式選單 -->
-<nav class="bookmark" id="bookmark">
-  <div class="container nav">
-    <a class="chip" data-goto="#about">活動簡介</a>
-    <a class="chip" data-goto="#speakers">主要講者</a>
-    <a class="chip" data-goto="#agenda">議程</a>
-    <a class="cta"  href="#register">立即報名</a>
-  </div>
-</nav>
-
-<!-- 活動簡介 + 系列活動 -->
-<section id="about" class="block">
-  <div class="container">
-    <h2>活動簡介</h2>
-    <p>此區為活動說明文案（先放占位，之後你替換即可）。下方為系列論壇四場活動切換，未選為深藍紫，選到後高亮且展開內容。</p>
-
-    <div class="tabs" id="tabs">
-      <button class="tab active" data-panel="p1">活動一</button>
-      <button class="tab" data-panel="p2">活動二</button>
-      <button class="tab" data-panel="p3">活動三</button>
-      <button class="tab" data-panel="p4">活動四</button>
+  <!-- HERO 主視覺 -->
+  <header class="hero" id="hero">
+    <img class="hero-logo" src="images/hero-logo.png" alt="主辦 Logo" />
+    <div class="hero-stack">
+      <!-- 你要做成 PNG 動畫出現的主/副標 -->
+      <img class="hero-title" src="images/hero-title.png" alt="前瞻科技系列論壇｜FutureTech Forum" />
+      <img class="hero-subtitle" src="images/hero-subtitle.png" alt="全球科技與頂尖人才的創新交融" />
+      <div class="hero-meta">Sep – Dec 2025｜Taipei, Taiwan</div>
     </div>
+  </header>
 
-    <div class="tab-panels">
-      <div class="panel active" id="p1">
-        <p><strong>主題：</strong>AI × 先進製程 × 產業新局</p>
-        <p><strong>時間：</strong>2025/09/04（Thu）10:00–16:30</p>
-        <p><strong>地點：</strong>台北‧元大金融廣場 國際會議廳</p>
-        <div class="event-cta">
-          <a class="cta" href="#" target="_blank" rel="noopener">立即報名</a>
-          <a class="chip" data-goto="#agenda">查看議程</a>
-        </div>
-      </div>
-      <div class="panel" id="p2">
-        <p><strong>主題：</strong>（活動二主題）</p><p><strong>時間：</strong>（活動二時間）</p><p><strong>地點：</strong>（活動二地點）</p>
-        <div class="event-cta"><a class="cta" href="#" target="_blank">立即報名</a><a class="chip" data-goto="#agenda">查看議程</a></div>
-      </div>
-      <div class="panel" id="p3">
-        <p><strong>主題：</strong>（活動三主題）</p><p><strong>時間：</strong>（活動三時間）</p><p><strong>地點：</strong>（活動三地點）</p>
-        <div class="event-cta"><a class="cta" href="#" target="_blank">立即報名</a><a class="chip" data-goto="#agenda">查看議程</a></div>
-      </div>
-      <div class="panel" id="p4">
-        <p><strong>主題：</strong>（活動四主題）</p><p><strong>時間：</strong>（活動四時間）</p><p><strong>地點：</strong>（活動四地點）</p>
-        <div class="event-cta"><a class="cta" href="#" target="_blank">立即報名</a><a class="chip" data-goto="#agenda">查看議程</a></div>
-      </div>
+  <!-- 以下是占位段落（方便測試捲動與錨點），之後可替換成你的真實內容 -->
+  <section id="intro" class="section">
+    <div class="container">
+      <h2>活動簡介</h2>
+      <p>這裡放活動介紹文字。之後會接系列活動選擇、活動內容與 CTA 區塊。</p>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- 主要講者：12 張（若無圖會自顯示佔位文字） -->
-<section id="speakers" class="block">
-  <div class="container">
-    <h2>主要講者</h2>
-    <div class="speakers">
-      <!-- 1 -->
-      <article class="speaker"><div class="pic"><img src="assets/img/speaker1-1.png" alt="Speaker 1-1" onerror="this.remove();this.parentElement.textContent='No Image';"></div><div class="info"><div class="name">講者 1-1</div><div class="role">（職稱）</div></div></article>
-      <article class="speaker"><div class="pic"><img src="assets/img/speaker1-2.png" alt="Speaker 1-2" onerror="this.remove();this.parentElement.textContent='No Image';"></div><div class="info"><div class="name">講者 1-2</div><div class="role">（職稱）</div></div></article>
-      <article class="speaker"><div class="pic"><img src="assets/img/speaker1-3.png" alt="Speaker 1-3" onerror="this.remove();this.parentElement.textContent='No Image';"></div><div class="info"><div class="name">講者 1-3</div><div class="role">（職稱）</div></div></article>
-      <!-- 2 -->
-      <article class="speaker"><div class="pic"><img src="assets/img/speaker2-1.png" alt="Speaker 2-1" onerror="this.remove();this.parentElement.textContent='No Image';"></div><div class="info"><div class="name">講者 2-1</div><div class="role">（職稱）</div></div></article>
-      <article class="speaker"><div class="pic"><img src="assets/img/speaker2-2.png" alt="Speaker 2-2" onerror="this.remove();this.parentElement.textContent='No Image';"></div><div class="info"><div class="name">講者 2-2</div><div class="role">（職稱）</div></div></article>
-      <article class="speaker"><div class="pic"><img src="assets/img/speaker2-3.png" alt="Speaker 2-3" onerror="this.remove();this.parentElement.textContent='No Image';"></div><div class="info"><div class="name">講者 2-3</div><div class="role">（職稱）</div></div></article>
-      <!-- 3 -->
-      <article class="speaker"><div class="pic"><img src="assets/img/speaker3-1.png" alt="Speaker 3-1" onerror="this.remove();this.parentElement.textContent='No Image';"></div><div class="info"><div class="name">講者 3-1</div><div class="role">（職稱）</div></div></article>
-      <article class="speaker"><div class="pic"><img src="assets/img/speaker3-2.png" alt="Speaker 3-2" onerror="this.remove();this.parentElement.textContent='No Image';"></div><div class="info"><div class="name">講者 3-2</div><div class="role">（職稱）</div></div></article>
-      <article class="speaker"><div class="pic"><img src="assets/img/speaker3-3.png" alt="Speaker 3-3" onerror="this.remove();this.parentElement.textContent='No Image';"></div><div class="info"><div class="name">講者 3-3</div><div class="role">（職稱）</div></div></article>
-      <!-- 4 -->
-      <article class="speaker"><div class="pic"><img src="assets/img/speaker4-1.png" alt="Speaker 4-1" onerror="this.remove();this.parentElement.textContent='No Image';"></div><div class="info"><div class="name">講者 4-1</div><div class="role">（職稱）</div></div></article>
-      <article class="speaker"><div class="pic"><img src="assets/img/speaker4-2.png" alt="Speaker 4-2" onerror="this.remove();this.parentElement.textContent='No Image';"></div><div class="info"><div class="name">講者 4-2</div><div class="role">（職稱）</div></div></article>
-      <article class="speaker"><div class="pic"><img src="assets/img/speaker4-3.png" alt="Speaker 4-3" onerror="this.remove();this.parentElement.textContent='No Image';"></div><div class="info"><div class="name">講者 4-3</div><div class="role">（職稱）</div></div></article>
+  <section id="speakers" class="section">
+    <div class="container">
+      <h2>主要講者</h2>
+      <p>這裡放講者區塊。圖片命名稍後我再給你完整建議與尺寸。</p>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- 議程 -->
-<section id="agenda" class="block">
-  <div class="container">
-    <h2>議程</h2>
-    <div class="agenda">
-      <div class="card"><div class="time">10:00–10:25</div><div class="topic">半導體在全球 ICT 供應鏈的核心地位與展望</div><div class="place">講者 A｜台北</div></div>
-      <div class="card"><div class="time">10:25–10:50</div><div class="topic">智慧產業共生成長的挑戰：AI 與半導體</div><div class="place">講者 B｜台北</div></div>
-      <div class="card"><div class="time">10:50–11:15</div><div class="topic">製程 × 封裝：機會與挑戰</div><div class="place">講者 C｜台北</div></div>
-      <div class="card"><div class="time">11:15–11:40</div><div class="topic">半導體先進製造趨勢分析</div><div class="place">講者 D｜台北</div></div>
+  <section id="agenda" class="section">
+    <div class="container">
+      <h2>議程</h2>
+      <p>這裡之後會放你要的「毛玻璃卡片」風格議程。</p>
     </div>
+  </section>
 
-    <!-- 中段二次 CTA -->
-    <div style="text-align:center;margin-top:24px">
-      <a class="cta" href="#register">立即報名</a>
+  <section id="register" class="section">
+    <div class="container">
+      <h2>立即報名</h2>
+      <p>放報名按鈕或外連。</p>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- 報名 -->
-<section id="register" class="block">
-  <div class="container" style="text-align:center">
-    <h2>立即報名</h2>
-    <p><a class="cta" href="#" target="_blank" rel="noopener">前往報名</a></p>
-  </div>
-</section>
-
-<!-- 主/協辦 -->
-<footer>
-  <div class="container">
-    <h2 style="margin-bottom:14px">主辦 / 協辦單位</h2>
-    <div class="partner-logos">
-      <img src="assets/img/organizer-logo.png" alt="Organizer">
-      <img src="assets/img/partner-logo.png" alt="Partner">
+  <footer class="section" style="padding-top:30px;padding-bottom:60px">
+    <div class="container" style="display:flex;gap:28px;align-items:center;flex-wrap:wrap">
+      <img src="images/organizer-logo.png" alt="主辦單位" style="height:40px" />
+      <img src="images/partner-logo.png" alt="協辦單位" style="height:36px;opacity:.9" />
     </div>
-  </div>
-</footer>
+  </footer>
 
-<script>
-/* 進場動畫觸發 */
-const hero = document.getElementById('hero');
-const ioIn = new IntersectionObserver(es => es.forEach(e=>{ if(e.isIntersecting) hero.classList.add('in') }), {threshold:.6});
-ioIn.observe(hero);
+  <script>
+    // 書籤選單：當頁面捲超過 hero 高度 60% 時顯示
+    (function(){
+      const bookmark = document.getElementById('bookmark');
+      const hero = document.getElementById('hero');
 
-/* 書籤顯示 */
-const bm = document.getElementById('bookmark');
-const ioBm = new IntersectionObserver(es => es.forEach(e=>{ bm.classList.toggle('show', !e.isIntersecting) }), {threshold:.01});
-ioBm.observe(hero);
-
-/* 平滑捲動 + active 標示 */
-document.querySelectorAll('.bookmark .chip, .chip[data-goto]').forEach(node=>{
-  node.addEventListener('click', e=>{
-    const id = node.dataset.goto;
-    if(id){ e.preventDefault(); const el = document.querySelector(id); if(el) el.scrollIntoView({behavior:'smooth'}); }
-    document.querySelectorAll('.bookmark .chip').forEach(x=>x.classList.remove('active'));
-    if(node.closest('.bookmark')) node.classList.add('active');
-  });
-});
-
-/* Tabs */
-const tabs = document.querySelectorAll('.tab');
-const panels = document.querySelectorAll('.panel');
-tabs.forEach(t=>{
-  t.addEventListener('click', ()=>{
-    tabs.forEach(x=>x.classList.remove('active'));
-    panels.forEach(p=>p.classList.remove('active'));
-    t.classList.add('active');
-    document.getElementById(t.dataset.panel).classList.add('active');
-  });
-});
-
-/* 回到頂部平滑 */
-document.querySelector('.fix-aside .top').addEventListener('click', e=>{
-  e.preventDefault(); document.getElementById('hero').scrollIntoView({behavior:'smooth'});
-});
-</script>
+      function onScroll(){
+        const heroRect = hero.getBoundingClientRect();
+        const past = heroRect.bottom < window.innerHeight * 0.4;
+        if(past) bookmark.classList.add('show');
+        else bookmark.classList.remove('show');
+      }
+      onScroll();
+      document.addEventListener('scroll', onScroll, {passive:true});
+      window.addEventListener('resize', onScroll);
+    })();
+  </script>
 </body>
 </html>
