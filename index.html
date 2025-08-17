@@ -8,19 +8,51 @@
       margin: 0;
       padding: 0;
     }
-    .hero {
-      width: 1920px;
-      height: 1080px;
-      background: url('assets/img/hero-bg.png') no-repeat center center;
-      background-size: cover; /* 讓背景完整填滿 */
+    /* 讓 hero 區域永遠維持 16:9 比例 */
+    .hero-wrapper {
       position: relative;
+      width: 100%;
+      max-width: 1920px; /* 避免超過原始解析度 */
+      margin: 0 auto;
+      aspect-ratio: 16 / 9; /* 保持 1920x1080 比例 */
+      background: url('assets/img/hero-bg.png') no-repeat center center;
+      background-size: cover;
       overflow: hidden;
+    }
+
+    .hero-img {
+      position: absolute;
+      max-width: 100%; /* 保持圖片清晰 */
+      height: auto;
+    }
+
+    /* logo：1920x1080 內 100,60 → 換算百分比 */
+    .hero-logo {
+      top: calc(60 / 1080 * 100%);
+      left: calc(100 / 1920 * 100%);
+      width: calc(634 / 1920 * 100%); /* 按比例縮放 */
+    }
+
+    /* title：1920x1080 內 100,375 */
+    .hero-title {
+      top: calc(375 / 1080 * 100%);
+      left: calc(100 / 1920 * 100%);
+      width: calc(887 / 1920 * 100%);
+    }
+
+    /* subtitle：1920x1080 內 100,725 */
+    .hero-subtitle {
+      top: calc(725 / 1080 * 100%);
+      left: calc(100 / 1920 * 100%);
+      width: calc(878 / 1920 * 100%);
     }
   </style>
 </head>
 <body>
-  <section class="hero">
-    <!-- 後續會在這裡加 logo、主標、副標 -->
+  <section class="hero-wrapper">
+    <img src="assets/img/hero-logo.png" alt="logo" class="hero-img hero-logo">
+    <img src="assets/img/hero-title.png" alt="title" class="hero-img hero-title">
+    <img src="assets/img/hero-subtitle.png" alt="subtitle" class="hero-img hero-subtitle">
   </section>
 </body>
 </html>
