@@ -153,36 +153,38 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
 }
 .event-info li{ margin-bottom:10px; }
 
-/* 立即報名（修正版） */
+/* ===== CTA（沿用你喜歡的橘底＋白框＋箭頭款） ===== */
 .register-btn{
-  display:flex;
+  display:inline-flex;
   align-items:center;
   justify-content:center;
-  margin:40px auto 0;
-  width:190px;
-  height:60px;
-  background:transparent;
+  background:#f48c06;               /* 橘色底 */
   color:#fff;
-  border:6px solid #fff; /* 白框加粗一點，但不是9px */
-  border-radius:999px;
+  font-size:1.6rem;                  /* 放大字體 */
+  font-weight:500;
+  padding:18px 50px;
+  border-radius:50px;
+  border:4px solid #fff;             /* 適中白框 */
+  box-shadow:0 8px 20px rgba(0,0,0,0.25);
   text-decoration:none;
-  font-size:1.875rem; /* 放大 1.5 倍 */
-  letter-spacing:.04em;
-  font-weight:500; /* Medium */
-  box-shadow:0 16px 36px rgba(0,0,0,.42);
-  transition:all .25s ease;
+  transition:all .3s ease;
+  margin:40px auto 0;
 }
+.register-btn span{ margin-right:12px; } /* 文字與箭頭間距 */
+
 .register-btn:hover{
-  background:#ff7a00; /* 橘色底 */
-  border-color:transparent;
-  transform:scale(0.9); /* 縮小10% */
+  background:#f48c06;               /* 保持橘色 */
+  border-color:transparent;         /* hover 時白框隱藏 */
+  transform:scale(0.95);            /* 略縮小 */
+  box-shadow:none;
 }
-.register-btn:active{
-  transform:scale(0.85);
-}
-.register-btn:focus-visible{
-  outline:3px solid rgba(255,255,255,.6);
-  outline-offset:3px;
+
+/* RWD：若需要可沿用先前的縮小規則（可選） */
+@media (max-width:480px){
+  .register-btn{
+    font-size:1.3rem;
+    padding:14px 36px;
+  }
 }
 </style>
 </head>
@@ -238,11 +240,8 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
       <li><strong>跨國交流：</strong>連線 Stanford 現場，探討 AI 時代半導體專業的必備技能與應用領域。</li>
       <li><strong>政策與產業鏈結：</strong>呼應「AI 新十大全球倡議」與人才培育政策，推動技術與人才並進。</li>
     </ul>
-    <!-- CTA 按鈕 -->
-    <div style="text-align:center;">
-      <a href="#" class="cta-btn"><span>免費參加</span> →</a>
-    </div>
-    <a href="#" class="register-btn">立即報名</a>
+    <!-- CTA 按鈕（只調整這一處標記：加上 span 與箭頭字元） -->
+    <a href="#" class="register-btn"><span>立即報名</span> →</a>
   </div>
 </section>
 
