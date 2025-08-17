@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>前瞻科技系列論壇</title>
 
-<!-- 字型：補上 Noto Sans TC 的 300（Light） -->
+<!-- 字型：補上 Noto Sans TC 300（Light） -->
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
@@ -131,29 +131,33 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
   padding:60px 20px;
 }
 .event-info .inner{
-  max-width:960px;
+  /* 1920 時左右各 160px：內容寬 1600px；小螢幕保留 20px 安全邊距 */
+  width:min(1600px, calc(100vw - 40px));
   margin:0 auto;
   line-height:1.8;
-  font-weight:300; /* ⭐ 正文預設 Light */
+  font-weight:300; /* 正文 Light */
 }
-/* 標題：中文粗體；英文用 Akrobat Bold */
+
+/* 標題：中文/整體用 Bold；英文子標用 Akrobat Bold */
 .event-info h2{
   font-size:1.5rem;
   margin:0 0 20px;
-  font-weight:700; /* 中文維持粗體 */
+  font-weight:700; /* ⭐ Bold */
 }
 .event-info h2 span{
   color:var(--pink);
-  font-family:"Akrobat","Noto Sans TC",sans-serif; /* ⭐ 英文用 Akrobat */
-  font-weight:700;
+  font-family:"Akrobat","Noto Sans TC",sans-serif;
+  font-weight:700; /* ⭐ Akrobat Bold */
 }
-/* ⭐ 內容區所有粗體統一改為 Bold(700) 並維持粉色 */
+
+/* 內容粗體：Bold + 粉色 */
 .event-info b,
 .event-info strong{
   color:var(--pink);
-  font-weight:700;
+  font-weight:700; /* ⭐ Bold 就好 */
 }
-/* 正文（段落與清單）預設 Light(300) */
+
+/* 列表與段落仍用 Light */
 .event-info p,
 .event-info li{
   font-weight:300;
@@ -167,32 +171,33 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
   margin-bottom:10px;
 }
 
-/* ⭐ 立即報名：白色外框、陰影、近距變色 */
+/* 立即報名：加寬、3px 白框、陰影、hover 反白 */
 .register-btn{
   display:inline-block;
-  margin-top:30px;
-  padding:16px 40px;
-  background:transparent;                 /* 透明底 */
+  margin-top:34px;
+  padding:20px 56px;                /* ⭐ 加寬加高 */
+  background:transparent;
   color:#fff;
-  border:2px solid #fff;                  /* 白色外框 */
-  border-radius:48px;
+  border:3px solid #fff;            /* ⭐ 3px 白框 */
+  border-radius:999px;
   text-decoration:none;
-  font-size:1.25rem;
+  font-size:1.375rem;               /* ⭐ 更大字 */
+  letter-spacing:.04em;
   font-weight:900;
-  box-shadow:0 10px 24px rgba(0,0,0,.35); /* 陰影 */
-  transition: transform .12s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease, border-color .2s ease, filter .2s ease;
+  box-shadow:0 14px 34px rgba(0,0,0,.42);  /* ⭐ 陰影更明顯 */
+  transition:transform .12s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease, border-color .2s ease, filter .2s ease;
 }
 .register-btn:hover{
-  background:#fff;                        /* 接近時變色：白底 */
-  color:#112240;                          /* 與區塊底色相呼應 */
+  background:#fff;
+  color:#112240;
   border-color:#fff;
   transform:translateY(-1px);
-  box-shadow:0 14px 28px rgba(0,0,0,.4);
+  box-shadow:0 18px 38px rgba(0,0,0,.44);
   filter:brightness(1.02);
 }
 .register-btn:active{
   transform:translateY(0);
-  box-shadow:0 8px 18px rgba(0,0,0,.32);
+  box-shadow:0 10px 22px rgba(0,0,0,.36);
 }
 .register-btn:focus-visible{
   outline:3px solid rgba(255,255,255,.6);
