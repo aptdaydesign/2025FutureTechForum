@@ -1,139 +1,120 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>前瞻科技系列論壇</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Noto Sans TC', sans-serif, 'Roboto', sans-serif;
-      background: #000;
-    }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>前瞻科技系列論壇</title>
 
-    /* Hero 區塊 */
-    .hero {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16/9;
-      background: url('hero-bg.jpg') no-repeat center center/cover;
-      overflow: hidden;
-    }
+<!-- Fonts：中文 Noto Sans TC；英文/數字 Roboto -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;800;900&family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
 
-    .hero img {
-      position: absolute;
-      max-width: 100%;
-      height: auto;
-    }
+<style>
+  html,body{margin:0;background:#000;color:#fff}
+  html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,"PingFang TC","Heiti TC",sans-serif}
+  .en{font-family:"Roboto","Noto Sans TC",system-ui,Arial,sans-serif}
 
-    /* 相對位置計算：以 1920x1080 為基準 */
-    .hero-logo {
-      top: calc(60 / 1080 * 100%);
-      left: calc(100 / 1920 * 100%);
-      width: 15%;
-    }
+  /* === HERO（16:9 等比；圖片以 1920×1080 百分比定位） === */
+  .hero-wrapper{
+    position:relative; width:100vw; margin:0;
+    aspect-ratio:16/9; overflow:hidden;
+    background:#0b0c0f url("assets/img/hero-bg.png") center/cover no-repeat;
+  }
+  .hero-img{position:absolute; max-width:100%; height:auto; pointer-events:none; user-select:none}
+  /* 依 1920×1080 的座標與寬度 */
+  .hero-logo{     top:calc( 60/1080*100%); left:calc(100/1920*100%); width:calc(634/1920*100%) }
+  .hero-title{    top:calc(375/1080*100%); left:calc(100/1920*100%); width:calc(887/1920*100%) }
+  .hero-subtitle{ top:calc(725/1080*100%); left:calc(100/1920*100%); width:calc(878/1920*100%) }
 
-    .hero-title {
-      top: calc(375 / 1080 * 100%);
-      left: calc(100 / 1920 * 100%);
-      width: 45%;
-    }
+  /* === 橫向活動選單：滿版 1920×315，字級跟高度等比 === */
+  :root{
+    --tab-default:#501cf2;   /* 未選 */
+    --tab-active:#d90085;    /* 選取 */
+    /* 橫幅實際高度（最小 140px，等比到 315px） */
+    --barH: clamp(140px, 100vw * (315 / 1920), 315px);
+    /* 1920px 寬時為 2px 的分隔線，會隨寬度縮放 */
+    --dividerW: 0.104vw;   /* 2 / 1920 * 100vw */
+  }
+  .event-bar{
+    position:relative; width:100vw;
+    margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw);
+    height:var(--barH); overflow:hidden;
+  }
+  .event-bar .bar{
+    position:absolute; inset:0; display:grid; grid-template-columns:repeat(4,1fr);
+  }
+  .bar-item{
+    --bg:var(--tab-default);
+    background:var(--bg); color:#fff;
+    appearance:none; border:none; outline:none; box-shadow:none;
+    display:grid; align-content:center; justify-items:center; text-align:center; line-height:1.15;
+    padding: calc(var(--barH) * 0.06) calc(12px + var(--barH) * 0.02);
+    border-right: var(--dividerW) solid #fff;          /* 只畫中間白線 */
+    cursor:pointer; user-select:none;
+  }
+  .bar-item:first-child{border-left:none}
+  .bar-item:last-child{border-right:none}
+  .bar-item[aria-current="true"]{ --bg:var(--tab-active) }
 
-    .hero-subtitle {
-      top: calc(725 / 1080 * 100%);
-      left: calc(100 / 1920 * 100%);
-      width: 50%;
-    }
+  /* 文字跟著高度等比；日期/時間強制 Roboto */
+  .bar-item .t1{ font-weight:900; letter-spacing:.02em; font-size:clamp(14px, calc(var(--barH)*0.085), 34px) }
+  .bar-item .t2{ font-weight:900; margin-top:calc(var(--barH)*0.03); font-size:clamp(20px, calc(var(--barH)*0.13), 72px); font-family:"Roboto","Noto Sans TC",system-ui,Arial,sans-serif }
+  .bar-item .t3{ font-weight:800; margin-top:calc(var(--barH)*0.02); opacity:.95; font-size:clamp(12px, calc(var(--barH)*0.07), 32px); font-family:"Roboto","Noto Sans TC",system-ui,Arial,sans-serif }
 
-    /* bar 區塊 */
-    .bar-container {
-      display: flex;
-      flex-wrap: wrap;
-      width: 100%;
-    }
-
-    .bar-item {
-      --bg: var(--tab-default);
-      flex: 1;
-      min-width: 200px;
-      background: var(--bg);
-      color: #fff;
-      text-align: center;
-      padding: 2em 1em;
-      border-right: 0.104vw solid #fff; /* 1920px = 2px */
-      font-size: clamp(14px, 1.2vw, 20px);
-    }
-
-    .bar-item:first-child { border-left: none; }
-    .bar-item:last-child { border-right: none; }
-
-    .bar-item h3 {
-      margin: 0;
-      font-size: 1.4em;
-      font-weight: 700;
-    }
-
-    .bar-item p {
-      margin: 0.3em 0 0;
-      font-size: 1em;
-      font-family: 'Roboto', sans-serif; /* 英文用 Roboto */
-    }
-
-    /* 顏色 */
-    .bar-item:nth-child(1) { background: #e91e63; }
-    .bar-item:nth-child(2) { background: #673ab7; }
-    .bar-item:nth-child(3) { background: #3f51b5; }
-    .bar-item:nth-child(4) { background: #2196f3; }
-
-    /* RWD 手機 2x2 */
-    @media (max-width: 768px) {
-      .bar-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-      }
-      .bar-item {
-        border-right: 0.104vw solid #fff;
-        border-bottom: 0.104vw solid #fff;
-      }
-      .bar-item:nth-child(2n) {
-        border-right: none;
-      }
-      .bar-item:nth-child(3),
-      .bar-item:nth-child(4) {
-        border-bottom: none;
-      }
-    }
-  </style>
+  /* 手機 ≤480px：改 2×2 排 */
+  @media (max-width:480px){
+    .event-bar{ height: calc(var(--barH) * 2) }
+    .event-bar .bar{ grid-template-columns:repeat(2,1fr) }
+    .bar-item{ border-right: var(--dividerW) solid #fff; border-bottom: var(--dividerW) solid #fff }
+    .bar-item:nth-child(2n){ border-right:none }
+    .bar-item:nth-last-child(-n+2){ border-bottom:none }
+  }
+</style>
 </head>
 <body>
 
-  <!-- Hero 區塊 -->
-  <section class="hero">
-    <img src="hero-logo.png" alt="Logo" class="hero-logo">
-    <img src="hero-title.png" alt="Title" class="hero-title">
-    <img src="hero-subtitle.png" alt="Subtitle" class="hero-subtitle">
-  </section>
+<!-- HERO：只疊你的三張圖，絕不改內容 -->
+<section class="hero-wrapper" aria-label="Hero">
+  <img class="hero-img hero-logo"     src="assets/img/hero-logo.png"     alt="">
+  <img class="hero-img hero-title"    src="assets/img/hero-title.png"    alt="">
+  <img class="hero-img hero-subtitle" src="assets/img/hero-subtitle.png" alt="">
+</section>
 
-  <!-- 系列論壇 bar -->
-  <section class="bar-container">
-    <div class="bar-item">
-      <h3>系列論壇 ①</h3>
-      <p>2025.09.26<br>07:30 – 11:00</p>
-    </div>
-    <div class="bar-item">
-      <h3>系列論壇 ②</h3>
-      <p>2025.10.14<br>10:30 – 12:30</p>
-    </div>
-    <div class="bar-item">
-      <h3>系列論壇 ③</h3>
-      <p>2025.11.22<br>09:00 – 16:00</p>
-    </div>
-    <div class="bar-item">
-      <h3>系列論壇 ④</h3>
-      <p>2025.12.15<br>08:30 – 16:30</p>
-    </div>
-  </section>
+<!-- 橫向活動選單（預設選左一） -->
+<nav class="event-bar" aria-label="系列論壇切換">
+  <div class="bar" id="eventBar">
+    <button type="button" class="bar-item" data-id="s1" aria-current="true">
+      <div class="t1">系列論壇 ➊</div>
+      <div class="t2 en">2025.09.26</div>
+      <div class="t3 en">07:30 – 11:00</div>
+    </button>
+    <button type="button" class="bar-item" data-id="s2" aria-current="false">
+      <div class="t1">系列論壇 ➋</div>
+      <div class="t2 en">2025.10.14</div>
+      <div class="t3 en">10:30 – 12:30</div>
+    </button>
+    <button type="button" class="bar-item" data-id="s3" aria-current="false">
+      <div class="t1">系列論壇 ➌</div>
+      <div class="t2 en">2025.11.22</div>
+      <div class="t3 en">09:00 – 16:00</div>
+    </button>
+    <button type="button" class="bar-item" data-id="s4" aria-current="false">
+      <div class="t1">系列論壇 ➍</div>
+      <div class="t2 en">2025.12.15</div>
+      <div class="t3 en">08:30 – 16:30</div>
+    </button>
+  </div>
+</nav>
+
+<script>
+  // 切換選取顏色（之後可在這裡連動內容）
+  document.querySelectorAll('.bar-item').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.bar-item')
+        .forEach(b=>b.setAttribute('aria-current', b===btn ? 'true' : 'false'));
+      // TODO: render(btn.dataset.id)
+    });
+  });
+</script>
 
 </body>
 </html>
