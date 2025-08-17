@@ -3,73 +3,32 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Hero 對版（百分比定位）</title>
+<title>Hero（SVG 像素對版）</title>
 <style>
-  :root{
-    /* 設計稿基準（你的底圖） */
-    --ref-w: 1920;
-    --ref-h: 1080;
-
-    /* ===== 依設計稿像素 → 轉百分比 =====
-       左邊統一 100px；logo 上 60px；主標上 230px；
-       「副標與時間」這張圖的 top：
-       - 如果這張圖只包含 “FutureTech Forum” ⇒ 建議用 486 (=230+236+20 留20px)
-       - 如果這張圖包含 FutureTech + 紅標語 + 英文小標 + 日期 ⇒ 用 596 (=230+236+130)
-       我先預設 **596**；若只放 FutureTech，改成 **486**。
-    */
-    --x-left: 100;
-    --logo-y: 60;   --logo-w: 634;
-    --title-y: 230; --title-w: 887;
-    --sub-y: 596;   --sub-w: 878; /* ←若只有 FutureTech，改 486 */
-  }
-
-  *{box-sizing:border-box}
+  /* 讓 SVG 等比自適應：寬度 100%，高度自動 */
+  .hero-svg{display:block;width:100%;height:auto}
   body{margin:0;background:#000}
-
-  /* 1) Hero 容器鎖定 16:9，避免任何拉伸 */
-  .hero{
-    position:relative;
-    width:100%;
-    aspect-ratio: calc(var(--ref-w) / var(--ref-h));
-    overflow:hidden;
-    color:#fff;
-  }
-
-  /* 2) 背景與容器同寬高（100% 100%），確保像素→百分比對位準 */
-  .hero::before{
-    content:"";
-    position:absolute; inset:0;
-    background: #0b0c0f url("assets/img/hero-bg.png") 0 0 / 100% 100% no-repeat;
-    z-index:0;
-  }
-
-  /* 3) 三個圖層以「設計稿像素 / 1920×1080」換算為百分比 */
-  .layer{
-    position:absolute; z-index:1; pointer-events:none; user-select:none;
-    filter: drop-shadow(0 2px 6px rgba(0,0,0,.22));
-    left: calc(var(--x-left) / var(--ref-w) * 100%);
-  }
-  .hero-logo{
-    top:   calc(var(--logo-y) / var(--ref-h) * 100%);
-    width: calc(var(--logo-w) / var(--ref-w) * 100%);
-  }
-  .hero-title{
-    top:   calc(var(--title-y) / var(--ref-h) * 100%);
-    width: calc(var(--title-w) / var(--ref-w) * 100%);
-  }
-  .hero-sub{
-    top:   calc(var(--sub-y) / var(--ref-h) * 100%);
-    width: calc(var(--sub-w) / var(--ref-w) * 100%);
-  }
 </style>
 </head>
 <body>
 
-<section class="hero" aria-label="Hero">
-  <img class="layer hero-logo"  src="assets/img/hero-logo.png"     alt="">
-  <img class="layer hero-title" src="assets/img/hero-title.png"    alt="">
-  <img class="layer hero-sub"   src="assets/img/hero-subtitle.png" alt="">
-</section>
+<!-- 以 viewBox 1920×1080 精準對版 -->
+<svg class="hero-svg" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg" aria-label="Hero">
+  <!-- 背景：1920×1080 -->
+  <image href="assets/img/hero-bg.png" x="0" y="0" width="1920" height="1080" />
+
+  <!-- 左邊統一 100px 對齊線 -->
+  <!-- Logo：上 60px、左 100px；尺寸 634×87 -->
+  <image href="assets/img/hero-logo.png" x="100" y="60" width="634" height="87" />
+
+  <!-- 主標：頂端 230px、左 100px；尺寸 887×236 -->
+  <image href="assets/img/hero-title.png" x="100" y="230" width="887" height="236" />
+
+  <!-- 副標（FutureTech Forum）：貼主標下緣並略留空隙
+       主標底緣 = 230 + 236 = 466；建議留 20px → 486
+       若要更接近你的版，改 y 值即可（例如 500/510） -->
+  <image href="assets/img/hero-subtitle.png" x="100" y="486" width="878" height="232" />
+</svg>
 
 </body>
 </html>
