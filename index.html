@@ -4,125 +4,178 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>前瞻科技系列論壇｜FutureTech Forum</title>
+<meta name="description" content="前瞻科技系列論壇 FutureTech Forum — Future of Semiconductor: Bridging Industry and Academia">
 <style>
-  :root{
-    /* ===== Hero 調整區 ===== */
-    --hero-aspect: 16/9;           /* 你的 hero-bg 為寬螢幕比例，維持 16:9 */
-    --hero-pad: clamp(16px,3vw,32px);
+/* ---------------- 基礎 ---------------- */
+:root{
+  /* ===== 設計稿基準尺寸（請改成你的 PDF hero 畫面尺寸） ===== */
+  --ref-w: 2560;     /* 設計稿寬 px */
+  --ref-h: 1440;     /* 設計稿高 px */
+  --hero-aspect: calc(var(--ref-w) / var(--ref-h)); /* 自動得出 hero 比例 */
 
-    /* 固定圖層（百分比越直覺）：left/top 以 Hero 內框為百分比 */
-    --logo-left: 6%;
-    --logo-top: 7%;
-    --logo-w: 13%;                 /* Logo 寬度百分比 */
+  /* ===== 把設計稿像素座標直接填進來（可照你的 PDF 精準調） ===== */
+  /* 主品牌 Logo（左上） */
+  --logo-x: 160;      --logo-y: 100;    --logo-w: 330;
+  /* 主標題（左側） */
+  --title-x: 160;     --title-y: 410;   --title-w: 1240;
+  /* 副標題（左側主標下方） */
+  --subtitle-x: 160;  --subtitle-y: 650;--subtitle-w: 1080;
 
-    --title-left: 6%;
-    --title-top: 28%;
-    --title-w: 48%;
+  /* ===== 主辦／協辦帶（獨立於 hero，下方一條帶狀；同樣可用像素鎖點做版位） ===== */
+  --sponsor-ref-h: 240;   /* 這條帶在設計稿中的高度（px）。實際會依寬度等比縮放 */
+  --sponsor-aspect: calc(var(--ref-w) / var(--sponsor-ref-h));
+  /* 左側「主辦」群組位置與寬（以設計稿 px） */
+  --org-x: 160; --org-y: 40; --org-w: 520;
+  /* 右側「協辦」群組位置與寬（以設計稿 px） */
+  --partner-x: 1880; --partner-y: 40; --partner-w: 520;
 
-    --subtitle-left: 6%;
-    --subtitle-top: 48%;
-    --subtitle-w: 44%;
+  /* 色彩 */
+  --ink:#0b0c0f; --bg:#ffffff; --muted:#5f6570;
+  --accent:#3b82f6; --accent-2:#0ea5e9; --accent-3:#22c55e;
+  --surface:#0a1326;         /* 功能帶深色底 */
+  --surface-2:#0e1a35;
+  --separator: rgba(255,255,255,.14);
+  --tab-border:#e5e7eb;
+  --chip-bg:#eef2ff; --chip-ink:#3730a3;
+}
+*{box-sizing:border-box}
+body{margin:0; font-family:ui-sans-serif,-apple-system,"Noto Sans TC","Segoe UI",Arial,"PingFang TC","Heiti TC",sans-serif; color:var(--ink); background:var(--bg)}
+a{color:inherit}
+.wrap{max-width:1200px; margin:auto; padding:0 clamp(16px,3vw,32px)}
 
-    /* 右下角主辦／協辦 Logo 列 */
-    --org-right: 4%;
-    --org-bottom: 6%;
-    --org-w: 22%;
-    --partner-gap: 10px;
+/* ---------------- Hero（像素鎖點） ---------------- */
+.hero{position:relative; width:100%; aspect-ratio:var(--hero-aspect); overflow:hidden; color:#fff;}
+.hero-bg{position:absolute; inset:0; background:#0b0c0f url("assets/img/hero-bg.png") center/cover no-repeat}
+.hero::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.5)); z-index:1}
+.px-abs{position:absolute; z-index:2; pointer-events:none; user-select:none; filter:drop-shadow(0 2px 6px rgba(0,0,0,.2))}
+.hero-logo{
+  left: calc(var(--logo-x) / var(--ref-w) * 100%);
+  top:  calc(var(--logo-y) / var(--ref-h) * 100%);
+  width: calc(var(--logo-w) / var(--ref-w) * 100%);
+}
+.hero-title{
+  left: calc(var(--title-x) / var(--ref-w) * 100%);
+  top:  calc(var(--title-y) / var(--ref-h) * 100%);
+  width: calc(var(--title-w) / var(--ref-w) * 100%);
+}
+.hero-subtitle{
+  left: calc(var(--subtitle-x) / var(--ref-w) * 100%);
+  top:  calc(var(--subtitle-y) / var(--ref-h) * 100%);
+  width: calc(var(--subtitle-w) / var(--ref-w) * 100%);
+}
 
-    /* 色彩 */
-    --ink:#0b0c0f; --bg:#fff; --muted:#5f6570;
-    --accent:#3b82f6; --accent-2:#0ea5e9;
-    --tab-bg:#f2f4f7; --tab-border:#e5e7eb;
-    --chip-bg:#eef2ff; --chip-ink:#3730a3;
-  }
-  *{box-sizing:border-box}
-  body{margin:0; font-family: ui-sans-serif, -apple-system,"Noto Sans TC","Segoe UI",Arial,"PingFang TC","Heiti TC",sans-serif; color:var(--ink); background:var(--bg)}
-  .wrap{max-width:1200px; margin:auto; padding:0 var(--hero-pad)}
+/* ---------------- 主辦／協辦 帶（獨立區塊） ---------------- */
+.sponsor-strip{position:relative; width:100%; aspect-ratio:var(--sponsor-aspect); background:#fff}
+.sponsor-inner{position:absolute; inset:0}
+.sponsor-img{position:absolute; width:auto; height:auto; pointer-events:none; user-select:none; filter:drop-shadow(0 1px 4px rgba(0,0,0,.08))}
+.sponsor-org{
+  left: calc(var(--org-x) / var(--ref-w) * 100%);
+  top:  calc(var(--org-y) / var(--sponsor-ref-h) * 100%);
+  width: calc(var(--org-w) / var(--ref-w) * 100%);
+}
+.sponsor-partner{
+  left: calc(var(--partner-x) / var(--ref-w) * 100%);
+  top:  calc(var(--partner-y) / var(--sponsor-ref-h) * 100%);
+  width: calc(var(--partner-w) / var(--ref-w) * 100%);
+}
 
-  /* ===== Hero ===== */
-  .hero{position:relative; width:100%; aspect-ratio:var(--hero-aspect); overflow:hidden; color:#fff;}
-  .hero-bg{position:absolute; inset:0; background:#0b0c0f url("assets/img/hero-bg.png") center/cover no-repeat}
-  .hero-layer{position:absolute; z-index:2; pointer-events:none; user-select:none; image-rendering:auto; filter:drop-shadow(0 2px 6px rgba(0,0,0,.2))}
-  .hero-logo{left:var(--logo-left); top:var(--logo-top); width:var(--logo-w)}
-  .hero-title{left:var(--title-left); top:var(--title-top); width:var(--title-w)}
-  .hero-subtitle{left:var(--subtitle-left); top:var(--subtitle-top); width:var(--subtitle-w)}
-  .hero::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.5)); z-index:1}
+/* ---------------- 功能帶（Ribbon Tabs 一整條） ---------------- */
+.event-ribbon{max-width:1200px; margin:16px auto 0; padding:0 clamp(16px,3vw,32px)}
+.ribbon{
+  display:grid; grid-template-columns:repeat(4,1fr); width:100%;
+  border-radius:16px; overflow:hidden;
+  background:linear-gradient(180deg,var(--surface),var(--surface-2));
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 8px 24px rgba(0,0,0,.18);
+}
+.ribbon-item{
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;
+  padding:14px 10px; cursor:pointer; user-select:none; text-align:center;
+  color:#e7eefb; font-weight:800; transition:background .15s ease, transform .15s ease;
+  position:relative;
+}
+.ribbon-item:not(:first-child)::before{
+  content:""; position:absolute; left:0; top:16%; bottom:16%; width:1px; background:var(--separator);
+}
+.ribbon-item .date{font-size:14px; letter-spacing:.02em}
+.ribbon-item .time{font-size:13px; opacity:.9}
+.ribbon-item:hover{transform:translateY(-1px)}
+.ribbon-item.active{
+  color:#fff;
+  background:linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);
+}
 
-  /* 主辦/協辦群組（右下角） */
-  .brand-strip{position:absolute; right:var(--org-right); bottom:var(--org-bottom); width:var(--org-w); z-index:3; display:flex; flex-direction:column; gap:var(--partner-gap); align-items:flex-end}
-  .brand-strip img{width:100%; height:auto; pointer-events:none; filter:drop-shadow(0 1px 4px rgba(0,0,0,.2))}
+/* ---------------- 內容卡片 ---------------- */
+.section{padding:24px 0}
+.card{background:#fff; border:1px solid #e7e7ea; border-radius:16px; padding:22px; box-shadow:0 2px 12px rgba(0,0,0,.03)}
+.h2{font-size:clamp(22px,2.6vw,30px); margin:0 0 10px; font-weight:800}
+.muted{color:var(--muted)}
+.grid{display:grid; gap:18px}
+@media (min-width:860px){ .grid-2{grid-template-columns:1.1fr .9fr} }
 
-  /* ===== Tabs ===== */
-  .event-tabs{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:16px auto 0; padding:0 var(--hero-pad); max-width:1200px}
-  .event-tab{display:block; text-align:center; padding:14px 10px; border:1px solid var(--tab-border); border-radius:14px; background:var(--tab-bg); cursor:pointer; font-weight:800; transition:.15s ease}
-  .event-tab:hover{transform:translateY(-1px); box-shadow:0 6px 18px rgba(0,0,0,.06)}
-  .event-tab .date{display:block; font-size:14px}
-  .event-tab .time{display:block; font-size:13px; color:var(--muted)}
-  .event-tab.active{color:#fff; border-color:transparent; background:linear-gradient(135deg,var(--accent),var(--accent-2)); box-shadow:0 10px 24px rgba(59,130,246,.25)}
+.chips{display:flex; flex-wrap:wrap; gap:8px}
+.chip{background:var(--chip-bg); color:var(--chip-ink); padding:6px 10px; border-radius:999px; font-size:13px; font-weight:700}
+.pill{display:inline-block; padding:.2em .6em; border:1px solid #e5e7eb; border-radius:999px; font-size:12px; color:#374151; background:#fafafa}
 
-  /* ===== Content ===== */
-  .section{padding:24px 0}
-  .card{background:#fff; border:1px solid #e7e7ea; border-radius:16px; padding:22px; box-shadow:0 2px 12px rgba(0,0,0,.03)}
-  .h2{font-size:clamp(22px,2.6vw,30px); margin:0 0 10px; font-weight:800}
-  .muted{color:var(--muted)}
-  .grid{display:grid; gap:18px}
-  @media (min-width:860px){ .grid-2{grid-template-columns:1.1fr .9fr} }
-  .chips{display:flex; flex-wrap:wrap; gap:8px}
-  .chip{background:var(--chip-bg); color:var(--chip-ink); padding:6px 10px; border-radius:999px; font-size:13px; font-weight:700}
-  .btn{display:inline-flex; align-items:center; gap:8px; padding:12px 18px; border-radius:12px; font-weight:800; text-decoration:none; background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#fff; box-shadow:0 8px 18px rgba(14,165,233,.25)}
+.btn{display:inline-flex; align-items:center; gap:8px; padding:12px 18px; border-radius:12px; font-weight:800; text-decoration:none; background:linear-gradient(135deg,var(--accent),var(--accent-3)); color:#fff; box-shadow:0 8px 18px rgba(34,197,94,.25)}
 
-  .agenda{list-style:none; margin:0; padding:0}
-  .agenda li{display:grid; grid-template-columns:110px 1fr; gap:14px; padding:12px 0; border-bottom:1px dashed #e8e8ee}
-  .agenda li:last-child{border-bottom:none}
+.agenda{list-style:none; margin:0; padding:0}
+.agenda li{display:grid; grid-template-columns:110px 1fr; gap:14px; padding:12px 0; border-bottom:1px dashed #e8e8ee}
+.agenda li:last-child{border-bottom:none}
 
-  .speakers{display:grid; gap:16px; grid-template-columns:repeat(3,1fr)}
-  .speaker{background:#fafafa; border:1px solid #efeff3; border-radius:14px; padding:10px; text-align:center}
-  .speaker img{width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:10px; background:#ddd}
-  .speaker .name{font-weight:800; margin-top:8px}
-  .speaker .role{font-size:13px; color:var(--muted)}
+.speakers{display:grid; gap:16px; grid-template-columns:repeat(3,1fr)}
+.speaker{background:#fafafa; border:1px solid #efeff3; border-radius:14px; padding:10px; text-align:center}
+.speaker img{width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:10px; background:#ddd}
+.speaker .name{font-weight:800; margin-top:8px}
+.speaker .role{font-size:13px; color:var(--muted)}
 </style>
 </head>
 <body>
 
-<!-- ============== HERO ============== -->
+<!-- ================= Hero（與 PDF 等比） ================= -->
 <section class="hero" aria-label="Hero">
   <div class="hero-bg"></div>
+  <!-- 三個透明 PNG 圖層（按像素鎖點轉為百分比定位） -->
+  <img class="px-abs hero-logo"     src="assets/img/hero-logo.png"     alt="品牌Logo">
+  <img class="px-abs hero-title"    src="assets/img/hero-title.png"    alt="主標題">
+  <img class="px-abs hero-subtitle" src="assets/img/hero-subtitle.png" alt="副標題">
+</section>
 
-  <!-- 固定位置圖層（依變數控制） -->
-  <img class="hero-layer hero-logo" src="assets/img/hero-logo.png" alt="品牌Logo">
-  <img class="hero-layer hero-title" src="assets/img/hero-title.png" alt="主標題">
-  <img class="hero-layer hero-subtitle" src="assets/img/hero-subtitle.png" alt="副標題">
-
-  <!-- 右下角主辦/協辦（各自是一張完整白底透明 PNG） -->
-  <div class="brand-strip">
-    <img src="assets/img/organizer-logo.png" alt="主辦單位">
-    <img src="assets/img/partner-logo.png" alt="合作夥伴">
+<!-- ================= 主辦／協辦 帶（獨立區，不在 hero 內） ================= -->
+<section class="sponsor-strip" aria-label="主辦與協辦">
+  <div class="sponsor-inner">
+    <img class="sponsor-img sponsor-org"     src="assets/img/organizer-logo.png" alt="主辦單位">
+    <img class="sponsor-img sponsor-partner" src="assets/img/partner-logo.png"   alt="協辦單位">
   </div>
 </section>
 
-<!-- ============== 四場活動切換 ============== -->
-<nav class="event-tabs" aria-label="系列論壇切換">
-  <button class="event-tab active" data-id="s1" aria-current="true">
-    <span class="date">系列論壇 ❶｜2025.09.26</span>
-    <span class="time">07:30 – 11:00</span>
-  </button>
-  <button class="event-tab" data-id="s2">
-    <span class="date">系列論壇 ❷｜2025.10.14</span>
-    <span class="time">10:30 – 12:30</span>
-  </button>
-  <button class="event-tab" data-id="s3">
-    <span class="date">系列論壇 ❸｜2025.11.22</span>
-    <span class="time">09:00 – 16:00</span>
-  </button>
-  <button class="event-tab" data-id="s4">
-    <span class="date">系列論壇 ❹｜2025.12.15</span>
-    <span class="time">08:30 – 16:30</span>
-  </button>
+<!-- ================= 功能帶（單條 Ribbon Tabs） ================= -->
+<nav class="event-ribbon" aria-label="系列論壇切換">
+  <div class="ribbon" id="ribbon">
+    <button class="ribbon-item active" data-id="s1" aria-current="true">
+      <span class="date">系列論壇 ❶｜2025.09.26</span>
+      <span class="time">07:30 – 11:00</span>
+    </button>
+    <button class="ribbon-item" data-id="s2">
+      <span class="date">系列論壇 ❷｜2025.10.14</span>
+      <span class="time">10:30 – 12:30</span>
+    </button>
+    <button class="ribbon-item" data-id="s3">
+      <span class="date">系列論壇 ❸｜2025.11.22</span>
+      <span class="time">09:00 – 16:00</span>
+    </button>
+    <button class="ribbon-item" data-id="s4">
+      <span class="date">系列論壇 ❹｜2025.12.15</span>
+      <span class="time">08:30 – 16:30</span>
+    </button>
+  </div>
 </nav>
 
-<!-- ============== 內容 ============== -->
+<!-- ================= 內容 ================= -->
 <main class="wrap section">
   <div id="event-root" class="grid grid-2">
+    <!-- 左：活動資訊 -->
     <section class="card" aria-live="polite">
       <div>
         <div class="muted" style="font-weight:800;letter-spacing:.02em">前瞻科技系列論壇｜FutureTech Forum</div>
@@ -135,9 +188,14 @@
       </div>
 
       <div style="margin-top:16px">
-        <div><span class="chip" style="background:#fafafa;color:#374151;border:1px solid #e5e7eb">日期</span> <strong id="date">2025/09/26（五）</strong>　
-          <span class="chip" style="background:#fafafa;color:#374151;border:1px solid #e5e7eb">時間</span> <strong id="time">07:30 – 11:00</strong></div>
-        <div style="margin-top:10px"><span class="chip" style="background:#fafafa;color:#374151;border:1px solid #e5e7eb">地點</span> <span id="venue">美國 史丹佛大學；臺灣 科政大樓 ×F 會議室（線上同步）</span></div>
+        <div>
+          <span class="pill">日期</span> <strong id="date">2025/09/26（五）</strong>　
+          <span class="pill">時間</span> <strong id="time">07:30 – 11:00</strong>
+        </div>
+        <div style="margin-top:10px">
+          <span class="pill">地點</span>
+          <span id="venue">美國 史丹佛大學；臺灣 科政大樓 ×F 會議室（線上同步）</span>
+        </div>
       </div>
 
       <div style="margin-top:16px">
@@ -146,6 +204,7 @@
       </div>
     </section>
 
+    <!-- 右：講者＋CTA -->
     <aside class="card">
       <h3 style="margin:0 0 12px;font-weight:800">主要講者｜Key Speakers</h3>
       <div class="speakers" id="speakers"></div>
@@ -174,6 +233,7 @@
 </main>
 
 <script>
+/* ---------------- 活動資料 ---------------- */
 const eventData = {
   s1: {
     title: "Empowering the Future of Semiconductor: Bridging Industry and Academia",
@@ -247,9 +307,9 @@ const eventData = {
   }
 };
 
+/* ---------------- 綁定 + 渲染 ---------------- */
 const $ = s => document.querySelector(s);
 const el = {
-  tabs: document.querySelectorAll('.event-tab'),
   title: $('#title'), chips: $('#chips'),
   date: $('#date'), time: $('#time'), venue: $('#venue'),
   agenda: $('#agenda'), speakers: $('#speakers'), cta: $('#cta'),
@@ -278,14 +338,20 @@ function render(id){
   el.about.textContent = (d.about||[]).join(" ");
   el.highlights.innerHTML = (d.highlights||[]).map(h=>`<li>${h}</li>`).join("");
 
-  document.querySelectorAll('.event-tab').forEach(b=>{
+  // ribbon 高亮
+  document.querySelectorAll('.ribbon-item').forEach(b=>{
     const active = b.dataset.id===id;
     b.classList.toggle('active', active);
     b.setAttribute('aria-current', active ? 'true':'false');
   });
 }
+
+// 初始載入第一場
 render('s1');
-document.querySelectorAll('.event-tab').forEach(b=>b.addEventListener('click', ()=>render(b.dataset.id)));
+
+// Ribbon 事件
+document.querySelectorAll('.ribbon-item').forEach(b=>b.addEventListener('click', ()=>render(b.dataset.id)));
 </script>
+
 </body>
 </html>
