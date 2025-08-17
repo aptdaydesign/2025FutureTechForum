@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>前瞻科技系列論壇</title>
 
-<!-- 字型：只保留 300 / 400 / 500 -->
+<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Montserrat:wght@500&display=swap" rel="stylesheet">
 
 <style>
@@ -92,6 +92,7 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
   line-height:1.25;
   margin:0 0 6px;
   letter-spacing:0.025em;
+  font-variant-numeric:lining-nums proportional-nums;
   font-family:"Akrobat","Noto Sans TC",sans-serif;
 }
 .bar-item .t3{
@@ -110,27 +111,28 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
   .bar-item{ border-right:var(--dividerW) solid #fff; border-bottom:var(--dividerW) solid #fff }
   .bar-item:nth-child(2n){ border-right:none }
   .bar-item:nth-last-child(-n+2){ border-bottom:none }
+  .bar-item .t1{ letter-spacing:0.02em; }
+  .bar-item .t2{ letter-spacing:0.015em; }
+  .bar-item .t3{ letter-spacing:0.015em; }
 }
 
-/* ===== 活動資訊區塊（背景 #112240） ===== */
+/* ===== 活動資訊區塊 ===== */
 .event-info{
   background:#112240;
   padding-block:60px;
 }
 .event-info .inner{
-  /* 回到最初的 max-width + padding */
-  max-width:1200px;
+  width:min(1600px, calc(100% - 40px));
   margin:0 auto;
-  padding:0 20px;
   line-height:1.8;
   font-weight:300;
 }
 
-/* 標題：改為 500 */
+/* 標題 */
 .event-info h2{
-  font-size:1.5rem;
-  margin:0 0 20px;
-  font-weight:500;
+  font-size: clamp(1.8rem, 2.5vw, 2.8rem);
+  margin:0 0 24px;
+  font-weight:500 !important;
 }
 .event-info h2 span{
   color:#fff;
@@ -138,14 +140,18 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
   font-weight:500;
 }
 
-/* 內容粗體：Medium + 粉色 */
+/* 內容 */
+.event-info p,
+.event-info li{
+  font-weight:300;
+  font-size: clamp(1.1rem, 1.4vw, 1.5rem);
+}
+
 .event-info b,
 .event-info strong{
   color:var(--pink);
   font-weight:500;
 }
-.event-info p,
-.event-info li{ font-weight:300; }
 
 .event-info ul{
   margin:20px 0;
@@ -153,32 +159,33 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
 }
 .event-info li{ margin-bottom:10px; }
 
-/* 立即報名（新版設定） */
+/* 立即報名按鈕 */
 .register-btn{
   display:flex;
   align-items:center;
   justify-content:center;
   margin:40px auto 0;
-  width:190px;
-  height:60px;
-  background:transparent;
+  padding:22px 64px;
+  min-width:320px;
+  background:#ff7a00;
   color:#fff;
-  border:9px solid #fff; /* 白框加粗 3 倍 */
+  border:2px solid #fff;       /* 白框縮小 */
   border-radius:999px;
   text-decoration:none;
-  font-size:1.875rem; /* 原本1.25rem × 1.5倍 */
+  font-size:2.25rem;           /* 放大1.5倍 */
   letter-spacing:.04em;
-  font-weight:500; /* Medium */
+  font-weight:500;
   box-shadow:0 16px 36px rgba(0,0,0,.42);
   transition:all .25s ease;
 }
 .register-btn:hover{
-  background:#ff7a00;
-  border-color:transparent;
-  transform:scale(0.9); /* 縮小10% */
+  background:#ff7a00;          /* 全橘底 */
+  border-color:transparent;    /* 白框消失 */
+  transform:scale(0.9);        /* 縮小10% */
 }
 .register-btn:active{
-  transform:scale(0.85);
+  transform:scale(0.92);
+  box-shadow:0 12px 24px rgba(0,0,0,.36);
 }
 .register-btn:focus-visible{
   outline:3px solid rgba(255,255,255,.6);
