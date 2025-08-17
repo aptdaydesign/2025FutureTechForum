@@ -18,13 +18,10 @@
   font-style: normal;
   font-display: swap;
 }
-/* 暫代 Medium：目前資料夾沒有 Medium 檔，
-   先用 SemiBold 對應 500；若之後補上 Akrobat-Medium.otf，
-   改成指向 Medium 檔即可。 */
 @font-face{
   font-family: 'Akrobat';
   src: url('assets/fonts/Akrobat-SemiBold.otf') format('opentype');
-  font-weight: 500;  /* temporary mapping */
+  font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
@@ -36,72 +33,98 @@
   font-display: swap;
 }
 
-  html,body{margin:0;background:#000;color:#fff}
-  html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,"PingFang TC","Heiti TC",sans-serif}
+html,body{margin:0;background:#000;color:#fff}
+html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,"PingFang TC","Heiti TC",sans-serif}
 
-  /* ===== HERO ===== */
-  .hero-wrapper{
-    position:relative; width:100vw;
-    aspect-ratio:16/9; overflow:hidden;
-    background:#0b0c0f url("assets/img/hero-bg.png") center/cover no-repeat;
-  }
-  .hero-img{position:absolute; max-width:100%; height:auto; pointer-events:none; user-select:none; opacity:0}
+/* ===== HERO ===== */
+.hero-wrapper{
+  position:relative; width:100vw;
+  aspect-ratio:16/9; overflow:hidden;
+  background:#0b0c0f url("assets/img/hero-bg.png") center/cover no-repeat;
+}
+.hero-img{position:absolute; max-width:100%; height:auto; pointer-events:none; user-select:none; opacity:0}
 
-  .hero-logo{     top:calc( 60/1080*100%); left:calc(100/1920*100%); width:calc(634/1920*100%);
-    animation: slideInLeft 1s ease-out forwards 0.2s; }
-  .hero-title{    top:calc(375/1080*100%); left:calc(100/1920*100%); width:calc(887/1920*100%);
-    animation: slideInUp 1s ease-out forwards 0.6s; }
-  .hero-subtitle{ top:calc(725/1080*100%); left:calc(100/1920*100%); width:calc(878/1920*100%);
-    animation: slideInUp 1s ease-out forwards 1s; }
+.hero-logo{     top:calc( 60/1080*100%); left:calc(100/1920*100%); width:calc(634/1920*100%);
+  animation: slideInLeft 1s ease-out forwards 0.2s; }
+.hero-title{    top:calc(375/1080*100%); left:calc(100/1920*100%); width:calc(887/1920*100%);
+  animation: slideInUp 1s ease-out forwards 0.6s; }
+.hero-subtitle{ top:calc(725/1080*100%); left:calc(100/1920*100%); width:calc(878/1920*100%);
+  animation: slideInUp 1s ease-out forwards 1s; }
 
-  @keyframes slideInLeft {
-    from { transform:translateX(-50px); opacity:0 }
-    to   { transform:translateX(0); opacity:1 }
-  }
-  @keyframes slideInUp {
-    from { transform:translateY(50px); opacity:0 }
-    to   { transform:translateY(0); opacity:1 }
-  }
+@keyframes slideInLeft {
+  from { transform:translateX(-50px); opacity:0 }
+  to   { transform:translateX(0); opacity:1 }
+}
+@keyframes slideInUp {
+  from { transform:translateY(50px); opacity:0 }
+  to   { transform:translateY(0); opacity:1 }
+}
 
-  /* ===== 橫向活動選單 ===== */
-  :root{
-    --tab-default:#501cf2;
-    --tab-active:#d90085;
-    --dividerW: calc(2 / 1920 * 100vw);
-    --f2: clamp(20px, 2.4vw, 56px);
-  }
-  .event-bar{ width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); background:#000 }
-  .event-bar .bar{ display:grid; grid-template-columns:repeat(4,1fr) }
+/* ===== 橫向活動選單 ===== */
+:root{
+  --tab-default:#501cf2;
+  --tab-active:#d90085;
+  --dividerW: calc(2 / 1920 * 100vw);
+  --f2: clamp(20px, 2.4vw, 56px);
+}
+.event-bar{ width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); background:#000 }
+.event-bar .bar{ display:grid; grid-template-columns:repeat(4,1fr) }
 
-  .bar-item{
-    --bg:var(--tab-default);
-    background:var(--bg); color:#fff;
-    appearance:none; border:none; outline:none; box-shadow:none;
-    display:grid; align-content:center; justify-items:center; text-align:center;
-    padding-block:20px;
-    padding-inline:clamp(12px, 2vw, 32px);
-    border-right:var(--dividerW) solid #fff;
-    cursor:pointer; user-select:none;
-  }
-  .bar-item:first-child{border-left:none}
-  .bar-item:last-child{border-right:none}
+.bar-item{
+  --bg:var(--tab-default);
+  background:var(--bg); color:#fff;
+  appearance:none; border:none; outline:none; box-shadow:none;
+  display:grid; align-content:center; justify-items:center; text-align:center;
+  padding-block:20px;
+  padding-inline:clamp(12px, 2vw, 32px);
+  border-right:var(--dividerW) solid #fff;
+  cursor:pointer; user-select:none;
+}
+.bar-item:first-child{border-left:none}
+.bar-item:last-child{border-right:none}
 
-  /* ✅ 修正：選中時背景變色 */
-  .bar-item[aria-current="true"]{ background:var(--tab-active) }
+/* ✅ 修正：選中時背景變色 */
+.bar-item[aria-current="true"]{ background:var(--tab-active) }
 
-  .bar-item .t1{white-space:nowrap;font-weight:500;letter-spacing:.02em;
-    font-size:var(--f2);line-height:1.25;margin:0 0 10px;font-family:"Noto Sans TC",sans-serif}
-  .bar-item .t2{font-weight:500;font-size:var(--f2);line-height:1.25;margin:0 0 10px;
-    font-family:"Akrobat","Noto Sans TC",sans-serif}
-  .bar-item .t3{font-weight:500;opacity:.95;font-size:calc(var(--f2) * 0.8);line-height:1.3;margin:0;
-    font-family:"Akrobat","Noto Sans TC",sans-serif}
+/* ====== 字體樣式 ====== */
+.bar-item .t1{
+  white-space:nowrap;
+  font-weight:500;
+  font-size:var(--f2);
+  line-height:1.25;
+  margin:0 0 10px;
+  letter-spacing:0.03em; /* 桌機字距 */
+  font-family:"Noto Sans TC",sans-serif;
+}
+.bar-item .t2{
+  font-weight:500;
+  font-size:var(--f2);
+  line-height:1.25;
+  margin:0 0 10px;
+  letter-spacing:0.025em;
+  font-family:"Akrobat","Noto Sans TC",sans-serif;
+}
+.bar-item .t3{
+  font-weight:500;
+  opacity:.95;
+  font-size:calc(var(--f2) * 0.8);
+  line-height:1.3;
+  margin:0;
+  letter-spacing:0.025em;
+  font-family:"Akrobat","Noto Sans TC",sans-serif;
+}
 
-  @media (max-width:480px){
-    .event-bar .bar{ grid-template-columns:repeat(2,1fr) }
-    .bar-item{ border-right:var(--dividerW) solid #fff; border-bottom:var(--dividerW) solid #fff }
-    .bar-item:nth-child(2n){ border-right:none }
-    .bar-item:nth-last-child(-n+2){ border-bottom:none }
-  }
+/* 手機調整：縮小字距避免太鬆 */
+@media (max-width:480px){
+  .event-bar .bar{ grid-template-columns:repeat(2,1fr) }
+  .bar-item{ border-right:var(--dividerW) solid #fff; border-bottom:var(--dividerW) solid #fff }
+  .bar-item:nth-child(2n){ border-right:none }
+  .bar-item:nth-last-child(-n+2){ border-bottom:none }
+
+  .bar-item .t1{ letter-spacing:0.02em; }
+  .bar-item .t2{ letter-spacing:0.015em; }
+  .bar-item .t3{ letter-spacing:0.015em; }
+}
 </style>
 </head>
 <body>
@@ -137,14 +160,14 @@
   </div>
 </nav>
 
-  <script>
-  // 點擊時切換 aria-current，讓被選取的 bar 變成 #d90085
-  document.querySelectorAll('.bar-item').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      document.querySelectorAll('.bar-item')
-        .forEach(b=> b.setAttribute('aria-current', b === btn ? 'true' : 'false'));
-    });
+<script>
+// 點擊時切換 aria-current，讓被選取的 bar 變成 #d90085
+document.querySelectorAll('.bar-item').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.bar-item')
+      .forEach(b=> b.setAttribute('aria-current', b === btn ? 'true' : 'false'));
   });
+});
 </script>
 </body>
 </html>
