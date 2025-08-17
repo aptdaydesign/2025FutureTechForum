@@ -3,70 +3,72 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Hero 對版（assets/img）</title>
+<title>Hero 對版（百分比定位）</title>
 <style>
   :root{
-    /* 設計稿基準：1920x1080 */
+    /* 設計稿基準（你的底圖） */
     --ref-w: 1920;
     --ref-h: 1080;
-    --hero-aspect: calc(var(--ref-w) / var(--ref-h));
 
-    /* 依 PDF 的像素座標（左 100px；上 60/230/330；寬 634/887/878） */
-    --x: 100;
-
+    /* ===== 依設計稿像素 → 轉百分比 =====
+       左邊統一 100px；logo 上 60px；主標上 230px；
+       「副標與時間」這張圖的 top：
+       - 如果這張圖只包含 “FutureTech Forum” ⇒ 建議用 486 (=230+236+20 留20px)
+       - 如果這張圖包含 FutureTech + 紅標語 + 英文小標 + 日期 ⇒ 用 596 (=230+236+130)
+       我先預設 **596**；若只放 FutureTech，改成 **486**。
+    */
+    --x-left: 100;
     --logo-y: 60;   --logo-w: 634;
     --title-y: 230; --title-w: 887;
-    --sub-y: 466;   --sub-w: 878;
-
-    /* 視需要可把暗角調淡或拿掉 */
-    --vignette-top: .18;
-    --vignette-btm: .50;
+    --sub-y: 596;   --sub-w: 878; /* ←若只有 FutureTech，改 486 */
   }
 
   *{box-sizing:border-box}
-  html,body{height:100%} body{margin:0;background:#000}
+  body{margin:0;background:#000}
 
-  /* Hero 依 16:9 等比縮放，位置用百分比換算自像素 */
-  .hero{position:relative; width:100%; aspect-ratio:var(--hero-aspect); overflow:hidden; color:#fff}
-  .hero-bg{position:absolute; inset:0; background:#0b0c0f url("assets/img/hero-bg.png") center/cover no-repeat; z-index:0}
-  .hero::after{content:""; position:absolute; inset:0; z-index:1;
-    background:linear-gradient(180deg, rgba(0,0,0,var(--vignette-top)), rgba(0,0,0,var(--vignette-btm)));
+  /* 1) Hero 容器鎖定 16:9，避免任何拉伸 */
+  .hero{
+    position:relative;
+    width:100%;
+    aspect-ratio: calc(var(--ref-w) / var(--ref-h));
+    overflow:hidden;
+    color:#fff;
   }
 
-  .layer{position:absolute; z-index:2; pointer-events:none; user-select:none; filter:drop-shadow(0 2px 6px rgba(0,0,0,.22))}
-  .at-left-100{ left: calc(var(--x) / var(--ref-w) * 100%) }
+  /* 2) 背景與容器同寬高（100% 100%），確保像素→百分比對位準 */
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background: #0b0c0f url("assets/img/hero-bg.png") 0 0 / 100% 100% no-repeat;
+    z-index:0;
+  }
 
+  /* 3) 三個圖層以「設計稿像素 / 1920×1080」換算為百分比 */
+  .layer{
+    position:absolute; z-index:1; pointer-events:none; user-select:none;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,.22));
+    left: calc(var(--x-left) / var(--ref-w) * 100%);
+  }
   .hero-logo{
-    top:  calc(var(--logo-y) / var(--ref-h) * 100%);
-    width:calc(var(--logo-w) / var(--ref-w) * 100%);
+    top:   calc(var(--logo-y) / var(--ref-h) * 100%);
+    width: calc(var(--logo-w) / var(--ref-w) * 100%);
   }
   .hero-title{
-    top:  calc(var(--title-y) / var(--ref-h) * 100%);
-    width:calc(var(--title-w) / var(--ref-w) * 100%);
+    top:   calc(var(--title-y) / var(--ref-h) * 100%);
+    width: calc(var(--title-w) / var(--ref-w) * 100%);
   }
   .hero-sub{
-    top:  calc(var(--sub-y) / var(--ref-h) * 100%);
-    width:calc(var(--sub-w) / var(--ref-w) * 100%);
-  }
-
-  /* （除錯）加上 class="hero debug" 可看格線 */
-  .hero.debug{
-    background-image:
-      linear-gradient(rgba(0,140,255,.12) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,140,255,.12) 1px, transparent 1px);
-    background-size: calc(100%/12) calc(100%/12);
+    top:   calc(var(--sub-y) / var(--ref-h) * 100%);
+    width: calc(var(--sub-w) / var(--ref-w) * 100%);
   }
 </style>
 </head>
 <body>
 
 <section class="hero" aria-label="Hero">
-  <div class="hero-bg" aria-hidden="true"></div>
-
-  <!-- 三張透明 PNG，皆以「左 100px」對齊 -->
-  <img class="layer at-left-100 hero-logo" src="assets/img/hero-logo.png"     alt="Logo">
-  <img class="layer at-left-100 hero-title" src="assets/img/hero-title.png"    alt="主標">
-  <img class="layer at-left-100 hero-sub"   src="assets/img/hero-subtitle.png" alt="副標與時間">
+  <img class="layer hero-logo"  src="assets/img/hero-logo.png"     alt="">
+  <img class="layer hero-title" src="assets/img/hero-title.png"    alt="">
+  <img class="layer hero-sub"   src="assets/img/hero-subtitle.png" alt="">
 </section>
 
 </body>
