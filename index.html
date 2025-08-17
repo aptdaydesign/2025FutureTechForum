@@ -77,15 +77,6 @@
   }
 </style>
 </head>
-<script>
-  // 點擊時切換 aria-current，讓被選取的 bar 變成 #d90085
-  document.querySelectorAll('.bar-item').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      document.querySelectorAll('.bar-item')
-        .forEach(b=> b.setAttribute('aria-current', b === btn ? 'true' : 'false'));
-    });
-  });
-</script>
 <body>
 
 <section class="hero-wrapper" aria-label="Hero">
@@ -119,5 +110,14 @@
   </div>
 </nav>
 
+  <script>
+  // 點擊時切換 aria-current，讓被選取的 bar 變成 #d90085
+  document.querySelectorAll('.bar-item').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.bar-item')
+        .forEach(b=> b.setAttribute('aria-current', b === btn ? 'true' : 'false'));
+    });
+  });
+</script>
 </body>
 </html>
