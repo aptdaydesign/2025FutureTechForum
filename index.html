@@ -54,5 +54,98 @@
     <img src="assets/img/hero-title.png" alt="title" class="hero-img hero-title">
     <img src="assets/img/hero-subtitle.png" alt="subtitle" class="hero-img hero-subtitle">
   </section>
+<!-- ===== 橫向活動選單（滿版 1920×315） ===== -->
+<style>
+  :root{
+    --bar-w: 1920;
+    --bar-h: 315;
+    --tab-default: #501cf2;  /* 未選 */
+    --tab-active:  #d90085;  /* 已選 */
+  }
+  /* 讓色帶滿版出血、固定比例 1920×315 */
+  .event-bar{
+    position: relative;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);  /* 跨出容器滿版 */
+    margin-right: calc(50% - 50vw);
+    aspect-ratio: calc(var(--bar-w) / var(--bar-h));
+    overflow: hidden;
+  }
+  .event-bar .bar{
+    position: absolute; inset:0;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+  }
+
+  .bar-item{
+    --bg: var(--tab-default);
+    background: var(--bg);
+    color: #fff;
+    display: grid;
+    grid-auto-rows: 1fr;
+    align-content: center;
+    justify-items: center;
+    text-align: center;
+    line-height: 1.2;
+    padding: 18px 12px;
+    border-right: 2pt solid rgba(255,255,255,1); /* 中間分隔線 2pt */
+    cursor: pointer;
+    user-select: none;
+  }
+  .bar-item:first-child{ border-left: none; }
+  .bar-item:last-child{ border-right: none; } /* 最左右沒有線 */
+
+  /* 文字階層 */
+  .bar-item .t1{ font-weight: 900; font-size: clamp(16px, 1.4vw, 22px); letter-spacing: .02em; }
+  .bar-item .t2{ font-weight: 900; font-size: clamp(22px, 2vw, 32px); margin-top: 10px; }
+  .bar-item .t3{ font-weight: 800; font-size: clamp(14px, 1.2vw, 18px); opacity: .95; margin-top: 6px; }
+
+  /* 選取狀態 */
+  .bar-item[aria-current="true"]{ --bg: var(--tab-active); }
+
+  /* 小螢幕時略縮排版高度（保持可讀） */
+  @media (max-width: 640px){
+    .bar-item{ padding: 12px 8px; }
+    .bar-item .t2{ margin-top: 6px; }
+    .bar-item .t3{ margin-top: 4px; }
+  }
+</style>
+
+<nav class="event-bar" aria-label="系列論壇切換">
+  <div class="bar" id="eventBar">
+    <button class="bar-item" data-id="s1" aria-current="true">
+      <div class="t1">系列論壇 ➊</div>
+      <div class="t2">2025.09.26</div>
+      <div class="t3">07:30 – 11:00</div>
+    </button>
+    <button class="bar-item" data-id="s2" aria-current="false">
+      <div class="t1">系列論壇 ➋</div>
+      <div class="t2">2025.10.14</div>
+      <div class="t3">10:30 – 12:30</div>
+    </button>
+    <button class="bar-item" data-id="s3" aria-current="false">
+      <div class="t1">系列論壇 ➌</div>
+      <div class="t2">2025.11.22</div>
+      <div class="t3">09:00 – 16:00</div>
+    </button>
+    <button class="bar-item" data-id="s4" aria-current="false">
+      <div class="t1">系列論壇 ➍</div>
+      <div class="t2">2025.12.15</div>
+      <div class="t3">08:30 – 16:30</div>
+    </button>
+  </div>
+</nav>
+
+<script>
+  // 點選切換選取色（之後可在這裡呼叫你的 render(...)）
+  document.querySelectorAll('.bar-item').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.bar-item').forEach(b=>{
+        b.setAttribute('aria-current', b===btn ? 'true':'false');
+      });
+      // TODO: 在這裡觸發對應內容的切換（例如 render(btn.dataset.id)）
+    });
+  });
+</script>
+
 </body>
 </html>
