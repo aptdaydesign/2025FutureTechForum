@@ -1,137 +1,130 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FutureTech Forum</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --tab-default:#501cf2;
-      --tab-active:#d90085;
-      --dividerW: calc(2 / 1920 * 100vw);
-      --f2: clamp(20px, 2.4vw, 56px);
-    }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>前瞻科技系列論壇</title>
 
-    body {
-      margin: 0;
-      font-family: "Noto Sans TC", "Roboto", sans-serif;
-      background: #000;
-      color: #fff;
-    }
+<!-- 字型：中文 Noto Sans TC（含 Medium 500）、英文/數字 Montserrat（Medium 500） -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
 
-    .hero {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 1920/1080;
-      background: url('hero-bg.png') no-repeat center/cover;
-    }
-    .hero img {
-      position: absolute;
-      max-width: 100%;
-      height: auto;
-    }
-    .hero-logo { left: calc(100 / 1920 * 100%); top: calc(60 / 1080 * 100%); width: 300px; }
-    .hero-title { left: calc(100 / 1920 * 100%); top: calc(375 / 1080 * 100%); width: 600px; }
-    .hero-subtitle { left: calc(100 / 1920 * 100%); top: calc(725 / 1080 * 100%); width: 800px; }
+<style>
+  /* ===== 全域（維持） ===== */
+  html,body{margin:0;background:#000;color:#fff}
+  html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,"PingFang TC","Heiti TC",sans-serif}
 
-    .event-bar {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-    }
-    .event-bar .bar {
-      display: grid;
-      grid-template-columns: repeat(4,1fr);
-      width: 100%;
-    }
-    .bar-item {
-      --bg: var(--tab-default);
-      background: var(--bg);
-      color: #fff;
-      display: grid;
-      align-content: center;
-      justify-items: center;
-      text-align: center;
-      padding-block: 20px;
-      padding-inline: clamp(12px, 2vw, 32px);
-      border-right: var(--dividerW) solid #fff;
-      cursor: pointer;
-      user-select: none;
-    }
-    .bar-item:first-child { border-left: none; }
-    .bar-item:last-child { border-right: none; }
-    .bar-item[aria-current="true"] { --bg: var(--tab-active); }
+  /* ===== HERO（維持：16:9 + 百分比定位） ===== */
+  .hero-wrapper{
+    position:relative; width:100vw;
+    aspect-ratio:16/9; overflow:hidden;
+    background:#0b0c0f url("assets/img/hero-bg.png") center/cover no-repeat; /* 修正：正確路徑 */
+  }
+  .hero-img{position:absolute; max-width:100%; height:auto; pointer-events:none; user-select:none}
+  .hero-logo{     top:calc( 60/1080*100%); left:calc(100/1920*100%); width:calc(634/1920*100%) }
+  .hero-title{    top:calc(375/1080*100%); left:calc(100/1920*100%); width:calc(887/1920*100%) }
+  .hero-subtitle{ top:calc(725/1080*100%); left:calc(100/1920*100%); width:calc(878/1920*100%) }
 
-    .bar-item .t1 {
-      font-weight: 900;
-      letter-spacing: .02em;
-      font-size: var(--f2);
-      line-height: 1.25;
-      margin: 0 0 12px;
-      font-family: "Noto Sans TC", sans-serif;
-    }
-    .bar-item .t2 {
-      font-weight: 900;
-      font-size: var(--f2);
-      line-height: 1.25;
-      margin: 0 0 12px;
-      font-family: "Roboto","Noto Sans TC",sans-serif;
-    }
-    .bar-item .t3 {
-      font-weight: 800;
-      opacity: .95;
-      font-size: calc(var(--f2) * 0.8);
-      line-height: 1.3;
-      margin: 0;
-      font-family: "Roboto","Noto Sans TC",sans-serif;
-    }
+  /* ===== 橫向活動選單（維持：滿版、2×2、小螢幕） ===== */
+  :root{
+    --tab-default:#501cf2;   /* 未選 */
+    --tab-active:#d90085;    /* 選取 */
+    --dividerW: calc(2 / 1920 * 100vw);   /* 1920px 寬時 = 2px，會隨寬縮放 */
+    --f2: clamp(20px, 2.4vw, 56px);       /* t2 基準字級 → t1 同步、t3 = 0.8 倍 */
+  }
+  .event-bar{
+    width:100vw;
+    margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw);
+    background:#000;
+  }
+  .event-bar .bar{
+    display:grid; grid-template-columns:repeat(4,1fr);
+  }
+  .bar-item{
+    --bg:var(--tab-default);
+    background:var(--bg); color:#fff;
+    appearance:none; border:none; outline:none; box-shadow:none;
+    display:grid; align-content:center; justify-items:center; text-align:center;
+    padding-block:20px;                         /* 你要求：上下 20px */
+    padding-inline:clamp(12px, 2vw, 32px);
+    border-right:var(--dividerW) solid #fff;    /* 只畫中間線 */
+    cursor:pointer; user-select:none;
+  }
+  .bar-item:first-child{border-left:none}
+  .bar-item:last-child{border-right:none}
+  .bar-item[aria-current="true"]{ --bg:var(--tab-active) }
 
-    @media (max-width: 480px) {
-      .event-bar .bar { grid-template-columns: repeat(2,1fr); }
+  /* 文字：t1 與 t2 等寬縮放；t3 = t2 的 4/5；t1 用 Medium；t2/t3 用 Montserrat Medium */
+  .bar-item .t1{
+    white-space:nowrap;                /* 你第三點：避免「系列論壇 ➊」換行 */
+    font-weight:500;                   /* Medium */
+    letter-spacing:.02em;
+    font-size:var(--f2);               /* 跟 t2 等寬縮放 */
+    line-height:1.25;
+    margin:0 0 10px;
+    font-family:"Noto Sans TC",sans-serif;   /* 中文用 Noto Sans TC Medium */
+  }
+  .bar-item .t2{
+    font-weight:500;                   /* Medium */
+    font-size:var(--f2);               /* 主控制 */
+    line-height:1.25;
+    margin:0 0 10px;
+    font-family:"Montserrat","Noto Sans TC",sans-serif;  /* 英數用 Montserrat Medium */
+  }
+  .bar-item .t3{
+    font-weight:500;                   /* Medium */
+    opacity:.95;
+    font-size:calc(var(--f2) * 0.8);   /* 永遠是 t2 的 4/5 */
+    line-height:1.3;
+    margin:0;
+    font-family:"Montserrat","Noto Sans TC",sans-serif;  /* 英數用 Montserrat Medium */
+  }
+
+  /* 手機 ≤480px：2×2，僅內線（維持既有規格） */
+  @media (max-width:480px){
+    .event-bar .bar{ grid-template-columns:repeat(2,1fr) }
+    .bar-item{
+      border-right:var(--dividerW) solid #fff;
+      border-bottom:var(--dividerW) solid #fff;
     }
-  </style>
+    .bar-item:nth-child(2n){ border-right:none }           /* 每列最右不畫線 */
+    .bar-item:nth-last-child(-n+2){ border-bottom:none }   /* 最後一列不畫底線 */
+  }
+</style>
 </head>
 <body>
-  <section class="hero">
-    <img src="assets/img/hero-logo.png" alt="logo" class="hero-logo">
-    <img src="assets/img/hero-title.png" alt="title" class="hero-title">
-    <img src="assets/img/hero-subtitle.png" alt="subtitle" class="hero-subtitle">
-  </section>
 
-  <nav class="event-bar" aria-label="系列論壇切換">
-    <div class="bar" id="eventBar">
-      <button class="bar-item" data-id="s1" aria-current="true">
-        <div class="t1">系列論壇 ➊</div>
-        <div class="t2">2025.09.26</div>
-        <div class="t3">07:30 – 11:00</div>
-      </button>
-      <button class="bar-item" data-id="s2" aria-current="false">
-        <div class="t1">系列論壇 ➋</div>
-        <div class="t2">2025.10.14</div>
-        <div class="t3">10:30 – 12:30</div>
-      </button>
-      <button class="bar-item" data-id="s3" aria-current="false">
-        <div class="t1">系列論壇 ➌</div>
-        <div class="t2">2025.11.22</div>
-        <div class="t3">09:00 – 16:00</div>
-      </button>
-      <button class="bar-item" data-id="s4" aria-current="false">
-        <div class="t1">系列論壇 ➍</div>
-        <div class="t2">2025.12.15</div>
-        <div class="t3">08:30 – 16:30</div>
-      </button>
-    </div>
-  </nav>
+<!-- HERO：只疊你的三張圖 -->
+<section class="hero-wrapper" aria-label="Hero">
+  <img class="hero-img hero-logo"     src="assets/img/hero-logo.png"     alt="">
+  <img class="hero-img hero-title"    src="assets/img/hero-title.png"    alt="">
+  <img class="hero-img hero-subtitle" src="assets/img/hero-subtitle.png" alt="">
+</section>
 
-  <script>
-    document.querySelectorAll('.bar-item').forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        document.querySelectorAll('.bar-item').forEach(b=>{
-          b.setAttribute('aria-current', b===btn ? 'true':'false');
-        });
-      });
-    });
-  </script>
+<!-- 橫向活動選單（預設選左一；文案完全照你給的，不改動） -->
+<nav class="event-bar" aria-label="系列論壇切換">
+  <div class="bar" id="eventBar">
+    <button type="button" class="bar-item" data-id="s1" aria-current="true">
+      <div class="t1">系列論壇 ➊</div>
+      <div class="t2">2025.09.26</div>
+      <div class="t3">07:30 – 11:00</div>
+    </button>
+    <button type="button" class="bar-item" data-id="s2" aria-current="false">
+      <div class="t1">系列論壇 ➋</div>
+      <div class="t2">2025.10.14</div>
+      <div class="t3">10:30 – 12:30</div>
+    </button>
+    <button type="button" class="bar-item" data-id="s3" aria-current="false">
+      <div class="t1">系列論壇 ➌</div>
+      <div class="t2">2025.11.22</div>
+      <div class="t3">09:00 – 16:00</div>
+    </button>
+    <button type="button" class="bar-item" data-id="s4" aria-current="false">
+      <div class="t1">系列論壇 ➍</div>
+      <div class="t2">2025.12.15</div>
+      <div class="t3">08:30 – 16:30</div>
+    </button>
+  </div>
+</nav>
+
 </body>
 </html>
