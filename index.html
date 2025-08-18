@@ -103,14 +103,62 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 }
 
 /* ===== 活動資訊 ===== */
-.event-info{ background:#112240; padding-block:60px }
-.event-info .inner{ max-width:1200px; margin:0 auto; padding:0 20px; line-height:1.8; font-weight:300; font-size:1.2em }
-.event-info .inner h2{ font-size:1.8rem; margin:64px 0 20px; font-weight:500 }
-.event-info .inner h2:first-of-type{ margin-top:0 }
-.event-info h2 span{ color:#fff; font-family:"Akrobat","Noto Sans TC",sans-serif; font-weight:500 }
-.event-info b, .event-info strong{ color:var(--pink); font-weight:500 }
-.event-info ul{ margin:20px 0; padding-left:20px }
-.event-info li{ margin-bottom:10px }
+.event-info {
+  position: relative;
+  background: #112240;     /* 原本藍色背景 */
+  padding-block: 60px;
+}
+
+/* 漸層銜接 Hero 區域 */
+.event-info::before {
+  content: "";
+  position: absolute;
+  top: -40px;              /* 往上疊一段，與 hero 黑底交疊 */
+  left: 0;
+  right: 0;
+  height: 40px;            /* 漸層高度，可自行調整 */
+  background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+}
+
+.event-info .inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  line-height: 1.8;
+  font-weight: 300;
+  font-size: 1.2em;
+}
+
+.event-info .inner h2 {
+  font-size: 1.8rem;
+  margin: 64px 0 20px;
+  font-weight: 500;
+}
+
+.event-info .inner h2:first-of-type {
+  margin-top: 0;
+}
+
+.event-info h2 span {
+  color: #fff;
+  font-family: "Akrobat","Noto Sans TC",sans-serif;
+  font-weight: 500;
+}
+
+.event-info b,
+.event-info strong {
+  color: var(--pink);
+  font-weight: 500;
+}
+
+.event-info ul {
+  margin: 20px 0;
+  padding-left: 20px;
+}
+
+.event-info li {
+  margin-bottom: 10px;
+}
 
 /* ===== CTA ===== */
 .register-btn{
