@@ -64,27 +64,26 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
 /* ===== 色彩變數 ===== */
 :root{
   --tab-default:#501cf2;
-  --tab-active:#ff2b8a;        /* 你要的桃紅 */
+  --tab-active:#ff2b8a;
   --dividerW: calc(2 / 1920 * 100vw);
   --f2: clamp(20px, 2.4vw, 56px);
   --pink:#ff5e99;
+  --gutter: clamp(16px, 5vw, 100px);
 }
 
 /* ===== 橫向日期選單（卡片式，嵌在 HERO 底部） ===== */
 .event-bar{
-  position:absolute; left:0; right:0; bottom:0;   /* ← 貼 hero 底 */
   width:100%;
-  padding-inline:100px;                            /* ← 桌機左右 100px */
-  padding-block:16px;                              /* 與底部留點距 */
-  background:transparent;                          /* 讓 hero 背景露出 */
+  padding-inline: var(--gutter);
+  background:#000;
   box-sizing:border-box;
 }
 .event-bar .bar{
-  max-width:min(1920px, calc(100% - 10px));      /* 兩側各 15px 的視覺邊界 */
-  margin:0 auto;
-  display:grid !important;
-  grid-template-columns:repeat(4, minmax(0, 1fr));
-  gap:10px;
+  max-width: min(1400px, 100%);  /* 內容最大 1400px，否則就吃滿可用寬度 */
+  margin: 0 auto;
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
 }
 
 /* 卡片按鈕（圓角、漸層、平滑變化） */
@@ -154,10 +153,10 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
   .event-bar{ padding-inline:12px; }
   .bar-item{ padding:5px; }
   .bar-date {
-    font-size:14px;     /* 日期字級縮小 */
+    font-size:20px;     /* 日期字級縮小 */
   }
   .bar-arrow {
-    font-size:14px;     /* 箭頭縮小 */
+    font-size:20px;     /* 箭頭縮小 */
   }
 }
 
