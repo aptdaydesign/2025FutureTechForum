@@ -172,17 +172,23 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
   transition:all .3s ease;
 }
 .register-btn span{ margin-right:4px; }
+
+/* ★ 箭頭：改為往返式線性晃動，避免與 hover 衝突、動作更順 */
 .register-btn svg{
   width:1.8em; height:1.5em; flex:0 0 auto;
-  animation: arrowShake 1.5s infinite ease-in-out;  /* ★ 常駐左右晃動 */
+  will-change: transform;
+  animation: arrowOsc 1.6s ease-in-out infinite alternate;
 }
 .register-btn svg path{
-  fill:none;                    /* ★ 使用描邊顯示箭頭 */
+  fill:none;                    /* 使用描邊顯示箭頭 */
   stroke:#fff;
   stroke-width:2;
   stroke-linecap:round;
   stroke-linejoin:round;
+  vector-effect: non-scaling-stroke;
 }
+
+/* hover 只縮放整顆按鈕；不再改變 svg transform，避免與常駐動畫牴觸 */
 .register-btn:hover{
   background:#f48c06;
   border-color:transparent;
@@ -195,11 +201,19 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
   outline-offset:3px;
 }
 
-/* 箭頭左右循環動畫 */
-@keyframes arrowShake{
-  0%,100%{ transform: translateX(0); }
-  25%{ transform: translateX(6px); }
-  75%{ transform: translateX(-6px); }
+/* ★ 箭頭左右往返動畫（平滑、無卡頓） */
+@keyframes arrowOsc{
+  from { transform: translateX(-6px); }
+  to   { transform: translateX(6px); }
+}
+
+/* 無障礙：使用者偏好減少動畫時停用 */
+@media (prefers-reduced-motion: reduce){
+  .register-btn, .register-btn svg{
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
 }
 </style>
 </head>
@@ -259,7 +273,7 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
     <!-- CTA 按鈕 -->
     <a href="#" class="register-btn">
       <span>立 即 報 名</span>
-      <!-- 右箭頭 SVG（使用描邊路徑） -->
+      <!-- 右箭頭 SVG -->
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
         <path d="M8 4l8 8-8 8" />
       </svg>
