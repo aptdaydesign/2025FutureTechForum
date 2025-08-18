@@ -234,25 +234,19 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 }
 .place .hl{ vertical-align:middle; }
 
-<!-- ----------------------------------------------------
-   議程（Agenda）— 毛玻璃風格（時間置中上方 + 人名 / 稱謂樣式）
----------------------------------------------------- -->
 <style>
+/* ===== Agenda（背景同上半部 / 時間膠囊改為藍色漸層）===== */
 .agenda{
   position:relative;
-  padding: 20px 0 60px;
-  background:#0f1d36; /* 與 event-info 同系深藍段落 */
+  padding:20px 0 60px;
+  background:#112240; /* 與 event-info 相同 */
 }
 .agenda .inner{ max-width:1200px; margin:0 auto; padding:0 20px; }
-.agenda h2{ font-size:clamp(20px, 1.8vw, 30px); font-weight:500; margin:0 0 20px; }
+.agenda h2{ font-size:clamp(20px,1.8vw,30px); font-weight:500; margin:0 0 20px; }
 
-.ag-grid{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:14px;
-}
+.ag-grid{ display:grid; grid-template-columns:1fr; gap:14px; }
 
-/* 卡片：改為單欄，時間置中在上方 */
+/* 卡片：單欄、時間置中在上方 */
 .ag-card{
   display:grid;
   grid-auto-rows:auto;
@@ -266,53 +260,45 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   -webkit-backdrop-filter:blur(10px);
 }
 
-/* 上方時間膠囊（置中） */
+/* 上方時間膠囊（藍色漸層 + 內亮） */
 .ag-time{
   justify-self:center;
-  padding:8px 16px;
+  padding:8px 18px;
   border-radius:999px;
-  background:rgba(255,255,255,.14);
-  border:1px solid rgba(255,255,255,.28);
+  background:linear-gradient(180deg, #6fb3ff 0%, #4598e6 100%);
+  color:#fff;
   font-family:"Akrobat","Noto Sans TC",sans-serif;
-  font-weight:500;
-  font-size:clamp(16px, 1.4vw, 22px);
-  line-height:1.2;
-  color:#E6ECFF;
+  font-weight:600;
+  font-size:clamp(16px,1.4vw,22px);
+  line-height:1.15;
+  letter-spacing:.02em;
+  border:1px solid rgba(255,255,255,.55);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.6),
+    0 4px 12px rgba(0,0,0,.25);
   white-space:nowrap;
 }
 
-/* 標題與內文 */
+/* 文字區 */
 .ag-body{ text-align:center; }
-.ag-title{
-  font-size:clamp(18px, 1.6vw, 26px);
-  font-weight:500;
-  margin:0 0 6px;
-}
-.ag-sub{ margin:0; color:#cfd6e6; line-height:1.8; }
+.ag-title{ font-size:clamp(18px,1.6vw,26px); font-weight:500; margin:0 0 6px; }
+.ag-sub{ margin:0; color:#cfd6e6; line-height:1.9; }
 
-/* 講者／主持資訊：人名粉色，斜線 70% */
+/* 人名 / 稱謂：人名更大；斜線與稱謂 70% */
 .ag-people{
-  display:inline-flex;
-  flex-wrap:wrap;
-  gap:.45em 1em;
-  justify-content:center;
-  margin-top:2px;
+  display:inline-flex; flex-wrap:wrap; gap:.45em 1em;
+  justify-content:center; margin-top:2px;
 }
 .ag-person{ white-space:normal; }
-.ag-name{ color:var(--pink); font-weight:500; }
+.ag-name{ color:var(--pink); font-weight:600; font-size:1.1em; } /* ↑放大 */
 .ag-sep{
-  display:inline-block;
-  font-size:70%;
-  line-height:1;
-  padding:0 .25em;
-  opacity:.9;
+  display:inline-block; font-size:70%; line-height:1;
+  padding:0 .3em; opacity:.95;
 }
-.ag-role{ opacity:.95; }
+.ag-role{ opacity:.95; font-size:70%; } /* ←稱謂縮小為 70% */
 
 /* 備註字級 */
 .ag-note{ color:#a8b3c9; font-size:.95em; }
-
-/* 小裝置維持單欄呈現（已為單欄，無需再切換） */
 </style>
 </head>
 <body>
@@ -487,27 +473,29 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
         </div>
       </article>
 
-      <!-- 9:15–9:25 -->
-      <article class="ag-card">
-        <div class="ag-time">9:15 – 9:25</div>
-        <div class="ag-body">
-          <h3 class="ag-title">【Q&amp;A 現場提問】</h3>
-          <p class="ag-sub">
-            <span class="ag-people">
-              <span class="ag-person">
-                <span class="ag-name">黃漢森</span>
-                <span class="ag-sep">/</span>
-                <span class="ag-role">台積電 首席科學家（主持）</span>
-              </span>
-              <span class="ag-person">
-                <span class="ag-name">與談人</span>
-                <span class="ag-sep">/</span>
-                <span class="ag-role">台積電多個業務單位經理</span>
-              </span>
-            </span>
-          </p>
-        </div>
-      </article>
+     <!-- 9:15–9:25 -->
+<article class="ag-card">
+  <div class="ag-time">9:15 – 9:25</div>
+  <div class="ag-body">
+    <h3 class="ag-title">【Q&amp;A 現場提問】</h3>
+    <p class="ag-sub">
+      <!-- 與談人：整段白字，大小同人名 -->
+      <span style="color:#fff; font-weight:600; font-size:1.1em;">
+        與談人｜台積電 5 位不同業務單位之經理
+      </span>
+      <br>
+      <!-- 主持人：前綴白字；姓名粉紅；斜線與稱謂 70% -->
+      <span class="ag-people">
+        <span class="ag-person">
+          <span style="color:#fff;">主持人｜</span>
+          <span class="ag-name">黃漢森</span>
+          <span class="ag-sep">/</span>
+          <span class="ag-role">台積電 首席科學家</span>
+        </span>
+      </span>
+    </p>
+  </div>
+</article>
 
       <!-- 9:25–9:30（問卷） -->
       <article class="ag-card">
@@ -518,27 +506,27 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
         </div>
       </article>
 
-      <!-- 9:25–9:45 -->
-      <article class="ag-card">
-        <div class="ag-time">9:25 – 9:45</div>
-        <div class="ag-body">
-          <h3 class="ag-title">【綜合座談】</h3>
-          <p class="ag-sub">
-            <span class="ag-people">
-              <span class="ag-person">
-                <span class="ag-name">黃漢森</span>
-                <span class="ag-sep">/</span>
-                <span class="ag-role">台積電 首席科學家（主持）</span>
-              </span>
-              <span class="ag-person">
-                <span class="ag-name">與談人</span>
-                <span class="ag-sep">/</span>
-                <span class="ag-role">台積電多個業務單位經理</span>
-              </span>
-            </span>
-          </p>
-        </div>
-      </article>
+<!-- 9:25–9:45 -->
+<article class="ag-card">
+  <div class="ag-time">9:25 – 9:45</div>
+  <div class="ag-body">
+    <h3 class="ag-title">【綜合座談】</h3>
+    <p class="ag-sub">
+      <span style="color:#fff; font-weight:600; font-size:1.1em;">
+        與談人｜台積電 5 位不同業務單位之經理
+      </span>
+      <br>
+      <span class="ag-people">
+        <span class="ag-person">
+          <span style="color:#fff;">主持人｜</span>
+          <span class="ag-name">黃漢森</span>
+          <span class="ag-sep">/</span>
+          <span class="ag-role">台積電 首席科學家</span>
+        </span>
+      </span>
+    </p>
+  </div>
+</article>
 
     </div>
 
