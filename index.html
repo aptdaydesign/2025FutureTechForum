@@ -235,52 +235,53 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 .place .hl{ vertical-align:middle; }
 </style>
 <style>
-/* ===== Agenda（背景同上半部；時間使用「上沿貼齊」方塊標籤） ===== */
+/* ===== Agenda（背景同上半部；時間方塊標籤貼齊卡片上緣） ===== */
 .agenda{
   position:relative;
   padding:20px 0 60px;
-  background:#112240 !important; /* 與 .event-info 一致，並避免舊樣式覆蓋 */
+  background:#112240 !important; /* 與 .event-info 一致，避免舊樣式覆蓋 */
 }
 .agenda .inner{ max-width:1200px; margin:0 auto; padding:0 20px; }
 .agenda h2{ font-size:clamp(20px,1.8vw,30px); font-weight:500; margin:0 0 20px; }
 
+/* 首張卡片不需要上方間距 */
 .ag-grid > .ag-card:first-child{ margin-top:0; }
 
-/* 卡片：預留上方「時間標籤」空間 */
+/* 卡片：預留時間標籤的空間 */
 .ag-card{
   position:relative;
   display:grid;
   grid-auto-rows:auto;
   row-gap:12px;
-  padding:44px 20px 20px;   /* ↑加大上邊內距，讓時間標籤不壓到標題 */
-  margin-top:18px;          /* 與上一張卡片拉開，避免視覺黏在一起 */
+  padding:56px 20px 20px;   /* ↑ 預留時間標籤高度 */
+  margin-top:22px;          /* 與上一張卡片拉開距離 */
   border-radius:16px;
   background:var(--glass-bg);
   border:1px solid var(--glass-bd);
   box-shadow:var(--glass-drop);
   backdrop-filter:blur(10px);
   -webkit-backdrop-filter:blur(10px);
-  overflow:visible;          /* 確保上緣「吊掛」區域不被裁切 */
+  overflow:visible;          /* 確保上緣標籤不被裁切 */
   z-index:1;
 }
 
-/* 時間：貼齊卡片上緣，只有「下方」兩角有 R 角（不像膠囊） */
+/* 時間標籤：貼齊卡片內側上緣，僅下緣圓角 */
 .ag-time{
   position:absolute;
   top:0;
   left:50%;
-  transform:translate(-50%, -50%);    /* 貼齊卡片上邊緣（吊掛感） */
+  transform:translateX(-50%);        /* 水平置中 */
   z-index:2;
-  padding:6px 14px;                   /* ↓縮小內距，讓文字更靠近邊緣 */
-  border-radius:0 0 12px 12px;        /* 只有下緣兩角 R */
+  padding:6px 16px;
+  border-radius:0 0 12px 12px;       /* 只保留下緣兩角 R */
   background:#e6eef7;
   border:1px solid #c9d8ea;
   box-shadow:0 3px 10px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.7);
   color:#1d2d44;
   font-family:"Akrobat","Noto Sans TC",sans-serif;
   font-weight:700;
-  font-size:clamp(16px, 1.8vw, 24px); /* ↑字更大 */
-  line-height:1.05;                   /* 字距更緊 */
+  font-size:clamp(18px,2.1vw,26px);  /* 字更大 */
+  line-height:1.05;
   letter-spacing:.01em;
   white-space:nowrap;
 }
@@ -290,22 +291,20 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 .ag-title{ font-size:clamp(18px,1.6vw,26px); font-weight:500; margin:0 0 6px; }
 .ag-sub{ margin:0; color:#cfd6e6; line-height:1.9; }
 
-/* 人名 / 稱謂：人名更大；斜線與稱謂按規格縮小 */
+/* 人名 / 稱謂 */
 .ag-people{
   display:inline-flex; flex-wrap:wrap; gap:.45em 1em;
   justify-content:center; margin-top:2px;
 }
 .ag-person{ white-space:normal; }
 .ag-name{ color:var(--pink); font-weight:600; font-size:1.1em; } /* 人名放大 */
-.ag-sep{
-  display:inline-block; font-size:85%; line-height:1;  /* 斜線 85% */
-  padding:0 .3em; opacity:.95;
-}
-.ag-role{ opacity:.95; font-size:85%; } /* 稱謂 85%（你指定） */
+.ag-sep{ display:inline-block; font-size:85%; line-height:1; padding:0 .3em; opacity:.95; }
+.ag-role{ opacity:.95; font-size:90%; } /* 稱謂縮小到 90% */
 
 /* 備註 */
 .ag-note{ color:#a8b3c9; font-size:.95em; }
 </style>
+
 </head>
 <body>
 
