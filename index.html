@@ -231,12 +231,29 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
   .topic-badge{ font-size:18px; }
 }
 
-/* ===== HERO (手機)：用 1920×1540 hero-bg-m ===== */
+/* ===== HERO (手機)：用 1920×1400 hero-bg-m ===== */
 @media (max-width: 768px){
   .hero-wrapper{
-    aspect-ratio:1920/1540;
-    background-image:url("assets/img/hero-bg-m.png");
+    aspect-ratio:1920/1400;                             /* 手機用較高比例 */
+    background-image:url("assets/img/hero-bg-m.png");   /* 手機版主視覺 */
     background-position:center top;
+  }
+
+  /* 整體放大：用視窗寬度來控制尺寸與間距 */
+  .hero-logo{
+    top:8vw;                  /* 從上緣距離 */
+    left:6vw;                 /* 左邊距離 */
+    width:60vw;               /* 新 logo 504×69，60vw 會有存在感 */
+  }
+  .hero-title{
+    top:22vw;                 /* 往上拉近一點 */
+    left:6vw;
+    width:78vw;               /* 放大標題 */
+  }
+  .hero-subtitle{
+    top:44vw;                 /* 再拉近一點（與標題距離縮短）*/
+    left:6vw;
+    width:84vw;               /* 副標略比標題寬 */
   }
 }
 </style>
