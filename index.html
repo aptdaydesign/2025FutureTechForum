@@ -157,10 +157,10 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 
 /* 左側膠囊：固定寬度、不換行、不被壓縮 */
 .topic-row .pill{
-  flex:0 0 auto;                  /* 不伸縮 */
-  min-width:64px;                 /* ← 想更窄就改這裡，例如 56px */
+  flex:0 0 auto;                  
+  min-width:64px;                 /* ← 想更窄就改這裡 */
   text-align:center;
-  white-space:nowrap;             /* 不換行 */
+  white-space:nowrap;
   background:rgba(255,255,255,.18);
   border-radius:999px;
   padding:8px 14px;
@@ -170,12 +170,12 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 /* 右側內容：可自由換行且不會把膠囊擠掉 */
 .topic-row > div:last-child{
   flex:1 1 auto;
-  min-width:0;                    /* 防止內容撐寬 */
-  overflow-wrap:anywhere;         /* 長字串也能斷行（保險） */
+  min-width:0;                    
+  overflow-wrap:anywhere;         
   line-height:1.8;
 }
 
-/* 既有樣式保留 */
+/* 這一段繼續沿用你的原本寫法 */
 .place{ font-size:1.05em; }
 .place .hl{
   display:inline-block;
@@ -186,7 +186,7 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   color:#fff; font-weight:500;
 }
 
-/* 手機微調：縮小間距 */
+/* 手機微調 */
 @media (max-width:560px){
   .topic-row{ gap:8px; }
   .topic-row .pill{ min-width:58px; padding:6px 12px; }
