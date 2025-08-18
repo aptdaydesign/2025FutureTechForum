@@ -120,21 +120,15 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 .topic-wrap{ text-align:center; margin:16px auto 24px; max-width:1000px; }
 .topic-badge {
   display: inline-block;
-  background: transparent;        /* 保持透明底 */
-  color: #fff;                    /* 白字 */
+  background: transparent;     /* 不要底色 */
+  color: #fff;                 /* 字體顏色白色 */
   font-size: clamp(23px, 3vw, 72px);
   font-weight: 400;
   padding: 10px 20px;
-  border-radius: 10px;
-
-  /* 七彩漸層邊框 */
-  border: 4px solid transparent;
-  border-image: linear-gradient(
-    90deg,
-    cyan,
-    blue,
-  ) 1;
-
+  border-radius: 10px;         /* 圓角 */
+  
+  border: 3px solid var(--pink);  /* 單色外框，這裡用 pink 變數 */
+  
   margin-top: 20px;
   margin-bottom: 20px;
 }
