@@ -114,15 +114,14 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 .event-info::before {
   content: "";
   position: absolute;
-  top: 0;                  /* 從 event-info 頂部開始 */
-  left: 0;
-  right: 0;
-  height: 200px;            /* 漸層高度，可自行調整 */
-  background:linear-gradient(to bottom,
-    #000 0%,       /* 直接從純黑開始 */
-    rgba(0,0,0,0.85) 40%, /* 保持黑感 */
-    #112240 100%   /* 最後過渡到你的區塊底色 */
+  top: 0; left: 0; right: 0;
+  height: 160px; /* 調整長度，越高漸層越長 */
+  background: linear-gradient(
+    to bottom,
+    #000 0%,        /* 純黑起點 */
+    #112240 100%    /* 直接過渡到底色 */
   );
+  pointer-events: none;
 }
 
 .event-info .inner {
