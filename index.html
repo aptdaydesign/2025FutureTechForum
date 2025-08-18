@@ -234,76 +234,85 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 }
 .place .hl{ vertical-align:middle; }
 
-/* ----------------------------------------------------
-   議程（Agenda）— 毛玻璃風格
----------------------------------------------------- */
+<!-- ----------------------------------------------------
+   議程（Agenda）— 毛玻璃風格（時間置中上方 + 人名 / 稱謂樣式）
+---------------------------------------------------- -->
+<style>
 .agenda{
   position:relative;
   padding: 20px 0 60px;
-  background: #0f1d36; /* 與 event-info 同系深藍段落 */
+  background:#0f1d36; /* 與 event-info 同系深藍段落 */
 }
-.agenda .inner{
-  max-width:1200px; margin:0 auto; padding:0 20px;
-}
-.agenda h2{
-  font-size:clamp(20px, 1.8vw, 30px);
-  font-weight:500;
-  margin:0 0 20px;
-}
+.agenda .inner{ max-width:1200px; margin:0 auto; padding:0 20px; }
+.agenda h2{ font-size:clamp(20px, 1.8vw, 30px); font-weight:500; margin:0 0 20px; }
+
 .ag-grid{
   display:grid;
   grid-template-columns:1fr;
   gap:14px;
 }
+
+/* 卡片：改為單欄，時間置中在上方 */
 .ag-card{
   display:grid;
-  grid-template-columns: 140px 1fr;
-  gap:16px;
-  align-items:start;
-  padding:18px 18px;
+  grid-auto-rows:auto;
+  row-gap:12px;
+  padding:22px 20px 20px;
   border-radius:16px;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-bd);
-  box-shadow: var(--glass-drop);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background:var(--glass-bg);
+  border:1px solid var(--glass-bd);
+  box-shadow:var(--glass-drop);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
 }
+
+/* 上方時間膠囊（置中） */
 .ag-time{
+  justify-self:center;
+  padding:8px 16px;
+  border-radius:999px;
+  background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.28);
   font-family:"Akrobat","Noto Sans TC",sans-serif;
   font-weight:500;
-  font-size: clamp(18px, 1.4vw, 24px);
-  line-height:1.3;
+  font-size:clamp(16px, 1.4vw, 22px);
+  line-height:1.2;
   color:#E6ECFF;
+  white-space:nowrap;
 }
-.ag-body .ag-title{
-  font-size: clamp(18px, 1.6vw, 26px);
+
+/* 標題與內文 */
+.ag-body{ text-align:center; }
+.ag-title{
+  font-size:clamp(18px, 1.6vw, 26px);
   font-weight:500;
   margin:0 0 6px;
 }
-.ag-body .ag-sub{ margin:0; color:#cfd6e6; line-height:1.7; }
-.ag-chip{
-  display:inline-block; padding:4px 10px; border-radius:999px;
-  background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.28);
-  font-size:.9em; margin-right:.5em; margin-top:.4em;
+.ag-sub{ margin:0; color:#cfd6e6; line-height:1.8; }
+
+/* 講者／主持資訊：人名粉色，斜線 70% */
+.ag-people{
+  display:inline-flex;
+  flex-wrap:wrap;
+  gap:.45em 1em;
+  justify-content:center;
+  margin-top:2px;
 }
+.ag-person{ white-space:normal; }
+.ag-name{ color:var(--pink); font-weight:500; }
+.ag-sep{
+  display:inline-block;
+  font-size:70%;
+  line-height:1;
+  padding:0 .25em;
+  opacity:.9;
+}
+.ag-role{ opacity:.95; }
+
+/* 備註字級 */
 .ag-note{ color:#a8b3c9; font-size:.95em; }
 
-/* 小裝置：時間改上、內容在下 */
-@media (max-width:680px){
-  .ag-card{ grid-template-columns: 1fr; }
-}
-
-/* 區塊底部備註 */
-.agenda .tip{
-  margin-top:18px; color:#a8b3c9; font-size:.95em;
-}
-
-/* 讓議程與上一段落距離更舒適 */
-.event-info .inner .after-rows-spacer{
-  height: clamp(26px, 4vw, 44px);
-}
-
-/* ---------------------------------------------------- */
+/* 小裝置維持單欄呈現（已為單欄，無需再切換） */
 </style>
 </head>
 <body>
@@ -407,7 +416,20 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
         <div class="ag-time">7:30 – 8:00</div>
         <div class="ag-body">
           <h3 class="ag-title">開場致詞與歡迎致詞</h3>
-          <p class="ag-sub">吳誠文／國家科學及技術委員會 主委；黃錫瑜／國研院科政中心 主任</p>
+          <p class="ag-sub">
+            <span class="ag-people">
+              <span class="ag-person">
+                <span class="ag-name">吳誠文</span>
+                <span class="ag-sep">/</span>
+                <span class="ag-role">國家科學及技術委員會 主委</span>
+              </span>
+              <span class="ag-person">
+                <span class="ag-name">黃錫瑜</span>
+                <span class="ag-sep">/</span>
+                <span class="ag-role">國研院科政中心 主任</span>
+              </span>
+            </span>
+          </p>
         </div>
       </article>
 
@@ -416,7 +438,15 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
         <div class="ag-time">8:05 – 8:25</div>
         <div class="ag-body">
           <h3 class="ag-title">【專題演講】未來半導體人才</h3>
-          <p class="ag-sub">主講者：David Horsley／加州大學戴維斯分校 教授</p>
+          <p class="ag-sub">
+            <span class="ag-people">
+              <span class="ag-person">
+                <span class="ag-name">David Horsley</span>
+                <span class="ag-sep">/</span>
+                <span class="ag-role">加州大學戴維斯分校 教授</span>
+              </span>
+            </span>
+          </p>
         </div>
       </article>
 
@@ -426,11 +456,33 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
         <div class="ag-body">
           <h3 class="ag-title">【台積電觀點】</h3>
           <p class="ag-sub">
-            <span class="ag-chip">沈文冰／智慧應用整合處 副處長</span>
-            <span class="ag-chip">Tzung-Hua Lin／R&amp;D Manager</span>
-            <span class="ag-chip">Steve Wang／Design Technology Platforms Manager</span>
-            <span class="ag-chip">Chun-Yu Lin／HR Manager</span>
-            <span class="ag-chip">TBC／Operation Manager</span>
+            <span class="ag-people">
+              <span class="ag-person">
+                <span class="ag-name">沈文冰</span>
+                <span class="ag-sep">/</span>
+                <span class="ag-role">智慧應用整合處 副處長</span>
+              </span>
+              <span class="ag-person">
+                <span class="ag-name">Tzung-Hua Lin</span>
+                <span class="ag-sep">/</span>
+                <span class="ag-role">R&amp;D Manager</span>
+              </span>
+              <span class="ag-person">
+                <span class="ag-name">Steve Wang</span>
+                <span class="ag-sep">/</span>
+                <span class="ag-role">Design Technology Platforms Manager</span>
+              </span>
+              <span class="ag-person">
+                <span class="ag-name">Chun-Yu Lin</span>
+                <span class="ag-sep">/</span>
+                <span class="ag-role">HR Manager</span>
+              </span>
+              <span class="ag-person">
+                <span class="ag-name">TBC</span>
+                <span class="ag-sep">/</span>
+                <span class="ag-role">Operation Manager</span>
+              </span>
+            </span>
           </p>
         </div>
       </article>
@@ -440,7 +492,20 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
         <div class="ag-time">9:15 – 9:25</div>
         <div class="ag-body">
           <h3 class="ag-title">【Q&amp;A 現場提問】</h3>
-          <p class="ag-sub">主持人：黃漢森／台積電 首席科學家；與談人：台積電多位不同業務單位之經理</p>
+          <p class="ag-sub">
+            <span class="ag-people">
+              <span class="ag-person">
+                <span class="ag-name">黃漢森</span>
+                <span class="ag-sep">/</span>
+                <span class="ag-role">台積電 首席科學家（主持）</span>
+              </span>
+              <span class="ag-person">
+                <span class="ag-name">與談人</span>
+                <span class="ag-sep">/</span>
+                <span class="ag-role">台積電多個業務單位經理</span>
+              </span>
+            </span>
+          </p>
         </div>
       </article>
 
@@ -458,7 +523,20 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
         <div class="ag-time">9:25 – 9:45</div>
         <div class="ag-body">
           <h3 class="ag-title">【綜合座談】</h3>
-          <p class="ag-sub">主持人：黃漢森／台積電 首席科學家；與談人：台積電多位不同業務單位之經理</p>
+          <p class="ag-sub">
+            <span class="ag-people">
+              <span class="ag-person">
+                <span class="ag-name">黃漢森</span>
+                <span class="ag-sep">/</span>
+                <span class="ag-role">台積電 首席科學家（主持）</span>
+              </span>
+              <span class="ag-person">
+                <span class="ag-name">與談人</span>
+                <span class="ag-sep">/</span>
+                <span class="ag-role">台積電多個業務單位經理</span>
+              </span>
+            </span>
+          </p>
         </div>
       </article>
 
