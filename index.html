@@ -144,20 +144,20 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 .topic-rows{
   display:grid;
   gap:12px;
-  margin:18px auto 0;      /* 桌機：整體置中 */
-  width:fit-content;       /* 由最長那列決定寬度 */
+  margin:18px auto 0;           /* 桌機：整體置中 */
+  width:fit-content;            /* 最長那一列決定寬度 */
   max-width:100%;
-  justify-items:start;     /* 列內內容靠左 */
-  text-align:left;         /* 覆蓋 .topic-wrap 的置中 */
+  justify-items:start;          /* 每列內容從左開始 */
+  text-align:left;              /* 覆寫 .topic-wrap 的置中 */
 }
 
 .topic-row{
   display:flex;
-  align-items:center;      /* 垂直置中（桌機） */
+  align-items:center;           /* 垂直置中（桌機） */
   gap:10px;
-  width:fit-content;       /* 本列寬度隨內容 */
-  text-align:left;         /* 文字靠左，不受父層影響 */
-  font-size:clamp(20px, 1.8vw, 30px);   /* 右側文字字級 */
+  width:fit-content;            /* 本列寬度隨內容 */
+  text-align:left;              /* 文字靠左 */
+  font-size:clamp(20px, 1.8vw, 30px); /* 右側文字字級 */
 }
 
 /* 左側膠囊 */
@@ -168,26 +168,28 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   white-space:nowrap;
   background:rgba(255,255,255,.18);
   border-radius:999px;
-  padding:0 14px;          /* 高度交給 height 控制 */
+  padding:0 14px;               /* 高度交給 height 控制 */
   height:48px;
   line-height:1;
   display:inline-flex;
   align-items:center;
   justify-content:center;
   font-weight:500;
-  font-size:clamp(16px, 1.8vw, 24px);   /* 膠囊內字級 */
+  font-size:clamp(16px, 1.8vw, 24px); /* 膠囊內字級 */
 }
 
-/* 右側內容 */
+/* 右側內容：可換行、與膠囊等高 */
 .topic-row > div:last-child{
   flex:1 1 auto;
   min-width:0;
-  overflow-wrap:anywhere;
-  display:flex;
+  display:flex;                 /* 用 flex 保持垂直置中 */
   align-items:center;
-  min-height:42px;         /* 與膠囊同高 */
+  flex-wrap:wrap;               /* 文字太長可換行 */
+  gap:.5em;                     /* 與徽章間留一點距離 */
+  min-height:48px;              /* 與膠囊同高 */
   line-height:1.8;
-  text-align:left;         /* 再保險一次靠左 */
+  overflow-wrap:anywhere;       /* 長字安全斷行 */
+  text-align:left;
 }
 
 /* 「線上同步」徽章 */
@@ -199,40 +201,49 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   font-weight:300;
   line-height:1;
   vertical-align:middle;
-  font-size:clamp(12px, 1.8vw, 20px);   /* 徽章字級 */
-  padding:6px 16px;                     /* 內距：覺得貼邊就加大 */
-  margin-left:.6em;                     /* 與前面文字距離 */
+  font-size:clamp(14px, 1.4vw, 20px);  /* 徽章字級（稍放大） */
+  padding:6px 16px;                    /* 內距：覺得貼邊可再加大 */
+  margin-left:.6em;                    /* 與前面文字距離 */
   border-radius:999px;
 }
 
-/* === 平板 / 小桌機：不要置中，吃滿寬 === */
-@media (max-width: 1200px){
+/* === 平板 / 小桌機：吃滿寬、靠左 === */
+@media (max-width:1200px){
   .topic-rows{
     width:100%;
     max-width:none;
-    margin:18px 0 0;        /* 移除 auto 置中 */
-    justify-items:start;    /* 明確靠左 */
+    margin:18px 0 0;             /* 移除 auto 置中 */
+    justify-items:start;         /* 明確靠左 */
   }
   .topic-row{
     width:100%;
   }
+  .topic-row > div:last-child{
+    min-height:48px;             /* 依桌機設定保持等高 */
+  }
 }
 
-/* === 手機：多行時頂齊 === */
-@media (max-width: 560px){
-  .topic-row{ align-items:flex-start; }
+/* === 手機：多行時頂齊；徽章不要太小 === */
+@media (max-width:560px){
+  .topic-row{ 
+    width:100%; 
+    align-items:flex-start;       /* 多行時讓起點頂齊 */
+    font-size:1em;                /* 右側文字微縮 */
+  }
   .topic-row .pill{
     min-width:58px;
-    height:38px;
+    height:40px;
     padding:0 12px;
-    font-size:.95em;        /* 小一點更和諧 */
+    font-size:.95em;              /* 膠囊內文字略小 */
   }
   .topic-row > div:last-child{
-    min-height:38px;
-    display:block;          /* 讓多行自然換行 */
+    min-height:40px;              /* 與膠囊一致 */
+  }
+  .place .hl{
+    font-size:.95em;              /* 手機徽章字級 */
+    padding:6px 14px;             /* 內距略縮，避免掉行 */
   }
 }
-
 /* ===== 小標（Key Speakers / About / Highlights）— 保留你的 1.8rem ===== */
 .event-info .inner h2{ font-size:1.8rem; margin:64px 0 20px; font-weight:500; }
 .event-info .inner h2:first-of-type{ margin-top:0; }
