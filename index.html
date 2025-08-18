@@ -8,16 +8,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Montserrat:wght@500&display=swap" rel="stylesheet">
 
 <style>
-/* ===================== 全站基礎 ===================== */
-/* 字型 */
+/* ===== 字型（Akrobat） ===== */
 @font-face{ font-family:'Akrobat'; src:url('assets/fonts/Akrobat-Regular.otf') format('opentype'); font-weight:400; font-style:normal; font-display:swap; }
 @font-face{ font-family:'Akrobat'; src:url('assets/fonts/Akrobat-SemiBold.otf') format('opentype'); font-weight:500; font-style:normal; font-display:swap; }
 
-/* reset + body */
+/* ===== 基礎 ===== */
 html,body{ margin:0; background:#000; color:#fff; overflow-x:hidden; }
 html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,"PingFang TC","Heiti TC",sans-serif }
 
-/* 變數 */
+/* 色彩 & 間距變數 */
 :root{
   --tab-default:#501cf2;
   --tab-active:#ff2b8a;
@@ -26,17 +25,23 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   --glass-bd: rgba(255,255,255,.18);
   --glass-drop: 0 10px 24px rgba(0,0,0,.28);
   --f2: clamp(20px, 2.4vw, 56px);
-  --hero-pad: max(12px, 5.208333vw);
+  --hero-pad: max(12px, 5.208333vw); /* 1920時≈100px */
+  --ag-time-h: 36px;      /* 桌機名義高度 */
+  --ag-time-pad-y: 6px;   /* 上下 padding */
+  --ag-time-pad-x: 14px;  /* 左右 padding */
 }
 
-/* ===================== HERO（含日期列） ===================== */
+/* ===== HERO（含貼底選單） ===== */
 .hero-wrapper{
-  position:relative; width:100%; aspect-ratio:1920/940; overflow:hidden;
+  position:relative;
+  width:100%;
+  aspect-ratio:1920/940; /* 桌機比 */
+  overflow:hidden;
   background:#0b0c0f url("assets/img/hero-bg.png") center/cover no-repeat;
 }
 .hero-img{ position:absolute; max-width:100%; height:auto; pointer-events:none; user-select:none; opacity:0 }
 
-/* 1920×940 座標 */
+/* 三張圖（以 1920×940 標定） */
 .hero-logo{     top:calc( 60/940*100%); left:calc( 70/1920*100%); width:calc(504/1920*100%); animation:slideInLeft 1s ease-out forwards .2s; }
 .hero-title{    top:calc(270/940*100%); left:calc(100/1920*100%); width:calc(880/1920*100%); animation:slideInUp   1s ease-out forwards .6s; }
 .hero-subtitle{ top:calc(570/940*100%); left:calc(100/1920*100%); width:calc(880/1920*100%); animation:slideInUp   1s ease-out forwards 1s; }
@@ -44,19 +49,36 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 @keyframes slideInLeft{ from{ transform:translateX(-50px); opacity:0 } to{ transform:translateX(0); opacity:1 } }
 @keyframes slideInUp  { from{ transform:translateY( 50px); opacity:0 } to{ transform:translateY(0);  opacity:1 } }
 
-/* 日期列 */
+/* ===== 日期選單（卡片式，置於 HERO 底部） ===== */
 .event-bar{
-  position:absolute; left:50%; bottom:clamp(12px, 2.8vw, 40px); transform:translateX(-50%);
-  width:min(89.5833vw, 1720px); max-width:1720px; background:transparent; padding:0; z-index:5;
+  position:absolute;
+  left:50%;
+  bottom:clamp(12px, 2.8vw, 40px);
+  transform:translateX(-50%);
+  width:min(89.5833vw, 1720px);
+  max-width:1720px;
+  background:transparent;
+  padding:0;
+  box-sizing:border-box;
+  z-index:5;
 }
-.event-bar .bar{ display:grid !important; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:clamp(10px, 1.25vw, 20px); }
+.event-bar .bar{
+  display:grid !important;
+  grid-template-columns:repeat(4, minmax(0, 1fr));
+  gap:clamp(10px, 1.25vw, 20px);
+}
 .bar-item{
-  --c1: var(--tab-default); --c2:#2b0f7a;
-  appearance:none; border:none; outline:none; color:#fff; cursor:pointer; user-select:none;
+  --c1: var(--tab-default);
+  --c2: #2b0f7a;
+  appearance:none; border:none; outline:none;
+  color:#fff; cursor:pointer; user-select:none;
   display:flex; align-items:center; justify-content:center; gap:10px;
-  border-radius:10px; padding:10px 24px 9px;
-  background:linear-gradient(135deg, var(--c1) 0%, var(--c2) 100%); background-size:200% 200%; background-position:0% 50%;
-  transition:background-position .6s ease, transform .2s ease, box-shadow .3s ease; box-shadow:0 8px 20px rgba(0,0,0,.25);
+  border-radius:10px;
+  padding:10px 24px 9px;
+  background:linear-gradient(135deg, var(--c1) 0%, var(--c2) 100%);
+  background-size:200% 200%; background-position:0% 50%;
+  transition:background-position .6s ease, transform .2s ease, box-shadow .3s ease;
+  box-shadow:0 8px 20px rgba(0,0,0,.25);
 }
 .bar-item:hover{ background-position:100% 50%; transform:translateY(-1px); }
 .bar-item[aria-current="true"]{ --c1:var(--tab-active); --c2:#a71858; animation:gradFlow 3s ease-in-out infinite alternate; }
@@ -64,77 +86,97 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 .bar-arrow{ font-size:clamp(18px, 2.2vw, 28px); line-height:1; display:inline-block; animation:arrowOsc .8s ease-in-out infinite alternate; }
 .bar-date{  font-family:"Akrobat","Noto Sans TC",sans-serif; font-weight:500; font-size:clamp(20px, 2.4vw, 40px); letter-spacing:.025em; white-space:nowrap; }
 @keyframes arrowOsc{ from{transform:translateX(-6px)} to{transform:translateX(6px)} }
-
 @media (max-width:820px){
   .event-bar .bar{ grid-template-columns:repeat(2, minmax(0, 1fr)); gap:clamp(8px, 2.2vw, 16px); }
 }
 @media (max-width:560px){
   .bar-item{ padding:6px 14px; }
-  .bar-date,.bar-arrow{ font-size:18px; }
+  .bar-date{ font-size:18px; }
+  .bar-arrow{ font-size:18px; }
 }
 
-/* ===================== 共同的區塊容器 ===================== */
-.event-info .inner,
-.agenda .inner,
-.sponsor-footer .inner{
-  max-width:1200px; margin:0 auto; padding:0 20px;
+/* ===== 活動資訊（含與 HERO 的黑→藍銜接） ===== */
+.event-info{
+  position:relative;
+  background:#112240;
+  padding-block:20px;
+  overflow:hidden;
 }
-
-/* ===================== 活動資訊（上半部） ===================== */
-.event-info{ position:relative; background:#112240; padding-block:20px; overflow:hidden; }
 .event-info::before{
-  content:""; position:absolute; top:0; left:0; right:0; height:500px;
-  background:linear-gradient(to bottom, #000 0%, #112240 100%); pointer-events:none;
+  content:"";
+  position:absolute; top:0; left:0; right:0;
+  height:500px;
+  background:linear-gradient(to bottom, #000 0%, #112240 100%);
+  pointer-events:none;
 }
+.event-info .inner{
+  position:relative; z-index:1;
+  max-width:1200px; margin:0 auto; padding:0 20px;
+  line-height:1.8; font-weight:300; font-size:1.2em;
+}
+
+/* ===== 主標 / 副標 ===== */
 .topic-wrap{ text-align:center; margin:16px auto 24px; max-width:1000px; }
 .topic-badge{
-  display:inline-block; background:transparent; color:#fff; font-size:clamp(23px, 3vw, 72px); font-weight:400;
-  padding:10px 20px; border-radius:20px; border:4px solid var(--pink); margin:20px 0;
+  display:inline-block; background:transparent; color:#fff;
+  font-size:clamp(23px, 3vw, 72px); font-weight:400;
+  padding:10px 20px; border-radius:20px; border:4px solid var(--pink);
+  margin-top:20px; margin-bottom:20px;
 }
 .topic-en{
-  font-size:clamp(20px, 1.8vw, 42px); font-weight:400; color:#ddd; margin-bottom:40px;
-  font-family:"Akrobat","Noto Sans TC",sans-serif;
+  font-size:clamp(20px, 1.8vw, 42px); font-weight:400; color:#ddd;
+  margin-bottom:40px; font-family:"Akrobat","Noto Sans TC",sans-serif;
 }
 
-/* 標題（event-info 與 agenda 共用字級與段後距） */
-.event-info h2,
-.agenda h2{
-  font-size:clamp(20px,1.8vw,30px);
-  font-weight:500;
-  margin-bottom:20px;
-}
-/* 第二個（含之後）主標：與上一段落拉距 */
-.event-info h2:not(:first-of-type),
-.agenda h2:not(:first-of-type){
+/* 內容主標（h2）不要比時間/地點大 */
+.event-info h2:not(:first-of-type){
   margin-top: clamp(28px, 5vw, 72px);
 }
-/* Agenda 的第一個主標：與上一個區塊拉距 */
-.agenda .inner > h2:first-of-type{
-  margin-top: clamp(28px, 5vw, 72px);
+/* ===== CTA ===== */
+.register-btn{
+  display:flex; align-items:center; justify-content:center; gap:14px;
+  margin:40px auto 0; padding:16px 15px 16px 35px; width:220px;
+  background:#f48c06; color:#fff; border:6px solid #fff; border-radius:999px;
+  font-size:1.8rem; font-weight:500; text-decoration:none;
+  box-shadow:0 6px 18px rgba(0,0,0,.18); transition:all .3s ease;
 }
+.register-btn svg{ width:1.8em; height:1.5em; flex:0 0 auto; will-change:transform; animation:arrowOsc .8s ease-in-out infinite alternate }
+.register-btn svg path{ fill:none; stroke:#fff; stroke-width:5; stroke-linecap:round; stroke-linejoin:round; vector-effect:non-scaling-stroke }
+.register-btn:hover{ background:#f48c06; border-color:transparent; transform:scale(.95); box-shadow:0 4px 12px rgba(0,0,0,.15) }
+.register-btn:active{ transform:scale(.9) }
+.register-btn:focus-visible{ outline:3px solid rgba(255,255,255,.6); outline-offset:3px }
 
-/* 時間／地點列 */
+/* ===== 時間／地點（穩定） ===== */
 .topic-rows{
   margin-top:18px; margin-bottom:clamp(28px, 4vw, 56px);
-  display:grid; gap:12px; width:max-content; max-width:100%;
-  margin-left:auto; margin-right:auto; text-align:left; justify-items:start;
+  display:grid; gap:12px;
+  width:max-content; max-width:100%;
+  margin-left:auto; margin-right:auto;
+  text-align:left; justify-items:start;
 }
 .topic-row{
-  display:grid; grid-template-columns:auto 1fr; align-items:center; column-gap:10px;
-  width:max-content; text-align:left; font-size:clamp(20px, 1.8vw, 30px);
+  display:grid; grid-template-columns:auto 1fr;
+  align-items:center; column-gap:10px;
+  width:max-content; text-align:left;
+  font-size:clamp(20px, 1.8vw, 30px);
 }
 .topic-row .pill{
-  min-width:64px; height:48px; padding:0 14px; display:inline-flex; align-items:center; justify-content:center;
-  white-space:nowrap; border-radius:999px; background:rgba(255,255,255,.18);
-  font-weight:500; line-height:1; font-size:clamp(16px, 1.8vw, 24px);
+  min-width:64px; height:48px; padding:0 14px;
+  display:inline-flex; align-items:center; justify-content:center;
+  white-space:nowrap; border-radius:999px;
+  background:rgba(255,255,255,.18);
+  font-weight:500; line-height:1;
+  font-size:clamp(16px, 1.8vw, 24px);
 }
 .topic-row > div:last-child{
   min-width:0; display:flex; align-items:center; flex-wrap:wrap; gap:.5em;
   min-height:48px; line-height:1.8; overflow-wrap:anywhere; text-align:left;
 }
 .place .hl{
-  display:inline-flex; align-items:center; border-radius:999px; background:rgba(255,255,255,.25); color:#fff; line-height:1;
-  margin-left:.6em; font-weight:500; font-size:clamp(14px, 1.25vw, 20px); padding:6px 16px; vertical-align:middle; white-space:nowrap;
+  display:inline-flex; align-items:center; border-radius:999px;
+  background:rgba(255,255,255,.25); color:#fff; line-height:1;
+  margin-left:.6em; font-weight:500;
+  font-size:clamp(14px, 1.25vw, 20px); padding:6px 16px; vertical-align:middle; white-space:nowrap;
 }
 @media (max-width:1200px){
   .topic-rows{ width:min(100%, 1000px); margin:18px auto clamp(28px, 4vw, 56px); }
@@ -147,20 +189,22 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   .place .hl{ font-size:.9em; padding:4px 10px; }
 }
 
-/* 內容內強調色（粉） */
+/* ===== 內容內強調色（粉色標註） ===== */
 .event-info b,
 .event-info strong{ color:var(--pink); font-weight:500; }
 
-/* 講者 */
+/* ===== 講者 ===== */
 .speaker-grid{ margin-top:36px; margin-bottom:60px; display:grid; grid-template-columns:repeat(3,1fr); gap:36px }
 .speaker{ text-align:center }
 .speaker .photo{
-  width:200px; height:200px; border-radius:50%; margin:0 auto 18px; object-fit:cover; object-position:center;
+  width:200px; height:200px; border-radius:50%;
+  margin:0 auto 18px; object-fit:cover; object-position:center;
   box-shadow:0 8px 24px rgba(0,0,0,.25); background:#0b0c0f;
 }
 .speaker .name{ font-size:1.6rem; font-weight:500; margin:0 0 10px }
 .speaker .title-chip{ display:inline-block; padding:8px 16px; border-radius:999px; background:rgba(255,255,255,.30); color:#fff; font-weight:500; font-size:1rem }
 
+/* 手機：講者直排 */
 @media (max-width: 768px){
   .speaker-grid{ grid-template-columns: 1fr; gap: 28px; max-width: 520px; margin-inline:auto; }
   .speaker .photo{ width: 160px; height: 160px; margin-bottom: 14px; }
@@ -172,20 +216,16 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   .speaker-grid{ gap: 24px; }
 }
 
-/* CTA */
-.register-btn{
-  display:flex; align-items:center; justify-content:center; gap:14px; width:220px; margin:40px auto 0;
-  padding:16px 15px 16px 35px; background:#f48c06; color:#fff; border:6px solid #fff; border-radius:999px;
-  font-size:1.8rem; font-weight:500; text-decoration:none;
-  box-shadow:0 6px 18px rgba(0,0,0,.18); transition:all .3s ease;
+/* ===== HERO（手機版 1920×1800）===== */
+@media (max-width:768px){
+  .hero-wrapper{ aspect-ratio:1920/1800; background-image:url("assets/img/hero-bg-m.png"); background-position:center top; }
+  .hero-logo{ top:6vw; left:6vw; width:50vw; }
+  .hero-title{ top:24vw; left:6vw; width:65vw; }
+  .hero-subtitle{ top:48vw; left:6vw; width:65vw; }
+  .topic-badge{ margin-top:10px; }
 }
-.register-btn svg{ width:1.8em; height:1.5em; flex:0 0 auto; will-change:transform; animation:arrowOsc .8s ease-in-out infinite alternate }
-.register-btn svg path{ fill:none; stroke:#fff; stroke-width:5; stroke-linecap:round; stroke-linejoin:round; vector-effect:non-scaling-stroke }
-.register-btn:hover{ background:#f48c06; border-color:transparent; transform:scale(.95); box-shadow:0 4px 12px rgba(0,0,0,.15) }
-.register-btn:active{ transform:scale(.9) }
-.register-btn:focus-visible{ outline:3px solid rgba(255,255,255,.6); outline-offset:3px }
 
-/* 桌機左右等高 */
+/* === 桌機：靠左排列，但膠囊內文字置中，左右等高對齊 === */
 @media (min-width:992px){
   .event-info .topic-row{ align-items:center !important; }
   .event-info .topic-row .pill{ display:inline-flex; align-items:center; justify-content:center; height:42px; padding:0 14px; line-height:1; text-align:center; }
@@ -197,80 +237,149 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 }
 .place .hl{ vertical-align:middle; }
 
-/* 手機版 HERO 圖 */
-@media (max-width:768px){
-  .hero-wrapper{ aspect-ratio:1920/1800; background-image:url("assets/img/hero-bg-m.png"); background-position:center top; }
-  .hero-logo{ top:6vw; left:6vw; width:50vw; }
-  .hero-title{ top:24vw; left:6vw; width:65vw; }
-  .hero-subtitle{ top:48vw; left:6vw; width:65vw; }
-  .topic-badge{ margin-top:10px; }
+/* Footer（與議程同色，滿版；無頂部分隔線） */
+.sponsor-footer{
+  background:#112240;
+  padding:28px 0 44px;        /* 底部多留一點呼吸 */
+  border-top:none;            /* ← 不要分隔線 */
+  box-shadow:none;            /* 保險：避免外部樣式投影 */
 }
-
-/* ===================== 議程（卡片 + 上沿貼齊膠囊） ===================== */
-.agenda{ position:relative; padding:20px 0 60px; background:#112240 !important; }
-.ag-grid{ display:grid; grid-template-columns:1fr; row-gap:28px; }
-
-/* 卡片：用 --tag-h 預留膠囊高度 */
-.ag-card{
-  position:relative;
-  --tag-h: clamp(34px, 3.0vw, 44px);
-  padding: calc(var(--tag-h) + 14px) 20px 20px;
-  border-radius:16px; background:var(--glass-bg); border:1px solid var(--glass-bd);
-  box-shadow:var(--glass-drop); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
-  overflow:hidden;
+.sponsor-footer::before{      /* 保險：如果曾用偽元素畫線，關掉它 */
+  content:none !important;
+  display:none !important;
 }
-/* 時間膠囊：完全在卡片內，緊貼上緣 */
-.ag-time{
-  position:absolute; top:0; left:50%; transform:translateX(-50%);
-  display:inline-flex; align-items:center; justify-content:center;
-  height:var(--tag-h); padding:0 18px; border-radius:0 0 12px 12px;
-  background:#e6eef7; border:1px solid #c9d8ea;
-  box-shadow:0 3px 10px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.7);
-  color:#1d2d44; font-family:"Akrobat","Noto Sans TC",sans-serif; font-weight:700;
-  font-size:clamp(16px, 1.6vw, 22px); letter-spacing:.01em; line-height:1; white-space:nowrap; z-index:1;
-}
-
-/* 文案 */
-.ag-body{ text-align:center; }
-.ag-title{ font-size:clamp(18px,1.6vw,26px); font-weight:500; margin:0 0 6px; }
-.ag-sub{ margin:0; color:#cfd6e6; line-height:1.9; }
-
-/* 人名／稱謂 */
-.ag-people{ display:inline-flex; flex-wrap:wrap; gap:.45em 1em; justify-content:center; margin-top:2px; }
-.ag-person{ white-space:normal; }
-.ag-name{ color:var(--pink); font-weight:600; font-size:1.1em; }
-.ag-sep{ display:inline-block; font-size:85%; line-height:1; padding:0 .3em; opacity:.95; }
-.ag-role{ opacity:.95; font-size:85%; }
-
-/* 備註 */
-.ag-note{ color:#a8b3c9; font-size:.95em; }
-
-/* 手機：膠囊與字再大一點 */
-@media (max-width:480px){
-  .ag-card{ --tag-h:48px; padding-top: calc(var(--tag-h) + 14px); }
-  .ag-time{ font-size:20px; padding:0 20px; }
-}
-
-/* ===================== Footer（滿版、無分隔線） ===================== */
-.sponsor-footer{ background:#112240; padding:28px 0 44px; border-top:none; box-shadow:none; }
-.sponsor-footer::before{ content:none !important; display:none !important; }
 
 .sponsor-footer .inner{
-  display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; justify-items:center;
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 20px;
+  display:grid;
+  grid-template-columns:1fr 1fr;  /* 左右兩欄 */
+  gap:40px;
+  align-items:center;
+  justify-items:center;
 }
-.sponsor-block{ display:flex; align-items:center; gap:18px; }
-.sponsor-tag{ color:#cfd6e6; opacity:1; font-weight:500; letter-spacing:.04em; font-size:clamp(14px,1.1vw,18px); white-space:nowrap; }
-.sponsor-logo{ display:block; height:46px; width:auto; max-width:100%; }
 
+.sponsor-block{
+  display:flex;
+  align-items:center;
+  gap:18px;                       /* 標籤與 logo 間距 */
+}
+
+.sponsor-tag{
+  color:#cfd6e6;                  /* 比純白柔一點 */
+  opacity:1;
+  font-weight:500;
+  letter-spacing:.04em;
+  font-size:clamp(14px,1.1vw,18px);
+  white-space:nowrap;
+}
+
+.sponsor-logo{
+  display:block;
+  height:46px;                    /* 統一高度（等比縮放）*/
+  width:auto;
+  max-width:100%;
+}
+
+/* 手機：改直排置中，Logo 稍微小一點 */
 @media (max-width:768px){
   .sponsor-footer .inner{ grid-template-columns:1fr; gap:22px; }
   .sponsor-block{ flex-direction:column; gap:10px; text-align:center; }
   .sponsor-logo{ height:40px; }
 }
-</style>
-</head>
 
+</style>
+<style>
+/* ===== Agenda（時間膠囊在卡片「內部」，上沿緊貼卡片） ===== */
+.agenda{
+  position:relative;
+  padding:20px 0 60px;
+  background:#112240 !important;
+}
+.agenda .inner{ max-width:1200px; margin:0 auto; padding:0 20px; }
+.agenda h2{
+  font-size:clamp(20px,1.8vw,30px);
+  font-weight:500;
+  margin-bottom:20px;
+}
+
+/* 用 row-gap 控制卡片間距，卡片本身不要再設 margin */
+.ag-grid{ display:grid; grid-template-columns:1fr; row-gap:28px; }
+
+/* 卡片：用 --tag-h 控制時間膠囊高度，並自動預留上方空間 */
+.ag-card{
+  position:relative;
+  --tag-h: clamp(34px, 3.0vw, 44px);            /* 時間膠囊高度（桌機自適應） */
+  padding: calc(var(--tag-h) + 14px) 20px 20px;  /* 上方留出膠囊高度 + 14px */
+  border-radius:16px;
+  background:var(--glass-bg);
+  border:1px solid var(--glass-bd);
+  box-shadow:var(--glass-drop);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  overflow:hidden;                               /* 防止內容溢出 */
+}
+
+/* 時間膠囊：在卡片「內部」置中，top:0 緊貼上邊，不再 -50% 吊掛 */
+.ag-time{
+  position:absolute;
+  top:0;                                         /* 緊貼卡片上邊 */
+  left:50%;
+  transform:translateX(-50%);                    /* 僅水平置中 */
+  display:inline-flex; align-items:center; justify-content:center;
+  height:var(--tag-h);
+  padding:0 18px;
+  border-radius:0 0 12px 12px;                   /* 只保留下緣 R 角 */
+  background:#e6eef7;                            /* 實色底，非毛玻璃 */
+  border:1px solid #c9d8ea;
+  box-shadow:0 3px 10px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.7);
+  color:#1d2d44;
+  font-family:"Akrobat","Noto Sans TC",sans-serif;
+  font-weight:700;
+  font-size:clamp(16px, 1.6vw, 22px);
+  letter-spacing:.01em;
+  line-height:1;
+  white-space:nowrap;
+  z-index:1;
+}
+
+/* 文字區 */
+.ag-body{ text-align:center; }
+.ag-title{ font-size:clamp(18px,1.6vw,26px); font-weight:500; margin:0 0 6px; }
+.ag-sub{ margin:0; color:#cfd6e6; line-height:1.9; }
+
+/* 人名 / 稱謂：人名較大；斜線與稱謂 可調整% */
+.ag-people{ display:inline-flex; flex-wrap:wrap; gap:.45em 1em; justify-content:center; margin-top:2px; }
+.ag-person{ white-space:normal; }
+.ag-name{ color:var(--pink); font-weight:600; font-size:1.1em; }
+.ag-sep{ display:inline-block; font-size:85%; line-height:1; padding:0 .3em; opacity:.95; }
+.ag-role{ opacity:.95; font-size:100%; }
+
+/* 備註 */
+.ag-note{ color:#a8b3c9; font-size:.95em; }
+
+/* 手機（<=480px）：膠囊更大、字更大，但仍在卡片內貼齊上邊 */
+@media (max-width:480px){
+  .ag-card{ --tag-h:48px; padding-top: calc(var(--tag-h) + 14px); }
+  .ag-time{ font-size:20px; padding:0 20px; }
+}
+/* 讓 event-info 與 agenda 的第二個(含之後) h2 都有段前距 */
+.event-info h2:not(:first-of-type),
+.agenda h2:not(:first-of-type){
+  margin-top: clamp(28px, 5vw, 72px);
+}
+
+/* Agenda 區塊的第一個 h2 也要與上一區塊拉開距離 */
+.agenda .inner > h2:first-of-type{
+  margin-top: clamp(28px, 5vw, 72px);
+}
+</style>
+
+
+</head>
 <body>
+
 <!-- ===== HERO（內含貼底的日期選單） ===== -->
 <section class="hero-wrapper" aria-label="Hero">
   <img class="hero-img hero-logo"     src="assets/img/hero-logo.png"     alt="">
@@ -316,6 +425,9 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
         </div>
       </div>
     </div>
+
+    <!-- 與下方「主要講者」之間的緩衝距離 -->
+    <div class="after-rows-spacer"></div>
 
     <h2>主要講者<span>｜Key Speakers</span></h2>
     <div class="speaker-grid">
@@ -438,26 +550,27 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
         </div>
       </article>
 
-      <!-- 9:15–9:25 -->
-      <article class="ag-card">
-        <div class="ag-time">9:15 – 9:25</div>
-        <div class="ag-body">
-          <h3 class="ag-title">【Q&amp;A 現場提問】</h3>
-          <p class="ag-sub">
-            <!-- 與談人：白字、一般字重、一般尺寸 -->
-            <span style="color:#fff;">與談人｜台積電 5 位不同業務單位之經理</span>
-            <br>
-            <span class="ag-people">
-              <span class="ag-person">
-                <span style="color:#fff;">主持人｜</span>
-                <span class="ag-name">黃漢森</span>
-                <span class="ag-sep">/</span>
-                <span class="ag-role">台積電 首席科學家</span>
-              </span>
-            </span>
-          </p>
-        </div>
-      </article>
+     <!-- 9:15–9:25 -->
+<article class="ag-card">
+  <div class="ag-time">9:15 – 9:25</div>
+  <div class="ag-body">
+    <h3 class="ag-title">【Q&amp;A 現場提問】</h3>
+    <p class="ag-sub">
+<!-- 與談人：跟「主持人｜」一樣，白字、一般字重、一般尺寸 -->
+<span style="color:#fff;">與談人｜台積電 5 位不同業務單位之經理</span>
+      <br>
+      <!-- 主持人：前綴白字；姓名粉紅；斜線與稱謂 70% -->
+      <span class="ag-people">
+        <span class="ag-person">
+          <span style="color:#fff;">主持人｜</span>
+          <span class="ag-name">黃漢森</span>
+          <span class="ag-sep">/</span>
+          <span class="ag-role">台積電 首席科學家</span>
+        </span>
+      </span>
+    </p>
+  </div>
+</article>
 
       <!-- 9:25–9:30（問卷） -->
       <article class="ag-card">
@@ -468,25 +581,26 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
         </div>
       </article>
 
-      <!-- 9:25–9:45 -->
-      <article class="ag-card">
-        <div class="ag-time">9:25 – 9:45</div>
-        <div class="ag-body">
-          <h3 class="ag-title">【綜合座談】</h3>
-          <p class="ag-sub">
-            <span style="color:#fff;">與談人｜台積電 5 位不同業務單位之經理</span>
-            <br>
-            <span class="ag-people">
-              <span class="ag-person">
-                <span style="color:#fff;">主持人｜</span>
-                <span class="ag-name">黃漢森</span>
-                <span class="ag-sep">/</span>
-                <span class="ag-role">台積電 首席科學家</span>
-              </span>
-            </span>
-          </p>
-        </div>
-      </article>
+<!-- 9:25–9:45 -->
+<article class="ag-card">
+  <div class="ag-time">9:25 – 9:45</div>
+  <div class="ag-body">
+    <h3 class="ag-title">【綜合座談】</h3>
+    <p class="ag-sub">
+<!-- 與談人：跟「主持人｜」一樣，白字、一般字重、一般尺寸 -->
+<span style="color:#fff;">與談人｜台積電 5 位不同業務單位之經理</span>
+      <br>
+      <span class="ag-people">
+        <span class="ag-person">
+          <span style="color:#fff;">主持人｜</span>
+          <span class="ag-name">黃漢森</span>
+          <span class="ag-sep">/</span>
+          <span class="ag-role">台積電 首席科學家</span>
+        </span>
+      </span>
+    </p>
+  </div>
+</article>
 
     </div>
 
