@@ -141,14 +141,20 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   font-weight: 500;
 }
 
-.event-info .inner h2:first-of-type {
-  margin-top: 0;
+/* 主標題 */
+.event-info .inner h2 {
+  font-size: 2.4rem;   /* 原本 1.8rem → 放大 */
+  margin: 64px 0 24px;
+  font-weight: 600;    /* 更醒目 */
+  color: #fff;         /* 保持白色 */
 }
 
-.event-info h2 span {
-  color: #fff;
-  font-family: "Akrobat","Noto Sans TC",sans-serif;
-  font-weight: 500;
+/* 副標題 */
+.event-info .inner h3 {
+  font-size: 1.6rem;   /* 副標題放大 */
+  font-weight: 400;    /* 比主標細一點 */
+  margin-bottom: 20px;
+  color: #ddd;         /* 比主標淺，層次更清楚 */
 }
 
 .event-info b,
