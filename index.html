@@ -140,76 +140,97 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   font-family:"Akrobat","Noto Sans TC",sans-serif;
 }
 
-/* ===== 時間／地點列：通用設定 ===== */
+/* === 時間 / 地點（通用預設）=== */
 .topic-rows{
-  margin-top:18px;
   display:grid;
   gap:12px;
-  justify-items:center;            /* 整列在容器中置中 */
+  margin:18px auto 0;
+  width:fit-content;              /* 由最長那列決定寬度 */
+  max-width:100%;
 }
 
 .topic-row{
-  width: min(900px, 100%);         /* 一個合理的行寬上限 */
   display:flex;
-  gap:12px;
-  align-items:center;               /* 預設垂直置中（桌機） */
-  text-align:left;                  /* 取消 .topic-wrap 的置中繼承 */
-  font-size: clamp(20px, 1.8vw, 30px); 
+  align-items:center;             /* 垂直置中（桌機 & 大多數情況） */
+  gap:10px;
+  width:fit-content;
 }
 
-/* 左側膠囊：固定寬度、內容置中 */
 .topic-row .pill{
   flex:0 0 auto;
-  display:inline-flex;
-  justify-content:center;
-  align-items:center;
-  min-width:64px;
-  height:42px;
-  padding:0 14px;                   /* 高度由 height 控制，左右靠 padding */
-  line-height:1;
+  min-width:64px;                 /* 膠囊最小寬 */
+  text-align:center;
   white-space:nowrap;
   background:rgba(255,255,255,.18);
   border-radius:999px;
+  padding:0 14px;                 /* 高度交由 height 控制 */
+  height:42px;
+  line-height:1;
+  display:inline-flex;
+  align-items:center;             /* 文字在膠囊內置中 */
+  justify-content:center;
   font-weight:500;
-  font-size: clamp(16px, 1.8vw, 24px); 
-  text-align:center;
 }
 
-/* 右側內容：靠左且可換行 */
+/* 右側內容：可換行、與膠囊等高 */
 .topic-row > div:last-child{
   flex:1 1 auto;
   min-width:0;
-  line-height:1.8;
-  text-align:left;                  /* 明確指定靠左 */
-  display:flex;                     /* 與膠囊同高垂直置中（桌機） */
+  overflow-wrap:anywhere;
+  display:flex;
   align-items:center;
   min-height:42px;
+  line-height:1.8;
 }
 
-/* 手機／小尺寸（≤ 991.98px）：多行時頂齊，右側恢復 block，膠囊自適應 */
-@media (max-width: 991.98px){
-  .topic-row{ align-items: flex-start; }
+/* 「線上同步」徽章（確保不消失、垂直對齊） */
+.place .hl{
+  display:inline-flex;
+  align-items:center;
+  padding:2px 8px;
+  margin-left:.4em;
+  border-radius:8px;
+  background:rgba(255,255,255,.25);
+  color:#fff;
+  font-weight:500;
+  line-height:1;
+  vertical-align:middle;
+}
+
+/* === 平板 / 小桌機：保持置中，不要貼左 === */
+@media (max-width:991.98px){
+  .topic-rows{            /* 一樣置中，但限制最大寬避免溢出 */
+    width:fit-content;
+    max-width:calc(100% - 32px);
+    margin:18px auto 0;
+  }
+  .topic-row{
+    width:fit-content;
+    align-items:flex-start;       /* 多行時讓起點齊上緣比較自然 */
+  }
   .topic-row > div:last-child{
-    display: block;
-    min-height: 0;
+    display:block;                /* 多行時不要強制垂直置中 */
+    min-height:0;
   }
+}
+
+/* === 手機超窄：改為吃滿螢幕寬 === */
+@media (max-width:560px){
+  .topic-rows{ width:100%; }
+  .topic-row{ width:100%; }
   .topic-row .pill{
-    height: auto;          /* 讓膠囊高度跟字級一起長/縮 */
-    padding: 6px 12px;
+    min-width:58px;
+    height:38px;
+    padding:0 12px;
   }
-  /* 小尺寸的字級 */
-  .topic-row{ font-size: 1em; }     /* 右側文字 */
-  .topic-row .pill{ font-size: 0.9em; }  /* 膠囊文字 */
+  .topic-row > div:last-child{ min-height:38px; }
 }
 
-/* 極小手機（≤ 560px）：再微縮一點字級 */
-@media (max-width: 560px){
-  .topic-row{ font-size: 0.95em; }
-  .topic-row .pill{ font-size: 0.85em; }
+/* 想調整字級：這裡改（例：整列與膠囊字體） */
+@media (max-width:560px){
+  .topic-row{ font-size:1em; }    /* 右側文字 */
+  .topic-row .pill{ font-size:.9em; }  /* 膠囊內文字 */
 }
-
-/* 小徽章（例如「線上同步」）與基線對齊更好看 */
-.place .hl{ vertical-align:middle; }
 
 /* ===== 小標（Key Speakers / About / Highlights）— 保留你的 1.8rem ===== */
 .event-info .inner h2{ font-size:1.8rem; margin:64px 0 20px; font-weight:500; }
