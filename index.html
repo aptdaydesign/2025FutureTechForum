@@ -140,55 +140,55 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   font-family:"Akrobat","Noto Sans TC",sans-serif;
 }
 
-/* === 時間 / 地點（通用預設）=== */
+/* ===== 時間／地點：穩定版（整段覆蓋） ===== */
+
+/* 外層：桌機以內容寬置中；內文一律靠左 */
 .topic-rows{
+  margin-top:18px;
   display:grid;
   gap:12px;
-  margin:18px auto 0;           /* 桌機：整體置中 */
-  width:fit-content;            /* 最長那一列決定寬度 */
+  width:max-content;             /* 由最長那一列決定寬度 */
   max-width:100%;
-  justify-items:start;          /* 每列內容從左開始 */
-  text-align:left;              /* 覆寫 .topic-wrap 的置中 */
+  margin-left:auto; margin-right:auto;  /* 桌機置中 */
+  text-align:left;               /* 蓋過 .topic-wrap 的置中 */
 }
 
+/* 每一列用 grid：左=膠囊、右=內容 */
 .topic-row{
-  display:flex;
-  align-items:center;           /* 垂直置中（桌機） */
-  gap:10px;
-  width:fit-content;            /* 本列寬度隨內容 */
-  text-align:left;              /* 文字靠左 */
-  font-size:clamp(16px, 1.8vw, 24px); /* 右側文字字級 */
+  display:grid;
+  grid-template-columns:auto 1fr;
+  align-items:center;            /* 膠囊與右側垂直置中 */
+  column-gap:10px;
+  width:max-content;             /* 以內容寬為準 */
+  text-align:left;
 }
 
-/* 左側膠囊 */
+/* 左側膠囊（時間／地點） */
 .topic-row .pill{
-  flex:0 0 auto;
   min-width:64px;
-  text-align:center;
-  white-space:nowrap;
-  background:rgba(255,255,255,.18);
-  border-radius:999px;
-  padding:0 14px;               /* 高度交給 height 控制 */
   height:48px;
-  line-height:1;
+  padding:0 14px;
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  font-weight:300;
-  font-size:clamp(14px, 1.8vw, 20px); /* 膠囊內字級 */
+  white-space:nowrap;
+  border-radius:999px;
+  background:rgba(255,255,255,.18);
+  font-weight:500;
+  line-height:1;
+  font-size:clamp(16px, 1.8vw, 24px);   /* 膠囊內字級 */
 }
 
-/* 右側內容：可換行、與膠囊等高 */
+/* 右側內容：可換行、不會把膠囊擠走，與膠囊等高 */
 .topic-row > div:last-child{
-  flex:1 1 auto;
   min-width:0;
-  display:flex;                 /* 用 flex 保持垂直置中 */
+  display:flex;
   align-items:center;
-  flex-wrap:wrap;               /* 文字太長可換行 */
-  gap:.5em;                     /* 與徽章間留一點距離 */
-  min-height:48px;              /* 與膠囊同高 */
+  flex-wrap:wrap;                /* 太長自動換行 */
+  gap:.5em;
+  min-height:48px;               /* 與膠囊等高 */
   line-height:1.8;
-  overflow-wrap:anywhere;       /* 長字安全斷行 */
+  overflow-wrap:anywhere;
   text-align:left;
 }
 
@@ -196,53 +196,33 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 .place .hl{
   display:inline-flex;
   align-items:center;
+  border-radius:999px;
   background:rgba(255,255,255,.25);
   color:#fff;
-  font-weight:300;
   line-height:1;
-  vertical-align:middle;
-  font-size:clamp(14px, 1.4vw, 20px);  /* 徽章字級（稍放大） */
-  padding:4px 14px;                    /* 內距：覺得貼邊可再加大 */
-  margin-left:.6em;                    /* 與前面文字距離 */
-  border-radius:999px;
+  margin-left:.6em;              /* 與前文間距 */
+  font-weight:500;
+  font-size:clamp(14px, 1.4vw, 20px);   /* 徽章字級（不會過小） */
+  padding:6px 16px;                      /* 內距：覺得貼邊就加大 */
 }
 
-/* === 平板 / 小桌機：吃滿寬、靠左 === */
+/* —— 平板以下：吃滿寬、靠左，不要置中 —— */
 @media (max-width:1200px){
-  .topic-rows{
-    width:100%;
-    max-width:none;
-    margin:18px 0 0;             /* 移除 auto 置中 */
-    justify-items:start;         /* 明確靠左 */
-  }
-  .topic-row{
-    width:100%;
-  }
-  .topic-row > div:last-child{
-    min-height:48px;             /* 依桌機設定保持等高 */
-  }
+  .topic-rows{ width:100%; margin-left:0; margin-right:0; }
+  .topic-row{  width:100%; }
 }
 
-/* === 手機：多行時頂齊；徽章不要太小 === */
+/* —— 手機：多行時頂齊；徽章不要掉行也不要太小 —— */
 @media (max-width:560px){
-  .topic-row{ 
-    width:100%; 
-    align-items:flex-start;       /* 多行時讓起點頂齊 */
-    font-size:1em;                /* 右側文字微縮 */
-  }
+  .topic-row{ align-items:flex-start; }
   .topic-row .pill{
     min-width:58px;
     height:40px;
     padding:0 12px;
-    font-size:.95em;              /* 膠囊內文字略小 */
+    font-size:.95em;
   }
-  .topic-row > div:last-child{
-    min-height:40px;              /* 與膠囊一致 */
-  }
-  .place .hl{
-    font-size:.95em;              /* 手機徽章字級 */
-    padding:6px 14px;             /* 內距略縮，避免掉行 */
-  }
+  .topic-row > div:last-child{ min-height:40px; }
+  .place .hl{ font-size:1em; padding:6px 14px; }
 }
 /* ===== 小標（Key Speakers / About / Highlights）— 保留你的 1.8rem ===== */
 .event-info .inner h2{ font-size:1.8rem; margin:64px 0 20px; font-weight:500; }
