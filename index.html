@@ -232,14 +232,47 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 
 /* ===== HERO（手機版 1920×1800）===== */
 @media (max-width:768px){
-  .hero-wrapper{ aspect-ratio:1920/1800; background-image:url("assets/img/hero-bg-m.png"); background-position:center top }
-  .hero-logo{ top:6vw; left:6vw; width:50vw }
-  .hero-title{ top:24vw; left:6vw; width:65vw }
-  .hero-subtitle{ top:48vw; left:6vw; width:65vw }
-  .topic-badge {
-    margin-top: 10px;
+  .hero-wrapper{
+    aspect-ratio:1920/1800;
+    background-image:url("assets/img/hero-bg-m.png");
+    background-position:center top;
+  }
+  .hero-logo{ top:6vw; left:6vw; width:50vw; }
+  .hero-title{ top:24vw; left:6vw; width:65vw; }
+  .hero-subtitle{ top:48vw; left:6vw; width:65vw; }
+
+  /* 手機版主標額外上距 */
+  .topic-badge{ margin-top:10px; }
+}
+/* ← 到這裡結束手機 media query，下面是桌機/手機的對齊補丁 */
+
+/* === 桌機：讓膠囊與右側文字垂直置中，起點對齊 === */
+@media (min-width:992px){
+  .event-info .topic-row{
+    align-items:center !important;
+  }
+  .event-info .topic-row .pill{
+    display:inline-flex;
+    align-items:center;
+    height:42px;
+    padding:0 14px;
+    line-height:1;
+  }
+  .event-info .topic-row > div:last-child{
+    display:flex;
+    align-items:center;
+    min-height:42px;
   }
 }
+
+/* 手機/平板：維持頂齊（多行比較自然） */
+@media (max-width:991.98px){
+  .event-info .topic-row{ align-items:flex-start; }
+  .event-info .topic-row > div:last-child{ display:block; min-height:0; }
+}
+
+/* 微調：避免右側 chip 影響基線 */
+.place .hl{ vertical-align:middle; }
 </style>
 </head>
 <body>
