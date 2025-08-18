@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>前瞻科技系列論壇</title>
 
-<!-- 字型：只保留 300 / 400 / 500 -->
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Montserrat:wght@500&display=swap" rel="stylesheet">
 
 <style>
@@ -118,7 +117,6 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
   padding-block:60px;
 }
 .event-info .inner{
-  /* 回到最初的 max-width + padding */
   max-width:1200px;
   margin:0 auto;
   padding:0 20px;
@@ -126,7 +124,6 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
   font-weight:300;
 }
 
-/* 標題：改為 500 */
 .event-info h2{
   font-size:1.5rem;
   margin:0 0 20px;
@@ -138,7 +135,6 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
   font-weight:500;
 }
 
-/* 內容粗體：Medium + 粉色 */
 .event-info b,
 .event-info strong{
   color:var(--pink);
@@ -153,35 +149,35 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
 }
 .event-info li{ margin-bottom:10px; }
 
-/* ===== 立即報名（箭頭款，白框加粗、置中） ===== */
+/* ===== 立即報名（箭頭款，hover箭頭右滑） ===== */
 .register-btn{
-  display:flex;                 /* block-level，margin:auto 易置中 */
+  display:flex;
   align-items:center;
   justify-content:center;
   gap:12px;
-  margin:40px auto 0;          /* 置中 */
-  padding:18px 50px;           /* 尺寸與你喜歡的版本一致 */
-  background:#f48c06;          /* 橘底（維持原風格） */
+  margin:40px auto 0;
+  padding:14px 30px;
+  width:190px;
+  background:#f48c06;
   color:#fff;
-  border:6px solid #fff;       /* 白框加粗 */
+  border:6px solid #fff;
   border-radius:999px;
-  font-size:1.6rem;            /* 與箭頭版一致 */
+  font-size:1.2rem;
   font-weight:500;
   text-decoration:none;
   box-shadow:0 8px 20px rgba(0,0,0,0.25);
   transition:all .3s ease;
 }
-.register-btn span{ margin-right:4px; }
 .register-btn svg{
-  width:24px; height:24px; fill:#fff; flex:0 0 auto; transition:transform .3s ease;
+  width:20px; height:20px; fill:#fff; flex:0 0 auto; transition:transform .3s ease;
 }
 .register-btn:hover{
-  background:#f48c06;          /* 維持橘色 */
-  border-color:transparent;    /* hover 時白框隱藏 */
+  background:#f48c06;
+  border-color:transparent;
   transform:scale(0.95);
   box-shadow:none;
 }
-.register-btn:hover svg{ transform:translateX(2px); }
+.register-btn:hover svg{ transform:translateX(6px); }  /* ← 箭頭右滑 */
 .register-btn:active{ transform:scale(0.9); }
 .register-btn:focus-visible{
   outline:3px solid rgba(255,255,255,.6);
@@ -242,12 +238,12 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
       <li><strong>政策與產業鏈結：</strong>呼應「AI 新十大全球倡議」與人才培育政策，推動技術與人才並進。</li>
     </ul>
 
-    <!-- CTA 按鈕（置中、白框加粗、含右箭頭） -->
+    <!-- CTA 按鈕 -->
     <a href="#" class="register-btn">
       <span>立即報名</span>
-      <!-- 右箭頭 SVG（方向已修正） -->
+      <!-- 右箭頭 SVG -->
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        <path d="M13 5l7 7-7 7-1.41-1.41L16.17 13H4v-2h12.17l-4.58-4.59L13 5z"/>
+        <path d="M10 17l5-5-5-5v10z"/>
       </svg>
     </a>
   </div>
