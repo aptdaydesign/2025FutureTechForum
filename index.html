@@ -298,7 +298,11 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   background:#112240 !important;
 }
 .agenda .inner{ max-width:1200px; margin:0 auto; padding:0 20px; }
-.agenda h2{ font-size:clamp(20px,1.8vw,30px); font-weight:500; margin:0 0 20px; }
+.agenda h2{
+  font-size:clamp(20px,1.8vw,30px);
+  font-weight:500;
+  margin-bottom:20px;
+}
 
 /* 用 row-gap 控制卡片間距，卡片本身不要再設 margin */
 .ag-grid{ display:grid; grid-template-columns:1fr; row-gap:28px; }
