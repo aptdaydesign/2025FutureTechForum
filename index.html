@@ -270,17 +270,17 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   position:absolute;
   top:0;
   left:50%;
-  transform:translateX(-50%);        /* 水平置中 */
+  transform:translate(-50%, -50%);
   z-index:2;
-  padding:6px 16px;
-  border-radius:0 0 12px 12px;       /* 只保留下緣兩角 R */
+  padding:6px 14px;
+  border-radius:0 0 12px 12px;
   background:#e6eef7;
   border:1px solid #c9d8ea;
   box-shadow:0 3px 10px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.7);
   color:#1d2d44;
   font-family:"Akrobat","Noto Sans TC",sans-serif;
   font-weight:700;
-  font-size:clamp(18px,2.1vw,26px);  /* 字更大 */
+  font-size:clamp(18px, 1.8vw, 24px); /* ⬅️ 調整這裡 */
   line-height:1.05;
   letter-spacing:.01em;
   white-space:nowrap;
@@ -303,6 +303,14 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 
 /* 備註 */
 .ag-note{ color:#a8b3c9; font-size:.95em; }
+
+/* 手機專屬（螢幕寬度小於 480px 時） */
+@media (max-width: 480px){
+  .ag-time{
+    font-size:20px;   /* 強制給一個固定值，不會小於這個字 */
+    padding:8px 16px; /* 讓膠囊在手機上更有份量 */
+    }
+  }
 </style>
 
 </head>
