@@ -236,6 +236,51 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   .event-info .topic-row > div:last-child{ display:block; min-height:0; }
 }
 .place .hl{ vertical-align:middle; }
+
+/* Footer（與議程同色，滿版） */
+.sponsor-footer{
+  background:#112240;
+  padding:28px 0 36px;
+  /* 與上方區塊留一點空隙（需要更緊可改小） */
+  margin-top:12px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+.sponsor-footer .inner{
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 20px;
+  display:grid;
+  grid-template-columns:1fr 1fr;  /* 左右兩欄 */
+  gap:40px;
+  align-items:center;
+  justify-items:center;
+}
+.sponsor-block{
+  display:flex;
+  align-items:center;
+  gap:18px;                       /* 標籤與 logo 間距 */
+}
+.sponsor-tag{
+  color:#fff;
+  opacity:.9;
+  font-weight:500;
+  font-size:clamp(14px,1vw,18px);
+  white-space:nowrap;
+}
+.sponsor-logo{
+  display:block;
+  height:46px;                    /* 統一高度（會等比縮放）*/
+  width:auto;
+  max-width:100%;
+}
+
+/* 手機：改直排置中，Logo 稍微小一點 */
+@media (max-width:768px){
+  .sponsor-footer .inner{ grid-template-columns:1fr; gap:22px; }
+  .sponsor-block{ flex-direction:column; gap:10px; text-align:center; }
+  .sponsor-logo{ height:40px; }
+}
+
 </style>
 <style>
 /* ===== Agenda（時間膠囊在卡片「內部」，上沿緊貼卡片） ===== */
@@ -543,6 +588,22 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
     <p class="tip">＊主辦單位保留議程內容與流程調整之權利。</p>
   </div>
 </section>
+
+<footer class="sponsor-footer" aria-label="主辦與協辦單位">
+  <div class="inner">
+    <!-- 主辦 -->
+    <div class="sponsor-block">
+      <div class="sponsor-tag">主辦單位</div>
+      <img class="sponsor-logo" src="assets/img/organizer-logo.png" alt="國家科學及技術委員會">
+    </div>
+
+    <!-- 協辦 -->
+    <div class="sponsor-block">
+      <div class="sponsor-tag">協辦單位</div>
+      <img class="sponsor-logo" src="assets/img/partner-logo.png" alt="科技政策研究與資訊中心">
+    </div>
+  </div>
+</footer>
 
 <script>
 /* 切換選取中的日期卡 */
