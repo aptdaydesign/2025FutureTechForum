@@ -154,6 +154,7 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   align-items:center;             /* 垂直置中（桌機 & 大多數情況） */
   gap:10px;
   width:fit-content;
+  font-size: clamp(20px, 1.8vw, 30px);
 }
 
 .topic-row .pill{
@@ -170,6 +171,7 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   align-items:center;             /* 文字在膠囊內置中 */
   justify-content:center;
   font-weight:500;
+  font-size: clamp(16px, 1.8vw, 24px);
 }
 
 /* 右側內容：可換行、與膠囊等高 */
@@ -187,14 +189,15 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 .place .hl{
   display:inline-flex;
   align-items:center;
-  padding:2px 8px;
-  margin-left:.4em;
-  border-radius:8px;
   background:rgba(255,255,255,.25);
   color:#fff;
   font-weight:500;
   line-height:1;
   vertical-align:middle;
+  font-size: clamp(16px, 1.8vw, 24px);          /* ← 改這裡：徽章字級 */
+  padding: 4px 12px;        /* ← 內距：覺得太貼就把左右數字再加大 */
+  margin-left: .6em;        /* ← 與前面文字的間距：.4em → .6em 或更多 */
+  border-radius: 10px;      /* 圓角可一起微調 */
 }
 
 /* === 平板 / 小桌機：保持置中，不要貼左 === */
