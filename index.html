@@ -116,69 +116,66 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   line-height:1.8; font-weight:300; font-size:1.2em;
 }
 
-/* ===== 主標 / 副標（保留你放大的數值） ===== */
-.topic-wrap{ text-align:center; margin:16px auto 24px; max-width:1000px; }
-.topic-badge {
-  display: inline-block;
-  background: transparent;     /* 不要底色 */
-  color: #fff;                 /* 字體顏色白色 */
-  font-size: clamp(23px, 3vw, 72px);
-  font-weight: 400;
-  padding: 10px 20px;
-  border-radius: 20px;         /* 圓角 */
-  
-  border: 4px solid var(--pink);  /* 單色外框，這裡用 pink 變數 */
-  
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
+/* === 時間 / 地點 === */
 
-.topic-en{
-  font-size: clamp(20px, 1.8vw, 42px);
-  font-weight:400;
-  color:#ddd;
-  margin-bottom:40px;
-  font-family:"Akrobat","Noto Sans TC",sans-serif;
-}
-
-/* 時間 / 地點 列 */
+/* 容器：以內容最大寬度為準並置中 */
 .topic-rows{
-  margin-top:18px;
-  display:grid;
-  gap:12px;
-  justify-items:stretch !important;   /* 取代舊的 center */
+  display: grid;
+  gap: 12px;
+  margin: 18px auto 0;   /* 置中 */
+  width: max-content;    /* 由最長那一列決定寬度 */
 }
 
+/* 每一列：不要撐滿父層，寬度隨內容 */
 .topic-row{
-  display:flex;
-  gap:10px;
-  align-items:flex-start;             /* 手機等小螢幕：多行時頂齊 */
+  display: flex;
+  align-items: center;    /* 文字與膠囊垂直置中（桌機） */
+  gap: 10px;
+  width: max-content;     /* 以本列內容寬度為準 */
 }
 
-/* 左側膠囊：固定寬度、不換行、不被壓縮 */
+/* 左側膠囊：固定寬、不換行 */
 .topic-row .pill{
-  flex:0 0 auto;
-  min-width:64px;                     /* 想更窄可改 56px */
-  white-space:nowrap;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  background:rgba(255,255,255,.18);
-  border-radius:999px;
-  padding:8px 14px;
-  font-weight:500;
+  flex: 0 0 auto;
+  min-width: 64px;        /* 需要更窄就調這裡（例：56px） */
+  text-align: center;
+  white-space: nowrap;
+  background: rgba(255,255,255,.18);
+  border-radius: 999px;
+  padding: 8px 14px;
+  line-height: 1;         /* 避免被行高撐高 */
+  display: inline-flex;
+  align-items: center;
+  height: 42px;           /* 膠囊視覺高度（和右側一致） */
 }
 
-/* 右側內容：可自由換行且不會把膠囊擠掉 */
+/* 右側內容：可換行、不會把膠囊擠走，與膠囊等高置中 */
 .topic-row > div:last-child{
-  flex:1 1 auto;
-  min-width:0;                        /* 防內容把容器撐寬 */
-  overflow-wrap:anywhere;             /* 長字串仍可斷行 */
-  line-height:1.8;
-  text-align:left;                    /* 保險：不要置中 */
+  flex: 1 1 auto;
+  min-width: 0;           /* 防止長字把版面撐寬 */
+  overflow-wrap: anywhere;
+  display: flex;
+  align-items: center;
+  min-height: 42px;       /* 要和膠囊高度一致 */
+  line-height: 1.8;
 }
 
-/* 這一段繼續沿用你的原本寫法 */
+/* 手機：避免超出畫面，改回吃滿寬度 */
+@media (max-width: 560px){
+  .topic-rows{ width: 100%; }
+  .topic-row{ width: 100%; align-items: flex-start; } /* 多行時頂齊更自然 */
+  .topic-row .pill{
+    min-width: 58px;
+    height: 38px;
+    padding: 0 12px;
+  }
+  .topic-row > div:last-child{
+    min-height: 38px;
+    display: block;       /* 多行時不要強制垂直置中 */
+  }
+}
+
+/* 你的既有樣式（保留） */
 .place{ font-size:1.05em; }
 .place .hl{
   display:inline-block;
@@ -187,17 +184,7 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   border-radius:8px;
   background:rgba(255,255,255,.25);
   color:#fff; font-weight:500;
-}
-
-/* 桌機：膠囊與文字改為垂直置中（視覺更穩） */
-@media (min-width: 769px){
-  .topic-row{ align-items:center; }
-}
-
-/* 手機微調：縮小間距與膠囊 */
-@media (max-width:560px){
-  .topic-row{ gap:8px; }
-  .topic-row .pill{ min-width:58px; padding:6px 12px; }
+  vertical-align: middle;
 }
 
 /* ===== 小標（Key Speakers / About / Highlights）— 保留你的 1.8rem ===== */
