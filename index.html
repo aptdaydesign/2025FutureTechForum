@@ -256,11 +256,19 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 }
 /* ← 到這裡結束手機 media query，下面是桌機/手機的對齊補丁 */
 
-/* === 桌機：讓膠囊與右側文字垂直置中，起點對齊 === */
+/* === 桌機：讓膠囊與右側文字垂直置中，起點對齊，整組置中 === */
 @media (min-width:992px){
+  /* 整組時間/地點列置中 */
+  .event-info .topic-rows{
+    display: grid;             /* 保持 grid 排版 */
+    justify-items: center;     /* 每一列以容器為基準置中 */
+  }
+
   .event-info .topic-row{
     align-items:center !important;
+    width: max-content;        /* 每列寬度縮到剛好包住內容，才會真的置中 */
   }
+
   .event-info .topic-row .pill{
     display:inline-flex;
     align-items:center;
@@ -268,6 +276,7 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
     padding:0 14px;
     line-height:1;
   }
+
   .event-info .topic-row > div:last-child{
     display:flex;
     align-items:center;
