@@ -44,7 +44,7 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
   animation: slideInUp 1s ease-out forwards 1s; }
 
 @keyframes slideInLeft { from { transform:translateX(-50px); opacity:0 } to { transform:translateX(0); opacity:1 } }
-@keyframes slideInUp   { from { transform:translateY(50px);  opacity:0 } to { transform:translateY(0); opacity:1 } }
+@keyframes slideInUp   { from { transform:translateY(50px);  opacity:0 } to { transform:translateY(0);  opacity:1 } }
 
 /* ===== 橫向活動選單 ===== */
 :root{
@@ -53,7 +53,6 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
   --dividerW: calc(2 / 1920 * 100vw);
   --f2: clamp(20px, 2.4vw, 56px);
   --pink:#ff5e99;
-  --gap:48px; /* 區塊間距一致 */
 }
 .event-bar{ width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); background:#000 }
 .event-bar .bar{ display:grid; grid-template-columns:repeat(4,1fr) }
@@ -63,17 +62,27 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
   background:var(--bg); color:#fff;
   appearance:none; border:none; outline:none; box-shadow:none;
   display:grid; align-content:center; justify-items:center; text-align:center;
-  padding-block:20px;
+  padding-block:16px;           /* 稍降高度 */
   padding-inline:clamp(12px, 2vw, 32px);
   border-right:var(--dividerW) solid #fff;
   cursor:pointer; user-select:none;
 }
+.bar-item:first-child{border-left:none}
 .bar-item:last-child{border-right:none}
 .bar-item[aria-current="true"]{ background:var(--tab-active) }
-.bar-item .t1{ white-space:nowrap; font-weight:500; font-size:var(--f2); line-height:1.25; margin:0 0 10px; letter-spacing:0.03em; }
-.bar-item .t2{ font-weight:500; font-size:calc(var(--f2) * 1.5); line-height:1.25; margin:0 0 6px; letter-spacing:0.025em; font-family:"Akrobat","Noto Sans TC",sans-serif; }
-.bar-item .t3{ font-weight:500; opacity:.95; font-size:calc(var(--f2) * 0.95); line-height:1.3; margin:0; letter-spacing:0.025em; font-family:"Akrobat","Noto Sans TC",sans-serif; }
 
+/* 只保留 t1（系列論壇） */
+.bar-item .t1{
+  white-space:nowrap;
+  font-weight:500;
+  font-size:var(--f2);
+  line-height:1.25;
+  margin:0;
+  letter-spacing:0.03em;
+}
+/* 刪除 t2 / t3 用到的樣式（不再需要） */
+
+/* 手機調整 */
 @media (max-width:480px){
   .event-bar .bar{ grid-template-columns:repeat(2,1fr) }
   .bar-item{ border-right:var(--dividerW) solid #fff; border-bottom:var(--dividerW) solid #fff }
@@ -82,71 +91,125 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
 }
 
 /* ===== 活動資訊區塊（背景 #112240） ===== */
-.event-info{ background:#112240; padding-block:60px; }
+.event-info{
+  background:#112240;
+  padding-block:60px;
+}
 .event-info .inner{
-  max-width:1200px; margin:0 auto; padding:0 20px;
-  line-height:1.8; font-weight:300; font-size:1.2em;
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 20px;
+  line-height:1.8;
+  font-weight:300;
+  font-size:1.2em;
 }
 
-/* 標題：改為 500 */
-.event-info h2{ font-size:2rem; margin:0 0 20px; font-weight:500; }
-.event-info h2 span{ color:#fff; font-family:"Akrobat","Noto Sans TC",sans-serif; font-weight:500; }
+/* 小標縮小 1/3（原 2rem → 約 1.34rem） */
+.event-info h2{
+  font-size:1.34rem;
+  margin:0 0 20px;
+  font-weight:500;
+}
+.event-info h2 span{
+  color:#fff;
+  font-family:"Akrobat","Noto Sans TC",sans-serif;
+  font-weight:500;
+}
 
-/* 內文強調 */
-.event-info b, .event-info strong{ color:var(--pink); font-weight:500; }
+.event-info b,
+.event-info strong{ color:var(--pink); font-weight:500; }
+.event-info p, .event-info li{ font-weight:300; }
+
 .event-info ul{ margin:20px 0; padding-left:20px; }
 .event-info li{ margin-bottom:10px; }
 
-/* ===== 活動名稱 / 時間 / 地點 ===== */
-.topic-wrap{ margin:0 0 var(--gap); }
-.topic-badge{
-  display:inline-block; padding:10px 18px;
-  border-radius:12px;                /* 小 R 角矩形 */
-  background:#ff2b8a; color:#fff; font-weight:500;
-  font-size:2rem;                    /* 與活動簡介主標同級 */
-}
-.topic-en{
-  margin-top:10px; color:#fff;
-  font-family:"Akrobat","Noto Sans TC",sans-serif; /* 指定 Akrobat */
-  font-size:1.4rem;                  /* 比主標小一些 */
-  font-weight:500;
-}
-.meta{ display:flex; flex-direction:column; gap:10px; margin:0 0 var(--gap); }
-.meta-item{ font-size:1.05em; }
-.meta-label{
-  display:inline-block; padding:2px 10px; margin-right:8px;
-  border-radius:999px; background:rgba(255,255,255,.2); color:#fff; font-weight:500;
-}
-.place .hl{ color:var(--pink); font-weight:500; font-size:inherit; } /* 線上同步：粉紅、字級一致 */
-
-/* ===== 講者 ===== */
-.speakers-block{ margin:0 0 var(--gap); }
-.speaker-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:36px; }
-.speaker{ text-align:center; }
-.speaker .photo{ width:200px; height:200px; border-radius:50%; margin:0 auto 18px; object-fit:cover; object-position:center; box-shadow:0 8px 24px rgba(0,0,0,.25); background:#0b0c0f; }
-.speaker .name{ font-size:1.6rem; font-weight:500; margin:0 0 10px; }
-.speaker .title-chip{ display:inline-block; padding:8px 16px; border-radius:999px; background:rgba(255,255,255,.30); color:#fff; font-weight:500; font-size:1rem; }
-
-@media (max-width:960px){ .speaker-grid{ grid-template-columns:1fr 1fr; } }
-@media (max-width:560px){ .speaker-grid{ grid-template-columns:1fr; } }
-
-/* ===== CTA（保留原樣） ===== */
+/* ===== 立即報名（置中 + 放大 + 柔和陰影 + 箭頭常駐晃動） ===== */
 .register-btn{
   display:flex; align-items:center; justify-content:center; gap:14px;
-  margin:40px auto 0; padding:16px 15px 16px 35px; width:220px;
-  background:#f48c06; color:#fff; border:6px solid #fff; border-radius:999px;
+  margin:40px auto 0;
+  padding:16px 15px 16px 35px;
+  width:220px;
+  background:#f48c06; color:#fff;
+  border:6px solid #fff; border-radius:999px;
   font-size:1.8rem; font-weight:500; text-decoration:none;
   box-shadow:0 6px 18px rgba(0,0,0,0.18); transition:all .3s ease;
 }
+.register-btn span{ margin-right:4px; }
 .register-btn svg{ width:1.8em; height:1.5em; flex:0 0 auto; will-change:transform; animation:arrowOsc .8s ease-in-out infinite alternate; }
 .register-btn svg path{ fill:none; stroke:#fff; stroke-width:5; stroke-linecap:round; stroke-linejoin:round; vector-effect:non-scaling-stroke; }
-.register-btn:hover{ background:#f48c06; border-color:transparent; transform:scale(.95); box-shadow:0 4px 12px rgba(0,0,0,.15); }
-.register-btn:active{ transform:scale(.9); }
+.register-btn:hover{ background:#f48c06; border-color:transparent; transform:scale(0.95); box-shadow:0 4px 12px rgba(0,0,0,0.15); }
+.register-btn:active{ transform:scale(0.9); }
 .register-btn:focus-visible{ outline:3px solid rgba(255,255,255,.6); outline-offset:3px; }
+@keyframes arrowOsc{ from{ transform:translateX(-6px) } to{ transform:translateX(6px) } }
+@media (prefers-reduced-motion: reduce){
+  .register-btn, .register-btn svg{ animation:none!important; transition:none!important; transform:none!important; }
+}
 
-@keyframes arrowOsc{ from{transform:translateX(-6px)} to{transform:translateX(6px)} }
-@media (prefers-reduced-motion:reduce){
-  .register-btn, .register-btn svg{ animation:none !important; transition:none !important; transform:none !important; }
+/* ====== 主題/時間/地點（置中） ====== */
+.topic-wrap{
+  text-align:center;
+  margin:48px auto 24px;
+  max-width:1000px;
+}
+.topic-badge{
+  display:inline-block;
+  padding:12px 24px;
+  border-radius:16px;                 /* 小 R 角矩形 */
+  background:#ff2b8a;
+  color:#fff; font-weight:500;
+  font-size:clamp(18px,1.6vw,28px);
+}
+.topic-en{
+  margin-top:14px;
+  font-weight:500;
+  font-family:"Akrobat","Noto Sans TC",sans-serif; /* 英文用 Akrobat */
+  font-size:clamp(14px,1.2vw,20px);                 /* 再小一點 */
+  opacity:.95;
+}
+.topic-rows{ margin-top:18px; display:grid; gap:14px; justify-items:center; }
+.topic-row{ display:flex; align-items:center; gap:12px; }
+.pill{
+  background:rgba(255,255,255,.18);
+  border-radius:999px;
+  padding:8px 14px;
+  font-weight:500;
+}
+.place{
+  font-size:1.05em;
+}
+.place .hl{
+  display:inline-block;
+  margin-left:.4em;
+  padding:2px 8px;
+  border-radius:8px;
+  background:rgba(255,255,255,.25);
+  color:#fff; font-weight:500;
+}
+
+/* ===== 講者 ===== */
+.speaker-grid{
+  margin-top:36px;
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:36px;
+}
+.speaker{ text-align:center; }
+.speaker .photo{
+  width:200px; height:200px; border-radius:50%;
+  margin:0 auto 18px; object-fit:cover; object-position:center;
+  box-shadow:0 8px 24px rgba(0,0,0,.25); background:#0b0c0f;
+}
+.speaker .name{ font-size:1.6rem; font-weight:500; margin:0 0 10px; }
+.speaker .title-chip{
+  display:inline-block; padding:8px 16px; border-radius:999px;
+  background:rgba(255,255,255,.30); color:#fff; font-weight:500; font-size:1rem;
+}
+
+/* RWD */
+@media (max-width:960px){ .speaker-grid{ grid-template-columns:1fr 1fr; } }
+@media (max-width:560px){
+  .speaker-grid{ grid-template-columns:1fr; }
+  .topic-badge{ font-size:18px; }
 }
 </style>
 </head>
@@ -158,64 +221,61 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
   <img class="hero-img hero-subtitle" src="assets/img/hero-subtitle.png" alt="">
 </section>
 
+<!-- 橫向選單：只保留「系列論壇」 -->
 <nav class="event-bar" aria-label="系列論壇切換">
   <div class="bar" id="eventBar">
     <button type="button" class="bar-item" data-id="s1" aria-current="true">
       <div class="t1">系列論壇 ①</div>
-      <div class="t2">2025.09.26</div>
-      <div class="t3">07:30 – 11:00</div>
     </button>
     <button type="button" class="bar-item" data-id="s2" aria-current="false">
       <div class="t1">系列論壇 ②</div>
-      <div class="t2">2025.10.14</div>
-      <div class="t3">10:30 – 12:30</div>
     </button>
     <button type="button" class="bar-item" data-id="s3" aria-current="false">
       <div class="t1">系列論壇 ③</div>
-      <div class="t2">2025.11.22</div>
-      <div class="t3">09:00 – 16:00</div>
     </button>
     <button type="button" class="bar-item" data-id="s4" aria-current="false">
       <div class="t1">系列論壇 ④</div>
-      <div class="t2">2025.12.15</div>
-      <div class="t3">08:30 – 16:30</div>
     </button>
   </div>
 </nav>
 
 <section class="event-info" id="s1-info">
   <div class="inner">
-    <!-- 活動名稱 -->
+
+    <!-- 活動名稱 / 英文副標 / 時間 / 地點（置中） -->
     <div class="topic-wrap">
       <div class="topic-badge">未來半導體人才趨勢論壇：產學對話</div>
       <div class="topic-en">Empowering the Future of Semiconductor: Bridging Industry and Academia</div>
+
+      <div class="topic-rows">
+        <div class="topic-row">
+          <div class="pill">時間</div>
+          <div>2025 年 9 月 26 日，7:30 – 11:00</div>
+        </div>
+        <div class="topic-row place">
+          <div class="pill">地點</div>
+          <div>美國 史丹佛大學；臺灣：科政大樓 14F 會議室 <span class="hl">線上同步</span></div>
+        </div>
+      </div>
     </div>
 
-    <!-- 時間 / 地點 -->
-    <div class="meta">
-      <div class="meta-item time"><span class="meta-label">時間</span>2025年9月26日，7:30 – 11:00</div>
-      <div class="meta-item place"><span class="meta-label">地點</span>美國 史丹佛大學；臺灣：科政大樓14F會議室 <span class="hl">線上同步</span></div>
-    </div>
-
-    <!-- 主要講者（主標置左） -->
-    <div class="speakers-block">
-      <h2>主要講者<span>｜Key Speakers</span></h2>
-      <div class="speaker-grid">
-        <div class="speaker">
-          <img class="photo" src="assets/img/speaker1-1.png" alt="Prof. David Horsley">
-          <div class="name">Prof. David Horsley</div>
-          <div class="title-chip">教授，加州大學戴維斯分校</div>
-        </div>
-        <div class="speaker">
-          <img class="photo" src="assets/img/speaker1-2.png" alt="台積電高階經理團隊">
-          <div class="name">台積電高階經理團隊</div>
-          <div class="title-chip">涵蓋研發、設計、製造、IT、人資等核心領域</div>
-        </div>
-        <div class="speaker">
-          <img class="photo" src="assets/img/speaker1-3.png" alt="Dr. H.S. Philip Wong">
-          <div class="name">Dr. H.S. Philip Wong</div>
-          <div class="title-chip">台積電首席科學家・史丹佛大學教授</div>
-        </div>
+    <!-- 主要講者（小標同樣縮小 1/3；置左） -->
+    <h2>主要講者<span>｜Key Speakers</span></h2>
+    <div class="speaker-grid">
+      <div class="speaker">
+        <img class="photo" src="assets/img/speaker1-1.png" alt="Prof. David Horsley">
+        <div class="name">Prof. David Horsley</div>
+        <div class="title-chip">教授，加州大學戴維斯分校</div>
+      </div>
+      <div class="speaker">
+        <img class="photo" src="assets/img/speaker1-2.png" alt="台積電高階經理團隊">
+        <div class="name">台積電高階經理團隊</div>
+        <div class="title-chip">涵蓋研發、設計、製造、IT、人資等核心領域</div>
+      </div>
+      <div class="speaker">
+        <img class="photo" src="assets/img/speaker1-3.png" alt="Dr. H.S. Philip Wong">
+        <div class="name">Dr. H.S. Philip Wong</div>
+        <div class="title-chip">台積電首席科學家・史丹佛大學教授</div>
       </div>
     </div>
 
@@ -239,13 +299,14 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
       <li><strong>政策與產業鏈結：</strong>呼應「AI 新十大全球倡議」與人才培育政策，推動技術與人才並進。</li>
     </ul>
 
-    <!-- CTA 按鈕（保留在最後） -->
+    <!-- CTA 按鈕 -->
     <a href="#" class="register-btn">
       <span>立 即 報 名</span>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
         <path d="M8 4l8 8-8 8" />
       </svg>
     </a>
+
   </div>
 </section>
 
