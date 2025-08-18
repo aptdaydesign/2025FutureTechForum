@@ -29,30 +29,30 @@
 html,body{margin:0;background:#000;color:#fff;overflow-x:hidden;}
 html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,"PingFang TC","Heiti TC",sans-serif}
 
-/* ===== HERO ===== */
+/* ===== HERO（把 event-bar 放進來、貼底） ===== */
 .hero-wrapper{
   position:relative;
   width:100%;
-  aspect-ratio:1920/840;
+  aspect-ratio:1920/940;                    /* ← 桌機改 1920×940 */
   overflow:hidden;
   background:#0b0c0f url("assets/img/hero-bg.png") center/cover no-repeat;
 }
 .hero-img{position:absolute; max-width:100%; height:auto; pointer-events:none; user-select:none; opacity:0}
 
 .hero-logo{
-  top:calc( 60/840 * 100%);
+  top:calc( 60/940 * 100%);                 /* 原本 /840 → /940 */
   left:calc(70/1920*100%);
   width:calc(504/1920*100%);
   animation: slideInLeft 1s ease-out forwards 0.2s;
 }
 .hero-title{
-  top:calc(270/840 * 100%);
+  top:calc(270/940 * 100%);                 /* 原本 /840 → /940 */
   left:calc(100/1920*100%);
   width:calc(880/1920*100%);
   animation: slideInUp 1s ease-out forwards 0.6s;
 }
 .hero-subtitle{
-  top:calc(570/840 * 100%);
+  top:calc(570/940 * 100%);                 /* 原本 /840 → /940 */
   left:calc(100/1920*100%);
   width:calc(880/1920*100%);
   animation: slideInUp 1s ease-out forwards 1s;
@@ -64,31 +64,33 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
 /* ===== 色彩變數 ===== */
 :root{
   --tab-default:#501cf2;
-  --tab-active:#ff2b8a;
+  --tab-active:#ff2b8a;        /* 你要的桃紅 */
   --dividerW: calc(2 / 1920 * 100vw);
   --f2: clamp(20px, 2.4vw, 56px);
   --pink:#ff5e99;
 }
 
-/* ===== 橫向日期選單（卡片式） ===== */
+/* ===== 橫向日期選單（卡片式，嵌在 HERO 底部） ===== */
 .event-bar{
+  position:absolute; left:0; right:0; bottom:0;   /* ← 貼 hero 底 */
   width:100%;
-  padding-inline:70px;
-  background:#000;
+  padding-inline:100px;                            /* ← 桌機左右 100px */
+  padding-block:16px;                              /* 與底部留點距 */
+  background:transparent;                          /* 讓 hero 背景露出 */
   box-sizing:border-box;
 }
-.event-bar .bar {
-  max-width: min(1400px, calc(100% - 200px)); /* 200px=左右各100px */
+.event-bar .bar{
+  max-width:min(1400px, calc(100% - 200px));      /* 兩側各 100px 的視覺邊界 */
   margin:0 auto;
   display:grid !important;
   grid-template-columns:repeat(4, minmax(0, 1fr));
   gap:10px;
 }
 
-/* 卡片按鈕 */
+/* 卡片按鈕（圓角、漸層、平滑變化） */
 .bar-item{
   --c1: var(--tab-default);
-  --c2: #2b0f7a;
+  --c2: #2b0f7a;                               /* 次色：深紫做對比 */
   appearance:none; border:none; outline:none;
   color:#fff; cursor:pointer; user-select:none;
 
@@ -107,7 +109,7 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
   transform:translateY(-1px);
 }
 .bar-item[aria-current="true"]{
-  --c1: var(--tab-active);
+  --c1: var(--tab-active);                      /* 啟用改桃紅漸層 */
   --c2: #a71858;
   animation: gradFlow 3s ease-in-out infinite alternate;
 }
@@ -116,26 +118,31 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
   to  { background-position:100% 50%; }
 }
 
-/* 內容 */
+/* 內容：箭頭 ⮕ + 日期（箭頭左右晃動） */
 .bar-arrow{
-  font-size: clamp(18px, 2.2vw, 28px);
+  font-size: clamp(18px, 2.2vw, 28px);         /* 調這裡＝改箭頭大小 */
   line-height:1;
   display:inline-block;
   animation: arrowOsc .8s ease-in-out infinite alternate;
 }
-@keyframes arrowOsc{
-  from{ transform: translateX(-6px); }
-  to  { transform: translateX(6px); }
-}
 .bar-date{
   font-family:"Akrobat","Noto Sans TC",sans-serif;
   font-weight:500;
-  font-size: clamp(18px, 2.4vw, 32px);
+  font-size: clamp(18px, 2.4vw, 32px);         /* 調這裡＝改日期字級 */
   letter-spacing:0.025em;
   white-space:nowrap;
 }
 
+/* 共用：箭頭左右晃動（給 bar、CTA） */
+@keyframes arrowOsc{
+  from{ transform: translateX(-6px); }
+  to  { transform: translateX(6px); }
+}
+
 /* —— RWD：event-bar —— */
+@media (max-width:1200px){
+  .event-bar .bar{ max-width:100%; }           /* 小於 1200 時允許滿寬但仍留 padding-inline */
+}
 @media (max-width:1024px){
   .event-bar{ padding-inline:60px; }
 }
@@ -177,7 +184,7 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
 .event-info ul{ margin:20px 0; padding-left:20px; }
 .event-info li{ margin-bottom:10px; }
 
-/* ===== 立即報名 ===== */
+/* ===== 立即報名（保留既有設定） ===== */
 .register-btn{
   display:flex; align-items:center; justify-content:center; gap:14px;
   margin:40px auto 0;
@@ -195,7 +202,7 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
 .register-btn:active{ transform:scale(0.9); }
 .register-btn:focus-visible{ outline:3px solid rgba(255,255,255,.6); outline-offset:3px; }
 
-/* ===== 主題/時間/地點 ===== */
+/* ===== 主題/時間/地點（保留既有設定） ===== */
 .topic-wrap{
   text-align:center;
   margin:48px auto 24px;
@@ -234,7 +241,7 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
   color:#fff; font-weight:500;
 }
 
-/* ===== 講者 ===== */
+/* ===== 講者（保留既有設定） ===== */
 .speaker-grid{
   margin-top:36px;
   margin-bottom:60px;
@@ -254,24 +261,14 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
   background:rgba(255,255,255,.30); color:#fff; font-weight:500; font-size:1rem;
 }
 
-/* RWD：講者 */
-@media (max-width:960px){ .speaker-grid{ grid-template-columns:1fr 1fr; } }
-@media (max-width:768px){
-  .event-info .inner h2{ margin:40px 0 16px; }
-  .speaker-grid{ margin-bottom:36px; }
-}
-@media (max-width:560px){
-  .speaker-grid{ grid-template-columns:1fr; }
-  .topic-badge{ font-size:18px; }
-}
-
-/* ===== HERO（手機版 1920×1400）===== */
+/* ===== HERO（手機版 1920×1800）===== */
 @media (max-width: 768px){
   .hero-wrapper{
-    aspect-ratio:1920/1400;
+    aspect-ratio:1920/1800;                 /* ← 手機改 1920×1800 */
     background-image:url("assets/img/hero-bg-m.png");
     background-position:center top;
   }
+  /* 行動版：維持你先前的相對尺寸微調 */
   .hero-logo{ top:6vw; left:6vw; width:50vw; }
   .hero-title{ top:24vw; left:6vw; width:65vw; }
   .hero-subtitle{ top:48vw; left:6vw; width:65vw; }
@@ -280,10 +277,33 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
 </head>
 <body>
 
+<!-- ===== HERO（內含貼底的 event-bar） ===== -->
 <section class="hero-wrapper" aria-label="Hero">
   <img class="hero-img hero-logo"     src="assets/img/hero-logo.png"     alt="">
   <img class="hero-img hero-title"    src="assets/img/hero-title.png"    alt="">
   <img class="hero-img hero-subtitle" src="assets/img/hero-subtitle.png" alt="">
+
+  <!-- 橫向選單：4 個圓角矩形按鈕（箭頭 ⮕ + 日期） -->
+  <nav class="event-bar" aria-label="系列論壇切換">
+    <div class="bar" id="eventBar">
+      <button type="button" class="bar-item" data-id="s1" aria-current="true" aria-label="系列論壇 ①，日期 2025.09.26">
+        <span class="bar-arrow" aria-hidden="true">⮕</span>
+        <span class="bar-date">2025.09.26</span>
+      </button>
+      <button type="button" class="bar-item" data-id="s2" aria-current="false" aria-label="系列論壇 ②，日期 2025.10.14">
+        <span class="bar-arrow" aria-hidden="true">⮕</span>
+        <span class="bar-date">2025.10.14</span>
+      </button>
+      <button type="button" class="bar-item" data-id="s3" aria-current="false" aria-label="系列論壇 ③，日期 2025.11.22">
+        <span class="bar-arrow" aria-hidden="true">⮕</span>
+        <span class="bar-date">2025.11.22</span>
+      </button>
+      <button type="button" class="bar-item" data-id="s4" aria-current="false" aria-label="系列論壇 ④，日期 2025.12.15">
+        <span class="bar-arrow" aria-hidden="true">⮕</span>
+        <span class="bar-date">2025.12.15</span>
+      </button>
+    </div>
+  </nav>
 </section>
 
 <!-- 橫向選單：4 個圓角矩形按鈕（箭頭 ⮕ + 日期） -->
