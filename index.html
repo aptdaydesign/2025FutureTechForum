@@ -28,6 +28,16 @@
 html,body{margin:0;background:#000;color:#fff}
 html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,"PingFang TC","Heiti TC",sans-serif}
 
+/* 間距變數 */
+:root{
+  --tab-default:#501cf2;
+  --tab-active:#d90085;
+  --dividerW: calc(2 / 1920 * 100vw);
+  --f2: clamp(20px, 2.4vw, 56px);
+  --pink:#ff5e99;
+  --section-gap: 56px; /* 區塊之間的一致間距 */
+}
+
 /* ===== HERO ===== */
 .hero-wrapper{
   position:relative; width:100vw;
@@ -35,34 +45,15 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
   background:#0b0c0f url("assets/img/hero-bg.png") center/cover no-repeat;
 }
 .hero-img{position:absolute; max-width:100%; height:auto; pointer-events:none; user-select:none; opacity:0}
-
-.hero-logo{     top:calc( 60/1080*100%); left:calc(70/1920*100%); width:calc(634/1920*100%);
-  animation: slideInLeft 1s ease-out forwards 0.2s; }
-.hero-title{    top:calc(375/1080*100%); left:calc(100/1920*100%); width:calc(887/1920*100%);
-  animation: slideInUp 1s ease-out forwards 0.6s; }
-.hero-subtitle{ top:calc(725/1080*100%); left:calc(100/1920*100%); width:calc(878/1920*100%);
-  animation: slideInUp 1s ease-out forwards 1s; }
-
-@keyframes slideInLeft {
-  from { transform:translateX(-50px); opacity:0 }
-  to   { transform:translateX(0); opacity:1 }
-}
-@keyframes slideInUp {
-  from { transform:translateY(50px); opacity:0 }
-  to   { transform:translateY(0); opacity:1 }
-}
+.hero-logo{     top:calc( 60/1080*100%); left:calc(70/1920*100%); width:calc(634/1920*100%); animation: slideInLeft 1s ease-out forwards 0.2s; }
+.hero-title{    top:calc(375/1080*100%); left:calc(100/1920*100%); width:calc(887/1920*100%); animation: slideInUp 1s ease-out forwards 0.6s; }
+.hero-subtitle{ top:calc(725/1080*100%); left:calc(100/1920*100%); width:calc(878/1920*100%); animation: slideInUp 1s ease-out forwards 1s; }
+@keyframes slideInLeft { from { transform:translateX(-50px); opacity:0 } to { transform:translateX(0); opacity:1 } }
+@keyframes slideInUp   { from { transform:translateY(50px); opacity:0 } to { transform:translateY(0); opacity:1 } }
 
 /* ===== 橫向活動選單 ===== */
-:root{
-  --tab-default:#501cf2;
-  --tab-active:#d90085;
-  --dividerW: calc(2 / 1920 * 100vw);
-  --f2: clamp(20px, 2.4vw, 56px);
-  --pink:#ff5e99;
-}
 .event-bar{ width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); background:#000 }
 .event-bar .bar{ display:grid; grid-template-columns:repeat(4,1fr) }
-
 .bar-item{
   --bg:var(--tab-default);
   background:var(--bg); color:#fff;
@@ -75,34 +66,10 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
 }
 .bar-item:first-child{border-left:none}
 .bar-item:last-child{border-right:none}
-
 .bar-item[aria-current="true"]{ background:var(--tab-active) }
-
-.bar-item .t1{
-  white-space:nowrap;
-  font-weight:500;
-  font-size:var(--f2);
-  line-height:1.25;
-  margin:0 0 10px;
-  letter-spacing:0.03em;
-}
-.bar-item .t2{
-  font-weight:500;
-  font-size:calc(var(--f2) * 1.5);
-  line-height:1.25;
-  margin:0 0 6px;
-  letter-spacing:0.025em;
-  font-family:"Akrobat","Noto Sans TC",sans-serif;
-}
-.bar-item .t3{
-  font-weight:500;
-  opacity:.95;
-  font-size:calc(var(--f2) * 0.95);
-  line-height:1.3;
-  margin:0;
-  letter-spacing:0.025em;
-  font-family:"Akrobat","Noto Sans TC",sans-serif;
-}
+.bar-item .t1{ white-space:nowrap; font-weight:500; font-size:var(--f2); line-height:1.25; margin:0 0 10px; letter-spacing:0.03em; }
+.bar-item .t2{ font-weight:500; font-size:calc(var(--f2) * 1.5); line-height:1.25; margin:0 0 6px; letter-spacing:0.025em; font-family:"Akrobat","Noto Sans TC",sans-serif; }
+.bar-item .t3{ font-weight:500; opacity:.95; font-size:calc(var(--f2) * 0.95); line-height:1.3; margin:0; letter-spacing:0.025em; font-family:"Akrobat","Noto Sans TC",sans-serif; }
 
 /* 手機調整 */
 @media (max-width:480px){
@@ -114,171 +81,91 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
 
 /* ===== 活動資訊區塊（背景 #112240） ===== */
 .event-info{
-  background:#112240;          /* 整塊背景顏色深藍 */
-  padding-block:60px;          /* 上下內距各 60px */
-  margin-bottom:80px;          /* 加大與下一區塊的距離 */
+  background:#112240;
+  padding-block:60px;
 }
-
 .event-info .inner{
-  max-width:1200px;            /* 區塊內容最大寬度 */
-  margin:0 auto;               /* 置中 */
-  padding:0 20px;              /* 左右保留 20px 內距 */
-  line-height:1.8;             /* 行距 */
-  font-weight:300;             /* 內文字重（細體） */
-  font-size:1.2em;             /* 整體字體大小放大 1.2 倍 */
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 20px;
+  line-height:1.8;
+  font-weight:300;
+  font-size:1.2em; /* 整體 1.2 倍 */
 }
-
-/* 標題：改為 500 */
 .event-info h2{
-  font-size:2rem;              /* 標題字體大小，2rem（相對於 html 的基準字體大小） */
-  margin:0 0 20px;             /* 標題與下方元素距離 20px */
-  font-weight:500;             /* 標題字體比內文更粗一點 */
+  font-size:2rem;
+  margin:0 0 20px;
+  font-weight:500;
 }
-
 .event-info h2 span{
-  color:#fff;                  /* 標題中 <span> 文字為白色 */
-  font-family:"Akrobat","Noto Sans TC",sans-serif; /* 使用指定字體 */
-  font-weight:500;             /* 一樣保持 500 粗細 */
+  color:#fff;
+  font-family:"Akrobat","Noto Sans TC",sans-serif;
+  font-weight:500;
 }
-
 .event-info b,
-.event-info strong{
-  color:var(--pink);           /* 內文中加粗文字會變粉紅色 */
-  font-weight:500;             /* 並且加粗 */
-}
-.event-info p,
-.event-info li{ font-weight:300; }
-
-.event-info ul{
-  margin:20px 0;
-  padding-left:20px;
-}
+.event-info strong{ color:var(--pink); font-weight:500; }
+.event-info p, .event-info li{ font-weight:300; }
+.event-info ul{ margin:20px 0; padding-left:20px; }
 .event-info li{ margin-bottom:10px; }
+
+/* 讓每個次標題前有一致的段落距離 */
+.event-info .inner > * + h2{ margin-top:var(--section-gap); }
 
 /* ===== 立即報名（置中 + 放大 + 柔和陰影 + 箭頭常駐晃動） ===== */
 .register-btn{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:14px;
+  display:flex; align-items:center; justify-content:center; gap:14px;
   margin:40px auto 0;
   padding:16px 15px 16px 35px;
-  width:220px;                  /* 放大為 220 */
-  background:#f48c06;
-  color:#fff;
-  border:6px solid #fff;
-  border-radius:999px;
-  font-size:1.8rem;             /* 文字放大 1.8 倍 */
-  font-weight:500;
-  text-decoration:none;
-  box-shadow:0 6px 18px rgba(0,0,0,0.18);
-  transition:all .3s ease;
+  width:220px; background:#f48c06; color:#fff;
+  border:6px solid #fff; border-radius:999px;
+  font-size:1.8rem; font-weight:500; text-decoration:none;
+  box-shadow:0 6px 18px rgba(0,0,0,0.18); transition:all .3s ease;
 }
 .register-btn span{ margin-right:4px; }
-
-/* ★ 箭頭：往返式線性晃動 */
-.register-btn svg{
-  width:1.8em; height:1.5em; flex:0 0 auto;
-  will-change: transform;
-  animation: arrowOsc 0.8s ease-in-out infinite alternate;
-}
-.register-btn svg path{
-  fill: none;
-  stroke: #fff;
-  stroke-width: 5;       /* 箭頭粗細 */
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  vector-effect: non-scaling-stroke;
-}
-
-.register-btn:hover{
-  background:#f48c06;
-  border-color:transparent;
-  transform:scale(0.95);
-  box-shadow:0 4px 12px rgba(0,0,0,0.15);
-}
+.register-btn svg{ width:1.8em; height:1.5em; flex:0 0 auto; will-change:transform; animation:arrowOsc 0.8s ease-in-out infinite alternate; }
+.register-btn svg path{ fill:none; stroke:#fff; stroke-width:5; stroke-linecap:round; stroke-linejoin:round; vector-effect:non-scaling-stroke; }
+.register-btn:hover{ background:#f48c06; border-color:transparent; transform:scale(0.95); box-shadow:0 4px 12px rgba(0,0,0,0.15); }
 .register-btn:active{ transform:scale(0.9); }
-.register-btn:focus-visible{
-  outline:3px solid rgba(255,255,255,.6);
-  outline-offset:3px;
-}
-
-@keyframes arrowOsc{
-  from { transform: translateX(-6px); }
-  to   { transform: translateX(6px); }
-}
+.register-btn:focus-visible{ outline:3px solid rgba(255,255,255,.6); outline-offset:3px; }
+@keyframes arrowOsc{ from{transform:translateX(-6px)} to{transform:translateX(6px)} }
 @media (prefers-reduced-motion: reduce){
-  .register-btn, .register-btn svg{
-    animation: none !important;
-    transition: none !important;
-    transform: none !important;
-  }
+  .register-btn, .register-btn svg{ animation:none !important; transition:none !important; transform:none !important; }
 }
 
-/* ====== 新增：主題/地點 + 講者 ====== */
-.topic-wrap{ text-align:center; margin:48px 0 24px; }
+/* ====== 主題/副標 + 日期/地點（調整版） ====== */
+.topic-wrap{ text-align:center; margin:var(--section-gap) 0; }
 .topic-badge{
-  display:inline-block;
-  padding:12px 24px;
-  border-radius:999px;
-  background:#ff2b8a;           /* 有色 R 角底框 */
-  color:#fff;
-  font-weight:500;
-  font-size:clamp(18px,1.6vw,28px);
+  display:inline-block; padding:10px 20px;
+  border-radius:12px;            /* 小 R 角矩形 */
+  background:#ff2b8a; color:#fff; font-weight:500;
+  font-size:2rem;                /* 與 h2 相同大小 */
 }
 .topic-en{
-  margin-top:14px;
-  font-weight:500;
-  font-size:clamp(16px,1.4vw,24px);
+  margin-top:12px; font-weight:500; color:#fff;
+  font-size:2rem;                /* 與 h2 相同大小 */
+  font-family:'Montserrat', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif; /* 專用英文 */
+  letter-spacing:.3px;
 }
-.place{
-  margin-top:10px;
-  font-size:1.05em;
-}
-.place .hl{
-  display:inline-block;
-  margin-left:.4em;
-  padding:2px 8px;
-  border-radius:8px;
-  background:rgba(255,255,255,.25);  /* 畫重點 */
-  color:#fff;
-  font-weight:500;
-}
+.meta{ margin-top:16px; display:grid; gap:10px; justify-items:center; }
+.chip{ display:inline-block; padding:8px 14px; border-radius:999px; background:rgba(255,255,255,.15); font-weight:500; }
+.chip-label{ background:rgba(255,255,255,.25); } /* 膠囊標籤（地點） */
+.place-line{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+.place-text{ font-weight:400; }
+.hl{ color:#fff; background:rgba(255,255,255,.25); padding:2px 8px; border-radius:8px; font-weight:500; }
+.hl.pink{ background:none; color:var(--pink); font-weight:500; } /* 線上同步特寫粉紅 */
 
-/* 講者 */
-.speaker-grid{
-  margin-top:36px;
-  display:grid;
-  grid-template-columns:repeat(3, 1fr);
-  gap:36px;
-}
-.speaker{
-  text-align:center;
-}
-.speaker .photo{
-  width:200px; height:200px; border-radius:50%;
-  margin:0 auto 18px; object-fit:cover; object-position:center;
-  box-shadow:0 8px 24px rgba(0,0,0,.25);
-  background:#0b0c0f;
-}
-.speaker .name{
-  font-size:1.6rem; font-weight:500; margin:0 0 10px;
-}
-.speaker .title-chip{
-  display:inline-block;
-  padding:8px 16px;
-  border-radius:999px;
-  background:rgba(255,255,255,.30);   /* 30% 白色半透明 */
-  color:#fff; font-weight:500; font-size:1rem;
-}
+/* ===== 講者 ===== */
+.speaker-grid{ margin-top:var(--section-gap); display:grid; grid-template-columns:repeat(3, 1fr); gap:36px; }
+.speaker{ text-align:center; }
+.speaker .photo{ width:200px; height:200px; border-radius:50%; margin:0 auto 18px; object-fit:cover; object-position:center; box-shadow:0 8px 24px rgba(0,0,0,.25); background:#0b0c0f; }
+.speaker .name{ font-size:1.6rem; font-weight:500; margin:0 0 10px; }
+.speaker .title-chip{ display:inline-block; padding:8px 16px; border-radius:999px; background:rgba(255,255,255,.30); color:#fff; font-weight:500; font-size:1rem; }
 
 /* RWD */
-@media (max-width:960px){
-  .speaker-grid{ grid-template-columns:1fr 1fr; }
-}
+@media (max-width:960px){ .speaker-grid{ grid-template-columns:1fr 1fr; } }
 @media (max-width:560px){
   .speaker-grid{ grid-template-columns:1fr; }
-  .topic-badge{ font-size:18px; }
+  .topic-badge,.topic-en{ font-size:1.6rem; }
 }
 </style>
 </head>
@@ -328,6 +215,31 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
       並剖析未來關鍵技能，打造跨國人才交流平台。
     </p>
 
+    <!-- 報名 CTA -->
+    <a href="#" class="register-btn">
+      <span>立 即 報 名</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M8 4l8 8-8 8" />
+      </svg>
+    </a>
+
+    <!-- 活動名/副標 + 日期/地點（上移，置於亮點前） -->
+    <div class="topic-wrap">
+      <div class="topic-badge">未來半導體人才趨勢論壇：產學對話</div>
+      <div class="topic-en">Empowering the Future of Semiconductor: Bridging Industry and Academia</div>
+
+      <div class="meta">
+        <div class="chip">日期　2025年9月26日，7:30 - 11:00</div>
+        <div class="place-line">
+          <span class="chip chip-label">地點</span>
+          <span class="place-text">
+            美國 史丹佛大學；臺灣：科政大樓14F會議室
+            <span class="pink hl">線上同步</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
     <!-- 活動亮點 -->
     <h2>活動亮點<span>｜Highlights</span></h2>
     <ul>
@@ -337,18 +249,8 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
       <li><strong>政策與產業鏈結：</strong>呼應「AI 新十大全球倡議」與人才培育政策，推動技術與人才並進。</li>
     </ul>
 
-    <!-- 主題 / 地點資訊（移到亮點之後） -->
-    <div class="topic-wrap">
-      <div class="topic-badge">未來半導體人才趨勢論壇：產學對話</div>
-      <div class="topic-en">Empowering the Future of Semiconductor: BridgingIndustry and Academia</div>
-      <div class="place">
-        地點｜美國 史丹佛大學；臺灣：科政大樓14F會議室，
-        <span class="hl">線上同步</span>
-      </div>
-    </div>
-
-    <!-- 主要講者（接續主題/地點） -->
-    <h2 style="text-align:center; margin-top:24px;">主要講者<span>｜Key Speakers</span></h2>
+    <!-- 主要講者（接在亮點後） -->
+    <h2 style="text-align:center; margin-top:var(--section-gap);">主要講者<span>｜Key Speakers</span></h2>
     <div class="speaker-grid">
       <div class="speaker">
         <img class="photo" src="assets/img/speaker1-1.png" alt="Prof. David Horsley">
@@ -366,15 +268,6 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
         <div class="title-chip">台積電首席科學家・史丹佛大學教授</div>
       </div>
     </div>
-
-    <!-- 報名 CTA（移到講者後方） -->
-    <a href="#" class="register-btn">
-      <span>立 即 報 名</span>
-      <!-- 右箭頭 SVG -->
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        <path d="M8 4l8 8-8 8" />
-      </svg>
-    </a>
 
   </div>
 </section>
