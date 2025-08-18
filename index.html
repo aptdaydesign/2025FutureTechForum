@@ -140,6 +140,75 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   font-family:"Akrobat","Noto Sans TC",sans-serif;
 }
 
+/* ===== CTA ===== */
+.register-btn{
+  display:flex; align-items:center; justify-content:center; gap:14px;
+  margin:40px auto 0; padding:16px 15px 16px 35px; width:220px;
+  background:#f48c06; color:#fff; border:6px solid #fff; border-radius:999px;
+  font-size:1.8rem; font-weight:500; text-decoration:none;
+  box-shadow:0 6px 18px rgba(0,0,0,.18); transition:all .3s ease;
+}
+.register-btn svg{ width:1.8em; height:1.5em; flex:0 0 auto; will-change:transform; animation:arrowOsc .8s ease-in-out infinite alternate }
+.register-btn svg path{ fill:none; stroke:#fff; stroke-width:5; stroke-linecap:round; stroke-linejoin:round; vector-effect:non-scaling-stroke }
+.register-btn:hover{ background:#f48c06; border-color:transparent; transform:scale(.95); box-shadow:0 4px 12px rgba(0,0,0,.15) }
+.register-btn:active{ transform:scale(.9) }
+.register-btn:focus-visible{ outline:3px solid rgba(255,255,255,.6); outline-offset:3px }
+
+/* ===== 講者 ===== */
+.speaker-grid{ margin-top:36px; margin-bottom:60px; display:grid; grid-template-columns:repeat(3,1fr); gap:36px }
+.speaker{ text-align:center }
+.speaker .photo{ width:200px; height:200px; border-radius:50%; margin:0 auto 18px; object-fit:cover; object-position:center; box-shadow:0 8px 24px rgba(0,0,0,.25); background:#0b0c0f }
+.speaker .name{ font-size:1.6rem; font-weight:500; margin:0 0 10px }
+.speaker .title-chip{ display:inline-block; padding:8px 16px; border-radius:999px; background:rgba(255,255,255,.30); color:#fff; font-weight:500; font-size:1rem }
+
+/* ===== HERO（手機版 1920×1800）===== */
+@media (max-width:768px){
+  .hero-wrapper{
+    aspect-ratio:1920/1800;
+    background-image:url("assets/img/hero-bg-m.png");
+    background-position:center top;
+  }
+  .hero-logo{ top:6vw; left:6vw; width:50vw; }
+  .hero-title{ top:24vw; left:6vw; width:65vw; }
+  .hero-subtitle{ top:48vw; left:6vw; width:65vw; }
+
+  /* 手機版主標額外上距 */
+  .topic-badge{ margin-top:10px; }
+}
+/* ← 到這裡結束手機 media query，下面是桌機/手機的對齊補丁 */
+
+/* === 桌機：靠左排列，但膠囊內文字置中，左右等高對齊 === */
+@media (min-width:992px){
+  .event-info .topic-row{
+    align-items: center !important;   /* 膠囊與右側文字垂直置中 */
+  }
+
+  .event-info .topic-row .pill{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;          /* ← 讓「時間 / 地點」文字在膠囊裡置中 */
+    height: 42px;
+    padding: 0 14px;
+    line-height: 1;
+    text-align: center;
+  }
+
+  .event-info .topic-row > div:last-child{
+    display: flex;
+    align-items: center;
+    min-height: 42px;
+  }
+}
+
+/* 手機/平板：維持頂齊（多行比較自然） */
+@media (max-width:991.98px){
+  .event-info .topic-row{ align-items:flex-start; }
+  .event-info .topic-row > div:last-child{ display:block; min-height:0; }
+}
+
+/* 微調：避免右側 chip 影響基線 */
+.place .hl{ vertical-align:middle; }
+
 /* ===== 時間／地點：穩定版（整段覆蓋） ===== */
 
 /* 外層：桌機以內容寬置中；內文一律靠左 */
@@ -233,74 +302,6 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 .event-info ul{ margin:20px 0; padding-left:20px; }
 .event-info li{ margin-bottom:10px; }
 
-/* ===== CTA ===== */
-.register-btn{
-  display:flex; align-items:center; justify-content:center; gap:14px;
-  margin:40px auto 0; padding:16px 15px 16px 35px; width:220px;
-  background:#f48c06; color:#fff; border:6px solid #fff; border-radius:999px;
-  font-size:1.8rem; font-weight:500; text-decoration:none;
-  box-shadow:0 6px 18px rgba(0,0,0,.18); transition:all .3s ease;
-}
-.register-btn svg{ width:1.8em; height:1.5em; flex:0 0 auto; will-change:transform; animation:arrowOsc .8s ease-in-out infinite alternate }
-.register-btn svg path{ fill:none; stroke:#fff; stroke-width:5; stroke-linecap:round; stroke-linejoin:round; vector-effect:non-scaling-stroke }
-.register-btn:hover{ background:#f48c06; border-color:transparent; transform:scale(.95); box-shadow:0 4px 12px rgba(0,0,0,.15) }
-.register-btn:active{ transform:scale(.9) }
-.register-btn:focus-visible{ outline:3px solid rgba(255,255,255,.6); outline-offset:3px }
-
-/* ===== 講者 ===== */
-.speaker-grid{ margin-top:36px; margin-bottom:60px; display:grid; grid-template-columns:repeat(3,1fr); gap:36px }
-.speaker{ text-align:center }
-.speaker .photo{ width:200px; height:200px; border-radius:50%; margin:0 auto 18px; object-fit:cover; object-position:center; box-shadow:0 8px 24px rgba(0,0,0,.25); background:#0b0c0f }
-.speaker .name{ font-size:1.6rem; font-weight:500; margin:0 0 10px }
-.speaker .title-chip{ display:inline-block; padding:8px 16px; border-radius:999px; background:rgba(255,255,255,.30); color:#fff; font-weight:500; font-size:1rem }
-
-/* ===== HERO（手機版 1920×1800）===== */
-@media (max-width:768px){
-  .hero-wrapper{
-    aspect-ratio:1920/1800;
-    background-image:url("assets/img/hero-bg-m.png");
-    background-position:center top;
-  }
-  .hero-logo{ top:6vw; left:6vw; width:50vw; }
-  .hero-title{ top:24vw; left:6vw; width:65vw; }
-  .hero-subtitle{ top:48vw; left:6vw; width:65vw; }
-
-  /* 手機版主標額外上距 */
-  .topic-badge{ margin-top:10px; }
-}
-/* ← 到這裡結束手機 media query，下面是桌機/手機的對齊補丁 */
-
-/* === 桌機：靠左排列，但膠囊內文字置中，左右等高對齊 === */
-@media (min-width:992px){
-  .event-info .topic-row{
-    align-items: center !important;   /* 膠囊與右側文字垂直置中 */
-  }
-
-  .event-info .topic-row .pill{
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;          /* ← 讓「時間 / 地點」文字在膠囊裡置中 */
-    height: 42px;
-    padding: 0 14px;
-    line-height: 1;
-    text-align: center;
-  }
-
-  .event-info .topic-row > div:last-child{
-    display: flex;
-    align-items: center;
-    min-height: 42px;
-  }
-}
-
-/* 手機/平板：維持頂齊（多行比較自然） */
-@media (max-width:991.98px){
-  .event-info .topic-row{ align-items:flex-start; }
-  .event-info .topic-row > div:last-child{ display:block; min-height:0; }
-}
-
-/* 微調：避免右側 chip 影響基線 */
-.place .hl{ vertical-align:middle; }
 </style>
 </head>
 <body>
