@@ -173,22 +173,21 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
 }
 .register-btn span{ margin-right:4px; }
 
-/* ★ 箭頭：改為往返式線性晃動，避免與 hover 衝突、動作更順 */
+/* ★ 箭頭：往返式線性晃動 */
 .register-btn svg{
   width:1.8em; height:1.5em; flex:0 0 auto;
   will-change: transform;
-  animation: arrowOsc 0.8s ease-in-out infinite alternate;  /* 控制箭頭速度 */
+  animation: arrowOsc 0.8s ease-in-out infinite alternate;
 }
 .register-btn svg path{
   fill: none;
-  stroke: #fff;          /* 箭頭顏色 */
-  stroke-width: 5;       /* ★ 箭頭粗細 ★ */
+  stroke: #fff;
+  stroke-width: 5;       /* 箭頭粗細 */
   stroke-linecap: round;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
 }
 
-/* hover 只縮放整顆按鈕；不再改變 svg transform，避免與常駐動畫牴觸 */
 .register-btn:hover{
   background:#f48c06;
   border-color:transparent;
@@ -201,19 +200,82 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
   outline-offset:3px;
 }
 
-/* ★ 箭頭左右往返動畫（平滑、無卡頓） */
 @keyframes arrowOsc{
   from { transform: translateX(-6px); }
   to   { transform: translateX(6px); }
 }
-
-/* 無障礙：使用者偏好減少動畫時停用 */
 @media (prefers-reduced-motion: reduce){
   .register-btn, .register-btn svg{
     animation: none !important;
     transition: none !important;
     transform: none !important;
   }
+}
+
+/* ====== 新增：主題/地點 + 講者 ====== */
+.topic-wrap{ text-align:center; margin:48px 0 24px; }
+.topic-badge{
+  display:inline-block;
+  padding:12px 24px;
+  border-radius:999px;
+  background:#ff2b8a;           /* 有色 R 角底框 */
+  color:#fff;
+  font-weight:500;
+  font-size:clamp(18px,1.6vw,28px);
+}
+.topic-en{
+  margin-top:14px;
+  font-weight:500;
+  font-size:clamp(16px,1.4vw,24px);
+}
+.place{
+  margin-top:10px;
+  font-size:1.05em;
+}
+.place .hl{
+  display:inline-block;
+  margin-left:.4em;
+  padding:2px 8px;
+  border-radius:8px;
+  background:rgba(255,255,255,.25);  /* 畫重點 */
+  color:#fff;
+  font-weight:500;
+}
+
+/* 講者 */
+.speaker-grid{
+  margin-top:36px;
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:36px;
+}
+.speaker{
+  text-align:center;
+}
+.speaker .photo{
+  width:200px; height:200px; border-radius:50%;
+  margin:0 auto 18px; object-fit:cover; object-position:center;
+  box-shadow:0 8px 24px rgba(0,0,0,.25);
+  background:#0b0c0f;
+}
+.speaker .name{
+  font-size:1.6rem; font-weight:500; margin:0 0 10px;
+}
+.speaker .title-chip{
+  display:inline-block;
+  padding:8px 16px;
+  border-radius:999px;
+  background:rgba(255,255,255,.30);   /* 30% 白色半透明 */
+  color:#fff; font-weight:500; font-size:1rem;
+}
+
+/* RWD */
+@media (max-width:960px){
+  .speaker-grid{ grid-template-columns:1fr 1fr; }
+}
+@media (max-width:560px){
+  .speaker-grid{ grid-template-columns:1fr; }
+  .topic-badge{ font-size:18px; }
 }
 </style>
 </head>
@@ -278,45 +340,38 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
         <path d="M8 4l8 8-8 8" />
       </svg>
     </a>
-  </div>
 
-</section>
-<!-- ===== 講者資訊區塊 ===== -->
-<section class="speakers" style="background:#0b0c0f; padding:80px 20px; text-align:center;">
-  <div class="inner" style="max-width:1200px; margin:0 auto;">
-    <h2 style="font-size:2.2rem; font-weight:500; margin-bottom:50px;">
-      主要講者<span style="font-family:'Akrobat','Noto Sans TC',sans-serif;">｜Key Speakers</span>
-    </h2>
-    <div class="speaker-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:40px;">
-      
-      <!-- Speaker 1 -->
-      <div class="speaker">
-        <div class="photo" style="width:200px; height:200px; border-radius:50%; background:#fff; margin:0 auto 20px; display:flex; align-items:center; justify-content:center; color:#0b0c0f; font-weight:500;">
-          講者照片
-        </div>
-        <h3 style="margin:0 0 10px; font-size:1.3rem;">Prof. David Horsley</h3>
-        <p style="margin:0; font-size:1rem; opacity:.85;">教授，加州大學機械工程系</p>
+    <!-- 主題 / 地點資訊（同區塊，背景一致） -->
+    <div class="topic-wrap">
+      <div class="topic-badge">未來半導體人才趨勢論壇：產學對話</div>
+      <div class="topic-en">Empowering the Future of Semiconductor: BridgingIndustry and Academia</div>
+      <div class="place">
+        地點｜美國 史丹佛大學；臺灣：科政大樓14F會議室，
+        <span class="hl">線上同步</span>
       </div>
-
-      <!-- Speaker 2 -->
-      <div class="speaker">
-        <div class="photo" style="width:200px; height:200px; border-radius:50%; background:#fff; margin:0 auto 20px; display:flex; align-items:center; justify-content:center; color:#0b0c0f; font-weight:500;">
-          講者照片
-        </div>
-        <h3 style="margin:0 0 10px; font-size:1.3rem;">台積電高階經理團隊</h3>
-        <p style="margin:0; font-size:1rem; opacity:.85;">涵蓋研發、設計、製造、IT、人資等核心業務領域</p>
-      </div>
-
-      <!-- Speaker 3 -->
-      <div class="speaker">
-        <div class="photo" style="width:200px; height:200px; border-radius:50%; background:#fff; margin:0 auto 20px; display:flex; align-items:center; justify-content:center; color:#0b0c0f; font-weight:500;">
-          講者照片
-        </div>
-        <h3 style="margin:0 0 10px; font-size:1.3rem;">Dr. H.S. Philip Wong</h3>
-        <p style="margin:0; font-size:1rem; opacity:.85;">台積電首席科學家、史丹佛大學教授</p>
-      </div>
-
     </div>
+
+    <!-- 主要講者（同區塊，背景一致） -->
+    <h2 style="text-align:center; margin-top:24px;">主要講者<span>｜Key Speakers</span></h2>
+    <div class="speaker-grid">
+      <!-- 注意：如檔名為 .jpg 請改副檔名 -->
+      <div class="speaker">
+        <img class="photo" src="assets/img/speaker1-1.png" alt="Prof. David Horsley">
+        <div class="name">Prof. David Horsley</div>
+        <div class="title-chip">教授，加州大學戴維斯分校</div>
+      </div>
+      <div class="speaker">
+        <img class="photo" src="assets/img/speaker1-2.png" alt="台積電高階經理團隊">
+        <div class="name">台積電高階經理團隊</div>
+        <div class="title-chip">涵蓋研發、設計、製造、IT、人資等核心領域</div>
+      </div>
+      <div class="speaker">
+        <img class="photo" src="assets/img/speaker1-3.png" alt="Dr. H.S. Philip Wong">
+        <div class="name">Dr. H.S. Philip Wong</div>
+        <div class="title-chip">台積電首席科學家・史丹佛大學教授</div>
+      </div>
+    </div>
+
   </div>
 </section>
 
