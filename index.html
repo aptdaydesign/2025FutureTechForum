@@ -237,14 +237,19 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 }
 .place .hl{ vertical-align:middle; }
 
-/* Footer（與議程同色，滿版） */
+/* Footer（與議程同色，滿版；無頂部分隔線） */
 .sponsor-footer{
   background:#112240;
-  padding:28px 0 36px;
-  /* 與上方區塊留一點空隙（需要更緊可改小） */
-  margin-top:12px;
-  border-top:1px solid rgba(255,255,255,.08);
+  padding:28px 0 44px;        /* 底部多留一點呼吸 */
+  margin-top:24px;            /* 與上方區塊距離，可依需要微調 */
+  border-top:none;            /* ← 不要分隔線 */
+  box-shadow:none;            /* 保險：避免外部樣式投影 */
 }
+.sponsor-footer::before{      /* 保險：如果曾用偽元素畫線，關掉它 */
+  content:none !important;
+  display:none !important;
+}
+
 .sponsor-footer .inner{
   max-width:1200px;
   margin:0 auto;
@@ -255,21 +260,25 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   align-items:center;
   justify-items:center;
 }
+
 .sponsor-block{
   display:flex;
   align-items:center;
   gap:18px;                       /* 標籤與 logo 間距 */
 }
+
 .sponsor-tag{
-  color:#fff;
-  opacity:.9;
+  color:#cfd6e6;                  /* 比純白柔一點 */
+  opacity:1;
   font-weight:500;
-  font-size:clamp(14px,1vw,18px);
+  letter-spacing:.04em;
+  font-size:clamp(14px,1.1vw,18px);
   white-space:nowrap;
 }
+
 .sponsor-logo{
   display:block;
-  height:46px;                    /* 統一高度（會等比縮放）*/
+  height:46px;                    /* 統一高度（等比縮放）*/
   width:auto;
   max-width:100%;
 }
