@@ -233,7 +233,7 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   .event-info .topic-row > div:last-child{ display:block; min-height:0; }
 }
 .place .hl{ vertical-align:middle; }
-
+</style>
 <style>
 /* ===== Agenda（背景同上半部；時間使用「上沿貼齊」方塊標籤） ===== */
 .agenda{
@@ -244,7 +244,7 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 .agenda .inner{ max-width:1200px; margin:0 auto; padding:0 20px; }
 .agenda h2{ font-size:clamp(20px,1.8vw,30px); font-weight:500; margin:0 0 20px; }
 
-.ag-grid{ display:grid; grid-template-columns:1fr; gap:14px; }
+.ag-grid > .ag-card:first-child{ margin-top:0; }
 
 /* 卡片：預留上方「時間標籤」空間 */
 .ag-card{
@@ -252,13 +252,16 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   display:grid;
   grid-auto-rows:auto;
   row-gap:12px;
-  padding:36px 20px 20px;       /* ↑多 14~16px 給上緣標籤 */
+  padding:44px 20px 20px;   /* ↑加大上邊內距，讓時間標籤不壓到標題 */
+  margin-top:18px;          /* 與上一張卡片拉開，避免視覺黏在一起 */
   border-radius:16px;
   background:var(--glass-bg);
   border:1px solid var(--glass-bd);
   box-shadow:var(--glass-drop);
   backdrop-filter:blur(10px);
   -webkit-backdrop-filter:blur(10px);
+  overflow:visible;          /* 確保上緣「吊掛」區域不被裁切 */
+  z-index:1;
 }
 
 /* 時間：貼齊卡片上緣，只有「下方」兩角有 R 角（不像膠囊） */
@@ -266,17 +269,19 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   position:absolute;
   top:0;
   left:50%;
-  transform:translate(-50%, -50%);   /* 上緣一半高度，像範例的「吊掛標籤」 */
-  padding:8px 18px;
-  border-radius:0 0 12px 12px;       /* 只給左下/右下 R 角 */
-  background:#e6eef7;                /* 淺灰藍實心，非毛玻璃 */
-  color:#1d2d44;
-  font-family:"Akrobat","Noto Sans TC",sans-serif;
-  font-weight:600;
-  font-size:clamp(14px,1.2vw,20px);
-  letter-spacing:.02em;
+  transform:translate(-50%, -50%);    /* 貼齊卡片上邊緣（吊掛感） */
+  z-index:2;
+  padding:6px 14px;                   /* ↓縮小內距，讓文字更靠近邊緣 */
+  border-radius:0 0 12px 12px;        /* 只有下緣兩角 R */
+  background:#e6eef7;
   border:1px solid #c9d8ea;
   box-shadow:0 3px 10px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.7);
+  color:#1d2d44;
+  font-family:"Akrobat","Noto Sans TC",sans-serif;
+  font-weight:700;
+  font-size:clamp(16px, 1.8vw, 24px); /* ↑字更大 */
+  line-height:1.05;                   /* 字距更緊 */
+  letter-spacing:.01em;
   white-space:nowrap;
 }
 
