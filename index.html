@@ -29,7 +29,7 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 .hero-wrapper{
   position:relative;
   width:100%;
-  aspect-ratio:1920/940; /* 桌機比 */
+  aspect-ratio:1920/940;
   overflow:hidden;
   background:#0b0c0f url("assets/img/hero-bg.png") center/cover no-repeat;
 }
@@ -43,13 +43,13 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 @keyframes slideInLeft{ from{ transform:translateX(-50px); opacity:0 } to{ transform:translateX(0); opacity:1 } }
 @keyframes slideInUp  { from{ transform:translateY( 50px); opacity:0 } to{ transform:translateY(0);  opacity:1 } }
 
-/* ===== 日期選單（卡片式，置於 HERO 底部，維持 1720/1920 比例） ===== */
+/* ===== 日期選單（卡片式） ===== */
 .event-bar{
   position:absolute;
   left:50%;
   bottom:clamp(12px, 2.8vw, 40px);
   transform:translateX(-50%);
-  width:min(89.5833vw, 1720px);  /* 1720/1920 = 0.895833 */
+  width:min(89.5833vw, 1720px);
   max-width:1720px;
   background:transparent;
   padding:0;
@@ -61,8 +61,6 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   grid-template-columns:repeat(4, minmax(0, 1fr));
   gap:clamp(10px, 1.25vw, 20px);
 }
-
-/* 卡片按鈕（保留你的數值） */
 .bar-item{
   --c1: var(--tab-default);
   --c2: #2b0f7a;
@@ -72,77 +70,56 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   border-radius:10px;
   padding:10px 24px 9px;
   background:linear-gradient(135deg, var(--c1) 0%, var(--c2) 100%);
-  background-size:200% 200%;
-  background-position:0% 50%;
+  background-size:200% 200%; background-position:0% 50%;
   transition:background-position .6s ease, transform .2s ease, box-shadow .3s ease;
   box-shadow:0 8px 20px rgba(0,0,0,.25);
 }
 .bar-item:hover{ background-position:100% 50%; transform:translateY(-1px); }
 .bar-item[aria-current="true"]{ --c1:var(--tab-active); --c2:#a71858; animation:gradFlow 3s ease-in-out infinite alternate; }
 @keyframes gradFlow{ from{background-position:0% 50%} to{background-position:100% 50%} }
-
-/* 內容：箭頭 ⮕ + 日期（只改這兩行可調字級） */
 .bar-arrow{ font-size:clamp(18px, 2.2vw, 28px); line-height:1; display:inline-block; animation:arrowOsc .8s ease-in-out infinite alternate; }
 .bar-date{  font-family:"Akrobat","Noto Sans TC",sans-serif; font-weight:500; font-size:clamp(20px, 2.4vw, 40px); letter-spacing:.025em; white-space:nowrap; }
 @keyframes arrowOsc{ from{transform:translateX(-6px)} to{transform:translateX(6px)} }
 
-/* RWD：<=820px 變 2×2；<=560px 更緊湊（保留你的數值） */
 @media (max-width:820px){
   .event-bar .bar{ grid-template-columns:repeat(2, minmax(0, 1fr)); gap:clamp(8px, 2.2vw, 16px); }
 }
 @media (max-width:560px){
   .bar-item{ padding:6px 14px; }
-  .bar-date{ font-size:18px; }
-  .bar-arrow{ font-size:18px; }
+  .bar-date,.bar-arrow{ font-size:18px; }
 }
 
-/* ===== 活動資訊（含與 HERO 的黑→藍銜接，保留高度 500px） ===== */
+/* ===== 活動資訊（黑→藍銜接，保留高度 500px） ===== */
 .event-info{
-  position:relative;
-  background:#112240;
-  padding-block:20px;
-  overflow:hidden;
+  position:relative; background:#112240; padding-block:20px; overflow:hidden;
 }
 .event-info::before{
-  content:"";
-  position:absolute; top:0; left:0; right:0;
-  height:500px;
-  background:linear-gradient(to bottom, #000 0%, #112240 100%);
-  pointer-events:none;
+  content:""; position:absolute; top:0; left:0; right:0; height:500px;
+  background:linear-gradient(to bottom, #000 0%, #112240 100%); pointer-events:none;
 }
 .event-info .inner{
-  position:relative; z-index:1;
-  max-width:1200px; margin:0 auto; padding:0 20px;
+  position:relative; z-index:1; max-width:1200px; margin:0 auto; padding:0 20px;
   line-height:1.8; font-weight:300; font-size:1.2em;
 }
 
 /* ===== 主標 / 副標 ===== */
 .topic-wrap{ text-align:center; margin:16px auto 24px; max-width:1000px; }
 .topic-badge{
-  display:inline-block;
-  background:transparent;
-  color:#fff;
-  font-size:clamp(23px, 3vw, 72px);
-  font-weight:400;
-  padding:10px 20px;
-  border-radius:20px;
-  border:4px solid var(--pink);
-  margin-top:20px;
-  margin-bottom:20px;
+  display:inline-block; background:transparent; color:#fff;
+  font-size:clamp(23px, 3vw, 72px); font-weight:400;
+  padding:10px 20px; border-radius:20px; border:4px solid var(--pink);
+  margin-top:20px; margin-bottom:20px;
 }
 .topic-en{
-  font-size:clamp(20px, 1.8vw, 42px);
-  font-weight:400;
-  color:#ddd;
-  margin-bottom:40px;
-  font-family:"Akrobat","Noto Sans TC",sans-serif;
+  font-size:clamp(20px, 1.8vw, 42px); font-weight:400; color:#ddd;
+  margin-bottom:40px; font-family:"Akrobat","Noto Sans TC",sans-serif;
 }
 
-/* ===== 讓內容主標（h2）不要比時間/地點更大 ===== */
+/* ===== 內容主標（不要比時間/地點更大；上下距加倍） ===== */
 .event-info h2{
-  font-size:clamp(20px, 1.8vw, 30px);   /* 與 .topic-row 的字級一致 */
+  font-size:clamp(20px, 1.8vw, 30px);
   font-weight:500;
-  margin:0 0 16px;
+  margin:clamp(36px,4vw,64px) 0 clamp(18px,2.6vw,36px); /* ↑上距、↓下距 */
 }
 .event-info h2 span{ font-weight:500; }
 
@@ -160,115 +137,53 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 .register-btn:active{ transform:scale(.9) }
 .register-btn:focus-visible{ outline:3px solid rgba(255,255,255,.6); outline-offset:3px }
 
-/* ===== 時間／地點：穩定版（你現在的設定保留） ===== */
-
-/* 外層：桌機以內容寬置中；內文靠左 */
+/* ===== 時間／地點（穩定版） ===== */
 .topic-rows{
-  margin-top:18px;
-  display:grid;
-  gap:12px;
-  width:max-content;
-  max-width:100%;
-  margin-left:auto; margin-right:auto;
-  text-align:left;
-  justify-items:start;
-  /* ★ 與「主要講者」的距離：加大底部間距 */
-  margin-bottom:clamp(28px, 4vw, 56px);
+  margin-top:18px; display:grid; gap:12px;
+  width:max-content; max-width:100%;
+  margin-left:auto; margin-right:auto; text-align:left; justify-items:start;
+  margin-bottom:clamp(28px, 4vw, 56px); /* 與「主要講者」距離拉開 */
 }
-
-/* 每列用 grid：左=膠囊、右=內容 */
 .topic-row{
-  display:grid;
-  grid-template-columns:auto 1fr;
-  align-items:center;
-  column-gap:10px;
-  width:max-content;
-  text-align:left;
+  display:grid; grid-template-columns:auto 1fr; align-items:center;
+  column-gap:10px; width:max-content; text-align:left;
   font-size:clamp(20px, 1.8vw, 30px);
 }
-
-/* 左側膠囊（時間／地點） */
 .topic-row .pill{
-  min-width:64px;
-  height:48px;
-  padding:0 14px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  white-space:nowrap;
-  border-radius:999px;
-  background:rgba(255,255,255,.18);
-  font-weight:500;
-  line-height:1;
-  font-size:clamp(16px, 1.8vw, 24px);
+  min-width:64px; height:48px; padding:0 14px;
+  display:inline-flex; align-items:center; justify-content:center;
+  white-space:nowrap; border-radius:999px; background:rgba(255,255,255,.18);
+  font-weight:500; line-height:1; font-size:clamp(16px, 1.8vw, 24px);
 }
-
-/* 右側內容 */
 .topic-row > div:last-child{
-  min-width:0;
-  display:flex;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:.5em;
-  min-height:48px;
-  line-height:1.8;
-  overflow-wrap:anywhere;
-  text-align:left;
+  min-width:0; display:flex; align-items:center; flex-wrap:wrap; gap:.5em;
+  min-height:48px; line-height:1.8; overflow-wrap:anywhere; text-align:left;
 }
-
-/* 「線上同步」徽章（chip） */
 .place .hl{
-  display:inline-flex;
-  align-items:center;
-  border-radius:999px;
-  background:rgba(255,255,255,.25);
-  color:#fff;
-  line-height:1;
-  margin-left:.6em;
-  font-weight:500;
-  font-size:clamp(14px, 1.25vw, 20px);
-  padding:6px 16px;
-  vertical-align:middle;
-  white-space:nowrap;
+  display:inline-flex; align-items:center; border-radius:999px;
+  background:rgba(255,255,255,.25); color:#fff; line-height:1;
+  margin-left:.6em; font-weight:500;
+  font-size:clamp(14px, 1.25vw, 20px); padding:6px 16px; vertical-align:middle; white-space:nowrap;
 }
-
-/* —— 平板以下：仍保持置中 —— */
 @media (max-width:1200px){
   .topic-rows{ width:min(100%, 1000px); margin:18px auto clamp(28px, 4vw, 56px); }
   .topic-row{ width:auto; max-width:100%; }
 }
-
-/* —— 手機：多行頂齊；chip 微縮避免掉到第三行 —— */
 @media (max-width:560px){
   .topic-row{ align-items:flex-start; }
-  .topic-row .pill{
-    min-width:58px;
-    height:40px;
-    padding:0 12px;
-    font-size:0.95em;
-  }
-  .topic-row > div:last-child{
-    min-height:40px;
-    display:flex;
-    flex-wrap:wrap;
-    gap:.4em;
-    font-size:0.95em;
-    line-height:1.6;
-  }
-  .place .hl{ font-size:0.9em; padding:4px 10px; }
+  .topic-row .pill{ min-width:58px; height:40px; padding:0 12px; font-size:.95em; }
+  .topic-row > div:last-child{ min-height:40px; display:flex; flex-wrap:wrap; gap:.4em; font-size:.95em; line-height:1.6; }
+  .place .hl{ font-size:.9em; padding:4px 10px; }
 }
 
-/* ===== 內容內強調色（恢復粉色標註） ===== */
-.event-info b,
-.event-info strong{ color:var(--pink); font-weight:500; }
+/* 內容內強調色（恢復粉色標註） */
+.event-info b, .event-info strong{ color:var(--pink); font-weight:500; }
 
 /* ===== 講者 ===== */
 .speaker-grid{
-  margin-top:36px;
+  margin-top:clamp(36px, 5vw, 72px);  /* 與上面區塊再拉開 */
   margin-bottom:60px;
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:36px;
+  display:grid; grid-template-columns:repeat(3,1fr); gap:36px;
 }
 .speaker{ text-align:center }
 .speaker .photo{
@@ -279,76 +194,41 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 .speaker .name{ font-size:1.6rem; font-weight:500; margin:0 0 10px }
 .speaker .title-chip{ display:inline-block; padding:8px 16px; border-radius:999px; background:rgba(255,255,255,.30); color:#fff; font-weight:500; font-size:1rem }
 
-/* ★ 小螢幕也維持一列三個（縮小頭像與間距） */
+/* 手機：講者改為直排（1 欄） */
 @media (max-width:768px){
   .speaker-grid{
-    grid-template-columns:repeat(3,1fr) !important;
-    gap:18px;
+    grid-template-columns:1fr;
+    gap:28px; max-width:520px; margin-inline:auto;
   }
-  .speaker .photo{ width:110px; height:110px; margin-bottom:10px; }
-  .speaker .name{ font-size:1rem; }
-  .speaker .title-chip{ font-size:.75rem; padding:6px 10px; }
+  .speaker .photo{ width:160px; height:160px; margin-bottom:14px; }
+  .speaker .name{ font-size:1.3rem; }
+  .speaker .title-chip{ font-size:.95rem; padding:6px 14px; }
+}
+@media (max-width:480px){
+  .speaker .photo{ width:140px; height:140px; }
+  .speaker-grid{ gap:24px; }
 }
 
 /* ===== HERO（手機版 1920×1800）===== */
 @media (max-width:768px){
-  .hero-wrapper{
-    aspect-ratio:1920/1800;
-    background-image:url("assets/img/hero-bg-m.png");
-    background-position:center top;
-  }
+  .hero-wrapper{ aspect-ratio:1920/1800; background-image:url("assets/img/hero-bg-m.png"); background-position:center top; }
   .hero-logo{ top:6vw; left:6vw; width:50vw; }
   .hero-title{ top:24vw; left:6vw; width:65vw; }
   .hero-subtitle{ top:48vw; left:6vw; width:65vw; }
   .topic-badge{ margin-top:10px; }
 }
 
-/* === 桌機：靠左排列，但膠囊內文字置中，左右等高對齊 === */
+/* 對齊補丁（保持現狀） */
 @media (min-width:992px){
   .event-info .topic-row{ align-items:center !important; }
-  .event-info .topic-row .pill{
-    display:inline-flex; align-items:center; justify-content:center;
-    height:42px; padding:0 14px; line-height:1; text-align:center;
-  }
+  .event-info .topic-row .pill{ display:inline-flex; align-items:center; justify-content:center; height:42px; padding:0 14px; line-height:1; text-align:center; }
   .event-info .topic-row > div:last-child{ display:flex; align-items:center; min-height:42px; }
 }
-
-/* 手機/平板：維持頂齊（多行比較自然） */
 @media (max-width:991.98px){
   .event-info .topic-row{ align-items:flex-start; }
   .event-info .topic-row > div:last-child{ display:block; min-height:0; }
 }
-
-/* 微調：避免右側 chip 影響基線 */
 .place .hl{ vertical-align:middle; }
-
-/* 手機：講者改為直排 */
-@media (max-width: 768px){
-  .speaker-grid{
-    grid-template-columns: 1fr;   /* 一欄直排 */
-    gap: 28px;                    /* 卡片間距 */
-    max-width: 520px;             /* 視覺寬度別太散 */
-    margin-inline: auto;          /* 置中 */
-  }
-  .speaker .photo{
-    width: 160px;
-    height: 160px;
-    margin-bottom: 14px;
-  }
-  .speaker .name{
-    font-size: 1.3rem;
-  }
-  .speaker .title-chip{
-    font-size: .95rem;
-    padding: 6px 14px;
-  }
-}
-
-/* 超小螢幕再緊一點 */
-@media (max-width: 480px){
-  .speaker .photo{ width: 140px; height: 140px; }
-  .speaker-grid{ gap: 24px; }
-}
 </style>
 </head>
 <body>
