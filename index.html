@@ -235,23 +235,24 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 .place .hl{ vertical-align:middle; }
 
 <style>
-/* ===== Agenda（背景同上半部 / 時間膠囊改為藍色漸層）===== */
+/* ===== Agenda（背景同上半部；時間使用「上沿貼齊」方塊標籤） ===== */
 .agenda{
   position:relative;
   padding:20px 0 60px;
-  background:#112240; /* 與 event-info 相同 */
+  background:#112240 !important; /* 與 .event-info 一致，並避免舊樣式覆蓋 */
 }
 .agenda .inner{ max-width:1200px; margin:0 auto; padding:0 20px; }
 .agenda h2{ font-size:clamp(20px,1.8vw,30px); font-weight:500; margin:0 0 20px; }
 
 .ag-grid{ display:grid; grid-template-columns:1fr; gap:14px; }
 
-/* 卡片：單欄、時間置中在上方 */
+/* 卡片：預留上方「時間標籤」空間 */
 .ag-card{
+  position:relative;
   display:grid;
   grid-auto-rows:auto;
   row-gap:12px;
-  padding:22px 20px 20px;
+  padding:36px 20px 20px;       /* ↑多 14~16px 給上緣標籤 */
   border-radius:16px;
   background:var(--glass-bg);
   border:1px solid var(--glass-bd);
@@ -260,22 +261,22 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   -webkit-backdrop-filter:blur(10px);
 }
 
-/* 上方時間膠囊（藍色漸層 + 內亮） */
+/* 時間：貼齊卡片上緣，只有「下方」兩角有 R 角（不像膠囊） */
 .ag-time{
-  justify-self:center;
+  position:absolute;
+  top:0;
+  left:50%;
+  transform:translate(-50%, -50%);   /* 上緣一半高度，像範例的「吊掛標籤」 */
   padding:8px 18px;
-  border-radius:999px;
-  background:linear-gradient(180deg, #6fb3ff 0%, #4598e6 100%);
-  color:#fff;
+  border-radius:0 0 12px 12px;       /* 只給左下/右下 R 角 */
+  background:#e6eef7;                /* 淺灰藍實心，非毛玻璃 */
+  color:#1d2d44;
   font-family:"Akrobat","Noto Sans TC",sans-serif;
   font-weight:600;
-  font-size:clamp(16px,1.4vw,22px);
-  line-height:1.15;
+  font-size:clamp(14px,1.2vw,20px);
   letter-spacing:.02em;
-  border:1px solid rgba(255,255,255,.55);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.6),
-    0 4px 12px rgba(0,0,0,.25);
+  border:1px solid #c9d8ea;
+  box-shadow:0 3px 10px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.7);
   white-space:nowrap;
 }
 
@@ -284,20 +285,20 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 .ag-title{ font-size:clamp(18px,1.6vw,26px); font-weight:500; margin:0 0 6px; }
 .ag-sub{ margin:0; color:#cfd6e6; line-height:1.9; }
 
-/* 人名 / 稱謂：人名更大；斜線與稱謂 70% */
+/* 人名 / 稱謂：人名更大；斜線與稱謂按規格縮小 */
 .ag-people{
   display:inline-flex; flex-wrap:wrap; gap:.45em 1em;
   justify-content:center; margin-top:2px;
 }
 .ag-person{ white-space:normal; }
-.ag-name{ color:var(--pink); font-weight:600; font-size:1.1em; } /* ↑放大 */
+.ag-name{ color:var(--pink); font-weight:600; font-size:1.1em; } /* 人名放大 */
 .ag-sep{
-  display:inline-block; font-size:80%; line-height:1;
+  display:inline-block; font-size:85%; line-height:1;  /* 斜線 85% */
   padding:0 .3em; opacity:.95;
 }
-.ag-role{ opacity:.95; font-size:70%; } /* ←稱謂縮小為 70% */
+.ag-role{ opacity:.95; font-size:85%; } /* 稱謂 85%（你指定） */
 
-/* 備註字級 */
+/* 備註 */
 .ag-note{ color:#a8b3c9; font-size:.95em; }
 </style>
 </head>
