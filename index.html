@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>前瞻科技系列論壇</title>
 
+<!-- 字型 -->
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Montserrat:wght@500&display=swap" rel="stylesheet">
 
 <style>
@@ -122,10 +123,12 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
   padding:0 20px;
   line-height:1.8;
   font-weight:300;
+  font-size:1.5em; /* 字體放大 1.5 倍 */
 }
 
+/* 標題：改為 500 */
 .event-info h2{
-  font-size:1.5rem;
+  font-size:2.25rem; /* 放大 */
   margin:0 0 20px;
   font-weight:500;
 }
@@ -149,35 +152,36 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
 }
 .event-info li{ margin-bottom:10px; }
 
-/* ===== 立即報名（箭頭款，hover箭頭右滑） ===== */
+/* ===== 立即報名（置中 + 放大 + 柔和陰影） ===== */
 .register-btn{
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:12px;
+  gap:14px;
   margin:40px auto 0;
-  padding:14px 30px;
-  width:190px;
+  padding:16px 34px;
+  width:220px;                  /* 放大為 220 */
   background:#f48c06;
   color:#fff;
   border:6px solid #fff;
   border-radius:999px;
-  font-size:1.2rem;
+  font-size:1.8rem;             /* 文字放大 1.8 倍 */
   font-weight:500;
   text-decoration:none;
-  box-shadow:0 8px 20px rgba(0,0,0,0.25);
+  box-shadow:0 6px 18px rgba(0,0,0,0.18); /* 柔和陰影 */
   transition:all .3s ease;
 }
+.register-btn span{ margin-right:4px; }
 .register-btn svg{
-  width:20px; height:20px; fill:#fff; flex:0 0 auto; transition:transform .3s ease;
+  width:1.8em; height:1.8em; fill:#fff; flex:0 0 auto; transition:transform .3s ease;
 }
 .register-btn:hover{
   background:#f48c06;
   border-color:transparent;
   transform:scale(0.95);
-  box-shadow:none;
+  box-shadow:0 4px 12px rgba(0,0,0,0.15);
 }
-.register-btn:hover svg{ transform:translateX(6px); }  /* ← 箭頭右滑 */
+.register-btn:hover svg{ transform:translateX(2px); }
 .register-btn:active{ transform:scale(0.9); }
 .register-btn:focus-visible{
   outline:3px solid rgba(255,255,255,.6);
@@ -243,7 +247,7 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
       <span>立即報名</span>
       <!-- 右箭頭 SVG -->
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        <path d="M10 17l5-5-5-5v10z"/>
+        <path d="M8 4l8 8-8 8" />
       </svg>
     </a>
   </div>
