@@ -25,13 +25,43 @@
   font-display: swap;
 }
 
-html,body{margin:0;background:#000;color:#fff}
+/* 基礎設定 */
+html,body{margin:0;background:#000;color:#fff;overflow-x:hidden;}
 html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,"PingFang TC","Heiti TC",sans-serif}
 
 /* ===== HERO ===== */
-.hero-wrapper{ ... } /* ← 原樣，省略 */
+.hero-wrapper{
+  position:relative;
+  width:100%;
+  aspect-ratio:1920/840;
+  overflow:hidden;
+  background:#0b0c0f url("assets/img/hero-bg.png") center/cover no-repeat;
+}
+.hero-img{position:absolute; max-width:100%; height:auto; pointer-events:none; user-select:none; opacity:0}
 
-/* ===== 橫向活動選單 ===== */
+.hero-logo{
+  top:calc( 60/840 * 100%);
+  left:calc(70/1920*100%);
+  width:calc(504/1920*100%);
+  animation: slideInLeft 1s ease-out forwards 0.2s;
+}
+.hero-title{
+  top:calc(270/840 * 100%);
+  left:calc(100/1920*100%);
+  width:calc(880/1920*100%);
+  animation: slideInUp 1s ease-out forwards 0.6s;
+}
+.hero-subtitle{
+  top:calc(570/840 * 100%);
+  left:calc(100/1920*100%);
+  width:calc(880/1920*100%);
+  animation: slideInUp 1s ease-out forwards 1s;
+}
+
+@keyframes slideInLeft { from { transform:translateX(-50px); opacity:0 } to { transform:translateX(0); opacity:1 } }
+@keyframes slideInUp   { from { transform:translateY(50px);  opacity:0 } to { transform:translateY(0);  opacity:1 } }
+
+/* ===== 色彩變數 ===== */
 :root{
   --tab-default:#501cf2;
   --tab-active:#ff2b8a;
@@ -39,41 +69,213 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
   --f2: clamp(20px, 2.4vw, 56px);
   --pink:#ff5e99;
 }
+
+/* ===== 橫向日期選單（卡片式） ===== */
 .event-bar{
   width:100%;
-  padding-inline:100px;      /* 桌機左右各 100px */
+  padding-inline:100px;
   background:#000;
   box-sizing:border-box;
 }
 .event-bar .bar{
   max-width:1200px;
   margin:0 auto;
-  display:grid;
+  display:grid !important;
   grid-template-columns:repeat(4, minmax(0, 1fr));
   gap:20px;
 }
-.bar-item{ ... } /* ← 保持你的設定 */
 
-/* —— ≤1024（平板，仍 4 欄，只縮 padding）—— */
+/* 卡片按鈕 */
+.bar-item{
+  --c1: var(--tab-default);
+  --c2: #2b0f7a;
+  appearance:none; border:none; outline:none;
+  color:#fff; cursor:pointer; user-select:none;
+
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  border-radius:16px;
+  padding:18px 20px;
+
+  background: linear-gradient(135deg, var(--c1) 0%, var(--c2) 100%);
+  background-size:200% 200%;
+  background-position:0% 50%;
+  transition: background-position .6s ease, transform .2s ease, box-shadow .3s ease;
+  box-shadow:0 8px 20px rgba(0,0,0,.25);
+}
+.bar-item:hover{
+  background-position:100% 50%;
+  transform:translateY(-1px);
+}
+.bar-item[aria-current="true"]{
+  --c1: var(--tab-active);
+  --c2: #a71858;
+  animation: gradFlow 3s ease-in-out infinite alternate;
+}
+@keyframes gradFlow{
+  from{ background-position:0% 50%; }
+  to  { background-position:100% 50%; }
+}
+
+/* 內容 */
+.bar-arrow{
+  font-size: clamp(18px, 2.2vw, 28px);
+  line-height:1;
+  display:inline-block;
+  animation: arrowOsc .8s ease-in-out infinite alternate;
+}
+@keyframes arrowOsc{
+  from{ transform: translateX(-6px); }
+  to  { transform: translateX(6px); }
+}
+.bar-date{
+  font-family:"Akrobat","Noto Sans TC",sans-serif;
+  font-weight:500;
+  font-size: clamp(18px, 2.4vw, 32px);
+  letter-spacing:0.025em;
+  white-space:nowrap;
+}
+
+/* —— RWD：event-bar —— */
 @media (max-width:1024px){
   .event-bar{ padding-inline:60px; }
 }
-
-/* —— ≤820（變 2×2，padding 再縮小，不必維持 100px）—— */
 @media (max-width:820px){
   .event-bar{ padding-inline:24px; }
-  .event-bar .bar{
-    grid-template-columns:repeat(2, minmax(0, 1fr));
-  }
+  .event-bar .bar{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
 }
-
-/* —— ≤560（極窄手機）—— */
 @media (max-width:560px){
   .event-bar{ padding-inline:12px; }
   .bar-item{ padding:14px; }
 }
 
-/* ===== 其他區塊（event-info / register-btn / topic / speaker-grid / HERO 手機版）保持原樣 ===== */
+/* ===== 活動資訊 ===== */
+.event-info{
+  background:#112240;
+  padding-block:60px;
+}
+.event-info .inner{
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 20px;
+  line-height:1.8;
+  font-weight:300;
+  font-size:1.2em;
+}
+.event-info .inner h2{
+  font-size:1.8rem;
+  margin:64px 0 20px;
+  font-weight:500;
+}
+.event-info .inner h2:first-of-type{ margin-top:0; }
+.event-info h2 span{
+  color:#fff;
+  font-family:"Akrobat","Noto Sans TC",sans-serif;
+  font-weight:500;
+}
+.event-info b, .event-info strong{ color:var(--pink); font-weight:500; }
+.event-info p, .event-info li{ font-weight:300; }
+.event-info ul{ margin:20px 0; padding-left:20px; }
+.event-info li{ margin-bottom:10px; }
+
+/* ===== 立即報名 ===== */
+.register-btn{
+  display:flex; align-items:center; justify-content:center; gap:14px;
+  margin:40px auto 0;
+  padding:16px 15px 16px 35px;
+  width:220px;
+  background:#f48c06; color:#fff;
+  border:6px solid #fff; border-radius:999px;
+  font-size:1.8rem; font-weight:500; text-decoration:none;
+  box-shadow:0 6px 18px rgba(0,0,0,0.18); transition:all .3s ease;
+}
+.register-btn span{ margin-right:4px; }
+.register-btn svg{ width:1.8em; height:1.5em; flex:0 0 auto; will-change:transform; animation:arrowOsc .8s ease-in-out infinite alternate; }
+.register-btn svg path{ fill:none; stroke:#fff; stroke-width:5; stroke-linecap:round; stroke-linejoin:round; vector-effect:non-scaling-stroke; }
+.register-btn:hover{ background:#f48c06; border-color:transparent; transform:scale(0.95); box-shadow:0 4px 12px rgba(0,0,0,0.15); }
+.register-btn:active{ transform:scale(0.9); }
+.register-btn:focus-visible{ outline:3px solid rgba(255,255,255,.6); outline-offset:3px; }
+
+/* ===== 主題/時間/地點 ===== */
+.topic-wrap{
+  text-align:center;
+  margin:48px auto 24px;
+  max-width:1000px;
+}
+.topic-badge{
+  display:inline-block;
+  padding:12px 24px;
+  border-radius:10px;
+  background:#ff2b8a;
+  color:#fff; font-weight:500;
+  font-size:clamp(20px,1.6vw,33px);
+}
+.topic-en{
+  margin-top:14px;
+  font-weight:500;
+  font-family:"Akrobat","Noto Sans TC",sans-serif;
+  font-size:clamp(20px,1.2vw,33px);
+  opacity:.95;
+}
+.topic-rows{ margin-top:18px; display:grid; gap:14px; justify-items:center; }
+.topic-row{ display:flex; align-items:center; gap:12px; }
+.pill{
+  background:rgba(255,255,255,.18);
+  border-radius:999px;
+  padding:8px 14px;
+  font-weight:500;
+}
+.place{ font-size:1.05em; }
+.place .hl{
+  display:inline-block;
+  margin-left:.4em;
+  padding:2px 8px;
+  border-radius:8px;
+  background:rgba(255,255,255,.25);
+  color:#fff; font-weight:500;
+}
+
+/* ===== 講者 ===== */
+.speaker-grid{
+  margin-top:36px;
+  margin-bottom:60px;
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:36px;
+}
+.speaker{ text-align:center; }
+.speaker .photo{
+  width:200px; height:200px; border-radius:50%;
+  margin:0 auto 18px; object-fit:cover; object-position:center;
+  box-shadow:0 8px 24px rgba(0,0,0,.25); background:#0b0c0f;
+}
+.speaker .name{ font-size:1.6rem; font-weight:500; margin:0 0 10px; }
+.speaker .title-chip{
+  display:inline-block; padding:8px 16px; border-radius:999px;
+  background:rgba(255,255,255,.30); color:#fff; font-weight:500; font-size:1rem;
+}
+
+/* RWD：講者 */
+@media (max-width:960px){ .speaker-grid{ grid-template-columns:1fr 1fr; } }
+@media (max-width:768px){
+  .event-info .inner h2{ margin:40px 0 16px; }
+  .speaker-grid{ margin-bottom:36px; }
+}
+@media (max-width:560px){
+  .speaker-grid{ grid-template-columns:1fr; }
+  .topic-badge{ font-size:18px; }
+}
+
+/* ===== HERO（手機版 1920×1400）===== */
+@media (max-width: 768px){
+  .hero-wrapper{
+    aspect-ratio:1920/1400;
+    background-image:url("assets/img/hero-bg-m.png");
+    background-position:center top;
+  }
+  .hero-logo{ top:6vw; left:6vw; width:50vw; }
+  .hero-title{ top:24vw; left:6vw; width:65vw; }
+  .hero-subtitle{ top:48vw; left:6vw; width:65vw; }
+}
 </style>
 </head>
 <body>
