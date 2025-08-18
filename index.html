@@ -21,35 +21,56 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   --tab-default:#501cf2;
   --tab-active:#ff2b8a;
   --pink:#ff5e99;
+  --glass-bg: rgba(255,255,255,.06);
+  --glass-bd: rgba(255,255,255,.18);
+  --glass-drop: 0 10px 24px rgba(0,0,0,.28);
   --f2: clamp(20px, 2.4vw, 56px);
-  --hero-pad: max(12px, 5.208333vw);
+  --hero-pad: max(12px, 5.208333vw); /* 1920時≈100px */
 }
 
 /* ===== HERO（含貼底選單） ===== */
 .hero-wrapper{
   position:relative;
   width:100%;
-  aspect-ratio:1920/940;
+  aspect-ratio:1920/940; /* 桌機比 */
   overflow:hidden;
   background:#0b0c0f url("assets/img/hero-bg.png") center/cover no-repeat;
 }
 .hero-img{ position:absolute; max-width:100%; height:auto; pointer-events:none; user-select:none; opacity:0 }
+
+/* 三張圖（以 1920×940 標定） */
 .hero-logo{     top:calc( 60/940*100%); left:calc( 70/1920*100%); width:calc(504/1920*100%); animation:slideInLeft 1s ease-out forwards .2s; }
 .hero-title{    top:calc(270/940*100%); left:calc(100/1920*100%); width:calc(880/1920*100%); animation:slideInUp   1s ease-out forwards .6s; }
 .hero-subtitle{ top:calc(570/940*100%); left:calc(100/1920*100%); width:calc(880/1920*100%); animation:slideInUp   1s ease-out forwards 1s; }
+
 @keyframes slideInLeft{ from{ transform:translateX(-50px); opacity:0 } to{ transform:translateX(0); opacity:1 } }
 @keyframes slideInUp  { from{ transform:translateY( 50px); opacity:0 } to{ transform:translateY(0);  opacity:1 } }
 
-/* ===== 日期選單 ===== */
+/* ===== 日期選單（卡片式，置於 HERO 底部） ===== */
 .event-bar{
-  position:absolute; left:50%; bottom:clamp(12px, 2.8vw, 40px); transform:translateX(-50%);
-  width:min(89.5833vw, 1720px); max-width:1720px; background:transparent; padding:0; box-sizing:border-box; z-index:5;
+  position:absolute;
+  left:50%;
+  bottom:clamp(12px, 2.8vw, 40px);
+  transform:translateX(-50%);
+  width:min(89.5833vw, 1720px);
+  max-width:1720px;
+  background:transparent;
+  padding:0;
+  box-sizing:border-box;
+  z-index:5;
 }
-.event-bar .bar{ display:grid !important; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:clamp(10px, 1.25vw, 20px); }
+.event-bar .bar{
+  display:grid !important;
+  grid-template-columns:repeat(4, minmax(0, 1fr));
+  gap:clamp(10px, 1.25vw, 20px);
+}
 .bar-item{
-  --c1: var(--tab-default); --c2:#2b0f7a;
-  appearance:none; border:none; outline:none; color:#fff; cursor:pointer; user-select:none;
-  display:flex; align-items:center; justify-content:center; gap:10px; border-radius:10px;
+  --c1: var(--tab-default);
+  --c2: #2b0f7a;
+  appearance:none; border:none; outline:none;
+  color:#fff; cursor:pointer; user-select:none;
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  border-radius:10px;
   padding:10px 24px 9px;
   background:linear-gradient(135deg, var(--c1) 0%, var(--c2) 100%);
   background-size:200% 200%; background-position:0% 50%;
@@ -62,29 +83,49 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 .bar-arrow{ font-size:clamp(18px, 2.2vw, 28px); line-height:1; display:inline-block; animation:arrowOsc .8s ease-in-out infinite alternate; }
 .bar-date{  font-family:"Akrobat","Noto Sans TC",sans-serif; font-weight:500; font-size:clamp(20px, 2.4vw, 40px); letter-spacing:.025em; white-space:nowrap; }
 @keyframes arrowOsc{ from{transform:translateX(-6px)} to{transform:translateX(6px)} }
-@media (max-width:820px){ .event-bar .bar{ grid-template-columns:repeat(2, minmax(0, 1fr)); gap:clamp(8px, 2.2vw, 16px); } }
-@media (max-width:560px){ .bar-item{ padding:6px 14px; } .bar-date{ font-size:18px; } .bar-arrow{ font-size:18px; } }
+@media (max-width:820px){
+  .event-bar .bar{ grid-template-columns:repeat(2, minmax(0, 1fr)); gap:clamp(8px, 2.2vw, 16px); }
+}
+@media (max-width:560px){
+  .bar-item{ padding:6px 14px; }
+  .bar-date{ font-size:18px; }
+  .bar-arrow{ font-size:18px; }
+}
 
-/* ===== 活動資訊（黑→藍銜接） ===== */
+/* ===== 活動資訊（含與 HERO 的黑→藍銜接） ===== */
 .event-info{
-  position:relative; background:#112240; padding-block:20px; overflow:hidden;
+  position:relative;
+  background:#112240;
+  padding-block:20px;
+  overflow:hidden;
 }
 .event-info::before{
-  content:""; position:absolute; top:0; left:0; right:0; height:500px;
-  background:linear-gradient(to bottom, #000 0%, #112240 100%); pointer-events:none;
+  content:"";
+  position:absolute; top:0; left:0; right:0;
+  height:500px;
+  background:linear-gradient(to bottom, #000 0%, #112240 100%);
+  pointer-events:none;
 }
-.event-info .inner{ position:relative; z-index:1; max-width:1200px; margin:0 auto; padding:0 20px; line-height:1.8; font-weight:300; font-size:1.2em; }
+.event-info .inner{
+  position:relative; z-index:1;
+  max-width:1200px; margin:0 auto; padding:0 20px;
+  line-height:1.8; font-weight:300; font-size:1.2em;
+}
 
 /* ===== 主標 / 副標 ===== */
 .topic-wrap{ text-align:center; margin:16px auto 24px; max-width:1000px; }
 .topic-badge{
   display:inline-block; background:transparent; color:#fff;
-  font-size:clamp(23px, 3vw, 72px); font-weight:400; padding:10px 20px;
-  border-radius:20px; border:4px solid var(--pink); margin:20px 0;
+  font-size:clamp(23px, 3vw, 72px); font-weight:400;
+  padding:10px 20px; border-radius:20px; border:4px solid var(--pink);
+  margin-top:20px; margin-bottom:20px;
 }
-.topic-en{ font-size:clamp(20px, 1.8vw, 42px); font-weight:400; color:#ddd; margin-bottom:40px; font-family:"Akrobat","Noto Sans TC",sans-serif; }
+.topic-en{
+  font-size:clamp(20px, 1.8vw, 42px); font-weight:400; color:#ddd;
+  margin-bottom:40px; font-family:"Akrobat","Noto Sans TC",sans-serif;
+}
 
-/* ===== 內容主標（h2）大小與時間地點一致 ===== */
+/* 內容主標（h2）不要比時間/地點大 */
 .event-info h2{ font-size:clamp(20px, 1.8vw, 30px); font-weight:500; margin:0 0 16px; }
 .event-info h2 span{ font-weight:500; }
 
@@ -96,58 +137,83 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   font-size:1.8rem; font-weight:500; text-decoration:none;
   box-shadow:0 6px 18px rgba(0,0,0,.18); transition:all .3s ease;
 }
+.register-btn svg{ width:1.8em; height:1.5em; flex:0 0 auto; will-change:transform; animation:arrowOsc .8s ease-in-out infinite alternate }
+.register-btn svg path{ fill:none; stroke:#fff; stroke-width:5; stroke-linecap:round; stroke-linejoin:round; vector-effect:non-scaling-stroke }
 .register-btn:hover{ background:#f48c06; border-color:transparent; transform:scale(.95); box-shadow:0 4px 12px rgba(0,0,0,.15) }
 .register-btn:active{ transform:scale(.9) }
 .register-btn:focus-visible{ outline:3px solid rgba(255,255,255,.6); outline-offset:3px }
 
-/* ===== 時間／地點 ===== */
+/* ===== 時間／地點（穩定） ===== */
 .topic-rows{
-  margin-top:18px; display:grid; gap:12px; width:max-content; max-width:100%;
-  margin-left:auto; margin-right:auto; text-align:left; justify-items:start;
-  margin-bottom:clamp(28px, 4vw, 56px);   /* 與主要講者距離加大 */
+  margin-top:18px; margin-bottom:clamp(28px, 4vw, 56px);
+  display:grid; gap:12px;
+  width:max-content; max-width:100%;
+  margin-left:auto; margin-right:auto;
+  text-align:left; justify-items:start;
 }
 .topic-row{
-  display:grid; grid-template-columns:auto 1fr; align-items:center; column-gap:10px;
-  width:max-content; text-align:left; font-size:clamp(20px, 1.8vw, 30px);
+  display:grid; grid-template-columns:auto 1fr;
+  align-items:center; column-gap:10px;
+  width:max-content; text-align:left;
+  font-size:clamp(20px, 1.8vw, 30px);
 }
 .topic-row .pill{
-  min-width:64px; height:48px; padding:0 14px; display:inline-flex; align-items:center; justify-content:center;
-  white-space:nowrap; border-radius:999px; background:rgba(255,255,255,.18); font-weight:500; line-height:1;
+  min-width:64px; height:48px; padding:0 14px;
+  display:inline-flex; align-items:center; justify-content:center;
+  white-space:nowrap; border-radius:999px;
+  background:rgba(255,255,255,.18);
+  font-weight:500; line-height:1;
   font-size:clamp(16px, 1.8vw, 24px);
 }
 .topic-row > div:last-child{
-  min-width:0; display:flex; align-items:center; flex-wrap:wrap; gap:.5em; min-height:48px;
-  line-height:1.8; overflow-wrap:anywhere; text-align:left;
+  min-width:0; display:flex; align-items:center; flex-wrap:wrap; gap:.5em;
+  min-height:48px; line-height:1.8; overflow-wrap:anywhere; text-align:left;
 }
 .place .hl{
-  display:inline-flex; align-items:center; border-radius:999px; background:rgba(255,255,255,.25); color:#fff;
-  line-height:1; margin-left:.6em; font-weight:500; font-size:clamp(14px, 1.25vw, 20px); padding:6px 16px; vertical-align:middle; white-space:nowrap;
+  display:inline-flex; align-items:center; border-radius:999px;
+  background:rgba(255,255,255,.25); color:#fff; line-height:1;
+  margin-left:.6em; font-weight:500;
+  font-size:clamp(14px, 1.25vw, 20px); padding:6px 16px; vertical-align:middle; white-space:nowrap;
 }
-@media (max-width:1200px){ .topic-rows{ width:min(100%,1000px); margin:18px auto clamp(28px,4vw,56px); } .topic-row{ width:auto; max-width:100%; } }
+@media (max-width:1200px){
+  .topic-rows{ width:min(100%, 1000px); margin:18px auto clamp(28px, 4vw, 56px); }
+  .topic-row{ width:auto; max-width:100%; }
+}
 @media (max-width:560px){
   .topic-row{ align-items:flex-start; }
   .topic-row .pill{ min-width:58px; height:40px; padding:0 12px; font-size:.95em; }
   .topic-row > div:last-child{ min-height:40px; display:flex; flex-wrap:wrap; gap:.4em; font-size:.95em; line-height:1.6; }
   .place .hl{ font-size:.9em; padding:4px 10px; }
 }
-/* 內文重點色 */
-.event-info b,.event-info strong{ color:var(--pink); font-weight:500; }
+
+/* ===== 內容內強調色（粉色標註） ===== */
+.event-info b,
+.event-info strong{ color:var(--pink); font-weight:500; }
 
 /* ===== 講者 ===== */
 .speaker-grid{ margin-top:36px; margin-bottom:60px; display:grid; grid-template-columns:repeat(3,1fr); gap:36px }
 .speaker{ text-align:center }
-.speaker .photo{ width:200px; height:200px; border-radius:50%; margin:0 auto 18px; object-fit:cover; object-position:center; box-shadow:0 8px 24px rgba(0,0,0,.25); background:#0b0c0f }
+.speaker .photo{
+  width:200px; height:200px; border-radius:50%;
+  margin:0 auto 18px; object-fit:cover; object-position:center;
+  box-shadow:0 8px 24px rgba(0,0,0,.25); background:#0b0c0f;
+}
 .speaker .name{ font-size:1.6rem; font-weight:500; margin:0 0 10px }
 .speaker .title-chip{ display:inline-block; padding:8px 16px; border-radius:999px; background:rgba(255,255,255,.30); color:#fff; font-weight:500; font-size:1rem }
-@media (max-width:768px){
-  .speaker-grid{ grid-template-columns:1fr; gap:28px; max-width:520px; margin-inline:auto; }
-  .speaker .photo{ width:160px; height:160px; margin-bottom:14px; }
-  .speaker .name{ font-size:1.3rem; }
-  .speaker .title-chip{ font-size:.95rem; padding:6px 14px; }
-}
-@media (max-width:480px){ .speaker .photo{ width:140px; height:140px; } .speaker-grid{ gap:24px; } }
 
-/* ===== HERO（手機 1920×1800）===== */
+/* 手機：講者直排 */
+@media (max-width: 768px){
+  .speaker-grid{ grid-template-columns: 1fr; gap: 28px; max-width: 520px; margin-inline:auto; }
+  .speaker .photo{ width: 160px; height: 160px; margin-bottom: 14px; }
+  .speaker .name{ font-size: 1.3rem; }
+  .speaker .title-chip{ font-size: .95rem; padding: 6px 14px; }
+}
+@media (max-width: 480px){
+  .speaker .photo{ width: 140px; height: 140px; }
+  .speaker-grid{ gap: 24px; }
+}
+
+/* ===== HERO（手機版 1920×1800）===== */
 @media (max-width:768px){
   .hero-wrapper{ aspect-ratio:1920/1800; background-image:url("assets/img/hero-bg-m.png"); background-position:center top; }
   .hero-logo{ top:6vw; left:6vw; width:50vw; }
@@ -156,66 +222,7 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   .topic-badge{ margin-top:10px; }
 }
 
-/* ====== 議程（毛玻璃＋粉色時間膠囊） ====== */
-/* 背景顏色與上方 section 一致 */
-.agenda{ background:#112240; padding:40px 0 20px; }
-.agenda .inner{ max-width:1200px; margin:0 auto; padding:0 20px; }
-
-.ag-list{ display:grid; gap:18px; }
-.ag-card{
-  position:relative; padding:28px 22px 24px; border-radius:18px;
-  background:rgba(255,255,255,.08); box-shadow:0 10px 30px rgba(0,0,0,.25);
-  backdrop-filter:saturate(140%) blur(10px); -webkit-backdrop-filter:saturate(140%) blur(10px);
-  overflow:hidden;
-}
-/* 底部 R 角裝飾（右下角一個更圓的轉角） */
-.ag-card::after{
-  content:""; position:absolute; right:-24px; bottom:-24px; width:120px; height:120px;
-  border:4px solid rgba(255,255,255,.15); border-radius:28px; transform:rotate(45deg);
-}
-/* 時間膠囊：置於卡片中間（上半部中央） */
-.ag-time{
-  position:absolute; left:50%; top:0; transform:translate(-50%, -50%);
-  background:var(--pink); color:#fff; font-weight:600; letter-spacing:.04em;
-  border-radius:999px; padding:8px 16px; line-height:1; font-size:clamp(14px,1.3vw,18px);
-  box-shadow:0 8px 18px rgba(0,0,0,.25);
-}
-/* 標題＋講者 */
-.ag-title{ font-size:clamp(18px, 2.1vw, 28px); font-weight:600; margin:6px 0 10px; }
-.ag-speaker{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; font-size:clamp(14px,1.5vw,18px); }
-/* 姓名膠囊（沿用 chip 視覺） */
-.chip{
-  display:inline-flex; align-items:center; background:rgba(255,255,255,.25);
-  color:#fff; padding:6px 14px; border-radius:999px; line-height:1; font-weight:600;
-}
-.ag-note{ margin-top:8px; }
-.ag-note .sub-btn{
-  appearance:none; border:0; background:transparent; color:#fff; opacity:.9; border:2px solid rgba(255,255,255,.35);
-  border-radius:999px; padding:6px 12px; cursor:pointer;
-}
-
-/* 斷行與排版 */
-@media (max-width:560px){
-  .ag-card{ padding:26px 16px 22px; border-radius:16px; }
-  .ag-title{ font-size:18px; }
-  .ag-speaker{ font-size:15px; }
-}
-
-/* ===== 主／協辦單位 ===== */
-.orgs{ background:#112240; padding:30px 0 60px; }
-.orgs .inner{ max-width:1200px; margin:0 auto; padding:0 20px; }
-.orgs h2{ font-size:clamp(20px, 1.8vw, 30px); font-weight:600; margin:0 0 14px; }
-.org-rows{ display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:center; }
-.org-box{
-  background:rgba(255,255,255,.08); backdrop-filter:saturate(140%) blur(10px); -webkit-backdrop-filter:saturate(140%) blur(10px);
-  border-radius:16px; padding:18px; text-align:center;
-}
-.org-box img{ max-width:100%; height:auto; display:inline-block; }
-@media (max-width:768px){
-  .org-rows{ grid-template-columns:1fr; }
-}
-
-/* === 對齊補丁（沿用） === */
+/* === 桌機：靠左排列，但膠囊內文字置中，左右等高對齊 === */
 @media (min-width:992px){
   .event-info .topic-row{ align-items:center !important; }
   .event-info .topic-row .pill{ display:inline-flex; align-items:center; justify-content:center; height:42px; padding:0 14px; line-height:1; text-align:center; }
@@ -226,11 +233,82 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   .event-info .topic-row > div:last-child{ display:block; min-height:0; }
 }
 .place .hl{ vertical-align:middle; }
+
+/* ----------------------------------------------------
+   議程（Agenda）— 毛玻璃風格
+---------------------------------------------------- */
+.agenda{
+  position:relative;
+  padding: 20px 0 60px;
+  background: #0f1d36; /* 與 event-info 同系深藍段落 */
+}
+.agenda .inner{
+  max-width:1200px; margin:0 auto; padding:0 20px;
+}
+.agenda h2{
+  font-size:clamp(20px, 1.8vw, 30px);
+  font-weight:500;
+  margin:0 0 20px;
+}
+.ag-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:14px;
+}
+.ag-card{
+  display:grid;
+  grid-template-columns: 140px 1fr;
+  gap:16px;
+  align-items:start;
+  padding:18px 18px;
+  border-radius:16px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-bd);
+  box-shadow: var(--glass-drop);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.ag-time{
+  font-family:"Akrobat","Noto Sans TC",sans-serif;
+  font-weight:500;
+  font-size: clamp(18px, 1.4vw, 24px);
+  line-height:1.3;
+  color:#E6ECFF;
+}
+.ag-body .ag-title{
+  font-size: clamp(18px, 1.6vw, 26px);
+  font-weight:500;
+  margin:0 0 6px;
+}
+.ag-body .ag-sub{ margin:0; color:#cfd6e6; line-height:1.7; }
+.ag-chip{
+  display:inline-block; padding:4px 10px; border-radius:999px;
+  background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.28);
+  font-size:.9em; margin-right:.5em; margin-top:.4em;
+}
+.ag-note{ color:#a8b3c9; font-size:.95em; }
+
+/* 小裝置：時間改上、內容在下 */
+@media (max-width:680px){
+  .ag-card{ grid-template-columns: 1fr; }
+}
+
+/* 區塊底部備註 */
+.agenda .tip{
+  margin-top:18px; color:#a8b3c9; font-size:.95em;
+}
+
+/* 讓議程與上一段落距離更舒適 */
+.event-info .inner .after-rows-spacer{
+  height: clamp(26px, 4vw, 44px);
+}
+
+/* ---------------------------------------------------- */
 </style>
 </head>
 <body>
 
-<!-- ===== HERO ===== -->
+<!-- ===== HERO（內含貼底的日期選單） ===== -->
 <section class="hero-wrapper" aria-label="Hero">
   <img class="hero-img hero-logo"     src="assets/img/hero-logo.png"     alt="">
   <img class="hero-img hero-title"    src="assets/img/hero-title.png"    alt="">
@@ -258,7 +336,6 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   </nav>
 </section>
 
-<!-- ===== 活動資訊（主題、時間/地點、講者、內文） ===== -->
 <section class="event-info" id="s1-info">
   <div class="inner">
     <div class="topic-wrap">
@@ -276,6 +353,9 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
         </div>
       </div>
     </div>
+
+    <!-- 與下方「主要講者」之間的緩衝距離 -->
+    <div class="after-rows-spacer"></div>
 
     <h2>主要講者<span>｜Key Speakers</span></h2>
     <div class="speaker-grid">
@@ -315,87 +395,81 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   </div>
 </section>
 
-<!-- ===== 議程（毛玻璃 + 粉色時間膠囊，姓名 chip，統一背景） ===== -->
+<!-- ===== 議程（Agenda）— 毛玻璃卡片 ===== -->
 <section class="agenda" id="agenda">
   <div class="inner">
     <h2>活動議程<span>｜Agenda</span></h2>
 
-    <div class="ag-list">
-      <!-- 10:00-10:25 -->
-      <div class="ag-card">
-        <div class="ag-time">10:00 – 10:25</div>
-        <div class="ag-title">半導體在全球 ICT 供應鏈的核心地位與展望</div>
-        <div class="ag-speaker">
-          <span class="chip">黃欽勇</span>
-          <span> / DIGITIMES 暨 IC 之音 董事長</span>
-        </div>
-      </div>
+    <div class="ag-grid">
 
-      <!-- 10:25-10:50 -->
-      <div class="ag-card">
-        <div class="ag-time">10:25 – 10:50</div>
-        <div class="ag-title">智慧產業共生成長的挑戰：AI 與半導體</div>
-        <div class="ag-speaker">
-          <span class="chip">盧超群</span>
-          <span> / 鈺創科技 董事長</span>
+      <!-- 7:30–8:00 -->
+      <article class="ag-card">
+        <div class="ag-time">7:30 – 8:00</div>
+        <div class="ag-body">
+          <h3 class="ag-title">開場致詞與歡迎致詞</h3>
+          <p class="ag-sub">吳誠文／國家科學及技術委員會 主委；黃錫瑜／國研院科政中心 主任</p>
         </div>
-      </div>
+      </article>
 
-      <!-- 10:50-11:15 -->
-      <div class="ag-card">
-        <div class="ag-time">10:50 – 11:15</div>
-        <div class="ag-title">製程 × 封裝：半導體產業的機會與挑戰</div>
-        <div class="ag-speaker">
-          <span class="chip">郭皇志</span>
-          <span> / 美國國家儀器 台灣區總經理</span>
+      <!-- 8:05–8:25 -->
+      <article class="ag-card">
+        <div class="ag-time">8:05 – 8:25</div>
+        <div class="ag-body">
+          <h3 class="ag-title">【專題演講】未來半導體人才</h3>
+          <p class="ag-sub">主講者：David Horsley／加州大學戴維斯分校 教授</p>
         </div>
-      </div>
+      </article>
 
-      <!-- 11:15-11:40 -->
-      <div class="ag-card">
-        <div class="ag-time">11:15 – 11:40</div>
-        <div class="ag-title">半導體先進製造趨勢分析</div>
-        <div class="ag-speaker">
-          <span class="chip">陳澤嘉</span>
-          <span> / DIGITIMES 分析師</span>
+      <!-- 8:25–9:15 -->
+      <article class="ag-card">
+        <div class="ag-time">8:25 – 9:15</div>
+        <div class="ag-body">
+          <h3 class="ag-title">【台積電觀點】</h3>
+          <p class="ag-sub">
+            <span class="ag-chip">沈文冰／智慧應用整合處 副處長</span>
+            <span class="ag-chip">Tzung-Hua Lin／R&amp;D Manager</span>
+            <span class="ag-chip">Steve Wang／Design Technology Platforms Manager</span>
+            <span class="ag-chip">Chun-Yu Lin／HR Manager</span>
+            <span class="ag-chip">TBC／Operation Manager</span>
+          </p>
         </div>
-        <div class="ag-note">
-          <button class="sub-btn" type="button">議程大綱</button>
-        </div>
-      </div>
+      </article>
 
-      <!-- 11:40-13:30 中場休息 -->
-      <div class="ag-card">
-        <div class="ag-time">11:40 – 13:30</div>
-        <div class="ag-title" style="text-align:center;">中場休息</div>
-      </div>
+      <!-- 9:15–9:25 -->
+      <article class="ag-card">
+        <div class="ag-time">9:15 – 9:25</div>
+        <div class="ag-body">
+          <h3 class="ag-title">【Q&amp;A 現場提問】</h3>
+          <p class="ag-sub">主持人：黃漢森／台積電 首席科學家；與談人：台積電多位不同業務單位之經理</p>
+        </div>
+      </article>
+
+      <!-- 9:25–9:30（問卷） -->
+      <article class="ag-card">
+        <div class="ag-time">9:25 – 9:30</div>
+        <div class="ag-body">
+          <h3 class="ag-title">線上發放滿意度問卷</h3>
+          <p class="ag-sub ag-note">請使用現場提供之 QR Code 連結填寫。</p>
+        </div>
+      </article>
+
+      <!-- 9:25–9:45 -->
+      <article class="ag-card">
+        <div class="ag-time">9:25 – 9:45</div>
+        <div class="ag-body">
+          <h3 class="ag-title">【綜合座談】</h3>
+          <p class="ag-sub">主持人：黃漢森／台積電 首席科學家；與談人：台積電多位不同業務單位之經理</p>
+        </div>
+      </article>
+
     </div>
 
-    <p style="opacity:.7; margin-top:18px;">※ 活動主辦單位保留議程與流程調整之權利。</p>
-  </div>
-</section>
-
-<!-- ===== 主／協辦單位 ===== -->
-<section class="orgs" id="orgs">
-  <div class="inner">
-    <div class="org-rows">
-      <div>
-        <h2>主辦單位</h2>
-        <div class="org-box">
-          <img src="assets/img/organizer-logo.png" alt="主辦單位">
-        </div>
-      </div>
-      <div>
-        <h2>協辦單位</h2>
-        <div class="org-box">
-          <img src="assets/img/partner-logo.png" alt="協辦單位">
-        </div>
-      </div>
-    </div>
+    <p class="tip">＊主辦單位保留議程內容與流程調整之權利。</p>
   </div>
 </section>
 
 <script>
+/* 切換選取中的日期卡 */
 document.querySelectorAll('.bar-item').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     document.querySelectorAll('.bar-item')
