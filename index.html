@@ -129,16 +129,8 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 }
 
 /* 內容主標（h2）不要比時間/地點大 */
-.event-info h2{ 
-  font-size:clamp(20px, 1.8vw, 30px); 
-  font-weight:500; 
-  margin:0 0 16px;   /* 保留下邊距 16px */
-}
-.event-info h2 span{ font-weight:500; }
-
-/* 只有「段落 p 後面緊接著的 h2」才加上邊距 —— 用於「活動亮點」 */
-.event-info p + h2{
-  margin-top: clamp(28px, 5vw, 72px);  /* 視窗越大空隙越大 */
+.event-info h2:not(:first-of-type){
+  margin-top: clamp(28px, 5vw, 72px);
 }
 /* ===== CTA ===== */
 .register-btn{
