@@ -75,7 +75,9 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
   --bg:var(--tab-default);
   background:var(--bg); color:#fff;
   appearance:none; border:none; outline:none; box-shadow:none;
-  display:grid; align-content:center; justify-items:center; text-align:center;
+  /* 原本是 grid，為了擺箭頭 + 日期改成 flex */
+  display:flex; align-items:center; justify-content:center;
+  gap:12px;
   padding-block:16px;           /* 稍降高度 */
   padding-inline:clamp(12px, 2vw, 32px);
   border-right:var(--dividerW) solid #fff;
@@ -85,22 +87,37 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
 .bar-item:last-child{border-right:none}
 .bar-item[aria-current="true"]{ background:var(--tab-active) }
 
-/* 只保留 t1（系列論壇） */
-.bar-item .t1{
-  white-space:nowrap;
+/* 日期：沿用你原本 t2 的字級與字型比例 */
+.bar-date{
+  font-family:"Akrobat","Noto Sans TC",sans-serif;
   font-weight:500;
-  font-size:var(--f2);
+  font-size:calc(var(--f2) * 1.5);
   line-height:1.25;
-  margin:0;
-  letter-spacing:0.03em;
+  letter-spacing:0.025em;
+  white-space:nowrap;
+}
+
+/* 箭頭：常駐左右晃動（沿用你已存在的 @keyframes arrowOsc） */
+.bar-arrow svg{
+  width:calc(var(--f2) * 1.1);
+  height:auto;
+  flex:0 0 auto;
+  fill:none;
+  stroke:#fff;
+  stroke-width:5;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  animation: arrowOsc 0.8s ease-in-out infinite alternate;
 }
 
 /* 手機調整 */
 @media (max-width:480px){
   .event-bar .bar{ grid-template-columns:repeat(2,1fr) }
-  .bar-item{ border-right:var(--dividerW) solid #fff; border-bottom:var(--dividerW) solid #fff }
+  .bar-item{ border-right:var(--dividerW) solid #fff; border-bottom:var(--dividerW) solid #fff; gap:10px; padding-block:14px; }
   .bar-item:nth-child(2n){ border-right:none }
   .bar-item:nth-last-child(-n+2){ border-bottom:none }
+  .bar-date{ font-size:calc(var(--f2) * 1.3); }
+  .bar-arrow svg{ width:calc(var(--f2) * 0.9); }
 }
 
 /* ===== 活動資訊區塊（背景 #112240） ===== */
@@ -266,20 +283,32 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
   <img class="hero-img hero-subtitle" src="assets/img/hero-subtitle.png" alt="">
 </section>
 
-<!-- 橫向選單：只保留「系列論壇」 -->
+<!-- 橫向選單：改為「箭頭 + 日期」（保留你的互動與配色） -->
 <nav class="event-bar" aria-label="系列論壇切換">
   <div class="bar" id="eventBar">
-    <button type="button" class="bar-item" data-id="s1" aria-current="true">
-      <div class="t1">系列論壇 ①</div>
+    <button type="button" class="bar-item" data-id="s1" aria-current="true" aria-label="系列論壇 ①，日期 2025.09.26">
+      <span class="bar-arrow" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 4l8 8-8 8"/></svg>
+      </span>
+      <span class="bar-date">2025.09.26</span>
     </button>
-    <button type="button" class="bar-item" data-id="s2" aria-current="false">
-      <div class="t1">系列論壇 ②</div>
+    <button type="button" class="bar-item" data-id="s2" aria-current="false" aria-label="系列論壇 ②，日期 2025.10.14">
+      <span class="bar-arrow" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 4l8 8-8 8"/></svg>
+      </span>
+      <span class="bar-date">2025.10.14</span>
     </button>
-    <button type="button" class="bar-item" data-id="s3" aria-current="false">
-      <div class="t1">系列論壇 ③</div>
+    <button type="button" class="bar-item" data-id="s3" aria-current="false" aria-label="系列論壇 ③，日期 2025.11.22">
+      <span class="bar-arrow" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 4l8 8-8 8"/></svg>
+      </span>
+      <span class="bar-date">2025.11.22</span>
     </button>
-    <button type="button" class="bar-item" data-id="s4" aria-current="false">
-      <div class="t1">系列論壇 ④</div>
+    <button type="button" class="bar-item" data-id="s4" aria-current="false" aria-label="系列論壇 ④，日期 2025.12.15">
+      <span class="bar-arrow" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 4l8 8-8 8"/></svg>
+      </span>
+      <span class="bar-date">2025.12.15</span>
     </button>
   </div>
 </nav>
