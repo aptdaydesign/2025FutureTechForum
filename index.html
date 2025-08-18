@@ -360,6 +360,16 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   .ag-card{ --tag-h:48px; padding-top: calc(var(--tag-h) + 14px); }
   .ag-time{ font-size:20px; padding:0 20px; }
 }
+/* 讓 event-info 與 agenda 的第二個(含之後) h2 都有段前距 */
+.event-info h2:not(:first-of-type),
+.agenda h2:not(:first-of-type){
+  margin-top: clamp(28px, 5vw, 72px);
+}
+
+/* Agenda 區塊的第一個 h2 也要與上一區塊拉開距離 */
+.agenda .inner > h2:first-of-type{
+  margin-top: clamp(28px, 5vw, 72px);
+}
 </style>
 
 
