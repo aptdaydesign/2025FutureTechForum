@@ -5,305 +5,172 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>前瞻科技系列論壇</title>
 
-<!-- 字型 -->
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Montserrat:wght@500&display=swap" rel="stylesheet">
 
 <style>
-/* ===== Akrobat local font files ===== */
-@font-face{
-  font-family: 'Akrobat';
-  src: url('assets/fonts/Akrobat-Regular.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face{
-  font-family: 'Akrobat';
-  src: url('assets/fonts/Akrobat-SemiBold.otf') format('opentype');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
+/* ===== 字型（Akrobat） ===== */
+@font-face{ font-family:'Akrobat'; src:url('assets/fonts/Akrobat-Regular.otf') format('opentype'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face{ font-family:'Akrobat'; src:url('assets/fonts/Akrobat-SemiBold.otf') format('opentype'); font-weight:500; font-style:normal; font-display:swap; }
 
-/* 基礎設定 */
-html,body{margin:0;background:#000;color:#fff;overflow-x:hidden;}
-html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,"PingFang TC","Heiti TC",sans-serif}
+/* ===== 基礎 ===== */
+html,body{ margin:0; background:#000; color:#fff; overflow-x:hidden; }
+html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,"PingFang TC","Heiti TC",sans-serif }
 
-/* ===== HERO（把 event-bar 放進來、貼底） ===== */
-.hero-wrapper{
-  position:relative;
-  width:100%;
-  aspect-ratio:1920/940;                    /* ← 桌機改 1920×940 */
-  overflow:hidden;
-  background:#0b0c0f url("assets/img/hero-bg.png") center/cover no-repeat;
-}
-.hero-img{position:absolute; max-width:100%; height:auto; pointer-events:none; user-select:none; opacity:0}
-
-.hero-logo{
-  top:calc( 60/940 * 100%);                 /* 原本 /840 → /940 */
-  left:calc(70/1920*100%);
-  width:calc(504/1920*100%);
-  animation: slideInLeft 1s ease-out forwards 0.2s;
-}
-.hero-title{
-  top:calc(270/940 * 100%);                 /* 原本 /840 → /940 */
-  left:calc(100/1920*100%);
-  width:calc(880/1920*100%);
-  animation: slideInUp 1s ease-out forwards 0.6s;
-}
-.hero-subtitle{
-  top:calc(570/940 * 100%);                 /* 原本 /840 → /940 */
-  left:calc(100/1920*100%);
-  width:calc(880/1920*100%);
-  animation: slideInUp 1s ease-out forwards 1s;
-}
-
-@keyframes slideInLeft { from { transform:translateX(-50px); opacity:0 } to { transform:translateX(0); opacity:1 } }
-@keyframes slideInUp   { from { transform:translateY(50px);  opacity:0 } to { transform:translateY(0);  opacity:1 } }
-
-/* ===== 色彩變數 ===== */
+/* 色彩 & 間距變數 */
 :root{
   --tab-default:#501cf2;
   --tab-active:#ff2b8a;
-  --dividerW: calc(2 / 1920 * 100vw);
-  --f2: clamp(20px, 2.4vw, 56px);
   --pink:#ff5e99;
-  --gutter: clamp(16px, 5vw, 100px);
+  --f2: clamp(20px, 2.4vw, 56px);
+  --gutter: clamp(16px, 5vw, 100px);   /* hero 內左右邊界 */
 }
 
-/* ===== 橫向日期選單（卡片式，嵌在 HERO 底部） ===== */
-.event-bar{
+/* ===== HERO（含貼底選單） ===== */
+.hero-wrapper{
+  position:relative;
   width:100%;
-  padding-inline: var(--gutter);
-  background:#000;
+  aspect-ratio:1920/940;                                   /* 桌機 */
+  overflow:hidden;
+  background:#0b0c0f url("assets/img/hero-bg.png") center/cover no-repeat;
+}
+.hero-img{ position:absolute; max-width:100%; height:auto; pointer-events:none; user-select:none; opacity:0 }
+
+/* 三張圖位置（依 1920×940 重新標定） */
+.hero-logo{     top:calc( 60/940*100%); left:calc( 70/1920*100%); width:calc(504/1920*100%); animation:slideInLeft 1s ease-out forwards .2s; }
+.hero-title{    top:calc(270/940*100%); left:calc(100/1920*100%); width:calc(880/1920*100%); animation:slideInUp   1s ease-out forwards .6s; }
+.hero-subtitle{ top:calc(570/940*100%); left:calc(100/1920*100%); width:calc(880/1920*100%); animation:slideInUp   1s ease-out forwards 1s; }
+
+@keyframes slideInLeft{ from{ transform:translateX(-50px); opacity:0 } to{ transform:translateX(0); opacity:1 } }
+@keyframes slideInUp  { from{ transform:translateY( 50px); opacity:0 } to{ transform:translateY(0);  opacity:1 } }
+
+/* === 日期選單：固定在 HERO 底部 === */
+.event-bar{
+  position:absolute;
+  left:var(--gutter);
+  right:var(--gutter);
+  bottom:clamp(16px, 3vw, 36px);
+  padding:0;
+  background:transparent;
   box-sizing:border-box;
+  z-index:5;
 }
 .event-bar .bar{
-  max-width: min(1400px, 100%);  /* 內容最大 1400px，否則就吃滿可用寬度 */
-  margin: 0 auto;
-  display: grid !important;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 20px;
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0, 1fr));
+  gap:14px;
+  max-width:1400px;
+  margin:0 auto;
 }
 
-/* 卡片按鈕（圓角、漸層、平滑變化） */
+/* 卡片按鈕（圓角漸層＋平滑過渡） */
 .bar-item{
-  --c1: var(--tab-default);
-  --c2: #2b0f7a;                               /* 次色：深紫做對比 */
-  appearance:none; border:none; outline:none;
-  color:#fff; cursor:pointer; user-select:none;
-
+  --c1:var(--tab-default);
+  --c2:#2b0f7a;
+  appearance:none; border:none; outline:none; color:#fff; cursor:pointer; user-select:none;
   display:flex; align-items:center; justify-content:center; gap:10px;
   border-radius:10px;
-  padding:10px 24px 9px;
-
-  background: linear-gradient(135deg, var(--c1) 0%, var(--c2) 100%);
+  padding:10px 24px 9px;                     /* ← 調高矮感覺 */
+  background:linear-gradient(135deg,var(--c1) 0%,var(--c2) 100%);
   background-size:200% 200%;
   background-position:0% 50%;
-  transition: background-position .6s ease, transform .2s ease, box-shadow .3s ease;
+  transition:background-position .6s ease, transform .2s ease, box-shadow .3s ease;
   box-shadow:0 8px 20px rgba(0,0,0,.25);
 }
-.bar-item:hover{
-  background-position:100% 50%;
-  transform:translateY(-1px);
-}
-.bar-item[aria-current="true"]{
-  --c1: var(--tab-active);                      /* 啟用改桃紅漸層 */
-  --c2: #a71858;
-  animation: gradFlow 3s ease-in-out infinite alternate;
-}
-@keyframes gradFlow{
-  from{ background-position:0% 50%; }
-  to  { background-position:100% 50%; }
-}
+.bar-item:hover{ background-position:100% 50%; transform:translateY(-1px) }
+.bar-item[aria-current="true"]{ --c1:var(--tab-active); --c2:#a71858; animation:gradFlow 3s ease-in-out infinite alternate }
+@keyframes gradFlow{ from{background-position:0% 50%} to{background-position:100% 50%} }
 
-/* 內容：箭頭 ⮕ + 日期（箭頭左右晃動） */
-.bar-arrow{
-  font-size: clamp(18px, 2.2vw, 28px);         /* 調這裡＝改箭頭大小 */
-  line-height:1;
-  display:inline-block;
-  animation: arrowOsc .8s ease-in-out infinite alternate;
-}
-.bar-date{
-  font-family:"Akrobat","Noto Sans TC",sans-serif;
-  font-weight:500;
-  font-size: clamp(20px, 2.4vw, 40px);         /* 調這裡＝改日期字級 */
-  letter-spacing:0.025em;
-  white-space:nowrap;
-}
+/* 內容：箭頭 + 日期 */
+.bar-arrow{ font-size:clamp(18px, 2.2vw, 28px); line-height:1; display:inline-block; animation:arrowOsc .8s ease-in-out infinite alternate }
+.bar-date{  font-family:"Akrobat","Noto Sans TC",sans-serif; font-weight:500; font-size:clamp(20px, 2.4vw, 40px); letter-spacing:.025em; white-space:nowrap }
+@keyframes arrowOsc{ from{ transform:translateX(-6px) } to{ transform:translateX(6px) } }
 
-/* 共用：箭頭左右晃動（給 bar、CTA） */
-@keyframes arrowOsc{
-  from{ transform: translateX(-6px); }
-  to  { transform: translateX(6px); }
-}
-
-/* —— RWD：event-bar —— */
-@media (max-width:1200px){
-  .event-bar .bar{ max-width:100%; }           /* 小於 1200 時允許滿寬但仍留 padding-inline */
-}
+/* RWD：選單在窄版改 2×2，並壓縮高度/字級 */
 @media (max-width:1024px){
-  .event-bar{ padding-inline:60px; }
+  .event-bar .bar{ max-width:none }
 }
 @media (max-width:820px){
-  .event-bar{ padding-inline:24px; }
-  .event-bar .bar{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
+  .event-bar .bar{ grid-template-columns:repeat(2, minmax(0, 1fr)) }
 }
 @media (max-width:560px){
-  .event-bar{ padding-inline:12px; }
-  .bar-item{ padding:5px; }
-  .bar-date {
-    font-size:20px;     /* 日期字級縮小 */
-  }
-  .bar-arrow {
-    font-size:20px;     /* 箭頭縮小 */
-  }
+  .bar-item{ padding:6px 14px }
+  .bar-date{ font-size:20px }
+  .bar-arrow{ font-size:20px }
 }
 
 /* ===== 活動資訊 ===== */
-.event-info{
-  background:#112240;
-  padding-block:60px;
-}
-.event-info .inner{
-  max-width:1200px;
-  margin:0 auto;
-  padding:0 20px;
-  line-height:1.8;
-  font-weight:300;
-  font-size:1.2em;
-}
-.event-info .inner h2{
-  font-size:1.8rem;
-  margin:64px 0 20px;
-  font-weight:500;
-}
-.event-info .inner h2:first-of-type{ margin-top:0; }
-.event-info h2 span{
-  color:#fff;
-  font-family:"Akrobat","Noto Sans TC",sans-serif;
-  font-weight:500;
-}
-.event-info b, .event-info strong{ color:var(--pink); font-weight:500; }
-.event-info p, .event-info li{ font-weight:300; }
-.event-info ul{ margin:20px 0; padding-left:20px; }
-.event-info li{ margin-bottom:10px; }
+.event-info{ background:#112240; padding-block:60px }
+.event-info .inner{ max-width:1200px; margin:0 auto; padding:0 20px; line-height:1.8; font-weight:300; font-size:1.2em }
+.event-info .inner h2{ font-size:1.8rem; margin:64px 0 20px; font-weight:500 }
+.event-info .inner h2:first-of-type{ margin-top:0 }
+.event-info h2 span{ color:#fff; font-family:"Akrobat","Noto Sans TC",sans-serif; font-weight:500 }
+.event-info b, .event-info strong{ color:var(--pink); font-weight:500 }
+.event-info ul{ margin:20px 0; padding-left:20px }
+.event-info li{ margin-bottom:10px }
 
-/* ===== 立即報名（保留既有設定） ===== */
+/* ===== CTA ===== */
 .register-btn{
   display:flex; align-items:center; justify-content:center; gap:14px;
-  margin:40px auto 0;
-  padding:16px 15px 16px 35px;
-  width:220px;
-  background:#f48c06; color:#fff;
-  border:6px solid #fff; border-radius:999px;
+  margin:40px auto 0; padding:16px 15px 16px 35px; width:220px;
+  background:#f48c06; color:#fff; border:6px solid #fff; border-radius:999px;
   font-size:1.8rem; font-weight:500; text-decoration:none;
-  box-shadow:0 6px 18px rgba(0,0,0,0.18); transition:all .3s ease;
+  box-shadow:0 6px 18px rgba(0,0,0,.18); transition:all .3s ease;
 }
-.register-btn span{ margin-right:4px; }
-.register-btn svg{ width:1.8em; height:1.5em; flex:0 0 auto; will-change:transform; animation:arrowOsc .8s ease-in-out infinite alternate; }
-.register-btn svg path{ fill:none; stroke:#fff; stroke-width:5; stroke-linecap:round; stroke-linejoin:round; vector-effect:non-scaling-stroke; }
-.register-btn:hover{ background:#f48c06; border-color:transparent; transform:scale(0.95); box-shadow:0 4px 12px rgba(0,0,0,0.15); }
-.register-btn:active{ transform:scale(0.9); }
-.register-btn:focus-visible{ outline:3px solid rgba(255,255,255,.6); outline-offset:3px; }
+.register-btn svg{ width:1.8em; height:1.5em; flex:0 0 auto; will-change:transform; animation:arrowOsc .8s ease-in-out infinite alternate }
+.register-btn svg path{ fill:none; stroke:#fff; stroke-width:5; stroke-linecap:round; stroke-linejoin:round; vector-effect:non-scaling-stroke }
+.register-btn:hover{ background:#f48c06; border-color:transparent; transform:scale(.95); box-shadow:0 4px 12px rgba(0,0,0,.15) }
+.register-btn:active{ transform:scale(.9) }
+.register-btn:focus-visible{ outline:3px solid rgba(255,255,255,.6); outline-offset:3px }
 
-/* ===== 主題/時間/地點（保留既有設定） ===== */
-.topic-wrap{
-  text-align:center;
-  margin:48px auto 24px;
-  max-width:1000px;
-}
-.topic-badge{
-  display:inline-block;
-  padding:12px 24px;
-  border-radius:10px;
-  background:#ff2b8a;
-  color:#fff; font-weight:500;
-  font-size:clamp(20px,1.6vw,33px);
-}
-.topic-en{
-  margin-top:14px;
-  font-weight:500;
-  font-family:"Akrobat","Noto Sans TC",sans-serif;
-  font-size:clamp(20px,1.2vw,33px);
-  opacity:.95;
-}
-.topic-rows{ margin-top:18px; display:grid; gap:14px; justify-items:center; }
-.topic-row{ display:flex; align-items:center; gap:12px; }
-.pill{
-  background:rgba(255,255,255,.18);
-  border-radius:999px;
-  padding:8px 14px;
-  font-weight:500;
-}
-.place{ font-size:1.05em; }
-.place .hl{
-  display:inline-block;
-  margin-left:.4em;
-  padding:2px 8px;
-  border-radius:8px;
-  background:rgba(255,255,255,.25);
-  color:#fff; font-weight:500;
-}
+/* ===== 主題/時間/地點 ===== */
+.topic-wrap{ text-align:center; margin:48px auto 24px; max-width:1000px }
+.topic-badge{ display:inline-block; padding:12px 24px; border-radius:10px; background:#ff2b8a; color:#fff; font-weight:500; font-size:clamp(20px,1.6vw,33px) }
+.topic-en{ margin-top:14px; font-weight:500; font-family:"Akrobat","Noto Sans TC",sans-serif; font-size:clamp(20px,1.2vw,33px); opacity:.95 }
+.topic-rows{ margin-top:18px; display:grid; gap:14px; justify-items:center }
+.topic-row{ display:flex; align-items:center; gap:12px }
+.pill{ background:rgba(255,255,255,.18); border-radius:999px; padding:8px 14px; font-weight:500 }
+.place{ font-size:1.05em }
+.place .hl{ display:inline-block; margin-left:.4em; padding:2px 8px; border-radius:8px; background:rgba(255,255,255,.25); color:#fff; font-weight:500 }
 
-/* ===== 講者（保留既有設定） ===== */
-.speaker-grid{
-  margin-top:36px;
-  margin-bottom:60px;
-  display:grid;
-  grid-template-columns:repeat(3, 1fr);
-  gap:36px;
-}
-.speaker{ text-align:center; }
-.speaker .photo{
-  width:200px; height:200px; border-radius:50%;
-  margin:0 auto 18px; object-fit:cover; object-position:center;
-  box-shadow:0 8px 24px rgba(0,0,0,.25); background:#0b0c0f;
-}
-.speaker .name{ font-size:1.6rem; font-weight:500; margin:0 0 10px; }
-.speaker .title-chip{
-  display:inline-block; padding:8px 16px; border-radius:999px;
-  background:rgba(255,255,255,.30); color:#fff; font-weight:500; font-size:1rem;
-}
+/* ===== 講者 ===== */
+.speaker-grid{ margin-top:36px; margin-bottom:60px; display:grid; grid-template-columns:repeat(3,1fr); gap:36px }
+.speaker{ text-align:center }
+.speaker .photo{ width:200px; height:200px; border-radius:50%; margin:0 auto 18px; object-fit:cover; object-position:center; box-shadow:0 8px 24px rgba(0,0,0,.25); background:#0b0c0f }
+.speaker .name{ font-size:1.6rem; font-weight:500; margin:0 0 10px }
+.speaker .title-chip{ display:inline-block; padding:8px 16px; border-radius:999px; background:rgba(255,255,255,.30); color:#fff; font-weight:500; font-size:1rem }
 
 /* ===== HERO（手機版 1920×1800）===== */
-@media (max-width: 768px){
-  .hero-wrapper{
-    aspect-ratio:1920/1800;                 /* ← 手機改 1920×1800 */
-    background-image:url("assets/img/hero-bg-m.png");
-    background-position:center top;
-  }
-  /* 行動版：維持你先前的相對尺寸微調 */
-  .hero-logo{ top:6vw; left:6vw; width:50vw; }
-  .hero-title{ top:24vw; left:6vw; width:65vw; }
-  .hero-subtitle{ top:48vw; left:6vw; width:65vw; }
+@media (max-width:768px){
+  .hero-wrapper{ aspect-ratio:1920/1800; background-image:url("assets/img/hero-bg-m.png"); background-position:center top }
+  .hero-logo{ top:6vw; left:6vw; width:50vw }
+  .hero-title{ top:24vw; left:6vw; width:65vw }
+  .hero-subtitle{ top:48vw; left:6vw; width:65vw }
 }
 </style>
 </head>
 <body>
 
-<!-- ===== HERO（內含貼底的 event-bar） ===== -->
+<!-- ===== HERO（內含貼底的日期選單） ===== -->
 <section class="hero-wrapper" aria-label="Hero">
   <img class="hero-img hero-logo"     src="assets/img/hero-logo.png"     alt="">
   <img class="hero-img hero-title"    src="assets/img/hero-title.png"    alt="">
   <img class="hero-img hero-subtitle" src="assets/img/hero-subtitle.png" alt="">
 
-  <!-- 這一份才要保留；頁面其他地方若還有 .event-bar，通通刪掉 -->
-  <nav class="event-bar" aria-label="系列論壇切換">
+  <nav class="event-bar" aria-label="論壇場次日期">
     <div class="bar" id="eventBar">
-      <button type="button" class="bar-item" data-id="s1" aria-current="true" aria-label="系列論壇 ①，日期 2025.09.26">
+      <button type="button" class="bar-item" data-id="s1" aria-current="true">
         <span class="bar-arrow" aria-hidden="true">⮕</span>
         <span class="bar-date">2025.09.26</span>
       </button>
-      <button type="button" class="bar-item" data-id="s2" aria-current="false" aria-label="系列論壇 ②，日期 2025.10.14">
+      <button type="button" class="bar-item" data-id="s2">
         <span class="bar-arrow" aria-hidden="true">⮕</span>
         <span class="bar-date">2025.10.14</span>
       </button>
-      <button type="button" class="bar-item" data-id="s3" aria-current="false" aria-label="系列論壇 ③，日期 2025.11.22">
+      <button type="button" class="bar-item" data-id="s3">
         <span class="bar-arrow" aria-hidden="true">⮕</span>
         <span class="bar-date">2025.11.22</span>
       </button>
-      <button type="button" class="bar-item" data-id="s4" aria-current="false" aria-label="系列論壇 ④，日期 2025.12.15">
+      <button type="button" class="bar-item" data-id="s4">
         <span class="bar-arrow" aria-hidden="true">⮕</span>
         <span class="bar-date">2025.12.15</span>
       </button>
@@ -313,12 +180,9 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
 
 <section class="event-info" id="s1-info">
   <div class="inner">
-
-    <!-- 活動名稱 / 英文副標 / 時間 / 地點（置中） -->
     <div class="topic-wrap">
       <div class="topic-badge">未來半導體人才趨勢論壇：產學對話</div>
       <div class="topic-en">Empowering the Future of Semiconductor: Bridging Industry and Academia</div>
-
       <div class="topic-rows">
         <div class="topic-row">
           <div class="pill">時間</div>
@@ -331,7 +195,6 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
       </div>
     </div>
 
-    <!-- 主要講者 -->
     <h2>主要講者<span>｜Key Speakers</span></h2>
     <div class="speaker-grid">
       <div class="speaker">
@@ -351,18 +214,10 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
       </div>
     </div>
 
-    <!-- 活動簡介 -->
     <h2>活動簡介<span>｜About the Forum</span></h2>
-    <p>
-      在人工智慧與先進技術重塑全球產業的浪潮中，<strong>半導體產業</strong>站在變革最前線，是推動創新與進步的核心引擎。
-      面對技術快速演進與國際競爭，培育高素質、跨領域的半導體人才已成為國家戰略重點。
-    </p>
-    <p>
-      本論壇匯聚來自<strong>台積電、美國加州大學</strong>以及<strong>產學界領袖</strong>，深入探討人工智慧時代半導體人才的需求、教育策略與全球布局，
-      並剖析未來關鍵技能，打造跨國人才交流平台。
-    </p>
+    <p>在人工智慧與先進技術重塑全球產業的浪潮中，<strong>半導體產業</strong>站在變革最前線，是推動創新與進步的核心引擎。面對技術快速演進與國際競爭，培育高素質、跨領域的半導體人才已成為國家戰略重點。</p>
+    <p>本論壇匯聚來自<strong>台積電、美國加州大學</strong>以及<strong>產學界領袖</strong>，深入探討人工智慧時代半導體人才的需求、教育策略與全球布局，並剖析未來關鍵技能，打造跨國人才交流平台。</p>
 
-    <!-- 活動亮點 -->
     <h2>活動亮點<span>｜Highlights</span></h2>
     <ul>
       <li><strong>國際級產業對話：</strong>台積電五大事業群高階主管分享未來人才需求與技術前瞻。</li>
@@ -371,14 +226,10 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
       <li><strong>政策與產業鏈結：</strong>呼應「AI 新十大全球倡議」與人才培育政策，推動技術與人才並進。</li>
     </ul>
 
-    <!-- CTA 按鈕 -->
     <a href="#" class="register-btn">
       <span>立 即 報 名</span>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        <path d="M8 4l8 8-8 8" />
-      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4l8 8-8 8"/></svg>
     </a>
-
   </div>
 </section>
 
