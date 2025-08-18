@@ -259,7 +259,6 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   line-height:1.8;
   overflow-wrap:anywhere;
   text-align:left;
-  font-size:clamp(16px, 1.8vw, 24px);
 }
 
 /* 「線上同步」徽章 */
@@ -272,23 +271,14 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   line-height:1;
   margin-left:.6em;              /* 與前文間距 */
   font-weight:300;
-  font-size:clamp(12px, 1.4vw, 18px);   /* 徽章字級（不會過小） */
+  font-size:clamp(14px, 1.4vw, 20px);   /* 徽章字級（不會過小） */
   padding:6px 16px;                      /* 內距：覺得貼邊就加大 */
 }
 
 /* —— 平板以下：吃滿寬、靠左，不要置中 —— */
-/* —— 平板以下：仍置中，但限制最大寬，避免太寬 —— */
 @media (max-width:1200px){
-  .topic-rows{
-    width: min(100%, 1000px);   /* 視窗小時不超出畫面 */
-    max-width: 100%;
-    margin: 18px auto 0;        /* 保留置中 */
-    justify-items: start;       /* 內容仍靠左 */
-  }
-  .topic-row{
-    width: auto;                /* 不強制 100%，讓它跟著內容 */
-    max-width: 100%;
-  }
+  .topic-rows{ width:100%; margin-left:0; margin-right:0; }
+  .topic-row{  width:100%; }
 }
 
 /* —— 手機：多行時頂齊；徽章不要掉行也不要太小 —— */
@@ -303,14 +293,6 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   .topic-row > div:last-child{ min-height:40px; }
   .place .hl{ font-size:1em; padding:6px 14px; }
 }
-/* ===== 小標（Key Speakers / About / Highlights）— 保留你的 1.8rem ===== */
-.event-info .inner h2{ font-size:1.8rem; margin:64px 0 20px; font-weight:500; }
-.event-info .inner h2:first-of-type{ margin-top:0; }
-.event-info h2 span{ color:#fff; font-family:"Akrobat","Noto Sans TC",sans-serif; font-weight:500; }
-
-.event-info b, .event-info strong{ color:var(--pink); font-weight:500; }
-.event-info ul{ margin:20px 0; padding-left:20px; }
-.event-info li{ margin-bottom:10px; }
 
 </style>
 </head>
