@@ -114,34 +114,36 @@ html{font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Aria
 
 /* ===== 活動資訊區塊（背景 #112240） ===== */
 .event-info{
-  background:#112240;
-  padding-block:60px;
+  background:#112240;          /* 整塊背景顏色深藍 */
+  padding-block:60px;          /* 上下內距各 60px */
 }
+
 .event-info .inner{
-  max-width:1200px;
-  margin:0 auto;
-  padding:0 20px;
-  line-height:1.8;
-  font-weight:300;
-  font-size:1.3em; /* 字體放大 1.3 倍 */
+  max-width:1200px;            /* 區塊內容最大寬度 */
+  margin:0 auto;               /* 置中 */
+  padding:0 20px;              /* 左右保留 20px 內距 */
+  line-height:1.8;             /* 行距 */
+  font-weight:300;             /* 內文字重（細體） */
+  font-size:1.2em;             /* 整體字體大小放大 1.2 倍 */
 }
 
 /* 標題：改為 500 */
 .event-info h2{
-  font-size:2rem; /* 放大 */
-  margin:0 0 20px;
-  font-weight:500;
+  font-size:2rem;              /* 標題字體大小，2rem（相對於 html 的基準字體大小） */
+  margin:0 0 20px;             /* 標題與下方元素距離 20px */
+  font-weight:500;             /* 標題字體比內文更粗一點 */
 }
+
 .event-info h2 span{
-  color:#fff;
-  font-family:"Akrobat","Noto Sans TC",sans-serif;
-  font-weight:500;
+  color:#fff;                  /* 標題中 <span> 文字為白色 */
+  font-family:"Akrobat","Noto Sans TC",sans-serif; /* 使用指定字體 */
+  font-weight:500;             /* 一樣保持 500 粗細 */
 }
 
 .event-info b,
 .event-info strong{
-  color:var(--pink);
-  font-weight:500;
+  color:var(--pink);           /* 內文中加粗文字會變粉紅色 */
+  font-weight:500;             /* 並且加粗 */
 }
 .event-info p,
 .event-info li{ font-weight:300; }
