@@ -140,75 +140,65 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   font-family:"Akrobat","Noto Sans TC",sans-serif;
 }
 
-/* === 時間 / 地點 === */
-/* 容器：以內容最大寬度為準並置中 */
+/* ===== 時間／地點列：通用設定 ===== */
 .topic-rows{
-  display: grid;
-  gap: 12px;
-  margin: 18px auto 0;   /* 置中 */
-  width: max-content;    /* 由最長那一列決定寬度 */
+  margin-top:18px;
+  display:grid;
+  gap:12px;
+  justify-items:center;            /* 整列在容器中置中 */
 }
 
-/* 每一列：不要撐滿父層，寬度隨內容 */
 .topic-row{
-  display: flex;
-  align-items: center;    /* 文字與膠囊垂直置中（桌機） */
-  gap: 10px;
-  width: max-content;     /* 以本列內容寬度為準 */
+  width: min(900px, 100%);         /* 一個合理的行寬上限 */
+  display:flex;
+  gap:12px;
+  align-items:center;               /* 預設垂直置中（桌機） */
+  text-align:left;                  /* 取消 .topic-wrap 的置中繼承 */
 }
 
-/* 左側膠囊：固定寬、不換行 */
+/* 左側膠囊：固定寬度、內容置中 */
 .topic-row .pill{
-  flex: 0 0 auto;
-  min-width: 64px;        /* 需要更窄就調這裡（例：56px） */
-  text-align: center;
-  white-space: nowrap;
-  background: rgba(255,255,255,.18);
-  border-radius: 999px;
-  padding: 8px 14px;
-  line-height: 1;         /* 避免被行高撐高 */
-  display: inline-flex;
-  align-items: center;
-  height: 42px;           /* 膠囊視覺高度（和右側一致） */
+  flex:0 0 auto;
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  min-width:64px;
+  height:42px;
+  padding:0 14px;                   /* 高度由 height 控制，左右靠 padding */
+  line-height:1;
+  white-space:nowrap;
+  background:rgba(255,255,255,.18);
+  border-radius:999px;
+  font-weight:500;
+  text-align:center;
 }
 
-/* 右側內容：可換行、不會把膠囊擠走，與膠囊等高置中 */
+/* 右側內容：靠左且可換行 */
 .topic-row > div:last-child{
-  flex: 1 1 auto;
-  min-width: 0;           /* 防止長字把版面撐寬 */
-  overflow-wrap: anywhere;
-  display: flex;
-  align-items: center;
-  min-height: 42px;       /* 要和膠囊高度一致 */
-  line-height: 1.8;
+  flex:1 1 auto;
+  min-width:0;
+  line-height:1.8;
+  text-align:left;                  /* 明確指定靠左 */
+  display:flex;                     /* 與膠囊同高垂直置中（桌機） */
+  align-items:center;
+  min-height:42px;
 }
 
-/* 手機：避免超出畫面，改回吃滿寬度 */
-@media (max-width: 560px){
-  .topic-rows{ width: 100%; }
-  .topic-row{ width: 100%; align-items: flex-start; } /* 多行時頂齊更自然 */
-  .topic-row .pill{
-    min-width: 58px;
-    height: 38px;
-    padding: 0 12px;
-  }
+/* 手機／小尺寸：多行時改頂齊，右側恢復普通 block */
+@media (max-width: 991.98px){
+  .topic-row{ align-items:flex-start; }
   .topic-row > div:last-child{
-    min-height: 38px;
-    display: block;       /* 多行時不要強制垂直置中 */
+    display:block;
+    min-height:0;
+  }
+  .topic-row .pill{
+    height:auto;                    /* 讓膠囊在小尺寸可依字級自適應 */
+    padding:6px 12px;
   }
 }
 
-/* 你的既有樣式（保留） */
-.place{ font-size:1.05em; }
-.place .hl{
-  display:inline-block;
-  margin-left:.4em;
-  padding:2px 8px;
-  border-radius:8px;
-  background:rgba(255,255,255,.25);
-  color:#fff; font-weight:500;
-  vertical-align: middle;
-}
+/* 小徽章（例如「線上同步」）與基線對齊更好看 */
+.place .hl{ vertical-align:middle; }
 
 /* ===== 小標（Key Speakers / About / Highlights）— 保留你的 1.8rem ===== */
 .event-info .inner h2{ font-size:1.8rem; margin:64px 0 20px; font-weight:500; }
