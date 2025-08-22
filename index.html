@@ -49,6 +49,26 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 @keyframes slideInLeft{ from{ transform:translateX(-50px); opacity:0 } to{ transform:translateX(0); opacity:1 } }
 @keyframes slideInUp  { from{ transform:translateY( 50px); opacity:0 } to{ transform:translateY(0);  opacity:1 } }
 
+/* 調整：讓 title/subtitle 由下往上浮現 */
+.hero-title,
+.hero-subtitle{
+  /* 起始狀態：向下偏移並隱藏（動畫會回到 translateY(0) 並顯示） */
+  transform: translateY(40px);
+  opacity: 0;
+}
+
+/* 修改 slideInUp 為較柔和的由下往上浮現 */
+@keyframes slideInUp {
+  from{
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to{
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 /* ===== 日期選單（卡片式，置於 HERO 底部） ===== */
 .event-bar{
   position:absolute;
@@ -65,8 +85,10 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 }
 .event-bar .bar{
   display:grid !important;
-  grid-template-columns:repeat(4, minmax(0, 1fr));
+  /* 桌機 4 欄但每欄不會小於 180px，避免內容換行/高度跑掉 */
+  grid-template-columns: repeat(4, minmax(180px, 1fr));
   gap:clamp(10px, 1.25vw, 20px);
+  align-items:stretch;
 }
 .bar-item{
   --c1: var(--tab-default);
@@ -80,6 +102,9 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   background-size:200% 200%; background-position:0% 50%;
   transition:background-position .6s ease, transform .2s ease, box-shadow .3s ease;
   box-shadow:0 8px 20px rgba(0,0,0,.25);
+  white-space:nowrap;
+  min-width:180px;
+  flex-shrink:0;
 }
 .bar-item:hover{ background-position:100% 50%; transform:translateY(-1px); }
 .bar-item[aria-current="true"]{ --c1:var(--tab-active); --c2:#a71858; animation:gradFlow 3s ease-in-out infinite alternate; }
@@ -95,6 +120,35 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   }
 }
 @media (max-width:560px){
+  /* 讓整列以 baseline 對齊 */
+  .topic-row{
+    align-items: baseline; /* 改為 baseline */
+  }
+
+  .topic-row .pill{
+    display:inline-block;      /* 小螢幕為 inline-block（保持膠囊形狀） */
+    align-self: baseline;
+    vertical-align: baseline;
+    min-width:58px;
+    height:40px;
+    line-height:40px;         /* 保持膠囊內文字垂直置中 */
+    padding:0 12px;
+    font-size: inherit;       /* 小螢幕亦繼承外層字級，與右側資訊一致 */
+    text-align:center;
+  }
+
+  .topic-row > div:last-child{
+    min-height:40px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:.4em;
+    font-size:.95em;
+    line-height:1.6;
+    align-items:baseline;
+    align-self: baseline;
+  }
+
+  /* 保留原本的 bar-item / 其他小尺寸樣式 */
   .bar-item{ padding:6px 14px; }
   .bar-date{ font-size:18px; }
   .bar-arrow{ font-size:18px; }
@@ -181,8 +235,9 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   display:inline-flex; align-items:center; justify-content:center;
   white-space:nowrap; border-radius:999px;
   background:rgba(255,255,255,.18);
-  font-weight:500; line-height:1;
-  font-size:clamp(16px, 1.8vw, 24px);
+  font-weight:500; /* 保留字重 */
+  line-height:1;
+  font-size: inherit; /* 改為繼承外層 .topic-row 的字級，與右側文字一致 */
 }
 .topic-row > div:last-child{
   min-width:0; display:flex; align-items:center; flex-wrap:wrap; gap:.5em;
@@ -198,11 +253,42 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   .topic-rows{ width:min(100%, 1000px); margin:18px auto clamp(28px, 4vw, 56px); }
   .topic-row{ width:auto; max-width:100%; }
 }
+@media (max-width:991.98px){
+  /* 讓中間寬度區間也以 baseline 對齊，避免在縮放途中膠囊與右側資訊垂直基準跑掉 */
+  .event-info .topic-row{ align-items:baseline; }
+  .event-info .topic-row > div:last-child{ display:flex; align-items:baseline; min-height:0; }
+}
 @media (max-width:560px){
-  .topic-row{ align-items:flex-start; }
-  .topic-row .pill{ min-width:58px; height:40px; padding:0 12px; font-size:.95em; }
-  .topic-row > div:last-child{ min-height:40px; display:flex; flex-wrap:wrap; gap:.4em; font-size:.95em; line-height:1.6; }
-  .place .hl{ font-size:.9em; padding:4px 10px; }
+  /* 讓整列以 baseline 對齊（小螢幕已有的調整，保留但改字級繼承） */
+  .topic-row{ align-items: baseline; }
+
+  .topic-row .pill{
+    display:inline-block;      /* 小螢幕為 inline-block（保持膠囊形狀） */
+    align-self: baseline;
+    vertical-align: baseline;
+    min-width:58px;
+    height:40px;
+    line-height:40px;         /* 保持膠囊內文字垂直置中 */
+    padding:0 12px;
+    font-size: inherit;       /* 小螢幕亦繼承外層字級，與右側資訊一致 */
+    text-align:center;
+  }
+
+  .topic-row > div:last-child{
+    min-height:40px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:.4em;
+    font-size:.95em;
+    line-height:1.6;
+    align-items:baseline;
+    align-self: baseline;
+  }
+
+  /* 保留原本的 bar-item / 其他小尺寸樣式 */
+  .bar-item{ padding:6px 14px; }
+  .bar-date{ font-size:18px; }
+  .bar-arrow{ font-size:18px; }
 }
 
 /* ===== 內容內強調色（粉色標註） ===== */
@@ -260,8 +346,9 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   .event-info .topic-row > div:last-child{ display:flex; align-items:center; min-height:42px; }
 }
 @media (max-width:991.98px){
-  .event-info .topic-row{ align-items:flex-start; }
-  .event-info .topic-row > div:last-child{ display:block; min-height:0; }
+  /* 讓中間寬度區間也以 baseline 對齊，避免在縮放途中膠囊與右側資訊垂直基準跑掉 */
+  .event-info .topic-row{ align-items:baseline; }
+  .event-info .topic-row > div:last-child{ display:flex; align-items:baseline; min-height:0; }
 }
 .place .hl{ vertical-align:middle; }
 
@@ -692,6 +779,9 @@ document.querySelector('.modal-close').onclick = function() {
 document.getElementById('speakerModal').onclick = function(e) {
   if(e.target === this) this.style.display = 'none';
 };
+</script>
+</body>
+</html>
 </script>
 </body>
 </html>
