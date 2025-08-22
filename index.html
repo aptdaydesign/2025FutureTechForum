@@ -43,8 +43,8 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 
 /* 三張圖（以 1920×940 標定） */
 .hero-logo{     top:calc( 50/940*100%); left:calc( 70/1920*100%); width:calc(504/1920*100%); animation:slideInLeft 1s ease-out forwards .2s; }
-.hero-title{    top:calc(250/940*100%); left:calc(100/1920*100%); width:calc(880/1920*100%); animation:slideInUp   1s ease-out forwards .6s; }
-.hero-subtitle{ top:calc(550/940*100%); left:calc(100/1920*100%); width:calc(880/1920*100%); animation:slideInUp   1s ease-out forwards 1s; }
+.hero-title{    top:calc(250/940*100%); left:calc(100/1920*100); width:calc(880/1920*100%); animation:slideInUp   1s ease-out forwards .6s; }
+.hero-subtitle{ top:calc(550/940*100%); left:calc(100/1920*100); width:calc(880/1920*100%); animation:slideInUp   1s ease-out forwards 1s; }
 
 @keyframes slideInLeft{ from{ transform:translateX(-50px); opacity:0 } to{ transform:translateX(0); opacity:1 } }
 @keyframes slideInUp  { from{ transform:translateY( 50px); opacity:0 } to{ transform:translateY(0);  opacity:1 } }
@@ -122,15 +122,26 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   font-size:clamp(23px, 3vw, 72px); font-weight:400;
   padding:10px 20px; border-radius:20px; border:4px solid var(--pink);
   margin-top:20px; margin-bottom:20px;
+  text-align:center;
 }
-.topic-en{
-  font-size:clamp(20px, 1.8vw, 42px); font-weight:400; color:#ddd;
-  margin-bottom:40px; font-family:"Akrobat","Noto Sans TC",sans-serif;
+.topic-badge .topic-en{
+  display:block;
+  font-size:clamp(20px, 1.8vw, 42px);
+  font-weight:400;
+  color:#ddd;
+  margin-top:5px;
+  margin-bottom:0;
+  font-family:"Akrobat","Noto Sans TC",sans-serif;
 }
 
 /* 內容主標（h2）不要比時間/地點大 */
 .event-info h2:not(:first-of-type){
   margin-top: clamp(28px, 5vw, 72px);
+}
+.event-info h2 {
+  font-size:clamp(20px,1.8vw,30px);
+  font-weight:500;
+  margin-bottom:20px;
 }
 /* ===== CTA ===== */
 .register-btn{
@@ -411,8 +422,10 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 <section class="event-info" id="s1-info">
   <div class="inner">
     <div class="topic-wrap">
-      <div class="topic-badge">未來半導體人才趨勢論壇：產學對話</div>
-      <div class="topic-en">Empowering the Future of Semiconductor: Bridging Industry and Academia</div>
+      <div class="topic-badge">
+        未來半導體人才趨勢論壇：產學對話
+        <div class="topic-en">Empowering the Future of Semiconductor: Bridging Industry and Academia</div>
+      </div>
 
       <div class="topic-rows">
         <div class="topic-row">
@@ -610,15 +623,15 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
 
 <footer class="sponsor-footer" aria-label="主辦與協辦單位">
   <div class="inner">
-    <!-- 主辦 -->
+    <!-- 指導單位 -->
     <div class="sponsor-block">
-      <div class="sponsor-tag">主辦單位</div>
+      <div class="sponsor-tag">指導單位</div>
       <img class="sponsor-logo" src="assets/img/organizer-logo.png" alt="國家科學及技術委員會">
     </div>
 
-    <!-- 協辦 -->
+    <!-- 主辦單位 -->
     <div class="sponsor-block">
-      <div class="sponsor-tag">協辦單位</div>
+      <div class="sponsor-tag">主辦單位</div>
       <img class="sponsor-logo" src="assets/img/partner-logo.png" alt="科技政策研究與資訊中心">
     </div>
   </div>
@@ -632,6 +645,36 @@ document.querySelectorAll('.bar-item').forEach(btn=>{
       .forEach(b=> b.setAttribute('aria-current', b === btn ? 'true' : 'false'));
   });
 });
+</script>
+</body>
+</html>
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.bar-item')
+      .forEach(b=> b.setAttribute('aria-current', b === btn ? 'true' : 'false'));
+  });
+});
+
+const speakerInfo = {
+  david: 'David Horsley 教授介紹內容...',
+  tsmc: '台積電高階經理團隊介紹內容...',
+  wong: 'Dr. H.S. Philip Wong 介紹內容...'
+};
+
+document.querySelectorAll('.speaker').forEach(sp => {
+  sp.style.cursor = 'pointer';
+  sp.addEventListener('click', () => {
+    const id = sp.getAttribute('data-id');
+    document.getElementById('modalBody').innerText = speakerInfo[id] || '暫無介紹';
+    document.getElementById('speakerModal').style.display = 'flex';
+  });
+});
+
+document.querySelector('.modal-close').onclick = function() {
+  document.getElementById('speakerModal').style.display = 'none';
+};
+document.getElementById('speakerModal').onclick = function(e) {
+  if(e.target === this) this.style.display = 'none';
+};
 </script>
 </body>
 </html>
