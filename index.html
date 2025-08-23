@@ -21,6 +21,7 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   --tab-default:#501cf2;
   --tab-active:#ff2b8a;
   --pink:#ff5e99;
+  --sp-photo-mobile:120px; /* mobile speaker photo width (tweak to control name wrap) */
   --glass-bg: rgba(255,255,255,.06);
   --glass-bd: rgba(255,255,255,.18);
   --glass-drop: 0 10px 24px rgba(0,0,0,.28);
@@ -304,7 +305,89 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   box-shadow:0 8px 24px rgba(0,0,0,.25); background:#0b0c0f;
 }
 .speaker .name{ font-size:1.6rem; font-weight:500; margin:0 0 10px }
-.speaker .title-chip{ display:inline-block; padding:8px 16px; border-radius:999px; background:rgba(255,255,255,.30); color:#fff; font-weight:500; font-size:1rem }
+.speaker .title-chip{ display:block; padding:0; border-radius:0; background:transparent; color:#cfd6e6; font-weight:500; font-size:1rem; margin-top:8px; }
+
+.speaker .bio{ display:none; }
+.bio-card{
+  margin-top:12px;
+  background: rgba(255,255,255,0.06); /* desktop: frosted glass */
+  border: 1px solid rgba(255,255,255,0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color:#cfd6e6;
+  padding:12px 14px;
+  border-radius:12px;
+  font-size:0.95rem;
+  line-height:1.6;
+  max-width:360px;
+  margin-left:auto; margin-right:auto;
+}
+
+/* bio-card internal pieces */
+.bio-card .bio-desc{ color:inherit; font-size:0.95rem; line-height:1.6; }
+
+/* meta: ensure title sits under name */
+.meta{ display:flex; flex-direction:column; gap:6px; }
+.meta .name{ margin:0; }
+
+
+/* carousel: sliding pages and pager styles */
+.speakers-carousel{ position:relative; max-width:1200px; margin:0 auto; overflow:hidden; }
+.speaker-pages{ display:flex; width:100%; transition:transform .6s cubic-bezier(.2,.9,.2,1); will-change:transform; }
+.speaker-page{ flex:0 0 100%; box-sizing:border-box; padding:0 12px; }
+
+.speaker-pager{ display:flex; gap:12px; justify-content:center; margin-top:22px; }
+.pager-dot{ width:14px; height:8px; background:rgba(255,255,255,.22); border-radius:8px; border:none; cursor:pointer; padding:0; }
+.pager-dot[aria-current="true"]{ background:#fff; width:32px; height:8px; border-radius:999px; }
+
+/* when page is partially offscreen, reduce pointer events on its children */
+.speaker-page[aria-hidden="true"] { pointer-events: none; opacity: .98; }
+
+@media (max-width: 768px){
+  .speaker-page{ padding:0 8px; }
+  .pager-dot{ width:12px; height:8px; }
+  .pager-dot[aria-current="true"]{ width:26px; }
+}
+
+/* Mobile / narrow: stack speakers vertically and disable sliding UI */
+@media (max-width: 768px){
+  .speakers-carousel{ overflow:visible; }
+  .speaker-pages{ display:block; transform:none !important; }
+  .speaker-page{ flex:0 0 auto; width:100% !important; padding:0; margin-bottom:18px; }
+  .speaker-grid{ display:block; gap:12px; }
+  /* mobile speaker: three-column row — photo | meta (name+title) | bio-card */
+  .speaker{ margin-bottom:36px; text-align:left; display:flex; flex-wrap:wrap; align-items:flex-start; gap:18px; }
+  .speaker .photo{ flex:0 0 var(--sp-photo-mobile); width:var(--sp-photo-mobile); height:var(--sp-photo-mobile); border-radius:50%; object-fit:cover; margin:0; box-shadow:0 8px 24px rgba(0,0,0,.25); margin-left:8px; }
+  /* allow meta to expand so name/title wrap later (up to the bio-card's right edge) */
+  /* meta should allow name/title to expand; prevent early wrapping by using nowrap and ellipsis */
+  /* photo(120px) + left margins ~ 20px, reserve remaining space for meta up to inner width */
+  .meta{ margin-left:12px; display:flex; flex-direction:column; justify-content:center; flex:1 1 auto; min-width:0; text-align:left; max-width: calc(100% - (var(--sp-photo-mobile) + 40px)); }
+  .speaker .name{ margin:0; font-size:1.45rem; font-weight:700; line-height:1.05; white-space:normal; overflow-wrap:break-word; }
+  .speaker .title-chip{ margin-top:6px; font-size:.95rem; color:#cfd6e6; white-space:normal; overflow-wrap:break-word; }
+  /* place bio-card as a full-width block below the speaker row on mobile; align to .inner so it matches Agenda card */
+  .bio-card{ display:block; margin-top:8px; flex-basis:100%; order:2; width:100%; max-width: none; margin-left:0; margin-right:0; }
+  .speaker-pager{ display:none; }
+  /* match floating-tab-bar spacing: left/right 16px on small screens to align with Agenda cards */
+  .inner{ padding-left:16px; padding-right:16px; }
+}
+
+/* mobile: bio-card as white rounded block with dark heading (to match provided mockup) */
+@media (max-width: 480px){
+  .bio-card{
+    /* restore frosted glass on mobile to match desktop */
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #cfd6e6;
+    padding:14px; border-radius:12px; max-width: none; margin-left:0; margin-right:0; width:100%;
+  }
+  .bio-card .bio-desc{ color: #cfd6e6; text-align:left; }
+  /* small tweaks for very narrow screens: reduce sizes but keep row layout */
+  .speaker .photo{ margin-bottom:0; width:110px; height:110px; flex:0 0 110px; }
+  .meta{ flex:0 0 130px; }
+  .speaker .name{ font-size:1.2rem; }
+}
 
 /* 手機：講者直排 */
 @media (max-width: 768px){
@@ -734,22 +817,72 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset, 140px); }
 
   <!-- spacer removed: spacing handled by margins/padding to avoid double gaps -->
 
-    <h2 id="speakers">主要講者<span>｜Key Speakers</span></h2>
-    <div class="speaker-grid">
-      <div class="speaker">
-        <img class="photo" src="assets/img/speaker1-1.png" alt="Prof. David Horsley">
-        <div class="name">Prof. David Horsley</div>
-        <div class="title-chip">教授，加州大學戴維斯分校</div>
+    <h2 id="speakers">亮點講者<span>｜Featured Speakers</span></h2>
+
+    <!-- speakers carousel: 2 pages, 3 speakers each -->
+    <div class="speakers-carousel" aria-roledescription="carousel">
+      <div class="speaker-pages">
+        <!-- page 1 -->
+        <div class="speaker-grid speaker-page" data-page="0">
+          <div class="speaker">
+            <img class="photo" src="assets/img/speaker1-1.png" alt="David Horsley">
+            <div class="meta">
+              <div class="name">David Horsley</div>
+              <div class="title-chip">教授，加州大學戴維斯分校</div>
+            </div>
+            <div class="bio-card">David Horsley 教授專注於半導體製程與材料研究，擁有多年跨國研究與教學經驗。</div>
+          </div>
+          <div class="speaker">
+            <img class="photo" src="assets/img/speaker2-1.png" alt="沈文冰">
+            <div class="meta">
+              <div class="name">沈文冰</div>
+              <div class="title-chip">智慧應用整合處 副處長</div>
+            </div>
+            <div class="bio-card">沈文冰 副處長負責智慧應用整合與跨部門協作，專長於系統整合與策略規劃。</div>
+          </div>
+          <div class="speaker">
+            <img class="photo" src="assets/img/speaker3-1.png" alt="Tzung-Hua Lin">
+            <div class="meta">
+              <div class="name">Tzung-Hua Lin</div>
+              <div class="title-chip">R&D Manager</div>
+            </div>
+            <div class="bio-card">Tzung-Hua Lin 具豐富研發管理經驗，領導多項產品化與量產導入專案。</div>
+          </div>
+        </div>
+
+        <!-- page 2 -->
+        <div class="speaker-grid speaker-page" data-page="1">
+          <div class="speaker">
+            <img class="photo" src="assets/img/speaker1-1.png" alt="Steve Wang">
+            <div class="meta">
+              <div class="name">Steve Wang</div>
+              <div class="title-chip">Design Technology Platforms Manager</div>
+            </div>
+            <div class="bio-card">負責設計工具與平台整合，推動跨團隊設計流程優化。</div>
+          </div>
+          <div class="speaker">
+            <img class="photo" src="assets/img/speaker1-2.png" alt="Chun-Yu Lin">
+            <div class="meta">
+              <div class="name">Chun-Yu Lin</div>
+              <div class="title-chip">HR Manager</div>
+            </div>
+            <div class="bio-card">專注人才招募與發展，擅長組織訓練與職涯規劃。</div>
+          </div>
+          <div class="speaker">
+            <img class="photo" src="assets/img/speaker1-3.png" alt="TBC">
+            <div class="meta">
+              <div class="name">TBC</div>
+              <div class="title-chip">Operation Manager</div>
+            </div>
+            <div class="bio-card">營運管理職務，負責資源調度與專案執行。</div>
+          </div>
+        </div>
       </div>
-      <div class="speaker">
-        <img class="photo" src="assets/img/speaker1-2.png" alt="台積電高階經理團隊">
-        <div class="name">台積電高階經理團隊</div>
-        <div class="title-chip">涵蓋研發、設計、製造、IT、人資等核心領域</div>
-      </div>
-      <div class="speaker">
-        <img class="photo" src="assets/img/speaker1-3.png" alt="Dr. H.S. Philip Wong">
-        <div class="name">Dr. H.S. Philip Wong</div>
-        <div class="title-chip">台積電首席科學家・史丹佛大學教授</div>
+
+      <!-- pager indicators -->
+      <div class="speaker-pager" role="tablist" aria-label="speaker pages">
+        <button class="pager-dot" data-to="0" aria-label="第一頁" aria-current="true"></button>
+        <button class="pager-dot" data-to="1" aria-label="第二頁" aria-current="false"></button>
       </div>
     </div>
 
@@ -879,6 +1012,80 @@ document.querySelectorAll('.bar-item').forEach(btn=>{
       .forEach(b=> b.setAttribute('aria-current', b === btn ? 'true' : 'false'));
   });
 });
+</script>
+<!-- speakers carousel script -->
+<script>
+// sliding carousel with autoplay, pager, swipe and keyboard controls
+(function(){
+  const carousel = document.querySelector('.speakers-carousel');
+  const pagesWrap = document.querySelector('.speaker-pages');
+  const pages = Array.from(document.querySelectorAll('.speaker-page'));
+  const dots = Array.from(document.querySelectorAll('.pager-dot'));
+  if (!carousel || !pagesWrap || pages.length === 0 || dots.length === 0) return;
+
+  let current = 0;
+  let autoplayId = null;
+  const AUTOPLAY_DELAY = 8000;
+  let isPaused = false;
+
+  function isNarrow(){ return window.innerWidth <= 768; }
+
+  function updateUI(){
+    const offset = -current * carousel.clientWidth;
+    pagesWrap.style.transform = `translateX(${offset}px)`;
+    pages.forEach((p,i)=> p.setAttribute('aria-hidden', i===current ? 'false' : 'true'));
+    dots.forEach((d,i)=> d.setAttribute('aria-current', i===current ? 'true' : 'false'));
+  }
+
+  function goTo(idx){
+    current = (idx + pages.length) % pages.length;
+    updateUI();
+  }
+
+  function next(){ goTo(current + 1); }
+  function prev(){ goTo(current - 1); }
+
+  function startAutoplay(){ stopAutoplay(); if (!isPaused && !isNarrow()) autoplayId = setInterval(next, AUTOPLAY_DELAY); }
+  function stopAutoplay(){ if (autoplayId) { clearInterval(autoplayId); autoplayId = null; } }
+
+  // pager click
+  dots.forEach(d=> d.addEventListener('click', ()=>{ const to = Number(d.dataset.to); if (!Number.isNaN(to)) { goTo(to); startAutoplay(); } }));
+
+  // pause on hover / focus
+  carousel.addEventListener('mouseenter', ()=>{ isPaused = true; stopAutoplay(); });
+  carousel.addEventListener('mouseleave', ()=>{ isPaused = false; startAutoplay(); });
+  carousel.addEventListener('focusin', ()=>{ isPaused = true; stopAutoplay(); });
+  carousel.addEventListener('focusout', ()=>{ isPaused = false; startAutoplay(); });
+
+  // keyboard navigation
+  carousel.addEventListener('keydown', (e)=>{
+    if (e.key === 'ArrowRight') { next(); startAutoplay(); }
+    if (e.key === 'ArrowLeft') { prev(); startAutoplay(); }
+  });
+  carousel.tabIndex = 0; // make focusable for keyboard
+
+  // swipe support (touch) — only when not narrow
+  let touchStartX = 0; let touchDeltaX = 0; let isTouching = false;
+  if (!isNarrow()){
+    carousel.addEventListener('touchstart', (e)=>{ stopAutoplay(); isTouching=true; touchStartX = e.touches[0].clientX; touchDeltaX=0; }, {passive:true});
+    carousel.addEventListener('touchmove', (e)=>{ if(!isTouching) return; touchDeltaX = e.touches[0].clientX - touchStartX; pagesWrap.style.transform = `translateX(${ -current * carousel.clientWidth + touchDeltaX }px)`; }, {passive:true});
+    carousel.addEventListener('touchend', ()=>{
+      isTouching=false;
+      const THRESHOLD = 60; // px
+      if (touchDeltaX > THRESHOLD) { prev(); }
+      else if (touchDeltaX < -THRESHOLD) { next(); }
+      else { goTo(current); }
+      touchDeltaX=0; startAutoplay();
+    });
+  }
+
+  // resize: recalculate transform
+  window.addEventListener('resize', ()=> updateUI());
+
+  // init
+  updateUI();
+  startAutoplay();
+})();
 </script>
 <script>
 /* ===== HERO下方才顯示右上角選單 ===== */
