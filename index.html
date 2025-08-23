@@ -586,6 +586,92 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset, 140px); }
 /* 小標（h3 / 卡片標題）間距一致 */
 .event-info .ag-title{ margin-top: var(--subheading-gap-top); margin-bottom: var(--subheading-gap-bottom); }
 
+/* === Agenda: 三欄條列（時間 / 議題 / 講者）=== */
+.event-info .agenda-list{
+  display:grid;
+  grid-template-columns: 160px 1fr 380px; /* 時間 / 議題 / 講者 */
+  gap: 10px 16px;
+  align-items:start;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-bd);
+  border-radius: 14px;
+  box-shadow: var(--glass-drop);
+  padding: 14px;
+}
+
+/* 表頭 */
+.event-info .agenda-head{
+  color:#cfd6e6;
+  font-weight:500;
+  letter-spacing:.02em;
+  border-bottom:1px solid rgba(255,255,255,.14);
+  padding-bottom:10px;
+}
+
+/* 一般列 */
+.event-info .agenda-time{
+  font-family:"Akrobat","Noto Sans TC",sans-serif;
+  font-weight:700;
+  color:#e6eef7;
+  background:#233856;
+  border:1px solid #2f4a72;
+  border-radius:10px;
+  height: var(--ag-time-h, 36px);
+  display:flex; align-items:center; justify-content:center;
+  padding: 0 var(--ag-time-pad-x, 14px);
+}
+.event-info .agenda-topic{
+  line-height:1.7;
+  color:#fff;
+}
+.event-info .agenda-topic .tag{
+  display:inline-block; margin-right:.5em; margin-bottom:.25em;
+  padding:.25em .6em; border-radius:999px;
+  background:rgba(255,255,255,.18); font-size:.92em; font-weight:500;
+}
+.event-info .agenda-speaker{
+  color:#cfd6e6; line-height:1.7;
+}
+.event-info .agenda-speaker b{ color:var(--pink); font-weight:600; }
+
+/* 區隔列（如：休息 / Lunch / Q&A / 綜合討論） */
+.event-info .agenda-span{
+  grid-column: 1 / -1;
+  background:rgba(255,255,255,.08);
+  border:1px dashed rgba(255,255,255,.22);
+  border-radius:10px;
+  padding:10px 12px;
+  color:#cfd6e6;
+  font-weight:500;
+}
+
+/* 小字註記 */
+.event-info .agenda-note{ color:#a8b3c9; font-size:.95em; }
+
+/* RWD：平板略縮、手機堆疊 */
+@media (max-width: 1199.98px){
+  .event-info .agenda-list{
+    grid-template-columns: 140px 1fr 320px;
+  }
+}
+@media (max-width: 768px){
+  .event-info .agenda-list{
+    grid-template-columns: 120px 1fr;   /* 時間 / 其餘 */
+  }
+  .event-info .agenda-speaker{
+    grid-column: 2 / -1;                /* 講者移到議題下方 */
+    margin-top: -6px;
+  }
+  .event-info .agenda-head:nth-child(3){ display:none; } /* 手機隱藏「講者」表頭 */
+}
+
+/* 行距微調，避免整塊太緊 */
+.event-info .agenda-topic h3{
+  font-size: clamp(17px,1.4vw,22px);
+  margin: 0 0 4px;
+  font-weight:500;
+}
+
 </style>
 
 
@@ -682,139 +768,81 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset, 140px); }
   <!-- register button moved to directly under time/place -->
     <h2 id="agenda">活動議程<span>｜Agenda</span></h2>
 
-    <div class="ag-grid">
+    <div class="agenda-list">
+
+      <!-- 表頭 -->
+      <div class="agenda-head">台灣時間</div>
+      <div class="agenda-head">議 題 Subject</div>
+      <div class="agenda-head">講 者 Speaker</div>
 
       <!-- 7:30–8:00 -->
-      <article class="ag-card">
-        <div class="ag-time">7:30 – 8:00</div>
-        <div class="ag-body">
-          <h3 class="ag-title">開場致詞與歡迎致詞</h3>
-          <p class="ag-sub">
-            <span class="ag-people">
-              <span class="ag-person">
-                <span class="ag-name">吳誠文</span>
-                <span class="ag-sep">/</span>
-                <span class="ag-role">國家科學及技術委員會 主委</span>
-              </span>
-              <span class="ag-person">
-                <span class="ag-name">黃錫瑜</span>
-                <span class="ag-sep">/</span>
-                <span class="ag-role">國研院科政中心 主任</span>
-              </span>
-            </span>
-          </p>
-        </div>
-      </article>
+      <div class="agenda-time">7:30–8:00</div>
+      <div class="agenda-topic">
+        <span class="tag">開場 / 貴賓致詞</span>
+        <h3>開場致詞與歡迎致詞</h3>
+        <div class="agenda-note">＊現場及線上同步</div>
+      </div>
+      <div class="agenda-speaker">
+        <b>吳誠文</b>／國家科學及技術委員會 主委<br>
+        <b>黃錫瑜</b>／國研院科政中心 主任
+      </div>
 
       <!-- 8:05–8:25 -->
-      <article class="ag-card">
-        <div class="ag-time">8:05 – 8:25</div>
-        <div class="ag-body">
-          <h3 class="ag-title">【專題演講】未來半導體人才</h3>
-          <p class="ag-sub">
-            <span class="ag-people">
-              <span class="ag-person">
-                <span class="ag-name">David Horsley</span>
-                <span class="ag-sep">/</span>
-                <span class="ag-role">加州大學戴維斯分校 教授</span>
-              </span>
-            </span>
-          </p>
-        </div>
-      </article>
+      <div class="agenda-time">8:05–8:25</div>
+      <div class="agenda-topic">
+        <span class="tag">專題演講</span>
+        <h3>未來半導體人才</h3>
+      </div>
+      <div class="agenda-speaker">
+        <b>David Horsley</b>／加州大學戴維斯分校 教授
+      </div>
 
       <!-- 8:25–9:15 -->
-      <article class="ag-card">
-        <div class="ag-time">8:25 – 9:15</div>
-        <div class="ag-body">
-          <h3 class="ag-title">【台積電觀點】</h3>
-          <p class="ag-sub">
-            <span class="ag-people">
-              <span class="ag-person">
-                <span class="ag-name">沈文冰</span>
-                <span class="ag-sep">/</span>
-                <span class="ag-role">智慧應用整合處 副處長</span>
-              </span>
-              <span class="ag-person">
-                <span class="ag-name">Tzung-Hua Lin</span>
-                <span class="ag-sep">/</span>
-                <span class="ag-role">R&amp;D Manager</span>
-              </span>
-              <span class="ag-person">
-                <span class="ag-name">Steve Wang</span>
-                <span class="ag-sep">/</span>
-                <span class="ag-role">Design Technology Platforms Manager</span>
-              </span>
-              <span class="ag-person">
-                <span class="ag-name">Chun-Yu Lin</span>
-                <span class="ag-sep">/</span>
-                <span class="ag-role">HR Manager</span>
-              </span>
-              <span class="ag-person">
-                <span class="ag-name">TBC</span>
-                <span class="ag-sep">/</span>
-                <span class="ag-role">Operation Manager</span>
-              </span>
-            </span>
-          </p>
-        </div>
-      </article>
+      <div class="agenda-time">8:25–9:15</div>
+      <div class="agenda-topic">
+        <span class="tag">台積電觀點</span>
+        <h3>AI 時代的人才與技術佈局</h3>
+      </div>
+      <div class="agenda-speaker">
+        <b>沈文冰</b>／智慧應用整合處 副處長 等（共 5 位）
+      </div>
 
-     <!-- 9:15–9:25 -->
-<article class="ag-card">
-  <div class="ag-time">9:15 – 9:25</div>
-  <div class="ag-body">
-    <h3 class="ag-title">【Q&amp;A 現場提問】</h3>
-    <p class="ag-sub">
-<!-- 與談人：跟「主持人｜」一樣，白字、一般字重、一般尺寸 -->
-<span style="color:#fff;">與談人｜台積電 5 位不同業務單位之經理</span>
-      <br>
-      <!-- 主持人：前綴白字；姓名粉紅；斜線與稱謂 70% -->
-      <span class="ag-people">
-        <span class="ag-person">
-          <span style="color:#fff;">主持人｜</span>
-          <span class="ag-name">黃漢森</span>
-          <span class="ag-sep">/</span>
-          <span class="ag-role">台積電 首席科學家</span>
-        </span>
-      </span>
-    </p>
-  </div>
-</article>
+      <!-- 9:15–9:25：Q&A 可用「區隔列」或正常列皆可；這裡用正常列以保持三欄 -->
+      <div class="agenda-time">9:15–9:25</div>
+      <div class="agenda-topic">
+        <span class="tag">Q&amp;A</span>
+        <h3>現場提問</h3>
+      </div>
+      <div class="agenda-speaker">
+        <span>與談人｜台積電 5 位不同業務單位經理</span><br>
+        <b>主持</b>｜<b>黃漢森</b>／台積電 首席科學家
+      </div>
 
-      <!-- 9:25–9:30（問卷） -->
-      <article class="ag-card">
-        <div class="ag-time">9:25 – 9:30</div>
-        <div class="ag-body">
-          <h3 class="ag-title">線上發放滿意度問卷</h3>
-          <p class="ag-sub ag-note">請使用現場提供之 QR Code 連結填寫。</p>
-        </div>
-      </article>
+      <!-- 9:25–9:30：問卷（簡短） -->
+      <div class="agenda-time">9:25–9:30</div>
+      <div class="agenda-topic">
+        <h3>線上發放滿意度問卷</h3>
+        <div class="agenda-note">請掃描現場 QR Code 填寫</div>
+      </div>
+      <div class="agenda-speaker"></div>
 
-<!-- 9:25–9:45 -->
-<article class="ag-card">
-  <div class="ag-time">9:25 – 9:45</div>
-  <div class="ag-body">
-    <h3 class="ag-title">【綜合座談】</h3>
-    <p class="ag-sub">
-<!-- 與談人：跟「主持人｜」一樣，白字、一般字重、一般尺寸 -->
-<span style="color:#fff;">與談人｜台積電 5 位不同業務單位之經理</span>
-      <br>
-      <span class="ag-people">
-        <span class="ag-person">
-          <span style="color:#fff;">主持人｜</span>
-          <span class="ag-name">黃漢森</span>
-          <span class="ag-sep">/</span>
-          <span class="ag-role">台積電 首席科學家</span>
-        </span>
-      </span>
-    </p>
-  </div>
-</article>
+      <!-- 9:25–9:45 綜合座談 -->
+      <div class="agenda-time">9:25–9:45</div>
+      <div class="agenda-topic">
+        <span class="tag">綜合座談</span>
+        <h3>產學交流與人才培育</h3>
+      </div>
+      <div class="agenda-speaker">
+        與談人｜台積電 5 位經理<br>
+        <b>主持</b>｜<b>黃漢森</b>／台積電 首席科學家
+      </div>
+
+      <!-- 區隔列範例（Coffee break / Lunch 可用） -->
+      <div class="agenda-span">11:20–13:10　午餐休息 Lunch</div>
 
     </div>
 
-    <p class="tip">＊主辦單位保留議程內容與流程調整之權利。</p>
+    <p class="agenda-note">＊主辦單位保留議程與流程調整權。</p>
 
 
 <footer class="sponsor-footer" aria-label="主辦與協辦單位">
