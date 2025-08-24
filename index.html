@@ -177,24 +177,53 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 /* ===== 時間／地點（穩定） ===== */
 .topic-rows{
   margin-top:18px; margin-bottom:clamp(28px, 4vw, 56px);
-  display:grid; gap:12px;
-  /* 強制居中的更穩定方法 */
-  width:fit-content; 
+  display:flex; 
+  flex-direction: column;
+  align-items: center; /* 整體居中 */
+  gap:12px;
+  width:100%;
   max-width:100%;
-  margin-left:auto !important; 
-  margin-right:auto !important; 
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%); /* 強制居中 */
   text-align:left; 
-  justify-items:start; /* 時間地點兩行內部左對齊 */
+}
+
+/* 創建一個內部容器來實現左對齊 */
+.topic-rows-inner {
+  display: grid;
+  gap: 12px;
+  justify-items: start; /* 內部左對齊 */
 }
 .topic-row{
   display:grid; grid-template-columns:auto 1fr;
   align-items:center; column-gap:10px;
   width:max-content; text-align:left;
   font-size:clamp(20px, 1.8vw, 30px);
-  /* 移除 justify-self，讓時間地點兩行保持左對齊 */
+  /* 在 flexbox 容器中會自動居中 */
+}
+
+/* 小螢幕時的特殊處理 */
+@media (max-width: 768px) {
+  .topic-row {
+    width: 100%; /* 小螢幕時佔滿寬度 */
+    max-width: 100%;
+  }
+  
+  .topic-row > div:last-child {
+    word-break: break-word; /* 允許適當的斷詞 */
+    overflow-wrap: break-word;
+    hyphens: auto; /* 自動連字符 */
+  }
+}
+
+@media (max-width: 480px) {
+  .topic-row {
+    grid-template-columns: auto minmax(0, 1fr); /* 確保第二列能壓縮 */
+    column-gap: 8px; /* 縮小間距 */
+  }
+  
+  .topic-row > div:last-child {
+    font-size: clamp(16px, 4vw, 20px); /* 小螢幕時稍微縮小字體 */
+    line-height: 1.4;
+  }
 }
 .topic-row .pill{
   min-width:64px; height:48px; padding:0 14px;
@@ -858,13 +887,15 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
       </div>
 
       <div class="topic-rows">
-        <div class="topic-row">
-          <div class="pill">時間</div>
-          <div>2025 年 9 月 26 日，7:30 – 11:00</div>
-        </div>
-        <div class="topic-row place">
-          <div class="pill">地點</div>
-          <div>美國｜史丹佛大學；臺灣｜科政大樓 14F 會議室 <span class="hl">線上同步</span></div>
+        <div class="topic-rows-inner">
+          <div class="topic-row">
+            <div class="pill">時間</div>
+            <div>2025 年 9 月 26 日，7:30 – 11:00</div>
+          </div>
+          <div class="topic-row place">
+            <div class="pill">地點</div>
+            <div>美國｜史丹佛大學；臺灣｜科政大樓 14F 會議室</div>
+          </div>
         </div>
       </div>
       
