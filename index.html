@@ -292,9 +292,1238 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   .bar-arrow{ font-size:18px; }
 }
 
-/* ===== 內容內強調色（粉色標註） ===== */
-.event-info b,
-.event-info strong{ color:var(--pink); font-weight:500; }
+/* ===== 活動資訊（含與 HERO 的黑→藍銜接） ===== */
+.event-info{
+  position:relative;
+  background:#112240;
+  padding-block:20px;
+  overflow:hidden;
+}
+.event-info::before{
+  content:"";
+  position:absolute; top:0; left:0; right:0;
+  height:500px;
+  background:linear-gradient(to bottom, #000 0%, #112240 100%);
+  pointer-events:none;
+}
+.event-info .inner{
+  position:relative; z-index:1;
+  max-width:1200px; margin:0 auto; padding:0 20px;
+  line-height:1.8; font-weight:300; font-size:1.2em;
+}
+
+/* ===== 主標 / 副標 ===== */
+.topic-wrap{ text-align:center; margin:16px auto 24px; max-width:1000px; }
+.topic-badge{
+  display:inline-block; background:transparent; color:#fff;
+  font-size:clamp(23px, 3vw, 72px); font-weight:400;
+  padding:10px 20px; border-radius:20px; border:4px solid var(--pink);
+  margin-top:20px; margin-bottom:20px;
+  text-align:center;
+}
+.topic-badge .topic-en{
+  display:block;
+  font-size:clamp(20px, 1.8vw, 42px);
+  font-weight:400;
+  color:#ddd;
+  margin-top:5px;
+  margin-bottom:0;
+  font-family:"Akrobat","Noto Sans TC",sans-serif;
+}
+
+/* 內容主標（h2）不要比時間/地點大 */
+.event-info h2:not(:first-of-type){
+  margin-top: clamp(28px, 5vw, 72px);
+}
+.event-info h2 {
+  font-size:clamp(20px,1.8vw,30px);
+  font-weight:500;
+  margin-bottom:20px;
+}
+/* ===== CTA ===== */
+.register-btn{
+  display:flex; align-items:center; justify-content:center; gap:14px;
+  margin:40px auto 0; padding:16px 15px 16px 35px; width:220px;
+  background:#f48c06; color:#fff; border:6px solid #fff; border-radius:999px;
+  font-size:1.8rem; font-weight:500; text-decoration:none;
+  box-shadow:0 6px 18px rgba(0,0,0,.18); transition:all .3s ease;
+}
+.register-btn svg{ width:1.8em; height:1.5em; flex:0 0 auto; will-change:transform; animation:arrowOsc .8s ease-in-out infinite alternate }
+.register-btn svg path{ fill:none; stroke:#fff; stroke-width:5; stroke-linecap:round; stroke-linejoin:round; vector-effect:non-scaling-stroke }
+.register-btn:hover{ background:#f48c06; border-color:transparent; transform:scale(.95); box-shadow:0 4px 12px rgba(0,0,0,.15) }
+.register-btn:active{ transform:scale(.9) }
+.register-btn:focus-visible{ outline:3px solid rgba(255,255,255,.6); outline-offset:3px }
+
+/* ===== 時間／地點（穩定） ===== */
+.topic-rows{
+  margin-top:18px; margin-bottom:clamp(28px, 4vw, 56px);
+  display:grid; gap:12px;
+  width:max-content; max-width:100%;
+  margin-left:auto; margin-right:auto;
+  text-align:left; justify-items:start;
+}
+.topic-row{
+  display:grid; grid-template-columns:auto 1fr;
+  align-items:center; column-gap:10px;
+  width:max-content; text-align:left;
+  font-size:clamp(20px, 1.8vw, 30px);
+}
+.topic-row .pill{
+  min-width:64px; height:48px; padding:0 14px;
+  display:inline-flex; align-items:center; justify-content:center;
+  white-space:nowrap; border-radius:999px;
+  background:rgba(255,255,255,.18);
+  font-weight:500; /* 保留字重 */
+  line-height:1;
+  font-size: inherit; /* 改為繼承外層 .topic-row 的字級，與右側文字一致 */
+}
+.topic-row > div:last-child{
+  min-width:0; display:flex; align-items:center; flex-wrap:wrap; gap:.5em;
+  min-height:48px; line-height:1.8; overflow-wrap:anywhere; text-align:left;
+}
+.place .hl{
+  display:inline-flex; align-items:center; border-radius:999px;
+  background:rgba(255,255,255,.25); color:#fff; line-height:1;
+  margin-left:.6em; font-weight:500;
+  font-size:clamp(14px, 1.25vw, 20px); padding:6px 16px; vertical-align:middle; white-space:nowrap;
+}
+@media (max-width:1200px){
+  .topic-rows{ width:min(100%, 1000px); margin:18px auto clamp(28px, 4vw, 56px); }
+  .topic-row{ width:auto; max-width:100%; }
+}
+@media (max-width:991.98px){
+  /* 讓中間寬度區間也以 baseline 對齊，避免在縮放途中膠囊與右側資訊垂直基準跑掉 */
+  .event-info .topic-row{ align-items:baseline; }
+  .event-info .topic-row > div:last-child{ display:flex; align-items:baseline; min-height:0; }
+}
+@media (max-width:560px){
+  /* 讓整列以 baseline 對齊（小螢幕已有的調整，保留但改字級繼承） */
+  .topic-row{ align-items: baseline; }
+
+  .topic-row .pill{
+    display:inline-block;      /* 小螢幕為 inline-block（保持膠囊形狀） */
+    align-self: baseline;
+    vertical-align: baseline;
+    min-width:58px;
+    height:40px;
+    line-height:40px;         /* 保持膠囊內文字垂直置中 */
+    padding:0 12px;
+    font-size: inherit;       /* 小螢幕亦繼承外層字級，與右側資訊一致 */
+    text-align:center;
+  }
+
+  .topic-row > div:last-child{
+    min-height:40px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:.4em;
+    font-size:.95em;
+    line-height:1.6;
+    align-items:baseline;
+    align-self: baseline;
+  }
+
+  /* 保留原本的 bar-item / 其他小尺寸樣式 */
+  .bar-item{ padding:6px 14px; }
+  .bar-date{ font-size:18px; }
+  .bar-arrow{ font-size:18px; }
+}
+
+/* ===== 活動資訊（含與 HERO 的黑→藍銜接） ===== */
+.event-info{
+  position:relative;
+  background:#112240;
+  padding-block:20px;
+  overflow:hidden;
+}
+.event-info::before{
+  content:"";
+  position:absolute; top:0; left:0; right:0;
+  height:500px;
+  background:linear-gradient(to bottom, #000 0%, #112240 100%);
+  pointer-events:none;
+}
+.event-info .inner{
+  position:relative; z-index:1;
+  max-width:1200px; margin:0 auto; padding:0 20px;
+  line-height:1.8; font-weight:300; font-size:1.2em;
+}
+
+/* ===== 主標 / 副標 ===== */
+.topic-wrap{ text-align:center; margin:16px auto 24px; max-width:1000px; }
+.topic-badge{
+  display:inline-block; background:transparent; color:#fff;
+  font-size:clamp(23px, 3vw, 72px); font-weight:400;
+  padding:10px 20px; border-radius:20px; border:4px solid var(--pink);
+  margin-top:20px; margin-bottom:20px;
+  text-align:center;
+}
+.topic-badge .topic-en{
+  display:block;
+  font-size:clamp(20px, 1.8vw, 42px);
+  font-weight:400;
+  color:#ddd;
+  margin-top:5px;
+  margin-bottom:0;
+  font-family:"Akrobat","Noto Sans TC",sans-serif;
+}
+
+/* 內容主標（h2）不要比時間/地點大 */
+.event-info h2:not(:first-of-type){
+  margin-top: clamp(28px, 5vw, 72px);
+}
+.event-info h2 {
+  font-size:clamp(20px,1.8vw,30px);
+  font-weight:500;
+  margin-bottom:20px;
+}
+/* ===== CTA ===== */
+.register-btn{
+  display:flex; align-items:center; justify-content:center; gap:14px;
+  margin:40px auto 0; padding:16px 15px 16px 35px; width:220px;
+  background:#f48c06; color:#fff; border:6px solid #fff; border-radius:999px;
+  font-size:1.8rem; font-weight:500; text-decoration:none;
+  box-shadow:0 6px 18px rgba(0,0,0,.18); transition:all .3s ease;
+}
+.register-btn svg{ width:1.8em; height:1.5em; flex:0 0 auto; will-change:transform; animation:arrowOsc .8s ease-in-out infinite alternate }
+.register-btn svg path{ fill:none; stroke:#fff; stroke-width:5; stroke-linecap:round; stroke-linejoin:round; vector-effect:non-scaling-stroke }
+.register-btn:hover{ background:#f48c06; border-color:transparent; transform:scale(.95); box-shadow:0 4px 12px rgba(0,0,0,.15) }
+.register-btn:active{ transform:scale(.9) }
+.register-btn:focus-visible{ outline:3px solid rgba(255,255,255,.6); outline-offset:3px }
+
+/* ===== 時間／地點（穩定） ===== */
+.topic-rows{
+  margin-top:18px; margin-bottom:clamp(28px, 4vw, 56px);
+  display:grid; gap:12px;
+  width:max-content; max-width:100%;
+  margin-left:auto; margin-right:auto;
+  text-align:left; justify-items:start;
+}
+.topic-row{
+  display:grid; grid-template-columns:auto 1fr;
+  align-items:center; column-gap:10px;
+  width:max-content; text-align:left;
+  font-size:clamp(20px, 1.8vw, 30px);
+}
+.topic-row .pill{
+  min-width:64px; height:48px; padding:0 14px;
+  display:inline-flex; align-items:center; justify-content:center;
+  white-space:nowrap; border-radius:999px;
+  background:rgba(255,255,255,.18);
+  font-weight:500; /* 保留字重 */
+  line-height:1;
+  font-size: inherit; /* 改為繼承外層 .topic-row 的字級，與右側文字一致 */
+}
+.topic-row > div:last-child{
+  min-width:0; display:flex; align-items:center; flex-wrap:wrap; gap:.5em;
+  min-height:48px; line-height:1.8; overflow-wrap:anywhere; text-align:left;
+}
+.place .hl{
+  display:inline-flex; align-items:center; border-radius:999px;
+  background:rgba(255,255,255,.25); color:#fff; line-height:1;
+  margin-left:.6em; font-weight:500;
+  font-size:clamp(14px, 1.25vw, 20px); padding:6px 16px; vertical-align:middle; white-space:nowrap;
+}
+@media (max-width:1200px){
+  .topic-rows{ width:min(100%, 1000px); margin:18px auto clamp(28px, 4vw, 56px); }
+  .topic-row{ width:auto; max-width:100%; }
+}
+@media (max-width:991.98px){
+  /* 讓中間寬度區間也以 baseline 對齊，避免在縮放途中膠囊與右側資訊垂直基準跑掉 */
+  .event-info .topic-row{ align-items:baseline; }
+  .event-info .topic-row > div:last-child{ display:flex; align-items:baseline; min-height:0; }
+}
+@media (max-width:560px){
+  /* 讓整列以 baseline 對齊（小螢幕已有的調整，保留但改字級繼承） */
+  .topic-row{ align-items: baseline; }
+
+  .topic-row .pill{
+    display:inline-block;      /* 小螢幕為 inline-block（保持膠囊形狀） */
+    align-self: baseline;
+    vertical-align: baseline;
+    min-width:58px;
+    height:40px;
+    line-height:40px;         /* 保持膠囊內文字垂直置中 */
+    padding:0 12px;
+    font-size: inherit;       /* 小螢幕亦繼承外層字級，與右側資訊一致 */
+    text-align:center;
+  }
+
+  .topic-row > div:last-child{
+    min-height:40px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:.4em;
+    font-size:.95em;
+    line-height:1.6;
+    align-items:baseline;
+    align-self: baseline;
+  }
+
+  /* 保留原本的 bar-item / 其他小尺寸樣式 */
+  .bar-item{ padding:6px 14px; }
+  .bar-date{ font-size:18px; }
+  .bar-arrow{ font-size:18px; }
+}
+
+/* ===== 活動資訊（含與 HERO 的黑→藍銜接） ===== */
+.event-info{
+  position:relative;
+  background:#112240;
+  padding-block:20px;
+  overflow:hidden;
+}
+.event-info::before{
+  content:"";
+  position:absolute; top:0; left:0; right:0;
+  height:500px;
+  background:linear-gradient(to bottom, #000 0%, #112240 100%);
+  pointer-events:none;
+}
+.event-info .inner{
+  position:relative; z-index:1;
+  max-width:1200px; margin:0 auto; padding:0 20px;
+  line-height:1.8; font-weight:300; font-size:1.2em;
+}
+
+/* ===== 主標 / 副標 ===== */
+.topic-wrap{ text-align:center; margin:16px auto 24px; max-width:1000px; }
+.topic-badge{
+  display:inline-block; background:transparent; color:#fff;
+  font-size:clamp(23px, 3vw, 72px); font-weight:400;
+  padding:10px 20px; border-radius:20px; border:4px solid var(--pink);
+  margin-top:20px; margin-bottom:20px;
+  text-align:center;
+}
+.topic-badge .topic-en{
+  display:block;
+  font-size:clamp(20px, 1.8vw, 42px);
+  font-weight:400;
+  color:#ddd;
+  margin-top:5px;
+  margin-bottom:0;
+  font-family:"Akrobat","Noto Sans TC",sans-serif;
+}
+
+/* 內容主標（h2）不要比時間/地點大 */
+.event-info h2:not(:first-of-type){
+  margin-top: clamp(28px, 5vw, 72px);
+}
+.event-info h2 {
+  font-size:clamp(20px,1.8vw,30px);
+  font-weight:500;
+  margin-bottom:20px;
+}
+/* ===== CTA ===== */
+.register-btn{
+  display:flex; align-items:center; justify-content:center; gap:14px;
+  margin:40px auto 0; padding:16px 15px 16px 35px; width:220px;
+  background:#f48c06; color:#fff; border:6px solid #fff; border-radius:999px;
+  font-size:1.8rem; font-weight:500; text-decoration:none;
+  box-shadow:0 6px 18px rgba(0,0,0,.18); transition:all .3s ease;
+}
+.register-btn svg{ width:1.8em; height:1.5em; flex:0 0 auto; will-change:transform; animation:arrowOsc .8s ease-in-out infinite alternate }
+.register-btn svg path{ fill:none; stroke:#fff; stroke-width:5; stroke-linecap:round; stroke-linejoin:round; vector-effect:non-scaling-stroke }
+.register-btn:hover{ background:#f48c06; border-color:transparent; transform:scale(.95); box-shadow:0 4px 12px rgba(0,0,0,.15) }
+.register-btn:active{ transform:scale(.9) }
+.register-btn:focus-visible{ outline:3px solid rgba(255,255,255,.6); outline-offset:3px }
+
+/* ===== 時間／地點（穩定） ===== */
+.topic-rows{
+  margin-top:18px; margin-bottom:clamp(28px, 4vw, 56px);
+  display:grid; gap:12px;
+  width:max-content; max-width:100%;
+  margin-left:auto; margin-right:auto;
+  text-align:left; justify-items:start;
+}
+.topic-row{
+  display:grid; grid-template-columns:auto 1fr;
+  align-items:center; column-gap:10px;
+  width:max-content; text-align:left;
+  font-size:clamp(20px, 1.8vw, 30px);
+}
+.topic-row .pill{
+  min-width:64px; height:48px; padding:0 14px;
+  display:inline-flex; align-items:center; justify-content:center;
+  white-space:nowrap; border-radius:999px;
+  background:rgba(255,255,255,.18);
+  font-weight:500; /* 保留字重 */
+  line-height:1;
+  font-size: inherit; /* 改為繼承外層 .topic-row 的字級，與右側文字一致 */
+}
+.topic-row > div:last-child{
+  min-width:0; display:flex; align-items:center; flex-wrap:wrap; gap:.5em;
+  min-height:48px; line-height:1.8; overflow-wrap:anywhere; text-align:left;
+}
+.place .hl{
+  display:inline-flex; align-items:center; border-radius:999px;
+  background:rgba(255,255,255,.25); color:#fff; line-height:1;
+  margin-left:.6em; font-weight:500;
+  font-size:clamp(14px, 1.25vw, 20px); padding:6px 16px; vertical-align:middle; white-space:nowrap;
+}
+@media (max-width:1200px){
+  .topic-rows{ width:min(100%, 1000px); margin:18px auto clamp(28px, 4vw, 56px); }
+  .topic-row{ width:auto; max-width:100%; }
+}
+@media (max-width:991.98px){
+  /* 讓中間寬度區間也以 baseline 對齊，避免在縮放途中膠囊與右側資訊垂直基準跑掉 */
+  .event-info .topic-row{ align-items:baseline; }
+  .event-info .topic-row > div:last-child{ display:flex; align-items:baseline; min-height:0; }
+}
+@media (max-width:560px){
+  /* 讓整列以 baseline 對齊（小螢幕已有的調整，保留但改字級繼承） */
+  .topic-row{ align-items: baseline; }
+
+  .topic-row .pill{
+    display:inline-block;      /* 小螢幕為 inline-block（保持膠囊形狀） */
+    align-self: baseline;
+    vertical-align: baseline;
+    min-width:58px;
+    height:40px;
+    line-height:40px;         /* 保持膠囊內文字垂直置中 */
+    padding:0 12px;
+    font-size: inherit;       /* 小螢幕亦繼承外層字級，與右側資訊一致 */
+    text-align:center;
+  }
+
+  .topic-row > div:last-child{
+    min-height:40px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:.4em;
+    font-size:.95em;
+    line-height:1.6;
+    align-items:baseline;
+    align-self: baseline;
+  }
+
+  /* 保留原本的 bar-item / 其他小尺寸樣式 */
+  .bar-item{ padding:6px 14px; }
+  .bar-date{ font-size:18px; }
+  .bar-arrow{ font-size:18px; }
+}
+
+/* ===== 活動資訊（含與 HERO 的黑→藍銜接） ===== */
+.event-info{
+  position:relative;
+  background:#112240;
+  padding-block:20px;
+  overflow:hidden;
+}
+.event-info::before{
+  content:"";
+  position:absolute; top:0; left:0; right:0;
+  height:500px;
+  background:linear-gradient(to bottom, #000 0%, #112240 100%);
+  pointer-events:none;
+}
+.event-info .inner{
+  position:relative; z-index:1;
+  max-width:1200px; margin:0 auto; padding:0 20px;
+  line-height:1.8; font-weight:300; font-size:1.2em;
+}
+
+/* ===== 主標 / 副標 ===== */
+.topic-wrap{ text-align:center; margin:16px auto 24px; max-width:1000px; }
+.topic-badge{
+  display:inline-block; background:transparent; color:#fff;
+  font-size:clamp(23px, 3vw, 72px); font-weight:400;
+  padding:10px 20px; border-radius:20px; border:4px solid var(--pink);
+  margin-top:20px; margin-bottom:20px;
+  text-align:center;
+}
+.topic-badge .topic-en{
+  display:block;
+  font-size:clamp(20px, 1.8vw, 42px);
+  font-weight:400;
+  color:#ddd;
+  margin-top:5px;
+  margin-bottom:0;
+  font-family:"Akrobat","Noto Sans TC",sans-serif;
+}
+
+/* 內容主標（h2）不要比時間/地點大 */
+.event-info h2:not(:first-of-type){
+  margin-top: clamp(28px, 5vw, 72px);
+}
+.event-info h2 {
+  font-size:clamp(20px,1.8vw,30px);
+  font-weight:500;
+  margin-bottom:20px;
+}
+/* ===== CTA ===== */
+.register-btn{
+  display:flex; align-items:center; justify-content:center; gap:14px;
+  margin:40px auto 0; padding:16px 15px 16px 35px; width:220px;
+  background:#f48c06; color:#fff; border:6px solid #fff; border-radius:999px;
+  font-size:1.8rem; font-weight:500; text-decoration:none;
+  box-shadow:0 6px 18px rgba(0,0,0,.18); transition:all .3s ease;
+}
+.register-btn svg{ width:1.8em; height:1.5em; flex:0 0 auto; will-change:transform; animation:arrowOsc .8s ease-in-out infinite alternate }
+.register-btn svg path{ fill:none; stroke:#fff; stroke-width:5; stroke-linecap:round; stroke-linejoin:round; vector-effect:non-scaling-stroke }
+.register-btn:hover{ background:#f48c06; border-color:transparent; transform:scale(.95); box-shadow:0 4px 12px rgba(0,0,0,.15) }
+.register-btn:active{ transform:scale(.9) }
+.register-btn:focus-visible{ outline:3px solid rgba(255,255,255,.6); outline-offset:3px }
+
+/* ===== 時間／地點（穩定） ===== */
+.topic-rows{
+  margin-top:18px; margin-bottom:clamp(28px, 4vw, 56px);
+  display:grid; gap:12px;
+  width:max-content; max-width:100%;
+  margin-left:auto; margin-right:auto;
+  text-align:left; justify-items:start;
+}
+.topic-row{
+  display:grid; grid-template-columns:auto 1fr;
+  align-items:center; column-gap:10px;
+  width:max-content; text-align:left;
+  font-size:clamp(20px, 1.8vw, 30px);
+}
+.topic-row .pill{
+  min-width:64px; height:48px; padding:0 14px;
+  display:inline-flex; align-items:center; justify-content:center;
+  white-space:nowrap; border-radius:999px;
+  background:rgba(255,255,255,.18);
+  font-weight:500; /* 保留字重 */
+  line-height:1;
+  font-size: inherit; /* 改為繼承外層 .topic-row 的字級，與右側文字一致 */
+}
+.topic-row > div:last-child{
+  min-width:0; display:flex; align-items:center; flex-wrap:wrap; gap:.5em;
+  min-height:48px; line-height:1.8; overflow-wrap:anywhere; text-align:left;
+}
+.place .hl{
+  display:inline-flex; align-items:center; border-radius:999px;
+  background:rgba(255,255,255,.25); color:#fff; line-height:1;
+  margin-left:.6em; font-weight:500;
+  font-size:clamp(14px, 1.25vw, 20px); padding:6px 16px; vertical-align:middle; white-space:nowrap;
+}
+@media (max-width:1200px){
+  .topic-rows{ width:min(100%, 1000px); margin:18px auto clamp(28px, 4vw, 56px); }
+  .topic-row{ width:auto; max-width:100%; }
+}
+@media (max-width:991.98px){
+  /* 讓中間寬度區間也以 baseline 對齊，避免在縮放途中膠囊與右側資訊垂直基準跑掉 */
+  .event-info .topic-row{ align-items:baseline; }
+  .event-info .topic-row > div:last-child{ display:flex; align-items:baseline; min-height:0; }
+}
+@media (max-width:560px){
+  /* 讓整列以 baseline 對齊（小螢幕已有的調整，保留但改字級繼承） */
+  .topic-row{ align-items: baseline; }
+
+  .topic-row .pill{
+    display:inline-block;      /* 小螢幕為 inline-block（保持膠囊形狀） */
+    align-self: baseline;
+    vertical-align: baseline;
+    min-width:58px;
+    height:40px;
+    line-height:40px;         /* 保持膠囊內文字垂直置中 */
+    padding:0 12px;
+    font-size: inherit;       /* 小螢幕亦繼承外層字級，與右側資訊一致 */
+    text-align:center;
+  }
+
+  .topic-row > div:last-child{
+    min-height:40px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:.4em;
+    font-size:.95em;
+    line-height:1.6;
+    align-items:baseline;
+    align-self: baseline;
+  }
+
+  /* 保留原本的 bar-item / 其他小尺寸樣式 */
+  .bar-item{ padding:6px 14px; }
+  .bar-date{ font-size:18px; }
+  .bar-arrow{ font-size:18px; }
+}
+
+/* ===== 活動資訊（含與 HERO 的黑→藍銜接） ===== */
+.event-info{
+  position:relative;
+  background:#112240;
+  padding-block:20px;
+  overflow:hidden;
+}
+.event-info::before{
+  content:"";
+  position:absolute; top:0; left:0; right:0;
+  height:500px;
+  background:linear-gradient(to bottom, #000 0%, #112240 100%);
+  pointer-events:none;
+}
+.event-info .inner{
+  position:relative; z-index:1;
+  max-width:1200px; margin:0 auto; padding:0 20px;
+  line-height:1.8; font-weight:300; font-size:1.2em;
+}
+
+/* ===== 主標 / 副標 ===== */
+.topic-wrap{ text-align:center; margin:16px auto 24px; max-width:1000px; }
+.topic-badge{
+  display:inline-block; background:transparent; color:#fff;
+  font-size:clamp(23px, 3vw, 72px); font-weight:400;
+  padding:10px 20px; border-radius:20px; border:4px solid var(--pink);
+  margin-top:20px; margin-bottom:20px;
+  text-align:center;
+}
+.topic-badge .topic-en{
+  display:block;
+  font-size:clamp(20px, 1.8vw, 42px);
+  font-weight:400;
+  color:#ddd;
+  margin-top:5px;
+  margin-bottom:0;
+  font-family:"Akrobat","Noto Sans TC",sans-serif;
+}
+
+/* 內容主標（h2）不要比時間/地點大 */
+.event-info h2:not(:first-of-type){
+  margin-top: clamp(28px, 5vw, 72px);
+}
+.event-info h2 {
+  font-size:clamp(20px,1.8vw,30px);
+  font-weight:500;
+  margin-bottom:20px;
+}
+/* ===== CTA ===== */
+.register-btn{
+  display:flex; align-items:center; justify-content:center; gap:14px;
+  margin:40px auto 0; padding:16px 15px 16px 35px; width:220px;
+  background:#f48c06; color:#fff; border:6px solid #fff; border-radius:999px;
+  font-size:1.8rem; font-weight:500; text-decoration:none;
+  box-shadow:0 6px 18px rgba(0,0,0,.18); transition:all .3s ease;
+}
+.register-btn svg{ width:1.8em; height:1.5em; flex:0 0 auto; will-change:transform; animation:arrowOsc .8s ease-in-out infinite alternate }
+.register-btn svg path{ fill:none; stroke:#fff; stroke-width:5; stroke-linecap:round; stroke-linejoin:round; vector-effect:non-scaling-stroke }
+.register-btn:hover{ background:#f48c06; border-color:transparent; transform:scale(.95); box-shadow:0 4px 12px rgba(0,0,0,.15) }
+.register-btn:active{ transform:scale(.9) }
+.register-btn:focus-visible{ outline:3px solid rgba(255,255,255,.6); outline-offset:3px }
+
+/* ===== 時間／地點（穩定） ===== */
+.topic-rows{
+  margin-top:18px; margin-bottom:clamp(28px, 4vw, 56px);
+  display:grid; gap:12px;
+  width:max-content; max-width:100%;
+  margin-left:auto; margin-right:auto;
+  text-align:left; justify-items:start;
+}
+.topic-row{
+  display:grid; grid-template-columns:auto 1fr;
+  align-items:center; column-gap:10px;
+  width:max-content; text-align:left;
+  font-size:clamp(20px, 1.8vw, 30px);
+}
+.topic-row .pill{
+  min-width:64px; height:48px; padding:0 14px;
+  display:inline-flex; align-items:center; justify-content:center;
+  white-space:nowrap; border-radius:999px;
+  background:rgba(255,255,255,.18);
+  font-weight:500; /* 保留字重 */
+  line-height:1;
+  font-size: inherit; /* 改為繼承外層 .topic-row 的字級，與右側文字一致 */
+}
+.topic-row > div:last-child{
+  min-width:0; display:flex; align-items:center; flex-wrap:wrap; gap:.5em;
+  min-height:48px; line-height:1.8; overflow-wrap:anywhere; text-align:left;
+}
+.place .hl{
+  display:inline-flex; align-items:center; border-radius:999px;
+  background:rgba(255,255,255,.25); color:#fff; line-height:1;
+  margin-left:.6em; font-weight:500;
+  font-size:clamp(14px, 1.25vw, 20px); padding:6px 16px; vertical-align:middle; white-space:nowrap;
+}
+@media (max-width:1200px){
+  .topic-rows{ width:min(100%, 1000px); margin:18px auto clamp(28px, 4vw, 56px); }
+  .topic-row{ width:auto; max-width:100%; }
+}
+@media (max-width:991.98px){
+  /* 讓中間寬度區間也以 baseline 對齊，避免在縮放途中膠囊與右側資訊垂直基準跑掉 */
+  .event-info .topic-row{ align-items:baseline; }
+  .event-info .topic-row > div:last-child{ display:flex; align-items:baseline; min-height:0; }
+}
+@media (max-width:560px){
+  /* 讓整列以 baseline 對齊（小螢幕已有的調整，保留但改字級繼承） */
+  .topic-row{ align-items: baseline; }
+
+  .topic-row .pill{
+    display:inline-block;      /* 小螢幕為 inline-block（保持膠囊形狀） */
+    align-self: baseline;
+    vertical-align: baseline;
+    min-width:58px;
+    height:40px;
+    line-height:40px;         /* 保持膠囊內文字垂直置中 */
+    padding:0 12px;
+    font-size: inherit;       /* 小螢幕亦繼承外層字級，與右側資訊一致 */
+    text-align:center;
+  }
+
+  .topic-row > div:last-child{
+    min-height:40px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:.4em;
+    font-size:.95em;
+    line-height:1.6;
+    align-items:baseline;
+    align-self: baseline;
+  }
+
+  /* 保留原本的 bar-item / 其他小尺寸樣式 */
+  .bar-item{ padding:6px 14px; }
+  .bar-date{ font-size:18px; }
+  .bar-arrow{ font-size:18px; }
+}
+
+/* ===== 活動資訊（含與 HERO 的黑→藍銜接） ===== */
+.event-info{
+  position:relative;
+  background:#112240;
+  padding-block:20px;
+  overflow:hidden;
+}
+.event-info::before{
+  content:"";
+  position:absolute; top:0; left:0; right:0;
+  height:500px;
+  background:linear-gradient(to bottom, #000 0%, #112240 100%);
+  pointer-events:none;
+}
+.event-info .inner{
+  position:relative; z-index:1;
+  max-width:1200px; margin:0 auto; padding:0 20px;
+  line-height:1.8; font-weight:300; font-size:1.2em;
+}
+
+/* ===== 主標 / 副標 ===== */
+.topic-wrap{ text-align:center; margin:16px auto 24px; max-width:1000px; }
+.topic-badge{
+  display:inline-block; background:transparent; color:#fff;
+  font-size:clamp(23px, 3vw, 72px); font-weight:400;
+  padding:10px 20px; border-radius:20px; border:4px solid var(--pink);
+  margin-top:20px; margin-bottom:20px;
+  text-align:center;
+}
+.topic-badge .topic-en{
+  display:block;
+  font-size:clamp(20px, 1.8vw, 42px);
+  font-weight:400;
+  color:#ddd;
+  margin-top:5px;
+  margin-bottom:0;
+  font-family:"Akrobat","Noto Sans TC",sans-serif;
+}
+
+/* 內容主標（h2）不要比時間/地點大 */
+.event-info h2:not(:first-of-type){
+  margin-top: clamp(28px, 5vw, 72px);
+}
+.event-info h2 {
+  font-size:clamp(20px,1.8vw,30px);
+  font-weight:500;
+  margin-bottom:20px;
+}
+/* ===== CTA ===== */
+.register-btn{
+  display:flex; align-items:center; justify-content:center; gap:14px;
+  margin:40px auto 0; padding:16px 15px 16px 35px; width:220px;
+  background:#f48c06; color:#fff; border:6px solid #fff; border-radius:999px;
+  font-size:1.8rem; font-weight:500; text-decoration:none;
+  box-shadow:0 6px 18px rgba(0,0,0,.18); transition:all .3s ease;
+}
+.register-btn svg{ width:1.8em; height:1.5em; flex:0 0 auto; will-change:transform; animation:arrowOsc .8s ease-in-out infinite alternate }
+.register-btn svg path{ fill:none; stroke:#fff; stroke-width:5; stroke-linecap:round; stroke-linejoin:round; vector-effect:non-scaling-stroke }
+.register-btn:hover{ background:#f48c06; border-color:transparent; transform:scale(.95); box-shadow:0 4px 12px rgba(0,0,0,.15) }
+.register-btn:active{ transform:scale(.9) }
+.register-btn:focus-visible{ outline:3px solid rgba(255,255,255,.6); outline-offset:3px }
+
+/* ===== 時間／地點（穩定） ===== */
+.topic-rows{
+  margin-top:18px; margin-bottom:clamp(28px, 4vw, 56px);
+  display:grid; gap:12px;
+  width:max-content; max-width:100%;
+  margin-left:auto; margin-right:auto;
+  text-align:left; justify-items:start;
+}
+.topic-row{
+  display:grid; grid-template-columns:auto 1fr;
+  align-items:center; column-gap:10px;
+  width:max-content; text-align:left;
+  font-size:clamp(20px, 1.8vw, 30px);
+}
+.topic-row .pill{
+  min-width:64px; height:48px; padding:0 14px;
+  display:inline-flex; align-items:center; justify-content:center;
+  white-space:nowrap; border-radius:999px;
+  background:rgba(255,255,255,.18);
+  font-weight:500; /* 保留字重 */
+  line-height:1;
+  font-size: inherit; /* 改為繼承外層 .topic-row 的字級，與右側文字一致 */
+}
+.topic-row > div:last-child{
+  min-width:0; display:flex; align-items:center; flex-wrap:wrap; gap:.5em;
+  min-height:48px; line-height:1.8; overflow-wrap:anywhere; text-align:left;
+}
+.place .hl{
+  display:inline-flex; align-items:center; border-radius:999px;
+  background:rgba(255,255,255,.25); color:#fff; line-height:1;
+  margin-left:.6em; font-weight:500;
+  font-size:clamp(14px, 1.25vw, 20px); padding:6px 16px; vertical-align:middle; white-space:nowrap;
+}
+@media (max-width:1200px){
+  .topic-rows{ width:min(100%, 1000px); margin:18px auto clamp(28px, 4vw, 56px); }
+  .topic-row{ width:auto; max-width:100%; }
+}
+@media (max-width:991.98px){
+  /* 讓中間寬度區間也以 baseline 對齊，避免在縮放途中膠囊與右側資訊垂直基準跑掉 */
+  .event-info .topic-row{ align-items:baseline; }
+  .event-info .topic-row > div:last-child{ display:flex; align-items:baseline; min-height:0; }
+}
+@media (max-width:560px){
+  /* 讓整列以 baseline 對齊（小螢幕已有的調整，保留但改字級繼承） */
+  .topic-row{ align-items: baseline; }
+
+  .topic-row .pill{
+    display:inline-block;      /* 小螢幕為 inline-block（保持膠囊形狀） */
+    align-self: baseline;
+    vertical-align: baseline;
+    min-width:58px;
+    height:40px;
+    line-height:40px;         /* 保持膠囊內文字垂直置中 */
+    padding:0 12px;
+    font-size: inherit;       /* 小螢幕亦繼承外層字級，與右側資訊一致 */
+    text-align:center;
+  }
+
+  .topic-row > div:last-child{
+    min-height:40px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:.4em;
+    font-size:.95em;
+    line-height:1.6;
+    align-items:baseline;
+    align-self: baseline;
+  }
+
+  /* 保留原本的 bar-item / 其他小尺寸樣式 */
+  .bar-item{ padding:6px 14px; }
+  .bar-date{ font-size:18px; }
+  .bar-arrow{ font-size:18px; }
+}
+
+/* ===== 活動資訊（含與 HERO 的黑→藍銜接） ===== */
+.event-info{
+  position:relative;
+  background:#112240;
+  padding-block:20px;
+  overflow:hidden;
+}
+.event-info::before{
+  content:"";
+  position:absolute; top:0; left:0; right:0;
+  height:500px;
+  background:linear-gradient(to bottom, #000 0%, #112240 100%);
+  pointer-events:none;
+}
+.event-info .inner{
+  position:relative; z-index:1;
+  max-width:1200px; margin:0 auto; padding:0 20px;
+  line-height:1.8; font-weight:300; font-size:1.2em;
+}
+
+/* ===== 主標 / 副標 ===== */
+.topic-wrap{ text-align:center; margin:16px auto 24px; max-width:1000px; }
+.topic-badge{
+  display:inline-block; background:transparent; color:#fff;
+  font-size:clamp(23px, 3vw, 72px); font-weight:400;
+  padding:10px 20px; border-radius:20px; border:4px solid var(--pink);
+  margin-top:20px; margin-bottom:20px;
+  text-align:center;
+}
+.topic-badge .topic-en{
+  display:block;
+  font-size:clamp(20px, 1.8vw, 42px);
+  font-weight:400;
+  color:#ddd;
+  margin-top:5px;
+  margin-bottom:0;
+  font-family:"Akrobat","Noto Sans TC",sans-serif;
+}
+
+/* 內容主標（h2）不要比時間/地點大 */
+.event-info h2:not(:first-of-type){
+  margin-top: clamp(28px, 5vw, 72px);
+}
+.event-info h2 {
+  font-size:clamp(20px,1.8vw,30px);
+  font-weight:500;
+  margin-bottom:20px;
+}
+/* ===== CTA ===== */
+.register-btn{
+  display:flex; align-items:center; justify-content:center; gap:14px;
+  margin:40px auto 0; padding:16px 15px 16px 35px; width:220px;
+  background:#f48c06; color:#fff; border:6px solid #fff; border-radius:999px;
+  font-size:1.8rem; font-weight:500; text-decoration:none;
+  box-shadow:0 6px 18px rgba(0,0,0,.18); transition:all .3s ease;
+}
+.register-btn svg{ width:1.8em; height:1.5em; flex:0 0 auto; will-change:transform; animation:arrowOsc .8s ease-in-out infinite alternate }
+.register-btn svg path{ fill:none; stroke:#fff; stroke-width:5; stroke-linecap:round; stroke-linejoin:round; vector-effect:non-scaling-stroke }
+.register-btn:hover{ background:#f48c06; border-color:transparent; transform:scale(.95); box-shadow:0 4px 12px rgba(0,0,0,.15) }
+.register-btn:active{ transform:scale(.9) }
+.register-btn:focus-visible{ outline:3px solid rgba(255,255,255,.6); outline-offset:3px }
+
+/* ===== 時間／地點（穩定） ===== */
+.topic-rows{
+  margin-top:18px; margin-bottom:clamp(28px, 4vw, 56px);
+  display:grid; gap:12px;
+  width:max-content; max-width:100%;
+  margin-left:auto; margin-right:auto;
+  text-align:left; justify-items:start;
+}
+.topic-row{
+  display:grid; grid-template-columns:auto 1fr;
+  align-items:center; column-gap:10px;
+  width:max-content; text-align:left;
+  font-size:clamp(20px, 1.8vw, 30px);
+}
+.topic-row .pill{
+  min-width:64px; height:48px; padding:0 14px;
+  display:inline-flex; align-items:center; justify-content:center;
+  white-space:nowrap; border-radius:999px;
+  background:rgba(255,255,255,.18);
+  font-weight:500; /* 保留字重 */
+  line-height:1;
+  font-size: inherit; /* 改為繼承外層 .topic-row 的字級，與右側文字一致 */
+}
+.topic-row > div:last-child{
+  min-width:0; display:flex; align-items:center; flex-wrap:wrap; gap:.5em;
+  min-height:48px; line-height:1.8; overflow-wrap:anywhere; text-align:left;
+}
+.place .hl{
+  display:inline-flex; align-items:center; border-radius:999px;
+  background:rgba(255,255,255,.25); color:#fff; line-height:1;
+  margin-left:.6em; font-weight:500;
+  font-size:clamp(14px, 1.25vw, 20px); padding:6px 16px; vertical-align:middle; white-space:nowrap;
+}
+@media (max-width:1200px){
+  .topic-rows{ width:min(100%, 1000px); margin:18px auto clamp(28px, 4vw, 56px); }
+  .topic-row{ width:auto; max-width:100%; }
+}
+@media (max-width:991.98px){
+  /* 讓中間寬度區間也以 baseline 對齊，避免在縮放途中膠囊與右側資訊垂直基準跑掉 */
+  .event-info .topic-row{ align-items:baseline; }
+  .event-info .topic-row > div:last-child{ display:flex; align-items:baseline; min-height:0; }
+}
+@media (max-width:560px){
+  /* 讓整列以 baseline 對齊（小螢幕已有的調整，保留但改字級繼承） */
+  .topic-row{ align-items: baseline; }
+
+  .topic-row .pill{
+    display:inline-block;      /* 小螢幕為 inline-block（保持膠囊形狀） */
+    align-self: baseline;
+    vertical-align: baseline;
+    min-width:58px;
+    height:40px;
+    line-height:40px;         /* 保持膠囊內文字垂直置中 */
+    padding:0 12px;
+    font-size: inherit;       /* 小螢幕亦繼承外層字級，與右側資訊一致 */
+    text-align:center;
+  }
+
+  .topic-row > div:last-child{
+    min-height:40px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:.4em;
+    font-size:.95em;
+    line-height:1.6;
+    align-items:baseline;
+    align-self: baseline;
+  }
+
+  /* 保留原本的 bar-item / 其他小尺寸樣式 */
+  .bar-item{ padding:6px 14px; }
+  .bar-date{ font-size:18px; }
+  .bar-arrow{ font-size:18px; }
+}
+
+/* ===== 活動資訊（含與 HERO 的黑→藍銜接） ===== */
+.event-info{
+  position:relative;
+  background:#112240;
+  padding-block:20px;
+  overflow:hidden;
+}
+.event-info::before{
+  content:"";
+  position:absolute; top:0; left:0; right:0;
+  height:500px;
+  background:linear-gradient(to bottom, #000 0%, #112240 100%);
+  pointer-events:none;
+}
+.event-info .inner{
+  position:relative; z-index:1;
+  max-width:1200px; margin:0 auto; padding:0 20px;
+  line-height:1.8; font-weight:300; font-size:1.2em;
+}
+
+/* ===== 主標 / 副標 ===== */
+.topic-wrap{ text-align:center; margin:16px auto 24px; max-width:1000px; }
+.topic-badge{
+  display:inline-block; background:transparent; color:#fff;
+  font-size:clamp(23px, 3vw, 72px); font-weight:400;
+  padding:10px 20px; border-radius:20px; border:4px solid var(--pink);
+  margin-top:20px; margin-bottom:20px;
+  text-align:center;
+}
+.topic-badge .topic-en{
+  display:block;
+  font-size:clamp(20px, 1.8vw, 42px);
+  font-weight:400;
+  color:#ddd;
+  margin-top:5px;
+  margin-bottom:0;
+  font-family:"Akrobat","Noto Sans TC",sans-serif;
+}
+
+/* 內容主標（h2）不要比時間/地點大 */
+.event-info h2:not(:first-of-type){
+  margin-top: clamp(28px, 5vw, 72px);
+}
+.event-info h2 {
+  font-size:clamp(20px,1.8vw,30px);
+  font-weight:500;
+  margin-bottom:20px;
+}
+/* ===== CTA ===== */
+.register-btn{
+  display:flex; align-items:center; justify-content:center; gap:14px;
+  margin:40px auto 0; padding:16px 15px 16px 35px; width:220px;
+  background:#f48c06; color:#fff; border:6px solid #fff; border-radius:999px;
+  font-size:1.8rem; font-weight:500; text-decoration:none;
+  box-shadow:0 6px 18px rgba(0,0,0,.18); transition:all .3s ease;
+}
+.register-btn svg{ width:1.8em; height:1.5em; flex:0 0 auto; will-change:transform; animation:arrowOsc .8s ease-in-out infinite alternate }
+.register-btn svg path{ fill:none; stroke:#fff; stroke-width:5; stroke-linecap:round; stroke-linejoin:round; vector-effect:non-scaling-stroke }
+.register-btn:hover{ background:#f48c06; border-color:transparent; transform:scale(.95); box-shadow:0 4px 12px rgba(0,0,0,.15) }
+.register-btn:active{ transform:scale(.9) }
+.register-btn:focus-visible{ outline:3px solid rgba(255,255,255,.6); outline-offset:3px }
+
+/* ===== 時間／地點（穩定） ===== */
+.topic-rows{
+  margin-top:18px; margin-bottom:clamp(28px, 4vw, 56px);
+  display:grid; gap:12px;
+  width:max-content; max-width:100%;
+  margin-left:auto; margin-right:auto;
+  text-align:left; justify-items:start;
+}
+.topic-row{
+  display:grid; grid-template-columns:auto 1fr;
+  align-items:center; column-gap:10px;
+  width:max-content; text-align:left;
+  font-size:clamp(20px, 1.8vw, 30px);
+}
+.topic-row .pill{
+  min-width:64px; height:48px; padding:0 14px;
+  display:inline-flex; align-items:center; justify-content:center;
+  white-space:nowrap; border-radius:999px;
+  background:rgba(255,255,255,.18);
+  font-weight:500; /* 保留字重 */
+  line-height:1;
+  font-size: inherit; /* 改為繼承外層 .topic-row 的字級，與右側文字一致 */
+}
+.topic-row > div:last-child{
+  min-width:0; display:flex; align-items:center; flex-wrap:wrap; gap:.5em;
+  min-height:48px; line-height:1.8; overflow-wrap:anywhere; text-align:left;
+}
+.place .hl{
+  display:inline-flex; align-items:center; border-radius:999px;
+  background:rgba(255,255,255,.25); color:#fff; line-height:1;
+  margin-left:.6em; font-weight:500;
+  font-size:clamp(14px, 1.25vw, 20px); padding:6px 16px; vertical-align:middle; white-space:nowrap;
+}
+@media (max-width:1200px){
+  .topic-rows{ width:min(100%, 1000px); margin:18px auto clamp(28px, 4vw, 56px); }
+  .topic-row{ width:auto; max-width:100%; }
+}
+@media (max-width:991.98px){
+  /* 讓中間寬度區間也以 baseline 對齊，避免在縮放途中膠囊與右側資訊垂直基準跑掉 */
+  .event-info .topic-row{ align-items:baseline; }
+  .event-info .topic-row > div:last-child{ display:flex; align-items:baseline; min-height:0; }
+}
+@media (max-width:560px){
+  /* 讓整列以 baseline 對齊（小螢幕已有的調整，保留但改字級繼承） */
+  .topic-row{ align-items: baseline; }
+
+  .topic-row .pill{
+    display:inline-block;      /* 小螢幕為 inline-block（保持膠囊形狀） */
+    align-self: baseline;
+    vertical-align: baseline;
+    min-width:58px;
+    height:40px;
+    line-height:40px;         /* 保持膠囊內文字垂直置中 */
+    padding:0 12px;
+    font-size: inherit;       /* 小螢幕亦繼承外層字級，與右側資訊一致 */
+    text-align:center;
+  }
+
+  .topic-row > div:last-child{
+    min-height:40px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:.4em;
+    font-size:.95em;
+    line-height:1.6;
+    align-items:baseline;
+    align-self: baseline;
+  }
+
+  /* 保留原本的 bar-item / 其他小尺寸樣式 */
+  .bar-item{ padding:6px 14px; }
+  .bar-date{ font-size:18px; }
+  .bar-arrow{ font-size:18px; }
+}
+
+/* ===== 活動資訊（含與 HERO 的黑→藍銜接） ===== */
+.event-info{
+  position:relative;
+  background:#112240;
+  padding-block:20px;
+  overflow:hidden;
+}
+.event-info::before{
+  content:"";
+  position:absolute; top:0; left:0; right:0;
+  height:500px;
+  background:linear-gradient(to bottom, #000 0%, #112240 100%);
+  pointer-events:none;
+}
+.event-info .inner{
+  position:relative; z-index:1;
+  max-width:1200px; margin:0 auto; padding:0 20px;
+  line-height:1.8; font-weight:300; font-size:1.2em;
+}
+
+/* ===== 主標 / 副標 ===== */
+.topic-wrap{ text-align:center; margin:16px auto 24px; max-width:1000px; }
+.topic-badge{
+  display:inline-block; background:transparent; color:#fff;
+  font-size:clamp(23px, 3vw, 72px); font-weight:400;
+  padding:10px 20px; border-radius:20px; border:4px solid var(--pink);
+  margin-top:20px; margin-bottom:20px;
+  text-align:center;
+}
+.topic-badge .topic-en{
+  display:block;
+  font-size:clamp(20px, 1.8vw, 42px);
+  font-weight:400;
+  color:#ddd;
+  margin-top:5px;
+  margin-bottom:0;
+  font-family:"Akrobat","Noto Sans TC",sans-serif;
+}
+
+/* 內容主標（h2）不要比時間/地點大 */
+.event-info h2:not(:first-of-type){
+  margin-top: clamp(28px, 5vw, 72px);
+}
+.event-info h2 {
+  font-size:clamp(20px,1.8vw,30px);
+  font-weight:500;
+  margin-bottom:20px;
+}
+/* ===== CTA ===== */
+.register-btn{
+  display:flex; align-items:center; justify-content:center; gap:14px;
+  margin:40px auto 0; padding:16px 15px 16px 35px; width:220px;
+  background:#f48c06; color:#fff; border:6px solid #fff; border-radius:999px;
+  font-size:1.8rem; font-weight:500; text-decoration:none;
+  box-shadow:0 6px 18px rgba(0,0,0,.18); transition:all .3s ease;
+}
+.register-btn svg{ width:1.8em; height:1.5em; flex:0 0 auto; will-change:transform; animation:arrowOsc .8s ease-in-out infinite alternate }
+.register-btn svg path{ fill:none; stroke:#fff; stroke-width:5; stroke-linecap:round; stroke-linejoin:round; vector-effect:non-scaling-stroke }
+.register-btn:hover{ background:#f48c06; border-color:transparent; transform:scale(.95); box-shadow:0 4px 12px rgba(0,0,0,.15) }
+.register-btn:active{ transform:scale(.9) }
+.register-btn:focus-visible{ outline:3px solid rgba(255,255,255,.6); outline-offset:3px }
+
+/* ===== 時間／地點（穩定） ===== */
+.topic-rows{
+  margin-top:18px; margin-bottom:clamp(28px, 4vw, 56px);
+  display:grid; gap:12px;
+  width:max-content; max-width:100%;
+  margin-left:auto; margin-right:auto;
+  text-align:left; justify-items:start;
+}
+.topic-row{
+  display:grid; grid-template-columns:auto 1fr;
+  align-items:center; column-gap:10px;
+  width:max-content; text-align:left;
+  font-size:clamp(20px, 1.8vw, 30px);
+}
+.topic-row .pill{
+  min-width:64px; height:48px; padding:0 14px;
+  display:inline-flex; align-items:center; justify-content:center;
+  white-space:nowrap; border-radius:999px;
+  background:rgba(255,255,255,.18);
+  font-weight:500; /* 保留字重 */
+  line-height:1;
+  font-size: inherit; /* 改為繼承外層 .topic-row 的字級，與右側文字一致 */
+}
+.topic-row > div:last-child{
+  min-width:0; display:flex; align-items:center; flex-wrap:wrap; gap:.5em;
+  min-height:48px; line-height:1.8; overflow-wrap:anywhere; text-align:left;
+}
+.place .hl{
+  display:inline-flex; align-items:center; border-radius:999px;
+  background:rgba(255,255,255,.25); color:#fff; line-height:1;
+  margin-left:.6em; font-weight:500;
+  font-size:clamp(14px, 1.25vw, 20px); padding:6px 16px; vertical-align:middle; white-space:nowrap;
+}
+@media (max-width:1200px){
+  .topic-rows{ width:min(100%, 1000px); margin:18px auto clamp(28px, 4vw, 56px); }
+  .topic-row{ width:auto; max-width:100%; }
+}
+@media (max-width:991.98px){
+  /* 讓中間寬度區間也以 baseline 對齊，避免在縮放途中膠囊與右側資訊垂直基準跑掉 */
+  .event-info .topic-row{ align-items:baseline; }
+  .event-info .topic-row > div:last-child{ display:flex; align-items:baseline; min-height:0; }
+}
+@media (max-width:560px){
+  /* 讓整列以 baseline 對齊（小螢幕已有的調整，保留但改字級繼承） */
+  .topic-row{ align-items: baseline; }
+
+  .topic-row .pill{
+    display:inline-block;      /* 小螢幕為 inline-block（保持膠囊形狀） */
+    align-self: baseline;
+    vertical-align: baseline;
+    min-width:58px;
+    height:40px;
+    line-height:40px;         /* 保持膠囊內文字垂直置中 */
+    padding:0 12px;
+    font-size: inherit;       /* 小螢幕亦繼承外層字級，與右側資訊一致 */
+    text-align:center;
+  }
+
+  .topic-row > div:last-child{
+    min-height:40px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:.4em;
+    font-size:.95em;
+    line-height:1.6;
+    align-items:baseline;
+    align-self: baseline;
+  }
+
+  /* 保留原本的 bar-item / 其他小尺寸樣式 */
+  .bar-item{ padding:6px 14px; }
+  .bar-date{ font-size:18px; }
+  .bar-arrow{ font-size:18px; }
+}
 
 /* ===== 講者 ===== */
 .speaker-grid{ margin-top:36px; margin-bottom:60px; display:grid; grid-template-columns:repeat(3,1fr); gap:36px }
@@ -386,12 +1615,12 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   /* small tweaks for very narrow screens: reduce sizes but keep row layout */
   .speaker .photo{ margin-bottom:0; width:110px; height:110px; flex:0 0 110px; }
   .meta{ flex:0 0 130px; }
-  .speaker .name{ font-size:1.2rem; }
+  .speaker .name{ font-size: 1.2rem; }
 }
 
 /* 手機：講者直排 */
 @media (max-width: 768px){
-  .speaker-grid{ grid-template-columns: 1fr; gap: 28px; max-width: 520px; margin-inline:auto; }
+  .speaker-grid{ grid-template-columns: 1fr; gap: 28px; }
   .speaker .photo{ width: 160px; height: 160px; margin-bottom: 14px; }
   .speaker .name{ font-size: 1.3rem; }
   .speaker .title-chip{ font-size: .95rem; padding: 6px 14px; }
@@ -487,6 +1716,176 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   .sponsor-logo{ height:40px; }
 }
 
+  /* 覆寫並統一手機版 (≤768px) 講者版型為橫排：照片左、name+title 右、bio 全寬置底 */
+@media (max-width: 768px) {
+  /* Carousel → 不使用 sliding 行為，改為逐項堆疊 */
+  .speakers-carousel { overflow: visible; }
+  .speaker-pages { display: block; transform: none !important; }
+  .speaker-page { flex: 0 0 auto; width: 100% !important; padding: 0; margin-bottom: 18px; }
+
+  /* 每位講者列：橫排（照片左、meta 右），允許換行以讓 bio-card 跳到下一行 */
+  .speaker-grid { display: block !important; gap: 28px; }
+  .speaker {
+    display: flex !important;
+    flex-wrap: wrap !important;        /* allow bio-card to drop to new line */
+    align-items: center !important;    /* name/title 垂直置中 */
+    gap: 18px !important;
+    margin-bottom: 28px !important;
+    text-align: left !important;
+  }
+
+  /* 照片固定尺寸（可由 --sp-photo-mobile 微調）*/
+  .speaker .photo {
+    flex: 0 0 var(--sp-photo-mobile);
+    width: var(--sp-photo-mobile);
+    height: var(--sp-photo-mobile);
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0;
+    box-shadow: 0 8px 24px rgba(0,0,0,.25);
+    order: 0;
+  }
+
+  /* meta 置右、垂直置中 name + title */
+  .meta {
+    order: 1;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;   /* ← 關鍵：左對齊 */
+    text-align: left;
+    min-width: 0; /* allow shrink to avoid overflow */
+    max-width: none;
+  }
+
+  .speaker .name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.05;
+    white-space: normal;
+    overflow-wrap: break-word;
+  }
+  .speaker .title-chip {
+    font-size: 0.95rem;
+    color: #cfd6e6;
+    margin-top: 6px;
+    white-space: normal;
+  }
+
+  /* bio-card 同層（兄弟），會在 flex-wrap 情況下自動換行並佔滿整行 */
+  .bio-card {
+    order: 2;
+    flex-basis: 100% !important;
+    width: 100%;
+    margin-top: 10px;
+    text-align: left;
+    max-width: none;
+  }
+
+  .speaker-pager { display: none; }
+
+  /* 小螢幕左右內縮與 Agenda 卡片對齊 */
+  .inner { padding-left: 16px; padding-right: 16px; }
+}
+
+/* 更窄裝置微調 */
+@media (max-width: 480px) {
+  .speaker .photo {
+    flex: 0 0 100px !important;
+    width: 100px;
+    height: 100px;
+  }
+  .speaker .name{
+    font-size: clamp(20px, 6.6vw, 24px) !important;
+  }
+  .speaker .title-chip{
+    font-size: clamp(13px, 4.8vw, 16px) !important;
+  }
+}
+
+/* Mobile tweak: 左側對齊 & 放大人名 */
+@media (max-width: 768px){
+  .speaker{
+    text-align: left;          /* 覆蓋桌機的置中 */
+    align-items: center;       /* 圖片 vs 右側區塊垂直置中 */
+  }
+  .meta{
+    align-items: flex-start;   /* 名字＆抬頭向左對齊 */
+    text-align: left;
+  }
+  .speaker .name{
+    margin: 0;
+    font-weight: 800;
+    font-size: clamp(22px, 6.2vw, 28px);  /* 比現在再大一級 */
+    line-height: 1.15;
+  }
+  .speaker .title-chip{
+    font-size: clamp(14px, 4.2vw, 18px);
+  }
+}
+
+/* === Mobile override: force speaker row left-aligned === */
+@media (max-width: 768px){
+  .speaker{
+    text-align: left !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 18px !important;
+  }
+
+  .speaker .photo{
+    flex: 0 0 var(--sp-photo-mobile) !important;
+    width: var(--sp-photo-mobile) !important;
+    height: var(--sp-photo-mobile) !important;
+    margin: 0 !important;
+  }
+
+  .meta{
+    flex: 1 1 auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: flex-start !important;   /* key: left align on cross axis */
+    text-align: left !important;
+    min-width: 0 !important;
+    max-width: none !important;
+  }
+
+  .speaker .name,
+  .speaker .title-chip{
+    align-self: flex-start !important;
+    text-align: left !important;
+  }
+
+  .speaker .name{
+    margin: 0 !important;
+    font-weight: 800 !important;
+    font-size: clamp(22px, 6.2vw, 28px) !important;
+    line-height: 1.15 !important;
+  }
+
+  .speaker .title-chip{
+    font-size: clamp(14px, 4.2vw, 18px) !important;
+    margin-top: 6px !important;
+  }
+
+  .bio-card{
+    order: 2 !important;
+    flex-basis: 100% !important;
+    width: 100% !important;
+    margin-top: 10px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+/* avoid locking meta width on very small screens */
+@media (max-width: 480px){
+  .meta{ flex: 1 1 auto !important; } /* overrides any previous flex:0 0 130px; */
+}
 </style>
 
 <style>
@@ -1214,9 +2613,9 @@ try {
   }
 } catch(e) {}
 
-// 錨點：仍保留 click 處理以防某些瀏覽器不受 scroll-margin-top 影響
-// 統一且更健壯的錨點平滑滾動：先使用計算好的偏移做平滑滾動，
-// 之後短時間內再檢查目標是否仍被遮蓋，必要時做第二次修正（解決行動/縮放下位置不穩定問題）
+/* 錨點：仍保留 click 處理以防某些瀏覽器不受 scroll-margin-top 影響
+統一且更健壯的錨點平滑滾動：先使用計算好的偏移做平滑滾動，
+之後短時間內再檢查目標是否仍被遮蓋，必要時做第二次修正（解決行動/縮放下位置不穩定問題）
 function smoothScrollToElement(target) {
   if (!target) return;
   // 保證使用最新的偏移值
@@ -1354,5 +2753,113 @@ document.querySelector('.btn-top').onclick = function(e) {
   window.scrollTo({top:0, behavior:'smooth'});
 };
 </script>
+<style>
+/* FIX #1: 手機不要把 speaker-grid 縮到 520px 並置中 */
+@media (max-width: 768px){
+  .speaker-grid{
+    max-width: none !important;
+    width: 100% !important;
+    margin-inline: 0 !important;
+  }
+}
+
+/* FIX #2: 最小裝置時，meta 不要被鎖死寬 */
+@media (max-width: 480px){
+  .speaker .meta{
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+  }
+}
+</style>
+
+<style>
+/* ===== 調整：移除造成下垂與鎖寬的舊規則（覆寫原先出現的位置） ===== */
+/* 找到原先的兩個區塊並改為保守、不會干擾的設定 */
+
+@media (max-width: 480px){
+  /* 之前：.meta{ flex:0 0 130px; } → 移除鎖死寬度，改為可伸縮 */
+  .meta{
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+  }
+
+  /* 確保 photo 不會有額外 bottom margin（避免在 align-items:center 時推動 meta） */
+  .speaker .photo{
+    margin-bottom: 0 !important;
+  }
+}
+
+/* 也覆寫任何先前的「手機：講者直排」區塊中設定 photo margin-bottom 的行為 */
+@media (max-width: 768px){
+  .speaker .photo{
+    /* 取消可能存在的 margin-bottom（避免把右側 meta 往下推） */
+    margin-bottom: 0 !important;
+    /* 保持寬高但不會造成垂直偏移問題 */
+    width: var(--sp-photo-mobile) !important;
+    height: var(--sp-photo-mobile) !important;
+  }
+}
+
+/* ===== KILL SWITCH — 用 Grid 徹底鎖定手機講者版型（最後載入，覆蓋所有衝突） ===== */
+@media (max-width:768px){
+  .event-info .speaker{
+    display:grid !important;
+    grid-template-columns: var(--sp-photo-mobile) 1fr !important;
+    grid-template-areas:
+      "photo meta"
+      "bio   bio" !important;
+    column-gap:18px !important;
+    row-gap:10px !important;
+    align-items:center !important;
+    text-align:left !important;
+    margin-bottom:28px !important;
+  }
+
+  .event-info .speaker .photo{
+    grid-area:photo !important;
+    width:var(--sp-photo-mobile) !important;
+    height:var(--sp-photo-mobile) !important;
+    margin:0 !important;                 /* ← 擋掉任何 margin-bottom */
+    border-radius:50% !important;
+    object-fit:cover !important;
+  }
+
+  .event-info .speaker .meta{
+    grid-area:meta !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:flex-start !important;
+    min-width:0 !important;
+  }
+
+  .event-info .speaker .name{
+    margin:0 !important;
+    font-weight:800 !important;
+    font-size:clamp(22px,6.2vw,28px) !important;
+    line-height:1.15 !important;
+  }
+
+  .event-info .speaker .title-chip{
+    margin-top:6px !important;
+    font-size:clamp(14px,4.2vw,18px) !important;
+  }
+
+  .event-info .speaker .bio-card{
+    grid-area:bio !important;
+    width:100% !important;
+    max-width:none !important;   /* ← 關鍵：解除 360px 上限 */
+    margin:0 !important;         /* 與 row-gap 控距離 */
+    padding:14px !important;
+    text-align:left !important;
+  }
+}
+
+/* 更窄裝置微調（如需） */
+@media (max-width:480px){
+  :root{ --sp-photo-mobile:100px; }
+}
+</style>
+
+
 </body>
 </html>
