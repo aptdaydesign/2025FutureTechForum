@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>對齊測試</title>
+<style>
+/* 複製相關的 CSS 變數和基礎樣式 */
+:root{
+  --glass-bg: rgba(255,255,255,.08);
+  --glass-bd: rgba(255,255,255,.18);
+}
+
+body { 
+  margin: 0; 
+  background: #112240; 
+  color: #fff; 
+  font-family: "Noto Sans TC", sans-serif;
+  padding: 20px;
+}
+
+/* 模擬 .inner 容器 */
+.test-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px; /* .inner 的 padding */
+  position: relative;
+}
+
+/* 模擬 bio-card */
+.test-bio-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  backdrop-filter: blur(8px);
+  padding: 14px;
+  border-radius: 12px;
+  margin: 20px 0;
+  box-sizing: border-box;
+}
+
+/* 模擬浮動選單 - 測試版本 */
+.test-floating-menu {
+  position: fixed;
+  top: 20px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-bd);
+  backdrop-filter: blur(18px);
+  padding: 8px 12px;
+  border-radius: 12px;
+  box-sizing: border-box;
+  z-index: 1000;
+}
+
+/* 測試不同的寬度 */
+.test-width-16 { left: 16px; right: 16px; }
+.test-width-24 { left: 24px; right: 24px; }
+.test-width-32 { left: 32px; right: 32px; }
+.test-width-40 { left: 40px; right: 40px; }
+
+.test-floating-menu ul {
+  display: flex;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  justify-content: space-around;
+}
+
+.test-floating-menu li {
+  flex: 0 1 auto;
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.test-floating-menu a {
+  color: #fff;
+  text-decoration: none;
+  padding: 0;
+  white-space: nowrap;
+}
+
+.debug-info {
+  background: rgba(255,255,255,0.1);
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+</style>
+</head>
+<body>
+
+<h1>尺寸對齊測試</h1>
+
+<!-- 測試不同寬度的浮動選單 -->
+<div class="test-floating-menu test-width-16">
+  <ul>
+    <li><a href="#">講師陣容</a></li>
+    <li><a href="#">活動介紹</a></li>
+    <li><a href="#">活動議程</a></li>
+    <li><a href="#">精彩回顧</a></li>
+  </ul>
+</div>
+
+<div style="margin-top: 80px;">
+  <div class="test-container">
+    <div class="debug-info">
+      <strong>容器資訊：</strong><br>
+      .test-container padding: 0 16px<br>
+      實際內容寬度 = 螢幕寬度 - 32px
+    </div>
+    
+    <div class="test-bio-card">
+      <strong>測試 Bio Card：</strong><br>
+      這是模擬的講者介紹框，應該與上方浮動選單寬度完全一致。<br>
+      Padding: 14px, Border: 1px, Box-sizing: border-box
+    </div>
+    
+    <div class="debug-info">
+      請使用瀏覽器開發者工具測量：<br>
+      1. Bio card 的實際寬度<br>
+      2. 浮動選單的實際寬度<br>
+      3. 調整上方浮動選單的 class (test-width-16/24/32/40) 來測試
+    </div>
+  </div>
+</div>
+
+<script>
+// 顯示實際尺寸資訊
+window.addEventListener('load', function() {
+  const bioCard = document.querySelector('.test-bio-card');
+  const floatingMenu = document.querySelector('.test-floating-menu');
+  
+  console.log('Bio Card 寬度:', bioCard.offsetWidth);
+  console.log('浮動選單寬度:', floatingMenu.offsetWidth);
+  console.log('視窗寬度:', window.innerWidth);
+});
+</script>
+
+</body>
+</html>
