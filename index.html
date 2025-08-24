@@ -178,15 +178,23 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 .topic-rows{
   margin-top:18px; margin-bottom:clamp(28px, 4vw, 56px);
   display:grid; gap:12px;
-  width:max-content; max-width:100%;
-  margin-left:auto; margin-right:auto;
-  text-align:left; justify-items:start;
+  /* 強制居中的更穩定方法 */
+  width:fit-content; 
+  max-width:100%;
+  margin-left:auto !important; 
+  margin-right:auto !important; 
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%); /* 強制居中 */
+  text-align:left; 
+  justify-items:start; /* 時間地點兩行內部左對齊 */
 }
 .topic-row{
   display:grid; grid-template-columns:auto 1fr;
   align-items:center; column-gap:10px;
   width:max-content; text-align:left;
   font-size:clamp(20px, 1.8vw, 30px);
+  /* 移除 justify-self，讓時間地點兩行保持左對齊 */
 }
 .topic-row .pill{
   min-width:64px; height:48px; padding:0 14px;
@@ -198,14 +206,30 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   font-size: inherit;
 }
 .topic-row > div:last-child{
-  min-width:0; display:flex; align-items:center; flex-wrap:wrap; gap:.5em;
+  min-width:0; display:flex; align-items:center; 
+  flex-wrap:wrap; gap:.5em;
   min-height:48px; line-height:1.8; overflow-wrap:anywhere; text-align:left;
 }
+
+/* 地點區域特殊處理 - 確保線上同步緊跟在會議室後 */
+.place {
+  display:flex; align-items:center; flex-wrap:wrap; gap:.5em;
+  /* 讓地點文字可以斷行，但按鈕不會被分離 */
+  word-break: break-word; 
+}
+.place .hl{
 .place .hl{
   display:inline-flex; align-items:center; border-radius:999px;
   background:rgba(255,255,255,.25); color:#fff; line-height:1;
   margin-left:.6em; font-weight:500;
-  font-size:clamp(14px, 1.25vw, 20px); padding:6px 16px; vertical-align:middle; white-space:nowrap;
+  font-size:clamp(14px, 1.25vw, 20px); padding:6px 16px; vertical-align:middle; 
+  white-space:nowrap;
+  /* 確保按鈕緊跟在會議室後面，永不分離 */
+  flex-shrink: 0; /* 防止按鈕被壓縮 */
+  /* 使用 CSS 確保不會被換行分離 */
+  display: inline-block; /* 改為 inline-block 以更好地控制換行 */
+  vertical-align: middle;
+}
 }
 
 /* ===== 講者 ===== */
@@ -217,7 +241,33 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   box-shadow:0 8px 24px rgba(0,0,0,.25); background:#0b0c0f;
 }
 .speaker .name{ font-size:1.6rem; font-weight:500; margin:0 0 10px }
-.speaker .title-chip{ display:block; padding:0; border-radius:0; background:transparent; color:#cfd6e6; font-weight:500; font-size:1rem; margin-top:8px; }
+.speaker .title-chip{ 
+  display: flex !important; /* 覆蓋 -webkit-box，優先使用 flex */
+  padding:0; 
+  border-radius:0; 
+  background:transparent; 
+  color:#cfd6e6; 
+  font-weight:500; 
+  font-size:1rem; 
+  margin-top:2px; /* 縮短人名與職稱間的距離，從 8px 改為 2px */
+  /* 職稱區域統一高度 */
+  height: 48px; /* 固定高度，可容納2行職稱 */
+  line-height: 1.2;
+  text-align: center; /* 水平置中 */
+  /* 文字溢出處理 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* 多行文字截斷 */
+  -webkit-line-clamp: 2; /* 最多顯示2行 */
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  /* 垂直置中 - 使用 flex 來實現完美的垂直居中 */
+  box-sizing: border-box;
+  align-items: center; /* 垂直置中 */
+  justify-content: center; /* 水平置中 */
+  /* 多行文字在 flex 中的處理 */
+  word-break: break-word;
+}
 
 .speaker .bio{ display:none; }
 .bio-card{
@@ -227,15 +277,32 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   color:#cfd6e6;
-  padding:12px 14px;
+  padding:14px;
   border-radius:12px;
   font-size:0.95rem;
   line-height:1.6;
   max-width:360px;
   margin-left:auto; margin-right:auto;
+  /* 統一高度解決方案 */
+  min-height: 120px; /* 設定最小高度 */
+  height: 120px; /* 固定高度 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 內容垂直置中 */
 }
 
-.bio-card .bio-desc{ color:inherit; font-size:0.95rem; line-height:1.6; }
+.bio-card .bio-desc{ 
+  color:inherit; 
+  font-size:0.95rem; 
+  line-height:1.6; 
+  /* 文字溢出處理 */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* 限制最多4行 */
+  line-clamp: 4; /* 標準屬性 */
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+}
 .meta{ display:flex; flex-direction:column; gap:6px; }
 .meta .name{ margin:0; }
 
@@ -385,6 +452,9 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
     padding:14px;
     text-align:left;
     box-sizing:border-box; /* 確保padding不會造成溢出 */
+    /* 確保與floating-tab-bar相同的視覺寬度 */
+    margin-left:0;
+    margin-right:0;
   }
   
   .speaker-pager{ display:none; }
@@ -487,23 +557,23 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   z-index: 9999;
   display: none;
   background: var(--glass-bg, rgba(255,255,255,.08));
-  border: 1.5px solid var(--glass-bd, rgba(255,255,255,.18));
+  border: 1px solid var(--glass-bd, rgba(255,255,255,.18));
   box-shadow: 0 8px 32px rgba(0,0,0,.22);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   border-radius: 18px;
-  padding: 12px 20px; /* 減少左右padding */
+  padding: 12px 32px; /* 增加左右padding讓選單變長 */
   transform: translateY(-10px);
   opacity: 0;
   transition: transform .28s ease, opacity .28s ease;
   will-change: transform, opacity;
-  max-width: 360px; /* 與bio-card完全相同的寬度 */
+  max-width: 420px; /* 增加最大寬度讓選單可以更長 */
   width: auto;
 }
 
 .floating-tab-bar ul {
   display: flex;
-  gap: 20px; /* 減少項目間距 */
+  gap: 28px; /* 增加項目間距讓選單變長 */
   margin: 0;
   padding: 0;
   list-style: none;
@@ -511,29 +581,32 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   width: 100%;
 }
 .floating-tab-bar li {
-  font-size: 1rem; /* 稍微縮小字體 */
-  font-weight: 500;
+  font-size: 0.95rem; /* 稍微縮小字體 */
+  font-weight: 400; /* 減少字體粗細 */
   color: #fff;
-  letter-spacing: .03em;
+  letter-spacing: 0; /* 移除字母間距 */
   flex: 1; /* 讓每個項目等寬 */
   text-align: center; /* 置中對齊 */
+  line-height: 1.2; /* 緊縮行高 */
 }
 .floating-tab-bar a {
   color: #fff;
   text-decoration: none;
-  padding: 4px 0;
+  padding: 2px 0; /* 減少垂直間距 */
   border-radius: 6px;
   transition: background .2s, color .2s;
   -webkit-tap-highlight-color: transparent;
   user-select: none;
+  display: block;
+  white-space: nowrap; /* 防止換行 */
 }
 .floating-tab-bar a:hover {
-  background: transparent;
+  background: rgba(255,255,255,0.15); /* 添加選取時的底框效果 */
   color: #fff;
 }
 .floating-tab-bar a:active,
 .floating-tab-bar a:focus{
-  background: transparent;
+  background: rgba(255,255,255,0.2); /* 更明顯的選取效果 */
   color: #fff;
   outline: none;
 }
@@ -541,32 +614,66 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 @media (max-width: 768px) {
   .floating-tab-bar {
     top: 12px;
-    left: 16px; /* 直接對齊.inner的padding */
-    right: 16px; /* 直接對齊.inner的padding */
-    transform: translateY(-10px); /* 只保留垂直偏移 */
-    width: auto; /* 讓寬度自動適應left/right */
-    max-width: none; /* 移除最大寬度限制 */
-    min-width: auto; /* 移除最小寬度限制 */
-    padding: 8px 14px; /* 與bio-card相同的padding */
+    left: 20px; /* 根據測量數據精確調整 */
+    right: 20px; /* 根據測量數據精確調整 */
+    transform: translateY(-10px);
+    width: auto;
+    max-width: none;
+    min-width: auto;
+    background: var(--glass-bg, rgba(255,255,255,.08));
+    border: 1px solid var(--glass-bd, rgba(255,255,255,.18));
+    box-shadow: 0 8px 32px rgba(0,0,0,.22);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    padding: 12px 16px;
     border-radius: 12px;
-    box-sizing: border-box; /* 確保padding計算正確 */
+    box-sizing: border-box;
   }
   .floating-tab-bar ul {
-    gap: 16px; /* 減少間距 */
+    gap: 12px; /* 恢復合理間距 */
     display:flex;
     width:100%;
     align-items:center;
-    justify-content: space-between;
+    justify-content: space-between; /* 恢復原始分布 */
+    margin: 0;
+    padding: 0;
   }
   .floating-tab-bar li {
-    flex: 1 1 0;
+    flex: 1 1 0; /* 恢復等寬分布 */
     min-width: 0;
     text-align: center;
-    font-size: 0.9rem; /* 手機版字體稍小 */
+    font-size: 0.9rem; /* 恢復合理字體大小 */
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.2;
   }
   .floating-tab-bar a {
     display:block;
-    padding:6px 4px; /* 調整內距 */
+    padding:4px 6px; /* 恢復合理內距 */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px; /* 保留圓角但不要 overflow hidden */
+    transition: background .2s, color .2s;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    white-space: nowrap;
+    /* 移除會切割文字的 overflow: hidden */
+  }
+}
+
+@media (max-width: 480px) {
+  .floating-tab-bar {
+    /* 基於 768px 測量結果調整 */
+    left: 20px; /* 先嘗試相同數值 */
+    right: 20px; /* 先嘗試相同數值 */
+    background: var(--glass-bg, rgba(255,255,255,.08));
+    border: 1px solid var(--glass-bd, rgba(255,255,255,.18));
+    box-shadow: 0 8px 32px rgba(0,0,0,.22);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    padding: 12px 16px;
+    border-radius: 12px;
+    box-sizing: border-box;
   }
 }
 </style>
@@ -1085,9 +1192,40 @@ function updateFloatingOffset() {
   document.documentElement.style.setProperty('--floating-offset', offset + 'px');
 }
 
+// 尺寸對齊測量工具 - 開發用
+function measureAlignment() {
+  const bioCards = document.querySelectorAll('.bio-card');
+  const floatingMenu = document.querySelector('.floating-tab-bar');
+  
+  if (bioCards.length > 0 && floatingMenu) {
+    const bioCard = bioCards[0];
+    console.log('=== 尺寸對齊測量 ===');
+    console.log('視窗寬度:', window.innerWidth);
+    console.log('Bio Card 寬度:', bioCard.offsetWidth);
+    console.log('Bio Card Left:', bioCard.getBoundingClientRect().left);
+    console.log('Bio Card Right:', bioCard.getBoundingClientRect().right);
+    console.log('浮動選單寬度:', floatingMenu.offsetWidth);
+    console.log('浮動選單 Left:', floatingMenu.getBoundingClientRect().left);
+    console.log('浮動選單 Right:', floatingMenu.getBoundingClientRect().right);
+    console.log('寬度差異:', Math.abs(bioCard.offsetWidth - floatingMenu.offsetWidth));
+    console.log('左邊距差異:', Math.abs(bioCard.getBoundingClientRect().left - floatingMenu.getBoundingClientRect().left));
+    
+    // 計算理想的 left/right 值
+    const bioRect = bioCard.getBoundingClientRect();
+    const idealLeft = bioRect.left;
+    const idealRight = window.innerWidth - bioRect.right;
+    console.log('建議的 CSS 設定:');
+    console.log(`left: ${idealLeft}px; right: ${idealRight}px;`);
+  }
+}
+
 updateFloatingOffset();
 window.addEventListener('resize', updateFloatingOffset);
 document.addEventListener('DOMContentLoaded', updateFloatingOffset);
+
+// 添加測量功能
+window.addEventListener('load', measureAlignment);
+window.addEventListener('resize', measureAlignment);
 
 let _resizeTimer = null;
 window.addEventListener('resize', ()=>{
