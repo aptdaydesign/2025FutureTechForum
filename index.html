@@ -1069,7 +1069,8 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
     gap: 8px; /* 手機版稍微縮小間距 */
     opacity: 0;
     visibility: hidden;
-    transition: opacity .25s ease, visibility .25s ease, transform .25s ease;
+    pointer-events: none; /* 隱藏時不可點擊 */
+    transition: opacity .25s ease, visibility .25s ease, transform .25s ease, pointer-events .25s ease;
     background: transparent;
     border: none;
     border-radius: 0;
@@ -1081,6 +1082,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   .share-container:hover .share-menu {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto; /* 顯示時可點擊 */
     transform: translateY(0);
   }
   
@@ -1095,12 +1097,14 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
     border-radius: 0;
     text-decoration: none;
     opacity: 0;
+    pointer-events: none; /* 隱藏時不可點擊 */
     transform: translateY(10px) scale(0.8);
-    transition: all .3s ease, opacity .4s ease, transform .4s ease;
+    transition: all .3s ease, opacity .4s ease, transform .4s ease, pointer-events .4s ease;
   }
   
   .share-container:hover .share-item {
     opacity: 1;
+    pointer-events: auto; /* 顯示時可點擊 */
     transform: translateY(0) scale(1);
   }
   
@@ -1739,7 +1743,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
     border-radius: 9px;
     overflow: hidden;
     position: relative;
-    transform: translateX(12px); /* 與主按鈕對齊 */
+    transform: translateX(12px) !important; /* 與主按鈕對齊，強制覆蓋 */
   }
   
   .download-btn {
@@ -1748,7 +1752,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
     border-radius: 9px;
     overflow: hidden;
     position: relative;
-    transform: translateX(12px); /* 與主按鈕對齊 */
+    transform: translateX(12px) !important; /* 與主按鈕對齊，強制覆蓋 */
   }
   
   .scroll-top-btn::before {
@@ -3022,27 +3026,28 @@ document.addEventListener('DOMContentLoaded', function() {
       e.preventDefault();
       e.stopPropagation();
       
-      // 防止按鈕位移
-      this.style.transform = 'none';
-      
       if (window.innerWidth <= 768) {
         isMenuOpen = !isMenuOpen;
         if (isMenuOpen) {
           shareMenu.style.opacity = '1';
           shareMenu.style.visibility = 'visible';
+          shareMenu.style.pointerEvents = 'auto';
           shareMenu.style.transform = 'translateY(0)';
           // 顯示所有分享項目
           shareItems.forEach(item => {
             item.style.opacity = '1';
+            item.style.pointerEvents = 'auto';
             item.style.transform = 'translateY(0) scale(1)';
           });
         } else {
           shareMenu.style.opacity = '0';
           shareMenu.style.visibility = 'hidden';
+          shareMenu.style.pointerEvents = 'none';
           shareMenu.style.transform = 'translateY(-10px)';
           // 隱藏所有分享項目
           shareItems.forEach(item => {
             item.style.opacity = '0';
+            item.style.pointerEvents = 'none';
             item.style.transform = 'translateY(10px) scale(0.8)';
           });
         }
@@ -3056,9 +3061,11 @@ document.addEventListener('DOMContentLoaded', function() {
           isMenuOpen = false;
           shareMenu.style.opacity = '0';
           shareMenu.style.visibility = 'hidden';
+          shareMenu.style.pointerEvents = 'none';
           shareMenu.style.transform = 'translateY(-10px)';
           shareItems.forEach(item => {
             item.style.opacity = '0';
+            item.style.pointerEvents = 'none';
             item.style.transform = 'translateY(10px) scale(0.8)';
           });
         }
@@ -3092,9 +3099,11 @@ document.addEventListener('DOMContentLoaded', function() {
           isMenuOpen = false;
           shareMenu.style.opacity = '0';
           shareMenu.style.visibility = 'hidden';
+          shareMenu.style.pointerEvents = 'none';
           shareMenu.style.transform = 'translateY(-10px)';
           shareItems.forEach(item => {
             item.style.opacity = '0';
+            item.style.pointerEvents = 'none';
             item.style.transform = 'translateY(10px) scale(0.8)';
           });
         }
@@ -3114,21 +3123,49 @@ document.addEventListener('DOMContentLoaded', function() {
     floatingBtn.classList.add('show');
   }
   
+  // 確保手機版按鈕正確定位
+  function ensureMobileButtonPosition() {
+    if (window.innerWidth <= 768) {
+      [downloadBtn, scrollTopBtn].forEach(btn => {
+        if (btn) {
+          btn.style.transform = 'translateX(12px)';
+        }
+      });
+    } else {
+      [downloadBtn, scrollTopBtn].forEach(btn => {
+        if (btn) {
+          btn.style.transform = 'none';
+        }
+      });
+    }
+  }
+  
+  // 初始化按鈕位置
+  ensureMobileButtonPosition();
+  
+  // 視窗大小改變時重新調整
+  window.addEventListener('resize', ensureMobileButtonPosition);
+  
   // 防止按鈕點擊時位移 (手機版)
   [downloadBtn, scrollTopBtn].forEach(btn => {
     if (btn) {
       btn.addEventListener('touchstart', function(e) {
-        e.preventDefault();
-        this.style.transform = window.innerWidth <= 768 ? 'translateX(12px)' : 'none';
+        if (window.innerWidth <= 768) {
+          this.style.transform = 'translateX(12px)';
+        }
       });
       
       btn.addEventListener('touchend', function(e) {
-        this.style.transform = window.innerWidth <= 768 ? 'translateX(12px)' : 'none';
+        if (window.innerWidth <= 768) {
+          this.style.transform = 'translateX(12px)';
+        }
       });
       
       btn.addEventListener('click', function(e) {
         e.preventDefault();
-        this.style.transform = window.innerWidth <= 768 ? 'translateX(12px)' : 'none';
+        if (window.innerWidth <= 768) {
+          this.style.transform = 'translateX(12px)';
+        }
       });
     }
   });
