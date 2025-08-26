@@ -351,7 +351,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 /* carousel: sliding pages and pager styles */
 .speakers-carousel{ position:relative; max-width:1200px; margin:0 auto; overflow:hidden; }
 .speaker-pages{ display:flex; width:100%; transition:transform .6s cubic-bezier(.2,.9,.2,1); will-change:transform; }
-.speaker-page{ flex:0 0 100%; box-sizing:border-box; padding:0 12px; }
+.speaker-page{ flex:0 0 100%; box-sizing:border-box; padding:0; } /* 移除padding，讓講師區域與其他內容對齊 */
 
 .speaker-pager{ display:flex; gap:12px; justify-content:center; margin-top:22px; }
 .pager-dot{ width:14px; height:8px; background:rgba(255,255,255,.22); border-radius:8px; border:none; cursor:pointer; padding:0; }
@@ -362,7 +362,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 /* Footer（與議程同色，滿版；無頂部分隔線） */
 .sponsor-footer{
   background:#112240;
-  padding:28px 0 44px;
+  padding:60px 0 44px; /* 增加上方間距 */
   border-top:none;
   box-shadow:none;
 }
@@ -374,7 +374,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 .sponsor-footer .inner{
   max-width:1200px;
   margin:0 auto;
-  padding:0 20px;
+  padding:0 32px; /* 調整為與其他區域一致的32px */
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:40px;
@@ -436,11 +436,17 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 
   /* 活動區內容向上靠近 */
   .event-info{ padding-top:12px; }
+  .event-info .inner{ padding:0 20px; } /* 手機版調整為與浮動選單一致 */
+  .event-info h2:not(:first-of-type) { margin-top: clamp(40px, 8vw, 60px); } /* 增加段落間距 */
   .topic-wrap{ margin:8px auto 12px; }
   .topic-badge{ margin-top:12px; }
   .topic-badge .topic-en{ margin-top:4px }
 
   /* 日期選單 */
+  .event-bar {
+    left: 20px; /* 手機版調整為與浮動選單一致 */
+    right: 20px; /* 手機版調整為與浮動選單一致 */
+  }
   .event-bar .bar{
     grid-template-columns:repeat(2, minmax(0, 1fr));
     gap:clamp(8px, 2.2vw, 16px);
@@ -449,7 +455,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   /* 講者區域 */
   .speakers-carousel{ overflow:visible; }
   .speaker-pages{ display:block; transform:none; }
-  .speaker-page{ flex:0 0 auto; width:100%; padding:0; margin-bottom:18px; }
+  .speaker-page{ flex:0 0 auto; width:100%; padding:0; margin-bottom:18px; } /* 移除padding以符合統一間距 */
   .speaker-grid{ display:block; gap:12px; }
   
   .speaker{
@@ -517,8 +523,9 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   .inner{ padding-left:16px; padding-right:16px; }
   
   /* Footer */
-  .sponsor-footer .inner{ grid-template-columns:1fr; gap:22px; }
-  .sponsor-block{ flex-direction:column; gap:10px; text-align:center; }
+  .sponsor-footer { padding: 40px 0 50px; } /* 調整上下間距 */
+  .sponsor-footer .inner{ grid-template-columns:1fr; gap:40px; padding:0 20px; } /* 增加gap並統一padding */
+  .sponsor-block{ flex-direction:column; gap:20px; text-align:center; } /* 增加內部間距 */
   .sponsor-logo{ height:40px; }
 }
 
@@ -588,7 +595,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   }
   .bio-card .bio-desc{ color: #cfd6e6; text-align:left; }
 
-  .speaker-page{ padding:0 8px; }
+  .speaker-page{ padding:0; } /* 移除padding以符合統一間距 */
   .pager-dot{ width:12px; height:8px; }
   .pager-dot[aria-current="true"]{ width:26px; }
   
@@ -934,6 +941,34 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   background: rgba(255,255,255,0.15);
 }
 
+/* 開啟狀態 = 跟 hover 同一套樣式 */
+.floating-share.is-open .share-trigger {
+  border-color: rgba(255,255,255,0.3);
+  box-shadow: 0 12px 40px rgba(0,0,0,.3);
+}
+.floating-share.is-open .share-trigger::before {
+  background: rgba(255,255,255,0.15);
+}
+
+/* 展開的選單與項目 */
+.floating-share.is-open .share-menu{
+  opacity:1; visibility:visible; pointer-events:auto; transform:translateY(0);
+}
+.floating-share.is-open .share-item{
+  opacity:1; pointer-events:auto; transform:translateY(0) scale(1);
+}
+
+/* 觸控裝置不要殘留 hover 效果 */
+@media (hover:none) {
+  .share-trigger:hover { 
+    border-color: var(--glass-bd, rgba(255,255,255,.18)); 
+    box-shadow: 0 8px 32px rgba(0,0,0,.22); 
+  }
+  .share-trigger:hover::before {
+    background: var(--glass-bg, rgba(255,255,255,.08));
+  }
+}
+
 .share-trigger img {
   width: 48px;
   height: 48px;
@@ -1216,14 +1251,15 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 /* ===== 議程表格樣式 ===== */
 .schedule-table {
   width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
+  max-width: none;
+  margin: 0;
   border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(10px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
 }
 
 .schedule-header {
@@ -1345,7 +1381,8 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   
   .schedule-table {
     border-radius: 8px;
-    margin: 0 -4px;
+    margin: 0; /* 移除偏移，讓它對齊左右間距 */
+    border-width: 1px; /* 減少邊框寬度避免右側偏移 */
   }
   
   .schedule-header {
@@ -1378,7 +1415,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 
 @media (max-width: 480px) {
   .schedule-table {
-    margin: 0 -8px;
+    margin: 0;
     border-radius: 6px;
   }
   
@@ -1592,7 +1629,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: background .3s, border-color .3s, transform .3s, box-shadow .3s;
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   box-shadow: 0 8px 32px rgba(0,0,0,.22);
@@ -1613,7 +1650,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: background .3s, border-color .3s, transform .3s, box-shadow .3s;
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   box-shadow: 0 8px 32px rgba(0,0,0,.22);
@@ -1646,6 +1683,18 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   box-shadow: 0 12px 40px rgba(0,0,0,.3);
 }
 
+/* 按住時的瞬間變色（不套任何 transition） */
+.download-btn.pressed, .scroll-top-btn.pressed{
+  opacity:.6;
+  transition: none;
+}
+
+/* 分享按鈕按住時的瞬間變色 */
+.share-trigger.pressed {
+  opacity:.6;
+  transition: none;
+}
+
 /* 移除不再需要的偽元素動畫 */
 .download-btn:hover img {
   transform: scale(1.1);
@@ -1672,8 +1721,8 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 @media (hover: none) and (pointer: coarse) {
   .scroll-top-btn:hover,
   .download-btn:hover {
-    background: rgba(255,255,255,.08);
-    border-color: rgba(255,255,255,.18);
+    background: var(--glass-bg, rgba(255,255,255,.08));
+    border-color: var(--glass-bd, rgba(255,255,255,.18));
     transform: none !important; /* 移除向上移動效果 */
     box-shadow: 0 8px 32px rgba(0,0,0,.22);
   }
@@ -1727,21 +1776,6 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   .scroll-top-btn .icon {
     width: 28px;
     height: 28px;
-  }
-  
-  /* 按鈕點擊時的狀態控制 */
-  .btn-clicked {
-    opacity: 0.6 !important;
-    transition: opacity 0.2s ease;
-  }
-  
-  /* 單次播放（手機點擊用） */
-  .btn-animate-download::after {
-    animation: downloadLoop 1.2s ease-in-out 1 !important;
-  }
-  
-  .btn-animate-scroll::before {
-    animation: arrowLoop 1.2s ease-in-out 1 !important;
   }
 }
 </style>
@@ -2974,70 +3008,52 @@ document.addEventListener('DOMContentLoaded', initLanguageToggle);
 
 /* 分享功能 */
 document.addEventListener('DOMContentLoaded', function() {
-  // 分享連結功能
-  const shareItems = document.querySelectorAll('.share-item');
-  const shareContainer = document.querySelector('.share-container');
-  const shareMenu = document.querySelector('.share-menu');
-  const shareTrigger = document.querySelector('.share-trigger');
-  
-  const currentUrl = window.location.href;
-  const title = document.title || '前瞻科技系列論壇';
-  
-  // 手機版觸控處理
-  let isMenuOpen = false;
-  
-  if (shareTrigger && shareMenu) {
-    // 點擊分享按鈕切換選單
-    shareTrigger.addEventListener('click', function(e) {
+  const floatingShare = document.getElementById('floatingShare');
+  const shareTrigger = floatingShare?.querySelector('.share-trigger');
+  const shareContainer = floatingShare?.querySelector('.share-container');
+
+  let open = false;
+  function setOpen(v){
+    open = v;
+    floatingShare.classList.toggle('is-open', open);
+  }
+
+  // 添加按壓回饋效果
+  function bindPress(btn, onClick){
+    let pressT = null;
+    const press = () => {
+      btn.classList.add('pressed');
+      if (pressT) clearTimeout(pressT);
+      // 150ms 後自動恢復顏色
+      pressT = setTimeout(()=> btn.classList.remove('pressed'), 150);
+    };
+
+    btn.addEventListener('pointerdown', press);
+    btn.addEventListener('pointerup',   () => setTimeout(()=>btn.classList.remove('pressed'), 150));
+    btn.addEventListener('pointercancel',() => btn.classList.remove('pressed'));
+    btn.addEventListener('mouseleave',  () => btn.classList.remove('pressed'));
+    btn.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      
-      if (window.innerWidth <= 768) {
-        isMenuOpen = !isMenuOpen;
-        if (isMenuOpen) {
-          shareMenu.style.opacity = '1';
-          shareMenu.style.visibility = 'visible';
-          shareMenu.style.pointerEvents = 'auto';
-          shareMenu.style.transform = 'translateY(0)';
-          // 顯示所有分享項目
-          shareItems.forEach(item => {
-            item.style.opacity = '1';
-            item.style.pointerEvents = 'auto';
-            item.style.transform = 'translateY(0) scale(1)';
-          });
-        } else {
-          shareMenu.style.opacity = '0';
-          shareMenu.style.visibility = 'hidden';
-          shareMenu.style.pointerEvents = 'none';
-          shareMenu.style.transform = 'translateY(-10px)';
-          // 隱藏所有分享項目
-          shareItems.forEach(item => {
-            item.style.opacity = '0';
-            item.style.pointerEvents = 'none';
-            item.style.transform = 'translateY(10px) scale(0.8)';
-          });
-        }
-      }
-    });
-    
-    // 點擊外部關閉選單 (僅手機版)
-    document.addEventListener('click', function(e) {
-      if (window.innerWidth <= 768 && isMenuOpen) {
-        if (!shareContainer.contains(e.target)) {
-          isMenuOpen = false;
-          shareMenu.style.opacity = '0';
-          shareMenu.style.visibility = 'hidden';
-          shareMenu.style.pointerEvents = 'none';
-          shareMenu.style.transform = 'translateY(-10px)';
-          shareItems.forEach(item => {
-            item.style.opacity = '0';
-            item.style.pointerEvents = 'none';
-            item.style.transform = 'translateY(10px) scale(0.8)';
-          });
-        }
-      }
-    });
+      press();               // 點擊當下也給一次按壓回饋
+      onClick?.();           // 執行原本功能
+    }, {passive:false});
   }
+
+  // 綁定分享按鈕的按壓效果
+  bindPress(shareTrigger, () => {
+    setOpen(!open);
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!open) return;
+    if (!shareContainer.contains(e.target)) setOpen(false);
+  });
+  
+  // 分享連結功能
+  const shareItems = document.querySelectorAll('.share-item');
+  const currentUrl = window.location.href;
+  const title = document.title || '前瞻科技系列論壇';
   
   // 分享連結點擊處理
   shareItems.forEach(item => {
@@ -3114,54 +3130,45 @@ document.addEventListener('DOMContentLoaded', function() {
   // 視窗大小改變時重新調整
   window.addEventListener('resize', ensureMobileButtonPosition);
   
-  // 防止按鈕點擊時位移 並添加動畫控制
-  [downloadBtn, scrollTopBtn].forEach(btn => {
-    if (btn) {
-      btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        // 點擊動畫和透明度控制
-        const isDownloadBtn = this.classList.contains('download-btn');
-        const isScrollBtn = this.classList.contains('scroll-top-btn');
-        
-        if (isDownloadBtn || isScrollBtn) {
-          // 使用更穩定的動畫播放機制
-          function playOnce(el, playClass) {
-            // 清掉舊狀態
-            el.classList.remove('btn-clicked', 'btn-animate-download', 'btn-animate-scroll');
-            // 立即給點擊色
-            el.classList.add('btn-clicked');
-            // 觸發單次動畫
-            el.classList.add(playClass);
+  function bindPress(btn, onClick){
+    let pressT = null;
+    const press = () => {
+      btn.classList.add('pressed');
+      if (pressT) clearTimeout(pressT);
+      // 150ms 後自動恢復顏色（不依賴 animationend）
+      pressT = setTimeout(()=> btn.classList.remove('pressed'), 150);
+    };
 
-            // 動畫結束就把暫時用的 class 清掉
-            const onAnimEnd = () => {
-              el.classList.remove('btn-clicked', playClass);
-              el.removeEventListener('animationend', onAnimEnd, true);
-            };
-            el.addEventListener('animationend', onAnimEnd, true);
-          }
-          
-          // 執行對應的動畫和功能
-          if (isDownloadBtn) {
-            playOnce(this, 'btn-animate-download');
-            
-            // 下載功能
-            const link = document.createElement('a');
-            link.href = 'data:text/plain;charset=utf-8,前瞻科技系列論壇議程資訊%0A%0A此為示範文件';
-            link.download = '前瞻科技論壇議程.txt';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-          } else if (isScrollBtn) {
-            playOnce(this, 'btn-animate-scroll');
-            
-            // 回到頂部功能
-            window.scrollTo({top: 0, behavior: 'smooth'});
-          }
-        }
-      });
-    }
+    btn.addEventListener('pointerdown', press);
+    btn.addEventListener('pointerup',   () => setTimeout(()=>btn.classList.remove('pressed'), 150));
+    btn.addEventListener('pointercancel',() => btn.classList.remove('pressed'));
+    btn.addEventListener('mouseleave',  () => btn.classList.remove('pressed'));
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      press();               // 點擊當下也給一次按壓回饋
+      onClick?.();           // 執行原本功能
+    }, {passive:false});
+  }
+
+  bindPress(downloadBtn, () => {
+    // 下載：保留你原本的下載動作（或改成真正檔案）
+    const link = document.createElement('a');
+    link.href = 'data:text/plain;charset=utf-8,前瞻科技系列論壇議程資訊%0A%0A此為示範文件';
+    link.download = '前瞻科技論壇議程.txt';
+    document.body.appendChild(link); link.click(); document.body.removeChild(link);
+
+    // 如果仍要顯示「下載箭頭」動畫，請：
+    // 1) 把動畫定義在按鈕本體 `.download-btn.animate`
+    // 2) 這裡用強制重排重新播放一次
+    downloadBtn.classList.remove('animate'); void downloadBtn.offsetWidth; downloadBtn.classList.add('animate');
+    setTimeout(()=> downloadBtn.classList.remove('animate'), 1200); // 以 timeout 作為保險
+  });
+
+  bindPress(scrollTopBtn, () => {
+    window.scrollTo({top:0, behavior:'smooth'});
+    // 回頂箭頭若要動畫，同上：
+    scrollTopBtn.classList.remove('animate'); void scrollTopBtn.offsetWidth; scrollTopBtn.classList.add('animate');
+    setTimeout(()=> scrollTopBtn.classList.remove('animate'), 1200);
   });
   
   // 更新報名連結
