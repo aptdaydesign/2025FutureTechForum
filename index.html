@@ -1749,7 +1749,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   .button__finger {
     width: 40px; /* 固定px取代45%，避免小數尺寸 */
     height: 40px;
-    animation: none; /* 移除counterRotate，避免多層旋轉合成問題 */
+    animation: counterRotate 20s linear infinite; /* 反向旋轉抵消父元素旋轉 */
     image-rendering: auto; /* 移除crisp-edges，對SVG反而容易怪 */
   }
   
@@ -1802,7 +1802,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
       </p>
 
       <div class="button__circle">
-        <img src="assets/img/svg_finger.svg" alt="" class="button__finger">
+        <img src="assets/img/finger.png" alt="" class="button__finger">
       </div>
     </a>
   </button>
