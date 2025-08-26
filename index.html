@@ -1757,7 +1757,10 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   
   .scroll-top-btn::before {
     font-size: 18px; /* 調整為適合50px容器的大小 */
-    transform: rotate(-90deg); /* 確保箭頭方向正確 */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-90deg); /* 置中並確保箭頭方向正確 */
   }
   
   .scroll-top-btn:hover {
@@ -1771,17 +1774,34 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   .download-btn::after {
     top: 8px; /* 調整位置，縮小上下距離 */
     font-size: 18px; /* 調整為適合50px容器的大小 */
-    transform: translateX(-50%) rotate(90deg); /* 確保箭頭方向正確 */
+    left: 50%;
+    transform: translateX(-50%) rotate(90deg); /* 確保箭頭方向正確並水平置中 */
   }
   
   .download-btn::before {
     width: 16px;
     height: 5px;
     bottom: 12px; /* 調整位置，縮小上下距離 */
+    left: 50%;
+    transform: translateX(-50%); /* 水平置中 */
     border-width: 2px;
     border-color: white;
     border-top: none;
     border-radius: 0 0 2px 2px;
+  }
+  
+  /* 按鈕點擊時的狀態控制 */
+  .btn-clicked {
+    opacity: 0.6 !important;
+    transition: opacity 0.2s ease;
+  }
+  
+  .btn-animate-download::after {
+    animation: downloadLoop 1.8s ease-in-out 1;
+  }
+  
+  .btn-animate-scroll::before {
+    animation: arrowLoop 1.8s ease-in-out 1;
   }
 }
 </style>
@@ -3146,7 +3166,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // 視窗大小改變時重新調整
   window.addEventListener('resize', ensureMobileButtonPosition);
   
-  // 防止按鈕點擊時位移 (手機版)
+  // 防止按鈕點擊時位移 並添加動畫控制
   [downloadBtn, scrollTopBtn].forEach(btn => {
     if (btn) {
       btn.addEventListener('touchstart', function(e) {
@@ -3166,23 +3186,59 @@ document.addEventListener('DOMContentLoaded', function() {
         if (window.innerWidth <= 768) {
           this.style.marginLeft = '12px';
         }
+        
+        // 點擊動畫和透明度控制
+        const isDownloadBtn = this.classList.contains('download-btn');
+        const isScrollBtn = this.classList.contains('scroll-top-btn');
+        
+        if (isDownloadBtn || isScrollBtn) {
+          // 先清理任何現有的動畫狀態
+          this.classList.remove('btn-clicked', 'btn-animate-download', 'btn-animate-scroll');
+          
+          // 強制重排，確保之前的狀態被清除
+          this.offsetHeight;
+          
+          // 1. 立即改變透明度
+          this.classList.add('btn-clicked');
+          
+          // 2. 添加對應的動畫類
+          if (isDownloadBtn) {
+            this.classList.add('btn-animate-download');
+          } else if (isScrollBtn) {
+            this.classList.add('btn-animate-scroll');
+          }
+          
+          // 3. 使用requestAnimationFrame確保動畫開始後再設置清理
+          requestAnimationFrame(() => {
+            // 1.8秒後復原透明度並停止動畫
+            setTimeout(() => {
+              this.classList.remove('btn-clicked');
+              this.classList.remove('btn-animate-download');
+              this.classList.remove('btn-animate-scroll');
+              
+              // 強制清理任何殘留的CSS狀態
+              this.style.opacity = '';
+              this.style.animation = '';
+            }, 1800);
+          });
+          
+          // 4. 執行按鈕對應的功能
+          if (isDownloadBtn) {
+            // 下載功能
+            const link = document.createElement('a');
+            link.href = 'data:text/plain;charset=utf-8,前瞻科技系列論壇議程資訊%0A%0A此為示範文件';
+            link.download = '前瞻科技論壇議程.txt';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          } else if (isScrollBtn) {
+            // 回到頂部功能
+            window.scrollTo({top: 0, behavior: 'smooth'});
+          }
+        }
       });
     }
   });
-  
-  // 下載按鈕功能
-  if (downloadBtn) {
-    downloadBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      // 創建虛擬下載連結
-      const link = document.createElement('a');
-      link.href = 'data:text/plain;charset=utf-8,前瞻科技系列論壇議程資訊%0A%0A此為示範文件';
-      link.download = '前瞻科技論壇議程.txt';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    });
-  }
   
   // 更新報名連結
   const registerLink = floatingBtn?.querySelector('.button a');
