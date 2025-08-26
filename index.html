@@ -354,9 +354,30 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 .speaker-pages{ display:flex; width:100%; transition:transform .6s cubic-bezier(.2,.9,.2,1); will-change:transform; }
 .speaker-page{ flex:0 0 100%; box-sizing:border-box; padding:0; } /* 移除padding，讓講師區域與其他內容對齊 */
 
+.speaker-pager {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 22px;
+}
+.pager-dot {
+  width: 14px;
+  height: 14px;
+  background: rgba(255,255,255,0.22);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background .3s;
+}
+.pager-dot[aria-current="true"] {
+  background: #fff;
+  box-shadow: 0 0 0 2px #fff2, 0 2px 8px #0002;
+}
+
 .speaker-pager{ display:flex; gap:12px; justify-content:center; margin-top:22px; }
-.pager-dot{ width:14px; height:8px; background:rgba(255,255,255,.22); border-radius:8px; border:none; cursor:pointer; padding:0; }
-.pager-dot[aria-current="true"]{ background:#fff; width:32px; height:8px; border-radius:999px; }
+.pager-dot{ width:14px; height:14px; background:rgba(255,255,255,.22); border-radius:50%; border:none; cursor:pointer; padding:0; transition:background .3s; }
+.pager-dot[aria-current="true"]{ background:#fff; width:14px; height:14px; border-radius:50%; box-shadow:0 0 0 2px #fff2, 0 2px 8px #0002; }
 
 .speaker-page[aria-hidden="true"] { pointer-events: none; opacity: .98; }
 
@@ -462,7 +483,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   /* 講者區域 */
   .speakers-carousel{ overflow:visible; }
   .speaker-pages{ display:block; transform:none; }
-  .speaker-page{ flex:0 0 auto; width:100%; padding:0; margin-bottom:18px; } /* 移除padding以符合統一間距 */
+  .speaker-page{ flex:0 0 auto; width:100%; padding:0; margin-bottom:18px; /* 移除padding以符合統一間距 */
   .speaker-grid{ display:block; gap:12px; }
   
   .speaker{
@@ -1578,7 +1599,6 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 .button__finger {
   width: 45%;
   height: 45%;
-  /* 移除濾鏡效果，直接使用 SVG 的原始色彩 */
   /* 反向旋轉抵消父元素的旋轉效果 */
   animation: counterRotate 20s linear infinite;
 }
@@ -1864,6 +1884,2680 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   }
 }
 </style>
+
+<style>
+/* ===== HERO右上角懸浮橫向表單（圓角磨砂玻璃質感） ===== */
+.floating-tab-bar {
+  position: fixed;
+  top: 32px;
+  right: 32px;
+  z-index: 9999;
+  display: block; /* 固定為 block，不再切換 */
+  visibility: hidden; /* 初始隱藏 */
+  background: var(--glass-bg, rgba(255,255,255,.08));
+  border: 1px solid var(--glass-bd, rgba(255,255,255,.18));
+  box-shadow: 0 8px 32px rgba(0,0,0,.22);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 11px; /* 根據 320x320 時 R角60 的比例調整 */
+  padding: 18px 32px; /* 調整上下padding，讓高度與分享按鈕相同(60px) */
+  transform: translateY(-10px);
+  opacity: 0;
+  transition: opacity .28s ease, visibility 0s linear .28s; /* 收起時延後切 visibility */
+  will-change: transform, opacity;
+  max-width: 420px; /* 增加最大寬度讓選單可以更長 */
+  width: auto;
+  isolation: isolate; /* 避免祖先的合成影響取樣 */
+}
+
+.floating-tab-bar.is-visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity .28s ease; /* 展開時立即可見 + 淡入 */
+}
+
+.floating-tab-bar ul {
+  display: flex;
+  gap: 28px; /* 增加項目間距讓選單變長 */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  justify-content: space-between; /* 均勻分布 */
+  width: 100%;
+}
+.floating-tab-bar li {
+  font-size: 0.95rem; /* 稍微縮小字體 */
+  font-weight: 400; /* 減少字體粗細 */
+  color: #fff;
+  letter-spacing: 0; /* 移除字母間距 */
+  flex: 1; /* 讓每個項目等寬 */
+  text-align: center; /* 置中對齊 */
+  line-height: 1.2; /* 緊縮行高 */
+}
+.floating-tab-bar a {
+  color: #fff;
+  text-decoration: none;
+  padding: 2px 0; /* 減少垂直間距 */
+  border-radius: 6px;
+  transition: background .3s ease, color .3s ease, transform .3s ease; /* 統一並加長 transition 時間 */
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  display: block;
+  white-space: nowrap; /* 防止換行 */
+  will-change: transform; /* 優化動畫性能 */
+}
+.floating-tab-bar a:hover {
+  background: transparent; /* 移除底框 */
+  color: #fff;
+  transform: translateY(-2px); /* 文字升高效果 */
+}
+.floating-tab-bar a:active,
+.floating-tab-bar a:focus{
+  background: rgba(255,255,255,0.2); /* 更明顯的選取效果 */
+  color: #fff;
+  outline: none;
+}
+
+@media (max-width: 768px) {
+  .floating-tab-bar {
+    top: 12px;
+    left: 20px; /* 根據測量數據精確調整 */
+    right: 20px; /* 根據測量數據精確調整 */
+    transform: translateY(-10px);
+    width: auto;
+    max-width: none;
+    min-width: auto;
+    background: var(--glass-bg, rgba(255,255,255,.08));
+    border: 1px solid var(--glass-bd, rgba(255,255,255,.18));
+    box-shadow: 0 8px 32px rgba(0,0,0,.22);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    padding: 15px 16px; /* 調整上下padding，讓高度與分享按鈕相同(50px) */
+    border-radius: 12px;
+    box-sizing: border-box;
+  }
+  
+  /* 手機版分享功能間距調整 */
+  .floating-share {
+    top: calc(12px + 50px + var(--floating-gap)) !important; /* 手機版：top + height + gap */
+    left: 20px !important;
+    right: 20px !important;
+  }
+}
+
+/* 極小螢幕或浮動選單變成2x2時的調整 */
+@media (max-width: 480px) {
+  .floating-share {
+    top: calc(12px + 50px + var(--floating-gap)) !important; /* 480px版2x2：與768px相同高度 + gap */
+  }
+  .floating-tab-bar ul {
+    gap: 12px; /* 恢復合理間距 */
+    display:flex;
+    width:100%;
+    align-items:center;
+    justify-content: space-between; /* 恢復原始分布 */
+    margin: 0;
+    padding: 0;
+  }
+  .floating-tab-bar li {
+    flex: 1 1 0; /* 恢復等寬分布 */
+    min-width: 0;
+    text-align: center;
+    font-size: 0.9rem; /* 恢復合理字體大小 */
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.2;
+  }
+  .floating-tab-bar a {
+    display:block;
+    padding:4px 6px; /* 恢復合理內距 */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px; /* 保留圓角但不要 overflow hidden */
+    transition: background .3s ease, color .3s ease, transform .3s ease; /* 與桌面版保持一致 */
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    white-space: nowrap;
+    will-change: transform; /* 優化動畫性能 */
+    /* 移除會切割文字的 overflow: hidden */
+  }
+  
+  .floating-tab-bar a:hover {
+    background: transparent; /* 移除底框 */
+    color: #fff;
+    transform: translateY(-2px); /* 文字升高效果 */
+  }
+}
+
+/* ===== 分享功能樣式 ===== */
+.floating-share {
+  position: fixed;
+  top: 102px; /* 採用與分享按鈕到社群圖示相同的間距(10px) */
+  right: 32px; /* 與浮動選單容器右側對齊 */
+  z-index: 10000;
+  display: block; /* 固定為 block，不再切換 */
+  visibility: hidden; /* 初始隱藏 */
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-radius: 0;
+  padding: 0;
+  opacity: 0; /* 初始透明，由滾動邏輯控制 */
+  transition: opacity .28s ease, visibility 0s linear .28s; /* 收起時延後切 visibility */
+  /* 移除 transform 相關屬性 */
+  /* 移除固定寬度，讓容器自適應 */
+}
+
+.floating-share.is-visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity .28s ease; /* 展開時立即可見 + 淡入 */
+}
+
+.share-container {
+  position: relative;
+  display: flex;
+  justify-content: flex-end; /* 確保分享按鈕右對齊 */
+  width: auto; /* 讓容器寬度自適應按鈕 */
+}
+
+.share-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: #ffffff; /* 改為白色背景 */
+  border: 1px solid rgba(0,0,0,.1); /* 改為淺灰邊框 */
+  border-radius: 11px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 32px rgba(0,0,0,.22);
+  overflow: hidden;
+  position: relative;
+  /* 移除毛玻璃相關屬性 */
+}
+
+/* 移除毛玻璃偽元素 */
+/*
+.share-trigger::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--glass-bg, rgba(255,255,255,.08));
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: inherit;
+  z-index: 0;
+  will-change: backdrop-filter;
+}
+*/
+
+/* SVG 圖示樣式 */
+.share-trigger .icon {
+  width: 32px;
+  height: 32px;
+  fill: none;
+  stroke: #333333;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.share-trigger:hover {
+  background: #f5f5f5; /* hover 時稍微變灰 */
+  border-color: rgba(0,0,0,0.2);
+  box-shadow: 0 12px 40px rgba(0,0,0,.3);
+}
+
+/* 移除毛玻璃 hover 效果 */
+/*
+.share-trigger:hover::before {
+  background: rgba(255,255,255,0.15);
+}
+*/
+
+/* 開啟狀態樣式 */
+.floating-share.is-open .share-trigger {
+  background: #f0f0f0; /* 開啟時的背景色 */
+  border-color: rgba(0,0,0,0.2);
+  box-shadow: 0 12px 40px rgba(0,0,0,.3);
+}
+
+/* 移除毛玻璃開啟效果 */
+/*
+.floating-share.is-open .share-trigger::before {
+  background: rgba(255,255,255,0.15);
+}
+*/
+
+/* 展開的選單與項目 */
+.floating-share.is-open .share-menu{
+  opacity:1; visibility:visible; pointer-events:auto; transform:translateY(0);
+}
+.floating-share.is-open .share-item{
+  opacity:1; pointer-events:auto; transform:translateY(0) scale(1);
+}
+
+/* 觸控裝置不要殘留 hover 效果 */
+@media (hover:none) {
+  .share-trigger:hover { 
+    border-color: var(--glass-bd, rgba(255,255,255,.18)); 
+    box-shadow: 0 8px 32px rgba(0,0,0,.22); 
+  }
+  .share-trigger:hover::before {
+    background: var(--glass-bg, rgba(255,255,255,.08));
+  }
+}
+
+.share-trigger img {
+  width: 48px;
+  height: 48px;
+  transition: transform .2s ease;
+}
+
+.share-menu {
+  position: absolute;
+  top: 70px; /* 增加間距，讓分享按鈕和社群圖示間距更大 */
+  right: 0; /* 右側對齊分享按鈕 */
+  transform: translateY(-10px);
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* 調整為與分享按鈕間距一致 */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .25s ease, visibility .25s ease, transform .25s ease;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 1px 0; /* 調整為1px內距 */
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* Facebook 圖示移除額外間距 */
+.share-item:nth-child(1) { /* Facebook */
+  transition-delay: 0.1s;
+}
+
+.share-item:nth-child(2) { /* Line */
+  transition-delay: 0.2s;
+}
+
+.share-item:nth-child(3) { /* X (Twitter) */
+  transition-delay: 0.3s;
+}
+
+.share-item:nth-child(4) { /* LinkedIn */
+  transition-delay: 0.4s;
+}
+
+.share-container:hover .share-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0); /* 移除 translateX */
+}
+
+.share-container:hover .share-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0); /* 移除 translateX */
+}
+
+.share-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(10px) scale(0.8);
+  transition: all .3s ease, opacity .4s ease, transform .4s ease;
+}
+
+/* 為每個社群圖示設定不同的延遲時間，實現逐一浮現效果 */
+/* Facebook 的樣式已在上方定義 */
+
+.share-item:nth-child(2) { /* Line */
+  transition-delay: 0.2s;
+}
+
+.share-item:nth-child(3) { /* X (Twitter) */
+  transition-delay: 0.3s;
+}
+
+.share-item:nth-child(4) { /* LinkedIn */
+  transition-delay: 0.4s;
+}
+
+.share-container:hover .share-item {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.share-item:hover {
+  transform: translateY(-2px) scale(1.05);
+  opacity: 0.8;
+}
+
+.share-item img {
+  width: 60px;
+  height: 60px;
+  transition: transform .2s ease;
+}
+
+/* 手機版分享功能調整 */
+@media (max-width: 768px) {
+  .floating-share {
+    top: 72px; /* 採用與桌面版相同的10px間距邏輯 */
+    right: 20px; /* 靠右對齊 */
+    left: auto; /* 移除左側定位 */
+  }
+  
+  .share-container {
+    display: flex;
+    justify-content: flex-end; /* 確保分享按鈕右對齊 */
+    width: auto; /* 讓容器寬度自適應按鈕 */
+  }
+  
+  .share-trigger {
+    width: 50px;
+    height: 50px;
+    border-radius: 9px;
+  }
+  
+  .share-trigger .icon {
+    width: 26px;
+    height: 26px;
+  }
+  
+  .share-menu {
+    position: absolute;
+    top: 60px; /* 調整間距 */
+    right: 0; /* 右側對齊分享按鈕 */
+    transform: translateY(-10px);
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* 手機版稍微縮小間距 */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none; /* 隱藏時不可點擊 */
+    transition: opacity .25s ease, visibility .25s ease, transform .25s ease, pointer-events .25s ease;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 1px 0;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  
+  .share-container:hover .share-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto; /* 顯示時可點擊 */
+    transform: translateY(0);
+  }
+  
+  .share-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    text-decoration: none;
+    opacity: 0;
+    pointer-events: none; /* 隱藏時不可點擊 */
+    transform: translateY(10px) scale(0.8);
+    transition: all .3s ease, opacity .4s ease, transform .4s ease, pointer-events .4s ease;
+  }
+  
+  .share-container:hover .share-item {
+    opacity: 1;
+    pointer-events: auto; /* 顯示時可點擊 */
+    transform: translateY(0) scale(1);
+  }
+  
+  .share-item:hover {
+    transform: translateY(-2px) scale(1.05);
+    opacity: 0.8;
+  }
+  
+  .share-item img {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* 小尺寸手機橫向顯示調整 */
+@media (max-width: 480px) and (orientation: landscape) {
+  .floating-share {
+    top: calc(12px + 42px + var(--floating-gap)) !important; /* 橫向時較矮的高度 + gap */
+    right: 15px; /* 橫向時稍微內移 */
+  }
+  
+  .share-menu {
+    flex-direction: row; /* 橫向時改為水平排列 */
+    gap: 4px; /* 橫向時減少間距 */
+  }
+  
+  .share-item {
+    width: 50px; /* 橫向時稍微縮小 */
+    height: 50px;
+  }
+  
+  .share-item img {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .floating-tab-bar {
+    /* 基於 768px 測量結果調整 */
+    left: 20px; /* 先嘗試相同數值 */
+    right: 20px; /* 先嘗試相同數值 */
+    background: var(--glass-bg, rgba(255,255,255,.08));
+    border: 1px solid var(--glass-bd, rgba(255,255,255,.18));
+    box-shadow: 0 8px 32px rgba(0,0,0,.22);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    padding: 12px 16px;
+    border-radius: 12px;
+    box-sizing: border-box;
+  }
+}
+</style>
+
+<style>
+/* ===== 時間切換器樣式 ===== */
+.time-toggle {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 32px 0;
+}
+
+.time-toggle-track {
+  position: relative;
+  display: flex;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 25px;
+  padding: 3px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+}
+
+.time-toggle-slider {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: calc(50% - 3px);
+  height: calc(100% - 6px);
+  background: #c93874;
+  border-radius: 22px;
+  transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+  z-index: 1;
+}
+
+.time-option {
+  position: relative;
+  padding: 10px 18px;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  z-index: 2;
+  min-width: 100px;
+  text-align: center;
+}
+
+.time-option.active {
+  color: #fff;
+}
+
+.time-toggle-track[data-active="taiwan"] .time-toggle-slider {
+  transform: translateX(100%);
+}
+
+/* ===== 議程表格樣式 ===== */
+.schedule-table {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+}
+
+.schedule-header {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  background: rgba(255, 255, 255, 0.1);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.schedule-header > div {
+  padding: 16px 12px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #fff;
+  text-align: center;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.schedule-header > div:last-child {
+  border-right: none;
+}
+
+.schedule-row {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.schedule-row:last-child {
+  border-bottom: none;
+}
+
+.schedule-row:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.time-cell {
+  padding: 16px 12px;
+  text-align: center;
+  font-family: "Akrobat", "Noto Sans TC", sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+  color: #fff;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content-cell {
+  padding: 16px 20px;
+  line-height: 1.6;
+  color: #cfd6e6;
+  font-weight: 500;
+}
+
+.content-cell ul {
+  margin: 8px 0 0 0;
+  padding-left: 20px;
+  list-style: disc;
+}
+
+.content-cell ol {
+  margin: 8px 0 0 0;
+  padding-left: 20px;
+  list-style: disc;
+}
+
+.content-cell li {
+  margin-bottom: 4px;
+  color: #cfd6e6;
+  font-weight: 400;
+}
+
+/* 職稱樣式 */
+.title {
+  font-size: 90%;
+  color: var(--pink);
+}
+
+/* 重要活動膠囊樣式 */
+.event-highlight {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 2px dashed var(--pink);
+  border-radius: 20px;
+  color: #fff;
+  font-weight: 500;
+  margin-bottom: 8px;
+  background: rgba(255, 94, 153, 0.1);
+}
+
+/* 小膠囊標籤樣式 */
+.role-tag {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .time-toggle {
+    margin: 16px 0 24px 0;
+  }
+  
+  .time-option {
+    padding: 8px 14px;
+    font-size: 13px;
+    min-width: 85px;
+  }
+  
+  .schedule-table {
+    border-radius: 8px;
+    margin: 0; /* 移除偏移，讓它對齊左右間距 */
+    border-width: 1px; /* 減少邊框寬度避免右側偏移 */
+  }
+  
+  .schedule-header {
+    display: none;
+  }
+  
+  .schedule-row {
+    grid-template-columns: 1fr;
+    background: rgba(255, 255, 255, 0.02);
+  }
+  
+  .time-cell {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.08);
+    padding: 12px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+  }
+  
+  .content-cell {
+    padding: 16px;
+  }
+  
+  .content-cell ul, .content-cell ol {
+    padding-left: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .schedule-table {
+    margin: 0;
+    border-radius: 6px;
+  }
+  
+  .time-cell {
+    padding: 10px;
+    font-size: 18px;
+  }
+  
+  .content-cell {
+    padding: 12px;
+    font-size: 0.9em;
+  }
+}
+
+/* 由 event-info 內部控制第一個 h2 的 margin */
+.event-info .inner > h2:first-of-type{
+  margin-top: 0;
+}
+
+/* ===== 圓形漂浮按鈕 ===== */
+.floating-circular-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 32px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--floating-gap);
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.floating-circular-btn.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.button {
+  position: relative;
+  width: 105px;
+  height: 105px;
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transform: translateX(15px);
+  display: block;
+}
+
+.button a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  position: relative;
+}
+
+.button__circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 105px;
+  height: 105px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  animation: rotate 20s linear infinite;
+  box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+}
+
+.button__finger {
+  width: 45%;
+  height: 45%;
+  /* 反向旋轉抵消父元素的旋轉效果 */
+  animation: counterRotate 20s linear infinite;
+}
+
+.button:hover .button__circle {
+  transform: scale(1.1);
+  box-shadow: 0 6px 30px rgba(255, 107, 53, 0.5);
+}
+
+.button__text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 105px;
+  height: 105px;
+  border-radius: 50%;
+  margin: 0;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  overflow: visible;
+  animation: rotate 20s linear infinite;
+  z-index: 1;
+}
+
+.button__text span {
+  position: absolute;
+  font-size: 16px;
+  color: white;
+  font-weight: 700;
+  line-height: 1;
+  transform: rotate(calc(30deg * var(--index)));
+  inset: 8px;
+}
+
+/* 使用 DIGITIMES 的 CSS 變數定位方式 */
+.button__text span:nth-child(1) { --index: 0; }
+.button__text span:nth-child(2) { --index: 1; }
+.button__text span:nth-child(3) { --index: 2; }
+.button__text span:nth-child(4) { --index: 3; }
+.button__text span:nth-child(5) { --index: 4; }
+.button__text span:nth-child(6) { --index: 5; }
+.button__text span:nth-child(7) { --index: 6; }
+.button__text span:nth-child(8) { --index: 7; }
+.button__text span:nth-child(9) { --index: 8; }
+.button__text span:nth-child(10) { --index: 9; }
+.button__text span:nth-child(11) { --index: 10; }
+.button__text span:nth-child(12) { --index: 11; }
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes counterRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes arrowLoop {
+  0% {
+    transform: rotate(-90deg) translateX(0px);
+    opacity: 1;
+  }
+  30% {
+    transform: rotate(-90deg) translateX(0px);
+    opacity: 1;
+  }
+  50% {
+    transform: rotate(-90deg) translateX(40px);
+    opacity: 0;
+  }
+  51% {
+    transform: rotate(-90deg) translateX(-40px);
+    opacity: 0;
+  }
+  70% {
+    transform: rotate(-90deg) translateX(0px);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(-90deg) translateX(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes downloadLoop {
+  0% {
+    transform: translate(-50%, -50%) rotate(90deg);
+    opacity: 1;
+  }
+  30% {
+    transform: translate(-50%, -50%) rotate(90deg);
+    opacity: 1;
+  }
+  40% {
+    transform: translate(-50%, -50%) translateY(8px) rotate(90deg);
+    opacity: 0;
+  }
+  41% {
+    transform: translate(-50%, -50%) translateY(-20px) rotate(90deg);
+    opacity: 0;
+  }
+  60% {
+    transform: translate(-50%, -50%) rotate(90deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(90deg);
+    opacity: 1;
+  }
+}
+
+/* 回到頂部按鈕 */
+.scroll-top-btn {
+  display: block;
+  width: 60px;
+  height: 60px;
+  background: var(--glass-bg, rgba(255,255,255,.08));
+  border: 1px solid var(--glass-bd, rgba(255,255,255,.18));
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: background .3s, border-color .3s, transform .3s, box-shadow .3s;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 8px 32px rgba(0,0,0,.22);
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box; /* 避免 border 影響幾何中心 */
+}
+
+/* 下載按鈕 */
+.download-btn {
+  display: block;
+  width: 60px;
+  height: 60px;
+  background: var(--glass-bg, rgba(255,255,255,.08));
+  border: 1px solid var(--glass-bd, rgba(255,255,255,.18));
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: background .3s, border-color .3s, transform .3s, box-shadow .3s;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 8px 32px rgba(0,0,0,.22);
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box; /* 避免 border 影響幾何中心 */
+}
+
+/* 統一SVG圖示樣式 */
+.download-btn .icon,
+.scroll-top-btn .icon {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  color: #ffffff;
+  opacity: 1;
+}
+
+.scroll-top-btn:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0,0,0,.3);
+}
+
+.download-btn:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0,0,0,.3);
+}
+
+/* 按壓回饋 - 使用 filter 而非 opacity，避免毛玻璃閃爍 */
+.download-btn.pressed, .scroll-top-btn.pressed{
+  filter: brightness(0.8);
+  transform: scale(0.98);
+  transition: none;
+}
+
+/* 分享按鈕按壓回饋 - 白色背景版本 */
+.share-trigger.pressed {
+  background: #e0e0e0; /* 按壓時更深的灰色 */
+  transform: scale(0.98);
+  transition: none;
+}
+
+/* 移除不再需要的偽元素動畫 */
+.download-btn:hover img {
+  transform: scale(1.1);
+}
+
+/* 只在有真正滑鼠的裝置啟用 hover 動畫 */
+@media (hover: hover) and (pointer: fine) {
+  .scroll-top-btn:hover { 
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0,0,0,.3);
+  }
+  .download-btn:hover { 
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0,0,0,.3);
+  }
+  /* SVG圖示不需要偽元素動畫 */
+}
+
+/* 觸控裝置：完全禁用 hover 動畫，避免點了就卡住 */
+@media (hover: none) and (pointer: coarse) {
+  .scroll-top-btn:hover,
+  .download-btn:hover {
+    background: var(--glass-bg, rgba(255,255,255,.08));
+    border-color: var(--glass-bd, rgba(255,255,255,.18));
+    transform: none !important; /* 移除向上移動效果 */
+    box-shadow: 0 8px 32px rgba(0,0,0,.22);
+  }
+  /* SVG圖示不需要偽元素動畫 */
+}
+
+@media (max-width: 768px) {
+  .floating-circular-btn {
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .button {
+    width: 88px;
+    height: 88px;
+    transform: translateX(12px);
+  }
+  
+  .button__circle {
+    width: 88px;
+    height: 88px;
+  }
+  
+  .button__finger {
+    width: 40px; /* 固定px取代45%，避免小數尺寸 */
+    height: 40px;
+    animation: counterRotate 20s linear infinite; /* 反向旋轉抵消父元素旋轉 */
+    image-rendering: auto; /* 移除crisp-edges，對SVG反而容易怪 */
+  }
+  
+  .button__text {
+    width: 88px;
+    height: 88px;
+  }
+  
+  .button__text span {
+    font-size: 14px;
+    inset: 6px;
+  }
+  
+  .scroll-top-btn,
+  .download-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 9px;
+    margin-left: 12px; /* 改用 margin 而不是 transform 避免衝突 */
+  }
+  
+  /* 小螢幕縮小圖示，只改尺寸 */
+  .download-btn .icon,
+  .scroll-top-btn .icon {
+    width: 28px;
+    height: 28px;
+  }
+}
+</style>
+
+<style>
+/* ===== HERO右上角懸浮橫向表單（圓角磨砂玻璃質感，滑過logo後浮現） ===== */
+.floating-tab-bar {
+  position: fixed;
+  top: 32px;
+  right: 32px;
+  z-index: 9999;
+  display: block; /* 固定為 block，不再切換 */
+  visibility: hidden; /* 初始隱藏 */
+  background: var(--glass-bg, rgba(255,255,255,.08));
+  border: 1px solid var(--glass-bd, rgba(255,255,255,.18));
+  box-shadow: 0 8px 32px rgba(0,0,0,.22);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 11px; /* 根據 320x320 時 R角60 的比例調整 */
+  padding: 18px 32px; /* 調整上下padding，讓高度與分享按鈕相同(60px) */
+  transform: translateY(-10px);
+  opacity: 0;
+  transition: opacity .28s ease, visibility 0s linear .28s; /* 收起時延後切 visibility */
+  will-change: transform, opacity;
+  max-width: 420px; /* 增加最大寬度讓選單可以更長 */
+  width: auto;
+  isolation: isolate; /* 避免祖先的合成影響取樣 */
+}
+
+.floating-tab-bar.is-visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity .28s ease; /* 展開時立即可見 + 淡入 */
+}
+
+.floating-tab-bar ul {
+  display: flex;
+  gap: 28px; /* 增加項目間距讓選單變長 */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  justify-content: space-between; /* 均勻分布 */
+  width: 100%;
+}
+.floating-tab-bar li {
+  font-size: 0.95rem; /* 稍微縮小字體 */
+  font-weight: 400; /* 減少字體粗細 */
+  color: #fff;
+  letter-spacing: 0; /* 移除字母間距 */
+  flex: 1; /* 讓每個項目等寬 */
+  text-align: center; /* 置中對齊 */
+  line-height: 1.2; /* 緊縮行高 */
+}
+.floating-tab-bar a {
+  color: #fff;
+  text-decoration: none;
+  padding: 2px 0; /* 減少垂直間距 */
+  border-radius: 6px;
+  transition: background .3s ease, color .3s ease, transform .3s ease; /* 統一並加長 transition 時間 */
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  display: block;
+  white-space: nowrap; /* 防止換行 */
+  will-change: transform; /* 優化動畫性能 */
+}
+.floating-tab-bar a:hover {
+  background: transparent; /* 移除底框 */
+  color: #fff;
+  transform: translateY(-2px); /* 文字升高效果 */
+}
+.floating-tab-bar a:active,
+.floating-tab-bar a:focus{
+  background: rgba(255,255,255,0.2); /* 更明顯的選取效果 */
+  color: #fff;
+  outline: none;
+}
+
+@media (max-width: 768px) {
+  .floating-tab-bar {
+    top: 12px;
+    left: 20px; /* 根據測量數據精確調整 */
+    right: 20px; /* 根據測量數據精確調整 */
+    transform: translateY(-10px);
+    width: auto;
+    max-width: none;
+    min-width: auto;
+    background: var(--glass-bg, rgba(255,255,255,.08));
+    border: 1px solid var(--glass-bd, rgba(255,255,255,.18));
+    box-shadow: 0 8px 32px rgba(0,0,0,.22);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    padding: 15px 16px; /* 調整上下padding，讓高度與分享按鈕相同(50px) */
+    border-radius: 12px;
+    box-sizing: border-box;
+  }
+  
+  /* 手機版分享功能間距調整 */
+  .floating-share {
+    top: calc(12px + 50px + var(--floating-gap)) !important; /* 手機版：top + height + gap */
+    left: 20px !important;
+    right: 20px !important;
+  }
+}
+
+/* 極小螢幕或浮動選單變成2x2時的調整 */
+@media (max-width: 480px) {
+  .floating-share {
+    top: calc(12px + 50px + var(--floating-gap)) !important; /* 480px版2x2：與768px相同高度 + gap */
+  }
+  .floating-tab-bar ul {
+    gap: 12px; /* 恢復合理間距 */
+    display:flex;
+    width:100%;
+    align-items:center;
+    justify-content: space-between; /* 恢復原始分布 */
+    margin: 0;
+    padding: 0;
+  }
+  .floating-tab-bar li {
+    flex: 1 1 0; /* 恢復等寬分布 */
+    min-width: 0;
+    text-align: center;
+    font-size: 0.9rem; /* 恢復合理字體大小 */
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.2;
+  }
+  .floating-tab-bar a {
+    display:block;
+    padding:4px 6px; /* 恢復合理內距 */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px; /* 保留圓角但不要 overflow hidden */
+    transition: background .3s ease, color .3s ease, transform .3s ease; /* 與桌面版保持一致 */
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    white-space: nowrap;
+    will-change: transform; /* 優化動畫性能 */
+    /* 移除會切割文字的 overflow: hidden */
+  }
+  
+  .floating-tab-bar a:hover {
+    background: transparent; /* 移除底框 */
+    color: #fff;
+    transform: translateY(-2px); /* 文字升高效果 */
+  }
+}
+
+/* ===== 分享功能樣式 ===== */
+.floating-share {
+  position: fixed;
+  top: 102px; /* 採用與分享按鈕到社群圖示相同的間距(10px) */
+  right: 32px; /* 與浮動選單容器右側對齊 */
+  z-index: 10000;
+  display: block; /* 固定為 block，不再切換 */
+  visibility: hidden; /* 初始隱藏 */
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-radius: 0;
+  padding: 0;
+  opacity: 0; /* 初始透明，由滾動邏輯控制 */
+  transition: opacity .28s ease, visibility 0s linear .28s; /* 收起時延後切 visibility */
+  /* 移除 transform 相關屬性 */
+  /* 移除固定寬度，讓容器自適應 */
+}
+
+.floating-share.is-visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity .28s ease; /* 展開時立即可見 + 淡入 */
+}
+
+.share-container {
+  position: relative;
+  display: flex;
+  justify-content: flex-end; /* 確保分享按鈕右對齊 */
+  width: auto; /* 讓容器寬度自適應按鈕 */
+}
+
+.share-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: #ffffff; /* 改為白色背景 */
+  border: 1px solid rgba(0,0,0,.1); /* 改為淺灰邊框 */
+  border-radius: 11px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 32px rgba(0,0,0,.22);
+  overflow: hidden;
+  position: relative;
+  /* 移除毛玻璃相關屬性 */
+}
+
+/* 移除毛玻璃偽元素 */
+/*
+.share-trigger::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--glass-bg, rgba(255,255,255,.08));
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: inherit;
+  z-index: 0;
+  will-change: backdrop-filter;
+}
+*/
+
+/* SVG 圖示樣式 */
+.share-trigger .icon {
+  width: 32px;
+  height: 32px;
+  fill: none;
+  stroke: #333333;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.share-trigger:hover {
+  background: #f5f5f5; /* hover 時稍微變灰 */
+  border-color: rgba(0,0,0,0.2);
+  box-shadow: 0 12px 40px rgba(0,0,0,.3);
+}
+
+/* 移除毛玻璃 hover 效果 */
+/*
+.share-trigger:hover::before {
+  background: rgba(255,255,255,0.15);
+}
+*/
+
+/* 開啟狀態樣式 */
+.floating-share.is-open .share-trigger {
+  background: #f0f0f0; /* 開啟時的背景色 */
+  border-color: rgba(0,0,0,0.2);
+  box-shadow: 0 12px 40px rgba(0,0,0,.3);
+}
+
+/* 移除毛玻璃開啟效果 */
+/*
+.floating-share.is-open .share-trigger::before {
+  background: rgba(255,255,255,0.15);
+}
+*/
+
+/* 展開的選單與項目 */
+.floating-share.is-open .share-menu{
+  opacity:1; visibility:visible; pointer-events:auto; transform:translateY(0);
+}
+.floating-share.is-open .share-item{
+  opacity:1; pointer-events:auto; transform:translateY(0) scale(1);
+}
+
+/* 觸控裝置不要殘留 hover 效果 */
+@media (hover:none) {
+  .share-trigger:hover { 
+    border-color: var(--glass-bd, rgba(255,255,255,.18)); 
+    box-shadow: 0 8px 32px rgba(0,0,0,.22); 
+  }
+  .share-trigger:hover::before {
+    background: var(--glass-bg, rgba(255,255,255,.08));
+  }
+}
+
+.share-trigger img {
+  width: 48px;
+  height: 48px;
+  transition: transform .2s ease;
+}
+
+.share-menu {
+  position: absolute;
+  top: 70px; /* 增加間距，讓分享按鈕和社群圖示間距更大 */
+  right: 0; /* 右側對齊分享按鈕 */
+  transform: translateY(-10px);
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* 調整為與分享按鈕間距一致 */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .25s ease, visibility .25s ease, transform .25s ease;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 1px 0; /* 調整為1px內距 */
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* Facebook 圖示移除額外間距 */
+.share-item:nth-child(1) { /* Facebook */
+  transition-delay: 0.1s;
+}
+
+.share-item:nth-child(2) { /* Line */
+  transition-delay: 0.2s;
+}
+
+.share-item:nth-child(3) { /* X (Twitter) */
+  transition-delay: 0.3s;
+}
+
+.share-item:nth-child(4) { /* LinkedIn */
+  transition-delay: 0.4s;
+}
+
+.share-container:hover .share-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0); /* 移除 translateX */
+}
+
+.share-container:hover .share-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0); /* 移除 translateX */
+}
+
+.share-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(10px) scale(0.8);
+  transition: all .3s ease, opacity .4s ease, transform .4s ease;
+}
+
+/* 為每個社群圖示設定不同的延遲時間，實現逐一浮現效果 */
+/* Facebook 的樣式已在上方定義 */
+
+.share-item:nth-child(2) { /* Line */
+  transition-delay: 0.2s;
+}
+
+.share-item:nth-child(3) { /* X (Twitter) */
+  transition-delay: 0.3s;
+}
+
+.share-item:nth-child(4) { /* LinkedIn */
+  transition-delay: 0.4s;
+}
+
+.share-container:hover .share-item {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.share-item:hover {
+  transform: translateY(-2px) scale(1.05);
+  opacity: 0.8;
+}
+
+.share-item img {
+  width: 60px;
+  height: 60px;
+  transition: transform .2s ease;
+}
+
+/* 手機版分享功能調整 */
+@media (max-width: 768px) {
+  .floating-share {
+    top: 72px; /* 採用與桌面版相同的10px間距邏輯 */
+    right: 20px; /* 靠右對齊 */
+    left: auto; /* 移除左側定位 */
+  }
+  
+  .share-container {
+    display: flex;
+    justify-content: flex-end; /* 確保分享按鈕右對齊 */
+    width: auto; /* 讓容器寬度自適應按鈕 */
+  }
+  
+  .share-trigger {
+    width: 50px;
+    height: 50px;
+    border-radius: 9px;
+  }
+  
+  .share-trigger .icon {
+    width: 26px;
+    height: 26px;
+  }
+  
+  .share-menu {
+    position: absolute;
+    top: 60px; /* 調整間距 */
+    right: 0; /* 右側對齊分享按鈕 */
+    transform: translateY(-10px);
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* 手機版稍微縮小間距 */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none; /* 隱藏時不可點擊 */
+    transition: opacity .25s ease, visibility .25s ease, transform .25s ease, pointer-events .25s ease;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 1px 0;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  
+  .share-container:hover .share-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto; /* 顯示時可點擊 */
+    transform: translateY(0);
+  }
+  
+  .share-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    text-decoration: none;
+    opacity: 0;
+    pointer-events: none; /* 隱藏時不可點擊 */
+    transform: translateY(10px) scale(0.8);
+    transition: all .3s ease, opacity .4s ease, transform .4s ease, pointer-events .4s ease;
+  }
+  
+  .share-container:hover .share-item {
+    opacity: 1;
+    pointer-events: auto; /* 顯示時可點擊 */
+    transform: translateY(0) scale(1);
+  }
+  
+  .share-item:hover {
+    transform: translateY(-2px) scale(1.05);
+    opacity: 0.8;
+  }
+  
+  .share-item img {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* 小尺寸手機橫向顯示調整 */
+@media (max-width: 480px) and (orientation: landscape) {
+  .floating-share {
+    top: calc(12px + 42px + var(--floating-gap)) !important; /* 橫向時較矮的高度 + gap */
+    right: 15px; /* 橫向時稍微內移 */
+  }
+  
+  .share-menu {
+    flex-direction: row; /* 橫向時改為水平排列 */
+    gap: 4px; /* 橫向時減少間距 */
+  }
+  
+  .share-item {
+    width: 50px; /* 橫向時稍微縮小 */
+    height: 50px;
+  }
+  
+  .share-item img {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .floating-tab-bar {
+    /* 基於 768px 測量結果調整 */
+    left: 20px; /* 先嘗試相同數值 */
+    right: 20px; /* 先嘗試相同數值 */
+    background: var(--glass-bg, rgba(255,255,255,.08));
+    border: 1px solid var(--glass-bd, rgba(255,255,255,.18));
+    box-shadow: 0 8px 32px rgba(0,0,0,.22);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    padding: 12px 16px;
+    border-radius: 12px;
+    box-sizing: border-box;
+  }
+}
+</style>
+
+<style>
+/* ===== 時間切換器樣式 ===== */
+.time-toggle {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 32px 0;
+}
+
+.time-toggle-track {
+  position: relative;
+  display: flex;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 25px;
+  padding: 3px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+}
+
+.time-toggle-slider {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: calc(50% - 3px);
+  height: calc(100% - 6px);
+  background: #c93874;
+  border-radius: 22px;
+  transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+  z-index: 1;
+}
+
+.time-option {
+  position: relative;
+  padding: 10px 18px;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  z-index: 2;
+  min-width: 100px;
+  text-align: center;
+}
+
+.time-option.active {
+  color: #fff;
+}
+
+.time-toggle-track[data-active="taiwan"] .time-toggle-slider {
+  transform: translateX(100%);
+}
+
+/* ===== 議程表格樣式 ===== */
+.schedule-table {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+}
+
+.schedule-header {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  background: rgba(255, 255, 255, 0.1);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.schedule-header > div {
+  padding: 16px 12px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #fff;
+  text-align: center;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.schedule-header > div:last-child {
+  border-right: none;
+}
+
+.schedule-row {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.schedule-row:last-child {
+  border-bottom: none;
+}
+
+.schedule-row:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.time-cell {
+  padding: 16px 12px;
+  text-align: center;
+  font-family: "Akrobat", "Noto Sans TC", sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+  color: #fff;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content-cell {
+  padding: 16px 20px;
+  line-height: 1.6;
+  color: #cfd6e6;
+  font-weight: 500;
+}
+
+.content-cell ul {
+  margin: 8px 0 0 0;
+  padding-left: 20px;
+  list-style: disc;
+}
+
+.content-cell ol {
+  margin: 8px 0 0 0;
+  padding-left: 20px;
+  list-style: disc;
+}
+
+.content-cell li {
+  margin-bottom: 4px;
+  color: #cfd6e6;
+  font-weight: 400;
+}
+
+/* 職稱樣式 */
+.title {
+  font-size: 90%;
+  color: var(--pink);
+}
+
+/* 重要活動膠囊樣式 */
+.event-highlight {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 2px dashed var(--pink);
+  border-radius: 20px;
+  color: #fff;
+  font-weight: 500;
+  margin-bottom: 8px;
+  background: rgba(255, 94, 153, 0.1);
+}
+
+/* 小膠囊標籤樣式 */
+.role-tag {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .time-toggle {
+    margin: 16px 0 24px 0;
+  }
+  
+  .time-option {
+    padding: 8px 14px;
+    font-size: 13px;
+    min-width: 85px;
+  }
+  
+  .schedule-table {
+    border-radius: 8px;
+    margin: 0; /* 移除偏移，讓它對齊左右間距 */
+    border-width: 1px; /* 減少邊框寬度避免右側偏移 */
+  }
+  
+  .schedule-header {
+    display: none;
+  }
+  
+  .schedule-row {
+    grid-template-columns: 1fr;
+    background: rgba(255, 255, 255, 0.02);
+  }
+  
+  .time-cell {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.08);
+    padding: 12px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+  }
+  
+  .content-cell {
+    padding: 16px;
+  }
+  
+  .content-cell ul, .content-cell ol {
+    padding-left: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .schedule-table {
+    margin: 0;
+    border-radius: 6px;
+  }
+  
+  .time-cell {
+    padding: 10px;
+    font-size: 18px;
+  }
+  
+  .content-cell {
+    padding: 12px;
+    font-size: 0.9em;
+  }
+}
+
+/* 由 event-info 內部控制第一個 h2 的 margin */
+.event-info .inner > h2:first-of-type{
+  margin-top: 0;
+}
+
+/* ===== 圓形漂浮按鈕 ===== */
+.floating-circular-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 32px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--floating-gap);
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.floating-circular-btn.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.button {
+  position: relative;
+  width: 105px;
+  height: 105px;
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transform: translateX(15px);
+  display: block;
+}
+
+.button a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  position: relative;
+}
+
+.button__circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 105px;
+  height: 105px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  animation: rotate 20s linear infinite;
+  box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+}
+
+.button__finger {
+  width: 45%;
+  height: 45%;
+  /* 反向旋轉抵消父元素的旋轉效果 */
+  animation: counterRotate 20s linear infinite;
+}
+
+.button:hover .button__circle {
+  transform: scale(1.1);
+  box-shadow: 0 6px 30px rgba(255, 107, 53, 0.5);
+}
+
+.button__text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 105px;
+  height: 105px;
+  border-radius: 50%;
+  margin: 0;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  overflow: visible;
+  animation: rotate 20s linear infinite;
+  z-index: 1;
+}
+
+.button__text span {
+  position: absolute;
+  font-size: 16px;
+  color: white;
+  font-weight: 700;
+  line-height: 1;
+  transform: rotate(calc(30deg * var(--index)));
+  inset: 8px;
+}
+
+/* 使用 DIGITIMES 的 CSS 變數定位方式 */
+.button__text span:nth-child(1) { --index: 0; }
+.button__text span:nth-child(2) { --index: 1; }
+.button__text span:nth-child(3) { --index: 2; }
+.button__text span:nth-child(4) { --index: 3; }
+.button__text span:nth-child(5) { --index: 4; }
+.button__text span:nth-child(6) { --index: 5; }
+.button__text span:nth-child(7) { --index: 6; }
+.button__text span:nth-child(8) { --index: 7; }
+.button__text span:nth-child(9) { --index: 8; }
+.button__text span:nth-child(10) { --index: 9; }
+.button__text span:nth-child(11) { --index: 10; }
+.button__text span:nth-child(12) { --index: 11; }
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes counterRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes arrowLoop {
+  0% {
+    transform: rotate(-90deg) translateX(0px);
+    opacity: 1;
+  }
+  30% {
+    transform: rotate(-90deg) translateX(0px);
+    opacity: 1;
+  }
+  50% {
+    transform: rotate(-90deg) translateX(40px);
+    opacity: 0;
+  }
+  51% {
+    transform: rotate(-90deg) translateX(-40px);
+    opacity: 0;
+  }
+  70% {
+    transform: rotate(-90deg) translateX(0px);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(-90deg) translateX(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes downloadLoop {
+  0% {
+    transform: translate(-50%, -50%) rotate(90deg);
+    opacity: 1;
+  }
+  30% {
+    transform: translate(-50%, -50%) rotate(90deg);
+    opacity: 1;
+  }
+  40% {
+    transform: translate(-50%, -50%) translateY(8px) rotate(90deg);
+    opacity: 0;
+  }
+  41% {
+    transform: translate(-50%, -50%) translateY(-20px) rotate(90deg);
+    opacity: 0;
+  }
+  60% {
+    transform: translate(-50%, -50%) rotate(90deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(90deg);
+    opacity: 1;
+  }
+}
+
+/* 回到頂部按鈕 */
+.scroll-top-btn {
+  display: block;
+  width: 60px;
+  height: 60px;
+  background: var(--glass-bg, rgba(255,255,255,.08));
+  border: 1px solid var(--glass-bd, rgba(255,255,255,.18));
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: background .3s, border-color .3s, transform .3s, box-shadow .3s;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 8px 32px rgba(0,0,0,.22);
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box; /* 避免 border 影響幾何中心 */
+}
+
+/* 下載按鈕 */
+.download-btn {
+  display: block;
+  width: 60px;
+  height: 60px;
+  background: var(--glass-bg, rgba(255,255,255,.08));
+  border: 1px solid var(--glass-bd, rgba(255,255,255,.18));
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: background .3s, border-color .3s, transform .3s, box-shadow .3s;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 8px 32px rgba(0,0,0,.22);
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box; /* 避免 border 影響幾何中心 */
+}
+
+/* 統一SVG圖示樣式 */
+.download-btn .icon,
+.scroll-top-btn .icon {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  color: #ffffff;
+  opacity: 1;
+}
+
+.scroll-top-btn:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0,0,0,.3);
+}
+
+.download-btn:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0,0,0,.3);
+}
+
+/* 按壓回饋 - 使用 filter 而非 opacity，避免毛玻璃閃爍 */
+.download-btn.pressed, .scroll-top-btn.pressed{
+  filter: brightness(0.8);
+  transform: scale(0.98);
+  transition: none;
+}
+
+/* 分享按鈕按壓回饋 - 白色背景版本 */
+.share-trigger.pressed {
+  background: #e0e0e0; /* 按壓時更深的灰色 */
+  transform: scale(0.98);
+  transition: none;
+}
+
+/* 移除不再需要的偽元素動畫 */
+.download-btn:hover img {
+  transform: scale(1.1);
+}
+
+/* 只在有真正滑鼠的裝置啟用 hover 動畫 */
+@media (hover: hover) and (pointer: fine) {
+  .scroll-top-btn:hover { 
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0,0,0,.3);
+  }
+  .download-btn:hover { 
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0,0,0,.3);
+  }
+  /* SVG圖示不需要偽元素動畫 */
+}
+
+/* 觸控裝置：完全禁用 hover 動畫，避免點了就卡住 */
+@media (hover: none) and (pointer: coarse) {
+  .scroll-top-btn:hover,
+  .download-btn:hover {
+    background: var(--glass-bg, rgba(255,255,255,.08));
+    border-color: var(--glass-bd, rgba(255,255,255,.18));
+    transform: none !important; /* 移除向上移動效果 */
+    box-shadow: 0 8px 32px rgba(0,0,0,.22);
+  }
+  /* SVG圖示不需要偽元素動畫 */
+}
+
+@media (max-width: 768px) {
+  .floating-circular-btn {
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .button {
+    width: 88px;
+    height: 88px;
+    transform: translateX(12px);
+  }
+  
+  .button__circle {
+    width: 88px;
+    height: 88px;
+  }
+  
+  .button__finger {
+    width: 40px; /* 固定px取代45%，避免小數尺寸 */
+    height: 40px;
+    animation: counterRotate 20s linear infinite; /* 反向旋轉抵消父元素旋轉 */
+    image-rendering: auto; /* 移除crisp-edges，對SVG反而容易怪 */
+  }
+  
+  .button__text {
+    width: 88px;
+    height: 88px;
+  }
+  
+  .button__text span {
+    font-size: 14px;
+    inset: 6px;
+  }
+  
+  .scroll-top-btn,
+  .download-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 9px;
+    margin-left: 12px; /* 改用 margin 而不是 transform 避免衝突 */
+  }
+  
+  /* 小螢幕縮小圖示，只改尺寸 */
+  .download-btn .icon,
+  .scroll-top-btn .icon {
+    width: 28px;
+    height: 28px;
+  }
+}
+</style>
+
+<style>
+/* ===== HERO右上角懸浮橫向表單（圓角磨砂玻璃質感，滑過logo後浮現） ===== */
+.floating-tab-bar {
+  position: fixed;
+  top: 32px;
+  right: 32px;
+  z-index: 9999;
+  display: block; /* 固定為 block，不再切換 */
+  visibility: hidden; /* 初始隱藏 */
+  background: var(--glass-bg, rgba(255,255,255,.08));
+  border: 1px solid var(--glass-bd, rgba(255,255,255,.18));
+  box-shadow: 0 8px 32px rgba(0,0,0,.22);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 11px; /* 根據 320x320 時 R角60 的比例調整 */
+  padding: 18px 32px; /* 調整上下padding，讓高度與分享按鈕相同(60px) */
+  transform: translateY(-10px);
+  opacity: 0;
+  transition: opacity .28s ease, visibility 0s linear .28s; /* 收起時延後切 visibility */
+  will-change: transform, opacity;
+  max-width: 420px; /* 增加最大寬度讓選單可以更長 */
+  width: auto;
+  isolation: isolate; /* 避免祖先的合成影響取樣 */
+}
+
+.floating-tab-bar.is-visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity .28s ease; /* 展開時立即可見 + 淡入 */
+}
+
+.floating-tab-bar ul {
+  display: flex;
+  gap: 28px; /* 增加項目間距讓選單變長 */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  justify-content: space-between; /* 均勻分布 */
+  width: 100%;
+}
+.floating-tab-bar li {
+  font-size: 0.95rem; /* 稍微縮小字體 */
+  font-weight: 400; /* 減少字體粗細 */
+  color: #fff;
+  letter-spacing: 0; /* 移除字母間距 */
+  flex: 1; /* 讓每個項目等寬 */
+  text-align: center; /* 置中對齊 */
+  line-height: 1.2; /* 緊縮行高 */
+}
+.floating-tab-bar a {
+  color: #fff;
+  text-decoration: none;
+  padding: 2px 0; /* 減少垂直間距 */
+  border-radius: 6px;
+  transition: background .3s ease, color .3s ease, transform .3s ease; /* 統一並加長 transition 時間 */
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  display: block;
+  white-space: nowrap; /* 防止換行 */
+  will-change: transform; /* 優化動畫性能 */
+}
+.floating-tab-bar a:hover {
+  background: transparent; /* 移除底框 */
+  color: #fff;
+  transform: translateY(-2px); /* 文字升高效果 */
+}
+.floating-tab-bar a:active,
+.floating-tab-bar a:focus{
+  background: rgba(255,255,255,0.2); /* 更明顯的選取效果 */
+  color: #fff;
+  outline: none;
+}
+
+@media (max-width: 768px) {
+  .floating-tab-bar {
+    top: 12px;
+    left: 20px; /* 根據測量數據精確調整 */
+    right: 20px; /* 根據測量數據精確調整 */
+    transform: translateY(-10px);
+    width: auto;
+    max-width: none;
+    min-width: auto;
+    background: var(--glass-bg, rgba(255,255,255,.08));
+    border: 1px solid var(--glass-bd, rgba(255,255,255,.18));
+    box-shadow: 0 8px 32px rgba(0,0,0,.22);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    padding: 15px 16px; /* 調整上下padding，讓高度與分享按鈕相同(50px) */
+    border-radius: 12px;
+    box-sizing: border-box;
+  }
+  
+  /* 手機版分享功能間距調整 */
+  .floating-share {
+    top: calc(12px + 50px + var(--floating-gap)) !important; /* 手機版：top + height + gap */
+    left: 20px !important;
+    right: 20px !important;
+  }
+}
+
+/* 極小螢幕或浮動選單變成2x2時的調整 */
+@media (max-width: 480px) {
+  .floating-share {
+    top: calc(12px + 50px + var(--floating-gap)) !important; /* 480px版2x2：與768px相同高度 + gap */
+  }
+  .floating-tab-bar ul {
+    gap: 12px; /* 恢復合理間距 */
+    display:flex;
+    width:100%;
+    align-items:center;
+    justify-content: space-between; /* 恢復原始分布 */
+    margin: 0;
+    padding: 0;
+  }
+  .floating-tab-bar li {
+    flex: 1 1 0; /* 恢復等寬分布 */
+    min-width: 0;
+    text-align: center;
+    font-size: 0.9rem; /* 恢復合理字體大小 */
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.2;
+  }
+  .floating-tab-bar a {
+    display:block;
+    padding:4px 6px; /* 恢復合理內距 */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px; /* 保留圓角但不要 overflow hidden */
+    transition: background .3s ease, color .3s ease, transform .3s ease; /* 與桌面版保持一致 */
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    white-space: nowrap;
+    will-change: transform; /* 優化動畫性能 */
+    /* 移除會切割文字的 overflow: hidden */
+  }
+  
+  .floating-tab-bar a:hover {
+    background: transparent; /* 移除底框 */
+    color: #fff;
+    transform: translateY(-2px); /* 文字升高效果 */
+  }
+}
+
+/* ===== 分享功能樣式 ===== */
+.floating-share {
+  position: fixed;
+  top: 102px; /* 採用與分享按鈕到社群圖示相同的間距(10px) */
+  right: 32px; /* 與浮動選單容器右側對齊 */
+  z-index: 10000;
+  display: block; /* 固定為 block，不再切換 */
+  visibility: hidden; /* 初始隱藏 */
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-radius: 0;
+  padding: 0;
+  opacity: 0; /* 初始透明，由滾動邏輯控制 */
+  transition: opacity .28s ease, visibility 0s linear .28s; /* 收起時延後切 visibility */
+  /* 移除 transform 相關屬性 */
+  /* 移除固定寬度，讓容器自適應 */
+}
+
+.floating-share.is-visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity .28s ease; /* 展開時立即可見 + 淡入 */
+}
+
+.share-container {
+  position: relative;
+  display: flex;
+  justify-content: flex-end; /* 確保分享按鈕右對齊 */
+  width: auto; /* 讓容器寬度自適應按鈕 */
+}
+
+.share-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: #ffffff; /* 改為白色背景 */
+  border: 1px solid rgba(0,0,0,.1); /* 改為淺灰邊框 */
+  border-radius: 11px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 32px rgba(0,0,0,.22);
+  overflow: hidden;
+  position: relative;
+  /* 移除毛玻璃相關屬性 */
+}
+
+/* 移除毛玻璃偽元素 */
+/*
+.share-trigger::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--glass-bg, rgba(255,255,255,.08));
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: inherit;
+  z-index: 0;
+  will-change: backdrop-filter;
+}
+*/
+
+/* SVG 圖示樣式 */
+.share-trigger .icon {
+  width: 32px;
+  height: 32px;
+  fill: none;
+  stroke: #333333;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.share-trigger:hover {
+  background: #f5f5f5; /* hover 時稍微變灰 */
+  border-color: rgba(0,0,0,0.2);
+  box-shadow: 0 12px 40px rgba(0,0,0,.3);
+}
+
+/* 移除毛玻璃 hover 效果 */
+/*
+.share-trigger:hover::before {
+  background: rgba(255,255,255,0.15);
+}
+*/
+
+/* 開啟狀態樣式 */
+.floating-share.is-open .share-trigger {
+  background: #f0f0f0; /* 開啟時的背景色 */
+  border-color: rgba(0,0,0,0.2);
+  box-shadow: 0 12px 40px rgba(0,0,0,.3);
+}
+
+/* 移除毛玻璃開啟效果 */
+/*
+.floating-share.is-open .share-trigger::before {
+  background: rgba(255,255,255,0.15);
+}
+*/
+
+/* 展開的選單與項目 */
+.floating-share.is-open .share-menu{
+  opacity:1; visibility:visible; pointer-events:auto; transform:translateY(0);
+}
+.floating-share.is-open .share-item{
+  opacity:1; pointer-events:auto; transform:translateY(0) scale(1);
+}
+
+/* 觸控裝置不要殘留 hover 效果 */
+@media (hover:none) {
+  .share-trigger:hover { 
+    border-color: var(--glass-bd, rgba(255,255,255,.18)); 
+    box-shadow: 0 8px 32px rgba(0,0,0,.22); 
+  }
+  .share-trigger:hover::before {
+    background: var(--glass-bg, rgba(255,255,255,.08));
+  }
+}
+
+.share-trigger img {
+  width: 48px;
+  height: 48px;
+  transition: transform .2s ease;
+}
+
+.share-menu {
+  position: absolute;
+  top: 70px; /* 增加間距，讓分享按鈕和社群圖示間距更大 */
+  right: 0; /* 右側對齊分享按鈕 */
+  transform: translateY(-10px);
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* 調整為與分享按鈕間距一致 */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .25s ease, visibility .25s ease, transform .25s ease;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 1px 0; /* 調整為1px內距 */
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* Facebook 圖示移除額外間距 */
+.share-item:nth-child(1) { /* Facebook */
+  transition-delay: 0.1s;
+}
+
+.share-item:nth-child(2) { /* Line */
+  transition-delay: 0.2s;
+}
+
+.share-item:nth-child(3) { /* X (Twitter) */
+  transition-delay: 0.3s;
+}
+
+.share-item:nth-child(4) { /* LinkedIn */
+  transition-delay: 0.4s;
+}
+
+.share-container:hover .share-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0); /* 移除 translateX */
+}
+
+.share-container:hover .share-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0); /* 移除 translateX */
+}
+
+.share-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(10px) scale(0.8);
+  transition: all .3s ease, opacity .4s ease, transform .4s ease;
+}
+
+/* 為每個社群圖示設定不同的延遲時間，實現逐一浮現效果 */
+/* Facebook 的樣式已在上方定義 */
+
+.share-item:nth-child(2) { /* Line */
+  transition-delay: 0.2s;
+}
+
+.share-item:nth-child(3) { /* X (Twitter) */
+  transition-delay: 0.3s;
+}
+
+.share-item:nth-child(4) { /* LinkedIn */
+  transition-delay: 0.4s;
+}
+
+.share-container:hover .share-item {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.share-item:hover {
+  transform: translateY(-2px) scale(1.05);
+  opacity: 0.8;
+}
+
+.share-item img {
+  width: 60px;
+  height: 60px;
+  transition: transform .2s ease;
+}
+
+/* 手機版分享功能調整 */
+@media (max-width: 768px) {
+  .floating-share {
+    top: 72px; /* 採用與桌面版相同的10px間距邏輯 */
+    right: 20px; /* 靠右對齊 */
+    left: auto; /* 移除左側定位 */
+  }
+  
+  .share-container {
+    display: flex;
+    justify-content: flex-end; /* 確保分享按鈕右對齊 */
+    width: auto; /* 讓容器寬度自適應按鈕 */
+  }
+  
+  .share-trigger {
+    width: 50px;
+    height: 50px;
+    border-radius: 9px;
+  }
+  
+  .share-trigger .icon {
+    width: 26px;
+    height: 26px;
+  }
+  
+  .share-menu {
+    position: absolute;
+    top: 60px; /* 調整間距 */
+    right: 0; /* 右側對齊分享按鈕 */
+    transform: translateY(-10px);
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* 手機版稍微縮小間距 */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none; /* 隱藏時不可點擊 */
+    transition: opacity .25s ease, visibility .25s ease, transform .25s ease, pointer-events .25s ease;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 1px 0;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  
+  .share-container:hover .share-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto; /* 顯示時可點擊 */
+    transform: translateY(0);
+  }
+  
+  .share-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    text-decoration: none;
+    opacity: 0;
+    pointer-events: none; /* 隱藏時不可點擊 */
+    transform: translateY(10px) scale(0.8);
+    transition: all .3s ease, opacity .4s ease, transform .4s ease, pointer-events .4s ease;
+  }
+  
+  .share-container:hover .share-item {
+    opacity: 1;
+    pointer-events: auto; /* 顯示時可點擊 */
+    transform: translateY(0) scale(1);
+  }
+  
+  .share-item:hover {
+    transform: translateY(-2px) scale(1.05);
+    opacity: 0.8;
+  }
+  
+  .share-item img {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* 小尺寸手機橫向顯示調整 */
+@media (max-width: 480px) and (orientation: landscape) {
+  .floating-share {
+    top: calc(12px + 42px + var(--floating-gap)) !important; /* 橫向時較矮的高度 + gap */
+    right: 15px; /* 橫向時稍微內移 */
+  }
+  
+  .share-menu {
+    flex-direction: row; /* 橫向時改為水平排列 */
+    gap: 4px; /* 橫向時減少間距 */
+  }
+  
+  .share-item {
+    width: 50px; /* 橫向時稍微縮小 */
+    height: 50px;
+  }
+  
+  .share-item img {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .floating-tab-bar {
+    /* 基於 768px 測量結果調整 */
+    left: 20px; /* 先嘗試相同數值 */
+    right: 20px; /* 先嘗試相同數值 */
+    background: var(--glass-bg, rgba(255,255,255,.08));
+    border: 1px solid var(--glass-bd, rgba(255,255,255,.18));
+    box-shadow: 0 8px 32px rgba(0,0,0,.22);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    padding: 12px 16px;
+    border-radius: 12px;
+    box-sizing: border-box;
+  }
+}
+</style>
+
+<style>
+/* ===== 講師輪播分頁圓形點樣式 */
+.speaker-pager {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 22px;
+}
+.speaker-pager .pager-dot {
+  width: 14px;
+  height: 14px;
+  background: rgba(255,255,255,0.22);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background .3s;
+}
+.speaker-pager .pager-dot[aria-current="true"] {
+  background: #fff;
+  box-shadow: 0 0 0 2px #fff2, 0 2px 8px #0002;
+}
+</style>
 </head>
 <body>
 
@@ -2000,103 +4694,79 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
         <!-- page 1 -->
         <div class="speaker-grid speaker-page" data-page="0">
           <div class="speaker">
-            <img class="photo" src="assets/img/speaker1-1.png" alt="David Horsley">
+            <img class="photo" src="assets/img/Horsley-David.png" alt="David Horsley 教授">
             <div class="meta">
-              <div class="name">David Horsley</div>
-              <div class="title-chip">
-                <span class="lang-zh">教授，加州大學戴維斯分校</span>
-                <span class="lang-en" style="display: none;">Professor, UC Davis</span>
-              </div>
+              <div class="name">David Horsley 教授</div>
+              <div class="title-chip">加州大學戴維斯分校</div>
             </div>
             <div class="bio-card">
-              <div class="bio-desc">
-                <span class="lang-zh">David Horsley 教授專注於半導體製程與材料研究，擁有多年跨國研究與教學經驗。</span>
-                <span class="lang-en" style="display: none;">Professor David Horsley focuses on semiconductor process and materials research, with extensive international research and teaching experience.</span>
-              </div>
+              <div class="bio-desc">具備深厚工程與半導體研究背景的知名學者，將分享發展頂尖半導體人才之教育途徑與關鍵舉措。</div>
             </div>
           </div>
           <div class="speaker">
-            <img class="photo" src="assets/img/speaker2-1.png" alt="沈文冰">
+            <img class="photo" src="assets/img/Philip-Wong.png" alt="黃漢森 教授">
             <div class="meta">
-              <div class="name">沈文冰</div>
-              <div class="title-chip">
-                <span class="lang-zh">智慧應用整合處 副處長</span>
-                <span class="lang-en" style="display: none;">Deputy Director, Smart Applications Integration</span>
-              </div>
+              <div class="name">黃漢森 教授</div>
+              <div class="title-chip">史丹佛大學 Willard R. and Inez Kerr Bell 講座教授<br>台積電首席科學家</div>
             </div>
             <div class="bio-card">
-              <div class="bio-desc">
-                <span class="lang-zh">沈文冰 副處長負責智慧應用整合與跨部門協作，專長於系統整合與策略規劃。</span>
-                <span class="lang-en" style="display: none;">Deputy Director Shen is responsible for smart application integration and cross-departmental collaboration, specializing in system integration and strategic planning.</span>
-              </div>
+              <div class="bio-desc">同時擔任台積電首席科學家（顧問角色），曾任美國 IBM T.J. Watson 研究中心研究員（1988–2004），並於2018–2020年擔任台積電企業研究副總裁，2020年起續任首席科學家顧問。黃教授對美國《晶片法案》有重要影響，並共同發表多篇重要出版品，包括《矽三角》(2023) 與《如何實現一兆電晶體GPU》(2024)。他是 IEEE Fellow，並榮獲該學會電子器件分會最高榮譽 J.J. Ebers Award。</div>
             </div>
           </div>
           <div class="speaker">
-            <img class="photo" src="assets/img/speaker3-1.png" alt="Tzung-Hua Lin">
+            <img class="photo" src="assets/img/speaker.png" alt="Chun-Yu Lin">
             <div class="meta">
-              <div class="name">Tzung-Hua Lin</div>
-              <div class="title-chip">
-                <span class="lang-zh">R&D Manager</span>
-                <span class="lang-en" style="display: none;">R&D Manager</span>
-              </div>
+              <div class="name">Chun-Yu Lin</div>
+              <div class="title-chip">台積電人資部經理</div>
             </div>
             <div class="bio-card">
-              <div class="bio-desc">
-                <span class="lang-zh">Tzung-Hua Lin 具豐富研發管理經驗，領導多項產品化與量產導入專案。</span>
-                <span class="lang-en" style="display: none;">Tzung-Hua Lin has extensive R&D management experience, leading multiple product development and mass production projects.</span>
-              </div>
+              <div class="bio-desc"></div>
             </div>
           </div>
         </div>
-
         <!-- page 2 -->
         <div class="speaker-grid speaker-page" data-page="1">
           <div class="speaker">
-            <img class="photo" src="assets/img/speaker1-1.png" alt="Steve Wang">
+            <img class="photo" src="assets/img/TzungHua-Lin.png" alt="Tzung-Hua Lin">
+            <div class="meta">
+              <div class="name">Tzung-Hua Lin</div>
+              <div class="title-chip">台積電研發部經理</div>
+            </div>
+            <div class="bio-card">
+              <div class="bio-desc"></div>
+            </div>
+          </div>
+          <div class="speaker">
+            <img class="photo" src="assets/img/speaker.png" alt="Steve Wang">
             <div class="meta">
               <div class="name">Steve Wang</div>
-              <div class="title-chip">
-                <span class="lang-zh">Design Technology Platforms Manager</span>
-                <span class="lang-en" style="display: none;">Design Technology Platforms Manager</span>
-              </div>
+              <div class="title-chip">設計暨技術平台經理</div>
             </div>
             <div class="bio-card">
-              <div class="bio-desc">
-                <span class="lang-zh">負責設計工具與平台整合，推動跨團隊設計流程優化。</span>
-                <span class="lang-en" style="display: none;">Responsible for design tool and platform integration, driving cross-team design process optimization.</span>
-              </div>
+              <div class="bio-desc"></div>
             </div>
           </div>
           <div class="speaker">
-            <img class="photo" src="assets/img/speaker1-2.png" alt="Chun-Yu Lin">
+            <img class="photo" src="assets/img/speaker.png" alt="待定">
             <div class="meta">
-              <div class="name">Chun-Yu Lin</div>
-              <div class="title-chip">
-                <span class="lang-zh">HR Manager</span>
-                <span class="lang-en" style="display: none;">HR Manager</span>
-              </div>
+              <div class="name">待定</div>
+              <div class="title-chip">營運部經理</div>
             </div>
             <div class="bio-card">
-              <div class="bio-desc">
-                <span class="lang-zh">專注人才招募與發展，擅長組織訓練與職涯規劃。</span>
-                <span class="lang-en" style="display: none;">Focuses on talent recruitment and development, specializing in organizational training and career planning.</span>
-              </div>
+              <div class="bio-desc"></div>
             </div>
           </div>
+        </div>
+        <!-- page 3 -->
+        <div class="speaker-grid speaker-page" data-page="2">
           <div class="speaker">
-            <img class="photo" src="assets/img/speaker1-3.png" alt="TBC">
+            <img class="photo" src="assets/img/Wenping-Shen.png" alt="Wenping Shen">
             <div class="meta">
-              <div class="name">TBC</div>
-              <div class="title-chip">
-                <span class="lang-zh">Operation Manager</span>
-                <span class="lang-en" style="display: none;">Operation Manager</span>
-              </div>
+              <div class="name">Wenping Shen</div>
+              <div class="title-chip">資訊部經理</div>
             </div>
             <div class="bio-card">
-              <div class="bio-desc">
-                <span class="lang-zh">營運管理職務，負責資源調度與專案執行。</span>
-                <span class="lang-en" style="display: none;">Operations management role, responsible for resource allocation and project execution.</span>
-              </div>
+              <div class="bio-desc"></div>
             </div>
           </div>
         </div>
@@ -2841,438 +5511,4 @@ function measureAlignment() {
     
     // 計算理想的 left/right 值
     const bioRect = bioCard.getBoundingClientRect();
-    const idealLeft = bioRect.left;
-    const idealRight = window.innerWidth - bioRect.right;
-    console.log('建議的 CSS 設定:');
-    console.log(`left: ${idealLeft}px; right: ${idealRight}px;`);
-  }
-}
-
-updateFloatingOffset();
-window.addEventListener('resize', updateFloatingOffset);
-document.addEventListener('DOMContentLoaded', () => {
-  updateFloatingOffset();
-  // 初始化浮動表單錨點（預設第一場）
-  updateFloatingMenuAnchors('s1');
-});
-
-// 添加測量功能
-window.addEventListener('load', measureAlignment);
-window.addEventListener('resize', measureAlignment);
-
-let _resizeTimer = null;
-window.addEventListener('resize', ()=>{
-  if (_resizeTimer) clearTimeout(_resizeTimer);
-  _resizeTimer = setTimeout(()=>{ updateFloatingOffset(); _resizeTimer = null; }, 120);
-});
-
-if (document.fonts && document.fonts.ready) {
-  document.fonts.ready.then(()=>{
-    updateFloatingOffset();
-    setTimeout(updateFloatingOffset, 250);
-  }).catch(()=>{});
-}
-
-/* HERO右上角懸浮橫向表單（滑過logo後浮現） */
-(function(){
-  const tabBar = document.getElementById('floatingTabBar');
-  const logo = document.querySelector('.hero-logo');
-  let rafId = null;
-  const THRESHOLD_FRACTION = 0.25;
-  function toggleTabBar() {
-    if (!tabBar || !logo) return;
-    const rect = logo.getBoundingClientRect();
-    const triggerPoint = rect.top + rect.height * THRESHOLD_FRACTION;
-    const shouldShow = (triggerPoint < 0);
-    const isMobile = window.innerWidth <= 768;
-    
-    // 同時控制分享選單
-    const shareMenu = document.getElementById('floatingShare');
-
-    if (rafId) cancelAnimationFrame(rafId);
-    rafId = requestAnimationFrame(()=>{
-      if (shouldShow) {
-        // 使用 class 控制顯示，避免 backdrop-filter 閃爍
-        tabBar.classList.add('is-visible');
-        if (shareMenu) shareMenu.classList.add('is-visible');
-        // 保持 transform 動畫
-        tabBar.style.transform = 'translateY(0)';
-        if (typeof updateFloatingOffset === 'function') updateFloatingOffset();
-      } else {
-        // 隱藏時移除 class
-        tabBar.classList.remove('is-visible');
-        if (shareMenu) shareMenu.classList.remove('is-visible');
-        // 保持 transform 動畫
-        tabBar.style.transform = 'translateY(-10px)';
-      }
-    });
-  }
-  window.addEventListener('scroll', toggleTabBar);
-  window.addEventListener('resize', toggleTabBar);
-  document.addEventListener('DOMContentLoaded', toggleTabBar);
-})();
-
-/* 錨點平滑滾動 */
-document.querySelectorAll('.floating-tab-bar a[href^="#"]').forEach(a=>{
-  a.addEventListener('click', function(e){
-    const target = document.querySelector(this.getAttribute('href'));
-    if(!target) return;
-    e.preventDefault();
-    const offset = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--floating-offset')) || 88;
-    const top = target.getBoundingClientRect().top + window.scrollY - offset;
-    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
-  });
-});
-
-/* 按鈕功能 */
-document.querySelectorAll('.register-btn').forEach(btn=>{
-  btn.onclick = function(e) {
-    e.preventDefault();
-    alert('報名網站尚未開放');
-  };
-});
-
-const _ftb = document.getElementById('floatingTabBar');
-if (_ftb) {
-  _ftb.addEventListener('transitionend', (ev)=>{
-    if (ev.propertyName === 'opacity' || ev.propertyName === 'transform') updateFloatingOffset();
-  });
-}
-
-window.addEventListener('orientationchange', ()=> setTimeout(updateFloatingOffset, 250));
-window.addEventListener('load', updateFloatingOffset);
-
-/* 語言切換功能 */
-function initLanguageToggle() {
-  const languageToggle = document.querySelector('.language-toggle-track');
-  const languageOptions = document.querySelectorAll('.language-option');
-  
-  if (!languageToggle || !languageOptions.length) return;
-  
-  let currentLang = 'zh'; // 預設為繁體中文
-  
-  // 切換語言內容
-  function switchLanguage(lang) {
-    currentLang = lang;
-    
-    // 更新切換器狀態
-    languageToggle.setAttribute('data-active', lang);
-    languageOptions.forEach(option => {
-      option.classList.toggle('active', option.dataset.lang === lang);
-    });
-    
-    // 切換內容顯示
-    const zhElements = document.querySelectorAll('.lang-zh');
-    const enElements = document.querySelectorAll('.lang-en');
-    
-    if (lang === 'zh') {
-      zhElements.forEach(el => el.style.display = '');
-      enElements.forEach(el => el.style.display = 'none');
-      
-      // 中文模式時，自動切換到台灣時間
-      if (window.switchTimezone) {
-        window.switchTimezone('taiwan');
-      }
-    } else {
-      zhElements.forEach(el => el.style.display = 'none');
-      enElements.forEach(el => el.style.display = '');
-      
-      // 英文模式時，自動切換到加州時間
-      if (window.switchTimezone) {
-        window.switchTimezone('california');
-      }
-    }
-    
-    // 更新報名按鈕提示文字
-    document.querySelectorAll('.register-btn').forEach(btn => {
-      btn.onclick = function(e) {
-        e.preventDefault();
-        const message = lang === 'zh' ? '報名網站尚未開放' : 'Registration website is not yet available';
-        alert(message);
-      };
-    });
-  }
-  
-  // 綁定點擊事件
-  languageOptions.forEach(option => {
-    option.addEventListener('click', () => {
-      const lang = option.dataset.lang;
-      if (lang !== currentLang) {
-        switchLanguage(lang);
-      }
-    });
-  });
-  
-  // 初始化為中文
-  switchLanguage('zh');
-}
-
-/* 時間切換功能 */
-function initTimeToggle() {
-  const timeToggle = document.querySelector('.time-toggle-track');
-  const timeOptions = document.querySelectorAll('.time-option');
-  
-  if (!timeToggle || !timeOptions.length) return;
-  
-  let currentTimezone = 'california'; // 預設為加州時間
-  
-  // 切換時區顯示
-  function switchTimezone(timezone) {
-    currentTimezone = timezone;
-    
-    // 更新切換器狀態
-    timeToggle.setAttribute('data-active', timezone);
-    timeOptions.forEach(option => {
-      option.classList.toggle('active', option.dataset.timezone === timezone);
-    });
-
-    // 獲取當前語言狀態
-    const currentLang = document.querySelector('.language-option.active')?.dataset.lang || 'zh';
-    
-    // 切換時間顯示
-    const taiwanTimes = document.querySelectorAll('.taiwan-time');
-    const californiaTimes = document.querySelectorAll('.california-time');
-
-    if (timezone === 'taiwan') {
-      // 顯示台灣時間（在議程表格內容中）
-      taiwanTimes.forEach(el => el.style.display = '');
-      // 隱藏加州時間（在議程表格內容中）
-      californiaTimes.forEach(el => el.style.display = 'none');
-      
-      // 處理時間標題
-      document.querySelectorAll('.california-time-zh, .california-time-en').forEach(el => {
-        el.style.display = 'none';
-      });
-      
-      // 根據當前語言顯示對應的台灣時間標題
-      if (currentLang === 'zh') {
-        document.querySelectorAll('.taiwan-time-zh').forEach(el => el.style.display = '');
-        document.querySelectorAll('.taiwan-time-en').forEach(el => el.style.display = 'none');
-      } else {
-        document.querySelectorAll('.taiwan-time-zh').forEach(el => el.style.display = 'none');
-        document.querySelectorAll('.taiwan-time-en').forEach(el => el.style.display = '');
-      }
-    } else {
-      // 顯示加州時間（在議程表格內容中）
-      californiaTimes.forEach(el => el.style.display = '');
-      // 隱藏台灣時間（在議程表格內容中）
-      taiwanTimes.forEach(el => el.style.display = 'none');
-      
-      // 處理時間標題
-      document.querySelectorAll('.taiwan-time-zh, .taiwan-time-en').forEach(el => {
-        el.style.display = 'none';
-      });
-      
-      // 根據當前語言顯示對應的加州時間標題
-      if (currentLang === 'zh') {
-        document.querySelectorAll('.california-time-zh').forEach(el => el.style.display = '');
-        document.querySelectorAll('.california-time-en').forEach(el => el.style.display = 'none');
-      } else {
-        document.querySelectorAll('.california-time-zh').forEach(el => el.style.display = 'none');
-        document.querySelectorAll('.california-time-en').forEach(el => el.style.display = '');
-      }
-    }
-  }
-  
-  // 將 switchTimezone 函數設為全域可訪問
-  window.switchTimezone = switchTimezone;
-  
-  // 綁定點擊事件
-  timeOptions.forEach(option => {
-    option.addEventListener('click', () => {
-      const timezone = option.dataset.timezone;
-      if (timezone !== currentTimezone) {
-        switchTimezone(timezone);
-      }
-    });
-  });
-  
-  // 初始化為加州時間
-  switchTimezone('california');
-}
-
-// 在頁面載入後初始化時間切換器
-document.addEventListener('DOMContentLoaded', initTimeToggle);
-
-// 在頁面載入後初始化語言切換器  
-document.addEventListener('DOMContentLoaded', initLanguageToggle);
-
-/* 分享功能 */
-document.addEventListener('DOMContentLoaded', function() {
-  const floatingShare = document.getElementById('floatingShare');
-  const shareTrigger = floatingShare?.querySelector('.share-trigger');
-  const shareContainer = floatingShare?.querySelector('.share-container');
-
-  let open = false;
-  function setOpen(v){
-    open = v;
-    floatingShare.classList.toggle('is-open', open);
-  }
-
-  // 添加按壓回饋效果
-  function bindPress(btn, onClick){
-    let pressT = null;
-    const press = () => {
-      btn.classList.add('pressed');
-      if (pressT) clearTimeout(pressT);
-      // 150ms 後自動恢復顏色
-      pressT = setTimeout(()=> btn.classList.remove('pressed'), 150);
-    };
-
-    btn.addEventListener('pointerdown', press);
-    btn.addEventListener('pointerup',   () => setTimeout(()=>btn.classList.remove('pressed'), 150));
-    btn.addEventListener('pointercancel',() => btn.classList.remove('pressed'));
-    btn.addEventListener('mouseleave',  () => btn.classList.remove('pressed'));
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      press();               // 點擊當下也給一次按壓回饋
-      onClick?.();           // 執行原本功能
-    }, {passive:false});
-  }
-
-  // 綁定分享按鈕的按壓效果
-  bindPress(shareTrigger, () => {
-    setOpen(!open);
-  });
-
-  document.addEventListener('click', (e) => {
-    if (!open) return;
-    if (!shareContainer.contains(e.target)) setOpen(false);
-  });
-  
-  // 分享連結功能
-  const shareItems = document.querySelectorAll('.share-item');
-  const currentUrl = window.location.href;
-  const title = document.title || '前瞻科技系列論壇';
-  
-  // 分享連結點擊處理
-  shareItems.forEach(item => {
-    item.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      
-      let shareUrl = '';
-      
-      if (item.classList.contains('share-facebook')) {
-        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`;
-      } else if (item.classList.contains('share-line')) {
-        shareUrl = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(currentUrl)}`;
-      } else if (item.classList.contains('share-twitter')) {
-        shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(title)}`;
-      } else if (item.classList.contains('share-linkedin')) {
-        shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentUrl)}`;
-      }
-      
-      if (shareUrl) {
-        window.open(shareUrl, '_blank', 'width=600,height=400,scrollbars=yes,resizable=yes');
-        
-        // 分享後關閉選單 (手機版)
-        if (window.innerWidth <= 768 && isMenuOpen) {
-          isMenuOpen = false;
-          shareMenu.style.opacity = '0';
-          shareMenu.style.visibility = 'hidden';
-          shareMenu.style.pointerEvents = 'none';
-          shareMenu.style.transform = 'translateY(-10px)';
-          shareItems.forEach(item => {
-            item.style.opacity = '0';
-            item.style.pointerEvents = 'none';
-            item.style.transform = 'translateY(10px) scale(0.8)';
-          });
-        }
-      }
-    });
-  });
-});
-
-/* 圓形漂浮按鈕控制 */
-document.addEventListener('DOMContentLoaded', function() {
-  const floatingBtn = document.getElementById('floatingBtn');
-  const downloadBtn = document.querySelector('.download-btn');
-  const scrollTopBtn = document.querySelector('.scroll-top-btn');
-  
-  // 按鈕常駐顯示，不需要滾動控制
-  if (floatingBtn) {
-    floatingBtn.classList.add('show');
-  }
-  
-  // 確保手機版按鈕正確定位
-  function ensureMobileButtonPosition() {
-    if (window.innerWidth <= 768) {
-      [downloadBtn, scrollTopBtn].forEach(btn => {
-        if (btn) {
-          btn.style.marginLeft = '12px';
-          btn.style.transform = ''; /* 清除任何transform */
-        }
-      });
-    } else {
-      [downloadBtn, scrollTopBtn].forEach(btn => {
-        if (btn) {
-          btn.style.marginLeft = '0';
-          btn.style.transform = '';
-        }
-      });
-    }
-  }
-  
-  // 初始化按鈕位置
-  ensureMobileButtonPosition();
-  
-  // 視窗大小改變時重新調整
-  window.addEventListener('resize', ensureMobileButtonPosition);
-  
-  function bindPress(btn, onClick){
-    let pressT = null;
-    const press = () => {
-      btn.classList.add('pressed');
-      if (pressT) clearTimeout(pressT);
-      // 150ms 後自動恢復顏色（不依賴 animationend）
-      pressT = setTimeout(()=> btn.classList.remove('pressed'), 150);
-    };
-
-    btn.addEventListener('pointerdown', press);
-    btn.addEventListener('pointerup',   () => setTimeout(()=>btn.classList.remove('pressed'), 150));
-    btn.addEventListener('pointercancel',() => btn.classList.remove('pressed'));
-    btn.addEventListener('mouseleave',  () => btn.classList.remove('pressed'));
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      press();               // 點擊當下也給一次按壓回饋
-      onClick?.();           // 執行原本功能
-    }, {passive:false});
-  }
-
-  bindPress(downloadBtn, () => {
-    // 下載：保留你原本的下載動作（或改成真正檔案）
-    const link = document.createElement('a');
-    link.href = 'data:text/plain;charset=utf-8,前瞻科技系列論壇議程資訊%0A%0A此為示範文件';
-    link.download = '前瞻科技論壇議程.txt';
-    document.body.appendChild(link); link.click(); document.body.removeChild(link);
-
-    // 如果仍要顯示「下載箭頭」動畫，請：
-    // 1) 把動畫定義在按鈕本體 `.download-btn.animate`
-    // 2) 這裡用強制重排重新播放一次
-    downloadBtn.classList.remove('animate'); void downloadBtn.offsetWidth; downloadBtn.classList.add('animate');
-    setTimeout(()=> downloadBtn.classList.remove('animate'), 1200); // 以 timeout 作為保險
-  });
-
-  bindPress(scrollTopBtn, () => {
-    window.scrollTo({top:0, behavior:'smooth'});
-    // 回頂箭頭若要動畫，同上：
-    scrollTopBtn.classList.remove('animate'); void scrollTopBtn.offsetWidth; scrollTopBtn.classList.add('animate');
-    setTimeout(()=> scrollTopBtn.classList.remove('animate'), 1200);
-  });
-  
-  // 更新報名連結
-  const registerLink = floatingBtn?.querySelector('.button a');
-  if (registerLink) {
-    registerLink.onclick = function(e) {
-      e.preventDefault();
-      window.open('https://example.com/register', '_blank');
-      return false;
-    };
-  }
-});
-</script>
-
-</body>
-</html>
+    const idealLeft = bio
