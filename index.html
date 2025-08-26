@@ -46,7 +46,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   width:100%;
   aspect-ratio:1920/940;
   overflow:hidden;
-  background:#0b0c0f url("assets/img/hero-bg.png") center/cover no-repeat;
+  background:#0b0c0f url("assets/img/hero-bg.jpg") center/cover no-repeat;
 }
 .hero-img{ position:absolute; max-width:100%; height:auto; pointer-events:none; user-select:none; opacity:1 }
 
@@ -429,7 +429,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 
 @media (max-width:768px){
   /* Hero 手機版 */
-  .hero-wrapper{ aspect-ratio:1920/1800; background-image:url("assets/img/hero-bg-m.png"); background-position:center top; }
+  .hero-wrapper{ aspect-ratio:1920/1800; background-image:url("assets/img/hero-bg-m.jpg"); background-position:center top; }
   .hero-logo{ top:6vw; left:6vw; width:50vw; }
   .hero-title{ top:28vw; left:6vw; width:65vw; }
   .hero-subtitle{ top:52vw; left:6vw; width:65vw; }
@@ -731,7 +731,8 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   top: 32px;
   right: 32px;
   z-index: 9999;
-  display: none;
+  display: block; /* 固定為 block，不再切換 */
+  visibility: hidden; /* 初始隱藏 */
   background: var(--glass-bg, rgba(255,255,255,.08));
   border: 1px solid var(--glass-bd, rgba(255,255,255,.18));
   box-shadow: 0 8px 32px rgba(0,0,0,.22);
@@ -741,10 +742,17 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   padding: 18px 32px; /* 調整上下padding，讓高度與分享按鈕相同(60px) */
   transform: translateY(-10px);
   opacity: 0;
-  transition: transform .28s ease, opacity .28s ease;
+  transition: opacity .28s ease, visibility 0s linear .28s; /* 收起時延後切 visibility */
   will-change: transform, opacity;
   max-width: 420px; /* 增加最大寬度讓選單可以更長 */
   width: auto;
+  isolation: isolate; /* 避免祖先的合成影響取樣 */
+}
+
+.floating-tab-bar.is-visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity .28s ease; /* 展開時立即可見 + 淡入 */
 }
 
 .floating-tab-bar ul {
@@ -852,7 +860,8 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   top: 102px; /* 採用與分享按鈕到社群圖示相同的間距(10px) */
   right: 32px; /* 與浮動選單容器右側對齊 */
   z-index: 10000;
-  display: none; /* 初始隱藏，由滾動邏輯控制顯示 */
+  display: block; /* 固定為 block，不再切換 */
+  visibility: hidden; /* 初始隱藏 */
   background: transparent;
   border: none;
   box-shadow: none;
@@ -861,9 +870,15 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   border-radius: 0;
   padding: 0;
   opacity: 0; /* 初始透明，由滾動邏輯控制 */
-  transition: opacity .28s ease;
+  transition: opacity .28s ease, visibility 0s linear .28s; /* 收起時延後切 visibility */
   /* 移除 transform 相關屬性 */
   /* 移除固定寬度，讓容器自適應 */
+}
+
+.floating-share.is-visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity .28s ease; /* 展開時立即可見 + 淡入 */
 }
 
 .share-container {
@@ -888,6 +903,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   overflow: hidden;
   position: relative;
   background-clip: padding-box;
+  isolation: isolate; /* 避免祖先的合成影響取樣 */
 }
 
 /* 玻璃與模糊都放在 pseudo 上 */
@@ -1021,7 +1037,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 /* 手機版分享功能調整 */
 @media (max-width: 768px) {
   .floating-share {
-    top: 78px; /* 在浮動選單下方，適當間距 */
+    top: 72px; /* 採用與桌面版相同的10px間距邏輯 */
     right: 20px; /* 靠右對齊 */
     left: auto; /* 移除左側定位 */
     display: block; /* 改為 block */
@@ -1109,7 +1125,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 /* 小尺寸手機橫向顯示調整 */
 @media (max-width: 480px) and (orientation: landscape) {
   .floating-share {
-    top: 68px; /* 橫向時降低位置，但保持適當間距 */
+    top: 62px; /* 橫向時保持與浮動選單10px間距 */
     right: 15px; /* 橫向時稍微內移 */
   }
   
@@ -2786,30 +2802,18 @@ if (document.fonts && document.fonts.ready) {
     if (rafId) cancelAnimationFrame(rafId);
     rafId = requestAnimationFrame(()=>{
       if (shouldShow) {
-        tabBar.style.display = 'flex';
-        if (shareMenu) shareMenu.style.display = 'block';
-        requestAnimationFrame(()=>{
-          // 所有螢幕尺寸都使用相同的transform
-          tabBar.style.transform = 'translateY(0)';
-          tabBar.style.opacity = '1';
-          if (shareMenu) {
-            // 使用 opacity 而非 transform 來避免影響 backdrop-filter
-            shareMenu.style.opacity = '1';
-          }
-          if (typeof updateFloatingOffset === 'function') updateFloatingOffset();
-        });
+        // 使用 class 控制顯示，避免 backdrop-filter 閃爍
+        tabBar.classList.add('is-visible');
+        if (shareMenu) shareMenu.classList.add('is-visible');
+        // 保持 transform 動畫
+        tabBar.style.transform = 'translateY(0)';
+        if (typeof updateFloatingOffset === 'function') updateFloatingOffset();
       } else {
-        // 隱藏時所有螢幕尺寸都使用相同的transform
+        // 隱藏時移除 class
+        tabBar.classList.remove('is-visible');
+        if (shareMenu) shareMenu.classList.remove('is-visible');
+        // 保持 transform 動畫
         tabBar.style.transform = 'translateY(-10px)';
-        tabBar.style.opacity = '0';
-        if (shareMenu) {
-          // 使用 opacity 而非 transform 來避免影響 backdrop-filter
-          shareMenu.style.opacity = '0';
-        }
-        setTimeout(()=>{ 
-          if (tabBar && tabBar.style.opacity === '0') tabBar.style.display = 'none';
-          if (shareMenu && shareMenu.style.opacity === '0') shareMenu.style.display = 'none';
-        }, 300);
       }
     });
   }
