@@ -68,8 +68,6 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 /* ===== 日期選單（卡片式，置於 HERO 底部） ===== */
 .event-bar{
   position:absolute;
-  left:calc( 32px + 3.65vw); /* 調整左側邊距：32px固定 + 3.65vw響應式 */
-  right:32px; /* 與浮動選單右側對齊 */
   bottom:0;
   transform:none; /* 移除置中變換 */
   width:auto; /* 讓寬度自動適應 */
@@ -82,9 +80,10 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 }
 .event-bar .bar{
   display:grid;
-  grid-template-columns: repeat(4, minmax(180px, 1fr));
+  grid-template-columns: repeat(4, auto); /* 改為 auto，讓按鈕根據內容調整寬度 */
   gap:clamp(10px, 1.25vw, 20px);
   align-items:stretch;
+  justify-content: center; /* 讓按鈕組在容器中居中 */
 }
 .bar-item{
   --c1: var(--tab-default);
@@ -93,13 +92,13 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   color:#fff; cursor:pointer; user-select:none;
   display:flex; align-items:center; justify-content:center; gap:10px;
   border-radius:10px;
-  padding:10px 24px 9px;
+  padding:8px 16px; /* 縮小內邊距 */
   background:linear-gradient(135deg, var(--c1) 0%, var(--c2) 100%);
   background-size:200% 200%; background-position:0% 50%;
   transition:background-position .6s ease, transform .2s ease, box-shadow .3s ease;
   box-shadow:0 8px 20px rgba(0,0,0,.25);
   white-space:nowrap;
-  min-width:180px;
+  min-width:120px; /* 減少最小寬度 */
   flex-shrink:0;
 }
 .bar-item:hover{ background-position:100% 50%; transform:translateY(-1px); }
@@ -439,17 +438,23 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   .event-info .inner{ padding:0 20px; } /* 手機版調整為與浮動選單一致 */
   .event-info h2:not(:first-of-type) { margin-top: clamp(40px, 8vw, 60px); } /* 增加段落間距 */
   .topic-wrap{ margin:8px auto 12px; }
-  .topic-badge{ margin-top:12px; }
+  .topic-badge{ 
+    margin-top:12px; 
+    max-width: calc(100vw - 40px); /* 與 2×2 選單同寬：扣除左右 20px 邊距 */
+    width: 100%;
+    box-sizing: border-box;
+  }
   .topic-badge .topic-en{ margin-top:4px }
 
   /* 日期選單 */
   .event-bar {
-    left: 20px; /* 手機版與浮動選單一致 */
-    right: 20px; /* 手機版與浮動選單一致 */
+    left: 20px; /* 手機版使用固定邊距 */
+    right: 20px; /* 手機版使用固定邊距 */
   }
   .event-bar .bar{
-    grid-template-columns:repeat(2, minmax(0, 1fr));
-    gap:clamp(8px, 2.2vw, 16px);
+    grid-template-columns: repeat(2, 1fr); /* 2×2 佈局 */
+    gap: clamp(4px, 1.1vw, 8px); /* 適當間距 */
+    box-sizing: border-box;
   }
   
   /* 講者區域 */
@@ -702,6 +707,14 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
     padding: 10px 16px;
     font-size: 13px;
     min-width: 80px;
+  }
+}
+
+/* 769px 以上通通與 logo 對齊 */
+@media (min-width: 769px) {
+  .event-bar {
+    left: calc( 70/1920*100%) !important; /* 與 logo 左邊距對齊，強制覆蓋 */
+    right: calc( 70/1920*100%) !important; /* 右側使用相同距離，強制覆蓋 */
   }
 }
 
