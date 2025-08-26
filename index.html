@@ -1756,6 +1756,9 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
     /* 移除濾鏡效果，直接使用 SVG 的原始色彩 */
     /* 反向旋轉抵消父元素的旋轉效果 */
     animation: counterRotate 20s linear infinite;
+    /* 優化SVG渲染品質 */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
   }
   
   .button__text {
@@ -1806,22 +1809,24 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   }
   
   .download-btn::after {
-    top: 8px; /* 恢復原本位置 */
-    font-size: 18px; /* 調整為適合50px容器的大小 */
+    position: absolute;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%) rotate(90deg); /* 恢復原本的transform */
+    font-size: 18px; /* 調整為適合50px容器的大小 */
+    transform: translate(-50%, -50%) rotate(90deg); /* 完全置中並旋轉 */
   }
   
   .download-btn::before {
+    position: absolute;
     width: 16px;
     height: 5px;
-    bottom: 12px; /* 恢復原本位置 */
+    bottom: 8px; /* 調整位置使其更接近置中的箭頭 */
     left: 50%;
     transform: translateX(-50%); /* 水平置中 */
     border-width: 2px;
     border-color: white;
     border-top: none;
-    border-radius: 0 0 2px 2px;
+    border-radius: 0; /* 移除R角，與桌面版一致 */
   }
   
   /* 按鈕點擊時的狀態控制 */
