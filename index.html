@@ -1743,7 +1743,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
     border-radius: 9px;
     overflow: hidden;
     position: relative;
-    transform: translateX(12px) !important; /* 與主按鈕對齊，強制覆蓋 */
+    margin-left: 12px; /* 改用 margin 而不是 transform 避免衝突 */
   }
   
   .download-btn {
@@ -1752,38 +1752,36 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
     border-radius: 9px;
     overflow: hidden;
     position: relative;
-    transform: translateX(12px) !important; /* 與主按鈕對齊，強制覆蓋 */
+    margin-left: 12px; /* 改用 margin 而不是 transform 避免衝突 */
   }
   
   .scroll-top-btn::before {
-    font-size: 20px;
+    font-size: 18px; /* 調整為適合50px容器的大小 */
+    transform: rotate(-90deg); /* 確保箭頭方向正確 */
   }
   
-  .download-btn img {
-    width: 20px;
-    height: 20px;
+  .scroll-top-btn:hover {
+    transform: translateY(-2px); /* 確保hover效果正常 */
+  }
+  
+  .download-btn:hover {
+    transform: translateY(-2px); /* 確保hover效果正常 */
   }
   
   .download-btn::after {
-    top: 6px;
-    font-size: 20px;
+    top: 8px; /* 調整位置，縮小上下距離 */
+    font-size: 18px; /* 調整為適合50px容器的大小 */
+    transform: translateX(-50%) rotate(90deg); /* 確保箭頭方向正確 */
   }
   
   .download-btn::before {
-    width: 20px;
-    height: 6px;
-    bottom: 10px;
-    border-width: 2.25px;
+    width: 16px;
+    height: 5px;
+    bottom: 12px; /* 調整位置，縮小上下距離 */
+    border-width: 2px;
     border-color: white;
-    border-radius: 0;
-  }
-  
-  .download-btn::before {
-    width: 14px;
-    height: 6px;
-    bottom: 6px;
-    border-width: 1.5px;
-    border-radius: 0 0 3px 3px;
+    border-top: none;
+    border-radius: 0 0 2px 2px;
   }
 }
 </style>
@@ -3128,13 +3126,15 @@ document.addEventListener('DOMContentLoaded', function() {
     if (window.innerWidth <= 768) {
       [downloadBtn, scrollTopBtn].forEach(btn => {
         if (btn) {
-          btn.style.transform = 'translateX(12px)';
+          btn.style.marginLeft = '12px';
+          btn.style.transform = ''; /* 清除任何transform */
         }
       });
     } else {
       [downloadBtn, scrollTopBtn].forEach(btn => {
         if (btn) {
-          btn.style.transform = 'none';
+          btn.style.marginLeft = '0';
+          btn.style.transform = '';
         }
       });
     }
@@ -3151,20 +3151,20 @@ document.addEventListener('DOMContentLoaded', function() {
     if (btn) {
       btn.addEventListener('touchstart', function(e) {
         if (window.innerWidth <= 768) {
-          this.style.transform = 'translateX(12px)';
+          this.style.marginLeft = '12px';
         }
       });
       
       btn.addEventListener('touchend', function(e) {
         if (window.innerWidth <= 768) {
-          this.style.transform = 'translateX(12px)';
+          this.style.marginLeft = '12px';
         }
       });
       
       btn.addEventListener('click', function(e) {
         e.preventDefault();
         if (window.innerWidth <= 768) {
-          this.style.transform = 'translateX(12px)';
+          this.style.marginLeft = '12px';
         }
       });
     }
