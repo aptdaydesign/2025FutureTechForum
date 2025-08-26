@@ -770,7 +770,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   text-decoration: none;
   padding: 2px 0; /* 減少垂直間距 */
   border-radius: 6px;
-  transition: background .2s, color .2s, transform .2s ease; /* 加入 transform 過渡效果 */
+  transition: background .2s ease, color .2s ease, transform .25s cubic-bezier(0.4, 0, 0.2, 1); /* 優化過渡效果 */
   -webkit-tap-highlight-color: transparent;
   user-select: none;
   display: block;
@@ -830,7 +830,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
     color: #fff;
     text-decoration: none;
     border-radius: 6px; /* 保留圓角但不要 overflow hidden */
-    transition: background .2s, color .2s;
+    transition: background .2s ease, color .2s ease, transform .25s cubic-bezier(0.4, 0, 0.2, 1); /* 與桌面版完全一致的過渡效果 */
     -webkit-tap-highlight-color: transparent;
     user-select: none;
     white-space: nowrap;
@@ -862,9 +862,8 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 
 .share-container {
   position: relative;
-  display: flex;
-  justify-content: flex-end; /* 確保分享按鈕右對齊 */
-  width: 56px; /* 設定容器寬度等於按鈕寬度 */
+  /* 移除 flex 設定，使用與浮動選單相同的內容對齊方式 */
+  text-align: right; /* 右對齊，與浮動選單一致 */
 }
 
 .share-trigger {
@@ -2301,19 +2300,38 @@ if (document.fonts && document.fonts.ready) {
 
     if (rafId) cancelAnimationFrame(rafId);
     rafId = requestAnimationFrame(()=>{
+      const shareMenu = document.getElementById('floatingShare'); // 獲取分享選單
+      
       if (shouldShow) {
         tabBar.style.display = 'flex';
+        // 同時顯示分享選單
+        if (shareMenu) {
+          shareMenu.style.display = 'block';
+        }
         requestAnimationFrame(()=>{
           // 所有螢幕尺寸都使用相同的transform
           tabBar.style.transform = 'translateY(0)';
           tabBar.style.opacity = '1';
+          // 同步分享選單動畫
+          if (shareMenu) {
+            shareMenu.style.transform = 'translateY(0)';
+            shareMenu.style.opacity = '1';
+          }
           if (typeof updateFloatingOffset === 'function') updateFloatingOffset();
         });
       } else {
         // 隱藏時所有螢幕尺寸都使用相同的transform
         tabBar.style.transform = 'translateY(-10px)';
         tabBar.style.opacity = '0';
-        setTimeout(()=>{ if (tabBar && tabBar.style.opacity === '0') tabBar.style.display = 'none'; }, 300);
+        // 同步隱藏分享選單
+        if (shareMenu) {
+          shareMenu.style.transform = 'translateY(-10px)';
+          shareMenu.style.opacity = '0';
+        }
+        setTimeout(()=>{ 
+          if (tabBar && tabBar.style.opacity === '0') tabBar.style.display = 'none';
+          if (shareMenu && shareMenu.style.opacity === '0') shareMenu.style.display = 'none';
+        }, 300);
       }
     });
   }
@@ -2509,35 +2527,7 @@ document.addEventListener('DOMContentLoaded', initLanguageToggle);
 
 /* 分享功能 */
 document.addEventListener('DOMContentLoaded', function() {
-  // 分享功能顯示邏輯（與浮動選單同步）
-  const floatingTabBar = document.getElementById('floatingTabBar');
-  const floatingShare = document.getElementById('floatingShare');
-  
-  if (floatingTabBar && floatingShare) {
-    // 監聽浮動選單的顯示狀態
-    const observer = new MutationObserver(function(mutations) {
-      mutations.forEach(function(mutation) {
-        if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
-          const tabBarDisplay = window.getComputedStyle(floatingTabBar).display;
-          if (tabBarDisplay !== 'none') {
-            floatingShare.style.display = 'block';
-            setTimeout(() => {
-              floatingShare.style.opacity = '1';
-              floatingShare.style.transform = 'translateY(0)';
-            }, 100);
-          } else {
-            floatingShare.style.opacity = '0';
-            floatingShare.style.transform = 'translateY(-10px)';
-            setTimeout(() => {
-              floatingShare.style.display = 'none';
-            }, 280);
-          }
-        }
-      });
-    });
-    
-    observer.observe(floatingTabBar, { attributes: true });
-  }
+  // 分享功能已整合到浮動選單的顯示邏輯中，無需額外監聽
   
   // 分享連結功能
   const shareItems = document.querySelectorAll('.share-item');
