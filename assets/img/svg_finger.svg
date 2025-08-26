@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 300 300">
+  <!-- Generator: Adobe Illustrator 29.6.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 9)  -->
+  <defs>
+    <style>
+      .st0 {
+        mask: url(#mask);
+      }
+
+      .st1 {
+        filter: url(#luminosity-noclip);
+      }
+
+      .st2 {
+        fill: #fff;
+      }
+    </style>
+    <filter id="luminosity-noclip" x="0" y="0" width="300" height="300" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-color="#fff" result="bg"/>
+      <feBlend in="SourceGraphic" in2="bg"/>
+    </filter>
+    <mask id="mask" x="0" y="0" width="300" height="300" maskUnits="userSpaceOnUse">
+      <g class="st1">
+        <g>
+          <rect x="112.46" y="66.58" width="8.34" height="100.1"/>
+          <rect x="120.8" y="58.24" width="16.68" height="8.34"/>
+          <rect x="137.49" y="66.58" width="8.34" height="75.08"/>
+          <rect x="145.83" y="99.95" width="16.68" height="8.34"/>
+          <rect x="162.51" y="116.63" width="8.34" height="25.03"/>
+          <rect x="162.51" y="108.29" width="25.03" height="8.34"/>
+          <rect x="187.54" y="124.97" width="8.34" height="25.01"/>
+          <rect x="187.54" y="116.63" width="16.68" height="8.34"/>
+          <rect x="204.22" y="124.97" width="8.34" height="8.34"/>
+          <rect x="212.56" y="133.32" width="8.34" height="58.39"/>
+          <rect x="204.22" y="191.71" width="8.34" height="25.03"/>
+          <rect x="195.88" y="216.73" width="8.34" height="25.03"/>
+          <rect x="120.8" y="233.42" width="75.08" height="8.34"/>
+          <rect x="104.12" y="141.66" width="8.34" height="8.34"/>
+          <rect x="79.09" y="133.32" width="25.03" height="8.34"/>
+          <rect x="79.09" y="141.66" width="8.34" height="16.68"/>
+          <rect x="87.44" y="158.34" width="8.34" height="8.34"/>
+          <rect x="95.78" y="166.68" width="8.34" height="16.68"/>
+          <rect x="104.12" y="183.37" width="8.34" height="16.68"/>
+          <rect x="112.46" y="200.05" width="8.34" height="16.68"/>
+          <rect x="120.8" y="216.73" width="8.34" height="16.68"/>
+        </g>
+      </g>
+    </mask>
+  </defs>
+  <g class="st0">
+    <circle class="st2" cx="150" cy="150" r="150"/>
+  </g>
+</svg>

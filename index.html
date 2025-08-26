@@ -738,7 +738,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   border-radius: 11px; /* 根據 320x320 時 R角60 的比例調整 */
-  padding: 12px 32px; /* 增加左右padding讓選單變長 */
+  padding: 18px 32px; /* 調整上下padding，讓高度與分享按鈕相同(60px) */
   transform: translateY(-10px);
   opacity: 0;
   transition: transform .28s ease, opacity .28s ease;
@@ -770,11 +770,12 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   text-decoration: none;
   padding: 2px 0; /* 減少垂直間距 */
   border-radius: 6px;
-  transition: background .2s ease, color .2s ease, transform .25s cubic-bezier(0.4, 0, 0.2, 1); /* 優化過渡效果 */
+  transition: background .3s ease, color .3s ease, transform .3s ease; /* 統一並加長 transition 時間 */
   -webkit-tap-highlight-color: transparent;
   user-select: none;
   display: block;
   white-space: nowrap; /* 防止換行 */
+  will-change: transform; /* 優化動畫性能 */
 }
 .floating-tab-bar a:hover {
   background: transparent; /* 移除底框 */
@@ -802,7 +803,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
     box-shadow: 0 8px 32px rgba(0,0,0,.22);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
-    padding: 12px 16px;
+    padding: 15px 16px; /* 調整上下padding，讓高度與分享按鈕相同(50px) */
     border-radius: 12px;
     box-sizing: border-box;
   }
@@ -830,22 +831,28 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
     color: #fff;
     text-decoration: none;
     border-radius: 6px; /* 保留圓角但不要 overflow hidden */
-    transition: background .2s ease, color .2s ease, transform .25s cubic-bezier(0.4, 0, 0.2, 1); /* 與桌面版完全一致的過渡效果 */
+    transition: background .3s ease, color .3s ease, transform .3s ease; /* 與桌面版保持一致 */
     -webkit-tap-highlight-color: transparent;
     user-select: none;
     white-space: nowrap;
+    will-change: transform; /* 優化動畫性能 */
     /* 移除會切割文字的 overflow: hidden */
+  }
+  
+  .floating-tab-bar a:hover {
+    background: transparent; /* 移除底框 */
+    color: #fff;
+    transform: translateY(-2px); /* 文字升高效果 */
   }
 }
 
 /* ===== 分享功能樣式 ===== */
 .floating-share {
   position: fixed;
-  top: 90px; /* 在浮動選單下方 */
-  /* 使用與浮動選單完全相同的定位邏輯 */
-  right: 32px;
-  z-index: 9998;
-  display: none;
+  top: 102px; /* 採用與分享按鈕到社群圖示相同的間距(10px) */
+  right: 32px; /* 與浮動選單容器右側對齊 */
+  z-index: 10000;
+  display: none; /* 初始隱藏，由滾動邏輯控制顯示 */
   background: transparent;
   border: none;
   box-shadow: none;
@@ -853,50 +860,78 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   -webkit-backdrop-filter: none;
   border-radius: 0;
   padding: 0;
-  transform: translateY(-10px);
-  opacity: 0;
-  transition: transform .28s ease, opacity .28s ease;
-  will-change: transform, opacity;
-  /* 確保與浮動選單使用相同的容器模式 */
+  opacity: 0; /* 初始透明，由滾動邏輯控制 */
+  transition: opacity .28s ease;
+  /* 移除 transform 相關屬性 */
+  /* 移除固定寬度，讓容器自適應 */
 }
 
 .share-container {
   position: relative;
-  /* 移除 flex 設定，使用與浮動選單相同的內容對齊方式 */
-  text-align: right; /* 右對齊，與浮動選單一致 */
+  display: flex;
+  justify-content: flex-end; /* 確保分享按鈕右對齊 */
+  width: auto; /* 讓容器寬度自適應按鈕 */
 }
 
 .share-trigger {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 56px; /* 再次增大容器 */
-  height: 56px;
+  width: 60px;
+  height: 60px;
   background: transparent;
-  border: none;
-  border-radius: 11px; /* 56px * (60/320) = 10.5px ≈ 11px */
+  border: 1px solid var(--glass-bd, rgba(255,255,255,.18));
+  border-radius: 11px;
   cursor: pointer;
-  transition: transform .2s ease, opacity .2s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 32px rgba(0,0,0,.22);
+  overflow: hidden;
+  position: relative;
+  background-clip: padding-box;
+}
+
+/* 玻璃與模糊都放在 pseudo 上 */
+.share-trigger::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--glass-bg, rgba(255,255,255,.08));
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: inherit;
+  z-index: 0;
+  will-change: backdrop-filter;
+}
+
+/* 讓圖示在玻璃層上方 */
+.share-trigger > * {
+  position: relative;
+  z-index: 1;
 }
 
 .share-trigger:hover {
-  opacity: 0.8;
+  border-color: rgba(255,255,255,0.3);
+  box-shadow: 0 12px 40px rgba(0,0,0,.3);
+}
+
+.share-trigger:hover::before {
+  background: rgba(255,255,255,0.15);
 }
 
 .share-trigger img {
-  width: 40px; /* 再次增大分享圖示 */
-  height: 40px;
+  width: 48px;
+  height: 48px;
   transition: transform .2s ease;
 }
 
 .share-menu {
   position: absolute;
-  top: 57px; /* 調整為極小間距，讓分享按鈕和Facebook間距約1px */
+  top: 70px; /* 增加間距，讓分享按鈕和社群圖示間距更大 */
   right: 0; /* 右側對齊分享按鈕 */
   transform: translateY(-10px);
   display: flex;
   flex-direction: column;
-  gap: 2px; /* 保持社群圖示之間的間距 */
+  gap: 10px; /* 調整為與分享按鈕間距一致 */
   opacity: 0;
   visibility: hidden;
   transition: opacity .25s ease, visibility .25s ease, transform .25s ease;
@@ -941,10 +976,11 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 56px; /* 再次增大點擊區域 */
-  height: 56px;
+  width: 60px;
+  height: 60px;
   background: transparent;
-  border-radius: 11px; /* 56px * (60/320) = 10.5px ≈ 11px */
+  border: none;
+  border-radius: 0;
   text-decoration: none;
   opacity: 0;
   transform: translateY(10px) scale(0.8);
@@ -972,20 +1008,20 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 }
 
 .share-item:hover {
-  transform: translateY(-2px) scale(1); /* 移除放大效果，只保留升高效果 */
+  transform: translateY(-2px) scale(1.05);
   opacity: 0.8;
 }
 
 .share-item img {
-  width: 44px; /* 再次增大社群圖示 */
-  height: 44px;
+  width: 60px;
+  height: 60px;
   transition: transform .2s ease;
 }
 
 /* 手機版分享功能調整 */
 @media (max-width: 768px) {
   .floating-share {
-    top: 80px;
+    top: 78px; /* 在浮動選單下方，適當間距 */
     right: 20px; /* 靠右對齊 */
     left: auto; /* 移除左側定位 */
     display: block; /* 改為 block */
@@ -999,16 +1035,16 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
     transform: none;
     opacity: 1;
     visibility: visible;
-    margin-top: 12px;
+    margin-top: 10px;
     margin-left: 0;
     background: transparent; /* 移除背景 */
     border: none; /* 移除邊框 */
-    padding: 8px 0;
+    padding: 0;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     border-radius: 0;
     flex-direction: column; /* 手機版改為垂直排列 */
-    gap: 8px; /* 適當間距 */
+    gap: 10px; /* 與桌面版一致的間距 */
     align-items: flex-end; /* 右側對齊 */
   }
   
@@ -1023,30 +1059,57 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   }
   
   .share-item {
-    width: 60px; /* 手機版更大的點擊區域 */
-    height: 60px;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
   }
   
   .share-item img {
-    width: 48px; /* 手機版更大的圖示 */
-    height: 48px;
+    width: 50px;
+    height: 50px;
   }
   
   .share-trigger {
-    width: 60px; /* 手機版分享按鈕也增大 */
-    height: 60px;
+    width: 50px;
+    height: 50px;
+    border-radius: 9px;
+    background: transparent;
+    border: 1px solid var(--glass-bd, rgba(255,255,255,.18));
+    box-shadow: 0 8px 32px rgba(0,0,0,.22);
+    overflow: hidden;
+    position: relative;
+    background-clip: padding-box;
+  }
+  
+  .share-trigger::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--glass-bg, rgba(255,255,255,.08));
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-radius: inherit;
+    z-index: 0;
+    will-change: backdrop-filter;
+  }
+  
+  .share-trigger > * {
+    position: relative;
+    z-index: 1;
   }
   
   .share-trigger img {
-    width: 44px; /* 手機版分享圖示增大 */
-    height: 44px;
+    width: 40px;
+    height: 40px;
   }
 }
 
 /* 小尺寸手機橫向顯示調整 */
 @media (max-width: 480px) and (orientation: landscape) {
   .floating-share {
-    top: 60px; /* 橫向時降低位置 */
+    top: 68px; /* 橫向時降低位置，但保持適當間距 */
     right: 15px; /* 橫向時稍微內移 */
   }
   
@@ -1321,9 +1384,428 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 .event-info .inner > h2:first-of-type{
   margin-top: 0;
 }
+
+/* ===== 圓形漂浮按鈕 ===== */
+.floating-circular-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 32px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.floating-circular-btn.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.button {
+  position: relative;
+  width: 105px;
+  height: 105px;
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transform: translateX(15px);
+  display: block;
+}
+
+.button a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  position: relative;
+}
+
+.button__circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 105px;
+  height: 105px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  animation: rotate 20s linear infinite;
+  box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+}
+
+.button__finger {
+  width: 45%;
+  height: 45%;
+  /* 移除濾鏡效果，直接使用 SVG 的原始色彩 */
+  /* 反向旋轉抵消父元素的旋轉效果 */
+  animation: counterRotate 20s linear infinite;
+}
+
+.button:hover .button__circle {
+  transform: scale(1.1);
+  box-shadow: 0 6px 30px rgba(255, 107, 53, 0.5);
+}
+
+.button__text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 105px;
+  height: 105px;
+  border-radius: 50%;
+  margin: 0;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  overflow: visible;
+  animation: rotate 20s linear infinite;
+  z-index: 1;
+}
+
+.button__text span {
+  position: absolute;
+  font-size: 16px;
+  color: white;
+  font-weight: 700;
+  line-height: 1;
+  transform: rotate(calc(30deg * var(--index)));
+  inset: 8px;
+}
+
+/* 使用 DIGITIMES 的 CSS 變數定位方式 */
+.button__text span:nth-child(1) { --index: 0; }
+.button__text span:nth-child(2) { --index: 1; }
+.button__text span:nth-child(3) { --index: 2; }
+.button__text span:nth-child(4) { --index: 3; }
+.button__text span:nth-child(5) { --index: 4; }
+.button__text span:nth-child(6) { --index: 5; }
+.button__text span:nth-child(7) { --index: 6; }
+.button__text span:nth-child(8) { --index: 7; }
+.button__text span:nth-child(9) { --index: 8; }
+.button__text span:nth-child(10) { --index: 9; }
+.button__text span:nth-child(11) { --index: 10; }
+.button__text span:nth-child(12) { --index: 11; }
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes counterRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes arrowLoop {
+  0% {
+    transform: rotate(-90deg) translateX(0px);
+    opacity: 1;
+  }
+  30% {
+    transform: rotate(-90deg) translateX(0px);
+    opacity: 1;
+  }
+  50% {
+    transform: rotate(-90deg) translateX(40px);
+    opacity: 0;
+  }
+  51% {
+    transform: rotate(-90deg) translateX(-40px);
+    opacity: 0;
+  }
+  70% {
+    transform: rotate(-90deg) translateX(0px);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(-90deg) translateX(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes downloadLoop {
+  0% {
+    transform: translateX(-50%) translateY(0px) rotate(90deg);
+    opacity: 1;
+  }
+  30% {
+    transform: translateX(-50%) translateY(0px) rotate(90deg);
+    opacity: 1;
+  }
+  40% {
+    transform: translateX(-50%) translateY(8px) rotate(90deg);
+    opacity: 0;
+  }
+  41% {
+    transform: translateX(-50%) translateY(-20px) rotate(90deg);
+    opacity: 0;
+  }
+  60% {
+    transform: translateX(-50%) translateY(0px) rotate(90deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-50%) translateY(0px) rotate(90deg);
+    opacity: 1;
+  }
+}
+
+/* 回到頂部按鈕 */
+.scroll-top-btn {
+  display: block;
+  width: 60px;
+  height: 60px;
+  background: var(--glass-bg, rgba(255,255,255,.08));
+  border: 1px solid var(--glass-bd, rgba(255,255,255,.18));
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 8px 32px rgba(0,0,0,.22);
+  overflow: hidden;
+  position: relative;
+}
+
+/* 下載按鈕 */
+.download-btn {
+  display: block;
+  width: 60px;
+  height: 60px;
+  background: var(--glass-bg, rgba(255,255,255,.08));
+  border: 1px solid var(--glass-bd, rgba(255,255,255,.18));
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 8px 32px rgba(0,0,0,.22);
+  overflow: hidden;
+  position: relative;
+}
+
+.scroll-top-btn:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0,0,0,.3);
+}
+
+.download-btn:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0,0,0,.3);
+}
+
+.scroll-top-btn::before {
+  content: "⮕";
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  transition: transform 0.3s ease;
+  will-change: transform;
+  transform: rotate(-90deg); /* 將右箭頭旋轉為上箭頭 */
+}
+
+.download-btn img {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease;
+  will-change: transform;
+}
+
+.download-btn::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: transparent;
+}
+
+/* 下載圖示：向下箭頭 + ㄩ形底座 */
+.download-btn::after {
+  content: "⮕";
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(90deg); /* 將右箭頭旋轉為下箭頭 */
+  z-index: 2;
+  display: block;
+}
+
+/* ㄩ形底座 */
+.download-btn::before {
+  content: "";
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 8px;
+  border: 3px solid white;
+  border-top: none;
+  border-radius: 0;
+  z-index: 1;
+  display: block;
+}
+
+.scroll-top-btn:hover::before {
+  animation: arrowLoop 1.8s ease-in-out infinite;
+}
+
+.download-btn:hover img {
+  transform: scale(1.1);
+}
+
+.download-btn:hover::after {
+  animation: downloadLoop 1.8s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+  .floating-circular-btn {
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .button {
+    width: 88px;
+    height: 88px;
+    transform: translateX(12px);
+  }
+  
+  .button__circle {
+    width: 88px;
+    height: 88px;
+  }
+  
+  .button__finger {
+    width: 45%;
+    height: 45%;
+    /* 移除濾鏡效果，直接使用 SVG 的原始色彩 */
+    /* 反向旋轉抵消父元素的旋轉效果 */
+    animation: counterRotate 20s linear infinite;
+  }
+  
+  .button__text {
+    width: 88px;
+    height: 88px;
+  }
+  
+  .button__text span {
+    font-size: 14px;
+    inset: 6px;
+  }
+  
+  .scroll-top-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 9px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .download-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 9px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .scroll-top-btn::before {
+    font-size: 20px;
+  }
+  
+  .download-btn img {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .download-btn::after {
+    top: 6px;
+    font-size: 20px;
+  }
+  
+  .download-btn::before {
+    width: 20px;
+    height: 6px;
+    bottom: 10px;
+    border-width: 2.25px;
+    border-color: white;
+    border-radius: 0;
+  }
+  
+  .download-btn::before {
+    width: 14px;
+    height: 6px;
+    bottom: 6px;
+    border-width: 1.5px;
+    border-radius: 0 0 3px 3px;
+  }
+}
 </style>
 </head>
 <body>
+
+<!-- ===== 圓形漂浮按鈕 ===== -->
+<div class="floating-circular-btn" id="floatingBtn">
+  <button class="button">
+    <a href="#" onclick="window.open('https://example.com/register', '_blank'); return false;">
+      <p class="button__text">
+        <span>立</span>
+        <span>即</span>
+        <span>報</span>
+        <span>名</span>
+        <span>　</span>
+        <span>　</span>
+        <span>立</span>
+        <span>即</span>
+        <span>報</span>
+        <span>名</span>
+        <span>　</span>
+        <span>　</span>
+      </p>
+
+      <div class="button__circle">
+        <img src="assets/img/svg_finger.svg" alt="" class="button__finger">
+      </div>
+    </a>
+  </button>
+  
+  <!-- 下載按鈕 -->
+  <a href="#" class="download-btn" onclick="return false;" title="下載檔案"></a>
+  
+  <!-- 回到頂部按鈕 -->
+  <a href="#" class="scroll-top-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" title="回到頂部"></a>
+</div>
 
 <!-- ===== HERO（內含貼底的日期選單） ===== -->
 <section class="hero-wrapper" aria-label="Hero">
@@ -1729,7 +2211,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
     </div>
 
     <!-- 立即報名按鈕（移至頁面底部） -->
-    <div style="text-align: center; margin: 40px 0;">
+    <div style="text-align: center; margin: 40px 0; display: none;">
       <a href="#" class="register-btn">
         <span class="lang-zh">立 即 報 名</span>
         <span class="lang-en" style="display: none;">Register Now</span>
@@ -1918,7 +2400,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
     </div>
     </div>
 
-    <div style="text-align: center; margin: 40px 0;">
+    <div style="text-align: center; margin: 40px 0; display: none;">
       <a href="#" class="register-btn">
         立 即 報 名
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4l8 8-8 8"/></svg>
@@ -2009,7 +2491,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 <!-- ===== 分享功能（在浮動選單下方） ===== -->
 <div id="floatingShare" class="floating-share">
   <div class="share-container">
-    <button class="share-trigger">
+    <button class="share-trigger" title="分享至社群">
       <img src="assets/img/svg_share.svg" alt="分享">
     </button>
     <div class="share-menu">
@@ -2297,24 +2779,21 @@ if (document.fonts && document.fonts.ready) {
     const triggerPoint = rect.top + rect.height * THRESHOLD_FRACTION;
     const shouldShow = (triggerPoint < 0);
     const isMobile = window.innerWidth <= 768;
+    
+    // 同時控制分享選單
+    const shareMenu = document.getElementById('floatingShare');
 
     if (rafId) cancelAnimationFrame(rafId);
     rafId = requestAnimationFrame(()=>{
-      const shareMenu = document.getElementById('floatingShare'); // 獲取分享選單
-      
       if (shouldShow) {
         tabBar.style.display = 'flex';
-        // 同時顯示分享選單
-        if (shareMenu) {
-          shareMenu.style.display = 'block';
-        }
+        if (shareMenu) shareMenu.style.display = 'block';
         requestAnimationFrame(()=>{
           // 所有螢幕尺寸都使用相同的transform
           tabBar.style.transform = 'translateY(0)';
           tabBar.style.opacity = '1';
-          // 同步分享選單動畫
           if (shareMenu) {
-            shareMenu.style.transform = 'translateY(0)';
+            // 使用 opacity 而非 transform 來避免影響 backdrop-filter
             shareMenu.style.opacity = '1';
           }
           if (typeof updateFloatingOffset === 'function') updateFloatingOffset();
@@ -2323,9 +2802,8 @@ if (document.fonts && document.fonts.ready) {
         // 隱藏時所有螢幕尺寸都使用相同的transform
         tabBar.style.transform = 'translateY(-10px)';
         tabBar.style.opacity = '0';
-        // 同步隱藏分享選單
         if (shareMenu) {
-          shareMenu.style.transform = 'translateY(-10px)';
+          // 使用 opacity 而非 transform 來避免影響 backdrop-filter
           shareMenu.style.opacity = '0';
         }
         setTimeout(()=>{ 
@@ -2527,7 +3005,7 @@ document.addEventListener('DOMContentLoaded', initLanguageToggle);
 
 /* 分享功能 */
 document.addEventListener('DOMContentLoaded', function() {
-  // 分享功能已整合到浮動選單的顯示邏輯中，無需額外監聽
+  // 移除分享按鈕常駐邏輯，讓它由滾動邏輯控制
   
   // 分享連結功能
   const shareItems = document.querySelectorAll('.share-item');
@@ -2555,6 +3033,27 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
+});
+
+/* 圓形漂浮按鈕控制 */
+document.addEventListener('DOMContentLoaded', function() {
+  const floatingBtn = document.getElementById('floatingBtn');
+  
+  // 按鈕常駐顯示，不需要滾動控制
+  if (floatingBtn) {
+    floatingBtn.classList.add('show');
+  }
+  
+  // 更新報名連結（您可以將此URL改為實際的報名頁面）
+  const registerLink = floatingBtn.querySelector('.button a');
+  if (registerLink) {
+    registerLink.onclick = function(e) {
+      e.preventDefault();
+      // 替換為您的實際報名連結
+      window.open('https://example.com/register', '_blank');
+      return false;
+    };
+  }
 });
 </script>
 
