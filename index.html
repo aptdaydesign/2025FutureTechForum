@@ -68,11 +68,12 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 /* ===== 日期選單（卡片式，置於 HERO 底部） ===== */
 .event-bar{
   position:absolute;
-  left:50%;
+  left:calc( 70/1920*100%); /* 與 hero title 對齊 */
+  right:calc( 70/1920*100%); /* 右側也保持相同邊距 */
   bottom:0;
-  transform:translateX(-50%);
-  width:min(89.5833vw, 1720px);
-  max-width:1720px;
+  transform:none; /* 移除置中變換 */
+  width:auto; /* 讓寬度自動適應 */
+  max-width:none;
   background:transparent;
   padding:0;
   padding-bottom: env(safe-area-inset-bottom, 0px);
@@ -105,8 +106,8 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 .bar-item[aria-current="true"]{ --c1:var(--tab-active); --c2:#a71858; animation:gradFlow 3s ease-in-out infinite alternate; }
 @keyframes gradFlow{ from{background-position:0% 50%} to{background-position:100% 50%} }
 .bar-arrow{ font-size:clamp(18px, 2.2vw, 28px); line-height:1; display:inline-block; animation:arrowOsc .8s ease-in-out infinite alternate; }
-.bar-date{  font-family:"Akrobat","Noto Sans TC",sans-serif; font-weight:500; font-size:clamp(20px, 2.4vw, 40px); letter-spacing:.025em; white-space:nowrap; }
-@keyframes arrowOsc{ from{transform:translateX(-6px)} to{transform:translateX(6px)} }
+.bar-date{  font-family:"Akrobat","Noto Sans TC",sans-serif; font-weight:500; font-size:clamp(20px, 2.4vw, 32px); letter-spacing:.025em; white-space:nowrap; }
+@keyframes arrowOsc{ from{transform:translateX(-3px)} to{transform:translateX(3px)} }
 
 /* ===== 活動資訊（含與 HERO 的黑→藍銜接） ===== */
 .event-info{
@@ -240,9 +241,21 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   min-height:48px; line-height:1.8; overflow-wrap:anywhere; text-align:left;
 }
 
+/* 地點區域基礎樣式 - 允許自然換行 */
+.topic-row.place > div:last-child {
+  display: block !important; /* 使用 !important 確保覆蓋 */
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+  gap: unset; /* 移除 flex gap */
+}
+
 /* 地點區域特殊處理 - 確保線上同步緊跟在會議室後 */
 .place {
-  display:flex; align-items:center; flex-wrap:wrap; gap:.5em;
+  /* 移除 flex 設置，讓地點區域使用正常的 grid 布局 */
+  /* display:flex; align-items:center; flex-wrap:wrap; gap:.5em; */
   /* 讓地點文字可以斷行，但按鈕不會被分離 */
   word-break: break-word; 
 }
@@ -281,7 +294,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   margin-top:2px; /* 縮短人名與職稱間的距離，從 8px 改為 2px */
   /* 職稱區域統一高度 */
   height: 48px; /* 固定高度，可容納2行職稱 */
-  line-height: 1.2;
+  line-height: 1.5; /* 增加行距，從 1.2 改為 1.5 */
   text-align: center; /* 水平置中 */
   /* 文字溢出處理 */
   overflow: hidden;
@@ -404,6 +417,14 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 @media (max-width:991.98px){
   .event-info .topic-row{ align-items:baseline; }
   .event-info .topic-row > div:last-child{ display:flex; align-items:baseline; min-height:0; }
+  
+  /* 地點區域特殊處理 - 允許正常換行 */
+  .event-info .topic-row.place > div:last-child{ 
+    display:block; 
+    word-break: break-word;
+    overflow-wrap: break-word;
+    white-space: normal; /* 允許正常換行 */
+  }
 }
 
 @media (max-width:768px){
@@ -471,6 +492,12 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   .speaker .title-chip{
     margin-top:6px;
     font-size:clamp(14px,4.2vw,18px);
+    /* 手機版時確保左對齊且有適當行距 */
+    text-align: left;
+    line-height: 1.4;
+    height: auto;
+    align-items: flex-start;
+    justify-content: flex-start;
   }
   
   .bio-card{
@@ -512,13 +539,24 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 
   .topic-row > div:last-child{
     min-height:40px;
-    display:flex;
-    flex-wrap:wrap;
-    gap:.4em;
     font-size:.95em;
     line-height:1.6;
     align-items:baseline;
     align-self: baseline;
+    /* 對於地點特殊處理 - 保持 grid 布局而不是 flex */
+    display: block;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  /* 地點區域特殊處理 - 允許自然換行 */
+  .topic-row.place > div:last-child {
+    display: block;
+    word-break: break-word; /* 允許適當的斷詞 */
+    overflow-wrap: break-word; /* 允許長字換行 */
+    white-space: normal; /* 允許正常換行 */
+    overflow: visible; /* 移除隱藏溢出 */
+    text-overflow: unset; /* 移除省略號 */
   }
 
   .bar-item{ padding:6px 14px; }
@@ -699,7 +737,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   box-shadow: 0 8px 32px rgba(0,0,0,.22);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-  border-radius: 18px;
+  border-radius: 11px; /* 根據 320x320 時 R角60 的比例調整 */
   padding: 12px 32px; /* 增加左右padding讓選單變長 */
   transform: translateY(-10px);
   opacity: 0;
@@ -732,15 +770,16 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   text-decoration: none;
   padding: 2px 0; /* 減少垂直間距 */
   border-radius: 6px;
-  transition: background .2s, color .2s;
+  transition: background .2s, color .2s, transform .2s ease; /* 加入 transform 過渡效果 */
   -webkit-tap-highlight-color: transparent;
   user-select: none;
   display: block;
   white-space: nowrap; /* 防止換行 */
 }
 .floating-tab-bar a:hover {
-  background: rgba(255,255,255,0.15); /* 添加選取時的底框效果 */
+  background: transparent; /* 移除底框 */
   color: #fff;
+  transform: translateY(-2px); /* 文字升高效果 */
 }
 .floating-tab-bar a:active,
 .floating-tab-bar a:focus{
@@ -796,6 +835,235 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
     user-select: none;
     white-space: nowrap;
     /* 移除會切割文字的 overflow: hidden */
+  }
+}
+
+/* ===== 分享功能樣式 ===== */
+.floating-share {
+  position: fixed;
+  top: 90px; /* 在浮動選單下方 */
+  /* 使用與浮動選單完全相同的定位邏輯 */
+  right: 32px;
+  z-index: 9998;
+  display: none;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-radius: 0;
+  padding: 0;
+  transform: translateY(-10px);
+  opacity: 0;
+  transition: transform .28s ease, opacity .28s ease;
+  will-change: transform, opacity;
+  /* 確保與浮動選單使用相同的容器模式 */
+}
+
+.share-container {
+  position: relative;
+  display: flex;
+  justify-content: flex-end; /* 確保分享按鈕右對齊 */
+  width: 56px; /* 設定容器寬度等於按鈕寬度 */
+}
+
+.share-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px; /* 再次增大容器 */
+  height: 56px;
+  background: transparent;
+  border: none;
+  border-radius: 11px; /* 56px * (60/320) = 10.5px ≈ 11px */
+  cursor: pointer;
+  transition: transform .2s ease, opacity .2s ease;
+}
+
+.share-trigger:hover {
+  opacity: 0.8;
+}
+
+.share-trigger img {
+  width: 40px; /* 再次增大分享圖示 */
+  height: 40px;
+  transition: transform .2s ease;
+}
+
+.share-menu {
+  position: absolute;
+  top: 57px; /* 調整為極小間距，讓分享按鈕和Facebook間距約1px */
+  right: 0; /* 右側對齊分享按鈕 */
+  transform: translateY(-10px);
+  display: flex;
+  flex-direction: column;
+  gap: 2px; /* 保持社群圖示之間的間距 */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .25s ease, visibility .25s ease, transform .25s ease;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 1px 0; /* 調整為1px內距 */
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* Facebook 圖示移除額外間距 */
+.share-item:nth-child(1) { /* Facebook */
+  transition-delay: 0.1s;
+}
+
+.share-item:nth-child(2) { /* Line */
+  transition-delay: 0.2s;
+}
+
+.share-item:nth-child(3) { /* X (Twitter) */
+  transition-delay: 0.3s;
+}
+
+.share-item:nth-child(4) { /* LinkedIn */
+  transition-delay: 0.4s;
+}
+
+.share-container:hover .share-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0); /* 移除 translateX */
+}
+
+.share-container:hover .share-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0); /* 移除 translateX */
+}
+
+.share-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px; /* 再次增大點擊區域 */
+  height: 56px;
+  background: transparent;
+  border-radius: 11px; /* 56px * (60/320) = 10.5px ≈ 11px */
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(10px) scale(0.8);
+  transition: all .3s ease, opacity .4s ease, transform .4s ease;
+}
+
+/* 為每個社群圖示設定不同的延遲時間，實現逐一浮現效果 */
+/* Facebook 的樣式已在上方定義 */
+
+.share-item:nth-child(2) { /* Line */
+  transition-delay: 0.2s;
+}
+
+.share-item:nth-child(3) { /* X (Twitter) */
+  transition-delay: 0.3s;
+}
+
+.share-item:nth-child(4) { /* LinkedIn */
+  transition-delay: 0.4s;
+}
+
+.share-container:hover .share-item {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.share-item:hover {
+  transform: translateY(-2px) scale(1); /* 移除放大效果，只保留升高效果 */
+  opacity: 0.8;
+}
+
+.share-item img {
+  width: 44px; /* 再次增大社群圖示 */
+  height: 44px;
+  transition: transform .2s ease;
+}
+
+/* 手機版分享功能調整 */
+@media (max-width: 768px) {
+  .floating-share {
+    top: 80px;
+    right: 20px; /* 靠右對齊 */
+    left: auto; /* 移除左側定位 */
+    display: block; /* 改為 block */
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+  
+  .share-menu {
+    position: static;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    margin-top: 12px;
+    margin-left: 0;
+    background: transparent; /* 移除背景 */
+    border: none; /* 移除邊框 */
+    padding: 8px 0;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-radius: 0;
+    flex-direction: column; /* 手機版改為垂直排列 */
+    gap: 8px; /* 適當間距 */
+    align-items: flex-end; /* 右側對齊 */
+  }
+  
+  .share-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .share-container:hover .share-menu {
+    transform: none;
+  }
+  
+  .share-item {
+    width: 60px; /* 手機版更大的點擊區域 */
+    height: 60px;
+  }
+  
+  .share-item img {
+    width: 48px; /* 手機版更大的圖示 */
+    height: 48px;
+  }
+  
+  .share-trigger {
+    width: 60px; /* 手機版分享按鈕也增大 */
+    height: 60px;
+  }
+  
+  .share-trigger img {
+    width: 44px; /* 手機版分享圖示增大 */
+    height: 44px;
+  }
+}
+
+/* 小尺寸手機橫向顯示調整 */
+@media (max-width: 480px) and (orientation: landscape) {
+  .floating-share {
+    top: 60px; /* 橫向時降低位置 */
+    right: 15px; /* 橫向時稍微內移 */
+  }
+  
+  .share-menu {
+    flex-direction: row; /* 橫向時改為水平排列 */
+    gap: 4px; /* 橫向時減少間距 */
+  }
+  
+  .share-item {
+    width: 50px; /* 橫向時稍微縮小 */
+    height: 50px;
+  }
+  
+  .share-item img {
+    width: 40px;
+    height: 40px;
   }
 }
 
@@ -963,6 +1231,31 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   color: var(--pink);
 }
 
+/* 重要活動膠囊樣式 */
+.event-highlight {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 2px dashed var(--pink);
+  border-radius: 20px;
+  color: #fff;
+  font-weight: 500;
+  margin-bottom: 8px;
+  background: rgba(255, 94, 153, 0.1);
+}
+
+/* 小膠囊標籤樣式 */
+.role-tag {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
 /* 響應式設計 */
 @media (max-width: 768px) {
   .time-toggle {
@@ -1042,20 +1335,24 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   <nav class="event-bar" aria-label="論壇場次日期">
     <div class="bar" id="eventBar">
       <button type="button" class="bar-item" data-id="s1" aria-current="true">
+        <span class="bar-date">第一場</span>
         <span class="bar-arrow" aria-hidden="true">⮕</span>
-        <span class="bar-date">2025.09.26</span>
+        <span class="bar-date">9 月份</span>
       </button>
       <button type="button" class="bar-item" data-id="s2">
+        <span class="bar-date">第二場</span>
         <span class="bar-arrow" aria-hidden="true">⮕</span>
-        <span class="bar-date">2025.10.14</span>
+        <span class="bar-date">10 月份</span>
       </button>
       <button type="button" class="bar-item" data-id="s3">
+        <span class="bar-date">第三場</span>
         <span class="bar-arrow" aria-hidden="true">⮕</span>
-        <span class="bar-date">2025.11.22</span>
+        <span class="bar-date">11 月份</span>
       </button>
       <button type="button" class="bar-item" data-id="s4">
+        <span class="bar-date">第四場</span>
         <span class="bar-arrow" aria-hidden="true">⮕</span>
-        <span class="bar-date">2025.12.15</span>
+        <span class="bar-date">12 月份</span>
       </button>
     </div>
   </nav>
@@ -1114,7 +1411,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
       </div>
     </div>
 
-    <h2 id="speakers">亮點講者<span>｜Featured Speakers</span></h2>
+    <h2 id="s1-speakers">亮點講者<span>｜Featured Speakers</span></h2>
 
     <!-- speakers carousel: 2 pages, 3 speakers each -->
     <div class="speakers-carousel" aria-roledescription="carousel">
@@ -1131,8 +1428,10 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
               </div>
             </div>
             <div class="bio-card">
-              <span class="lang-zh">David Horsley 教授專注於半導體製程與材料研究，擁有多年跨國研究與教學經驗。</span>
-              <span class="lang-en" style="display: none;">Professor David Horsley focuses on semiconductor process and materials research, with extensive international research and teaching experience.</span>
+              <div class="bio-desc">
+                <span class="lang-zh">David Horsley 教授專注於半導體製程與材料研究，擁有多年跨國研究與教學經驗。</span>
+                <span class="lang-en" style="display: none;">Professor David Horsley focuses on semiconductor process and materials research, with extensive international research and teaching experience.</span>
+              </div>
             </div>
           </div>
           <div class="speaker">
@@ -1145,8 +1444,10 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
               </div>
             </div>
             <div class="bio-card">
-              <span class="lang-zh">沈文冰 副處長負責智慧應用整合與跨部門協作，專長於系統整合與策略規劃。</span>
-              <span class="lang-en" style="display: none;">Deputy Director Shen is responsible for smart application integration and cross-departmental collaboration, specializing in system integration and strategic planning.</span>
+              <div class="bio-desc">
+                <span class="lang-zh">沈文冰 副處長負責智慧應用整合與跨部門協作，專長於系統整合與策略規劃。</span>
+                <span class="lang-en" style="display: none;">Deputy Director Shen is responsible for smart application integration and cross-departmental collaboration, specializing in system integration and strategic planning.</span>
+              </div>
             </div>
           </div>
           <div class="speaker">
@@ -1159,8 +1460,10 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
               </div>
             </div>
             <div class="bio-card">
-              <span class="lang-zh">Tzung-Hua Lin 具豐富研發管理經驗，領導多項產品化與量產導入專案。</span>
-              <span class="lang-en" style="display: none;">Tzung-Hua Lin has extensive R&D management experience, leading multiple product development and mass production projects.</span>
+              <div class="bio-desc">
+                <span class="lang-zh">Tzung-Hua Lin 具豐富研發管理經驗，領導多項產品化與量產導入專案。</span>
+                <span class="lang-en" style="display: none;">Tzung-Hua Lin has extensive R&D management experience, leading multiple product development and mass production projects.</span>
+              </div>
             </div>
           </div>
         </div>
@@ -1177,8 +1480,10 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
               </div>
             </div>
             <div class="bio-card">
-              <span class="lang-zh">負責設計工具與平台整合，推動跨團隊設計流程優化。</span>
-              <span class="lang-en" style="display: none;">Responsible for design tool and platform integration, driving cross-team design process optimization.</span>
+              <div class="bio-desc">
+                <span class="lang-zh">負責設計工具與平台整合，推動跨團隊設計流程優化。</span>
+                <span class="lang-en" style="display: none;">Responsible for design tool and platform integration, driving cross-team design process optimization.</span>
+              </div>
             </div>
           </div>
           <div class="speaker">
@@ -1191,8 +1496,10 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
               </div>
             </div>
             <div class="bio-card">
-              <span class="lang-zh">專注人才招募與發展，擅長組織訓練與職涯規劃。</span>
-              <span class="lang-en" style="display: none;">Focuses on talent recruitment and development, specializing in organizational training and career planning.</span>
+              <div class="bio-desc">
+                <span class="lang-zh">專注人才招募與發展，擅長組織訓練與職涯規劃。</span>
+                <span class="lang-en" style="display: none;">Focuses on talent recruitment and development, specializing in organizational training and career planning.</span>
+              </div>
             </div>
           </div>
           <div class="speaker">
@@ -1205,8 +1512,10 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
               </div>
             </div>
             <div class="bio-card">
-              <span class="lang-zh">營運管理職務，負責資源調度與專案執行。</span>
-              <span class="lang-en" style="display: none;">Operations management role, responsible for resource allocation and project execution.</span>
+              <div class="bio-desc">
+                <span class="lang-zh">營運管理職務，負責資源調度與專案執行。</span>
+                <span class="lang-en" style="display: none;">Operations management role, responsible for resource allocation and project execution.</span>
+              </div>
             </div>
           </div>
         </div>
@@ -1219,7 +1528,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
       </div>
     </div>
 
-    <h2 id="about">
+    <h2 id="s1-about">
       <span class="lang-zh">活動簡介<span>｜About the Forum</span></span>
       <span class="lang-en" style="display: none;">活動簡介<span>｜About the Forum</span></span>
     </h2>
@@ -1261,7 +1570,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
       Discover the emerging skills and knowledge areas that are becoming essential for professionals in the semiconductor industry. Our speakers will discuss how to stay ahead of the curve and ensure workforce readiness for future technological developments.</p>
     </div>
 
-    <h2 id="agenda">活動議程<span>｜Agenda</span></h2>
+    <h2 id="s1-agenda">活動議程<span>｜Agenda</span></h2>
 
     <!-- 時間切換器 -->
     <div class="time-toggle">
@@ -1432,6 +1741,228 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   </div>
 </section>
 
+<!-- 第二場活動資訊 -->
+<section class="event-info" id="s2-info" style="display: none;">
+  <div class="inner">
+    <div class="topic-wrap">
+      <div class="topic-badge">
+        大語言模型運算需求之 Edge AI 晶片設計與實踐經驗
+        <div class="topic-en">Powering the Future of Large Language Models with Edge AI Chips</div>
+      </div>
+
+      <div class="topic-rows">
+        <div class="topic-rows-inner">
+          <div class="topic-row">
+            <div class="pill">時間</div>
+            <div>2025 年 10 月 14 日 (二) 上午 10:30 至 下午 12:30</div>
+          </div>
+          <div class="topic-row place">
+            <div class="pill">地點</div>
+            <div>工研院 BR6 科技大樓 中教室 (台北市復興南路二段 237 號 4 樓)</div>
+          </div>
+          <div class="topic-row">
+            <div class="pill">形式</div>
+            <div>混合進行<br>• 實體會場：免費報名，即日起至額滿為止，預定 40 名<br>• 線上參加：報名後提供連線資訊</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2 id="s2-speakers" style="margin-top: 48px;">亮點講者<span>｜Featured Speakers</span></h2>
+
+    <!-- speakers: 3 speakers, no carousel needed -->
+    <div class="speakers-carousel" aria-roledescription="carousel">
+      <div class="speaker-pages">
+        <div class="speaker-grid speaker-page" data-page="0">
+          <div class="speaker">
+            <img class="photo" src="assets/img/speaker1-2.png" alt="黃錫瑜">
+            <div class="meta">
+              <div class="name">黃錫瑜</div>
+              <div class="title-chip">國研院科政中心主任<br>清大電機工程系教授</div>
+            </div>
+            <div class="bio-card">
+              <div class="bio-desc">人物簡介先放暫時的假字。黃錫瑜教授專注於半導體技術與系統整合研究，在產學合作與技術轉移方面擁有豐富經驗。</div>
+            </div>
+          </div>
+          <div class="speaker">
+            <img class="photo" src="assets/img/speaker2-2.png" alt="黃錫霖">
+            <div class="meta">
+              <div class="name">黃錫霖</div>
+              <div class="title-chip">千逢科技公司執行長<br>交通大學電機碩士</div>
+            </div>
+            <div class="bio-card">
+              <div class="bio-desc">人物簡介先放暫時的假字。黃錫霖執行長在邊緣運算與AI晶片設計領域具有深厚的產業實務經驗。</div>
+            </div>
+          </div>
+          <div class="speaker">
+            <img class="photo" src="assets/img/speaker3-2.png" alt="林哲民">
+            <div class="meta">
+              <div class="name">林哲民</div>
+              <div class="title-chip">史丹佛大學應用物理系博後研究員<br>中山大學物理學博士</div>
+            </div>
+            <div class="bio-card">
+              <div class="bio-desc">人物簡介先放暫時的假字。林哲民博士專精於量子材料與新世代運算技術，在前沿物理研究方面有突出貢獻。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- No pager needed for single page -->
+    </div>
+
+    <h2 id="s2-about">活動簡介<span>｜About the Forum</span></h2>
+    <div>
+      <p>隨著大型語言模型（LLMs） 帶動人工智慧快速演進，龐大的運算需求推動 Edge AI 晶片成為新世代的關鍵技術。如何在效能、能耗與應用場域之間取得平衡，不僅需要創新的運算架構與演算法設計，更仰賴新材料與晶片製程的突破。</p>
+      <p>本場論壇匯聚來自產業與學界的前瞻專家，從產業實務、材料創新到跨域應用深入剖析 Edge AI 的未來機遇，並探討臺灣在全球半導體生態系中的角色與挑戰。</p>
+    </div>
+
+    <h2>主要議題<span>｜Key Topics</span></h2>
+    <div>
+      <h3><span class="event-highlight">技術分享：從自旋到拓樸的材料革新</span></h3>
+      <p>林哲民 博士 <span class="title">/ 美國史丹佛大學應用物理系 博士後</span></p>
+      <p>以尖端物理研究切入，揭示新世代量子材料如何驅動邊緣運算效能突破，展望從學術研究到產業應用的轉化潛力。</p>
+      
+      <h3><span class="event-highlight">綜合座談：從學術到產業，邊緣運算應用場域的實務與挑戰</span></h3>
+      <p>主持人：黃錫瑜 主任 <span class="title">/ 國研院科政中心、國立清華大學電機系教授</span></p>
+      <p>邀集講者進行跨域對談，聚焦如何將前沿研究成果落地至產業應用，並探討人才培育、技術交流與國際鏈結的未來方向。</p>
+    </div>
+
+    <h2 id="s2-agenda">活動議程<span>｜Agenda</span></h2>
+
+    <div class="schedule-table">
+      <div class="schedule-header">
+        <div class="time-col">活動時間</div>
+        <div class="content-col">活動內容</div>
+      </div>
+      
+      <div class="schedule-row">
+        <div class="time-cell">10:15 – 10:35</div>
+        <div class="content-cell">報到與入場</div>
+      </div>
+      
+      <div class="schedule-row">
+        <div class="time-cell">10:30 – 10:35</div>
+        <div class="content-cell">
+          開場與歡迎致詞
+          <ul>
+            <li>黃錫瑜 <span class="title">/ 國研院科政中心主任</span></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="schedule-row">
+        <div class="time-cell">10:35 – 11:05</div>
+        <div class="content-cell">
+          AI 的模型與運算技術的演變
+          <ul>
+            <li>黃錫霖 <span class="title">/ 千逢科技股份有限公司執行長</span></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="schedule-row">
+        <div class="time-cell">11:05 – 11:35</div>
+        <div class="content-cell">
+          技術分享：從自旋到拓樸的材料革新
+          <ul>
+            <li>林哲民 <span class="title">/ 美國史丹佛大學應用物理系博士</span></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="schedule-row">
+        <div class="time-cell">11:35 – 12:05</div>
+        <div class="content-cell">
+          綜合座談：從學術到產業，邊緣運算應用場域的實務與挑戰
+          <br><br>
+          <span class="role-tag">主持人</span>
+          <ul style="margin-top: 8px;">
+            <li>黃錫瑜 <span class="title">/ 國研院科政中心主任</span></li>
+          </ul>
+          <span class="role-tag">與談人</span>
+          <ul style="margin-top: 8px;">
+            <li>黃錫霖 <span class="title">/ 千逢科技股份有限公司執行長</span></li>
+            <li>林哲民 <span class="title">/ 美國史丹佛大學應用物理博後</span></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="schedule-row">
+        <div class="time-cell">12:05 – 12:30</div>
+        <div class="content-cell">
+          <strong>餐盒分享</strong><br>
+          <span style="font-weight: normal;">會後貴賓午宴席</span>
+        </div>
+      </div>
+    </div>
+
+    <h2>會場位置｜Venue Location</h2>
+    <div style="text-align: center; margin: 24px 0;">
+      <div style="margin: 20px auto; max-width: 900px;">
+        <div style="margin-bottom: 20px;">
+          <p style="font-size: 1.2em; margin-bottom: 8px; font-weight: 600;">工研院 BR6 科技大樓 中教室</p>
+          <p style="font-size: 1.1em; color: #cfd6e6;">台北市復興南路二段 237 號 4 樓</p>
+        </div>
+        <!-- Google Maps 嵌入地圖 -->
+        <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.3);">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14459.557142973939!2d121.5437351!3d25.0259584!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442aa2c1e0bf393%3A0x608bf57447782df9!2z5Y-w5YyX5biC5aSn5a6J5Y2A5bu95pil5Y2X6Lev5LqM5q61MjM3!5e0!3m2!1szh-TW!2stw!4v1692345678901!5m2!1szh-TW!2stw"
+            width="100%" 
+            height="450" 
+            style="border:0; border-radius: 8px;" 
+            allowfullscreen="" 
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div style="text-align: center; margin: 40px 0;">
+      <a href="#" class="register-btn">
+        立 即 報 名
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4l8 8-8 8"/></svg>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- 第三場活動資訊 -->
+<section class="event-info" id="s3-info" style="display: none;">
+  <div class="inner">
+    <div class="topic-wrap">
+      <div class="topic-badge">
+        第三場論壇主題（待確定）
+        <div class="topic-en">Third Forum Topic (TBD)</div>
+      </div>
+    </div>
+    
+    <div style="text-align: center; margin: 100px 0;">
+      <h2>第三場內容籌備中</h2>
+      <p>詳細資訊將陸續公布，敬請期待。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 第四場活動資訊 -->
+<section class="event-info" id="s4-info" style="display: none;">
+  <div class="inner">
+    <div class="topic-wrap">
+      <div class="topic-badge">
+        第四場論壇主題（待確定）
+        <div class="topic-en">Fourth Forum Topic (TBD)</div>
+      </div>
+    </div>
+    
+    <div style="text-align: center; margin: 100px 0;">
+      <h2>第四場內容籌備中</h2>
+      <p>詳細資訊將陸續公布，敬請期待。</p>
+    </div>
+  </div>
+</section>
+
 <footer class="sponsor-footer" aria-label="主辦與協辦單位">
   <div class="inner">
     <!-- 指導單位 -->
@@ -1476,109 +2007,207 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   </ul>
 </div>
 
+<!-- ===== 分享功能（在浮動選單下方） ===== -->
+<div id="floatingShare" class="floating-share">
+  <div class="share-container">
+    <button class="share-trigger">
+      <img src="assets/img/svg_share.svg" alt="分享">
+    </button>
+    <div class="share-menu">
+      <a href="#" class="share-item share-facebook" title="分享到 Facebook">
+        <img src="assets/img/svg_fb.svg" alt="Facebook">
+      </a>
+      <a href="#" class="share-item share-line" title="分享到 Line">
+        <img src="assets/img/svg_line.svg" alt="Line">
+      </a>
+      <a href="#" class="share-item share-twitter" title="分享到 X (Twitter)">
+        <img src="assets/img/svg_X.svg" alt="X">
+      </a>
+      <a href="#" class="share-item share-linkedin" title="分享到 LinkedIn">
+        <img src="assets/img/svg_linkedin.svg" alt="LinkedIn">
+      </a>
+    </div>
+  </div>
+</div>
+
 <script>
-/* 切換選取中的日期卡 */
+/* 切換選取中的日期卡並顯示對應活動內容 */
 document.querySelectorAll('.bar-item').forEach(btn=>{
   btn.addEventListener('click', ()=>{
+    // 更新按鈕狀態
     document.querySelectorAll('.bar-item')
       .forEach(b=> b.setAttribute('aria-current', b === btn ? 'true' : 'false'));
+    
+    // 獲取點擊按鈕的 data-id
+    const targetId = btn.getAttribute('data-id');
+    
+    // 停止所有活動的輪播
+    document.querySelectorAll('.event-info').forEach(section => {
+      const carousel = section.querySelector('.speakers-carousel');
+      if (carousel && carousel.stopAutoplay) {
+        carousel.stopAutoplay();
+      }
+    });
+    
+    // 隱藏所有活動資訊
+    document.querySelectorAll('.event-info').forEach(section => {
+      section.style.display = 'none';
+    });
+    
+    // 顯示對應的活動資訊
+    const targetSection = document.getElementById(`${targetId}-info`);
+    if (targetSection) {
+      targetSection.style.display = 'block';
+      
+      // 更新浮動表單的錨點
+      updateFloatingMenuAnchors(targetId);
+      
+      // 如果新顯示的活動有輪播功能，重新啟動自動播放
+      const carousel = targetSection.querySelector('.speakers-carousel');
+      if (carousel && carousel.startAutoplay) {
+        setTimeout(() => {
+          carousel.startAutoplay();
+        }, 100);
+      }
+    }
   });
 });
 
+/* 更新浮動表單錨點 */
+function updateFloatingMenuAnchors(currentEventId) {
+  const floatingMenu = document.getElementById('floatingTabBar');
+  if (!floatingMenu) return;
+  
+  const links = floatingMenu.querySelectorAll('a[href^="#"]');
+  
+  links.forEach(link => {
+    const originalHref = link.getAttribute('href');
+    if (originalHref === '#speakers' || originalHref.includes('-speakers')) {
+      // 講者錨點根據當前活動調整
+      link.setAttribute('href', `#${currentEventId}-speakers`);
+    } else if (originalHref === '#about' || originalHref.includes('-about')) {
+      // 活動簡介錨點
+      link.setAttribute('href', `#${currentEventId}-about`);
+    } else if (originalHref === '#agenda' || originalHref.includes('-agenda')) {
+      // 議程錨點
+      link.setAttribute('href', `#${currentEventId}-agenda`);
+    }
+  });
+}
+
 /* 講師輪播 */
 (function(){
-  const carousel = document.querySelector('.speakers-carousel');
-  const pagesWrap = document.querySelector('.speaker-pages');
-  const pages = Array.from(document.querySelectorAll('.speaker-page'));
-  const dots = Array.from(document.querySelectorAll('.pager-dot'));
-  if (!carousel || !pagesWrap || pages.length === 0 || dots.length === 0) return;
-
-  let current = 0;
-  let autoplayId = null;
-  const AUTOPLAY_DELAY = 8000;
-  let isPaused = false;
-
-  function isNarrow(){ return window.innerWidth <= 768; }
-
-  function updateUI(){
-    // 在窄版（手機版）不執行輪播移動
-    if (isNarrow()) {
-      // 手機版重置transform並顯示所有頁面
-      pagesWrap.style.transform = 'translateX(0px)';
-      pages.forEach(p=> p.setAttribute('aria-hidden', 'false'));
-      dots.forEach(d=> d.setAttribute('aria-current', 'false'));
-      return;
-    }
+  // 為每個活動單獨初始化輪播
+  const eventSections = document.querySelectorAll('.event-info');
+  
+  eventSections.forEach(section => {
+    const carousel = section.querySelector('.speakers-carousel');
+    const pagesWrap = section.querySelector('.speaker-pages');
+    const pages = Array.from(section.querySelectorAll('.speaker-page'));
+    const dots = Array.from(section.querySelectorAll('.pager-dot'));
     
-    const offset = -current * carousel.clientWidth;
-    pagesWrap.style.transform = `translateX(${offset}px)`;
-    pages.forEach((p,i)=> p.setAttribute('aria-hidden', i===current ? 'false' : 'true'));
-    dots.forEach((d,i)=> d.setAttribute('aria-current', i===current ? 'true' : 'false'));
-  }
+    // 如果沒有輪播元素或只有一頁，跳過
+    if (!carousel || !pagesWrap || pages.length <= 1 || dots.length === 0) return;
 
-  function goTo(idx){
-    current = (idx + pages.length) % pages.length;
-    updateUI();
-  }
+    let current = 0;
+    let autoplayId = null;
+    const AUTOPLAY_DELAY = 8000;
+    let isPaused = false;
 
-  function next(){ goTo(current + 1); }
-  function prev(){ goTo(current - 1); }
+    function isNarrow(){ return window.innerWidth <= 768; }
 
-  function startAutoplay(){ stopAutoplay(); if (!isPaused && !isNarrow()) autoplayId = setInterval(next, AUTOPLAY_DELAY); }
-  function stopAutoplay(){ if (autoplayId) { clearInterval(autoplayId); autoplayId = null; } }
+    function updateUI(){
+      // 在窄版（手機版）不執行輪播移動
+      if (isNarrow()) {
+        // 手機版重置transform並顯示所有頁面
+        pagesWrap.style.transform = 'translateX(0px)';
+        pages.forEach(p=> p.setAttribute('aria-hidden', 'false'));
+        dots.forEach(d=> d.setAttribute('aria-current', 'false'));
+        return;
+      }
+      
+      const offset = -current * carousel.clientWidth;
+      pagesWrap.style.transform = `translateX(${offset}px)`;
+      pages.forEach((p,i)=> p.setAttribute('aria-hidden', i===current ? 'false' : 'true'));
+      dots.forEach((d,i)=> d.setAttribute('aria-current', i===current ? 'true' : 'false'));
+    }
 
-  // pager click - 窄版時不執行
-  dots.forEach(d=> d.addEventListener('click', ()=>{ 
-    if (isNarrow()) return; // 窄版不執行輪播
-    const to = Number(d.dataset.to); 
-    if (!Number.isNaN(to)) { goTo(to); startAutoplay(); } 
-  }));
+    function goTo(idx){
+      current = (idx + pages.length) % pages.length;
+      updateUI();
+    }
 
-  // pause on hover / focus - 只在桌機版有效
-  if (!isNarrow()) {
-    carousel.addEventListener('mouseenter', ()=>{ isPaused = true; stopAutoplay(); });
-    carousel.addEventListener('mouseleave', ()=>{ isPaused = false; startAutoplay(); });
-    carousel.addEventListener('focusin', ()=>{ isPaused = true; stopAutoplay(); });
-    carousel.addEventListener('focusout', ()=>{ isPaused = false; startAutoplay(); });
-  }
+    function next(){ goTo(current + 1); }
+    function prev(){ goTo(current - 1); }
 
-  // keyboard navigation - 窄版時不執行
-  carousel.addEventListener('keydown', (e)=>{
-    if (isNarrow()) return; // 窄版不執行鍵盤導航
-    if (e.key === 'ArrowRight') { next(); startAutoplay(); }
-    if (e.key === 'ArrowLeft') { prev(); startAutoplay(); }
-  });
-  carousel.tabIndex = 0;
+    function startAutoplay(){ 
+      stopAutoplay(); 
+      // 只有當前顯示的活動且不是窄版時才啟動自動播放
+      if (!isPaused && !isNarrow() && section.style.display !== 'none') {
+        autoplayId = setInterval(next, AUTOPLAY_DELAY); 
+      }
+    }
+    function stopAutoplay(){ if (autoplayId) { clearInterval(autoplayId); autoplayId = null; } }
 
-  // swipe support (touch)
-  let touchStartX = 0; let touchDeltaX = 0; let isTouching = false;
-  if (!isNarrow()){
-    carousel.addEventListener('touchstart', (e)=>{ stopAutoplay(); isTouching=true; touchStartX = e.touches[0].clientX; touchDeltaX=0; }, {passive:true});
-    carousel.addEventListener('touchmove', (e)=>{ if(!isTouching) return; touchDeltaX = e.touches[0].clientX - touchStartX; pagesWrap.style.transform = `translateX(${ -current * carousel.clientWidth + touchDeltaX }px)`; }, {passive:true});
-    carousel.addEventListener('touchend', ()=>{
-      isTouching=false;
-      const THRESHOLD = 60;
-      if (touchDeltaX > THRESHOLD) { prev(); }
-      else if (touchDeltaX < -THRESHOLD) { next(); }
-      else { goTo(current); }
-      touchDeltaX=0; startAutoplay();
+    // pager click - 窄版時不執行
+    dots.forEach(d=> d.addEventListener('click', ()=>{ 
+      if (isNarrow()) return; // 窄版不執行輪播
+      const to = Number(d.dataset.to); 
+      if (!Number.isNaN(to)) { goTo(to); startAutoplay(); } 
+    }));
+
+    // pause on hover / focus - 只在桌機版有效
+    if (!isNarrow()) {
+      carousel.addEventListener('mouseenter', ()=>{ isPaused = true; stopAutoplay(); });
+      carousel.addEventListener('mouseleave', ()=>{ isPaused = false; startAutoplay(); });
+      carousel.addEventListener('focusin', ()=>{ isPaused = true; stopAutoplay(); });
+      carousel.addEventListener('focusout', ()=>{ isPaused = false; startAutoplay(); });
+    }
+
+    // keyboard navigation - 窄版時不執行
+    carousel.addEventListener('keydown', (e)=>{
+      if (isNarrow()) return; // 窄版不執行鍵盤導航
+      if (e.key === 'ArrowRight') { next(); startAutoplay(); }
+      if (e.key === 'ArrowLeft') { prev(); startAutoplay(); }
     });
-  }
+    carousel.tabIndex = 0;
 
-  // resize: recalculate transform
-  window.addEventListener('resize', ()=> {
+    // swipe support (touch)
+    let touchStartX = 0; let touchDeltaX = 0; let isTouching = false;
+    if (!isNarrow()){
+      carousel.addEventListener('touchstart', (e)=>{ stopAutoplay(); isTouching=true; touchStartX = e.touches[0].clientX; touchDeltaX=0; }, {passive:true});
+      carousel.addEventListener('touchmove', (e)=>{ if(!isTouching) return; touchDeltaX = e.touches[0].clientX - touchStartX; pagesWrap.style.transform = `translateX(${ -current * carousel.clientWidth + touchDeltaX }px)`; }, {passive:true});
+      carousel.addEventListener('touchend', ()=>{
+        isTouching=false;
+        const THRESHOLD = 60;
+        if (touchDeltaX > THRESHOLD) { prev(); }
+        else if (touchDeltaX < -THRESHOLD) { next(); }
+        else { goTo(current); }
+        touchDeltaX=0; startAutoplay();
+      });
+    }
+
+    // resize: recalculate transform
+    window.addEventListener('resize', ()=> {
+      updateUI();
+      // 如果在resize後變成窄版，停止自動播放
+      if (isNarrow()) {
+        stopAutoplay();
+      } else {
+        // 只有當前顯示的活動才啟動自動播放
+        if (section.style.display !== 'none') {
+          startAutoplay();
+        }
+      }
+    });
+
+    // init
     updateUI();
-    // 如果在resize後變成窄版，停止自動播放
-    if (isNarrow()) {
-      stopAutoplay();
-    } else {
+    // 只有第一個活動（第一場）預設顯示時才啟動自動播放
+    if (section.id === 's1-info') {
       startAutoplay();
     }
   });
-
-  // init
-  updateUI();
-  startAutoplay();
 })();
 
 /* 浮動選單控制 */
@@ -1634,7 +2263,11 @@ function measureAlignment() {
 
 updateFloatingOffset();
 window.addEventListener('resize', updateFloatingOffset);
-document.addEventListener('DOMContentLoaded', updateFloatingOffset);
+document.addEventListener('DOMContentLoaded', () => {
+  updateFloatingOffset();
+  // 初始化浮動表單錨點（預設第一場）
+  updateFloatingMenuAnchors('s1');
+});
 
 // 添加測量功能
 window.addEventListener('load', measureAlignment);
@@ -1873,6 +2506,66 @@ document.addEventListener('DOMContentLoaded', initTimeToggle);
 
 // 在頁面載入後初始化語言切換器  
 document.addEventListener('DOMContentLoaded', initLanguageToggle);
+
+/* 分享功能 */
+document.addEventListener('DOMContentLoaded', function() {
+  // 分享功能顯示邏輯（與浮動選單同步）
+  const floatingTabBar = document.getElementById('floatingTabBar');
+  const floatingShare = document.getElementById('floatingShare');
+  
+  if (floatingTabBar && floatingShare) {
+    // 監聽浮動選單的顯示狀態
+    const observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+          const tabBarDisplay = window.getComputedStyle(floatingTabBar).display;
+          if (tabBarDisplay !== 'none') {
+            floatingShare.style.display = 'block';
+            setTimeout(() => {
+              floatingShare.style.opacity = '1';
+              floatingShare.style.transform = 'translateY(0)';
+            }, 100);
+          } else {
+            floatingShare.style.opacity = '0';
+            floatingShare.style.transform = 'translateY(-10px)';
+            setTimeout(() => {
+              floatingShare.style.display = 'none';
+            }, 280);
+          }
+        }
+      });
+    });
+    
+    observer.observe(floatingTabBar, { attributes: true });
+  }
+  
+  // 分享連結功能
+  const shareItems = document.querySelectorAll('.share-item');
+  const currentUrl = window.location.href;
+  const title = document.title || '前瞻科技系列論壇';
+  
+  shareItems.forEach(item => {
+    item.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      let shareUrl = '';
+      
+      if (item.classList.contains('share-facebook')) {
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`;
+      } else if (item.classList.contains('share-line')) {
+        shareUrl = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(currentUrl)}`;
+      } else if (item.classList.contains('share-twitter')) {
+        shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(title)}`;
+      } else if (item.classList.contains('share-linkedin')) {
+        shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentUrl)}`;
+      }
+      
+      if (shareUrl) {
+        window.open(shareUrl, '_blank', 'width=600,height=400,scrollbars=yes,resizable=yes');
+      }
+    });
+  });
+});
 </script>
 
 </body>
