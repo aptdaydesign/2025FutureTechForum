@@ -1528,54 +1528,54 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 
 @keyframes arrowLoop {
   0% {
-    transform: rotate(-90deg) translateX(0px);
+    transform: translate(-50%, -50%) rotate(-90deg) translateX(0px);
     opacity: 1;
   }
   30% {
-    transform: rotate(-90deg) translateX(0px);
+    transform: translate(-50%, -50%) rotate(-90deg) translateX(0px);
     opacity: 1;
   }
   50% {
-    transform: rotate(-90deg) translateX(40px);
+    transform: translate(-50%, -50%) rotate(-90deg) translateX(40px);
     opacity: 0;
   }
   51% {
-    transform: rotate(-90deg) translateX(-40px);
+    transform: translate(-50%, -50%) rotate(-90deg) translateX(-40px);
     opacity: 0;
   }
   70% {
-    transform: rotate(-90deg) translateX(0px);
+    transform: translate(-50%, -50%) rotate(-90deg) translateX(0px);
     opacity: 1;
   }
   100% {
-    transform: rotate(-90deg) translateX(0px);
+    transform: translate(-50%, -50%) rotate(-90deg) translateX(0px);
     opacity: 1;
   }
 }
 
 @keyframes downloadLoop {
   0% {
-    transform: translateX(-50%) translateY(0px) rotate(90deg);
+    transform: translate(-50%, -50%) rotate(90deg) translateY(0px);
     opacity: 1;
   }
   30% {
-    transform: translateX(-50%) translateY(0px) rotate(90deg);
+    transform: translate(-50%, -50%) rotate(90deg) translateY(0px);
     opacity: 1;
   }
   40% {
-    transform: translateX(-50%) translateY(8px) rotate(90deg);
+    transform: translate(-50%, -50%) rotate(90deg) translateY(8px);
     opacity: 0;
   }
   41% {
-    transform: translateX(-50%) translateY(-20px) rotate(90deg);
+    transform: translate(-50%, -50%) rotate(90deg) translateY(-20px);
     opacity: 0;
   }
   60% {
-    transform: translateX(-50%) translateY(0px) rotate(90deg);
+    transform: translate(-50%, -50%) rotate(90deg) translateY(0px);
     opacity: 1;
   }
   100% {
-    transform: translateX(-50%) translateY(0px) rotate(90deg);
+    transform: translate(-50%, -50%) rotate(90deg) translateY(0px);
     opacity: 1;
   }
 }
@@ -1702,6 +1702,37 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   animation: downloadLoop 1.8s ease-in-out infinite;
 }
 
+/* 只在有真正滑鼠的裝置啟用 hover 動畫 */
+@media (hover: hover) and (pointer: fine) {
+  .scroll-top-btn:hover { 
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0,0,0,.3);
+  }
+  .download-btn:hover { 
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0,0,0,.3);
+  }
+  .scroll-top-btn:hover::before { animation: arrowLoop 1.8s ease-in-out infinite; }
+  .download-btn:hover::after     { animation: downloadLoop 1.8s ease-in-out infinite; }
+}
+
+/* 觸控裝置：完全禁用 hover 動畫，避免點了就卡住 */
+@media (hover: none) and (pointer: coarse) {
+  .scroll-top-btn:hover,
+  .download-btn:hover {
+    background: rgba(255,255,255,.08);
+    border-color: rgba(255,255,255,.18);
+    transform: none !important; /* 移除向上移動效果 */
+    box-shadow: 0 8px 32px rgba(0,0,0,.22);
+  }
+  .scroll-top-btn:hover::before { animation: none; }
+  .download-btn:hover::after { animation: none; }
+}
+
 @media (max-width: 768px) {
   .floating-circular-btn {
     bottom: 20px;
@@ -1764,24 +1795,25 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   }
   
   .scroll-top-btn:hover {
-    transform: translateY(-2px); /* 確保hover效果正常 */
+    transform: none; /* 移除hover的向上移動效果 */
   }
   
   .download-btn:hover {
-    transform: translateY(-2px); /* 確保hover效果正常 */
+    transform: none; /* 移除hover的向上移動效果 */
   }
   
   .download-btn::after {
-    top: 8px; /* 調整位置，縮小上下距離 */
     font-size: 18px; /* 調整為適合50px容器的大小 */
+    position: absolute;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%) rotate(90deg); /* 確保箭頭方向正確並水平置中 */
+    transform: translate(-50%, -50%) rotate(90deg); /* 完全置中並確保箭頭方向正確 */
   }
   
   .download-btn::before {
     width: 16px;
     height: 5px;
-    bottom: 12px; /* 調整位置，縮小上下距離 */
+    bottom: 10px; /* 調整位置，與置中的箭頭配合 */
     left: 50%;
     transform: translateX(-50%); /* 水平置中 */
     border-width: 2px;
@@ -1796,12 +1828,13 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
     transition: opacity 0.2s ease;
   }
   
+  /* 單次播放（手機點擊用） */
   .btn-animate-download::after {
-    animation: downloadLoop 1.8s ease-in-out 1;
+    animation: downloadLoop 1.2s ease-in-out 1 !important;
   }
   
   .btn-animate-scroll::before {
-    animation: arrowLoop 1.8s ease-in-out 1;
+    animation: arrowLoop 1.2s ease-in-out 1 !important;
   }
 }
 </style>
@@ -3192,38 +3225,27 @@ document.addEventListener('DOMContentLoaded', function() {
         const isScrollBtn = this.classList.contains('scroll-top-btn');
         
         if (isDownloadBtn || isScrollBtn) {
-          // 先清理任何現有的動畫狀態
-          this.classList.remove('btn-clicked', 'btn-animate-download', 'btn-animate-scroll');
-          
-          // 強制重排，確保之前的狀態被清除
-          this.offsetHeight;
-          
-          // 1. 立即改變透明度
-          this.classList.add('btn-clicked');
-          
-          // 2. 添加對應的動畫類
-          if (isDownloadBtn) {
-            this.classList.add('btn-animate-download');
-          } else if (isScrollBtn) {
-            this.classList.add('btn-animate-scroll');
+          // 使用更穩定的動畫播放機制
+          function playOnce(el, playClass) {
+            // 清掉舊狀態
+            el.classList.remove('btn-clicked', 'btn-animate-download', 'btn-animate-scroll');
+            // 立即給點擊色
+            el.classList.add('btn-clicked');
+            // 觸發單次動畫
+            el.classList.add(playClass);
+
+            // 動畫結束就把暫時用的 class 清掉
+            const onAnimEnd = () => {
+              el.classList.remove('btn-clicked', playClass);
+              el.removeEventListener('animationend', onAnimEnd, true);
+            };
+            el.addEventListener('animationend', onAnimEnd, true);
           }
           
-          // 3. 使用requestAnimationFrame確保動畫開始後再設置清理
-          requestAnimationFrame(() => {
-            // 1.8秒後復原透明度並停止動畫
-            setTimeout(() => {
-              this.classList.remove('btn-clicked');
-              this.classList.remove('btn-animate-download');
-              this.classList.remove('btn-animate-scroll');
-              
-              // 強制清理任何殘留的CSS狀態
-              this.style.opacity = '';
-              this.style.animation = '';
-            }, 1800);
-          });
-          
-          // 4. 執行按鈕對應的功能
+          // 執行對應的動畫和功能
           if (isDownloadBtn) {
+            playOnce(this, 'btn-animate-download');
+            
             // 下載功能
             const link = document.createElement('a');
             link.href = 'data:text/plain;charset=utf-8,前瞻科技系列論壇議程資訊%0A%0A此為示範文件';
@@ -3232,6 +3254,8 @@ document.addEventListener('DOMContentLoaded', function() {
             link.click();
             document.body.removeChild(link);
           } else if (isScrollBtn) {
+            playOnce(this, 'btn-animate-scroll');
+            
             // 回到頂部功能
             window.scrollTo({top: 0, behavior: 'smooth'});
           }
