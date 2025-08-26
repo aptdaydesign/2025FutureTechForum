@@ -68,8 +68,8 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 /* ===== 日期選單（卡片式，置於 HERO 底部） ===== */
 .event-bar{
   position:absolute;
-  left:calc( 70/1920*100%); /* 與 hero title 對齊 */
-  right:calc( 70/1920*100%); /* 右側也保持相同邊距 */
+  left:calc( 32px + 3.65vw); /* 調整左側邊距：32px固定 + 3.65vw響應式 */
+  right:32px; /* 與浮動選單右側對齊 */
   bottom:0;
   transform:none; /* 移除置中變換 */
   width:auto; /* 讓寬度自動適應 */
@@ -444,8 +444,8 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 
   /* 日期選單 */
   .event-bar {
-    left: 20px; /* 手機版調整為與浮動選單一致 */
-    right: 20px; /* 手機版調整為與浮動選單一致 */
+    left: 20px; /* 手機版與浮動選單一致 */
+    right: 20px; /* 手機版與浮動選單一致 */
   }
   .event-bar .bar{
     grid-template-columns:repeat(2, minmax(0, 1fr));
@@ -522,10 +522,10 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   .speaker-pager{ display:none; }
   .inner{ padding-left:16px; padding-right:16px; }
   
-  /* Hero選單在極小螢幕保持與inner一致的間距 */
+  /* Hero選單在極小螢幕保持與浮動選單一致的間距 */
   .event-bar {
-    left: 16px; 
-    right: 16px; 
+    left: 20px; /* 與浮動選單保持一致 */
+    right: 20px; /* 與浮動選單保持一致 */
   }
   
   /* Footer */
@@ -907,19 +907,19 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   justify-content: center;
   width: 60px;
   height: 60px;
-  background: transparent;
-  border: 1px solid var(--glass-bd, rgba(255,255,255,.18));
+  background: #ffffff; /* 改為白色背景 */
+  border: 1px solid rgba(0,0,0,.1); /* 改為淺灰邊框 */
   border-radius: 11px;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 8px 32px rgba(0,0,0,.22);
   overflow: hidden;
   position: relative;
-  background-clip: padding-box;
-  isolation: isolate; /* 避免祖先的合成影響取樣 */
+  /* 移除毛玻璃相關屬性 */
 }
 
-/* 玻璃與模糊都放在 pseudo 上 */
+/* 移除毛玻璃偽元素 */
+/*
 .share-trigger::before {
   content: "";
   position: absolute;
@@ -931,30 +931,45 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   z-index: 0;
   will-change: backdrop-filter;
 }
+*/
 
-/* 讓圖示在玻璃層上方 */
-.share-trigger > * {
-  position: relative;
-  z-index: 1;
+/* SVG 圖示樣式 */
+.share-trigger .icon {
+  width: 32px;
+  height: 32px;
+  fill: none;
+  stroke: #333333;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .share-trigger:hover {
-  border-color: rgba(255,255,255,0.3);
+  background: #f5f5f5; /* hover 時稍微變灰 */
+  border-color: rgba(0,0,0,0.2);
   box-shadow: 0 12px 40px rgba(0,0,0,.3);
 }
 
+/* 移除毛玻璃 hover 效果 */
+/*
 .share-trigger:hover::before {
   background: rgba(255,255,255,0.15);
 }
+*/
 
-/* 開啟狀態 = 跟 hover 同一套樣式 */
+/* 開啟狀態樣式 */
 .floating-share.is-open .share-trigger {
-  border-color: rgba(255,255,255,0.3);
+  background: #f0f0f0; /* 開啟時的背景色 */
+  border-color: rgba(0,0,0,0.2);
   box-shadow: 0 12px 40px rgba(0,0,0,.3);
 }
+
+/* 移除毛玻璃開啟效果 */
+/*
 .floating-share.is-open .share-trigger::before {
   background: rgba(255,255,255,0.15);
 }
+*/
 
 /* 展開的選單與項目 */
 .floating-share.is-open .share-menu{
@@ -1095,9 +1110,9 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
     border-radius: 9px;
   }
   
-  .share-trigger img {
-    width: 40px;
-    height: 40px;
+  .share-trigger .icon {
+    width: 26px;
+    height: 26px;
   }
   
   .share-menu {
@@ -1689,15 +1704,17 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   box-shadow: 0 12px 40px rgba(0,0,0,.3);
 }
 
-/* 按住時的瞬間變色（不套任何 transition） */
+/* 按壓回饋 - 使用 filter 而非 opacity，避免毛玻璃閃爍 */
 .download-btn.pressed, .scroll-top-btn.pressed{
-  opacity:.6;
+  filter: brightness(0.8);
+  transform: scale(0.98);
   transition: none;
 }
 
-/* 分享按鈕按住時的瞬間變色 */
+/* 分享按鈕按壓回饋 - 白色背景版本 */
 .share-trigger.pressed {
-  opacity:.6;
+  background: #e0e0e0; /* 按壓時更深的灰色 */
+  transform: scale(0.98);
   transition: none;
 }
 
@@ -2513,7 +2530,13 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 <div id="floatingShare" class="floating-share">
   <div class="share-container">
     <button class="share-trigger" title="分享至社群">
-      <img src="assets/img/svg_share.svg" alt="分享">
+      <svg viewBox="0 0 24 24" class="icon">
+        <circle cx="18" cy="5" r="3"/>
+        <circle cx="6" cy="12" r="3"/>
+        <circle cx="18" cy="19" r="3"/>
+        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+      </svg>
     </button>
     <div class="share-menu">
       <a href="#" class="share-item share-facebook" title="分享到 Facebook">
