@@ -35,6 +35,7 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   --section-gap-bottom: 20px;
   --subheading-gap-top: clamp(12px, 2.2vw, 28px);
   --subheading-gap-bottom: 10px;
+  --floating-gap: 10px; /* 漂浮元件之間的統一間距 */
 }
 
 /* 錨點滾動偏移 */
@@ -80,10 +81,10 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 }
 .event-bar .bar{
   display:grid;
-  grid-template-columns: repeat(4, auto); /* 改為 auto，讓按鈕根據內容調整寬度 */
+  grid-template-columns: repeat(4, 1fr); /* 改為 1fr，讓按鈕平均分配寬度 */
   gap:clamp(10px, 1.25vw, 20px);
   align-items:stretch;
-  justify-content: center; /* 讓按鈕組在容器中居中 */
+  width: 100%; /* 確保充分利用容器寬度 */
 }
 .bar-item{
   --c1: var(--tab-default);
@@ -98,7 +99,8 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   transition:background-position .6s ease, transform .2s ease, box-shadow .3s ease;
   box-shadow:0 8px 20px rgba(0,0,0,.25);
   white-space:nowrap;
-  min-width:120px; /* 減少最小寬度 */
+  min-width:120px; /* 保持最小寬度 */
+  width: 100%; /* 確保按鈕填滿分配的網格空間 */
   flex-shrink:0;
 }
 .bar-item:hover{ background-position:100% 50%; transform:translateY(-1px); }
@@ -716,6 +718,39 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
     left: calc( 70/1920*100%) !important; /* 與 logo 左邊距對齊，強制覆蓋 */
     right: calc( 70/1920*100%) !important; /* 右側使用相同距離，強制覆蓋 */
   }
+  
+  /* 右上角浮動元素與 logo 對齊 */
+  .floating-tab-bar {
+    right: calc( 70/1920*100%) !important; /* 與 logo 邊距對齊 */
+  }
+  
+  .floating-share {
+    right: calc( 70/1920*100%) !important; /* 分享功能與 logo 邊距對齊 */
+  }
+  
+  .floating-circular-btn {
+    right: calc( 70/1920*100%) !important; /* 下載按鈕與回到頂部與 logo 邊距對齊 */
+  }
+  
+  /* 講師區域與 logo 對齊 - 修正方式 */
+  .speakers-carousel {
+    margin-left: calc( 70/1920*100%) !important;
+    margin-right: calc( 70/1920*100%) !important;
+    max-width: calc(100% - 2 * 70/1920*100%) !important; /* 調整最大寬度 */
+  }
+  
+  /* 活動內容區域與 logo 對齊 */
+  .event-info .inner {
+    padding-left: calc( 70/1920*100%) !important;
+    padding-right: calc( 70/1920*100%) !important;
+  }
+  
+  /* 議程表格與 logo 對齊 */
+  .schedule-table {
+    margin-left: calc( 70/1920*100%) !important;
+    margin-right: calc( 70/1920*100%) !important;
+    width: calc(100% - 2 * 70/1920*100%) !important; /* 扣除左右邊距 */
+  }
 }
 
 @media (min-width: 769px) {
@@ -840,6 +875,20 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
     padding: 15px 16px; /* 調整上下padding，讓高度與分享按鈕相同(50px) */
     border-radius: 12px;
     box-sizing: border-box;
+  }
+  
+  /* 手機版分享功能間距調整 */
+  .floating-share {
+    top: calc(12px + 50px + var(--floating-gap)) !important; /* 手機版：top + height + gap */
+    left: 20px !important;
+    right: 20px !important;
+  }
+}
+
+/* 極小螢幕或浮動選單變成2x2時的調整 */
+@media (max-width: 480px) {
+  .floating-share {
+    top: calc(12px + 50px + var(--floating-gap)) !important; /* 480px版2x2：與768px相同高度 + gap */
   }
   .floating-tab-bar ul {
     gap: 12px; /* 恢復合理間距 */
@@ -1191,7 +1240,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 /* 小尺寸手機橫向顯示調整 */
 @media (max-width: 480px) and (orientation: landscape) {
   .floating-share {
-    top: 62px; /* 橫向時保持與浮動選單10px間距 */
+    top: calc(12px + 42px + var(--floating-gap)) !important; /* 橫向時較矮的高度 + gap */
     right: 15px; /* 橫向時稍微內移 */
   }
   
@@ -1478,7 +1527,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 10px;
+  gap: var(--floating-gap);
   opacity: 1;
   transform: translateY(0);
   transition: opacity 0.3s ease, transform 0.3s ease;
