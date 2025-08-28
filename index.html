@@ -126,22 +126,26 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 }
 .event-info .inner{
   position:relative; z-index:1;
-  max-width:1200px; margin:0 auto; padding:0 20px;
-  line-height:1.8; font-weight:300; font-size:1.2em;
+  max-width:800px; /* 調整與講師簡介框一致的寬度 */
+  margin:0 auto; 
+  padding:0 20px;
+  line-height:1.8; 
+  font-weight:300; 
+  font-size:clamp(1rem, 1.2em, 1.2rem); /* 設定字體大小上限為1.2rem，在1200px時約19.2px */
 }
 
 /* ===== 主標 / 副標 ===== */
-.topic-wrap{ text-align:center; margin:16px auto 24px; max-width:1000px; }
+.topic-wrap{ text-align:center; margin:16px auto 24px; max-width:800px; } /* 調整與講師簡介框一致 */
 .topic-badge{
   display:inline-block; background:transparent; color:#fff;
-  font-size:clamp(23px, 3vw, 72px); font-weight:400;
+  font-size:clamp(24px, 1.8vw, 42px); font-weight:400; /* 中文活動名稱字體 */
   padding:10px 20px; border-radius:20px; border:4px solid var(--pink);
   margin-top:20px; margin-bottom:20px;
   text-align:center;
 }
 .topic-badge .topic-en{
   display:block;
-  font-size:clamp(20px, 1.8vw, 42px);
+  font-size:clamp(16px, 1.8vw, 24px); /* 英文活動名稱字體 */
   font-weight:400;
   color:#ddd;
   margin-top:5px;
@@ -160,6 +164,19 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 .event-info h2 {
   font-size:clamp(20px,1.8vw,30px);
   font-weight:500;
+  text-align: left; /* 確保標題左對齊 */
+}
+
+/* 獨立的h2標題（講師區域等）與event-info內容對齊 */
+body > h2, 
+section:not(.event-info) h2 {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
+  font-size: clamp(20px,1.8vw,30px);
+  font-weight: 500;
+  box-sizing: border-box;
 }
 
 /* ===== CTA ===== */
@@ -198,7 +215,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   display:grid; grid-template-columns:auto 1fr;
   align-items:center; column-gap:10px;
   width:max-content; text-align:left;
-  font-size:clamp(20px, 1.8vw, 30px);
+  font-size:clamp(20px, 1.8vw, 20px);
   /* 在 flexbox 容器中會自動居中 */
 }
 
@@ -276,14 +293,45 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 }
 
 /* ===== 講者 ===== */
-.speaker-grid{ margin-top:36px; margin-bottom:60px; display:grid; grid-template-columns:repeat(3,1fr); gap:36px }
-.speaker{ text-align:center }
-.speaker .photo{
-  width:200px; height:200px; border-radius:50%;
-  margin:0 auto 18px; object-fit:cover; object-position:center;
-  box-shadow:0 8px 24px rgba(0,0,0,.25); background:#0b0c0f;
+.speaker-grid{ 
+  margin-top:36px; 
+  margin-bottom:60px; 
+  display:block; /* 改為垂直排列，參考手機版格式 */
+  gap:36px; 
 }
-.speaker .name{ font-size:1.6rem; font-weight:500; margin:0 0 10px }
+.speaker{ 
+  /* 參考手機版的簡潔格式 */
+  margin-bottom:48px; 
+  text-align:left; 
+  display:grid;
+  grid-template-columns: 180px 1fr; /* 桌面版照片稍大一些 */
+  grid-template-areas:
+    "photo meta"
+    "bio   bio";
+  column-gap:32px;
+  row-gap:16px;
+  align-items:center;
+  width:100%; /* 改為100%寬度 */
+  max-width:none; /* 移除最大寬度限制 */
+  /* margin-left:auto; 移除 */
+  /* margin-right:auto; 移除 */
+}
+.speaker .photo{
+  grid-area:photo;
+  width:180px; 
+  height:180px; 
+  border-radius:50%;
+  margin:0; /* 移除自動置中margin */
+  object-fit:cover; 
+  object-position:center;
+  box-shadow:0 8px 24px rgba(0,0,0,.25); 
+  background:#0b0c0f;
+}
+.speaker .name{ 
+  font-size:1.6rem; 
+  font-weight:500; 
+  margin:0; /* 移除bottom margin */
+}
 .speaker .title-chip{ 
   display: flex !important; /* 覆蓋 -webkit-box，優先使用 flex */
   padding:0; 
@@ -291,19 +339,19 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   background:transparent; 
   color:#cfd6e6; 
   font-weight:500; 
-  font-size:1rem; 
-  margin-top:2px; /* 縮短人名與職稱間的距離，從 8px 改為 2px */
+  font-size:clamp(0.85rem, 1.2vw, 1.1rem); /* 電腦版改為響應式 */
+  margin-top:1px; /* 縮短一半：從 2px 改為 1px */
   /* 職稱區域統一高度 */
-  height: 48px; /* 固定高度，可容納2行職稱 */
-  line-height: 1.5; /* 增加行距，從 1.2 改為 1.5 */
-  text-align: center; /* 水平置中 */
-  /* 文字溢出處理 */
-  overflow: hidden;
-  text-overflow: ellipsis;
-  /* 多行文字截斷 */
-  -webkit-line-clamp: 2; /* 最多顯示2行 */
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
+  height: auto; /* 改為自動高度 */
+  line-height: 1.8; /* 設定為 1.8 */
+  text-align: left; /* 改為左對齊，參考手機版 */
+  /* 移除文字截斷限制，讓職稱完整顯示 */
+  overflow: visible; /* 改為可見，避免文字被裁切 */
+  /* text-overflow: ellipsis; 移除 */
+  /* 移除多行文字截斷 */
+  /* -webkit-line-clamp: 2; 移除行數限制 */
+  /* line-clamp: 2; 移除 */
+  /* -webkit-box-orient: vertical; 移除 */
   /* 垂直置中 - 使用 flex 來實現完美的垂直居中 */
   box-sizing: border-box;
   align-items: center; /* 垂直置中 */
@@ -314,43 +362,67 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 
 .speaker .bio{ display:none; }
 .bio-card{
-  margin-top:12px;
+  grid-area:bio;
+  margin-top:0; /* 移除上邊距，使用grid gap控制 */
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.12);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   color:#cfd6e6;
-  padding:14px;
+  padding:20px; /* 稍微增加padding */
   border-radius:12px;
   font-size:0.95rem;
   line-height:1.6;
-  max-width:360px;
-  margin-left:auto; margin-right:auto;
-  /* 統一高度解決方案 */
-  min-height: 120px; /* 設定最小高度 */
-  height: 120px; /* 固定高度 */
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* 內容垂直置中 */
+  /* 確保在grid中正確顯示 */
+  width: auto; /* 改為auto，讓grid控制寬度 */
+  max-width: none; /* 移除最大寬度限制 */
+  margin:0; /* 移除margin */
+  /* 調整高度為自動，讓內容決定高度 */
+  min-height: auto; /* 改為自動 */
+  height: auto; /* 改為自動高度 */
+  /* 確保內容不會溢出框外 */
+  overflow: visible; /* 改為可見 */
+  display: block; /* 改為block */
+  /* 確保box-sizing正確 */
+  box-sizing: border-box;
 }
 
 .bio-card .bio-desc{ 
   color:inherit; 
-  font-size:0.95rem; 
+  font-size:0.85rem; /* 縮小至2/3：1.27rem × (2/3) ≈ 0.85rem */
   line-height:1.6; 
-  /* 文字溢出處理 */
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 4; /* 限制最多4行 */
-  line-clamp: 4; /* 標準屬性 */
-  -webkit-box-orient: vertical;
-  text-overflow: ellipsis;
+  /* 設定兩端對齊，末行置左 */
+  text-align: justify; /* 兩端對齊 */
+  text-align-last: left; /* 最後一行置左 */
+  /* 確保文字在框內正常顯示 */
+  overflow: visible; /* 改為可見 */
+  display: block; /* 改為 block，移除 -webkit-box */
+  /* 移除行數限制 */
+  /* -webkit-line-clamp: 4; 移除行數限制 */
+  /* line-clamp: 4; 移除行數限制 */
+  /* -webkit-box-orient: vertical; 移除 */
+  /* text-overflow: ellipsis; 移除 */
+  white-space: normal; /* 確保正常換行 */
+  word-wrap: break-word; /* 長詞自動換行 */
 }
-.meta{ display:flex; flex-direction:column; gap:6px; }
+.meta{ 
+  grid-area:meta;
+  display:flex; 
+  flex-direction:column; 
+  gap:3px; 
+  align-items:flex-start; /* 左對齊 */
+  min-width:0;
+}
 .meta .name{ margin:0; }
 
 /* carousel: sliding pages and pager styles */
-.speakers-carousel{ position:relative; max-width:1200px; margin:0 auto; overflow:hidden; }
+.speakers-carousel{ 
+  position:relative; 
+  max-width:800px; /* 調整與其他內容區域一致 */
+  margin:0 auto; 
+  padding:0 20px; /* 添加與event-info相同的padding */
+  overflow:hidden; 
+}
 .speaker-pages{ display:flex; width:100%; transition:transform .6s cubic-bezier(.2,.9,.2,1); will-change:transform; }
 .speaker-page{ flex:0 0 100%; box-sizing:border-box; padding:0; } /* 移除padding，讓講師區域與其他內容對齊 */
 
@@ -361,19 +433,19 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 .speaker-page[aria-hidden="true"] { pointer-events: none; opacity: .98; }
 
 /* Footer（與議程同色，滿版；無頂部分隔線） */
-.sponsor-footer{
+.footer-section{
   background:#112240;
   padding:60px 0 44px; /* 增加上方間距 */
   border-top:none;
   box-shadow:none;
 }
-.sponsor-footer::before{
+.footer-section::before{
   content:none;
   display:none;
 }
 
-.sponsor-footer .inner{
-  max-width:1200px;
+.footer-section .inner{
+  max-width:800px; /* 調整與講師簡介框一致的寬度 */
   margin:0 auto;
   padding:0 32px; /* 調整為與其他區域一致的32px */
   display:grid;
@@ -383,13 +455,13 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   justify-items:center;
 }
 
-.sponsor-block{
+.footer-block{
   display:flex;
   align-items:center;
   gap:18px;
 }
 
-.sponsor-tag{
+.footer-tag{
   color:#cfd6e6;
   opacity:1;
   font-weight:500;
@@ -398,7 +470,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   white-space:nowrap;
 }
 
-.sponsor-logo{
+.footer-logo{
   display:block;
   height:46px;
   width:auto;
@@ -439,6 +511,8 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   .event-info{ padding-top:12px; }
   .event-info .inner{ padding:0 20px; } /* 手機版調整為與浮動選單一致 */
   .event-info h2:not(:first-of-type) { margin-top: clamp(40px, 8vw, 60px); } /* 增加段落間距 */
+  .event-info p { font-size: clamp(16px, 4.2vw, 18px); line-height: 1.6; } /* 手機版內文字體再放大 */
+  .topic-row > div:last-child { font-size: clamp(16px, 4.2vw, 18px); } /* 手機版時間地點文字與內文一致 */
   .topic-wrap{ margin:8px auto 12px; }
   .topic-badge{ 
     margin-top:12px; 
@@ -460,7 +534,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   }
   
   /* 講者區域 */
-  .speakers-carousel{ overflow:visible; }
+  .speakers-carousel{ overflow:visible; margin: 0 -20px; padding: 0 20px; } /* 手機版與浮動選單等寬 */
   .speaker-pages{ display:block; transform:none; }
   .speaker-page{ flex:0 0 auto; width:100%; padding:0; margin-bottom:18px; } /* 移除padding以符合統一間距 */
   .speaker-grid{ display:block; gap:12px; }
@@ -503,11 +577,11 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   }
   
   .speaker .title-chip{
-    margin-top:6px;
-    font-size:clamp(14px,4.2vw,18px);
+    margin-top:7px; /* 增加 1px 間距 */
+    font-size:clamp(8px, 3.2vw, 12px); /* 手機版縮小 2px */
     /* 手機版時確保左對齊且有適當行距 */
     text-align: left;
-    line-height: 1.4;
+    line-height: 1.5; /* 增加行距，讓多行職稱之間間距更大 */
     height: auto;
     align-items: flex-start;
     justify-content: flex-start;
@@ -536,10 +610,17 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   }
   
   /* Footer */
-  .sponsor-footer { padding: 40px 0 50px; } /* 調整上下間距 */
-  .sponsor-footer .inner{ grid-template-columns:1fr; gap:40px; padding:0 20px; } /* 增加gap並統一padding */
-  .sponsor-block{ flex-direction:column; gap:20px; text-align:center; } /* 增加內部間距 */
-  .sponsor-logo{ height:40px; }
+  .footer-section { padding: 40px 0 50px; } /* 調整上下間距 */
+  .footer-section .inner{ 
+    grid-template-columns:1fr; 
+    gap:40px; 
+    padding:0 20px; 
+    max-width: 800px; 
+    margin: 0 auto;
+    justify-items: flex-start; /* 手機版改為置左對齊 */
+  } 
+  .footer-block{ flex-direction:column; gap:20px; text-align:left; align-items:flex-start; } /* 手機版改為置左對齊 */
+  .footer-logo{ height:40px; }
 }
 
 @media (max-width:560px){
@@ -549,17 +630,17 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
     display:inline-block;
     align-self: baseline;
     vertical-align: baseline;
-    min-width:58px;
-    height:40px;
-    line-height:40px;
-    padding:0 12px;
-    font-size: inherit;
+    min-width:50px;
+    height:32px;
+    line-height:32px;
+    padding:0 10px;
+    font-size: clamp(14px, 3.5vw, 16px);
     text-align:center;
   }
 
   .topic-row > div:last-child{
     min-height:40px;
-    font-size:.95em;
+    font-size: clamp(16px, 4.2vw, 18px);
     line-height:1.6;
     align-items:baseline;
     align-self: baseline;
@@ -1282,7 +1363,8 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 .time-toggle {
   display: flex;
   justify-content: center;
-  margin: 20px 0 32px 0;
+  margin: 20px auto 32px auto;
+  max-width: 800px; /* 與內容區域等寬 */
 }
 
 .time-toggle-track {
@@ -1334,8 +1416,8 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 /* ===== 議程表格樣式 ===== */
 .schedule-table {
   width: 100%;
-  max-width: none;
-  margin: 0;
+  max-width: 800px; /* 調整與講師簡介框一致的寬度 */
+  margin: 0 auto; /* 居中對齊 */
   border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   overflow: hidden;
@@ -1453,7 +1535,8 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 /* 響應式設計 */
 @media (max-width: 768px) {
   .time-toggle {
-    margin: 16px 0 24px 0;
+    margin: 16px auto 24px auto; /* 手機版也居中並與內容等寬 */
+    max-width: calc(100vw - 40px); /* 與浮動選單等寬 */
   }
   
   .time-option {
@@ -1464,8 +1547,9 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   
   .schedule-table {
     border-radius: 8px;
-    margin: 0; /* 移除偏移，讓它對齊左右間距 */
+    margin: 0 auto; /* 手機版也居中，讓父容器的padding控制邊距 */
     border-width: 1px; /* 減少邊框寬度避免右側偏移 */
+    max-width: 100%; /* 確保不超出父容器 */
   }
   
   .schedule-header {
@@ -1498,8 +1582,9 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 
 @media (max-width: 480px) {
   .schedule-table {
-    margin: 0;
+    margin: 0 auto; /* 480px以下也居中 */
     border-radius: 6px;
+    max-width: 100%;
   }
   
   .time-cell {
@@ -1990,66 +2075,53 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
           </div>
         </div>
       </div>
+      
+      <h2 id="s1-speakers">
+        <span class="lang-zh">亮點講者<span>｜Featured Speakers</span></span>
+        <span class="lang-en" style="display: none;">亮點講者<span>｜Featured Speakers</span></span>
+      </h2>
     </div>
 
-    <h2 id="s1-speakers">亮點講者<span>｜Featured Speakers</span></h2>
-
-    <!-- speakers carousel: 2 pages, 3 speakers each -->
+    <!-- speakers: all in one page, no carousel needed -->
     <div class="speakers-carousel" aria-roledescription="carousel">
       <div class="speaker-pages">
-        <!-- page 1 -->
         <div class="speaker-grid speaker-page" data-page="0">
           <div class="speaker">
-            <img class="photo" src="assets/img/Philip-Wong.png" alt="黃漢森">
+            <img class="photo" src="assets/img/speaker-ShiYu-Huang.png" alt="黃錫瑜">
+            <div class="meta">
+              <div class="name">黃錫瑜</div>
+              <div class="title-chip">國研院科技政策研究與資訊中心主任<br>國立清華大學電機工程學系教授</div>
+            </div>
+            <div class="bio-card"><div class="bio-desc">黃錫瑜教授曾任職於美國矽谷國民半導體與世大積體電路（後併入台積電），1999 年起於清華大學任教，並先後擔任清華大學積體電路設計技術中心主任、創新育成中心主任、南台科技大學副校長等職務，亦共同創立兆心科技。專精於積體電路設計、自動化與測試，致力於研發高可靠度與長壽命的「永保安康晶片」，推動台灣半導體創新。</div></div>
+          </div>
+          <div class="speaker">
+            <img class="photo" src="assets/img/speaker-Philip-Wong.png" alt="黃漢森">
             <div class="meta">
               <div class="name">黃漢森</div>
-              <div class="title-chip"></div>
+              <div class="title-chip">台積電首席科學家<br>史丹佛大學電機系教授</div>
             </div>
-            <div class="bio-card"><div class="bio-desc"></div></div>
+            <div class="bio-card"><div class="bio-desc">黃漢森教授曾任 IBM T.J. Watson 研究中心研究員（1988–2004），2004 年起於史丹佛大學執教，並於 2018–2020 年擔任台積電副總經理，現為首席科學家。專長涵蓋奈米電子、半導體元件、類腦計算與 3D 系統整合等領域，成就卓著。黃教授為 IEEE 院士，榮獲 J.J. Ebers 獎與 Andrew S. Grove 獎等國際大獎，並在多所國際頂尖大學擔任客座教授，持續引領全球半導體技術前沿。</div></div>
           </div>
           <div class="speaker">
-            <img class="photo" src="assets/img/Huang-Xilin.png" alt="黃錫霖">
-            <div class="meta">
-              <div class="name">黃錫霖</div>
-              <div class="title-chip"></div>
-            </div>
-            <div class="bio-card"><div class="bio-desc"></div></div>
-          </div>
-          <div class="speaker">
-            <img class="photo" src="assets/img/Horsley-David.png" alt="David Horsley">
+            <img class="photo" src="assets/img/speaker-Horsley-David.png" alt="David Horsley">
             <div class="meta">
               <div class="name">David Horsley</div>
-              <div class="title-chip"></div>
+              <div class="title-chip">TDK Invensense 新興感測器事業部 技術長<br>加州大學戴維斯分校機械與航太工程學系教授<br>加州大學柏克萊分校兼任教授</div>
             </div>
-            <div class="bio-card"><div class="bio-desc"></div></div>
-          </div>
-        </div>
-        <!-- page 2 -->
-        <div class="speaker-grid speaker-page" data-page="1">
-          <div class="speaker">
-            <img class="photo" src="assets/img/Shen-Wenbing.png" alt="沈文冰">
-            <div class="meta">
-              <div class="name">沈文冰</div>
-              <div class="title-chip"></div>
-            </div>
-            <div class="bio-card"><div class="bio-desc"></div></div>
+            <div class="bio-card"><div class="bio-desc">David Horsley 博士為微機電系統（MEMS）超音波感測領域的先驅，2013 年共同創立 Chirp Microsystems，成功開發超音波感測技術並擔任技術長，後被 TDK 收購，現任 TDK Invensense 新興感測器事業部 CTO。他同時為 UC Davis 教授及 UC Berkeley 感測與致動中心共同主任，研發成果包括應用於筆電與消費性產品的超音波指紋辨識感測器。Horsley 博士是 IEEE 會士與美國國家發明家學院會士，曾獲 NSF CAREER Award、UC Davis 傑出青年教師獎及 MSIG Hall of Fame Award，著有 150 餘篇論文並持有 22 項專利。</div></div>
           </div>
           <div class="speaker">
-            <img class="photo" src="assets/img/Zhu-Chenzao.png" alt="朱宸佐">
+            <img class="photo" src="assets/img/speaker-Wesley-Chu.png" alt="朱宸佐">
             <div class="meta">
               <div class="name">朱宸佐</div>
-              <div class="title-chip"></div>
+              <div class="title-chip">史丹佛大學法學院資深研究員<br>人工智慧法律國際研究基金會 秘書長</div>
             </div>
-            <div class="bio-card"><div class="bio-desc"></div></div>
+            <div class="bio-card"><div class="bio-desc">朱宸佐博士為台灣及中國大陸雙重執業律師，專精於人工智慧法律、科技法規、數據治理及跨境爭議解決。曾任日本及台灣上市公司法務長，並長年擔任跨國科技企業總法律顧問，實務經驗豐富。現為史丹佛大學法學院資深研究員、史丹佛台灣科學技術研究中心客座研究員，全國律師聯合會科技法律委員會副主任委員，同時擔任人工智慧法律國際研究基金會秘書長。他持續推動 AI 與法律的國際研究與政策倡議，積極建構健全的全球科技治理架構。</div></div>
           </div>
         </div>
       </div>
 
-      <!-- pager indicators -->
-      <div class="speaker-pager" role="tablist" aria-label="speaker pages">
-        <button class="pager-dot" data-to="0" aria-label="第一頁" aria-current="true"></button>
-        <button class="pager-dot" data-to="1" aria-label="第二頁" aria-current="false"></button>
-      </div>
+      <!-- No pager needed for single page -->
     </div>
 
     <h2 id="s1-about">
@@ -2063,7 +2135,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
       <p>In an era where artificial intelligence and advanced technologies are reshaping industries worldwide, the semiconductor sector stands at the forefront, powering innovations and driving progress. The demand for a highly skilled workforce in this field has never been more pressing. This seminar aims to highlight the significance of cultivating talent that can meet these challenges and propel the semiconductor industry into the future.</p>
     </div>
 
-    <h2>
+    <h2 id="s1-topics">
       <span class="lang-zh">主要議題<span>｜Key Topics</span></span>
       <span class="lang-en" style="display: none;">主要議題<span>｜Key Topics to be Covered</span></span>
     </h2>
@@ -2093,8 +2165,11 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
       <p><strong>Future Skillsets and Workforce Preparedness:</strong><br>
       Discover the emerging skills and knowledge areas that are becoming essential for professionals in the semiconductor industry. Our speakers will discuss how to stay ahead of the curve and ensure workforce readiness for future technological developments.</p>
     </div>
-
-    <h2 id="s1-agenda">活動議程<span>｜Agenda</span></h2>
+    
+    <h2 id="s1-agenda">
+      <span class="lang-zh">活動議程<span>｜Agenda</span></span>
+      <span class="lang-en" style="display: none;">活動議程<span>｜Agenda</span></span>
+    </h2>
 
     <!-- 時間切換器 -->
     <div class="time-toggle">
@@ -2290,9 +2365,12 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
           </div>
         </div>
       </div>
+      
+      <h2 id="s2-speakers" style="margin-top: 48px;">
+        <span class="lang-zh">亮點講者<span>｜Featured Speakers</span></span>
+        <span class="lang-en" style="display: none;">亮點講者<span>｜Featured Speakers</span></span>
+      </h2>
     </div>
-
-    <h2 id="s2-speakers" style="margin-top: 48px;">亮點講者<span>｜Featured Speakers</span></h2>
 
     <!-- speakers: 3 speakers, no carousel needed -->
     <div class="speakers-carousel" aria-roledescription="carousel">
@@ -2334,7 +2412,10 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
       <!-- No pager needed for single page -->
     </div>
 
-    <h2 id="s2-about">活動簡介<span>｜About the Forum</span></h2>
+    <h2 id="s2-about">
+      <span class="lang-zh">活動簡介<span>｜About the Forum</span></span>
+      <span class="lang-en" style="display: none;">活動簡介<span>｜About the Forum</span></span>
+    </h2>
     <div>
       <p>隨著大型語言模型（LLMs） 帶動人工智慧快速演進，龐大的運算需求推動 Edge AI 晶片成為新世代的關鍵技術。如何在效能、能耗與應用場域之間取得平衡，不僅需要創新的運算架構與演算法設計，更仰賴新材料與晶片製程的突破。</p>
       <p>本場論壇匯聚來自產業與學界的前瞻專家，從產業實務、材料創新到跨域應用深入剖析 Edge AI 的未來機遇，並探討臺灣在全球半導體生態系中的角色與挑戰。</p>
@@ -2349,9 +2430,12 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
       <h3><span class="event-highlight">綜合座談：從學術到產業，邊緣運算應用場域的實務與挑戰</span></h3>
       <p>主持人：黃錫瑜 主任 <span class="title">/ 國研院科政中心、國立清華大學電機系教授</span></p>
       <p>邀集講者進行跨域對談，聚焦如何將前沿研究成果落地至產業應用，並探討人才培育、技術交流與國際鏈結的未來方向。</p>
+      
+      <h2 id="s2-agenda">
+        <span class="lang-zh">活動議程<span>｜Agenda</span></span>
+        <span class="lang-en" style="display: none;">活動議程<span>｜Agenda</span></span>
+      </h2>
     </div>
-
-    <h2 id="s2-agenda">活動議程<span>｜Agenda</span></h2>
 
     <div class="schedule-table">
       <div class="schedule-header">
@@ -2487,24 +2571,24 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   </div>
 </section>
 
-<footer class="sponsor-footer" aria-label="主辦與協辦單位">
+<footer class="footer-section" aria-label="主辦與協辦單位">
   <div class="inner">
     <!-- 指導單位 -->
-    <div class="sponsor-block">
-      <div class="sponsor-tag">
+    <div class="footer-block">
+      <div class="footer-tag">
         <span class="lang-zh">指導單位</span>
         <span class="lang-en" style="display: none;">Guidance Unit</span>
       </div>
-      <img class="sponsor-logo" src="assets/img/organizer-logo.png" alt="國家科學及技術委員會">
+      <img class="footer-logo" src="assets/img/organizer-logo.png" alt="國家科學及技術委員會">
     </div>
 
     <!-- 主辦單位 -->
-    <div class="sponsor-block">
-      <div class="sponsor-tag">
+    <div class="footer-block">
+      <div class="footer-tag">
         <span class="lang-zh">主辦單位</span>
         <span class="lang-en" style="display: none;">Organizer</span>
       </div>
-      <img class="sponsor-logo" src="assets/img/partner-logo.png" alt="科技政策研究與資訊中心">
+      <img class="footer-logo" src="assets/img/partner-logo.png" alt="科技政策研究與資訊中心">
     </div>
   </div>
 </footer>
