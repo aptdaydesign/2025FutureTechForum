@@ -333,7 +333,7 @@ section:not(.event-info) h2 {
   margin:0; /* 移除bottom margin */
 }
 .speaker .title-chip{ 
-  display: flex; /* 移除 !important，讓 JavaScript 可以控制顯示狀態 */
+  display: flex !important; /* 覆蓋 -webkit-box，優先使用 flex */
   padding:0; 
   border-radius:0; 
   background:transparent; 
@@ -818,7 +818,6 @@ section:not(.event-info) h2 {
     margin-left: calc( 70/1920*100%) !important;
     margin-right: calc( 70/1920*100%) !important;
     max-width: calc(100% - 2 * 70/1920*100%) !important; /* 調整最大寬度 */
-    padding: 0 !important; /* 移除內部 padding，讓講師內容與標題對齊 */
   }
   
   /* 活動內容區域與 logo 對齊 */
@@ -2090,54 +2089,34 @@ section:not(.event-info) h2 {
           <div class="speaker">
             <img class="photo" src="assets/img/speaker-ShiYu-Huang.png" alt="黃錫瑜">
             <div class="meta">
-              <div class="name lang-zh">黃錫瑜</div>
-              <div class="name lang-en" style="display: none;">Shi-Yu Huang</div>
-              <div class="title-chip lang-zh">國研院科技政策研究與資訊中心主任<br>國立清華大學電機工程學系教授</div>
-              <div class="title-chip lang-en" style="display: none;">Director, STPI-NARLabs<br>Professor, National Tsing Hua University</div>
+              <div class="name">黃錫瑜</div>
+              <div class="title-chip">國研院科技政策研究與資訊中心主任<br>國立清華大學電機工程學系教授</div>
             </div>
-            <div class="bio-card">
-              <div class="bio-desc lang-zh">黃錫瑜教授曾任職於美國矽谷國民半導體與世大積體電路（後併入台積電），1999 年起於清華大學任教，並先後擔任清華大學積體電路設計技術中心主任、創新育成中心主任、南台科技大學副校長等職務，亦共同創立兆心科技。專精於積體電路設計、自動化與測試，致力於研發高可靠度與長壽命的「永保安康晶片」，推動台灣半導體創新。</div>
-              <div class="bio-desc lang-en" style="display: none;">Prof. Huang worked at National Semiconductor in Silicon Valley and at Acer Semiconductor Manufacturing (later merged with TSMC) before joining NTHU in 1999. He has served as Director of the IC Design Technology Center, Director of the Innovation Incubation Center, Vice President of Southern Taiwan University of Science and Technology, and co-founder of ChipStart Technology. His research integrates IC design, design automation, and testing, with the vision of developing highly reliable and long-lasting "Everlasting Health Chips," driving continuous innovation in Taiwan's semiconductor industry.</div>
-            </div>
+            <div class="bio-card"><div class="bio-desc">黃錫瑜教授曾任職於美國矽谷國民半導體與世大積體電路（後併入台積電），1999 年起於清華大學任教，並先後擔任清華大學積體電路設計技術中心主任、創新育成中心主任、南台科技大學副校長等職務，亦共同創立兆心科技。專精於積體電路設計、自動化與測試，致力於研發高可靠度與長壽命的「永保安康晶片」，推動台灣半導體創新。</div></div>
           </div>
           <div class="speaker">
             <img class="photo" src="assets/img/speaker-Philip-Wong.png" alt="黃漢森">
             <div class="meta">
-              <div class="name lang-zh">黃漢森</div>
-              <div class="name lang-en" style="display: none;">H.S. Philip Wong</div>
-              <div class="title-chip lang-zh">台積電首席科學家<br>史丹佛大學電機系教授</div>
-              <div class="title-chip lang-en" style="display: none;">Chief Scientist, TSMC<br>Professor, Stanford University</div>
+              <div class="name">黃漢森</div>
+              <div class="title-chip">台積電首席科學家<br>史丹佛大學電機系教授</div>
             </div>
-            <div class="bio-card">
-              <div class="bio-desc lang-zh">黃漢森教授曾任 IBM T.J. Watson 研究中心研究員（1988–2004），2004 年起於史丹佛大學執教，並於 2018–2020 年擔任台積電副總經理，現為首席科學家。專長涵蓋奈米電子、半導體元件、類腦計算與 3D 系統整合等領域，成就卓著。黃教授為 IEEE 院士，榮獲 J.J. Ebers 獎與 Andrew S. Grove 獎等國際大獎，並在多所國際頂尖大學擔任客座教授，持續引領全球半導體技術前沿。</div>
-              <div class="bio-desc lang-en" style="display: none;">Prof. Wong worked at IBM T.J. Watson Research Center (1988–2004) before joining Stanford University in 2004. He served as Vice President for Corporate Research at TSMC (2018–2020) and is now the company's Chief Scientist. His research spans nanotechnology, nanoelectronics, semiconductor devices, neuromorphic computing, and 3D integration. A Fellow of IEEE, he has received the J.J. Ebers Award and the Andrew S. Grove Award for his outstanding contributions. He also holds visiting professorships worldwide, actively shaping the future of global semiconductor technology.</div>
-            </div>
+            <div class="bio-card"><div class="bio-desc">黃漢森教授曾任 IBM T.J. Watson 研究中心研究員（1988–2004），2004 年起於史丹佛大學執教，並於 2018–2020 年擔任台積電副總經理，現為首席科學家。專長涵蓋奈米電子、半導體元件、類腦計算與 3D 系統整合等領域，成就卓著。黃教授為 IEEE 院士，榮獲 J.J. Ebers 獎與 Andrew S. Grove 獎等國際大獎，並在多所國際頂尖大學擔任客座教授，持續引領全球半導體技術前沿。</div></div>
           </div>
           <div class="speaker">
             <img class="photo" src="assets/img/speaker-Horsley-David.png" alt="David Horsley">
             <div class="meta">
-              <div class="name lang-zh">David Horsley</div>
-              <div class="name lang-en" style="display: none;">David Horsley</div>
-              <div class="title-chip lang-zh">TDK Invensense 新興感測器事業部 技術長<br>加州大學戴維斯分校機械與航太工程學系教授<br>加州大學柏克萊分校兼任教授</div>
-              <div class="title-chip lang-en" style="display: none;">CTO, Emerging Sensors Business Unit, TDK Invensense<br>Professor, UC Davis<br>Adjunct Professor, UC Berkeley</div>
+              <div class="name">David Horsley</div>
+              <div class="title-chip">TDK Invensense 新興感測器事業部 技術長<br>加州大學戴維斯分校機械與航太工程學系教授<br>加州大學柏克萊分校兼任教授</div>
             </div>
-            <div class="bio-card">
-              <div class="bio-desc lang-zh">David Horsley 博士為微機電系統（MEMS）超音波感測領域的先驅，2013 年共同創立 Chirp Microsystems，成功開發超音波感測技術並擔任技術長，後被 TDK 收購，現任 TDK Invensense 新興感測器事業部 CTO。他同時為 UC Davis 教授及 UC Berkeley 感測與致動中心共同主任，研發成果包括應用於筆電與消費性產品的超音波指紋辨識感測器。Horsley 博士是 IEEE 會士與美國國家發明家學院會士，曾獲 NSF CAREER Award、UC Davis 傑出青年教師獎及 MSIG Hall of Fame Award，著有 150 餘篇論文並持有 22 項專利。</div>
-              <div class="bio-desc lang-en" style="display: none;">Pioneer in MEMS ultrasonic sensing, co-founded Chirp Microsystems in 2013 and served as CTO until its acquisition by TDK. Currently CTO of TDK Invensense and Professor at UC Davis, Adjunct Professor at UC Berkeley, and Co-Director of BSAC. Invented the ultrasonic fingerprint sensor commercialized by TDK. IEEE Fellow, NAI Fellow, recipient of NSF CAREER Award, UC Davis Outstanding Junior Faculty Award, and MSIG Hall of Fame Award. Author of 150+ papers and holder of 22 patents.</div>
-            </div>
+            <div class="bio-card"><div class="bio-desc">David Horsley 博士為微機電系統（MEMS）超音波感測領域的先驅，2013 年共同創立 Chirp Microsystems，成功開發超音波感測技術並擔任技術長，後被 TDK 收購，現任 TDK Invensense 新興感測器事業部 CTO。他同時為 UC Davis 教授及 UC Berkeley 感測與致動中心共同主任，研發成果包括應用於筆電與消費性產品的超音波指紋辨識感測器。Horsley 博士是 IEEE 會士與美國國家發明家學院會士，曾獲 NSF CAREER Award、UC Davis 傑出青年教師獎及 MSIG Hall of Fame Award，著有 150 餘篇論文並持有 22 項專利。</div></div>
           </div>
           <div class="speaker">
             <img class="photo" src="assets/img/speaker-Wesley-Chu.png" alt="朱宸佐">
             <div class="meta">
-              <div class="name lang-zh">朱宸佐</div>
-              <div class="name lang-en" style="display: none;">Wesley Chu</div>
-              <div class="title-chip lang-zh">史丹佛大學法學院資深研究員<br>人工智慧法律國際研究基金會 秘書長</div>
-              <div class="title-chip lang-en" style="display: none;">Research Fellow, Harvard University<br>Senior Research Fellow, Stanford Law School<br>Secretary General, International Artificial Intelligence and Law Research Foundation</div>
+              <div class="name">朱宸佐</div>
+              <div class="title-chip">史丹佛大學法學院資深研究員<br>人工智慧法律國際研究基金會 秘書長</div>
             </div>
-            <div class="bio-card">
-              <div class="bio-desc lang-zh">朱宸佐博士為台灣及中國大陸雙重執業律師，專精於人工智慧法律、科技法規、數據治理及跨境爭議解決。曾任日本及台灣上市公司法務長，並長年擔任跨國科技企業總法律顧問，實務經驗豐富。現為史丹佛大學法學院資深研究員、史丹佛台灣科學技術研究中心客座研究員，全國律師聯合會科技法律委員會副主任委員，同時擔任人工智慧法律國際研究基金會秘書長。他持續推動 AI 與法律的國際研究與政策倡議，積極建構健全的全球科技治理架構。</div>
-              <div class="bio-desc lang-en" style="display: none;">Dr. Wesley Chu is a licensed lawyer in both Taiwan and Mainland China, specializing in AI law, technology regulations, data governance, and cross-border dispute resolution. He has served as General Counsel for multinational technology corporations and as Chief Legal Officer for listed companies in Japan and Taiwan, bringing extensive international legal and corporate experience. Currently, he is a Senior Research Fellow at Stanford Law School, Visiting Fellow at the Taiwan Science and Technology Hub at Stanford, and Deputy Director of the Technology Law Committee of the National Bar Association. As Secretary General of the International Artificial Intelligence and Law Research Foundation, Dr. Chu actively promotes global research and policy dialogue on AI and law, advancing robust frameworks for international technology governance.</div>
-            </div>
+            <div class="bio-card"><div class="bio-desc">朱宸佐博士為台灣及中國大陸雙重執業律師，專精於人工智慧法律、科技法規、數據治理及跨境爭議解決。曾任日本及台灣上市公司法務長，並長年擔任跨國科技企業總法律顧問，實務經驗豐富。現為史丹佛大學法學院資深研究員、史丹佛台灣科學技術研究中心客座研究員，全國律師聯合會科技法律委員會副主任委員，同時擔任人工智慧法律國際研究基金會秘書長。他持續推動 AI 與法律的國際研究與政策倡議，積極建構健全的全球科技治理架構。</div></div>
           </div>
         </div>
       </div>
