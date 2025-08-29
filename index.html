@@ -1692,6 +1692,25 @@ section:not(.event-info) h2 {
   position: relative;
 }
 
+/* 活動三議程表格項目符號 */
+#s3-info .schedule-table ul li {
+  position: relative;
+  padding-left: 15px;
+  list-style: none;
+}
+
+#s3-info .schedule-table ul li:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 6px;
+  height: 6px;
+  background-color: #ff5e99;
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+
 /* 斜體文字樣式 */
 .schedule-table em {
   opacity: 0.7;
@@ -2915,11 +2934,11 @@ section:not(.event-info) h2 {
         <div class="topic-rows-inner">
           <div class="topic-row">
             <div class="pill">時間</div>
-            <div>2024年11月21日(五)、11月24日(一) 09:00 – 16:00</div>
+            <div>2025 年 11 月 21 日（五）<br>2025 年 11 月 24 日（一）<br>下午 9:00 至 4:00，共兩場</div>
           </div>
           <div class="topic-row place">
             <div class="pill">地點</div>
-            <div>工研院 BR6 科技大樓 中教室<br>台北市復興南路二段237號4樓</div>
+            <div>工研院 BR6 科技大樓 中教室（台北市復興南路二段237號4樓）</div>
           </div>
           <div class="topic-row">
             <div class="pill">形式</div>
@@ -3159,7 +3178,7 @@ section:not(.event-info) h2 {
               <span class="lang-en" style="display: none;">Time</span>
             </div>
             <div>
-              <span class="lang-zh">2025年12月15日(一) 09:00 – 17:00</span>
+              <span class="lang-zh">2025 年 12 月 15 日（一）09:00 – 17:00</span>
               <span class="lang-en" style="display: none;">December 15th, 2025 (Monday) 09:00 – 17:00</span>
             </div>
             </div>
@@ -3630,6 +3649,33 @@ section:not(.event-info) h2 {
         </div>
       </div>
     </div>
+
+    <!-- English Version -->
+    <div class="lang-en" style="display: none;">
+      <div class="topic-wrap">
+        <div class="topic-badge">
+          International Forum on Semiconductor, Quantum, and Material Innovation
+          <div class="topic-en">半導體、量子、材料創新的國際論壇</div>
+        </div>
+
+        <div class="topic-rows">
+          <div class="topic-rows-inner">
+            <div class="topic-row">
+              <div class="pill">Time</div>
+              <div>December 15, 2025 (Monday) 09:00 – 17:00</div>
+            </div>
+            <div class="topic-row place">
+              <div class="pill">Venue</div>
+              <div>TICC (Taipei International Convention Center) Room 102</div>
+            </div>
+            <div class="topic-row">
+              <div class="pill">Format</div>
+              <div>Hybrid: Free registration for in-person attendance, online connection info provided after registration</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -3773,11 +3819,11 @@ section:not(.event-info) h2 {
       <li><strong>Cross-border Industry-Academia-Research Cooperation Models:</strong> Building technology talent mobility networks in the Asia-Pacific region, strengthening international partnerships</li>
       <li><strong>Stanford Cutting-edge Research & Industrial Applications:</strong> NSTC postdoctoral researchers share Silicon Valley innovation thinking and technology translation experience</li>
       <li><strong>Global Technology Investment Trends:</strong> Analyzing international capital market hotspots to formulate forward-looking industrial policies for Taiwan</li>
-    </ul>      <h2 id="s4-agenda-en">
+    </ul>      <h2 id="s4-agenda-en" class="lang-en" style="display: none;">
         Agenda｜活動議程
       </h2>
       
-      <div class="schedule-table">
+      <div class="lang-en schedule-table" style="display: none;">
         <div class="schedule-header">
           <div class="time-col">Time</div>
           <div class="content-col">Program</div>
