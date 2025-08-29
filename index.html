@@ -161,7 +161,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   margin-bottom: var(--section-gap-bottom);
 }
 .event-info h2 {
-  font-size:clamp(24px,2.2vw,36px);
+  font-size:clamp(20px,1.8vw,30px);
   font-weight:500;
   text-align: left; /* 確保標題左對齊 */
 }
@@ -173,7 +173,7 @@ section:not(.event-info) h2 {
   margin-left: auto;
   margin-right: auto;
   padding: 0 20px;
-  font-size: clamp(24px,2.2vw,36px);
+  font-size: clamp(20px,1.8vw,30px);
   font-weight: 500;
   box-sizing: border-box;
 }
@@ -191,106 +191,6 @@ section:not(.event-info) h2 {
 .register-btn:hover{ background:#f48c06; border-color:transparent; transform:scale(.95); box-shadow:0 4px 12px rgba(0,0,0,.15) }
 .register-btn:active{ transform:scale(.9) }
 .register-btn:focus-visible{ outline:3px solid rgba(255,255,255,.6); outline-offset:3px }
-
-/* ===== 注意事項區域 ===== */
-.notice-section {
-  margin-top: 60px;
-}
-
-.notice-section h2 {
-  font-size: clamp(24px,2.2vw,36px);
-  font-weight: 500;
-  margin-bottom: 32px;
-  color: var(--blue);
-  text-align: left;
-}
-
-.notice-section h2 span span {
-  color: var(--pink);
-  font-weight: 500;
-}
-
-.notice-content {
-  max-width: none;
-}
-
-.notice-item {
-  margin-bottom: 28px;
-}
-
-.notice-item h3 {
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: var(--blue);
-  margin-bottom: 12px;
-  padding-left: 0;
-}
-
-.notice-item ul {
-  margin-left: 0;
-  padding-left: 0;
-  list-style: none;
-}
-
-.notice-item li {
-  position: relative;
-  padding-left: 20px;
-  margin-bottom: 8px;
-  line-height: 1.6;
-  color: #cfd6e6;
-}
-
-.notice-item li:before {
-  content: '•';
-  position: absolute;
-  left: 0;
-  color: var(--pink);
-  font-weight: bold;
-}
-
-/* 高亮文字樣式 */
-.highlight-text {
-  color: var(--pink);
-  font-weight: normal;
-}
-
-/* 個人資料蒐集告知聲明按鈕 */
-.privacy-btn {
-  display: inline-block;
-  padding: 12px 24px;
-  background: linear-gradient(135deg, var(--pink), #e91e63);
-  color: #fff;
-  text-decoration: none;
-  border-radius: 25px;
-  font-size: 1.1rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  border: none;
-}
-
-.privacy-btn:hover {
-  transform: translateY(-2px);
-}
-
-.privacy-btn:active {
-  transform: translateY(-2px);
-}
-
-@media (max-width: 768px) {
-  .notice-section h2 {
-    font-size: clamp(24px, 4.5vw, 28px);
-    text-align: left;
-  }
-  
-  .notice-item h3 {
-    font-size: 1.2rem;
-  }
-  
-  .privacy-btn {
-    font-size: 1rem;
-    padding: 10px 20px;
-  }
-}
 
 /* ===== 時間／地點（穩定） ===== */
 .topic-rows{
@@ -2223,8 +2123,8 @@ section:not(.event-info) h2 {
       </div>
       
       <h2 id="s1-speakers">
-        <span class="lang-zh">亮點講者<span>｜Featured Speakers</span>
-        <span class="lang-en" style="display: none;">亮點講者<span>｜Featured Speakers</span>
+        <span class="lang-zh">亮點講者<span>｜Featured Speakers</span></span>
+        <span class="lang-en" style="display: none;">亮點講者<span>｜Featured Speakers</span></span>
       </h2>
     </div>
 
@@ -2291,8 +2191,8 @@ section:not(.event-info) h2 {
     </div>
 
     <h2 id="s1-about">
-      <span class="lang-zh">活動簡介<span>｜About the Forum</span>
-      <span class="lang-en" style="display: none;">活動簡介<span>｜About the Forum</span>
+      <span class="lang-zh">活動簡介<span>｜About the Forum</span></span>
+      <span class="lang-en" style="display: none;">活動簡介<span>｜About the Forum</span></span>
     </h2>
     <div class="lang-zh">
       <p>在人工智慧與先進技術重塑全球產業的時代，半導體產業位居變革前線，是推動創新與進步的核心動力。當前對於高度專業技術人才的需求前所未有地迫切。本次論壇旨在強調培育因應挑戰、推動半導體產業持續發展之關鍵人才的重要性。</p>
@@ -2302,8 +2202,8 @@ section:not(.event-info) h2 {
     </div>
 
     <h2 id="s1-topics">
-      <span class="lang-zh">主要議題<span>｜Key Topics</span>
-      <span class="lang-en" style="display: none;">主要議題<span>｜Key Topics to be Covered</span>
+      <span class="lang-zh">主要議題<span>｜Key Topics</span></span>
+      <span class="lang-en" style="display: none;">主要議題<span>｜Key Topics to be Covered</span></span>
     </h2>
     <div class="lang-zh">
       <p><strong>人工智慧時代的半導體人才重要性：</strong><br>
@@ -2333,8 +2233,8 @@ section:not(.event-info) h2 {
     </div>
     
     <h2 id="s1-agenda">
-      <span class="lang-zh">活動議程<span>｜Agenda</span>
-      <span class="lang-en" style="display: none;">活動議程<span>｜Agenda</span>
+      <span class="lang-zh">活動議程<span>｜Agenda</span></span>
+      <span class="lang-en" style="display: none;">活動議程<span>｜Agenda</span></span>
     </h2>
 
     <!-- 時間切換器 -->
@@ -2503,73 +2403,6 @@ section:not(.event-info) h2 {
       </a>
     </div>
 
-    <!-- 注意事項區域 -->
-    <div class="notice-section" style="margin-top: 60px;">
-      <h2>
-        <span class="lang-zh">注意事項<span>｜Important Notes</span></span>
-        <span class="lang-en" style="display: none;">注意事項<span>｜Important Notes</span></span>
-      </h2>
-
-      <div class="notice-content">
-        <div class="notice-item">
-          <h3>一、活動參加辦法</h3>
-          <ul>
-            <li>本活動採「免費預先線上報名制」，請確實留下正確資料。<span class="highlight-text">主辦單位保留報名審核權。</span></li>
-            <li>報名截止日請見報名頁面，主辦單位得視報名狀況調整報名截止時間。</li>
-            <li>報名後若無法參加，請指派其他人選並提前通知主辦單位。</li>
-            <li>本活動提供與會者登錄<span class="highlight-text">「公務人員終生學習時數、研習證明」</span>服務。</li>
-          </ul>
-        </div>
-
-        <div class="notice-item">
-          <h3>二、審核與通知</h3>
-          <ul>
-            <li>經審核通過者，主辦單位將於活動前<span class="highlight-text">以電子郵件方式寄送「出席通知信」</span>至您報名時所填電子信箱，以作為報到憑證。</li>
-            <li>若報名審核未通過，將不另行通知。</li>
-          </ul>
-        </div>
-
-        <div class="notice-item">
-          <h3>三、報名須知</h3>
-          <ul>
-            <li>請勿冒用或偽造他人身份進行報名，違者將依法處理。</li>
-            <li>主辦單位保留報名資格之最終解釋與變更權利，恕不另行通知。</li>
-          </ul>
-        </div>
-
-        <div class="notice-item">
-          <h3>四、取消報名</h3>
-          <ul>
-            <li>需取消報名者，請於<span class="highlight-text">活動3日前</span>來電或 Email 通知。活動當日恕不接受取消，且未出席者不提供活動簡報檔。</li>
-          </ul>
-        </div>
-
-        <div class="notice-item">
-          <h3>五、講義與智慧財產</h3>
-          <ul>
-            <li>活動結束後，凡已完成填寫活動滿意度調查問卷者，主辦單位將電子郵件方式提供論壇議程簡報講義。惟因智慧財產權保護，倘若外部講師未授權提供，該講師之講義將不予提供下載。</li>
-            <li>為保護智慧財產權，嚴禁攝影及錄影等行為。</li>
-          </ul>
-        </div>
-
-        <div class="notice-item">
-          <h3>六、特殊情況</h3>
-          <ul>
-            <li>主辦單位保留修改本活動規則之權利，毋須另行作出解釋或通知。</li>
-            <li>本次活動若適逢天災(地震、颱風等)不可抗拒之因素，將延期舉辦時間另行通知。</li>
-            <li>若因不可預測之突發因素，主辦單位得保留活動議程及講師之變更權利。</li>
-          </ul>
-        </div>
-
-        <!-- 個人資料蒐集告知聲明按鈕 -->
-        <div class="privacy-notice" style="text-align: center; margin-top: 40px;">
-          <a href="https://www.stpi.niar.org.tw/public/privacy" target="_blank" class="privacy-btn">
-            國研院科政中心個人資料蒐集告知聲明
-          </a>
-        </div>
-      </div>
-    </div>
-
   </div>
 </section>
 
@@ -2600,8 +2433,8 @@ section:not(.event-info) h2 {
       </div>
       
       <h2 id="s2-speakers" style="margin-top: 48px;">
-        <span class="lang-zh">亮點講者<span>｜Featured Speakers</span>
-        <span class="lang-en" style="display: none;">亮點講者<span>｜Featured Speakers</span>
+        <span class="lang-zh">亮點講者<span>｜Featured Speakers</span></span>
+        <span class="lang-en" style="display: none;">亮點講者<span>｜Featured Speakers</span></span>
       </h2>
     </div>
 
@@ -2646,8 +2479,8 @@ section:not(.event-info) h2 {
     </div>
 
     <h2 id="s2-about">
-      <span class="lang-zh">活動簡介<span>｜About the Forum</span>
-      <span class="lang-en" style="display: none;">活動簡介<span>｜About the Forum</span>
+      <span class="lang-zh">活動簡介<span>｜About the Forum</span></span>
+      <span class="lang-en" style="display: none;">活動簡介<span>｜About the Forum</span></span>
     </h2>
     <div>
       <p>隨著大型語言模型（LLMs） 帶動人工智慧快速演進，龐大的運算需求推動 Edge AI 晶片成為新世代的關鍵技術。如何在效能、能耗與應用場域之間取得平衡，不僅需要創新的運算架構與演算法設計，更仰賴新材料與晶片製程的突破。</p>
@@ -2665,8 +2498,8 @@ section:not(.event-info) h2 {
       <p>邀集講者進行跨域對談，聚焦如何將前沿研究成果落地至產業應用，並探討人才培育、技術交流與國際鏈結的未來方向。</p>
       
       <h2 id="s2-agenda">
-        <span class="lang-zh">活動議程<span>｜Agenda</span>
-        <span class="lang-en" style="display: none;">活動議程<span>｜Agenda</span>
+        <span class="lang-zh">活動議程<span>｜Agenda</span></span>
+        <span class="lang-en" style="display: none;">活動議程<span>｜Agenda</span></span>
       </h2>
     </div>
 
@@ -2767,73 +2600,6 @@ section:not(.event-info) h2 {
       </a>
     </div>
 
-    <!-- 注意事項區域 -->
-    <div class="notice-section" style="margin-top: 60px;">
-      <h2>
-        <span class="lang-zh">注意事項<span>｜Important Notes</span></span>
-        <span class="lang-en" style="display: none;">注意事項<span>｜Important Notes</span></span>
-      </h2>
-
-      <div class="notice-content">
-        <div class="notice-item">
-          <h3>一、活動參加辦法</h3>
-          <ul>
-            <li>本活動採「免費預先線上報名制」，請確實留下正確資料。<span class="highlight-text">主辦單位保留報名審核權。</span></li>
-            <li>報名截止日請見報名頁面，主辦單位得視報名狀況調整報名截止時間。</li>
-            <li>報名後若無法參加，請指派其他人選並提前通知主辦單位。</li>
-            <li>本活動提供與會者登錄<span class="highlight-text">「公務人員終生學習時數、研習證明」</span>服務。</li>
-          </ul>
-        </div>
-
-        <div class="notice-item">
-          <h3>二、審核與通知</h3>
-          <ul>
-            <li>經審核通過者，主辦單位將於活動前<span class="highlight-text">以電子郵件方式寄送「出席通知信」</span>至您報名時所填電子信箱，以作為報到憑證。</li>
-            <li>若報名審核未通過，將不另行通知。</li>
-          </ul>
-        </div>
-
-        <div class="notice-item">
-          <h3>三、報名須知</h3>
-          <ul>
-            <li>請勿冒用或偽造他人身份進行報名，違者將依法處理。</li>
-            <li>主辦單位保留報名資格之最終解釋與變更權利，恕不另行通知。</li>
-          </ul>
-        </div>
-
-        <div class="notice-item">
-          <h3>四、取消報名</h3>
-          <ul>
-            <li>需取消報名者，請於<span class="highlight-text">活動3日前</span>來電或 Email 通知。活動當日恕不接受取消，且未出席者不提供活動簡報檔。</li>
-          </ul>
-        </div>
-
-        <div class="notice-item">
-          <h3>五、講義與智慧財產</h3>
-          <ul>
-            <li>活動結束後，凡已完成填寫活動滿意度調查問卷者，主辦單位將電子郵件方式提供論壇議程簡報講義。惟因智慧財產權保護，倘若外部講師未授權提供，該講師之講義將不予提供下載。</li>
-            <li>為保護智慧財產權，嚴禁攝影及錄影等行為。</li>
-          </ul>
-        </div>
-
-        <div class="notice-item">
-          <h3>六、特殊情況</h3>
-          <ul>
-            <li>主辦單位保留修改本活動規則之權利，毋須另行作出解釋或通知。</li>
-            <li>本次活動若適逢天災(地震、颱風等)不可抗拒之因素，將延期舉辦時間另行通知。</li>
-            <li>若因不可預測之突發因素，主辦單位得保留活動議程及講師之變更權利。</li>
-          </ul>
-        </div>
-
-        <!-- 個人資料蒐集告知聲明按鈕 -->
-        <div class="privacy-notice" style="text-align: center; margin-top: 40px;">
-          <a href="https://www.stpi.niar.org.tw/public/privacy" target="_blank" class="privacy-btn">
-            國研院科政中心個人資料蒐集告知聲明
-          </a>
-        </div>
-      </div>
-    </div>
-
   </div>
 </section>
 
@@ -2851,73 +2617,6 @@ section:not(.event-info) h2 {
       <h2><span style="color: var(--pink);">• </span>第三場內容籌備中</h2>
       <p>詳細資訊將陸續公布，敬請期待。</p>
     </div>
-
-    <!-- 注意事項區域 -->
-    <div class="notice-section" style="margin-top: 60px;">
-      <h2>
-        <span class="lang-zh">注意事項<span>｜Important Notes</span></span>
-        <span class="lang-en" style="display: none;">注意事項<span>｜Important Notes</span></span>
-      </h2>
-
-      <div class="notice-content">
-        <div class="notice-item">
-          <h3>一、活動參加辦法</h3>
-          <ul>
-            <li>本活動採「免費預先線上報名制」，請確實留下正確資料。<span class="highlight-text">主辦單位保留報名審核權。</span></li>
-            <li>報名截止日請見報名頁面，主辦單位得視報名狀況調整報名截止時間。</li>
-            <li>報名後若無法參加，請指派其他人選並提前通知主辦單位。</li>
-            <li>本活動提供與會者登錄<span class="highlight-text">「公務人員終生學習時數、研習證明」</span>服務。</li>
-          </ul>
-        </div>
-
-        <div class="notice-item">
-          <h3>二、審核與通知</h3>
-          <ul>
-            <li>經審核通過者，主辦單位將於活動前<span class="highlight-text">以電子郵件方式寄送「出席通知信」</span>至您報名時所填電子信箱，以作為報到憑證。</li>
-            <li>若報名審核未通過，將不另行通知。</li>
-          </ul>
-        </div>
-
-        <div class="notice-item">
-          <h3>三、報名須知</h3>
-          <ul>
-            <li>請勿冒用或偽造他人身份進行報名，違者將依法處理。</li>
-            <li>主辦單位保留報名資格之最終解釋與變更權利，恕不另行通知。</li>
-          </ul>
-        </div>
-
-        <div class="notice-item">
-          <h3>四、取消報名</h3>
-          <ul>
-            <li>需取消報名者，請於<span class="highlight-text">活動3日前</span>來電或 Email 通知。活動當日恕不接受取消，且未出席者不提供活動簡報檔。</li>
-          </ul>
-        </div>
-
-        <div class="notice-item">
-          <h3>五、講義與智慧財產</h3>
-          <ul>
-            <li>活動結束後，凡已完成填寫活動滿意度調查問卷者，主辦單位將電子郵件方式提供論壇議程簡報講義。惟因智慧財產權保護，倘若外部講師未授權提供，該講師之講義將不予提供下載。</li>
-            <li>為保護智慧財產權，嚴禁攝影及錄影等行為。</li>
-          </ul>
-        </div>
-
-        <div class="notice-item">
-          <h3>六、特殊情況</h3>
-          <ul>
-            <li>主辦單位保留修改本活動規則之權利，毋須另行作出解釋或通知。</li>
-            <li>本次活動若適逢天災(地震、颱風等)不可抗拒之因素，將延期舉辦時間另行通知。</li>
-            <li>若因不可預測之突發因素，主辦單位得保留活動議程及講師之變更權利。</li>
-          </ul>
-        </div>
-
-        <!-- 個人資料蒐集告知聲明按鈕 -->
-        <div class="privacy-notice" style="text-align: center; margin-top: 40px;">
-          <a href="https://www.stpi.niar.org.tw/public/privacy" target="_blank" class="privacy-btn">
-            國研院科政中心個人資料蒐集告知聲明
-          </a>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -2934,73 +2633,6 @@ section:not(.event-info) h2 {
     <div style="text-align: center; margin: 100px 0;">
       <h2><span style="color: var(--pink);">• </span>第四場內容籌備中</h2>
       <p>詳細資訊將陸續公布，敬請期待。</p>
-    </div>
-
-    <!-- 注意事項區域 -->
-    <div class="notice-section" style="margin-top: 60px;">
-      <h2>
-        <span class="lang-zh">注意事項<span>｜Important Notes</span></span>
-        <span class="lang-en" style="display: none;">注意事項<span>｜Important Notes</span></span>
-      </h2>
-
-      <div class="notice-content">
-        <div class="notice-item">
-          <h3>一、活動參加辦法</h3>
-          <ul>
-            <li>本活動採「免費預先線上報名制」，請確實留下正確資料。<span class="highlight-text">主辦單位保留報名審核權。</span></li>
-            <li>報名截止日請見報名頁面，主辦單位得視報名狀況調整報名截止時間。</li>
-            <li>報名後若無法參加，請指派其他人選並提前通知主辦單位。</li>
-            <li>本活動提供與會者登錄<span class="highlight-text">「公務人員終生學習時數、研習證明」</span>服務。</li>
-          </ul>
-        </div>
-
-        <div class="notice-item">
-          <h3>二、審核與通知</h3>
-          <ul>
-            <li>經審核通過者，主辦單位將於活動前<span class="highlight-text">以電子郵件方式寄送「出席通知信」</span>至您報名時所填電子信箱，以作為報到憑證。</li>
-            <li>若報名審核未通過，將不另行通知。</li>
-          </ul>
-        </div>
-
-        <div class="notice-item">
-          <h3>三、報名須知</h3>
-          <ul>
-            <li>請勿冒用或偽造他人身份進行報名，違者將依法處理。</li>
-            <li>主辦單位保留報名資格之最終解釋與變更權利，恕不另行通知。</li>
-          </ul>
-        </div>
-
-        <div class="notice-item">
-          <h3>四、取消報名</h3>
-          <ul>
-            <li>需取消報名者，請於<span class="highlight-text">活動3日前</span>來電或 Email 通知。活動當日恕不接受取消，且未出席者不提供活動簡報檔。</li>
-          </ul>
-        </div>
-
-        <div class="notice-item">
-          <h3>五、講義與智慧財產</h3>
-          <ul>
-            <li>活動結束後，凡已完成填寫活動滿意度調查問卷者，主辦單位將電子郵件方式提供論壇議程簡報講義。惟因智慧財產權保護，倘若外部講師未授權提供，該講師之講義將不予提供下載。</li>
-            <li>為保護智慧財產權，嚴禁攝影及錄影等行為。</li>
-          </ul>
-        </div>
-
-        <div class="notice-item">
-          <h3>六、特殊情況</h3>
-          <ul>
-            <li>主辦單位保留修改本活動規則之權利，毋須另行作出解釋或通知。</li>
-            <li>本次活動若適逢天災(地震、颱風等)不可抗拒之因素，將延期舉辦時間另行通知。</li>
-            <li>若因不可預測之突發因素，主辦單位得保留活動議程及講師之變更權利。</li>
-          </ul>
-        </div>
-
-        <!-- 個人資料蒐集告知聲明按鈕 -->
-        <div class="privacy-notice" style="text-align: center; margin-top: 40px;">
-          <a href="https://www.stpi.niar.org.tw/public/privacy" target="_blank" class="privacy-btn">
-            國研院科政中心個人資料蒐集告知聲明
-          </a>
-        </div>
-      </div>
     </div>
   </div>
 </section>
