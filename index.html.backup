@@ -161,7 +161,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   margin-bottom: var(--section-gap-bottom);
 }
 .event-info h2 {
-  font-size:clamp(24px,2.2vw,36px);
+  font-size:clamp(20px,1.8vw,30px);
   font-weight:500;
   text-align: left; /* 確保標題左對齊 */
 }
@@ -173,9 +173,8 @@ section:not(.event-info) h2 {
   margin-left: auto;
   margin-right: auto;
   padding: 0 20px;
-  font-size: clamp(24px,2.2vw,36px);
-  font-weight: 600;
-  font-family: 'Akrobat-SemiBold', 'Noto Sans TC', Arial, sans-serif;
+  font-size: clamp(20px,1.8vw,30px);
+  font-weight: 500;
   box-sizing: border-box;
 }
 
@@ -194,35 +193,22 @@ section:not(.event-info) h2 {
 .register-btn:focus-visible{ outline:3px solid rgba(255,255,255,.6); outline-offset:3px }
 
 /* ===== 注意事項區域 ===== */
-.notice-section { margin-top: 60px; }
-.notice-section h2 { margin-bottom: 32px; } /* 不再改字體/顏色，避免覆蓋共用樣式 */
-
-/* ===== 統一的section-title樣式 ===== */
-.section-title {
-  font-size: clamp(24px,2.2vw,36px);
-  font-weight: 500;
-  text-align: left;
-  color: var(--pink);
-  margin-top: var(--section-gap-top);
-  margin-bottom: var(--section-gap-bottom);
-  font-family: inherit;
+.notice-section {
+  margin-top: 60px;
 }
 
-.event-info .section-title { color: var(--pink) !important; }
+.notice-section h2 {
+  font-size: clamp(20px,1.8vw,30px);
+  font-weight: 500;
+  margin-bottom: 32px;
+  color: var(--blue);
+  text-align: left;
+}
 
-/* 語言顯示：支援兩種方式 - data-lang 屬性控制 和 傳統 inline style */
-/* 方式1: 以 .event-info[data-lang] 為作用域 */
-.event-info[data-lang="zh"] .lang-en { display: none !important; }
-.event-info[data-lang="en"] .lang-zh { display: none !important; }
-.event-info[data-lang="zh"] .lang-zh,
-.event-info[data-lang="en"] .lang-en { display: revert !important; }
-
-/* 方式2: 對於沒有 data-lang 的 section，尊重 inline style */
-.event-info:not([data-lang]) .lang-zh[style*="display: none"],
-.event-info:not([data-lang]) .lang-en[style*="display: none"] { display: none !important; }
-
-/* 保護 h2 小標顏色，避免任何腳本/樣式覆蓋把它變白 */
-.event-info .section-title { color: var(--pink) !important; }
+.notice-section h2 span span {
+  color: var(--pink);
+  font-weight: 300;
+}
 
 .notice-content {
   max-width: none;
@@ -235,6 +221,7 @@ section:not(.event-info) h2 {
 .notice-item h3 {
   font-size: 1.4rem;
   font-weight: 600;
+  color: var(--blue);
   margin-bottom: 12px;
   padding-left: 0;
 }
@@ -264,7 +251,7 @@ section:not(.event-info) h2 {
 /* 高亮文字樣式 */
 .highlight-text {
   color: var(--pink);
-  font-weight: normal;
+  font-weight: 700;
 }
 
 /* 個人資料蒐集告知聲明按鈕 */
@@ -282,17 +269,18 @@ section:not(.event-info) h2 {
 }
 
 .privacy-btn:hover {
+  background: linear-gradient(135deg, #e91e63, var(--pink));
   transform: translateY(-2px);
 }
 
 .privacy-btn:active {
-  transform: translateY(-2px);
+  transform: translateY(0);
 }
 
 @media (max-width: 768px) {
   .notice-section h2 {
-    font-size: clamp(24px, 4.5vw, 28px);
-    text-align: left;
+    font-size: 1.8rem;
+    text-align: center;
   }
   
   .notice-item h3 {
@@ -303,39 +291,6 @@ section:not(.event-info) h2 {
     font-size: 1rem;
     padding: 10px 20px;
   }
-}
-
-/* ===== 語言切換按鈕 ===== */
-.language-toggle {
-  margin-bottom: 40px;
-}
-
-.lang-btn {
-  background: #f5f5f5;
-  border: 2px solid #ddd;
-  padding: 10px 20px;
-  margin: 0 5px;
-  border-radius: 25px;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: "Akrobat", "Noto Sans TC", sans-serif;
-}
-
-.lang-btn:hover {
-  background: #e9e9e9;
-  border-color: #ccc;
-}
-
-.lang-btn.active {
-  background: linear-gradient(135deg, var(--pink), #e91e63);
-  color: white;
-  border-color: var(--pink);
-}
-
-.lang-zh, .lang-en {
-  transition: opacity 0.3s ease;
 }
 
 /* ===== 時間／地點（穩定） ===== */
@@ -423,11 +378,18 @@ section:not(.event-info) h2 {
   word-break: break-word; 
 }
 .place .hl{
+.place .hl{
   display:inline-flex; align-items:center; border-radius:999px;
   background:rgba(255,255,255,.25); color:#fff; line-height:1;
   margin-left:.6em; font-weight:500;
-  font-size:clamp(14px, 1.25vw, 20px); padding:6px 16px; 
-  white-space:nowrap; flex-shrink:0; display:inline-block; vertical-align:middle;
+  font-size:clamp(14px, 1.25vw, 20px); padding:6px 16px; vertical-align:middle; 
+  white-space:nowrap;
+  /* 確保按鈕緊跟在會議室後面，永不分離 */
+  flex-shrink: 0; /* 防止按鈕被壓縮 */
+  /* 使用 CSS 確保不會被換行分離 */
+  display: inline-block; /* 改為 inline-block 以更好地控制換行 */
+  vertical-align: middle;
+}
 }
 
 /* ===== 講者 ===== */
@@ -527,7 +489,7 @@ section:not(.event-info) h2 {
 
 .bio-card .bio-desc{ 
   color:inherit; 
-  font-size:1rem; /* 調大字體：從 0.85rem 改為 1rem */
+  font-size:0.85rem; /* 縮小至2/3：1.27rem × (2/3) ≈ 0.85rem */
   line-height:1.6; 
   /* 設定兩端對齊，末行置左 */
   text-align: justify; /* 兩端對齊 */
@@ -827,7 +789,7 @@ section:not(.event-info) h2 {
     width:100%;
     box-sizing:border-box; /* 防止padding造成溢出 */
   }
-  .bio-card .bio-desc{ color: #cfd6e6; text-align:left; font-size: 0.95rem; } /* 手機版稍小但比原本大 */
+  .bio-card .bio-desc{ color: #cfd6e6; text-align:left; }
 
   .speaker-page{ padding:0; } /* 移除padding以符合統一間距 */
   .pager-dot{ width:12px; height:8px; }
@@ -1007,6 +969,11 @@ section:not(.event-info) h2 {
   .language-toggle-slider {
     border-radius: 26px;
   }
+}
+
+/* 小標粉色樣式 */
+.event-info h2 {
+  color: var(--pink);
 }
 
 /* 中間寬度微調 */
@@ -1681,56 +1648,6 @@ section:not(.event-info) h2 {
   vertical-align: middle;
 }
 
-/* 隱藏議程表中的項目符號 */
-.schedule-table ul {
-  list-style: none !important;
-  padding-left: 0 !important;
-}
-
-.schedule-table li {
-  list-style: none !important;
-  position: relative;
-}
-
-/* 斜體文字樣式 */
-.schedule-table em {
-  opacity: 0.7;
-  font-size: 0.8em;
-}
-
-/* 議程表區段標題樣式 */
-.section-header {
-  background: rgba(255, 94, 153, 0.6);
-  color: white;
-  font-weight: 600;
-}
-
-.section-header .content-cell {
-  text-align: center;
-  font-size: 16px;
-  font-weight: 600;
-  padding: 15px 20px;
-}
-
-/* 場次標題行合併格子樣式 */
-.schedule-row.section-header,
-.schedule-row:has([style*="background: #f8f9fa"]) {
-  display: block !important;
-}
-
-.schedule-row.section-header .content-cell,
-.schedule-row:has([style*="background: #f8f9fa"]) .content-cell {
-  flex: none !important;
-  width: 100% !important;
-  border-right: none !important;
-}
-
-/* 禁用場次標題行的hover效果 */
-.schedule-row.section-header:hover,
-.schedule-row:has([style*="background: #f8f9fa"]):hover {
-  background-color: transparent !important;
-}
-
 /* 響應式設計 */
 @media (max-width: 768px) {
   .time-toggle {
@@ -2264,7 +2181,7 @@ section:not(.event-info) h2 {
 
       <!-- 語言切換器 -->
       <div class="language-toggle">
-        <div class="language-toggle-track" data-active="zh">
+        <div class="language-toggle-track">
           <div class="language-toggle-slider"></div>
           <button class="language-option active" data-lang="zh">繁體中文</button>
           <button class="language-option" data-lang="en">English</button>
@@ -2306,7 +2223,10 @@ section:not(.event-info) h2 {
         </div>
       </div>
       
-      <h2 id="s1-speakers" class="section-title">亮點講者｜Featured Speakers</h2>
+      <h2 id="s1-speakers">
+        <span class="lang-zh">亮點講者<span>｜Featured Speakers</span></span>
+        <span class="lang-en" style="display: none;">亮點講者<span>｜Featured Speakers</span></span>
+      </h2>
     </div>
 
     <!-- speakers: all in one page, no carousel needed -->
@@ -2371,7 +2291,10 @@ section:not(.event-info) h2 {
       <!-- No pager needed for single page -->
     </div>
 
-    <h2 id="s1-about" class="section-title">活動簡介｜About the Forum</h2>
+    <h2 id="s1-about">
+      <span class="lang-zh">活動簡介<span>｜About the Forum</span></span>
+      <span class="lang-en" style="display: none;">活動簡介<span>｜About the Forum</span></span>
+    </h2>
     <div class="lang-zh">
       <p>在人工智慧與先進技術重塑全球產業的時代，半導體產業位居變革前線，是推動創新與進步的核心動力。當前對於高度專業技術人才的需求前所未有地迫切。本次論壇旨在強調培育因應挑戰、推動半導體產業持續發展之關鍵人才的重要性。</p>
     </div>
@@ -2379,7 +2302,10 @@ section:not(.event-info) h2 {
       <p>In an era where artificial intelligence and advanced technologies are reshaping industries worldwide, the semiconductor sector stands at the forefront, powering innovations and driving progress. The demand for a highly skilled workforce in this field has never been more pressing. This seminar aims to highlight the significance of cultivating talent that can meet these challenges and propel the semiconductor industry into the future.</p>
     </div>
 
-    <h2 id="s1-topics" class="section-title">主要議題｜Key Topics</h2>
+    <h2 id="s1-topics">
+      <span class="lang-zh">主要議題<span>｜Key Topics</span></span>
+      <span class="lang-en" style="display: none;">主要議題<span>｜Key Topics to be Covered</span></span>
+    </h2>
     <div class="lang-zh">
       <p><strong>人工智慧時代的半導體人才重要性：</strong><br>
       隨著人工智慧驅動現今多數科技進展，半導體所扮演的角色愈加關鍵。與會講者將探討半導體創新如何實現 AI 技術能力，以及為何培育該領域人才對持續技術進展至關重要。</p>
@@ -2407,7 +2333,10 @@ section:not(.event-info) h2 {
       Discover the emerging skills and knowledge areas that are becoming essential for professionals in the semiconductor industry. Our speakers will discuss how to stay ahead of the curve and ensure workforce readiness for future technological developments.</p>
     </div>
     
-    <h2 id="s1-agenda" class="section-title">活動議程｜Agenda</h2>
+    <h2 id="s1-agenda">
+      <span class="lang-zh">活動議程<span>｜Agenda</span></span>
+      <span class="lang-en" style="display: none;">活動議程<span>｜Agenda</span></span>
+    </h2>
 
     <!-- 時間切換器 -->
     <div class="time-toggle">
@@ -2427,10 +2356,10 @@ section:not(.event-info) h2 {
     <div class="schedule-table">
       <div class="schedule-header">
         <div class="time-col">
-          <span class="california-time-zh" style="display: none;">加州時間</span>
-          <span class="california-time-en" style="display: none;">California Time</span>
-          <span class="taiwan-time-zh">台灣時間</span>
-          <span class="taiwan-time-en" style="display: none;">Taiwan Time</span>
+          <span class="california-time-zh lang-zh">加州時間</span>
+          <span class="california-time-en lang-en" style="display: none;">California Time</span>
+          <span class="taiwan-time-zh lang-zh" style="display: none;">台灣時間</span>
+          <span class="taiwan-time-en lang-en" style="display: none;">Taiwan Time</span>
         </div>
         <div class="content-col">
           <span class="lang-zh">活動內容</span>
@@ -2577,7 +2506,10 @@ section:not(.event-info) h2 {
 
     <!-- 注意事項區域 -->
     <div class="notice-section" style="margin-top: 60px;">
-      <h2 class="section-title">注意事項｜Important Notes</h2>
+      <h2>
+        <span class="lang-zh">注意事項<span>｜Important Notes</span></span>
+        <span class="lang-en" style="display: none;">注意事項<span>｜Important Notes</span></span>
+      </h2>
 
       <div class="notice-content">
         <div class="notice-item">
@@ -2609,7 +2541,7 @@ section:not(.event-info) h2 {
         <div class="notice-item">
           <h3>四、取消報名</h3>
           <ul>
-            <li>需取消報名者，請於<span class="highlight-text">活動3日前</span>來電或 Email 通知。活動當日恕不接受取消，且未出席者不提供活動簡報檔。</li>
+            <li>需取消報名者，請於活動3日前來電或Email通知。活動當日恕不接受取消，且未出席者不提供活動簡報檔。</li>
           </ul>
         </div>
 
@@ -2668,7 +2600,10 @@ section:not(.event-info) h2 {
         </div>
       </div>
       
-      <h2 id="s2-speakers" class="section-title" style="margin-top: 48px;">亮點講者｜Featured Speakers</h2>
+      <h2 id="s2-speakers" style="margin-top: 48px;">
+        <span class="lang-zh">亮點講者<span>｜Featured Speakers</span></span>
+        <span class="lang-en" style="display: none;">亮點講者<span>｜Featured Speakers</span></span>
+      </h2>
     </div>
 
     <!-- speakers: 3 speakers, no carousel needed -->
@@ -2676,20 +2611,17 @@ section:not(.event-info) h2 {
       <div class="speaker-pages">
         <div class="speaker-grid speaker-page" data-page="0">
           <div class="speaker">
-            <img class="photo" src="assets/img/speaker-ShiYu-Huang.png" alt="黃錫瑜">
+            <img class="photo" src="assets/img/speaker1-2.png" alt="黃錫瑜">
             <div class="meta">
-              <div class="name lang-zh">黃錫瑜</div>
-              <div class="name lang-en" style="display: none;">Shi-Yu Huang</div>
-              <div class="title-chip lang-zh">國研院科技政策研究與資訊中心主任<br>國立清華大學電機工程學系教授</div>
-              <div class="title-chip lang-en" style="display: none;">Director, STPI-NARLabs<br>Professor, National Tsing Hua University</div>
+              <div class="name">黃錫瑜</div>
+              <div class="title-chip">國研院科政中心主任<br>清大電機工程系教授</div>
             </div>
             <div class="bio-card">
-              <div class="bio-desc lang-zh">黃錫瑜教授曾任職於美國矽谷國民半導體與世大積體電路（後併入台積電），1999 年起於清華大學任教，並先後擔任清華大學積體電路設計技術中心主任、創新育成中心主任、南台科技大學副校長等職務，亦共同創立兆心科技。專精於積體電路設計、自動化與測試，致力於研發高可靠度與長壽命的「永保安康晶片」，推動台灣半導體創新。</div>
-              <div class="bio-desc lang-en" style="display: none;">Prof. Huang worked at National Semiconductor in Silicon Valley and at Acer Semiconductor Manufacturing (later merged with TSMC) before joining NTHU in 1999. He has served as Director of the IC Design Technology Center, Director of the Innovation Incubation Center, Vice President of Southern Taiwan University of Science and Technology, and co-founder of ChipStart Technology. His research integrates IC design, design automation, and testing, with the vision of developing highly reliable and long-lasting "Everlasting Health Chips," driving continuous innovation in Taiwan's semiconductor industry.</div>
+              <div class="bio-desc">人物簡介先放暫時的假字。黃錫瑜教授專注於半導體技術與系統整合研究，在產學合作與技術轉移方面擁有豐富經驗。</div>
             </div>
           </div>
           <div class="speaker">
-            <img class="photo" src="assets/img/speaker-黃錫霖.png" alt="黃錫霖">
+            <img class="photo" src="assets/img/speaker2-2.png" alt="黃錫霖">
             <div class="meta">
               <div class="name">黃錫霖</div>
               <div class="title-chip">千逢科技公司執行長<br>交通大學電機碩士</div>
@@ -2699,19 +2631,13 @@ section:not(.event-info) h2 {
             </div>
           </div>
           <div class="speaker">
-            <img class="photo" src="assets/img/speaker-林哲民.png" alt="林哲民">
+            <img class="photo" src="assets/img/speaker3-2.png" alt="林哲民">
             <div class="meta">
-              <div class="name">
-                <span class="lang-zh">林哲民</span>
-                <span class="lang-en" style="display: none;">Che-Min Lin</span>
-              </div>
-              <div class="title-chip">
-                <span class="lang-zh">史丹佛大學應用物理博士後研究員<br>國立中山大學物理學博士</span>
-                <span class="lang-en" style="display: none;">Stanford University Postdoc<br>NSYSU Physics PhD</span>
-              </div>
+              <div class="name">林哲民</div>
+              <div class="title-chip">史丹佛大學應用物理系博後研究員<br>中山大學物理學博士</div>
             </div>
             <div class="bio-card">
-              <div class="bio-desc"></div>
+              <div class="bio-desc">人物簡介先放暫時的假字。林哲民博士專精於量子材料與新世代運算技術，在前沿物理研究方面有突出貢獻。</div>
             </div>
           </div>
         </div>
@@ -2720,13 +2646,16 @@ section:not(.event-info) h2 {
       <!-- No pager needed for single page -->
     </div>
 
-    <h2 id="s2-about" class="section-title">活動簡介｜About the Forum</h2>
+    <h2 id="s2-about">
+      <span class="lang-zh">活動簡介<span>｜About the Forum</span></span>
+      <span class="lang-en" style="display: none;">活動簡介<span>｜About the Forum</span></span>
+    </h2>
     <div>
       <p>隨著大型語言模型（LLMs） 帶動人工智慧快速演進，龐大的運算需求推動 Edge AI 晶片成為新世代的關鍵技術。如何在效能、能耗與應用場域之間取得平衡，不僅需要創新的運算架構與演算法設計，更仰賴新材料與晶片製程的突破。</p>
       <p>本場論壇匯聚來自產業與學界的前瞻專家，從產業實務、材料創新到跨域應用深入剖析 Edge AI 的未來機遇，並探討臺灣在全球半導體生態系中的角色與挑戰。</p>
     </div>
 
-    <h2 id="s2-topics" class="section-title">主要議題｜Key Topics</h2>
+    <h2>主要議題<span>｜Key Topics</span></h2>
     <div>
       <h3><span class="event-highlight">技術分享：從自旋到拓樸的材料革新</span></h3>
       <p>林哲民 博士 <span class="title">/ 美國史丹佛大學應用物理系 博士後</span></p>
@@ -2736,7 +2665,10 @@ section:not(.event-info) h2 {
       <p>主持人：黃錫瑜 主任 <span class="title">/ 國研院科政中心、國立清華大學電機系教授</span></p>
       <p>邀集講者進行跨域對談，聚焦如何將前沿研究成果落地至產業應用，並探討人才培育、技術交流與國際鏈結的未來方向。</p>
       
-      <h2 id="s2-agenda" class="section-title">活動議程｜Agenda</h2>
+      <h2 id="s2-agenda">
+        <span class="lang-zh">活動議程<span>｜Agenda</span></span>
+        <span class="lang-en" style="display: none;">活動議程<span>｜Agenda</span></span>
+      </h2>
     </div>
 
     <div class="schedule-table">
@@ -2806,7 +2738,7 @@ section:not(.event-info) h2 {
       </div>
     </div>
 
-    <h2 id="s2-venue" class="section-title">會場位置｜Venue Location</h2>
+    <h2>會場位置｜Venue Location</h2>
     <div style="text-align: center; margin: 24px 0;">
       <div style="margin: 20px auto; max-width: 900px;">
         <div style="margin-bottom: 20px;">
@@ -2826,7 +2758,8 @@ section:not(.event-info) h2 {
           </iframe>
         </div>
       </div>
-    
+    </div>
+    </div>
 
     <div style="text-align: center; margin: 40px 0; display: none;">
       <a href="#" class="register-btn">
@@ -2837,23 +2770,26 @@ section:not(.event-info) h2 {
 
     <!-- 注意事項區域 -->
     <div class="notice-section" style="margin-top: 60px;">
-      <h2 class="section-title">注意事項｜Important Notes</h2>
+      <h2>
+        <span class="lang-zh">注意事項<span>｜Important Notes</span></span>
+        <span class="lang-en" style="display: none;">注意事項<span>｜Important Notes</span></span>
+      </h2>
 
       <div class="notice-content">
         <div class="notice-item">
           <h3>一、活動參加辦法</h3>
           <ul>
-            <li>本活動採「免費預先線上報名制」，請確實留下正確資料。<span class="highlight-text">主辦單位保留報名審核權。</span></li>
+            <li>本活動採「免費預先線上報名制」，請確實留下正確資料。主辦單位保留報名審核權。</li>
             <li>報名截止日請見報名頁面，主辦單位得視報名狀況調整報名截止時間。</li>
             <li>報名後若無法參加，請指派其他人選並提前通知主辦單位。</li>
-            <li>本活動提供與會者登錄<span class="highlight-text">「公務人員終生學習時數、研習證明」</span>服務。</li>
+            <li>本活動提供與會者登錄「公務人員終生學習時數、研習證明」服務。</li>
           </ul>
         </div>
 
         <div class="notice-item">
           <h3>二、審核與通知</h3>
           <ul>
-            <li>經審核通過者，主辦單位將於活動前<span class="highlight-text">以電子郵件方式寄送「出席通知信」</span>至您報名時所填電子信箱，以作為報到憑證。</li>
+            <li>經審核通過者，主辦單位將於活動前以電子郵件方式寄送「出席通知信」至您報名時所填電子信箱，以作為報到憑證。</li>
             <li>若報名審核未通過，將不另行通知。</li>
           </ul>
         </div>
@@ -2869,7 +2805,7 @@ section:not(.event-info) h2 {
         <div class="notice-item">
           <h3>四、取消報名</h3>
           <ul>
-            <li>需取消報名者，請於<span class="highlight-text">活動3日前</span>來電或 Email 通知。活動當日恕不接受取消，且未出席者不提供活動簡報檔。</li>
+            <li>需取消報名者，請於活動3日前來電或Email通知。活動當日恕不接受取消，且未出席者不提供活動簡報檔。</li>
           </ul>
         </div>
 
@@ -2907,185 +2843,38 @@ section:not(.event-info) h2 {
   <div class="inner">
     <div class="topic-wrap">
       <div class="topic-badge">
-        數據驅動的政策研究能力工作坊
-        <div class="topic-en">Data-Driven Policy Research Workshop</div>
-      </div>
-
-      <div class="topic-rows">
-        <div class="topic-rows-inner">
-          <div class="topic-row">
-            <div class="pill">時間</div>
-            <div>2024年11月21日(五)、11月24日(一) 09:00 – 16:00</div>
-          </div>
-          <div class="topic-row place">
-            <div class="pill">地點</div>
-            <div>工研院 BR6 科技大樓 中教室<br>台北市復興南路二段237號4樓</div>
-          </div>
-          <div class="topic-row">
-            <div class="pill">形式</div>
-            <div>實體會場：免費報名，即日起至額滿為止，預定40名</div>
-          </div>
-        </div>
-      </div>
-      
-      <h2 id="s3-speakers" class="section-title">亮點講者｜Featured Speakers</h2>
-    </div>
-
-    <!-- speakers: all in one page, no carousel needed -->
-    <div class="speakers-carousel" aria-roledescription="carousel">
-      <div class="speaker-pages">
-        <div class="speaker-grid speaker-page" data-page="0">
-          <div class="speaker">
-            <img class="photo" src="assets/img/speaker-ShiYu-Huang.png" alt="黃錫瑜">
-            <div class="meta">
-              <div class="name lang-zh">黃錫瑜</div>
-              <div class="name lang-en" style="display: none;">Shi-Yu Huang</div>
-              <div class="title-chip lang-zh">國研院科技政策研究與資訊中心主任<br>國立清華大學電機工程學系教授</div>
-              <div class="title-chip lang-en" style="display: none;">Director, STPI-NARLabs<br>Professor, National Tsing Hua University</div>
-            </div>
-            <div class="bio-card">
-              <div class="bio-desc lang-zh">黃錫瑜教授曾任職於美國矽谷國民半導體與世大積體電路（後併入台積電），1999 年起於清華大學任教，並先後擔任清華大學積體電路設計技術中心主任、創新育成中心主任、南台科技大學副校長等職務，亦共同創立兆心科技。專精於積體電路設計、自動化與測試，致力於研發高可靠度與長壽命的「永保安康晶片」，推動台灣半導體創新。</div>
-              <div class="bio-desc lang-en" style="display: none;">Prof. Huang worked at National Semiconductor in Silicon Valley and at Acer Semiconductor Manufacturing (later merged with TSMC) before joining NTHU in 1999. He has served as Director of the IC Design Technology Center, Director of the Innovation Incubation Center, Vice President of Southern Taiwan University of Science and Technology, and co-founder of ChipStart Technology. His research integrates IC design, design automation, and testing, with the vision of developing highly reliable and long-lasting "Everlasting Health Chips," driving continuous innovation in Taiwan's semiconductor industry.</div>
-            </div>
-          </div>
-          <div class="speaker">
-            <img class="photo" src="assets/img/speaker-邱皓政.png" alt="邱皓政">
-            <div class="meta">
-              <div class="name">邱皓政</div>
-              <div class="title-chip">中華民國統計學會理事長<br>美國南加州大學心理計量學博士</div>
-            </div>
-            <div class="bio-card">
-              <div class="bio-desc"></div>
-            </div>
-          </div>
-        </div>
+        第三場論壇主題（待確定）
+        <div class="topic-en">Third Forum Topic (TBD)</div>
       </div>
     </div>
-
-    <h2 id="s3-about" class="section-title">活動簡介｜About</h2>
-    <p>在數據爆炸與 AI 技術快速演進的時代，如何將大數據轉化為政策洞察與決策支持，是產官學研的共同挑戰。</p>
-    <p>本工作坊以<span class="highlight-text">「實務示範 + 分組演練」</span>為核心，邀請統計學會與 AI 技術專家，帶領學員掌握統計分析、AI 資料視覺化、縱貫數據追蹤等核心技能，並實際操作 ChatGPT、Power BI、Tableau AI、Kumu.ai 等工具。</p>
-    <p>學員將透過兩天的訓練，從案例到實作，強化<span class="highlight-text">數據驅動的政策研究能力</span>，並促進跨領域交流合作。</p>
-
-    <h2 id="s3-topics" class="section-title">主要議題｜Key Topics</h2>
-    <ul style="line-height: 1.8; margin: 20px 0;">
-      <li><strong>政策分析中的 AI 工具應用：</strong>解析文本、數據與圖像處理，示範前沿工具的應用情境</li>
-      <li><strong>AI 資料視覺化與動態儀表板：</strong>手把手實作，快速建立互動圖表與研究故事版</li>
-      <li><strong>縱貫資料分析的策略：</strong>掌握跨時間、跨地區數據的追蹤與比對，理解政策長期效應</li>
-      <li><strong>分組實作與成果發表：</strong>學員分組應用 AI 工具，從資料整理到視覺化，完成成果簡報</li>
-    </ul>
     
-    <h2 id="s3-agenda" class="section-title">活動議程｜Agenda</h2>
-    
-    <div class="schedule-table">
-      <div class="schedule-header">
-        <div class="time-col">時間</div>
-        <div class="content-col">活動內容</div>
-      </div>
-      
-      <div class="schedule-row">
-        <div class="time-cell">09:00 - 09:10</div>
-        <div class="content-cell">
-          <strong>報到與開場</strong>
-          <ul>
-            <li>工作坊簡介、講師介紹、學員自我介紹</li>
-          </ul>
-        </div>
-      </div>
-      
-      <div class="schedule-row">
-        <div class="time-cell">09:10 - 09:15</div>
-        <div class="content-cell">
-          <strong>貴賓致詞</strong>
-          <ul>
-            <li>黃錫瑜 <span class="title">/ 國研院科政中心主任</span></li>
-          </ul>
-        </div>
-      </div>
-      
-      <div class="schedule-row">
-        <div class="time-cell">09:15 - 10:30</div>
-        <div class="content-cell">
-          <strong>單元一：AI 工具在政策分析中的應用趨勢</strong>
-          <ul>
-            <li>政策資料的類型與挑戰</li>
-            <li>AI 在文本、數據與圖像處理的角色</li>
-            <li>介紹常用工具（ChatGPT、Claude、Power BI + Copilot、Polis、Tableau AI、Kumu.ai 等）</li>
-          </ul>
-        </div>
-      </div>
-      
-      <div class="schedule-row">
-        <div class="time-cell">10:30 - 10:45</div>
-        <div class="content-cell"><strong>茶敘與交流</strong></div>
-      </div>
-      
-      <div class="schedule-row">
-        <div class="time-cell">10:45 - 12:00</div>
-        <div class="content-cell">
-          <strong>單元二：AI 資料視覺化與動態圖表實作</strong>
-          <ul>
-            <li>研究資料如何視覺化（含時間序列、分區圖、互動圖）</li>
-            <li>使用 Power BI/ Tableau AI 實作研究數據儀表板</li>
-            <li>快速建立 AI 驅動的互動圖表與故事版（Storytelling Dashboard）</li>
-          </ul>
-        </div>
-      </div>
-      
-      <div class="schedule-row">
-        <div class="time-cell">12:00 - 13:00</div>
-        <div class="content-cell"><strong>午餐與自由討論</strong></div>
-      </div>
-      
-      <div class="schedule-row">
-        <div class="time-cell">13:00 - 14:30</div>
-        <div class="content-cell">
-          <strong>單元三：縱貫資料分析的策略與工具應用</strong>
-          <ul>
-            <li>什麼是縱貫資料（panel / longitudinal data）？</li>
-            <li>追蹤大數據資料庫變化的 AI 工具應用（如：R/Python 套件、LlamaIndex 結合向量資料庫等）</li>
-            <li>案例分析：不同地區/時間的長期追蹤資料整理與分析</li>
-          </ul>
-        </div>
-      </div>
-      
-      <div class="schedule-row">
-        <div class="time-cell">14:30 - 14:45</div>
-        <div class="content-cell"><strong>短暫休息</strong></div>
-      </div>
-      
-      <div class="schedule-row">
-        <div class="time-cell">14:45 - 16:00</div>
-        <div class="content-cell">
-          <strong>單元四：小組實作與成果簡報</strong>
-          <ul>
-            <li>小組選擇一組縱貫資料主題（可提供 2–3 套開放資料集）</li>
-            <li>使用 AI 工具進行視覺化或縱貫分析</li>
-            <li>簡短報告成果、AI 工具使用心得分享</li>
-          </ul>
-        </div>
-      </div>
+    <div style="text-align: center; margin: 100px 0;">
+      <h2><span style="color: var(--pink);">• </span>第三場內容籌備中</h2>
+      <p>詳細資訊將陸續公布，敬請期待。</p>
     </div>
 
     <!-- 注意事項區域 -->
     <div class="notice-section" style="margin-top: 60px;">
-      <h2 class="section-title">注意事項｜Important Notes</h2>
-      
+      <h2>
+        <span class="lang-zh">注意事項<span>｜Important Notes</span></span>
+        <span class="lang-en" style="display: none;">注意事項<span>｜Important Notes</span></span>
+      </h2>
+
       <div class="notice-content">
         <div class="notice-item">
           <h3>一、活動參加辦法</h3>
           <ul>
-            <li>本活動採「免費預先線上報名制」，請確實留下正確資料。<span class="highlight-text">主辦單位保留報名審核權。</span></li>
+            <li>本活動採「免費預先線上報名制」，請確實留下正確資料。主辦單位保留報名審核權。</li>
             <li>報名截止日請見報名頁面，主辦單位得視報名狀況調整報名截止時間。</li>
             <li>報名後若無法參加，請指派其他人選並提前通知主辦單位。</li>
-            <li>本活動提供與會者登錄<span class="highlight-text">「公務人員終生學習時數、研習證明」</span>服務。</li>
+            <li>本活動提供與會者登錄「公務人員終生學習時數、研習證明」服務。</li>
           </ul>
         </div>
 
         <div class="notice-item">
           <h3>二、審核與通知</h3>
           <ul>
-            <li>經審核通過者，主辦單位將於活動前<span class="highlight-text">以電子郵件方式寄送「出席通知信」</span>至您報名時所填電子信箱，以作為報到憑證。</li>
+            <li>經審核通過者，主辦單位將於活動前以電子郵件方式寄送「出席通知信」至您報名時所填電子信箱，以作為報到憑證。</li>
             <li>若報名審核未通過，將不另行通知。</li>
           </ul>
         </div>
@@ -3101,7 +2890,7 @@ section:not(.event-info) h2 {
         <div class="notice-item">
           <h3>四、取消報名</h3>
           <ul>
-            <li>需取消報名者，請於<span class="highlight-text">活動3日前</span>來電或 Email 通知。活動當日恕不接受取消，且未出席者不提供活動簡報檔。</li>
+            <li>需取消報名者，請於活動3日前來電或Email通知。活動當日恕不接受取消，且未出席者不提供活動簡報檔。</li>
           </ul>
         </div>
 
@@ -3138,711 +2927,79 @@ section:not(.event-info) h2 {
   <div class="inner">
     <div class="topic-wrap">
       <div class="topic-badge">
-        半導體、量子、材料創新的國際論壇
-        <div class="topic-en">International Forum on Semiconductor, Quantum, and Material Innovation</div>
-      </div>
-
-      <!-- 語言切換器 -->
-      <div class="language-toggle">
-        <div class="language-toggle-track" data-active="zh">
-          <div class="language-toggle-slider"></div>
-          <button class="language-option active" data-lang="zh">繁體中文</button>
-          <button class="language-option" data-lang="en">English</button>
-        </div>
-      </div>
-
-      <div class="topic-rows">
-        <div class="topic-rows-inner">
-          <div class="topic-row">
-            <div class="pill">
-              <span class="lang-zh">時間</span>
-              <span class="lang-en" style="display: none;">Time</span>
-            </div>
-            <div>
-              <span class="lang-zh">2025年12月15日(一) 09:00 – 17:00</span>
-              <span class="lang-en" style="display: none;">December 15th, 2025 (Monday) 09:00 – 17:00</span>
-            </div>
-            </div>
-            <div class="topic-row place">
-              <div class="pill">
-                <span class="lang-zh">地點</span>
-                <span class="lang-en" style="display: none;">Venue</span>
-              </div>
-              <div>
-                <span class="lang-zh">TICC國際會議中心102會議室</span>
-                <span class="lang-en" style="display: none;">TICC (Taipei International Convention Center) Room 102</span>
-              </div>
-            </div>
-            <div class="topic-row">
-              <div class="pill">
-                <span class="lang-zh">形式</span>
-                <span class="lang-en" style="display: none;">Format</span>
-              </div>
-              <div>
-                <span class="lang-zh">混合進行：實體會場免費報名，線上參加報名後提供連線資訊</span>
-                <span class="lang-en" style="display: none;">Hybrid: Free registration for in-person attendance, online connection info provided after registration</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      
-      <h2 id="s4-speakers" class="section-title">亮點講者｜Featured Speakers</h2>
-    </div>
-
-    <!-- speakers: all in one page, no carousel needed -->
-    <div class="speakers-carousel" aria-roledescription="carousel">
-      <div class="speaker-pages">
-        <div class="speaker-grid speaker-page" data-page="0">
-          <div class="speaker">
-            <img class="photo" src="assets/img/speaker-吳誠文.png" alt="吳誠文">
-            <div class="meta">
-              <div class="name">
-                <span class="lang-zh">吳誠文</span>
-                <span class="lang-en" style="display: none;">Shi-Yu Huang</span>
-              </div>
-              <div class="title-chip">
-                <span class="lang-zh">國科會主委<br>加州大學聖塔芭芭拉電機工程博士</span>
-                <span class="lang-en" style="display: none;">NSTC Minister<br>UC Santa Barbara EE PhD</span>
-              </div>
-            </div>
-            <div class="bio-card">
-              <div class="bio-desc"></div>
-            </div>
-          </div>
-          <div class="speaker">
-            <img class="photo" src="assets/img/speaker-李旺龍.png" alt="李旺龍">
-            <div class="meta">
-              <div class="name">
-                <span class="lang-zh">李旺龍</span>
-                <span class="lang-en" style="display: none;">Wang-Long Li</span>
-              </div>
-              <div class="title-chip">
-                <span class="lang-zh">國科會科教發展及國際合作處處長<br>成功大學機械博士</span>
-                <span class="lang-en" style="display: none;">NSTC Director<br>NCKU Mechanical Engineering PhD</span>
-              </div>
-            </div>
-            <div class="bio-card">
-              <div class="bio-desc"></div>
-            </div>
-          </div>
-          <div class="speaker">
-            <img class="photo" src="assets/img/speaker-ShiYu-Huang.png" alt="黃錫瑜">
-            <div class="meta">
-              <div class="name">
-                <span class="lang-zh">黃錫瑜</span>
-                <span class="lang-en" style="display: none;">Shi-Yu Huang</span>
-              </div>
-              <div class="title-chip">
-                <span class="lang-zh">國研院科技政策研究與資訊中心主任<br>國立清華大學電機工程學系教授</span>
-                <span class="lang-en" style="display: none;">Director, STPI-NARLabs<br>Professor, National Tsing Hua University</span>
-              </div>
-            </div>
-            <div class="bio-card">
-              <div class="bio-desc">
-                <span class="lang-zh">黃錫瑜教授曾任職於美國矽谷國民半導體與世大積體電路（後併入台積電），1999 年起於清華大學任教，並先後擔任清華大學積體電路設計技術中心主任、創新育成中心主任、南台科技大學副校長等職務，亦共同創立兆心科技。專精於積體電路設計、自動化與測試，致力於研發高可靠度與長壽命的「永保安康晶片」，推動台灣半導體創新。</span>
-                <span class="lang-en" style="display: none;">Prof. Huang worked at National Semiconductor in Silicon Valley and at Acer Semiconductor Manufacturing (later merged with TSMC) before joining NTHU in 1999. He has served as Director of the IC Design Technology Center, Director of the Innovation Incubation Center, Vice President of Southern Taiwan University of Science and Technology, and co-founder of ChipStart Technology. His research integrates IC design, design automation, and testing, with the vision of developing highly reliable and long-lasting "Everlasting Health Chips," driving continuous innovation in Taiwan's semiconductor industry.</span>
-              </div>
-            </div>
-          </div>
-          <div class="speaker">
-            <img class="photo" src="assets/img/speaker-謝明修.png" alt="謝明修">
-            <div class="meta">
-              <div class="name">
-                <span class="lang-zh">謝明修</span>
-                <span class="lang-en" style="display: none;">Ming-Hsiu Hsieh</span>
-              </div>
-              <div class="title-chip">
-                <span class="lang-zh">鴻海研究院量子計算研究所所長<br>南加大量子資訊理論博士</span>
-                <span class="lang-en" style="display: none;">Hon Hai Research Institute Director<br>USC Quantum Information Theory PhD</span>
-              </div>
-            </div>
-            <div class="bio-card">
-              <div class="bio-desc"></div>
-            </div>
-          </div>
-          <div class="speaker">
-            <img class="photo" src="assets/img/speaker-王志光.png" alt="王志光">
-            <div class="meta">
-              <div class="name">王志光</div>
-              <div class="title-chip">高雄醫學大學骨科學研究中心副主任<br>成功大學材料科學暨工程博士</div>
-            </div>
-            <div class="bio-card">
-              <div class="bio-desc"></div>
-            </div>
-          </div>
-          <div class="speaker">
-            <img class="photo" src="assets/img/speaker-許惠民.png" alt="William Sheu">
-            <div class="meta">
-              <div class="name">William Sheu</div>
-              <div class="title-chip">華碩電腦北美策略與夥伴關係副總裁<br>加州大學洛杉磯分校工程碩士</div>
-            </div>
-            <div class="bio-card">
-              <div class="bio-desc"></div>
-            </div>
-          </div>
-          <div class="speaker">
-            <img class="photo" src="assets/img/speaker-林冠宇.png" alt="林冠宇">
-            <div class="meta">
-              <div class="name">
-                <span class="lang-zh">林冠宇</span>
-                <span class="lang-en" style="display: none;">Kuan-Yu Lin</span>
-              </div>
-              <div class="title-chip">
-                <span class="lang-zh">史丹佛大學化學工程博士後研究員<br>國立台灣科技大學化工博士</span>
-                <span class="lang-en" style="display: none;">Stanford University Postdoc<br>NTUST Chemical Engineering PhD</span>
-              </div>
-            </div>
-            <div class="bio-card">
-              <div class="bio-desc"></div>
-            </div>
-          </div>
-          <div class="speaker">
-            <img class="photo" src="assets/img/speaker-林哲民.png" alt="林哲民">
-            <div class="meta">
-              <div class="name">
-                <span class="lang-zh">林哲民</span>
-                <span class="lang-en" style="display: none;">Che-Min Lin</span>
-              </div>
-              <div class="title-chip">
-                <span class="lang-zh">史丹佛大學應用物理博士後研究員<br>國立中山大學物理學博士</span>
-                <span class="lang-en" style="display: none;">Stanford University Postdoc<br>NSYSU Physics PhD</span>
-              </div>
-            </div>
-            <div class="bio-card">
-              <div class="bio-desc"></div>
-            </div>
-          </div>
-          <div class="speaker">
-            <img class="photo" src="assets/img/speaker-李泓邦.png" alt="李泓邦">
-            <div class="meta">
-              <div class="name">
-                <span class="lang-zh">李泓邦</span>
-                <span class="lang-en" style="display: none;">Hung-Pang Lee</span>
-              </div>
-              <div class="title-chip">
-                <span class="lang-zh">史丹佛大學生物工程與骨科系博後研究員<br>德克薩斯農工大學材料科學與工程博士</span>
-                <span class="lang-en" style="display: none;">Stanford University Postdoc<br>Texas A&M Materials Science & Engineering PhD</span>
-              </div>
-            </div>
-            <div class="bio-card">
-              <div class="bio-desc"></div>
-            </div>
-          </div>
-        </div>
+        第四場論壇主題（待確定）
+        <div class="topic-en">Fourth Forum Topic (TBD)</div>
       </div>
     </div>
-
-    <h2 id="s4-about" class="section-title">活動簡介｜About</h2>
-    <div class="lang-zh">
-      <p>半導體是全球戰略科技的核心動能，人工智慧、量子計算與新材料的快速突破，正重塑世界科技競局。</p>
-      <p>作為系列論壇的壓軸場次，本活動將鏈結臺、美、日、韓的產學研領袖與史丹佛博士後研究人才，共同探討<span class="highlight-text">半導體、量子、材料創新與跨領域應用</span>的最新趨勢，並交流<span class="highlight-text">人才循環、國際合作與技術轉譯</span>的實務策略。</p>
-      <p>這不僅是一場知識分享，更是打造臺灣未來科技戰略優勢的重要平台。</p>
-    </div>
-    <div class="lang-en" style="display: none;">
-      <p>Semiconductors are the core driving force of global strategic technology, and the rapid breakthroughs in artificial intelligence, quantum computing, and new materials are reshaping the global technology landscape.</p>
-      <p>As the finale of the series forum, this event will connect industry-academia leaders from Taiwan, the US, Japan, and South Korea with Stanford postdoctoral research talents to jointly explore the latest trends in <span class="highlight-text">semiconductors, quantum, material innovation and interdisciplinary applications</span>, and exchange practical strategies for <span class="highlight-text">talent circulation, international cooperation and technology translation</span>.</p>
-      <p>This is not only a knowledge sharing session, but also an important platform for building Taiwan's future technological strategic advantages.</p>
+    
+    <div style="text-align: center; margin: 100px 0;">
+      <h2><span style="color: var(--pink);">• </span>第四場內容籌備中</h2>
+      <p>詳細資訊將陸續公布，敬請期待。</p>
     </div>
 
-    <h2 id="s4-topics" class="section-title">主要議題｜Key Topics</h2>
-    <div class="lang-zh">
-      <ul style="line-height: 1.8; margin: 20px 0;">
-        <li><strong>聚焦全球半導體與量子科技趨勢：</strong>洞察材料創新、感測應用與 AI 驅動的新興領域</li>
-        <li><strong>跨國對話，亞洲連線：</strong>邀請臺、美、日、韓科技智庫與產學專家，剖析全球產業脈動</li>
-        <li><strong>博士後人才分享：</strong>國科會補助史丹佛博士後研究員分享矽谷前沿研究與臺灣應用潛力</li>
-        <li><strong>跨界交流：</strong>推動產學協作、商業媒合與導師制度，深化人才循環與國際鏈結</li>
-        <li><strong>政策呼應：</strong>呼應「人工智慧島」願景與量子國家計畫，探索臺灣科技佈局新藍圖</li>
-      </ul>
-    </div>
-    <div class="lang-en" style="display: none;">
-      <ul style="line-height: 1.8; margin: 20px 0;">
-        <li><strong>Focus on Global Semiconductor and Quantum Technology Trends:</strong> Insights into material innovation, sensing applications, and AI-driven emerging fields</li>
-        <li><strong>Cross-national Dialogue, Asian Connection:</strong> Inviting technology think tanks and industry-academia experts from Taiwan, the US, Japan, and South Korea to analyze global industry dynamics</li>
-        <li><strong>Postdoctoral Talent Sharing:</strong> NSTC-funded Stanford postdoctoral researchers share Silicon Valley cutting-edge research and Taiwan application potential</li>
-        <li><strong>Cross-boundary Exchange:</strong> Promoting industry-academia collaboration, business matching, and mentorship systems to deepen talent circulation and international connections</li>
-        <li><strong>Policy Response:</strong> Responding to the "AI Island" vision and quantum national plan, exploring Taiwan's new technology layout blueprint</li>
-      </ul>
-    </div>      <h2 id="s4-agenda" class="section-title">活動議程｜Agenda</h2>
-      
-      <div class="lang-zh">
-        <div class="schedule-table">
-          <div class="schedule-header">
-            <div class="time-col">時間</div>
-            <div class="content-col">活動內容</div>
-          </div>
-          
-          <div class="schedule-row">
-            <div class="time-cell">08:30 - 09:00</div>
-            <div class="content-cell">報到與入場</div>
-          </div>
-          
-          <div class="schedule-row">
-            <div class="time-cell">09:00 - 09:05</div>
-            <div class="content-cell">
-              歡迎暨開幕致詞
-              <ul>
-                <li>黃錫瑜 <span class="title">/ 國研院科政中心主任</span></li>
-                <li>貴賓致詞：吳誠文 <span class="title">/ 國科會主委</span></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div class="schedule-row">
-            <div class="time-cell">09:05 - 09:10</div>
-            <div class="content-cell">大合照</div>
-          </div>
-          
-          <div class="schedule-row">
-            <div class="time-cell">09:10 - 10:10</div>
-            <div class="content-cell">
-              半導體策略
-              <ul>
-                <li><span class="role-tag">引言人</span><br>黃錫瑜 <span class="title">/ 國研院科政中心主任</span></li>
-                <li><span class="role-tag">專題演講人I</span><br>許惠民 <span class="title">/ 華碩北美策略與夥伴關係副總裁</span></li>
-                <li><span class="role-tag">專題演講人II</span><br>日本或韓國智庫領域專家</li>
-              </ul>
-            </div>
-          </div>
-          
-          <div class="schedule-row">
-            <div class="time-cell">10:10 - 10:30</div>
-            <div class="content-cell">中場休息</div>
-          </div>
-          
-          <div class="schedule-row">
-            <div class="time-cell">10:30 - 11:20</div>
-            <div class="content-cell">
-              量子技術
-              <ul>
-                <li><span class="role-tag">專題演講人III</span><br>林哲民 <span class="title">/ 史丹佛大學應用物理系博後</span><br><em>拓樸材料啟動未來：從半導體瓶頸到量子科技契機- 解密下一代電子材料的關鍵角色</em></li>
-                <li><span class="role-tag">專題演講人IV</span><br>謝明修 <span class="title">/ 鴻海研究院量子計算研究所所長</span></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div class="schedule-row section-header">
-            <div class="content-cell" style="display: flex; width: 100%; background: rgba(255, 94, 153, 0.6); color: white; text-align: center; justify-content: center; align-items: center;">場次一：利用先進半導體推進人工智慧生態及未來</div>
-          </div>
-          
-          <div class="schedule-row">
-            <div class="time-cell">11:20 - 12:00</div>
-            <div class="content-cell">
-              <span class="role-tag">主持人</span>
-              <ul style="margin-top: 8px;">
-                <li>黃錫瑜 <span class="title">/ 國研院科政中心主任</span></li>
-              </ul>
-              <span class="role-tag">與談人</span>
-              <ul style="margin-top: 8px;">
-                <li>許惠民 <span class="title">/ 華碩北美策略與夥伴關係副總裁</span></li>
-                <li>林哲民 <span class="title">/ 史丹佛大學應用物理系博後</span></li>
-                <li>謝明修 <span class="title">/ 鴻海研究院量子計算研究所所長</span></li>
-                <li>日本或韓國智庫領域專家</li>
-              </ul>
-            </div>
-          </div>
-          
-          <div class="schedule-row">
-            <div class="time-cell">12:00 - 14:00</div>
-            <div class="content-cell">午餐時間</div>
-          </div>
-          
-          <div class="schedule-row">
-            <div class="time-cell">14:00 - 15:00</div>
-            <div class="content-cell">
-              生物工程技術
-              <ul>
-                <li><span class="role-tag">引言人</span><br>李旺龍 <span class="title">/ 國科會科教發展及國際合作處長</span></li>
-                <li><span class="role-tag">專題演講人I</span><br>王志光 <span class="title">/ 高雄醫學大學骨科學研究中心副主任</span><br><em>醫材醫材市場的創新挑戰：3D生物關反骨模型材料的技術發展、臨床應用、市場機遇、新創潛在挑戰</em></li>
-                <li><span class="role-tag">專題演講人II</span><br>李泓邦 <span class="title">/ 史丹佛大學生物工程與骨科系博後</span></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div class="schedule-row">
-            <div class="time-cell">15:00 - 15:10</div>
-            <div class="content-cell">中場休息</div>
-          </div>
-          
-          <div class="schedule-row">
-            <div class="time-cell">15:10 - 16:00</div>
-            <div class="content-cell">
-              先進材料與綠能
-              <ul>
-                <li><span class="role-tag">專題演講人III</span><br>日本或韓國智庫領域專家</li>
-                <li><span class="role-tag">專題演講人IV</span><br>林冠宇 <span class="title">/ 史丹佛大學化工系博後</span><br><em>電池池材料精密：看不見的環境如何影響學家你的手機電池動</em></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div class="schedule-row section-header">
-            <div class="content-cell" style="display: flex; width: 100%; background: rgba(255, 94, 153, 0.6); color: white; text-align: center; justify-content: center; align-items: center; font-weight: 600; padding: 15px 20px;">場次二：從生醫材料到能源材料，跨領域創新如何翻轉台灣的全球競爭力</div>
-          </div>
-          
-          <div class="schedule-row">
-            <div class="time-cell">16:00 - 16:30</div>
-            <div class="content-cell">
-              <span class="role-tag">主持人</span>
-              <ul style="margin-top: 8px;">
-                <li>李旺龍 <span class="title">/ 國科會科教發展及國際合作處長</span></li>
-              </ul>
-              <span class="role-tag">與談人</span>
-              <ul style="margin-top: 8px;">
-                <li>王志光 <span class="title">/ 高雄醫學大學骨科學研究中心副主任</span></li>
-                <li>李泓邦 <span class="title">/ 史丹佛大學生物工程與骨科系博後</span></li>
-                <li>林冠宇 <span class="title">/ 史丹佛大學化工系博後</span></li>
-                <li>日本或韓國智庫領域專家</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="lang-en" style="display: none;">
-        <div class="schedule-table">
-          <div class="schedule-header">
-            <div class="time-col">Time</div>
-            <div class="content-col">Content</div>
-          </div>
-          
-          <div class="schedule-row">
-            <div class="time-cell">08:30 - 09:00</div>
-            <div class="content-cell">Registration and Entry</div>
-          </div>
-          
-          <div class="schedule-row">
-            <div class="time-cell">09:00 - 09:05</div>
-            <div class="content-cell">
-              Welcome / Introductory Remarks
-              <ul>
-                <li>Shi-Yu Huang <span class="title">/ Director General, Science & Technology Policy Research and Information Center</span></li>
-                <li>Minister <span class="title">/ National Science and Technology Council</span></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div class="schedule-row">
-            <div class="time-cell">09:05 - 09:10</div>
-            <div class="content-cell">Group Photo</div>
-          </div>
-          
-          <div class="schedule-row">
-            <div class="time-cell">09:10 - 10:10</div>
-            <div class="content-cell">
-              Semiconductor
-              <ul>
-                <li><span class="role-tag">Host</span><br>Shi-Yu Huang <span class="title">/ Director General, Science & Technology Policy Research and Information Center</span></li>
-                <li><span class="role-tag">Keynote Speaker I</span><br>William Sheu <span class="title">/ Vice President, Strategy and Partnership of ASUS</span></li>
-                <li><span class="role-tag">Keynote Speaker II</span><br>Japanese or Korean Think Tank Expert</li>
-              </ul>
-            </div>
-          </div>
-          
-          <div class="schedule-row">
-            <div class="time-cell">10:10 - 10:30</div>
-            <div class="content-cell">Coffee Break</div>
-          </div>
-          
-          <div class="schedule-row">
-            <div class="time-cell">10:30 - 11:20</div>
-            <div class="content-cell">
-              Quantum Technologies
-              <ul>
-                <li><span class="role-tag">Keynote Speaker III</span><br>Che-Min Lin <span class="title">/ Postdoc, Applied Physics of Stanford University</span><br><em>One material, many functions: from prediction to realization</em></li>
-                <li><span class="role-tag">Keynote Speaker IV</span><br>Min-Hsiu Hsieh <span class="title">/ Hon Hai Quantum Computing Research Center</span></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div class="schedule-row section-header">
-            <div class="content-cell" style="display: flex; width: 100%; background: rgba(255, 94, 153, 0.6); color: white; text-align: center; justify-content: center; align-items: center;">Session I: Advancing AI Ecosystem and Future with Advanced Semiconductors</div>
-          </div>
-          
-          <div class="schedule-row">
-            <div class="time-cell">11:20 - 12:00</div>
-            <div class="content-cell">
-              <span class="role-tag">Moderator</span>
-              <ul style="margin-top: 8px;">
-                <li>Shih-Yu Huang <span class="title">/ Director of Center for Science and Technology Policy Research, National Applied Research Laboratories</span></li>
-              </ul>
-              <span class="role-tag">Panelists</span>
-              <ul style="margin-top: 8px;">
-                <li>William Sheu <span class="title">/ Vice President, Strategy and Partnership of ASUS</span></li>
-                <li>Che-Min Lin <span class="title">/ Postdoc, Applied Physics of Stanford University</span></li>
-                <li>Min-Hsiu Hsieh <span class="title">/ Hon Hai Quantum Computing Research Center</span></li>
-                <li>Japanese or Korean Think Tank Expert</li>
-              </ul>
-            </div>
-          </div>
-          
-          <div class="schedule-row">
-            <div class="time-cell">12:00 - 14:00</div>
-            <div class="content-cell">Lunch Break</div>
-          </div>
-          
-          <div class="schedule-row">
-            <div class="time-cell">14:00 - 15:00</div>
-            <div class="content-cell">
-              Bioengineering Technology
-              <ul>
-                <li><span class="role-tag">Moderator</span><br>Wang-Long Lee <span class="title">/ Director of Science Education Development and International Cooperation, National Science and Technology Council</span></li>
-                <li><span class="role-tag">Keynote Speaker I</span><br>Zhi-Guang Wang <span class="title">/ Associate Director of Orthopedic Research Center, Kaohsiung Medical University</span><br><em>Innovation Challenges in Medical Device Market: Technical Development, Clinical Applications, Market Opportunities, and Startup Potential Challenges of 3D Bioprinted Bone Model Materials</em></li>
-                <li><span class="role-tag">Keynote Speaker II</span><br>Hong-Bang Lee <span class="title">/ Postdoctoral Researcher in Bioengineering and Orthopedic Surgery, Stanford University</span></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div class="schedule-row">
-            <div class="time-cell">15:00 - 15:10</div>
-            <div class="content-cell">Coffee Break</div>
-          </div>
-          
-          <div class="schedule-row">
-            <div class="time-cell">15:10 - 16:00</div>
-            <div class="content-cell">
-              Advanced Materials and Green Energy
-              <ul>
-                <li><span class="role-tag">Keynote Speaker III</span><br>Japanese or Korean Think Tank Expert</li>
-                <li><span class="role-tag">Keynote Speaker IV</span><br>Guan-Yu Lin <span class="title">/ Postdoctoral Researcher in Chemical Engineering, Stanford University</span><br><em>Battery Material Precision: How Invisible Environments Affect Your Phone Battery Performance</em></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div class="schedule-row">
-            <div class="content-cell" style="display: flex; width: 100%; background: rgba(255, 94, 153, 0.6); color: white; text-align: center; justify-content: center; align-items: center; font-weight: 600; padding: 15px 20px;">Session II: From Biomedical Materials to Energy Materials, How Cross-Field Innovation Transforms Taiwan's Global Competitiveness</div>
-          </div>
-          
-          <div class="schedule-row">
-            <div class="time-cell">16:00 - 16:30</div>
-            <div class="content-cell">
-              <span class="role-tag">Moderator</span>
-              <ul style="margin-top: 8px;">
-                <li>Wang-Long Lee <span class="title">/ Director of Science Education Development and International Cooperation, National Science and Technology Council</span></li>
-              </ul>
-              <span class="role-tag">Panelists</span>
-              <ul style="margin-top: 8px;">
-                <li>Zhi-Guang Wang <span class="title">/ Associate Director of Orthopedic Research Center, Kaohsiung Medical University</span></li>
-                <li>Hong-Bang Lee <span class="title">/ Postdoctoral Researcher in Bioengineering and Orthopedic Surgery, Stanford University</span></li>
-                <li>Guan-Yu Lin <span class="title">/ Postdoctoral Researcher in Chemical Engineering, Stanford University</span></li>
-                <li>Japanese or Korean Think Tank Expert</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 第四場活動注意事項 -->
-<section class="notice-section" id="s4-notice" style="display: none;">
-  <div class="inner">
     <!-- 注意事項區域 -->
-      <div class="notice-section" style="margin-top: 60px;">
-        <h2 class="section-title">注意事項｜Important Notes</h2>
-        
-        <div class="notice-content">
-          <div class="notice-item">
-            <h3>一、活動參加辦法</h3>
-            <ul>
-              <li>本活動採「免費預先線上報名制」，請確實留下正確資料。<span class="highlight-text">主辦單位保留報名審核權。</span></li>
-              <li>報名截止日請見報名頁面，主辦單位得視報名狀況調整報名截止時間。</li>
-              <li>報名後若無法參加，請指派其他人選並提前通知主辦單位。</li>
-              <li>本活動提供與會者登錄<span class="highlight-text">「公務人員終生學習時數、研習證明」</span>服務。</li>
-            </ul>
-          </div>
-
-          <div class="notice-item">
-            <h3>二、審核與通知</h3>
-            <ul>
-              <li>經審核通過者，主辦單位將於活動前<span class="highlight-text">以電子郵件方式寄送「出席通知信」</span>至您報名時所填電子信箱，以作為報到憑證。</li>
-              <li>若報名審核未通過，將不另行通知。</li>
-            </ul>
-          </div>
-
-          <div class="notice-item">
-            <h3>三、報名須知</h3>
-            <ul>
-              <li>請勿冒用或偽造他人身份進行報名，違者將依法處理。</li>
-              <li>主辦單位保留報名資格之最終解釋與變更權利，恕不另行通知。</li>
-            </ul>
-          </div>
-
-          <div class="notice-item">
-            <h3>四、取消報名</h3>
-            <ul>
-              <li>需取消報名者，請於<span class="highlight-text">活動3日前</span>來電或 Email 通知。活動當日恕不接受取消，且未出席者不提供活動簡報檔。</li>
-            </ul>
-          </div>
-
-          <div class="notice-item">
-            <h3>五、講義與智慧財產</h3>
-            <ul>
-              <li>活動結束後，凡已完成填寫活動滿意度調查問卷者，主辦單位將電子郵件方式提供論壇議程簡報講義。惟因智慧財產權保護，倘若外部講師未授權提供，該講師之講義將不予提供下載。</li>
-              <li>為保護智慧財產權，嚴禁攝影及錄影等行為。</li>
-            </ul>
-          </div>
-
-          <div class="notice-item">
-            <h3>六、特殊情況</h3>
-            <ul>
-              <li>主辦單位保留修改本活動規則之權利，毋須另行作出解釋或通知。</li>
-              <li>本次活動若適逢天災(地震、颱風等)不可抗拒之因素，將延期舉辦時間另行通知。</li>
-              <li>若因不可預測之突發因素，主辦單位得保留活動議程及講師之變更權利。</li>
-            </ul>
-          </div>
-
-          <!-- 個人資料蒐集告知聲明按鈕 -->
-          <div class="privacy-notice" style="text-align: center; margin-top: 40px;">
-            <a href="https://www.stpi.niar.org.tw/public/privacy" target="_blank" class="privacy-btn">
-              國研院科政中心個人資料蒐集告知聲明
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 英文版內容 -->
-    <div class="lang-en" style="display: none;">
-      <div class="topic-wrap">
-        <div class="topic-badge">
-          International Forum on Semiconductor, Quantum, and Material Innovation
-          <div class="topic-en">半導體、量子、材料創新的國際論壇</div>
-        </div>
-
-        <div class="topic-rows">
-          <div class="topic-rows-inner">
-            <div class="topic-row">
-              <div class="pill">Time</div>
-              <div>December 15, 2025 (Monday) 09:00 – 17:00</div>
-            </div>
-            <div class="topic-row place">
-              <div class="pill">Venue</div>
-              <div>TICC Conference Room 102</div>
-            </div>
-            <div class="topic-row">
-              <div class="pill">Format</div>
-              <div>Hybrid: Free registration for physical venue, online connection info provided after registration</div>
-            </div>
-        </div>
-      </div>
-      
-      <h2 id="s4-speakers-en">Featured Speakers｜亮點講者</h2>
-    </div>
-
-    <!-- speakers: all in one page, no carousel needed -->
-    <div class="speakers-carousel" aria-roledescription="carousel">
-      <div class="speaker-pages">
-        <div class="speaker-grid speaker-page" data-page="0">
-          <div class="speaker">
-            <img class="photo" src="assets/img/speaker-ShiYu-Huang.png" alt="Shi-Yu Huang">
-            <div class="meta">
-              <div class="name">Shi-Yu Huang</div>
-              <div class="title-chip">Director, STPI-NARLabs<br>Professor, National Tsing Hua University</div>
-            </div>
-            <div class="bio-card">
-              <div class="bio-desc"></div>
-            </div>
-          </div>
-          <div class="speaker">
-            <img class="photo" src="assets/img/speaker-Philip-Wong.png" alt="H.S. Philip Wong">
-            <div class="meta">
-              <div class="name lang-zh">黃漢森</div>
-              <div class="name lang-en" style="display: none;">H.S. Philip Wong</div>
-              <div class="title-chip lang-zh">台積電首席科學家<br>史丹佛大學電機系教授</div>
-              <div class="title-chip lang-en" style="display: none;">Chief Scientist, TSMC<br>Professor, Stanford University</div>
-            </div>
-            <div class="bio-card">
-              <div class="bio-desc lang-zh">黃漢森教授曾任 IBM T.J. Watson 研究中心研究員（1988–2004），2004 年起於史丹佛大學執教，並於 2018–2020 年擔任台積電副總經理，現為首席科學家。專長涵蓋奈米電子、半導體元件、類腦計算與 3D 系統整合等領域，成就卓著。黃教授為 IEEE 院士，榮獲 J.J. Ebers 獎與 Andrew S. Grove 獎等國際大獎，並在多所國際頂尖大學擔任客座教授，持續引領全球半導體技術前沿。</div>
-              <div class="bio-desc lang-en" style="display: none;">Prof. Wong worked at IBM T.J. Watson Research Center (1988–2004) before joining Stanford University in 2004. He served as Vice President for Corporate Research at TSMC (2018–2020) and is now the company's Chief Scientist. His research spans nanotechnology, nanoelectronics, semiconductor devices, neuromorphic computing, and 3D integration. A Fellow of IEEE, he has received the J.J. Ebers Award and the Andrew S. Grove Award for his outstanding contributions. He also holds visiting professorships worldwide, actively shaping the future of global semiconductor technology.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <h2 id="s4-about-en">About｜活動簡介</h2>
-    <p>As AI-driven technological innovation sets off waves of transformation globally, semiconductors, quantum computing, smart materials, and sensing technologies are becoming the core driving forces leading the future.</p>
-    <p>As the finale of the forum series, this forum will bring together top technology think tanks and industry-academia-research experts from Taiwan, the US, Japan, and Korea to delve into <span class="highlight-text">AI-driven future technology trends, cross-border cooperation strategies, and business opportunities</span>, and invite NSTC-funded Stanford postdoctoral researchers to share cutting-edge research results.</p>
-    <p>This will be a high-level dialogue connecting international perspectives with local innovation, providing key insights for Taiwan's technology industry to position itself for global competitiveness.</p>
-
-    <h2 id="s4-topics-en">Key Topics｜主要議題</h2>
-    <ul style="line-height: 1.8; margin: 20px 0;">
-      <li><strong>AI-Driven Semiconductor Technology Innovation:</strong> Exploring how artificial intelligence redefines the future development of semiconductor design, processes, and applications</li>
-      <li><strong>Quantum Computing & Emerging Technology Trends:</strong> Analyzing breakthrough applications of quantum technology in information processing, cryptography, and scientific computing</li>
-      <li><strong>Smart Materials & Sensing Technologies:</strong> From lab to market, analyzing industrialization pathways and investment opportunities for new material technologies</li>
-      <li><strong>Cross-border Industry-Academia-Research Cooperation Models:</strong> Building technology talent mobility networks in the Asia-Pacific region, strengthening international partnerships</li>
-      <li><strong>Stanford Cutting-edge Research & Industrial Applications:</strong> NSTC postdoctoral researchers share Silicon Valley innovation thinking and technology translation experience</li>
-      <li><strong>Global Technology Investment Trends:</strong> Analyzing international capital market hotspots to formulate forward-looking industrial policies for Taiwan</li>
-    </ul>      <h2 id="s4-agenda-en">
-        Agenda｜活動議程
+    <div class="notice-section" style="margin-top: 60px;">
+      <h2>
+        <span class="lang-zh">注意事項<span>｜Important Notes</span></span>
+        <span class="lang-en" style="display: none;">注意事項<span>｜Important Notes</span></span>
       </h2>
-      
-      <div class="schedule-table">
-        <div class="schedule-header">
-          <div class="time-col">Time</div>
-          <div class="content-col">Program</div>
+
+      <div class="notice-content">
+        <div class="notice-item">
+          <h3>一、活動參加辦法</h3>
+          <ul>
+            <li>本活動採「免費預先線上報名制」，請確實留下正確資料。主辦單位保留報名審核權。</li>
+            <li>報名截止日請見報名頁面，主辦單位得視報名狀況調整報名截止時間。</li>
+            <li>報名後若無法參加，請指派其他人選並提前通知主辦單位。</li>
+            <li>本活動提供與會者登錄「公務人員終生學習時數、研習證明」服務。</li>
+          </ul>
         </div>
-        
-        <div class="schedule-row">
-          <div class="time-cell">09:00 - 09:30</div>
-          <div class="content-cell">Registration & Opening Remarks</div>
+
+        <div class="notice-item">
+          <h3>二、審核與通知</h3>
+          <ul>
+            <li>經審核通過者，主辦單位將於活動前以電子郵件方式寄送「出席通知信」至您報名時所填電子信箱，以作為報到憑證。</li>
+            <li>若報名審核未通過，將不另行通知。</li>
+          </ul>
         </div>
-        
-        <div class="schedule-row">
-          <div class="time-cell">09:30 - 11:00</div>
-          <div class="content-cell">
-            Keynote Speech: Semiconductor Technology Innovation & AI Application Prospects
-            <ul>
-              <li>H.S. Philip Wong <span class="title">/ Chief Scientist, TSMC & Professor, Stanford University</span></li>
-            </ul>
-          </div>
+
+        <div class="notice-item">
+          <h3>三、報名須知</h3>
+          <ul>
+            <li>請勿冒用或偽造他人身份進行報名，違者將依法處理。</li>
+            <li>主辦單位保留報名資格之最終解釋與變更權利，恕不另行通知。</li>
+          </ul>
         </div>
-        
-        <div class="schedule-row">
-          <div class="time-cell">11:00 - 12:30</div>
-          <div class="content-cell">
-            Keynote Speech: Quantum Technology & Future Computing Trends
-            <ul>
-              <li>Shi-Yu Huang <span class="title">/ Director, STPI-NARLabs & Professor, National Tsing Hua University</span></li>
-            </ul>
-          </div>
+
+        <div class="notice-item">
+          <h3>四、取消報名</h3>
+          <ul>
+            <li>需取消報名者，請於活動3日前來電或Email通知。活動當日恕不接受取消，且未出席者不提供活動簡報檔。</li>
+          </ul>
         </div>
-        
-        <div class="schedule-row">
-          <div class="time-cell">12:30 - 13:30</div>
-          <div class="content-cell">Lunch & Networking</div>
+
+        <div class="notice-item">
+          <h3>五、講義與智慧財產</h3>
+          <ul>
+            <li>活動結束後，凡已完成填寫活動滿意度調查問卷者，主辦單位將電子郵件方式提供論壇議程簡報講義。惟因智慧財產權保護，倘若外部講師未授權提供，該講師之講義將不予提供下載。</li>
+            <li>為保護智慧財產權，嚴禁攝影及錄影等行為。</li>
+          </ul>
         </div>
-        
-        <div class="schedule-row">
-          <div class="time-cell">13:30 - 15:30</div>
-          <div class="content-cell">
-            Roundtable Forum: Cross-border Technology Cooperation & Business Opportunities
-            <br><br>
-            <span class="role-tag">Moderator</span>
-            <ul style="margin-top: 8px;">
-              <li>Shi-Yu Huang <span class="title">/ Director, STPI-NARLabs</span></li>
-            </ul>
-            <span class="role-tag">Panelists</span>
-            <ul style="margin-top: 8px;">
-              <li>H.S. Philip Wong <span class="title">/ Chief Scientist, TSMC</span></li>
-              <li>Invited experts and scholars from Japan, Korea, and the US</li>
-            </ul>
-          </div>
+
+        <div class="notice-item">
+          <h3>六、特殊情況</h3>
+          <ul>
+            <li>主辦單位保留修改本活動規則之權利，毋須另行作出解釋或通知。</li>
+            <li>本次活動若適逢天災(地震、颱風等)不可抗拒之因素，將延期舉辦時間另行通知。</li>
+            <li>若因不可預測之突發因素，主辦單位得保留活動議程及講師之變更權利。</li>
+          </ul>
         </div>
-        
-        <div class="schedule-row">
-          <div class="time-cell">15:30 - 16:30</div>
-          <div class="content-cell">
-            Stanford Postdoctoral Research Sharing: Cutting-edge Technology & Application Potential
-            <ul>
-              <li>NSTC-funded Stanford Postdoctoral Researchers <span class="title">/ Multi-disciplinary Technology Sharing</span></li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="schedule-row">
-          <div class="time-cell">16:30 - 17:00</div>
-          <div class="content-cell">Panel Discussion & Closing</div>
+
+        <!-- 個人資料蒐集告知聲明按鈕 -->
+        <div class="privacy-notice" style="text-align: center; margin-top: 40px;">
+          <a href="https://www.stpi.niar.org.tw/public/privacy" target="_blank" class="privacy-btn">
+            國研院科政中心個人資料蒐集告知聲明
+          </a>
         </div>
       </div>
     </div>
@@ -3953,9 +3110,6 @@ document.querySelectorAll('.bar-item').forEach(btn=>{
       
       // 更新浮動表單的錨點
       updateFloatingMenuAnchors(targetId);
-      
-      // 重新初始化當前事件的語言切換功能
-      initEventLanguageToggle(targetSection);
       
       // 如果新顯示的活動有輪播功能，重新啟動自動播放
       const carousel = targetSection.querySelector('.speakers-carousel');
@@ -4278,30 +3432,18 @@ function initLanguageToggle() {
       enElements.forEach(el => el.style.display = 'none');
       
       // 中文模式時，自動切換到台灣時間
-      setTimeout(() => {
-        if (window.switchTimezone) {
-          window.switchTimezone('taiwan');
-        }
-      }, 100);
+      if (window.switchTimezone) {
+        window.switchTimezone('taiwan');
+      }
     } else {
       zhElements.forEach(el => el.style.display = 'none');
       enElements.forEach(el => el.style.display = '');
       
       // 英文模式時，自動切換到加州時間
-      setTimeout(() => {
-        if (window.switchTimezone) {
-          window.switchTimezone('california');
-        }
-      }, 100);
-    }
-    
-    // 更新時間切換器按鈕文字
-    setTimeout(() => {
       if (window.switchTimezone) {
-        const currentTimezone = lang === 'zh' ? 'taiwan' : 'california';
-        window.switchTimezone(currentTimezone);
+        window.switchTimezone('california');
       }
-    }, 150);
+    }
     
     // 更新報名按鈕提示文字
     document.querySelectorAll('.register-btn').forEach(btn => {
@@ -4327,58 +3469,6 @@ function initLanguageToggle() {
   switchLanguage('zh');
 }
 
-/* 為特定事件初始化語言切換功能 */
-function initEventLanguageToggle(eventSection) {
-  if (!eventSection) return;
-  
-  const languageToggle = eventSection.querySelector('.language-toggle-track');
-  const languageOptions = eventSection.querySelectorAll('.language-option');
-  
-  if (!languageToggle || !languageOptions.length) return;
-  
-  let currentLang = 'zh'; // 預設為繁體中文
-  
-  // 切換語言內容（只影響當前事件）
-  function switchEventLanguage(lang) {
-    currentLang = lang;
-    
-    // 更新切換器狀態
-    languageToggle.setAttribute('data-active', lang);
-    languageOptions.forEach(option => {
-      option.classList.toggle('active', option.dataset.lang === lang);
-    });
-    
-    // 切換內容顯示（只在當前事件內）
-    const zhElements = eventSection.querySelectorAll('.lang-zh');
-    const enElements = eventSection.querySelectorAll('.lang-en');
-    
-    if (lang === 'zh') {
-      zhElements.forEach(el => el.style.display = '');
-      enElements.forEach(el => el.style.display = 'none');
-    } else {
-      zhElements.forEach(el => el.style.display = 'none');
-      enElements.forEach(el => el.style.display = '');
-    }
-  }
-  
-  // 移除舊的事件監聽器並綁定新的點擊事件
-  languageOptions.forEach(option => {
-    // 克隆元素以移除所有舊的事件監聽器
-    const newOption = option.cloneNode(true);
-    option.parentNode.replaceChild(newOption, option);
-    
-    newOption.addEventListener('click', () => {
-      const lang = newOption.dataset.lang;
-      if (lang !== currentLang) {
-        switchEventLanguage(lang);
-      }
-    });
-  });
-  
-  // 初始化為中文
-  switchEventLanguage('zh');
-}
-
 /* 時間切換功能 */
 function initTimeToggle() {
   const timeToggle = document.querySelector('.time-toggle-track');
@@ -4399,7 +3489,7 @@ function initTimeToggle() {
     });
 
     // 獲取當前語言狀態
-    const currentLang = document.querySelector('#s1-info .language-toggle-track')?.getAttribute('data-active') || 'zh';
+    const currentLang = document.querySelector('.language-option.active')?.dataset.lang || 'zh';
     
     // 切換時間顯示
     const taiwanTimes = document.querySelectorAll('.taiwan-time');
@@ -4459,15 +3549,8 @@ function initTimeToggle() {
     });
   });
   
-  // 初始化時間顯示 - 根據當前語言設定
-  const initializeTimeDisplay = () => {
-    const currentLang = document.querySelector('#s1-info .language-toggle-track')?.getAttribute('data-active') || 'zh';
-    const initialTimezone = currentLang === 'zh' ? 'taiwan' : 'california';
-    switchTimezone(initialTimezone);
-  };
-  
-  // 延遲初始化，確保語言狀態已設定
-  setTimeout(initializeTimeDisplay, 200);
+  // 初始化為加州時間
+  switchTimezone('california');
 }
 
 // 在頁面載入後初始化時間切換器
@@ -4475,29 +3558,6 @@ document.addEventListener('DOMContentLoaded', initTimeToggle);
 
 // 在頁面載入後初始化語言切換器  
 document.addEventListener('DOMContentLoaded', initLanguageToggle);
-
-// 在頁面載入後初始化當前顯示事件的語言切換
-document.addEventListener('DOMContentLoaded', function() {
-  // 找到當前顯示的事件（第一個沒有 display:none 的事件）
-  const allEvents = document.querySelectorAll('.event-info');
-  let currentEvent = null;
-  
-  allEvents.forEach(event => {
-    const style = window.getComputedStyle(event);
-    if (style.display !== 'none') {
-      currentEvent = event;
-    }
-  });
-  
-  // 如果沒找到顯示的事件，默認使用第一個
-  if (!currentEvent && allEvents.length > 0) {
-    currentEvent = allEvents[0];
-  }
-  
-  if (currentEvent) {
-    initEventLanguageToggle(currentEvent);
-  }
-});
 
 /* 分享功能 */
 document.addEventListener('DOMContentLoaded', function() {
@@ -4675,84 +3735,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-/* 語言切換功能 */
-function switchLanguage(lang) {
-  // 更新按鈕狀態
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.classList.remove('active');
-  });
-  document.getElementById('lang-' + lang).classList.add('active');
-  
-  // 切換內容顯示
-  if (lang === 'zh') {
-    // 顯示中文內容
-    document.querySelectorAll('.lang-zh').forEach(el => {
-      el.style.display = 'block';
-    });
-    // 隱藏英文內容
-    document.querySelectorAll('.lang-en').forEach(el => {
-      el.style.display = 'none';
-    });
-  } else {
-    // 顯示英文內容
-    document.querySelectorAll('.lang-en').forEach(el => {
-      el.style.display = 'block';
-    });
-    // 隱藏中文內容
-    document.querySelectorAll('.lang-zh').forEach(el => {
-      el.style.display = 'none';
-    });
-  }
-}
-
-</script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  // 預設每個活動區塊為中文
-  document.querySelectorAll('.event-info').forEach(section => {
-    if (!section.dataset.lang) section.dataset.lang = 'zh';
-  });
-
-  // 綁定「語言切換器」：支援兩種方式
-  document.querySelectorAll('.event-info .language-toggle').forEach(toggle => {
-    const section = toggle.closest('.event-info');
-    const track   = toggle.querySelector('.language-toggle-track');
-    const btns    = toggle.querySelectorAll('.language-option');
-
-    btns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const lang = btn.dataset.lang === 'en' ? 'en' : 'zh';
-        
-        // 更新切換器的視覺狀態
-        btns.forEach(b => b.classList.toggle('active', b === btn));
-        if (track) track.setAttribute('data-active', lang);
-
-        // 方式1: 設定 data-lang (第四場用這個方式)
-        section.dataset.lang = lang;
-        
-        // 方式2: 同時支援 inline style (第一場等其他活動用這個)
-        section.querySelectorAll('.lang-zh').forEach(el => {
-          if (el.closest('.section-title')) return; // 跳過標題
-          el.style.display = (lang === 'zh') ? '' : 'none';
-        });
-        section.querySelectorAll('.lang-en').forEach(el => {
-          if (el.closest('.section-title')) return; // 跳過標題  
-          el.style.display = (lang === 'en') ? '' : 'none';
-        });
-        
-        // 如果是活動一，同時更新時間切換
-        if (section.id === 's1-info' && window.switchTimezone) {
-          const targetTimezone = lang === 'zh' ? 'taiwan' : 'california';
-          setTimeout(() => window.switchTimezone(targetTimezone), 100);
-        }
-      });
-    });
-  });
-
-  // 防呆
-  window.__disableTitleReorder = true;
-});
 </script>
 
 </body>
