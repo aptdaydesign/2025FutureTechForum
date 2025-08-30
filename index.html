@@ -629,18 +629,6 @@ section:not(.event-info) h2 {
 .event-info ul, .event-info p, .event-info .speaker-grid, .event-info .ag-grid{ margin-bottom: 0; padding-bottom: 0; }
 .event-info .ag-title{ margin-top: var(--subheading-gap-top); margin-bottom: var(--subheading-gap-bottom); }
 
-/* ===== 加強 strong 標籤的粗體效果 ===== */
-strong {
-  font-weight: 700 !important; /* 使用更重的字重 */
-  letter-spacing: 0.5px; /* 增加字母間距使其更明顯 */
-}
-
-/* 對中文字體特別加強 */
-.bio-desc strong {
-  font-weight: 900 !important; /* 使用最粗的字重 */
-  color: #fff !important; /* 確保顏色為白色 */
-}
-
 /* ===== 響應式設計 ===== */
 @media (max-width:1200px){
   .topic-rows{ width:min(100%, 1000px); margin:18px auto clamp(28px, 4vw, 56px); }
@@ -2364,21 +2352,8 @@ strong {
               <div class="title-chip lang-en" style="display: none;">Director, STPI-NARLabs<br>Professor, National Tsing Hua University</div>
             </div>
             <div class="bio-card">
-              <div class="bio-desc lang-zh">
-                <strong>學歷</strong><br>
-                • 美國加州大學聖塔芭芭拉分校 電機與計算機工程博士<br>
-                • 國立台灣大學 電機工程學系碩士<br>
-                • 國立台灣大學 電機工程學系學士<br><br>
-                <strong>經歷</strong><br>
-                黃錫瑜教授曾任職於美國矽谷國民半導體與世大積體電路（後併入台積電），1999 年起於清華大學任教，並先後擔任清華大學積體電路設計技術中心主任、創新育成中心主任、南台科技大學副校長等職務，亦共同創立兆心科技。專精於積體電路設計、自動化與測試，致力於研發高可靠度與長壽命的「永保安康晶片」，推動台灣半導體創新。
-              </div>
-              <div class="bio-desc lang-en" style="display: none;">
-                <strong>Education</strong><br>
-                • Ph.D. in Electrical and Computer Engineering, University of California, Santa Barbara<br>
-                • M.S. & B.S. in Electrical Engineering, National Taiwan University<br><br>
-                <strong>Career Summary</strong><br>
-                Prof. Huang worked at National Semiconductor in Silicon Valley and at Acer Semiconductor Manufacturing (later merged with TSMC) before joining NTHU in 1999. He has served as Director of the IC Design Technology Center, Director of the Innovation Incubation Center, Vice President of Southern Taiwan University of Science and Technology, and co-founder of ChipStart Technology. His research integrates IC design, design automation, and testing, with the vision of developing highly reliable and long-lasting "Everlasting Health Chips," driving continuous innovation in Taiwan's semiconductor industry.
-              </div>
+              <div class="bio-desc lang-zh">黃錫瑜教授曾任職於美國矽谷國民半導體與世大積體電路（後併入台積電），1999 年起於清華大學任教，並先後擔任清華大學積體電路設計技術中心主任、創新育成中心主任、南台科技大學副校長等職務，亦共同創立兆心科技。專精於積體電路設計、自動化與測試，致力於研發高可靠度與長壽命的「永保安康晶片」，推動台灣半導體創新。</div>
+              <div class="bio-desc lang-en" style="display: none;">Prof. Huang worked at National Semiconductor in Silicon Valley and at Acer Semiconductor Manufacturing (later merged with TSMC) before joining NTHU in 1999. He has served as Director of the IC Design Technology Center, Director of the Innovation Incubation Center, Vice President of Southern Taiwan University of Science and Technology, and co-founder of ChipStart Technology. His research integrates IC design, design automation, and testing, with the vision of developing highly reliable and long-lasting "Everlasting Health Chips," driving continuous innovation in Taiwan's semiconductor industry.</div>
             </div>
           </div>
           <div class="speaker">
@@ -2390,22 +2365,8 @@ strong {
               <div class="title-chip lang-en" style="display: none;">Chief Scientist, TSMC<br>Professor, Stanford University</div>
             </div>
             <div class="bio-card">
-              <div class="bio-desc lang-zh">
-                <strong>學歷</strong><br>
-                • 美國理海大學 電機工程博士<br>
-                • 美國紐約州立大學 電機工程碩士<br>
-                • 香港大學 電機工程學士<br><br>
-                <strong>經歷</strong><br>
-                黃漢森教授曾任 IBM T.J. Watson 研究中心研究員（1988–2004），2004 年起於史丹佛大學執教，並於 2018–2020 年擔任台積電副總經理，現為首席科學家。專長涵蓋奈米電子、半導體元件、類腦計算與 3D 系統整合等領域，成就卓著。黃教授為 IEEE 院士，榮獲 J.J. Ebers 獎與 Andrew S. Grove 獎等國際大獎，並在多所國際頂尖大學擔任客座教授，持續引領全球半導體技術前沿。
-              </div>
-              <div class="bio-desc lang-en" style="display: none;">
-                <strong>Education</strong><br>
-                • Ph.D. in Electrical Engineering, Lehigh University<br>
-                • M.S. in Electrical Engineering, State University of New York<br>
-                • B.S. in Electrical Engineering, The University of Hong Kong<br><br>
-                <strong>Career Summary</strong><br>
-                Prof. Wong worked at IBM T.J. Watson Research Center (1988–2004) before joining Stanford University in 2004. He served as Vice President for Corporate Research at TSMC (2018–2020) and is now the company's Chief Scientist. His research spans nanotechnology, nanoelectronics, semiconductor devices, neuromorphic computing, and 3D integration. A Fellow of IEEE, he has received the J.J. Ebers Award and the Andrew S. Grove Award for his outstanding contributions. He also holds visiting professorships worldwide, actively shaping the future of global semiconductor technology.
-              </div>
+              <div class="bio-desc lang-zh">黃漢森教授曾任 IBM T.J. Watson 研究中心研究員（1988–2004），2004 年起於史丹佛大學執教，並於 2018–2020 年擔任台積電副總經理，現為首席科學家。專長涵蓋奈米電子、半導體元件、類腦計算與 3D 系統整合等領域，成就卓著。黃教授為 IEEE 院士，榮獲 J.J. Ebers 獎與 Andrew S. Grove 獎等國際大獎，並在多所國際頂尖大學擔任客座教授，持續引領全球半導體技術前沿。</div>
+              <div class="bio-desc lang-en" style="display: none;">Prof. Wong worked at IBM T.J. Watson Research Center (1988–2004) before joining Stanford University in 2004. He served as Vice President for Corporate Research at TSMC (2018–2020) and is now the company's Chief Scientist. His research spans nanotechnology, nanoelectronics, semiconductor devices, neuromorphic computing, and 3D integration. A Fellow of IEEE, he has received the J.J. Ebers Award and the Andrew S. Grove Award for his outstanding contributions. He also holds visiting professorships worldwide, actively shaping the future of global semiconductor technology.</div>
             </div>
           </div>
           <div class="speaker">
@@ -2417,24 +2378,8 @@ strong {
               <div class="title-chip lang-en" style="display: none;">CTO, Emerging Sensors Business Unit, TDK Invensense<br>Professor, UC Davis<br>Adjunct Professor, UC Berkeley</div>
             </div>
             <div class="bio-card">
-              <div class="bio-desc lang-zh">
-                <strong>學歷</strong><br>
-                • 美國加州大學柏克萊分校 機械工程博士<br><br>
-                <strong>經歷</strong><br>
-                David Horsley 博士為微機電系統（MEMS）超音波感測領域的先驅，2013 年共同創立 Chirp Microsystems，成功開發超音波感測技術並擔任技術長，後被 TDK 收購，現任 TDK Invensense 新興感測器事業部 CTO。他同時為 UC Davis 教授及 UC Berkeley 感測與致動中心共同主任，研發成果包括應用於筆電與消費性產品的超音波指紋辨識感測器。Horsley 博士是 IEEE 會士與美國國家發明家學院會士，曾獲 NSF CAREER Award、UC Davis 傑出青年教師獎及 MSIG Hall of Fame Award，著有 150 餘篇論文並持有 22 項專利。
-              </div>
-              <div class="bio-desc lang-en" style="display: none;">
-                <strong>Education</strong><br>
-                • PhD, UC Berkeley<br><br>
-                <strong>Experience</strong><br>
-                • 2021 MSIG Hall of Fame Award<br>
-                • US National Academy of Inventors Fellow & IEEE Fellow<br>
-                • CTO & Founder, Chirp Microsystems (acquired by TDK)<br>
-                • Professor, UC Davis & Adjunct Professor, UC Berkeley<br>
-                • Director, Berkeley Sensor & Actuator Center<br><br>
-                <strong>Biography</strong><br>
-                Pioneer in MEMS ultrasonic sensing, co-founded Chirp Microsystems in 2013 and served as CTO until its acquisition by TDK. Currently CTO of TDK Invensense and Professor at UC Davis, Adjunct Professor at UC Berkeley, and Co-Director of BSAC. Invented the ultrasonic fingerprint sensor commercialized by TDK. IEEE Fellow, NAI Fellow, recipient of NSF CAREER Award, UC Davis Outstanding Junior Faculty Award, and MSIG Hall of Fame Award. Author of 150+ papers and holder of 22 patents.
-              </div>
+              <div class="bio-desc lang-zh">David Horsley 博士為微機電系統（MEMS）超音波感測領域的先驅，2013 年共同創立 Chirp Microsystems，成功開發超音波感測技術並擔任技術長，後被 TDK 收購，現任 TDK Invensense 新興感測器事業部 CTO。他同時為 UC Davis 教授及 UC Berkeley 感測與致動中心共同主任，研發成果包括應用於筆電與消費性產品的超音波指紋辨識感測器。Horsley 博士是 IEEE 會士與美國國家發明家學院會士，曾獲 NSF CAREER Award、UC Davis 傑出青年教師獎及 MSIG Hall of Fame Award，著有 150 餘篇論文並持有 22 項專利。</div>
+              <div class="bio-desc lang-en" style="display: none;">Pioneer in MEMS ultrasonic sensing, co-founded Chirp Microsystems in 2013 and served as CTO until its acquisition by TDK. Currently CTO of TDK Invensense and Professor at UC Davis, Adjunct Professor at UC Berkeley, and Co-Director of BSAC. Invented the ultrasonic fingerprint sensor commercialized by TDK. IEEE Fellow, NAI Fellow, recipient of NSF CAREER Award, UC Davis Outstanding Junior Faculty Award, and MSIG Hall of Fame Award. Author of 150+ papers and holder of 22 patents.</div>
             </div>
           </div>
           <div class="speaker">
@@ -2446,18 +2391,8 @@ strong {
               <div class="title-chip lang-en" style="display: none;">Research Fellow, Harvard University<br>Senior Research Fellow, Stanford Law School<br>Secretary General, International Artificial Intelligence and Law Research Foundation</div>
             </div>
             <div class="bio-card">
-              <div class="bio-desc lang-zh">
-                <strong>學歷</strong><br>
-                • 中國清華大學 法學博士<br><br>
-                <strong>經歷</strong><br>
-                朱宸佐博士為台灣及中國大陸雙重執業律師，專精於人工智慧法律、科技法規、數據治理及跨境爭議解決。曾任日本及台灣上市公司法務長，並長年擔任跨國科技企業總法律顧問，實務經驗豐富。現為史丹佛大學法學院資深研究員、史丹佛台灣科學技術研究中心客座研究員，全國律師聯合會科技法律委員會副主任委員，同時擔任人工智慧法律國際研究基金會秘書長。他持續推動 AI 與法律的國際研究與政策倡議，積極建構健全的全球科技治理架構。
-              </div>
-              <div class="bio-desc lang-en" style="display: none;">
-                <strong>Education</strong><br>
-                • Ph.D. in Law, Tsinghua University (Beijing)<br><br>
-                <strong>Career Summary</strong><br>
-                Dr. Wesley Chu is a licensed lawyer in both Taiwan and Mainland China, specializing in AI law, technology regulations, data governance, and cross-border dispute resolution. He has served as General Counsel for multinational technology corporations and as Chief Legal Officer for listed companies in Japan and Taiwan, bringing extensive international legal and corporate experience. Currently, he is a Senior Research Fellow at Stanford Law School, Visiting Fellow at the Taiwan Science and Technology Hub at Stanford, and Deputy Director of the Technology Law Committee of the National Bar Association. As Secretary General of the International Artificial Intelligence and Law Research Foundation, Dr. Chu actively promotes global research and policy dialogue on AI and law, advancing robust frameworks for international technology governance.
-              </div>
+              <div class="bio-desc lang-zh">朱宸佐博士為台灣及中國大陸雙重執業律師，專精於人工智慧法律、科技法規、數據治理及跨境爭議解決。曾任日本及台灣上市公司法務長，並長年擔任跨國科技企業總法律顧問，實務經驗豐富。現為史丹佛大學法學院資深研究員、史丹佛台灣科學技術研究中心客座研究員，全國律師聯合會科技法律委員會副主任委員，同時擔任人工智慧法律國際研究基金會秘書長。他持續推動 AI 與法律的國際研究與政策倡議，積極建構健全的全球科技治理架構。</div>
+              <div class="bio-desc lang-en" style="display: none;">Dr. Wesley Chu is a licensed lawyer in both Taiwan and Mainland China, specializing in AI law, technology regulations, data governance, and cross-border dispute resolution. He has served as General Counsel for multinational technology corporations and as Chief Legal Officer for listed companies in Japan and Taiwan, bringing extensive international legal and corporate experience. Currently, he is a Senior Research Fellow at Stanford Law School, Visiting Fellow at the Taiwan Science and Technology Hub at Stanford, and Deputy Director of the Technology Law Committee of the National Bar Association. As Secretary General of the International Artificial Intelligence and Law Research Foundation, Dr. Chu actively promotes global research and policy dialogue on AI and law, advancing robust frameworks for international technology governance.</div>
             </div>
           </div>
         </div>
@@ -2772,18 +2707,14 @@ strong {
           <div class="speaker">
             <img class="photo" src="assets/img/speaker-ShiYu-Huang.png" alt="黃錫瑜">
             <div class="meta">
-              <div class="name">黃錫瑜</div>
-              <div class="title-chip">國研院科技政策研究與資訊中心主任<br>國立清華大學電機工程學系教授</div>
+              <div class="name lang-zh">黃錫瑜</div>
+              <div class="name lang-en" style="display: none;">Shi-Yu Huang</div>
+              <div class="title-chip lang-zh">國研院科技政策研究與資訊中心主任<br>國立清華大學電機工程學系教授</div>
+              <div class="title-chip lang-en" style="display: none;">Director, STPI-NARLabs<br>Professor, National Tsing Hua University</div>
             </div>
             <div class="bio-card">
-              <div class="bio-desc">
-                <strong>學歷</strong><br>
-                • 美國加州大學聖塔芭芭拉分校 電機與計算機工程博士<br>
-                • 國立台灣大學 電機工程學系碩士<br>
-                • 國立台灣大學 電機工程學系學士<br><br>
-                <strong>經歷</strong><br>
-                黃錫瑜教授曾任職於美國矽谷國民半導體與世大積體電路（後併入台積電），1999 年起於清華大學任教，並先後擔任清華大學積體電路設計技術中心主任、創新育成中心主任、南台科技大學副校長等職務，亦共同創立兆心科技。專精於積體電路設計、自動化與測試，致力於研發高可靠度與長壽命的「永保安康晶片」，推動台灣半導體創新。
-              </div>
+              <div class="bio-desc lang-zh">黃錫瑜教授曾任職於美國矽谷國民半導體與世大積體電路（後併入台積電），1999 年起於清華大學任教，並先後擔任清華大學積體電路設計技術中心主任、創新育成中心主任、南台科技大學副校長等職務，亦共同創立兆心科技。專精於積體電路設計、自動化與測試，致力於研發高可靠度與長壽命的「永保安康晶片」，推動台灣半導體創新。</div>
+              <div class="bio-desc lang-en" style="display: none;">Prof. Huang worked at National Semiconductor in Silicon Valley and at Acer Semiconductor Manufacturing (later merged with TSMC) before joining NTHU in 1999. He has served as Director of the IC Design Technology Center, Director of the Innovation Incubation Center, Vice President of Southern Taiwan University of Science and Technology, and co-founder of ChipStart Technology. His research integrates IC design, design automation, and testing, with the vision of developing highly reliable and long-lasting "Everlasting Health Chips," driving continuous innovation in Taiwan's semiconductor industry.</div>
             </div>
           </div>
           <div class="speaker">
@@ -2793,12 +2724,7 @@ strong {
               <div class="title-chip">千逢科技公司執行長<br>交通大學電機碩士</div>
             </div>
             <div class="bio-card">
-              <div class="bio-desc">
-                <strong>學歷</strong><br>
-                • 國立交通大學 電機工程學系碩士<br><br>
-                <strong>經歷</strong><br>
-                黃錫霖執行長擁有超過30年 GPU 與 NPU 架構經驗及擁有50多項已獲核准專利，曾任職於英特爾、聯發科、蘋果、亞馬遜、廣東歐珀移動通訊擔任資深架構師，經理與人工智慧總監。
-              </div>
+              <div class="bio-desc">人物簡介先放暫時的假字。黃錫霖執行長在邊緣運算與AI晶片設計領域具有深厚的產業實務經驗。</div>
             </div>
           </div>
           <div class="speaker">
@@ -2814,16 +2740,7 @@ strong {
               </div>
             </div>
             <div class="bio-card">
-              <div class="bio-desc">
-                <strong>學歷</strong><br>
-                • 國立中山大學 物理學博士<br>
-                • 國立中山大學 物理學學士<br><br>
-                <strong>經歷</strong><br>
-                林哲民博士專長是理論與計算物理，致力於設計具有多重功能的量子材料。利用電腦與數學模型，預測哪些材料在極小尺度下，會展現出想要的特性，如：可導電的表面、可切換的磁性、或用電場就能改變材料的性質。簡單來說，我的研究就是用科學思維和模擬技術，讓材料在被做出來之前，就能知道它值不值得做。可大幅減少開發成本並加快創新步伐。目前已經成功被實驗驗證，包括：<br>
-                1. 全世界少數同時具備拓樸特性與反鐵磁性的材料，有潛力用於低功耗運算；<br>
-                2. 只靠一塊材料本身，就能產生自旋閥效應，為自旋元件開啟全新設計可能；<br>
-                3. 可以用電場切換拓樸狀態與極化方向的材料，未來有望應用在記憶體與邊緣運算晶片中。
-              </div>
+              <div class="bio-desc"></div>
             </div>
           </div>
         </div>
@@ -3050,18 +2967,14 @@ strong {
           <div class="speaker">
             <img class="photo" src="assets/img/speaker-ShiYu-Huang.png" alt="黃錫瑜">
             <div class="meta">
-              <div class="name">黃錫瑜</div>
-              <div class="title-chip">國研院科技政策研究與資訊中心主任<br>國立清華大學電機工程學系教授</div>
+              <div class="name lang-zh">黃錫瑜</div>
+              <div class="name lang-en" style="display: none;">Shi-Yu Huang</div>
+              <div class="title-chip lang-zh">國研院科技政策研究與資訊中心主任<br>國立清華大學電機工程學系教授</div>
+              <div class="title-chip lang-en" style="display: none;">Director, STPI-NARLabs<br>Professor, National Tsing Hua University</div>
             </div>
             <div class="bio-card">
-              <div class="bio-desc">
-                <strong>學歷</strong><br>
-                • 美國加州大學聖塔芭芭拉分校 電機與計算機工程博士<br>
-                • 國立台灣大學 電機工程學系碩士<br>
-                • 國立台灣大學 電機工程學系學士<br><br>
-                <strong>經歷</strong><br>
-                黃錫瑜教授曾任職於美國矽谷國民半導體與世大積體電路（後併入台積電），1999 年起於清華大學任教，並先後擔任清華大學積體電路設計技術中心主任、創新育成中心主任、南台科技大學副校長等職務，亦共同創立兆心科技。專精於積體電路設計、自動化與測試，致力於研發高可靠度與長壽命的「永保安康晶片」，推動台灣半導體創新。
-              </div>
+              <div class="bio-desc lang-zh">黃錫瑜教授曾任職於美國矽谷國民半導體與世大積體電路（後併入台積電），1999 年起於清華大學任教，並先後擔任清華大學積體電路設計技術中心主任、創新育成中心主任、南台科技大學副校長等職務，亦共同創立兆心科技。專精於積體電路設計、自動化與測試，致力於研發高可靠度與長壽命的「永保安康晶片」，推動台灣半導體創新。</div>
+              <div class="bio-desc lang-en" style="display: none;">Prof. Huang worked at National Semiconductor in Silicon Valley and at Acer Semiconductor Manufacturing (later merged with TSMC) before joining NTHU in 1999. He has served as Director of the IC Design Technology Center, Director of the Innovation Incubation Center, Vice President of Southern Taiwan University of Science and Technology, and co-founder of ChipStart Technology. His research integrates IC design, design automation, and testing, with the vision of developing highly reliable and long-lasting "Everlasting Health Chips," driving continuous innovation in Taiwan's semiconductor industry.</div>
             </div>
           </div>
           <div class="speaker">
@@ -3355,21 +3268,8 @@ strong {
             </div>
             <div class="bio-card">
               <div class="bio-desc">
-                <span class="lang-zh">
-                  <strong>學歷</strong><br>
-                  • 美國加州大學聖塔芭芭拉分校 電機與計算機工程博士<br>
-                  • 國立台灣大學 電機工程學系碩士<br>
-                  • 國立台灣大學 電機工程學系學士<br><br>
-                  <strong>經歷</strong><br>
-                  黃錫瑜教授曾任職於美國矽谷國民半導體與世大積體電路（後併入台積電），1999 年起於清華大學任教，並先後擔任清華大學積體電路設計技術中心主任、創新育成中心主任、南台科技大學副校長等職務，亦共同創立兆心科技。專精於積體電路設計、自動化與測試，致力於研發高可靠度與長壽命的「永保安康晶片」，推動台灣半導體創新。
-                </span>
-                <span class="lang-en" style="display: none;">
-                  <strong>Education</strong><br>
-                  • Ph.D. in Electrical and Computer Engineering, University of California, Santa Barbara<br>
-                  • M.S. & B.S. in Electrical Engineering, National Taiwan University<br><br>
-                  <strong>Career Summary</strong><br>
-                  Prof. Huang worked at National Semiconductor in Silicon Valley and at Acer Semiconductor Manufacturing (later merged with TSMC) before joining NTHU in 1999. He has served as Director of the IC Design Technology Center, Director of the Innovation Incubation Center, Vice President of Southern Taiwan University of Science and Technology, and co-founder of ChipStart Technology. His research integrates IC design, design automation, and testing, with the vision of developing highly reliable and long-lasting "Everlasting Health Chips," driving continuous innovation in Taiwan's semiconductor industry.
-                </span>
+                <span class="lang-zh">黃錫瑜教授曾任職於美國矽谷國民半導體與世大積體電路（後併入台積電），1999 年起於清華大學任教，並先後擔任清華大學積體電路設計技術中心主任、創新育成中心主任、南台科技大學副校長等職務，亦共同創立兆心科技。專精於積體電路設計、自動化與測試，致力於研發高可靠度與長壽命的「永保安康晶片」，推動台灣半導體創新。</span>
+                <span class="lang-en" style="display: none;">Prof. Huang worked at National Semiconductor in Silicon Valley and at Acer Semiconductor Manufacturing (later merged with TSMC) before joining NTHU in 1999. He has served as Director of the IC Design Technology Center, Director of the Innovation Incubation Center, Vice President of Southern Taiwan University of Science and Technology, and co-founder of ChipStart Technology. His research integrates IC design, design automation, and testing, with the vision of developing highly reliable and long-lasting "Everlasting Health Chips," driving continuous innovation in Taiwan's semiconductor industry.</span>
               </div>
             </div>
           </div>
@@ -3386,14 +3286,7 @@ strong {
               </div>
             </div>
             <div class="bio-card">
-              <div class="bio-desc">
-                <strong class="lang-zh">學歷</strong><strong class="lang-en" style="display: none;">Education</strong><br>
-                <span class="lang-zh">• 南加州大學 電子資訊理論博士</span>
-                <span class="lang-en" style="display: none;">• Ph.D., Electronic Information Theory, University of Southern California</span><br><br>
-                <strong class="lang-zh">經歷</strong><strong class="lang-en" style="display: none;">Career Summary</strong><br>
-                <span class="lang-zh">謝明修博士自 2021 年 1 月起擔任鴻海研究院量子計算研究所所長。此前，他於 2014 至 2020 年間任教於澳洲雪梨科技大學（University of Technology Sydney），擔任副教授，並為該校量子軟體與資訊中心（Centre for Quantum Software and Information）成員。2010 至 2012 年間，他在英國劍橋大學擔任博士後研究員。更早之前，他於日本擔任日本科技振興機構（Japan Science and Technology Agency, JST）資助之 ERATO-SORST 量子計算與資訊計畫的研究科學家，並同時掛名於東京大學計算機科學系。2014 至 2018 年間，他曾獲得澳洲研究委員會（ARC）未來學者獎（Future Fellowship）。</span>
-                <span class="lang-en" style="display: none;">Dr. Ming-Hsiu Hsieh has served as Director of the Quantum Computing Research Center at Foxconn Research Institute since January 2021. Prior to this position, he was an Associate Professor at the University of Technology Sydney from 2014 to 2020, where he was also a member of the Centre for Quantum Software and Information. From 2010 to 2012, he worked as a postdoctoral research fellow at the University of Cambridge in the United Kingdom. Earlier in his career, he served as a research scientist for the ERATO-SORST Quantum Computing and Information Project funded by the Japan Science and Technology Agency, while holding an affiliation with the Department of Computer Science at the University of Tokyo. He was awarded the Australian Research Council Future Fellowship from 2014 to 2018.</span>
-              </div>
+              <div class="bio-desc"></div>
             </div>
           </div>
           <div class="speaker">
@@ -3409,14 +3302,7 @@ strong {
               </div>
             </div>
             <div class="bio-card">
-              <div class="bio-desc">
-                <strong class="lang-zh">學歷</strong><strong class="lang-en" style="display: none;">Education</strong><br>
-                <span class="lang-zh">• 成功大學 材料科學暨工程學系博士<br>• 成功大學 材料科學暨工程學系碩士<br>• 逢甲大學 材料科學暨工程學系學士</span>
-                <span class="lang-en" style="display: none;">• Ph.D. in Materials Science and Engineering, National Cheng Kung University<br>• M.S. in Materials Science and Engineering, National Cheng Kung University<br>• B.S. in Materials Science and Engineering, Feng Chia University</span><br><br>
-                <strong class="lang-zh">經歷</strong><strong class="lang-en" style="display: none;">Career Summary</strong><br>
-                <span class="lang-zh">王志光教授曾任高雄醫學大學產學營運處創新育成中心主任、產學組組長，以及生命科學院綜合組組長，並早年於工業技術研究院工業材料研究所擔任研究員。他專精於骨與軟骨組織工程、生物陶瓷 3D 列印、藥物傳遞系統及再生醫學材料，成果獲多項專利與國家新創獎肯定，並指導團隊成立新創公司，推動產學合作與臨床應用轉譯，致力於以創新醫材造福人類健康。</span>
-                <span class="lang-en" style="display: none;">Prof. Wang has served as Director of the Innovation Incubation Center, Division Chief of Industry-Academia Collaboration, and Section Chief at Kaohsiung Medical University, as well as Researcher at the Industrial Technology Research Institute. His expertise covers bone and cartilage tissue engineering, 3D bioceramic printing, drug delivery systems, and regenerative biomaterials. Recognized with multiple patents and National Innovation Awards, he has led teams to establish startups and promote technology transfer, advancing translational medicine and innovative biomedical applications.</span>
-              </div>
+              <div class="bio-desc"></div>
             </div>
           </div>
           <div class="speaker">
@@ -3432,14 +3318,7 @@ strong {
               </div>
             </div>
             <div class="bio-card">
-              <div class="bio-desc">
-                <strong class="lang-zh">學歷</strong><strong class="lang-en" style="display: none;">Education</strong><br>
-                <span class="lang-zh">• 加州大學洛杉磯分校 工程學碩士</span>
-                <span class="lang-en" style="display: none;">• Master of Engineering, University of California, Los Angeles</span><br><br>
-                <strong class="lang-zh">經歷</strong><strong class="lang-en" style="display: none;">Career Summary</strong><br>
-                <span class="lang-zh">William Sheu許副總裁透過策略投資、夥伴關係建立，以及在機器學習、物聯網和雲端技術方面的技術探索，推動產品創新和營運效率提升，擁有15年領導和高階主管職位經驗，具備優秀的人員管理和專案管理技能，在交付複雜大規模高可用性架構和系統方面擁有紮實經驗。</span>
-                <span class="lang-en" style="display: none;">Vice President William Sheu drive product innovation and operation efficiency with strategic investment, partnership engagement, and technology scouting in machine learning, IoT, and cloud. Has 15 years of experience in leadership and executive role with strong people and project management skills. Solid experience in delivering complicated large scale high availability architecture and system.</span>
-              </div>
+              <div class="bio-desc"></div>
             </div>
           </div>
           <div class="speaker">
@@ -3455,14 +3334,7 @@ strong {
               </div>
             </div>
             <div class="bio-card">
-              <div class="bio-desc">
-                <strong class="lang-zh">學歷</strong><strong class="lang-en" style="display: none;">Education</strong><br>
-                <span class="lang-zh">• 國立臺灣科技大學化學工程博士</span>
-                <span class="lang-en" style="display: none;">• Ph.D. in Chemical Engineering, National Taiwan University of Science and Technology</span><br><br>
-                <strong class="lang-zh">經歷</strong><strong class="lang-en" style="display: none;">Career Summary</strong><br>
-                <span class="lang-zh">林冠宇博士目前在史丹佛大學化學工程系擔任博士後研究員，研究專長為使用密度泛函理論（DFT）計算、分子動力學（MD）模擬與電池材料的建模來探討電化學，鋰金屬電池（LMBs）和鋅離子水系電池（AZIBs）的相關議題。近期研究重點在探討鋰金屬負極表面的電解液分解機制，透過調控溶劑化結構，促進形成穩定且具功能性的固態電解質介面（SEI）。此外，也針對不同官能基溶劑以及離子配位環境對界面反應機制與SEI組成的影響進行系統性研究。透過理論模擬與實驗合作的結合，期望能提供微觀角度的見解，作為開發高安全性與高性能電池材料的設計依據。</span>
-                <span class="lang-en" style="display: none;">Dr Kuan-Yu Lin, a postdoctoral researcher in the Department of Chemical Engineering at Stanford University, specializing in electrochemistry and lithium metal batteries (LMBs), with expertise in DFT calculations, molecular dynamics (MD) simulations, and computational modeling. My research focuses on the electrochemical decomposition of electrolytes on Li-metal anodes, aiming to tailor solvation structures to promote the formation of favorable SEI components. Recently, I have been investigating how specific solvent–ion coordination environments influence interfacial reaction pathways and SEI composition. By integrating theoretical simulations with experimental collaboration, my work provides molecular-level insights to support the design of safer and more efficient battery materials.</span>
-              </div>
+              <div class="bio-desc"></div>
             </div>
           </div>
           <div class="speaker">
@@ -3478,14 +3350,7 @@ strong {
               </div>
             </div>
             <div class="bio-card">
-              <div class="bio-desc">
-                <strong class="lang-zh">學歷</strong><strong class="lang-en" style="display: none;">Education</strong><br>
-                <span class="lang-zh">• 國立中山大學 物理學博士<br>• 國立中山大學 物理學學士</span>
-                <span class="lang-en" style="display: none;">• Ph.D. in Physics, National Sun Yat-Sen University<br>• B.S. in Physics, National Sun Yat-Sen University</span><br><br>
-                <strong class="lang-zh">經歷</strong><strong class="lang-en" style="display: none;">Career Summary</strong><br>
-                <span class="lang-zh">林哲民博士專長是理論與計算物理，致力於設計具有多重功能的量子材料。利用電腦與數學模型，預測哪些材料在極小尺度下，會展現出想要的特性，如：可導電的表面、可切換的磁性、或用電場就能改變材料的性質。簡單來說，我的研究就是用科學思維和模擬技術，讓材料在被做出來之前，就能知道它值不值得做。可大幅減少開發成本並加快創新步伐。目前已經成功被實驗驗證，包括：<br>1. 全世界少數同時具備拓樸特性與反鐵磁性的材料，有潛力用於低功耗運算；<br>2. 只靠一塊材料本身，就能產生自旋閥效應，為自旋元件開啟全新設計可能；<br>3. 可以用電場切換拓樸狀態與極化方向的材料，未來有望應用在記憶體與邊緣運算晶片中。</span>
-                <span class="lang-en" style="display: none;">Dr. Che-Min Lin, a theoretical physicist working at the intersection of quantum materials,computation, and real-world functionality. My research focuses on designing materials that can do more than one job at once：conduct electricity on the surface while insulating inside, switch magnetism on and off, or remember electric states without power. They're materials we can predict, simulate, and in many cases, already build. In simple terms, I use mathematics and computational tools to predict how a material will behave before it's even made. This greatly reduces trial-and-error in the lab and helps industry partners identify what's truly worth pursuing.<br>Some of the materials I've proposed have already been confirmed in experiments, such as:<br>1. One of the first magnetic topological materials with strong spin-orbit coupling, promising for ultra-low-power electronics；<br>2. A single-kagome-structure material that acts as its own spin valve, enabling magnetic memory without multilayer engineering；<br>3. A bilayer quantum material where electric fields can switch both topology and polarization, useful for future reconfigurable mrmory devices.</span>
-              </div>
+              <div class="bio-desc"></div>
             </div>
           </div>
           <div class="speaker">
@@ -3501,14 +3366,7 @@ strong {
               </div>
             </div>
             <div class="bio-card">
-              <div class="bio-desc">
-                <strong class="lang-zh">學歷</strong><strong class="lang-en" style="display: none;">Education</strong><br>
-                <span class="lang-zh">• 德克薩斯農工大學 生物醫學工程學博士<br>• 成功大學 生物醫學工程學碩士<br>• 成功大學 生物醫學工程學學士</span>
-                <span class="lang-en" style="display: none;">• Ph.D. in Biomedical Engineering, Texas A&M University, TX<br>• M.S. in Biomedical Engineering, National Cheng Kung University, Taiwan<br>• B.S. in Biomedical Engineering, National Cheng Kung University, Taiwan</span><br><br>
-                <strong class="lang-zh">經歷</strong><strong class="lang-en" style="display: none;">Career Summary</strong><br>
-                <span class="lang-zh">李泓邦博士現任史丹佛大學 Fan Yang 實驗室博士後研究員，主要專注於推進 3D 生物列印於骨軟骨組織工程的應用。在此跨領域研究環境中，他積極投入於複雜組織結構的先進製造方法開發，特別針對骨與軟骨交界的再生挑戰。他的研究涵蓋創新生物材料與精準生物列印技術，最終目標是提升組織再生的效率與效果。</span>
-                <span class="lang-en" style="display: none;">Dr. Hung-Pang Lee currently in a postdoctoral position at the Fan Yang Lab, where my primary focus lies in advancing the field of 3D bioprinting for osteochondral tissue engineering. Within this dynamic research environment, actively involved in developing cutting-edge methodologies to fabricate complex tissue structures, specifically aiming at the intersection of bone and cartilage. Research pursuits extend to exploring innovative biomaterials and precise bioprinting techniques, with the ultimate goal of enhancing tissue regeneration capabilities.</span>
-              </div>
+              <div class="bio-desc"></div>
             </div>
           </div>
         </div>
