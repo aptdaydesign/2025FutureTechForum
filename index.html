@@ -4355,11 +4355,15 @@ function initLanguageToggle() {
   
   if (!languageToggle || !languageOptions.length) return;
   
-  let currentLang = 'zh'; // 預設為繁體中文
+  // 初始化全域語言狀態
+  if (!window.currentGlobalLanguage) {
+    window.currentGlobalLanguage = 'zh'; // 預設為繁體中文
+  }
   
   // 切換語言內容
   function switchLanguage(lang) {
-    currentLang = lang;
+    // 更新全域語言狀態
+    window.currentGlobalLanguage = lang;
     
     // 更新切換器狀態
     languageToggle.setAttribute('data-active', lang);
@@ -4367,14 +4371,24 @@ function initLanguageToggle() {
       option.classList.toggle('active', option.dataset.lang === lang);
     });
     
-    // 切換內容顯示
-    const zhElements = document.querySelectorAll('.lang-zh');
-    const enElements = document.querySelectorAll('.lang-en');
+    // 更新所有 event-info 的 data-lang 屬性並清除inline樣式
+    document.querySelectorAll('.event-info').forEach(eventInfo => {
+      eventInfo.setAttribute('data-lang', lang);
+      
+      // 清除所有語言元素的inline樣式，讓CSS規則控制
+      const zhEls = eventInfo.querySelectorAll('.lang-zh');
+      const enEls = eventInfo.querySelectorAll('.lang-en');
+      zhEls.forEach(el => {
+        el.style.display = '';
+        el.style.visibility = '';
+      });
+      enEls.forEach(el => {
+        el.style.display = '';
+        el.style.visibility = '';
+      });
+    });
     
     if (lang === 'zh') {
-      zhElements.forEach(el => el.style.display = '');
-      enElements.forEach(el => el.style.display = 'none');
-      
       // 中文模式時，自動切換到台灣時間
       setTimeout(() => {
         if (window.switchTimezone) {
@@ -4382,8 +4396,6 @@ function initLanguageToggle() {
         }
       }, 100);
     } else {
-      zhElements.forEach(el => el.style.display = 'none');
-      enElements.forEach(el => el.style.display = '');
       
       // 英文模式時，自動切換到加州時間
       setTimeout(() => {
@@ -4392,6 +4404,17 @@ function initLanguageToggle() {
         }
       }, 100);
     }
+    
+    // 同步所有事件的語言切換器狀態
+    document.querySelectorAll('.event-info .language-toggle-track').forEach(toggle => {
+      if (toggle !== languageToggle) {
+        toggle.setAttribute('data-active', lang);
+        const options = toggle.parentElement.querySelectorAll('.language-option');
+        options.forEach(option => {
+          option.classList.toggle('active', option.dataset.lang === lang);
+        });
+      }
+    });
     
     // 更新時間切換器按鈕文字
     setTimeout(() => {
@@ -4415,7 +4438,7 @@ function initLanguageToggle() {
   languageOptions.forEach(option => {
     option.addEventListener('click', () => {
       const lang = option.dataset.lang;
-      if (lang !== currentLang) {
+      if (lang !== window.currentGlobalLanguage) {
         switchLanguage(lang);
       }
     });
@@ -4434,28 +4457,136 @@ function initEventLanguageToggle(eventSection) {
   
   if (!languageToggle || !languageOptions.length) return;
   
-  let currentLang = 'zh'; // 預設為繁體中文
+  // 獲取全域語言狀態 - 從活動一的狀態或全域變數
+  function getGlobalLanguage() {
+    // 優先從全域變數獲取
+    if (window.currentGlobalLanguage) {
+      return window.currentGlobalLanguage;
+    }
+    // 其次從活動一的UI狀態獲取
+    const globalToggle = document.querySelector('#s1-info .language-toggle-track');
+    const lang = globalToggle ? globalToggle.getAttribute('data-active') || 'zh' : 'zh';
+    // 設置全域變數
+    window.currentGlobalLanguage = lang;
+    return lang;
+  }
   
-  // 切換語言內容（只影響當前事件）
-  function switchEventLanguage(lang) {
-    currentLang = lang;
+  // 設置全域語言狀態
+  function setGlobalLanguage(lang) {
+    window.currentGlobalLanguage = lang;
+  }
+  
+  // 僅同步UI狀態，不觸發內容切換
+  function syncUIOnly(lang) {
+    // 設置 data-lang 屬性，讓CSS規則生效
+    eventSection.setAttribute('data-lang', lang);
     
     // 更新切換器狀態
     languageToggle.setAttribute('data-active', lang);
     languageOptions.forEach(option => {
-      option.classList.toggle('active', option.dataset.lang === lang);
+      option.classList.remove('active');
+      if (option.dataset.lang === lang) {
+        option.classList.add('active');
+      }
     });
     
-    // 切換內容顯示（只在當前事件內）
+    // 清除inline樣式，讓CSS規則控制顯示
     const zhElements = eventSection.querySelectorAll('.lang-zh');
     const enElements = eventSection.querySelectorAll('.lang-en');
     
+    zhElements.forEach(el => {
+      el.style.display = '';
+      el.style.visibility = '';
+    });
+    enElements.forEach(el => {
+      el.style.display = '';
+      el.style.visibility = '';
+    });
+  }
+  
+  // 同步全域語言狀態
+  function syncWithGlobalLanguage() {
+    const globalLang = getGlobalLanguage();
+    
+    // 設置 data-lang 屬性，讓CSS規則生效
+    eventSection.setAttribute('data-lang', globalLang);
+    
+    // 確保UI狀態同步
+    languageToggle.setAttribute('data-active', globalLang);
+    languageOptions.forEach(option => {
+      option.classList.remove('active');
+      if (option.dataset.lang === globalLang) {
+        option.classList.add('active');
+      }
+    });
+    
+    // 確保內容顯示同步 - 清除inline樣式，讓CSS規則控制
+    const zhElements = eventSection.querySelectorAll('.lang-zh');
+    const enElements = eventSection.querySelectorAll('.lang-en');
+    
+    // 清除所有inline樣式，讓CSS的 data-lang 規則控制顯示
+    zhElements.forEach(el => {
+      el.style.display = '';
+      el.style.visibility = '';
+    });
+    enElements.forEach(el => {
+      el.style.display = '';
+      el.style.visibility = '';
+    });
+  }
+  
+  // 切換語言內容（影響所有事件）
+  function switchEventLanguage(lang) {
+    // 設置新的全域語言狀態
+    setGlobalLanguage(lang);
+    
+    // 更新當前事件的UI
+    syncUIOnly(lang);
+    
+    // 同步到所有事件的語言狀態
+    document.querySelectorAll('.event-info').forEach(event => {
+      const toggle = event.querySelector('.language-toggle-track');
+      const options = event.querySelectorAll('.language-option');
+      if (toggle) {
+        // 設置 data-lang 屬性
+        event.setAttribute('data-lang', lang);
+        
+        toggle.setAttribute('data-active', lang);
+        options.forEach(option => {
+          option.classList.remove('active');
+          if (option.dataset.lang === lang) {
+            option.classList.add('active');
+          }
+        });
+        
+        // 清除inline樣式，讓CSS規則控制顯示
+        const zhEls = event.querySelectorAll('.lang-zh');
+        const enEls = event.querySelectorAll('.lang-en');
+        
+        zhEls.forEach(el => {
+          el.style.display = '';
+          el.style.visibility = '';
+        });
+        enEls.forEach(el => {
+          el.style.display = '';
+          el.style.visibility = '';
+        });
+      }
+    });
+    
+    // 觸發時區切換
     if (lang === 'zh') {
-      zhElements.forEach(el => el.style.display = '');
-      enElements.forEach(el => el.style.display = 'none');
+      setTimeout(() => {
+        if (window.switchTimezone) {
+          window.switchTimezone('taiwan');
+        }
+      }, 100);
     } else {
-      zhElements.forEach(el => el.style.display = 'none');
-      enElements.forEach(el => el.style.display = '');
+      setTimeout(() => {
+        if (window.switchTimezone) {
+          window.switchTimezone('california');
+        }
+      }, 100);
     }
   }
   
@@ -4467,14 +4598,12 @@ function initEventLanguageToggle(eventSection) {
     
     newOption.addEventListener('click', () => {
       const lang = newOption.dataset.lang;
-      if (lang !== currentLang) {
-        switchEventLanguage(lang);
-      }
+      switchEventLanguage(lang);
     });
   });
   
-  // 初始化為中文
-  switchEventLanguage('zh');
+  // 初始化時同步全域語言狀態
+  syncWithGlobalLanguage();
 }
 
 /* 時間切換功能 */
