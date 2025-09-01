@@ -27,7 +27,7 @@ html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Ari
   --ag-time-pad-y: 6px;
   --ag-time-pad-x: 14px;
   --floating-offset: 140px;
-  --section-gap-top: clamp(40px, 6vw, 96px);
+  --section-gap-top: 30px;
   --section-gap-bottom: 20px;
   --subheading-gap-top: clamp(12px, 2.2vw, 28px);
   --subheading-gap-bottom: 10px;
@@ -168,6 +168,7 @@ section:not(.event-info) h2 {
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 30px;
   padding: 0 20px;
   font-size: clamp(24px,2.2vw,36px);
   font-weight: 600;
@@ -199,9 +200,14 @@ section:not(.event-info) h2 {
   font-weight: 500;
   text-align: left;
   color: var(--pink);
-  margin-top: var(--section-gap-top);
+  margin-top: 40px;
   margin-bottom: var(--section-gap-bottom);
   font-family: inherit;
+}
+
+/* 活動簡介標題需要更大的上邊距 */
+.section-title.about-section {
+  margin-top: 40px;
 }
 
 .event-info .section-title { color: var(--pink) !important; }
@@ -673,6 +679,356 @@ section:not(.event-info) h2 {
   flex-shrink: 0;
 }
 
+/* ===== 講師彈出視窗樣式 ===== */
+.speaker-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.speaker-modal {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  border-radius: 0;
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-header {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  padding: 6px 5px 6px 30px;
+  border-radius: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 30px;
+}
+
+.modal-event-title {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  flex: 1;
+}
+
+.modal-close {
+  background: #ff6b9d; /* 粉紅方塊背景 */
+  border: none;
+  color: #1a1a2e; /* 深藍色X */
+  font-size: 40px; /* 更大的X */
+  font-weight: 300; /* 更細的X */
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 0;
+  width: 38px; /* 縮小1/4：50px * 0.75 = 37.5px ≈ 38px */
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+}
+
+.modal-close:hover {
+  background: #ff5a8c; /* 稍微深一點的粉紅色 */
+}
+
+/* 模態視窗打開時，分享按鈕在背景 */
+.speaker-modal-overlay ~ .floating-share {
+  z-index: 9998; /* 低於模態視窗的 z-index: 9999 */
+}
+
+/* 當模態視窗顯示時，分享按鈕降層 */
+body.modal-open .floating-share {
+  z-index: 100; /* 降低層級，確保在模態視窗背景之下 */
+}
+
+.modal-content {
+  padding: 30px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* 上方經歷區域 - 全寬 */
+.experience-section {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+/* 下方區域 - 左側資訊 + 右側照片 */
+.speaker-info-row {
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+}
+
+.modal-left {
+  flex: 1;
+  min-width: 0;
+}
+
+.modal-right {
+  flex-shrink: 0;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  margin-top: 45px; /* 調整以對齊分隔線中心 */
+}
+
+.speaker-name-modal {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--pink);
+  margin-bottom: 10px;
+}
+
+.speaker-title-modal {
+  font-size: 15px;
+  color: #ddd;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+.divider {
+  height: 2px;
+  background: linear-gradient(90deg, var(--pink), transparent);
+  margin: 30px 0;
+  border-radius: 1px;
+}
+
+.experience-section,
+.bio-section,
+.education-section {
+  margin-bottom: 25px;
+}
+
+/* 經歷區域的文字樣式 - 全寬 */
+.bio-text {
+  color: #ddd;
+  line-height: 1.7;
+  font-size: 15px;
+  width: 100%;
+  text-align: justify;
+  word-wrap: break-word;
+}
+
+.section-title-modal {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--pink);
+  margin-bottom: 15px;
+}
+
+.experience-list {
+  color: #ddd;
+  line-height: 1.6;
+  font-size: 15px;
+  word-wrap: break-word;
+  text-align: justify;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.modal-photo {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--pink);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* 講師彈出視窗響應式設計 */
+@media (max-width: 768px) {
+  .speaker-modal {
+    margin: 10px;
+    max-height: 95vh;
+    border-radius: 0;
+  }
+  
+  .modal-content {
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+  }
+  
+  /* 手機版照片區域：置於最上方中央 */
+  .modal-right {
+    width: 100%;
+    justify-content: center;
+    order: -2; /* 移到最上方 */
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+  
+  /* 經歷區域：照片下方 */
+  .experience-section {
+    order: -1; /* 照片後的第二位 */
+  }
+  
+  /* 其他資訊區域：最下方 */
+  .speaker-info-row {
+    flex-direction: column;
+    order: 0;
+  }
+  
+  .modal-photo {
+    width: 200px;
+    height: 200px;
+  }
+  
+  /* 手機版關閉按鈕樣式 */
+  .modal-header {
+    padding: 6px 8px 6px 20px !important; /* 右邊距增加到8px，讓X不要太靠邊 */
+    min-height: 40px !important; /* 增加表頭高度，讓它更寬/高 */
+  }
+  
+  .modal-close {
+    width: 28px !important; /* 粉色按鈕稍微大一點：24px → 28px */
+    height: 28px !important;
+    font-size: 22px !important; /* X符號大一些：18px → 22px */
+    padding: 3px !important; /* 內縮padding */
+  }
+  
+  /* 手機版左側內容調整 */
+  .modal-left {
+    width: 100%;
+  }
+  
+  .modal-header {
+    padding: 5px 20px;
+    min-height: 25px;
+  }
+  
+  .modal-event-title {
+    font-size: 16px;
+  }
+  
+  .modal-close {
+    font-size: 28px;
+    width: 45px;
+    height: 45px;
+  }
+  
+  .speaker-name-modal {
+    font-size: 26px;
+  }
+}
+
+/* 可點擊的講師照片樣式 */
+.speaker-clickable {
+  cursor: pointer !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.speaker-clickable:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(233, 30, 99, 0.3);
+}
+
+/* 新的講師卡片樣式 */
+.speaker-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 14px 14px 14px 20px;
+  margin-bottom: 20px;
+  position: relative;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.speaker-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 25px rgba(233, 30, 99, 0.2);
+  transform: translateY(-2px);
+}
+
+.speaker-info {
+  flex: 1;
+  color: white;
+  padding-left: 10px;
+}
+
+.speaker-name-card {
+  font-size: 34px;
+  font-weight: 400;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.speaker-title-card {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--pink);
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.speaker-experience-preview {
+  font-size: 15px;
+  color: rgba(204, 204, 204, 0.5);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.continue-reading {
+  color: var(--pink);
+  font-weight: 500;
+  margin-top: 8px;
+  font-size: 12px;
+  text-align: right;
+  display: none;
+}
+
+.speaker-photo-card {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--pink);
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.speaker-card:hover .speaker-photo-card {
+  border-color: #ff4081;
+  box-shadow: 0 5px 15px rgba(233, 30, 99, 0.3);
+}
+
+/* 講者區塊容器樣式 */
+.speakers-section {
+  margin-bottom: 50px;
+}
+
 /* 手機版響應式 */
 @media (max-width: 768px) {
   .highlights-grid {
@@ -719,6 +1075,64 @@ section:not(.event-info) h2 {
   .action-btn .btn-icon {
     width: 32px;
     height: 32px;
+  }
+  
+  /* 手機版講者卡片文字調整 */
+  .speaker-name-card {
+    font-size: 26px;
+  }
+  
+  .speaker-title-card {
+    font-size: 14px;
+  }
+  
+  .speaker-experience-preview {
+    font-size: 13px;
+  }
+  
+  /* 手機版講者卡片布局 - 垂直置中排列 */
+  .speaker-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 25px 20px 20px 20px;
+    gap: 15px;
+  }
+  
+  .speaker-info {
+    order: 2;
+    text-align: center;
+    padding-left: 0;
+    width: 100%;
+  }
+  
+  .speaker-photo-card {
+    order: 1;
+    margin-bottom: 0px;
+    width: 160px;
+    height: 160px;
+  }
+  
+  .speaker-name-card {
+    font-size: 28px;
+    margin-bottom: 8px;
+  }
+  
+  .speaker-title-card {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+  
+  .speaker-experience-preview {
+    font-size: 15px;
+    text-align: center;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
+  
+  /* 手機版移除繼續閱讀文字 */
+  .speaker-experience-preview::after {
+    content: none;
   }
 }
 
@@ -2606,125 +3020,128 @@ strong {
         </div>
       </div>
       
-      <h2 id="s1-speakers" class="section-title">亮點講者｜Featured Speakers</h2>
+      <h2 id="s1-speakers" class="section-title">
+        <span class="lang-zh">亮點講者｜Featured Speakers</span>
+        <span class="lang-en" style="display: none;">Featured Speakers</span>
+      </h2>
     </div>
 
-    <!-- speakers: all in one page, no carousel needed -->
-    <div class="speakers-carousel" aria-roledescription="carousel">
-      <div class="speaker-pages">
-        <div class="speaker-grid speaker-page" data-page="0">
-          <div class="speaker">
-            <img class="photo" src="assets/img/speaker-ShiYu-Huang.png" alt="黃錫瑜">
-            <div class="meta">
-              <div class="name lang-zh">黃錫瑜</div>
-              <div class="name lang-en" style="display: none;">Shi-Yu Huang</div>
-              <div class="title-chip lang-zh">國研院科技政策研究與資訊中心主任<br>國立清華大學電機工程學系教授</div>
-              <div class="title-chip lang-en" style="display: none;">Director, STPI-NARLabs<br>Professor, National Tsing Hua University</div>
-            </div>
-            <div class="bio-card">
-              <div class="bio-desc lang-zh">
-                <strong>學歷</strong><br>
-                • 美國加州大學聖塔芭芭拉分校 電機與計算機工程博士<br>
-                • 國立台灣大學 電機工程學系碩士<br>
-                • 國立台灣大學 電機工程學系學士<br><br>
-                <strong>經歷</strong><br>
-                黃錫瑜教授曾任職於美國矽谷國民半導體與世大積體電路（後併入台積電），1999 年起於清華大學任教，並先後擔任清華大學積體電路設計技術中心主任、創新育成中心主任、南台科技大學副校長等職務，亦共同創立兆心科技。專精於積體電路設計、自動化與測試，致力於研發高可靠度與長壽命的「永保安康晶片」，推動台灣半導體創新。
-              </div>
-              <div class="bio-desc lang-en" style="display: none;">
-                <strong>Education</strong><br>
-                • Ph.D. in Electrical and Computer Engineering, University of California, Santa Barbara<br>
-                • M.S. & B.S. in Electrical Engineering, National Taiwan University<br><br>
-                <strong>Career Summary</strong><br>
-                Prof. Huang worked at National Semiconductor in Silicon Valley and at Acer Semiconductor Manufacturing (later merged with TSMC) before joining NTHU in 1999. He has served as Director of the IC Design Technology Center, Director of the Innovation Incubation Center, Vice President of Southern Taiwan University of Science and Technology, and co-founder of ChipStart Technology. His research integrates IC design, design automation, and testing, with the vision of developing highly reliable and long-lasting "Everlasting Health Chips," driving continuous innovation in Taiwan's semiconductor industry.
-              </div>
-            </div>
+    <!-- speakers: 4 speakers, new card layout -->
+    <div class="speakers-section">
+      <div class="speaker-card speaker-clickable"
+           data-speaker-name="黃錫瑜"
+           data-speaker-name-en="Shi-Yu Huang"
+           data-speaker-title="國研院科技政策研究與資訊中心主任<br>國立清華大學電機工程學系教授"
+           data-speaker-title-en="Director, STPI-NARLabs<br>Professor, National Tsing Hua University"
+           data-speaker-education="• 美國加州大學聖塔芭芭拉分校 電機與計算機工程博士<br>• 國立台灣大學 電機工程學系碩士<br>• 國立台灣大學 電機工程學系學士"
+           data-speaker-education-en="• Ph.D. in Electrical and Computer Engineering, University of California, Santa Barbara<br>• M.S. & B.S. in Electrical Engineering, National Taiwan University"
+           data-speaker-experience="黃錫瑜教授曾任職於美國矽谷國民半導體與世大積體電路（後併入台積電），1999 年起於清華大學任教，並先後擔任清華大學積體電路設計技術中心主任、創新育成中心主任、南台科技大學副校長等職務，亦共同創立兆心科技。專精於積體電路設計、自動化與測試，致力於研發高可靠度與長壽命的「永保安康晶片」，推動台灣半導體創新。"
+           data-speaker-experience-en="Prof. Huang worked at National Semiconductor in Silicon Valley and at Acer Semiconductor Manufacturing (later merged with TSMC) before joining NTHU in 1999. He has served as Director of the IC Design Technology Center, Director of the Innovation Incubation Center, Vice President of Southern Taiwan University of Science and Technology, and co-founder of ChipStart Technology. His research integrates IC design, design automation, and testing, with the vision of developing highly reliable and long-lasting 'Everlasting Health Chips,' driving continuous innovation in Taiwan's semiconductor industry."
+           data-event-title="未來半導體人才趨勢論壇：產學對話"
+           data-event-title-en="Empowering the Future of Semiconductor：Bridging Industry and Academia">
+        <div class="speaker-info">
+          <div class="speaker-name-card">
+            <span class="lang-zh">黃錫瑜</span>
+            <span class="lang-en" style="display: none;">Shi-Yu Huang</span>
           </div>
-          <div class="speaker">
-            <img class="photo" src="assets/img/speaker-Philip-Wong.png" alt="黃漢森">
-            <div class="meta">
-              <div class="name lang-zh">黃漢森</div>
-              <div class="name lang-en" style="display: none;">H.S. Philip Wong</div>
-              <div class="title-chip lang-zh">台積電首席科學家<br>史丹佛大學電機系教授</div>
-              <div class="title-chip lang-en" style="display: none;">Chief Scientist, TSMC<br>Professor, Stanford University</div>
-            </div>
-            <div class="bio-card">
-              <div class="bio-desc lang-zh">
-                <strong>學歷</strong><br>
-                • 美國理海大學 電機工程博士<br>
-                • 美國紐約州立大學 電機工程碩士<br>
-                • 香港大學 電機工程學士<br><br>
-                <strong>經歷</strong><br>
-                黃漢森教授曾任 IBM T.J. Watson 研究中心研究員（1988–2004），2004 年起於史丹佛大學執教，並於 2018–2020 年擔任台積電副總經理，現為首席科學家。專長涵蓋奈米電子、半導體元件、類腦計算與 3D 系統整合等領域，成就卓著。黃教授為 IEEE 院士，榮獲 J.J. Ebers 獎與 Andrew S. Grove 獎等國際大獎，並在多所國際頂尖大學擔任客座教授，持續引領全球半導體技術前沿。
-              </div>
-              <div class="bio-desc lang-en" style="display: none;">
-                <strong>Education</strong><br>
-                • Ph.D. in Electrical Engineering, Lehigh University<br>
-                • M.S. in Electrical Engineering, State University of New York<br>
-                • B.S. in Electrical Engineering, The University of Hong Kong<br><br>
-                <strong>Career Summary</strong><br>
-                Prof. Wong worked at IBM T.J. Watson Research Center (1988–2004) before joining Stanford University in 2004. He served as Vice President for Corporate Research at TSMC (2018–2020) and is now the company's Chief Scientist. His research spans nanotechnology, nanoelectronics, semiconductor devices, neuromorphic computing, and 3D integration. A Fellow of IEEE, he has received the J.J. Ebers Award and the Andrew S. Grove Award for his outstanding contributions. He also holds visiting professorships worldwide, actively shaping the future of global semiconductor technology.
-              </div>
-            </div>
+          <div class="speaker-title-card">
+            <span class="lang-zh">・國研院科技政策研究與資訊中心主任<br>・國立清華大學電機工程學系教授</span>
+            <span class="lang-en" style="display: none;">・Director, Science & Technology Policy Research and Information Center, National Applied Research Laboratories<br>・Professor, Department of Electrical Engineering, National Tsing Hua University</span>
           </div>
-          <div class="speaker">
-            <img class="photo" src="assets/img/speaker-Horsley-David.png" alt="David Horsley">
-            <div class="meta">
-              <div class="name lang-zh">David Horsley</div>
-              <div class="name lang-en" style="display: none;">David Horsley</div>
-              <div class="title-chip lang-zh">TDK Invensense 新興感測器事業部 技術長<br>美國加州大學戴維斯分校機械與航太工程學系教授<br>美國加州大學柏克萊分校兼任教授</div>
-              <div class="title-chip lang-en" style="display: none;">CTO, Emerging Sensors Business Unit, TDK Invensense<br>Professor, UC Davis<br>Adjunct Professor, UC Berkeley</div>
-            </div>
-            <div class="bio-card">
-              <div class="bio-desc lang-zh">
-                <strong>學歷</strong><br>
-                • 美國加州大學柏克萊分校 機械工程博士<br><br>
-                <strong>經歷</strong><br>
-                David Horsley 博士為微機電系統（MEMS）超音波感測領域的先驅，2013 年共同創立 Chirp Microsystems，成功開發超音波感測技術並擔任技術長，後被 TDK 收購，現任 TDK Invensense 新興感測器事業部 CTO。他同時為 UC Davis 教授及 UC Berkeley 感測與致動中心共同主任，研發成果包括應用於筆電與消費性產品的超音波指紋辨識感測器。Horsley 博士是 IEEE 會士與美國國家發明家學院會士，曾獲 NSF CAREER Award、UC Davis 傑出青年教師獎及 MSIG Hall of Fame Award，著有 150 餘篇論文並持有 22 項專利。
-              </div>
-              <div class="bio-desc lang-en" style="display: none;">
-                <strong>Education</strong><br>
-                • PhD, UC Berkeley<br><br>
-                <strong>Experience</strong><br>
-                • 2021 MSIG Hall of Fame Award<br>
-                • US National Academy of Inventors Fellow & IEEE Fellow<br>
-                • CTO & Founder, Chirp Microsystems (acquired by TDK)<br>
-                • Professor, UC Davis & Adjunct Professor, UC Berkeley<br>
-                • Director, Berkeley Sensor & Actuator Center<br><br>
-                <strong>Biography</strong><br>
-                Pioneer in MEMS ultrasonic sensing, co-founded Chirp Microsystems in 2013 and served as CTO until its acquisition by TDK. Currently CTO of TDK Invensense and Professor at UC Davis, Adjunct Professor at UC Berkeley, and Co-Director of BSAC. Invented the ultrasonic fingerprint sensor commercialized by TDK. IEEE Fellow, NAI Fellow, recipient of NSF CAREER Award, UC Davis Outstanding Junior Faculty Award, and MSIG Hall of Fame Award. Author of 150+ papers and holder of 22 patents.
-              </div>
-            </div>
-          </div>
-          <div class="speaker">
-            <img class="photo" src="assets/img/speaker-Wesley-Chu.png" alt="朱宸佐">
-            <div class="meta">
-              <div class="name lang-zh">朱宸佐</div>
-              <div class="name lang-en" style="display: none;">Wesley Chu</div>
-              <div class="title-chip lang-zh">史丹佛大學法學院資深研究員<br>人工智慧法律國際研究基金會秘書長</div>
-              <div class="title-chip lang-en" style="display: none;">Research Fellow, Harvard University<br>Senior Research Fellow, Stanford Law School<br>Secretary General, International Artificial Intelligence and Law Research Foundation</div>
-            </div>
-            <div class="bio-card">
-              <div class="bio-desc lang-zh">
-                <strong>學歷</strong><br>
-                • 中國清華大學 法學博士<br><br>
-                <strong>經歷</strong><br>
-                朱宸佐博士為台灣及中國大陸雙重執業律師，專精於人工智慧法律、科技法規、數據治理及跨境爭議解決。曾任日本及台灣上市公司法務長，並長年擔任跨國科技企業總法律顧問，實務經驗豐富。現為史丹佛大學法學院資深研究員、史丹佛台灣科學技術研究中心客座研究員，全國律師聯合會科技法律委員會副主任委員，同時擔任人工智慧法律國際研究基金會秘書長。他持續推動 AI 與法律的國際研究與政策倡議，積極建構健全的全球科技治理架構。
-              </div>
-              <div class="bio-desc lang-en" style="display: none;">
-                <strong>Education</strong><br>
-                • Ph.D. in Law, Tsinghua University (Beijing)<br><br>
-                <strong>Career Summary</strong><br>
-                Dr. Wesley Chu is a licensed lawyer in both Taiwan and Mainland China, specializing in AI law, technology regulations, data governance, and cross-border dispute resolution. He has served as General Counsel for multinational technology corporations and as Chief Legal Officer for listed companies in Japan and Taiwan, bringing extensive international legal and corporate experience. Currently, he is a Senior Research Fellow at Stanford Law School, Visiting Fellow at the Taiwan Science and Technology Hub at Stanford, and Deputy Director of the Technology Law Committee of the National Bar Association. As Secretary General of the International Artificial Intelligence and Law Research Foundation, Dr. Chu actively promotes global research and policy dialogue on AI and law, advancing robust frameworks for international technology governance.
-              </div>
-            </div>
+          <div class="speaker-experience-preview">
+            <span class="lang-zh">黃錫瑜教授曾任職於美國矽谷國民半導體與世大積體電路（後併入台積電），1999 年起於清華大學任教...< 繼續閱讀 ></span>
+            <span class="lang-en" style="display: none;">Prof. Huang worked at National Semiconductor in Silicon Valley and at Acer Semiconductor Manufacturing (later merged with TSMC) before joining NTHU in 1999...< 繼續閱讀 ></span>
           </div>
         </div>
+        <img class="speaker-photo-card" src="assets/img/speaker-ShiYu-Huang.png" alt="黃錫瑜">
       </div>
 
-      <!-- No pager needed for single page -->
+      <div class="speaker-card speaker-clickable"
+           data-speaker-name="黃漢森"
+           data-speaker-name-en="H.S. Philip Wong"
+           data-speaker-title="台積電首席科學家<br>史丹佛大學電機系教授"
+           data-speaker-title-en="Chief Scientist, TSMC<br>Professor, Stanford University"
+           data-speaker-education="• 美國理海大學 電機工程博士<br>• 美國紐約州立大學 電機工程碩士<br>• 香港大學 電機工程學士"
+           data-speaker-education-en="• Ph.D. in Electrical Engineering, Lehigh University<br>• M.S. in Electrical Engineering, State University of New York<br>• B.S. in Electrical Engineering, The University of Hong Kong"
+           data-speaker-experience="黃漢森教授曾任 IBM T.J. Watson 研究中心研究員（1988–2004），2004 年起於史丹佛大學執教，並於 2018–2020 年擔任台積電副總經理，現為首席科學家。專長涵蓋奈米電子、半導體元件、類腦計算與 3D 系統整合等領域，成就卓著。黃教授為 IEEE 院士，榮獲 J.J. Ebers 獎與 Andrew S. Grove 獎等國際大獎，並在多所國際頂尖大學擔任客座教授，持續引領全球半導體技術前沿。"
+           data-speaker-experience-en="Prof. Wong worked at IBM T.J. Watson Research Center (1988–2004) before joining Stanford University in 2004. He served as Vice President for Corporate Research at TSMC (2018–2020) and is now the company's Chief Scientist. His research spans nanotechnology, nanoelectronics, semiconductor devices, neuromorphic computing, and 3D integration. A Fellow of IEEE, he has received the J.J. Ebers Award and the Andrew S. Grove Award for his outstanding contributions. He also holds visiting professorships worldwide, actively shaping the future of global semiconductor technology."
+           data-event-title="未來半導體人才趨勢論壇：產學對話"
+           data-event-title-en="Empowering the Future of Semiconductor：Bridging Industry and Academia">
+        <div class="speaker-info">
+          <div class="speaker-name-card">
+            <span class="lang-zh">黃漢森</span>
+            <span class="lang-en" style="display: none;">H.S. Philip Wong</span>
+          </div>
+          <div class="speaker-title-card">
+            <span class="lang-zh">・台積電首席科學家<br>・史丹佛大學電機系教授</span>
+            <span class="lang-en" style="display: none;">・Chief Scientist, TSMC<br>・Professor, Stanford University</span>
+          </div>
+          <div class="speaker-experience-preview">
+            <span class="lang-zh">黃漢森教授曾任 IBM T.J. Watson 研究中心研究員（1988–2004），2004 年起於史丹佛大學執教，並於 2018–2020 年擔任台積電副總經理，現為首席科學家...< 繼續閱讀 ></span>
+            <span class="lang-en" style="display: none;">Prof. Wong worked at IBM T.J. Watson Research Center (1988–2004) before joining Stanford University in 2004. He served as Vice President for Corporate Research at TSMC (2018–2020) and is now the company's Chief Scientist...< 繼續閱讀 ></span>
+          </div>
+        </div>
+        <img class="speaker-photo-card" src="assets/img/speaker-Philip-Wong.png" alt="黃漢森">
+      </div>
+
+      <div class="speaker-card speaker-clickable"
+           data-speaker-name="David Horsley"
+           data-speaker-name-en="David Horsley"
+           data-speaker-title="TDK Invensense 新興感測器事業部 技術長<br>美國加州大學戴維斯分校機械與航太工程學系教授<br>美國加州大學柏克萊分校兼任教授"
+           data-speaker-title-en="CTO, Emerging Sensors Business Unit, TDK Invensense<br>Professor, UC Davis<br>Adjunct Professor, UC Berkeley"
+           data-speaker-education="• 美國加州大學柏克萊分校 機械工程博士"
+           data-speaker-education-en="• Ph.D. in Mechanical Engineering, UC Berkeley"
+           data-speaker-experience="David Horsley 博士為微機電系統（MEMS）超音波感測領域的先驅，2013 年共同創立 Chirp Microsystems，成功開發超音波感測技術並擔任技術長，後被 TDK 收購，現任 TDK Invensense 新興感測器事業部 CTO。他同時為 UC Davis 教授及 UC Berkeley 感測與致動中心共同主任，研發成果包括應用於筆電與消費性產品的超音波指紋辨識感測器。Horsley 博士是 IEEE 會士與美國國家發明家學院會士，曾獲 NSF CAREER Award、UC Davis 傑出青年教師獎及 MSIG Hall of Fame Award，著有 150 餘篇論文並持有 22 項專利。"
+           data-speaker-experience-en="Pioneer in MEMS ultrasonic sensing, co-founded Chirp Microsystems in 2013 and served as CTO until its acquisition by TDK. Currently CTO of TDK Invensense and Professor at UC Davis, Adjunct Professor at UC Berkeley, and Co-Director of BSAC. Invented the ultrasonic fingerprint sensor commercialized by TDK. IEEE Fellow, NAI Fellow, recipient of NSF CAREER Award, UC Davis Outstanding Junior Faculty Award, and MSIG Hall of Fame Award. Author of 150+ papers and holder of 22 patents."
+           data-event-title="未來半導體人才趨勢論壇：產學對話"
+           data-event-title-en="Empowering the Future of Semiconductor：Bridging Industry and Academia">
+        <div class="speaker-info">
+          <div class="speaker-name-card">
+            <span class="lang-zh">David Horsley</span>
+            <span class="lang-en" style="display: none;">David Horsley</span>
+          </div>
+          <div class="speaker-title-card">
+            <span class="lang-zh">・TDK Invensense 新興感測器事業部 技術長<br>・美國加州大學戴維斯分校機械與航太工程學系教授<br>・美國加州大學柏克萊分校兼任教授</span>
+            <span class="lang-en" style="display: none;">・CTO, Emerging Sensors Business Unit, TDK Invensense<br>・Professor, UC Davis<br>・Adjunct Professor, UC Berkeley</span>
+          </div>
+          <div class="speaker-experience-preview">
+            <span class="lang-zh">David Horsley 博士為微機電系統（MEMS）超音波感測領域的先驅，2013 年共同創立 Chirp Microsystems，成功開發超音波感測技術並擔任技術長。</span>
+            <span class="lang-en" style="display: none;">Pioneer in MEMS ultrasonic sensing, co-founded Chirp Microsystems in 2013 and served as CTO until its acquisition by TDK.</span>
+          </div>
+        </div>
+        <img class="speaker-photo-card" src="assets/img/speaker-Horsley-David.png" alt="David Horsley">
+      </div>
+
+      <div class="speaker-card speaker-clickable"
+           data-speaker-name="朱宸佐"
+           data-speaker-name-en="Wesley Chu"
+           data-speaker-title="史丹佛大學法學院資深研究員<br>人工智慧法律國際研究基金會秘書長"
+           data-speaker-title-en="Research Fellow, Harvard University<br>Senior Research Fellow, Stanford Law School<br>Secretary General, International Artificial Intelligence and Law Research Foundation"
+           data-speaker-education="• 中國清華大學 法學博士"
+           data-speaker-education-en="• Ph.D. in Law, Tsinghua University"
+           data-speaker-experience="朱宸佐博士為台灣及中國大陸雙重執業律師，專精於人工智慧法律、科技法規、數據治理及跨境爭議解決。曾任日本及台灣上市公司法務長，並長年擔任跨國科技企業總法律顧問，實務經驗豐富。現為史丹佛大學法學院資深研究員、史丹佛台灣科學技術研究中心客座研究員，全國律師聯合會科技法律委員會副主任委員，同時擔任人工智慧法律國際研究基金會秘書長。他持續推動 AI 與法律的國際研究與政策倡議，積極建構健全的全球科技治理架構。"
+           data-speaker-experience-en="Dr. Wesley Chu is a licensed lawyer in both Taiwan and Mainland China, specializing in AI law, technology regulations, data governance, and cross-border dispute resolution. He has served as General Counsel for multinational technology corporations and as Chief Legal Officer for listed companies in Japan and Taiwan, bringing extensive international legal and corporate experience. Currently, he is a Senior Research Fellow at Stanford Law School, Visiting Fellow at the Taiwan Science and Technology Hub at Stanford, and Deputy Director of the Technology Law Committee of the National Bar Association. As Secretary General of the International Artificial Intelligence and Law Research Foundation, Dr. Chu actively promotes global research and policy dialogue on AI and law, advancing robust frameworks for international technology governance."
+           data-event-title="半導體關鍵人才培育：產學研跨域合作的創新模式"
+           data-event-title-en="Semiconductor Talent Cultivation: Innovative Cross-Disciplinary Industry-Academia-Research Collaboration">
+        <div class="speaker-info">
+          <div class="speaker-name-card">
+            <span class="lang-zh">朱宸佐</span>
+            <span class="lang-en" style="display: none;">Wesley Chu</span>
+          </div>
+          <div class="speaker-title-card">
+            <span class="lang-zh">・史丹佛大學法學院資深研究員<br>・人工智慧法律國際研究基金會秘書長</span>
+            <span class="lang-en" style="display: none;">・Research Fellow, Harvard University<br>・Senior Research Fellow, Stanford Law School<br>・Secretary General, International Artificial Intelligence and Law Research Foundation</span>
+          </div>
+          <div class="speaker-experience-preview">
+            <span class="lang-zh">朱宸佐博士為台灣及中國大陸雙重執業律師，專精於人工智慧法律、科技法規、數據治理及跨境爭議解決。</span>
+            <span class="lang-en" style="display: none;">Dr. Wesley Chu is a licensed lawyer in both Taiwan and Mainland China, specializing in AI law, technology regulations, data governance, and cross-border dispute resolution.</span>
+          </div>
+        </div>
+        <img class="speaker-photo-card" src="assets/img/speaker-Wesley-Chu.png" alt="朱宸佐">
+      </div>
     </div>
 
-    <h2 id="s1-about" class="section-title">活動簡介｜About the Forum</h2>
+    <h2 id="s1-about" class="section-title about-section">活動簡介｜About the Forum</h2>
     <div class="lang-zh">
       <p>在人工智慧與先進技術重塑全球產業的時代，半導體產業位居變革前線，是推動創新與進步的核心動力。當前對於高度專業技術人才的需求前所未有地迫切。本次論壇旨在強調培育因應挑戰、推動半導體產業持續發展之關鍵人才的重要性。</p>
     </div>
@@ -2997,7 +3414,6 @@ strong {
     <div class="topic-wrap">
       <div class="topic-badge">
         大語言模型運算需求之 Edge AI 晶片設計與實踐經驗
-        <div class="topic-en">Powering the Future of Large Language Models with Edge AI Chips</div>
       </div>
 
       <div class="topic-rows">
@@ -3017,77 +3433,102 @@ strong {
         </div>
       </div>
       
-      <h2 id="s2-speakers" class="section-title" style="margin-top: 48px;">亮點講者｜Featured Speakers</h2>
+      <h2 id="s2-speakers" class="section-title">
+        <span class="lang-zh">亮點講者｜Featured Speakers</span>
+        <span class="lang-en" style="display: none;">Featured Speakers</span>
+      </h2>
     </div>
 
-    <!-- speakers: 3 speakers, no carousel needed -->
-    <div class="speakers-carousel" aria-roledescription="carousel">
-      <div class="speaker-pages">
-        <div class="speaker-grid speaker-page" data-page="0">
-          <div class="speaker">
-            <img class="photo" src="assets/img/speaker-ShiYu-Huang.png" alt="黃錫瑜">
-            <div class="meta">
-              <div class="name">黃錫瑜</div>
-              <div class="title-chip">國研院科技政策研究與資訊中心主任<br>國立清華大學電機工程學系教授</div>
-            </div>
-            <div class="bio-card">
-              <div class="bio-desc">
-                <strong>學歷</strong><br>
-                • 美國加州大學聖塔芭芭拉分校 電機與計算機工程博士<br>
-                • 國立台灣大學 電機工程學系碩士<br>
-                • 國立台灣大學 電機工程學系學士<br><br>
-                <strong>經歷</strong><br>
-                黃錫瑜教授曾任職於美國矽谷國民半導體與世大積體電路（後併入台積電），1999 年起於清華大學任教，並先後擔任清華大學積體電路設計技術中心主任、創新育成中心主任、南台科技大學副校長等職務，亦共同創立兆心科技。專精於積體電路設計、自動化與測試，致力於研發高可靠度與長壽命的「永保安康晶片」，推動台灣半導體創新。
-              </div>
-            </div>
+    <!-- speakers: 3 speakers, new card layout -->
+    <div class="speakers-section">
+      <div class="speaker-card speaker-clickable"
+           data-speaker-name="黃錫瑜"
+           data-speaker-name-en="Shi-Yu Huang"
+           data-speaker-title="國研院科技政策研究與資訊中心主任<br>國立清華大學電機工程學系教授"
+           data-speaker-title-en="Director, Science and Technology Policy Research and Information Center, NARL<br>Professor, Department of Electrical Engineering, National Tsing Hua University"
+           data-speaker-education="• 美國加州大學聖塔芭芭拉分校 電機與計算機工程博士<br>• 國立台灣大學 電機工程學系碩士<br>• 國立台灣大學 電機工程學系學士"
+           data-speaker-education-en="• Ph.D. in Electrical and Computer Engineering, University of California, Santa Barbara<br>• M.S. in Electrical Engineering, National Taiwan University<br>• B.S. in Electrical Engineering, National Taiwan University"
+           data-speaker-experience="黃錫瑜教授曾任職於美國矽谷國民半導體與世大積體電路（後併入台積電），1999 年起於清華大學任教，並先後擔任清華大學積體電路設計技術中心主任、創新育成中心主任、南台科技大學副校長等職務，亦共同創立兆心科技。專精於積體電路設計、自動化與測試，致力於研發高可靠度與長壽命的「永保安康晶片」，推動台灣半導體創新。"
+           data-speaker-experience-en="Professor Shi-Yu Huang previously worked at National Semiconductor and Avant! Corporation (later acquired by Cadence) in Silicon Valley. Since 1999, he has been teaching at National Tsing Hua University and has served as Director of the IC Design Technology Center, Director of the Innovation Incubation Center at NTHU, and Vice President of Southern Taiwan University of Science and Technology. He also co-founded Zillmind Corporation. He specializes in integrated circuit design, automation, and testing, dedicating his efforts to developing high-reliability and long-lifetime 'Forever Healthy Chips' to advance Taiwan's semiconductor innovation."
+           data-event-title="大語言模型運算需求之 Edge AI 晶片設計與實踐經驗">
+        <div class="speaker-info">
+          <div class="speaker-name-card">
+            <span class="lang-zh">黃錫瑜</span>
+            <span class="lang-en" style="display: none;">Shi-Yu Huang</span>
           </div>
-          <div class="speaker">
-            <img class="photo" src="assets/img/speaker-黃錫霖.png" alt="黃錫霖">
-            <div class="meta">
-              <div class="name">黃錫霖</div>
-              <div class="title-chip">千逢科技公司執行長</div>
-            </div>
-            <div class="bio-card">
-              <div class="bio-desc">
-                <strong>學歷</strong><br>
-                • 國立交通大學 電機工程學系碩士<br><br>
-                <strong>經歷</strong><br>
-                黃錫霖執行長擁有超過30年 GPU 與 NPU 架構經驗及擁有50多項已獲核准專利，曾任職於英特爾、聯發科、蘋果、亞馬遜、廣東歐珀移動通訊擔任資深架構師，經理與人工智慧總監。
-              </div>
-            </div>
+          <div class="speaker-title-card">
+            <span class="lang-zh">・國研院科技政策研究與資訊中心主任<br>・國立清華大學電機工程學系教授</span>
+            <span class="lang-en" style="display: none;">・Director, Science and Technology Policy Research and Information Center, NARL<br>・Professor, Department of Electrical Engineering, National Tsing Hua University</span>
           </div>
-          <div class="speaker">
-            <img class="photo" src="assets/img/speaker-林哲民.png" alt="林哲民">
-            <div class="meta">
-              <div class="name">
-                <span class="lang-zh">林哲民</span>
-                <span class="lang-en" style="display: none;">Che-Min Lin</span>
-              </div>
-              <div class="title-chip">
-                <span class="lang-zh">史丹佛大學應用物理博士後研究員</span>
-                <span class="lang-en" style="display: none;">Stanford University Postdoc</span>
-              </div>
-            </div>
-            <div class="bio-card">
-              <div class="bio-desc">
-                <strong>學歷</strong><br>
-                • 國立中山大學 物理學博士<br>
-                • 國立中山大學 物理學學士<br><br>
-                <strong>經歷</strong><br>
-                林哲民博士專長是理論與計算物理，致力於設計具有多重功能的量子材料。利用電腦與數學模型，預測哪些材料在極小尺度下，會展現出想要的特性，如：可導電的表面、可切換的磁性、或用電場就能改變材料的性質。簡單來說，我的研究就是用科學思維和模擬技術，讓材料在被做出來之前，就能知道它值不值得做。可大幅減少開發成本並加快創新步伐。目前已經成功被實驗驗證，包括：<br>
-                1. 全世界少數同時具備拓樸特性與反鐵磁性的材料，有潛力用於低功耗運算；<br>
-                2. 只靠一塊材料本身，就能產生自旋閥效應，為自旋元件開啟全新設計可能；<br>
-                3. 可以用電場切換拓樸狀態與極化方向的材料，未來有望應用在記憶體與邊緣運算晶片中。
-              </div>
-            </div>
+          <div class="speaker-experience-preview">
+            <span class="lang-zh">黃錫瑜教授曾任職於美國矽谷國民半導體與世大積體電路（後併入台積電），1999 年起於清華大學任教，並先後擔任清華大學積體電路設計技術中心主任、創新育成中心主任、南台科技大學副校長等職務...< 繼續閱讀 ></span>
+            <span class="lang-en" style="display: none;">Professor Shi-Yu Huang previously worked at National Semiconductor and Avant! Corporation (later acquired by Cadence) in Silicon Valley. Since 1999, he has been teaching at National Tsing Hua University and has served as Director of the IC Design Technology Center...< 繼續閱讀 ></span>
           </div>
         </div>
+        <img class="speaker-photo-card" src="assets/img/speaker-ShiYu-Huang.png" alt="黃錫瑜">
       </div>
-      
-      <!-- No pager needed for single page -->
+
+      <div class="speaker-card speaker-clickable"
+           data-speaker-name="黃錫霖"
+           data-speaker-name-en="Shih-Lin Huang"
+           data-speaker-title="千逢科技公司執行長"
+           data-speaker-title-en="CEO, ChiPhong Technology"
+           data-speaker-education="• 國立交通大學 電機工程學系碩士"
+           data-speaker-education-en="• M.S. in Electrical Engineering, National Chiao Tung University"
+           data-speaker-experience="黃錫霖執行長擁有超過30年 GPU 與 NPU 架構經驗及擁有50多項已獲核准專利，曾任職於英特爾、聯發科、蘋果、亞馬遜、廣東歐珀移動通訊擔任資深架構師，經理與人工智慧總監。"
+           data-speaker-experience-en="CEO Huang has over 30 years of experience in GPU and NPU architecture and holds more than 50 approved patents. He has worked at Intel, MediaTek, Apple, Amazon, and OPPO as Senior Architect, Manager, and AI Director."
+           data-event-title="大語言模型運算需求之 Edge AI 晶片設計與實踐經驗"
+           data-event-title-en="Edge AI Chip Design and Implementation for Large Language Model Computing Requirements">
+        <div class="speaker-info">
+          <div class="speaker-name-card">
+            <span class="lang-zh">黃錫霖</span>
+            <span class="lang-en" style="display: none;">Shih-Lin Huang</span>
+          </div>
+          <div class="speaker-title-card">
+            <span class="lang-zh">・千逢科技公司執行長</span>
+            <span class="lang-en" style="display: none;">・CEO, ChiPhong Technology</span>
+          </div>
+          <div class="speaker-experience-preview">
+            <span class="lang-zh">黃錫霖執行長擁有超過30年 GPU 與 NPU 架構經驗及擁有50多項已獲核准專利，曾任職於英特爾、聯發科、蘋果、亞馬遜、廣東歐珀移動通訊擔任資深架構師，經理與人工智慧總監。</span>
+            <span class="lang-en" style="display: none;">CEO Huang has over 30 years of experience in GPU and NPU architecture and holds more than 50 approved patents. He has worked at Intel, MediaTek, Apple, Amazon, and OPPO as Senior Architect, Manager, and AI Director.</span>
+          </div>
+        </div>
+        <img class="speaker-photo-card" src="assets/img/speaker-黃錫霖.png" alt="黃錫霖">
+      </div>
+
+      <div class="speaker-card speaker-clickable"
+           data-speaker-name="林哲民"
+           data-speaker-name-en="Che-Min Lin"
+           data-speaker-title="史丹佛大學應用物理博士後研究員"
+           data-speaker-title-en="Postdoctoral Researcher, Applied Physics, Stanford University"
+           data-speaker-education="• 國立中山大學 物理學博士<br>• 國立中山大學 物理學學士"
+           data-speaker-education-en="• Ph.D. in Physics, National Sun Yat-sen University<br>• B.S. in Physics, National Sun Yat-sen University"
+           data-speaker-experience="林哲民博士專長是理論與計算物理，致力於設計具有多重功能的量子材料。利用電腦與數學模型，預測哪些材料在極小尺度下，會展現出想要的特性，如：可導電的表面、可切換的磁性、或用電場就能改變材料的性質。簡單來說，我的研究就是用科學思維和模擬技術，讓材料在被做出來之前，就能知道它值不值得做。可大幅減少開發成本並加快創新步伐。目前已經成功被實驗驗證，包括：<br>1. 全世界少數同時具備拓樸特性與反鐵磁性的材料，有潛力用於低功耗運算；<br>2. 只靠一塊材料本身，就能產生自旋閥效應，為自旋元件開啟全新設計可能；<br>3. 可以用電場切換拓樸狀態與極化方向的材料，未來有望應用在記憶體與邊緣運算晶片中。"
+           data-speaker-experience-en="Dr. Lin specializes in theoretical and computational physics, dedicated to designing quantum materials with multiple functionalities. Using computer models and mathematical simulations, he predicts which materials will exhibit desired properties at nanoscale, such as conductive surfaces, switchable magnetism, or materials whose properties can be changed by electric fields. Simply put, his research uses scientific thinking and simulation technology to determine whether materials are worth developing before they are actually made, significantly reducing development costs and accelerating innovation. His work has been successfully validated experimentally, including: 1. Materials with both topological properties and antiferromagnetism (among the few worldwide), with potential for low-power computing; 2. Materials that can generate spin valve effects by themselves, opening new design possibilities for spintronic devices; 3. Materials that can switch topological states and polarization directions with electric fields, with future applications in memory and edge computing chips."
+           data-event-title="大語言模型運算需求之 Edge AI 晶片設計與實踐經驗"
+           data-event-title-en="Edge AI Chip Design and Implementation for Large Language Model Computing Requirements">
+        <div class="speaker-info">
+          <div class="speaker-name-card">
+            <span class="lang-zh">林哲民</span>
+            <span class="lang-en" style="display: none;">Che-Min Lin</span>
+          </div>
+          <div class="speaker-title-card">
+            <span class="lang-zh">・史丹佛大學應用物理博士後研究員</span>
+            <span class="lang-en" style="display: none;">・Postdoctoral Researcher, Applied Physics, Stanford University</span>
+          </div>
+          <div class="speaker-experience-preview">
+            <span class="lang-zh">林哲民博士專長是理論與計算物理，致力於設計具有多重功能的量子材料。利用電腦與數學模型，預測哪些材料在極小尺度下，會展現出想要的特性，如：可導電的表面、可切換的磁性、或用電場就能改變材料的性質...< 繼續閱讀 ></span>
+            <span class="lang-en" style="display: none;">Dr. Lin specializes in theoretical and computational physics, dedicated to designing quantum materials with multiple functionalities. Using computer models and mathematical simulations, he predicts which materials will exhibit desired properties at nanoscale...< 繼續閱讀 ></span>
+          </div>
+        </div>
+        <img class="speaker-photo-card" src="assets/img/speaker-林哲民.png" alt="林哲民">
+      </div>
     </div>
 
-    <h2 id="s2-about" class="section-title">活動簡介｜About the Forum</h2>
+    <h2 id="s2-about" class="section-title about-section">
+      <span class="lang-zh">活動簡介｜About the Forum</span>
+      <span class="lang-en" style="display: none;">About the Forum</span>
+    </h2>
     <div>
       <p>隨著大型語言模型（LLMs） 帶動人工智慧快速演進，龐大的運算需求推動 Edge AI 晶片成為新世代的關鍵技術。如何在效能、能耗與應用場域之間取得平衡，不僅需要創新的運算架構與演算法設計，更仰賴新材料與晶片製程的突破。</p>
       <p>本場論壇匯聚來自產業與學界的前瞻專家，從產業實務、材料創新到跨域應用深入剖析 Edge AI 的未來機遇，並探討臺灣在全球半導體生態系中的角色與挑戰。</p>
@@ -3287,50 +3728,81 @@ strong {
         </div>
       </div>
       
-      <h2 id="s3-speakers" class="section-title">亮點講者｜Featured Speakers</h2>
+      <h2 id="s3-speakers" class="section-title">
+        <span class="lang-zh">亮點講者｜Featured Speakers</span>
+        <span class="lang-en" style="display: none;">Featured Speakers</span>
+      </h2>
     </div>
 
-    <!-- speakers: all in one page, no carousel needed -->
-    <div class="speakers-carousel" aria-roledescription="carousel">
-      <div class="speaker-pages">
-        <div class="speaker-grid speaker-page" data-page="0">
-          <div class="speaker">
-            <img class="photo" src="assets/img/speaker-ShiYu-Huang.png" alt="黃錫瑜">
-            <div class="meta">
-              <div class="name">黃錫瑜</div>
-              <div class="title-chip">國研院科技政策研究與資訊中心主任<br>國立清華大學電機工程學系教授</div>
-            </div>
-            <div class="bio-card">
-              <div class="bio-desc">
-                <strong>學歷</strong><br>
-                • 美國加州大學聖塔芭芭拉分校 電機與計算機工程博士<br>
-                • 國立台灣大學 電機工程學系碩士<br>
-                • 國立台灣大學 電機工程學系學士<br><br>
-                <strong>經歷</strong><br>
-                黃錫瑜教授曾任職於美國矽谷國民半導體與世大積體電路（後併入台積電），1999 年起於清華大學任教，並先後擔任清華大學積體電路設計技術中心主任、創新育成中心主任、南台科技大學副校長等職務，亦共同創立兆心科技。專精於積體電路設計、自動化與測試，致力於研發高可靠度與長壽命的「永保安康晶片」，推動台灣半導體創新。
-              </div>
-            </div>
+    <!-- speakers: 2 speakers, new card layout -->
+    <div class="speakers-section">
+      <div class="speaker-card speaker-clickable"
+           data-speaker-name="黃錫瑜"
+           data-speaker-name-en="Shi-Yu Huang"
+           data-speaker-title="國研院科技政策研究與資訊中心主任<br>國立清華大學電機工程學系教授"
+           data-speaker-title-en="Director, Science and Technology Policy Research and Information Center, NARL<br>Professor, Department of Electrical Engineering, National Tsing Hua University"
+           data-speaker-education="• 美國加州大學聖塔芭芭拉分校 電機與計算機工程博士<br>• 國立台灣大學 電機工程學系碩士<br>• 國立台灣大學 電機工程學系學士"
+           data-speaker-education-en="• Ph.D. in Electrical and Computer Engineering, University of California, Santa Barbara<br>• M.S. in Electrical Engineering, National Taiwan University<br>• B.S. in Electrical Engineering, National Taiwan University"
+           data-speaker-experience="黃錫瑜教授曾任職於美國矽谷國民半導體與世大積體電路（後併入台積電），1999 年起於清華大學任教，並先後擔任清華大學積體電路設計技術中心主任、創新育成中心主任、南台科技大學副校長等職務，亦共同創立兆心科技。專精於積體電路設計、自動化與測試，致力於研發高可靠度與長壽命的「永保安康晶片」，推動台灣半導體創新。"
+           data-speaker-experience-en="Professor Shi-Yu Huang previously worked at National Semiconductor and Avant! Corporation (later acquired by Cadence) in Silicon Valley. Since 1999, he has been teaching at National Tsing Hua University and has served as Director of the IC Design Technology Center, Director of the Innovation Incubation Center at NTHU, and Vice President of Southern Taiwan University of Science and Technology. He also co-founded Zillmind Corporation. He specializes in integrated circuit design, automation, and testing, dedicating his efforts to developing high-reliability and long-lifetime 'Forever Healthy Chips' to advance Taiwan's semiconductor innovation."
+           data-event-title="系列創新人才培育工作坊｜數據驅動的政策洞察：統計分析與AI工具應用">
+        <div class="speaker-info">
+          <div class="speaker-name-card">
+            <span class="lang-zh">黃錫瑜</span>
+            <span class="lang-en" style="display: none;">Shi-Yu Huang</span>
           </div>
-          <div class="speaker">
-            <img class="photo" src="assets/img/speaker-邱皓政.png" alt="邱皓政">
-            <div class="meta">
-              <div class="name">邱皓政</div>
-              <div class="title-chip">中華民國統計學會理事長<br>美國南加州大學心理計量學博士</div>
-            </div>
-            <div class="bio-card">
-              <div class="bio-desc"></div>
-            </div>
+          <div class="speaker-title-card">
+            <span class="lang-zh">・國研院科技政策研究與資訊中心主任<br>・國立清華大學電機工程學系教授</span>
+            <span class="lang-en" style="display: none;">・Director, Science and Technology Policy Research and Information Center, NARL<br>・Professor, Department of Electrical Engineering, National Tsing Hua University</span>
+          </div>
+          <div class="speaker-experience-preview">
+            <span class="lang-zh">黃錫瑜教授曾任職於美國矽谷國民半導體與世大積體電路（後併入台積電），1999 年起於清華大學任教，並先後擔任清華大學積體電路設計技術中心主任、創新育成中心主任、南台科技大學副校長等職務...< 繼續閱讀 ></span>
+            <span class="lang-en" style="display: none;">Professor Shi-Yu Huang previously worked at National Semiconductor and Avant! Corporation (later acquired by Cadence) in Silicon Valley. Since 1999, he has been teaching at National Tsing Hua University and has served as Director of the IC Design Technology Center...< 繼續閱讀 ></span>
           </div>
         </div>
+        <img class="speaker-photo-card" src="assets/img/speaker-ShiYu-Huang.png" alt="黃錫瑜">
+      </div>
+
+      <div class="speaker-card speaker-clickable"
+           data-speaker-name="邱皓政"
+           data-speaker-name-en="Haw-Jeng Chiou"
+           data-speaker-title="中華民國統計學會理事長<br>美國南加州大學心理計量學博士"
+           data-speaker-title-en="Chairman, Chinese Statistical Association<br>Ph.D. in Psychometrics, University of Southern California"
+           data-speaker-education="• 美國南加州大學 心理計量學博士"
+           data-speaker-education-en="• Ph.D. in Psychometrics, University of Southern California"
+           data-speaker-experience="邱皓政博士為中華民國統計學會理事長，專精於統計學、心理計量學及資料科學領域，在學術研究與實務應用方面具有豐富經驗。"
+           data-speaker-experience-en="Dr. Haw-Jeng Chiou serves as Chairman of the Chinese Statistical Association, specializing in statistics, psychometrics, and data science with extensive experience in both academic research and practical applications."
+           data-event-title="系列創新人才培育工作坊｜數據驅動的政策洞察：統計分析與AI工具應用">
+        <div class="speaker-info">
+          <div class="speaker-name-card">
+            <span class="lang-zh">邱皓政</span>
+            <span class="lang-en" style="display: none;">Haw-Jeng Chiou</span>
+          </div>
+          <div class="speaker-title-card">
+            <span class="lang-zh">・中華民國統計學會理事長<br>・美國南加州大學心理計量學博士</span>
+            <span class="lang-en" style="display: none;">・Chairman, Chinese Statistical Association<br>・Ph.D. in Psychometrics, University of Southern California</span>
+          </div>
+          <div class="speaker-experience-preview">
+            <span class="lang-zh">邱皓政博士為中華民國統計學會理事長，專精於統計學、心理計量學及資料科學領域，在學術研究與實務應用方面具有豐富經驗。</span>
+            <span class="lang-en" style="display: none;">Dr. Haw-Jeng Chiou serves as Chairman of the Chinese Statistical Association, specializing in statistics, psychometrics, and data science with extensive experience in both academic research and practical applications.</span>
+          </div>
+        </div>
+        <img class="speaker-photo-card" src="assets/img/speaker-邱皓政.png" alt="邱皓政">
       </div>
     </div>
 
-    <h2 id="s3-about" class="section-title">活動簡介｜About</h2>
+    <h2 id="s3-about" class="section-title about-section">
+      <span class="lang-zh">活動簡介｜About</span>
+      <span class="lang-en" style="display: none;">About</span>
+    </h2>
     <p>在數據爆炸與 AI 技術快速演進的時代，如何將大數據轉化為政策洞察與決策支持，是產官學研的共同挑戰。</p>
     <p>本工作坊以<span class="highlight-text">「實務示範 + 分組演練」</span>為核心，邀請統計學會與 AI 技術專家，帶領學員掌握統計分析、AI 資料視覺化、縱貫數據追蹤等核心技能，並實際操作 ChatGPT、Power BI、Tableau AI、Kumu.ai 等工具。</p>
     <p>學員將透過兩天的訓練，從案例到實作，強化<span class="highlight-text">數據驅動的政策研究能力</span>，並促進跨領域交流合作。</p>
 
-    <h2 id="s3-topics" class="section-title">主要議題｜Key Topics</h2>
+    <h2 id="s3-topics" class="section-title">
+      <span class="lang-zh">主要議題｜Key Topics</span>
+      <span class="lang-en" style="display: none;">Key Topics</span>
+    </h2>
     <ul style="line-height: 1.8; margin: 20px 0;">
       <li><strong>政策分析中的 AI 工具應用：</strong>解析文本、數據與圖像處理，示範前沿工具的應用情境</li>
       <li><strong>AI 資料視覺化與動態儀表板：</strong>手把手實作，快速建立互動圖表與研究故事版</li>
@@ -3536,250 +4008,271 @@ strong {
         </div>
       </div>
       
-      <h2 id="s4-speakers" class="section-title">亮點講者｜Featured Speakers</h2>
+      <h2 id="s4-speakers" class="section-title">
+        <span class="lang-zh">亮點講者｜Featured Speakers</span>
+        <span class="lang-en" style="display: none;">Featured Speakers</span>
+      </h2>
     </div>
 
-    <!-- speakers: all in one page, no carousel needed -->
-    <div class="speakers-carousel" aria-roledescription="carousel">
-      <div class="speaker-pages">
-        <div class="speaker-grid speaker-page" data-page="0">
-          <div class="speaker">
-            <img class="photo" src="assets/img/speaker-吳誠文.png" alt="吳誠文">
-            <div class="meta">
-              <div class="name">
-                <span class="lang-zh">吳誠文</span>
-                <span class="lang-en" style="display: none;">Cheng-Wen Wu</span>
-              </div>
-              <div class="title-chip">
-                <span class="lang-zh">國科會主委</span>
-                <span class="lang-en" style="display: none;">NSTC Minister</span>
-              </div>
-            </div>
-            <div class="bio-card">
-              <div class="bio-desc">
-                <span class="lang-zh">
-                  <strong>學歷</strong><br>
-                  • 美國加州大學聖塔芭芭拉分校 電子與計算機工程系碩士、博士<br>
-                  • 國立臺灣大學 電機工程學系學士<br><br>
-                  <strong>經歷</strong><br>
-                  吳誠文主任委員曾任國立清華大學副教授、教授，並陸續擔任清華大學計算機中心主任、電機系主任、電機資訊學院院長、副校長等職。其後任工研院系統晶片科技中心主任、資訊與通訊研究所所長、工研院南分院執行長、副總及首席技術專家。亦曾擔任成功大學副校長、南臺科技大學校長與國家運動科學中心董事長，具豐富學術與行政領導經歷。自2024年5月起兼任行政院政務委員及國科會主任委員
-                </span>
-                <span class="lang-en" style="display: none;">
-                  <strong>Education</strong><br>
-                  • M.S. & Ph.D. in Electronic and Computer Engineering, University of California, Santa Barbara<br>
-                  • B.S. in Electrical Engineering, National Taiwan University<br><br>
-                  <strong>Career Summary</strong><br>
-                  Dr. Cheng-Wen Wu previously served as Assistant Professor and Professor at National Tsing Hua University, where he also held leadership roles including Director of the Computer Center, Chair of the Department of Electrical Engineering, Dean of the College of Electrical and Computer Engineering, and Vice President. He later served at ITRI as Director of the System-on-Chip Technology Center, Director of the Institute of Communications and Information Systems, and Executive roles including SVP and Chief Technical Expert. He also held leadership positions at National Cheng Kung University and Southern Taiwan University of Science and Technology, and served as Chairman of the National Sports Science Center. He assumed his current role as NSTC Chairperson and Minister without Portfolio in May 2024
-                </span>
-              </div>
-            </div>
+    <!-- speakers: 9 speakers, new card layout -->
+    <div class="speakers-section">
+      <div class="speaker-card speaker-clickable"
+           data-speaker-name="吳誠文"
+           data-speaker-name-en="Cheng-Wen Wu"
+           data-speaker-title="國科會主委"
+           data-speaker-title-en="Executive Yuan Minister without Portfolio & Chairperson, National Science and Technology Council (NSTC)"
+           data-speaker-education="• 美國加州大學聖塔芭芭拉分校 電子與計算機工程系碩士、博士<br>• 國立臺灣大學 電機工程學系學士"
+           data-speaker-education-en="• Ph.D. & M.S. in Electrical and Computer Engineering, University of California, Santa Barbara<br>• B.S. in Electrical Engineering, National Taiwan University"
+           data-speaker-experience="吳誠文主任委員曾任國立清華大學副教授、教授，並陸續擔任清華大學計算機中心主任、電機系主任、電機資訊學院院長、副校長等職。其後任工研院系統晶片科技中心主任、資訊與通訊研究所所長、工研院南分院執行長、副總及首席技術專家。亦曾擔任成功大學副校長、南臺科技大學校長與國家運動科學中心董事長，具豐富學術與行政領導經歷。自2024年5月起兼任行政院政務委員及國科會主任委員"
+           data-speaker-experience-en="Minister Cheng-Wen Wu has served as Associate Professor and Professor at National Tsing Hua University, with leadership roles including Director of Computer Center, Chair of Electrical Engineering Department, Dean of College of Electrical Engineering and Computer Science, and Vice President. He subsequently held positions at ITRI as Director of System-on-Chip Technology Center, Director of Information and Communications Research Laboratories, Executive Director of ITRI South, Vice President and Chief Technology Expert. He has also served as Vice President of National Cheng Kung University, President of Southern Taiwan University of Science and Technology, and Chairman of National Sports Science Center. Since May 2024, he has served concurrently as Executive Yuan Minister without Portfolio and Chairperson of the National Science and Technology Council."
+           data-event-title="臺灣 × 全球科技人才大鏈結"
+           data-event-title-en="Bridging Global Innovation and Exceptional Talent">
+        <div class="speaker-info">
+          <div class="speaker-name-card">
+            <span class="lang-zh">吳誠文</span>
+            <span class="lang-en" style="display: none;">Cheng-Wen Wu</span>
           </div>
-          <div class="speaker">
-            <img class="photo" src="assets/img/speaker-李旺龍.png" alt="李旺龍">
-            <div class="meta">
-              <div class="name">
-                <span class="lang-zh">李旺龍</span>
-                <span class="lang-en" style="display: none;">Wang-Long Li</span>
-              </div>
-              <div class="title-chip">
-                <span class="lang-zh">國科會科教發展及國際合作處處長</span>
-                <span class="lang-en" style="display: none;">NSTC Director</span>
-              </div>
-            </div>
-            <div class="bio-card">
-              <div class="bio-desc">
-                <span class="lang-zh">
-                  <strong>學歷</strong><br>
-                  • 國立成功大學 機械工程系博士<br>
-                  • 國立成功大學 機械工程系碩士<br>
-                  • 國立成功大學 機械工程系學士<br><br>
-                  <strong>經歷</strong><br>
-                  李旺龍處長曾任高雄應用科技大學副教授、教授、兼系主任，其後在國立成功大學擔任奈微所副教授、教授、兼代理所長及微奈米中心組長。亦擔任雲嘉南區域教學資源中心秘書與主任，以及成功大學教務處教學發展中心主任、副教務長等職務，歷練豐富，現任國科會科教處處長，推動學術國際合作與科教發展。
-                </span>
-                <span class="lang-en" style="display: none;">
-                  <strong>Education</strong><br>
-                  • B.S., M.S., and Ph.D. in Mechanical Engineering, National Cheng Kung University<br><br>
-                  <strong>Career Summary</strong><br>
-                  Dr. Wang‑Long Li served as faculty at National Kaohsiung University of Applied Sciences (as Associate Professor, Professor, and Department Chair), and later at National Cheng Kung University including roles as Associate Professor and Professor in the Institute of Applied Mechanics (with additional responsibilities as Acting Director and Head of the Micronanotechnology Center). He also held administrative roles in the regional teaching resource center and served in academic affairs leadership at NCKU. He currently leads the Department of International Cooperation and Science Education at NSTC, advancing national science education and international collaboration
-                </span>
-              </div>
-            </div>
+          <div class="speaker-title-card">
+            <span class="lang-zh">・國科會主委</span>
+            <span class="lang-en" style="display: none;">・Executive Yuan Minister without Portfolio & Chairperson, National Science and Technology Council (NSTC)</span>
           </div>
-          <div class="speaker">
-            <img class="photo" src="assets/img/speaker-ShiYu-Huang.png" alt="黃錫瑜">
-            <div class="meta">
-              <div class="name">
-                <span class="lang-zh">黃錫瑜</span>
-                <span class="lang-en" style="display: none;">Shi-Yu Huang</span>
-              </div>
-              <div class="title-chip">
-                <span class="lang-zh">國研院科技政策研究與資訊中心主任<br>國立清華大學電機工程學系教授</span>
-                <span class="lang-en" style="display: none;">Director, STPI-NARLabs<br>Professor, National Tsing Hua University</span>
-              </div>
-            </div>
-            <div class="bio-card">
-              <div class="bio-desc">
-                <span class="lang-zh">
-                  <strong>學歷</strong><br>
-                  • 美國加州大學聖塔芭芭拉分校 電機與計算機工程博士<br>
-                  • 國立台灣大學 電機工程學系碩士<br>
-                  • 國立台灣大學 電機工程學系學士<br><br>
-                  <strong>經歷</strong><br>
-                  黃錫瑜教授曾任職於美國矽谷國民半導體與世大積體電路（後併入台積電），1999 年起於清華大學任教，並先後擔任清華大學積體電路設計技術中心主任、創新育成中心主任、南台科技大學副校長等職務，亦共同創立兆心科技。專精於積體電路設計、自動化與測試，致力於研發高可靠度與長壽命的「永保安康晶片」，推動台灣半導體創新。
-                </span>
-                <span class="lang-en" style="display: none;">
-                  <strong>Education</strong><br>
-                  • Ph.D. in Electrical and Computer Engineering, University of California, Santa Barbara<br>
-                  • M.S. & B.S. in Electrical Engineering, National Taiwan University<br><br>
-                  <strong>Career Summary</strong><br>
-                  Prof. Huang worked at National Semiconductor in Silicon Valley and at Acer Semiconductor Manufacturing (later merged with TSMC) before joining NTHU in 1999. He has served as Director of the IC Design Technology Center, Director of the Innovation Incubation Center, Vice President of Southern Taiwan University of Science and Technology, and co-founder of ChipStart Technology. His research integrates IC design, design automation, and testing, with the vision of developing highly reliable and long-lasting "Everlasting Health Chips," driving continuous innovation in Taiwan's semiconductor industry.
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="speaker">
-            <img class="photo" src="assets/img/speaker-謝明修.png" alt="謝明修">
-            <div class="meta">
-              <div class="name">
-                <span class="lang-zh">謝明修</span>
-                <span class="lang-en" style="display: none;">Ming-Hsiu Hsieh</span>
-              </div>
-              <div class="title-chip">
-                <span class="lang-zh">鴻海研究院量子計算研究所所長</span>
-                <span class="lang-en" style="display: none;">Hon Hai Research Institute Director</span>
-              </div>
-            </div>
-            <div class="bio-card">
-              <div class="bio-desc">
-                <strong class="lang-zh">學歷</strong><strong class="lang-en" style="display: none;">Education</strong><br>
-                <span class="lang-zh">• 南加州大學 電子資訊理論博士</span>
-                <span class="lang-en" style="display: none;">• Ph.D., Electronic Information Theory, University of Southern California</span><br><br>
-                <strong class="lang-zh">經歷</strong><strong class="lang-en" style="display: none;">Career Summary</strong><br>
-                <span class="lang-zh">謝明修博士自 2021 年 1 月起擔任鴻海研究院量子計算研究所所長。此前，他於 2014 至 2020 年間任教於澳洲雪梨科技大學（University of Technology Sydney），擔任副教授，並為該校量子軟體與資訊中心（Centre for Quantum Software and Information）成員。2010 至 2012 年間，他在英國劍橋大學擔任博士後研究員。更早之前，他於日本擔任日本科技振興機構（Japan Science and Technology Agency, JST）資助之 ERATO-SORST 量子計算與資訊計畫的研究科學家，並同時掛名於東京大學計算機科學系。2014 至 2018 年間，他曾獲得澳洲研究委員會（ARC）未來學者獎（Future Fellowship）。</span>
-                <span class="lang-en" style="display: none;">Dr. Ming-Hsiu Hsieh has served as Director of the Quantum Computing Research Center at Foxconn Research Institute since January 2021. Prior to this position, he was an Associate Professor at the University of Technology Sydney from 2014 to 2020, where he was also a member of the Centre for Quantum Software and Information. From 2010 to 2012, he worked as a postdoctoral research fellow at the University of Cambridge in the United Kingdom. Earlier in his career, he served as a research scientist for the ERATO-SORST Quantum Computing and Information Project funded by the Japan Science and Technology Agency, while holding an affiliation with the Department of Computer Science at the University of Tokyo. He was awarded the Australian Research Council Future Fellowship from 2014 to 2018.</span>
-              </div>
-            </div>
-          </div>
-          <div class="speaker">
-            <img class="photo" src="assets/img/speaker-王志光.png" alt="王志光">
-            <div class="meta">
-              <div class="name">
-                <span class="lang-zh">王志光</span>
-                <span class="lang-en" style="display: none;">Chih-Kuang Wang</span>
-              </div>
-              <div class="title-chip">
-                <span class="lang-zh">高雄醫學大學骨科學研究中心副主任</span>
-                <span class="lang-en" style="display: none;">Deputy Director, KMU Bone Research Center</span>
-              </div>
-            </div>
-            <div class="bio-card">
-              <div class="bio-desc">
-                <strong class="lang-zh">學歷</strong><strong class="lang-en" style="display: none;">Education</strong><br>
-                <span class="lang-zh">• 成功大學 材料科學暨工程學系博士<br>• 成功大學 材料科學暨工程學系碩士<br>• 逢甲大學 材料科學暨工程學系學士</span>
-                <span class="lang-en" style="display: none;">• Ph.D. in Materials Science and Engineering, National Cheng Kung University<br>• M.S. in Materials Science and Engineering, National Cheng Kung University<br>• B.S. in Materials Science and Engineering, Feng Chia University</span><br><br>
-                <strong class="lang-zh">經歷</strong><strong class="lang-en" style="display: none;">Career Summary</strong><br>
-                <span class="lang-zh">王志光教授曾任高雄醫學大學產學營運處創新育成中心主任、產學組組長，以及生命科學院綜合組組長，並早年於工業技術研究院工業材料研究所擔任研究員。他專精於骨與軟骨組織工程、生物陶瓷 3D 列印、藥物傳遞系統及再生醫學材料，成果獲多項專利與國家新創獎肯定，並指導團隊成立新創公司，推動產學合作與臨床應用轉譯，致力於以創新醫材造福人類健康。</span>
-                <span class="lang-en" style="display: none;">Prof. Wang has served as Director of the Innovation Incubation Center, Division Chief of Industry-Academia Collaboration, and Section Chief at Kaohsiung Medical University, as well as Researcher at the Industrial Technology Research Institute. His expertise covers bone and cartilage tissue engineering, 3D bioceramic printing, drug delivery systems, and regenerative biomaterials. Recognized with multiple patents and National Innovation Awards, he has led teams to establish startups and promote technology transfer, advancing translational medicine and innovative biomedical applications.</span>
-              </div>
-            </div>
-          </div>
-          <div class="speaker">
-            <img class="photo" src="assets/img/speaker-許惠民.png" alt="William Sheu">
-            <div class="meta">
-              <div class="name">
-                <span class="lang-zh">許惠民</span>
-                <span class="lang-en" style="display: none;">William Sheu</span>
-              </div>
-              <div class="title-chip">
-                <span class="lang-zh">華碩電腦北美策略與夥伴關係副總裁</span>
-                <span class="lang-en" style="display: none;">VP Strategy & Partnership, ASUS North America</span>
-              </div>
-            </div>
-            <div class="bio-card">
-              <div class="bio-desc">
-                <strong class="lang-zh">學歷</strong><strong class="lang-en" style="display: none;">Education</strong><br>
-                <span class="lang-zh">• 美國加州大學洛杉磯分校 工程學碩士</span>
-                <span class="lang-en" style="display: none;">• Master of Engineering, University of California, Los Angeles</span><br><br>
-                <strong class="lang-zh">經歷</strong><strong class="lang-en" style="display: none;">Career Summary</strong><br>
-                <span class="lang-zh">William Sheu許副總裁透過策略投資、夥伴關係建立，以及在機器學習、物聯網和雲端技術方面的技術探索，推動產品創新和營運效率提升，擁有15年領導和高階主管職位經驗，具備優秀的人員管理和專案管理技能，在交付複雜大規模高可用性架構和系統方面擁有紮實經驗。</span>
-                <span class="lang-en" style="display: none;">Vice President William Sheu drive product innovation and operation efficiency with strategic investment, partnership engagement, and technology scouting in machine learning, IoT, and cloud. Has 15 years of experience in leadership and executive role with strong people and project management skills. Solid experience in delivering complicated large scale high availability architecture and system.</span>
-              </div>
-            </div>
-          </div>
-          <div class="speaker">
-            <img class="photo" src="assets/img/speaker-林冠宇.png" alt="林冠宇">
-            <div class="meta">
-              <div class="name">
-                <span class="lang-zh">林冠宇</span>
-                <span class="lang-en" style="display: none;">Kuan-Yu Lin</span>
-              </div>
-              <div class="title-chip">
-                <span class="lang-zh">史丹佛大學化學工程博士後研究員</span>
-                <span class="lang-en" style="display: none;">Stanford University Postdoc</span>
-              </div>
-            </div>
-            <div class="bio-card">
-              <div class="bio-desc">
-                <strong class="lang-zh">學歷</strong><strong class="lang-en" style="display: none;">Education</strong><br>
-                <span class="lang-zh">• 國立臺灣科技大學化學工程博士</span>
-                <span class="lang-en" style="display: none;">• Ph.D. in Chemical Engineering, National Taiwan University of Science and Technology</span><br><br>
-                <strong class="lang-zh">經歷</strong><strong class="lang-en" style="display: none;">Career Summary</strong><br>
-                <span class="lang-zh">林冠宇博士目前在史丹佛大學化學工程系擔任博士後研究員，研究專長為使用密度泛函理論（DFT）計算、分子動力學（MD）模擬與電池材料的建模來探討電化學，鋰金屬電池（LMBs）和鋅離子水系電池（AZIBs）的相關議題。近期研究重點在探討鋰金屬負極表面的電解液分解機制，透過調控溶劑化結構，促進形成穩定且具功能性的固態電解質介面（SEI）。此外，也針對不同官能基溶劑以及離子配位環境對界面反應機制與SEI組成的影響進行系統性研究。透過理論模擬與實驗合作的結合，期望能提供微觀角度的見解，作為開發高安全性與高性能電池材料的設計依據。</span>
-                <span class="lang-en" style="display: none;">Dr Kuan-Yu Lin, a postdoctoral researcher in the Department of Chemical Engineering at Stanford University, specializing in electrochemistry and lithium metal batteries (LMBs), with expertise in DFT calculations, molecular dynamics (MD) simulations, and computational modeling. My research focuses on the electrochemical decomposition of electrolytes on Li-metal anodes, aiming to tailor solvation structures to promote the formation of favorable SEI components. Recently, I have been investigating how specific solvent–ion coordination environments influence interfacial reaction pathways and SEI composition. By integrating theoretical simulations with experimental collaboration, my work provides molecular-level insights to support the design of safer and more efficient battery materials.</span>
-              </div>
-            </div>
-          </div>
-          <div class="speaker">
-            <img class="photo" src="assets/img/speaker-林哲民.png" alt="林哲民">
-            <div class="meta">
-              <div class="name">
-                <span class="lang-zh">林哲民</span>
-                <span class="lang-en" style="display: none;">Che-Min Lin</span>
-              </div>
-              <div class="title-chip">
-                <span class="lang-zh">史丹佛大學應用物理博士後研究員</span>
-                <span class="lang-en" style="display: none;">Stanford University Postdoc</span>
-              </div>
-            </div>
-            <div class="bio-card">
-              <div class="bio-desc">
-                <strong class="lang-zh">學歷</strong><strong class="lang-en" style="display: none;">Education</strong><br>
-                <span class="lang-zh">• 國立中山大學 物理學博士<br>• 國立中山大學 物理學學士</span>
-                <span class="lang-en" style="display: none;">• Ph.D. in Physics, National Sun Yat-Sen University<br>• B.S. in Physics, National Sun Yat-Sen University</span><br><br>
-                <strong class="lang-zh">經歷</strong><strong class="lang-en" style="display: none;">Career Summary</strong><br>
-                <span class="lang-zh">林哲民博士專長是理論與計算物理，致力於設計具有多重功能的量子材料。利用電腦與數學模型，預測哪些材料在極小尺度下，會展現出想要的特性，如：可導電的表面、可切換的磁性、或用電場就能改變材料的性質。簡單來說，我的研究就是用科學思維和模擬技術，讓材料在被做出來之前，就能知道它值不值得做。可大幅減少開發成本並加快創新步伐。目前已經成功被實驗驗證，包括：<br>1. 全世界少數同時具備拓樸特性與反鐵磁性的材料，有潛力用於低功耗運算；<br>2. 只靠一塊材料本身，就能產生自旋閥效應，為自旋元件開啟全新設計可能；<br>3. 可以用電場切換拓樸狀態與極化方向的材料，未來有望應用在記憶體與邊緣運算晶片中。</span>
-                <span class="lang-en" style="display: none;">Dr. Che-Min Lin, a theoretical physicist working at the intersection of quantum materials,computation, and real-world functionality. My research focuses on designing materials that can do more than one job at once：conduct electricity on the surface while insulating inside, switch magnetism on and off, or remember electric states without power. They're materials we can predict, simulate, and in many cases, already build. In simple terms, I use mathematics and computational tools to predict how a material will behave before it's even made. This greatly reduces trial-and-error in the lab and helps industry partners identify what's truly worth pursuing.<br>Some of the materials I've proposed have already been confirmed in experiments, such as:<br>1. One of the first magnetic topological materials with strong spin-orbit coupling, promising for ultra-low-power electronics；<br>2. A single-kagome-structure material that acts as its own spin valve, enabling magnetic memory without multilayer engineering；<br>3. A bilayer quantum material where electric fields can switch both topology and polarization, useful for future reconfigurable mrmory devices.</span>
-              </div>
-            </div>
-          </div>
-          <div class="speaker">
-            <img class="photo" src="assets/img/speaker-李泓邦.png" alt="李泓邦">
-            <div class="meta">
-              <div class="name">
-                <span class="lang-zh">李泓邦</span>
-                <span class="lang-en" style="display: none;">Hung-Pang Lee</span>
-              </div>
-              <div class="title-chip">
-                <span class="lang-zh">史丹佛大學生物工程與骨科系博後研究員</span>
-                <span class="lang-en" style="display: none;">Stanford University Postdoc</span>
-              </div>
-            </div>
-            <div class="bio-card">
-              <div class="bio-desc">
-                <strong class="lang-zh">學歷</strong><strong class="lang-en" style="display: none;">Education</strong><br>
-                <span class="lang-zh">• 德克薩斯農工大學 生物醫學工程學博士<br>• 成功大學 生物醫學工程學碩士<br>• 成功大學 生物醫學工程學學士</span>
-                <span class="lang-en" style="display: none;">• Ph.D. in Biomedical Engineering, Texas A&M University, TX<br>• M.S. in Biomedical Engineering, National Cheng Kung University, Taiwan<br>• B.S. in Biomedical Engineering, National Cheng Kung University, Taiwan</span><br><br>
-                <strong class="lang-zh">經歷</strong><strong class="lang-en" style="display: none;">Career Summary</strong><br>
-                <span class="lang-zh">李泓邦博士現任史丹佛大學 Fan Yang 實驗室博士後研究員，主要專注於推進 3D 生物列印於骨軟骨組織工程的應用。在此跨領域研究環境中，他積極投入於複雜組織結構的先進製造方法開發，特別針對骨與軟骨交界的再生挑戰。他的研究涵蓋創新生物材料與精準生物列印技術，最終目標是提升組織再生的效率與效果。</span>
-                <span class="lang-en" style="display: none;">Dr. Hung-Pang Lee currently in a postdoctoral position at the Fan Yang Lab, where my primary focus lies in advancing the field of 3D bioprinting for osteochondral tissue engineering. Within this dynamic research environment, actively involved in developing cutting-edge methodologies to fabricate complex tissue structures, specifically aiming at the intersection of bone and cartilage. Research pursuits extend to exploring innovative biomaterials and precise bioprinting techniques, with the ultimate goal of enhancing tissue regeneration capabilities.</span>
-              </div>
-            </div>
+          <div class="speaker-experience-preview">
+            <span class="lang-zh">吳誠文主任委員曾任國立清華大學副教授、教授，並陸續擔任清華大學計算機中心主任、電機系主任、電機資訊學院院長、副校長等職。其後任工研院系統晶片科技中心主任、資訊與通訊研究所所長...< 繼續閱讀 ></span>
+            <span class="lang-en" style="display: none;">Minister Cheng-Wen Wu has served as Associate Professor and Professor at National Tsing Hua University, with leadership roles including Director of Computer Center, Chair of Electrical Engineering Department...< 繼續閱讀 ></span>
           </div>
         </div>
+        <img class="speaker-photo-card" src="assets/img/speaker-吳誠文.png" alt="吳誠文">
+      </div>
+
+      <div class="speaker-card speaker-clickable"
+           data-speaker-name="李旺龍"
+           data-speaker-name-en="Wang-Long Li"
+           data-speaker-title="國科會科教發展及國際合作處處長"
+           data-speaker-title-en="Director, Department of International Cooperation and Science Education, NSTC"
+           data-speaker-education="• 國立成功大學 機械工程系博士<br>• 國立成功大學 機械工程系碩士<br>• 國立成功大學 機械工程系學士"
+           data-speaker-education-en="• Ph.D. in Mechanical Engineering, National Cheng Kung University<br>• M.S. in Mechanical Engineering, National Cheng Kung University<br>• B.S. in Mechanical Engineering, National Cheng Kung University"
+           data-speaker-experience="李旺龍處長曾任高雄應用科技大學副教授、教授、兼系主任，其後在國立成功大學擔任奈微所副教授、教授、兼代理所長及微奈米中心組長。亦擔任雲嘉南區域教學資源中心秘書與主任，以及成功大學教務處教學發展中心主任、副教務長等職務，歷練豐富，現任國科會科教處處長，推動學術國際合作與科教發展。"
+           data-speaker-experience-en="Dr. Wang‑Long Li served as faculty at National Kaohsiung University of Applied Sciences (as Associate Professor, Professor, and Department Chair), and later at National Cheng Kung University including roles as Associate Professor and Professor in the Institute of Applied Mechanics (with additional responsibilities as Acting Director and Head of the Micronanotechnology Center). He also held administrative roles in the regional teaching resource center and served in academic affairs leadership at NCKU. He currently leads the Department of International Cooperation and Science Education at NSTC, advancing national science education and international collaboration."
+           data-event-title="臺灣 × 全球科技人才大鏈結"
+           data-event-title-en="Bridging Global Innovation and Exceptional Talent">
+        <div class="speaker-info">
+          <div class="speaker-name-card">
+            <span class="lang-zh">李旺龍</span>
+            <span class="lang-en" style="display: none;">Wang-Long Li</span>
+          </div>
+          <div class="speaker-title-card">
+            <span class="lang-zh">・國科會科教發展及國際合作處處長</span>
+            <span class="lang-en" style="display: none;">・Director, Department of International Cooperation and Science Education, NSTC</span>
+          </div>
+          <div class="speaker-experience-preview">
+            <span class="lang-zh">李旺龍處長曾任高雄應用科技大學副教授、教授、兼系主任，其後在國立成功大學擔任奈微所副教授、教授、兼代理所長及微奈米中心組長。亦擔任雲嘉南區域教學資源中心秘書與主任...< 繼續閱讀 ></span>
+            <span class="lang-en" style="display: none;">Dr. Wang‑Long Li served as faculty at National Kaohsiung University of Applied Sciences (as Associate Professor, Professor, and Department Chair), and later at National Cheng Kung University including roles...< 繼續閱讀 ></span>
+          </div>
+        </div>
+        <img class="speaker-photo-card" src="assets/img/speaker-李旺龍.png" alt="李旺龍">
+      </div>
+
+      <div class="speaker-card speaker-clickable"
+           data-speaker-name="黃錫瑜"
+           data-speaker-name-en="Shi-Yu Huang"
+           data-speaker-title="國研院科技政策研究與資訊中心主任<br>國立清華大學電機工程學系教授"
+           data-speaker-title-en="Director, STPI-NARLabs<br>Professor, National Tsing Hua University"
+           data-speaker-education="• 美國加州大學聖塔芭芭拉分校 電機與計算機工程博士<br>• 國立台灣大學 電機工程學系碩士<br>• 國立台灣大學 電機工程學系學士"
+           data-speaker-education-en="• Ph.D. in Electrical and Computer Engineering, University of California, Santa Barbara<br>• M.S. & B.S. in Electrical Engineering, National Taiwan University"
+           data-speaker-experience="黃錫瑜教授曾任職於美國矽谷國民半導體與世大積體電路（後併入台積電），1999 年起於清華大學任教，並先後擔任清華大學積體電路設計技術中心主任、創新育成中心主任、南台科技大學副校長等職務，亦共同創立兆心科技。專精於積體電路設計、自動化與測試，致力於研發高可靠度與長壽命的「永保安康晶片」，推動台灣半導體創新。"
+           data-speaker-experience-en="Prof. Huang worked at National Semiconductor in Silicon Valley and at Acer Semiconductor Manufacturing (later merged with TSMC) before joining NTHU in 1999. He has served as Director of the IC Design Technology Center, Director of the Innovation Incubation Center, Vice President of Southern Taiwan University of Science and Technology, and co-founder of ChipStart Technology. His research integrates IC design, design automation, and testing, with the vision of developing highly reliable and long-lasting 'Everlasting Health Chips,' driving continuous innovation in Taiwan's semiconductor industry."
+           data-event-title="臺灣 × 全球科技人才大鏈結"
+           data-event-title-en="Bridging Global Innovation and Exceptional Talent">
+        <div class="speaker-info">
+          <div class="speaker-name-card">
+            <span class="lang-zh">黃錫瑜</span>
+            <span class="lang-en" style="display: none;">Shi-Yu Huang</span>
+          </div>
+          <div class="speaker-title-card">
+            <span class="lang-zh">・國研院科技政策研究與資訊中心主任<br>・國立清華大學電機工程學系教授</span>
+            <span class="lang-en" style="display: none;">・Director, STPI-NARLabs<br>・Professor, National Tsing Hua University</span>
+          </div>
+          <div class="speaker-experience-preview">
+            <span class="lang-zh">黃錫瑜教授曾任職於美國矽谷國民半導體與世大積體電路（後併入台積電），1999 年起於清華大學任教，並先後擔任清華大學積體電路設計技術中心主任、創新育成中心主任、南台科技大學副校長等職務...< 繼續閱讀 ></span>
+            <span class="lang-en" style="display: none;">Prof. Huang worked at National Semiconductor in Silicon Valley and at Acer Semiconductor Manufacturing (later merged with TSMC) before joining NTHU in 1999. He has served as Director of the IC Design Technology Center...< 繼續閱讀 ></span>
+          </div>
+        </div>
+        <img class="speaker-photo-card" src="assets/img/speaker-ShiYu-Huang.png" alt="黃錫瑜">
+      </div>
+
+      <div class="speaker-card speaker-clickable"
+           data-speaker-name="謝明修"
+           data-speaker-name-en="Ming-Hsiu Hsieh"
+           data-speaker-title="鴻海研究院量子計算研究所所長"
+           data-speaker-title-en="Director, Institute for Quantum Computing, Hon Hai Research Institute"
+           data-speaker-education="• 南加州大學 電子資訊理論博士"
+           data-speaker-education-en="• Ph.D. in Electrical and Information Theory, University of Southern California"
+           data-speaker-experience="謝明修博士自 2021 年 1 月起擔任鴻海研究院量子計算研究所所長。此前，他於 2014 至 2020 年間任教於澳洲雪梨科技大學（University of Technology Sydney），擔任副教授，並為該校量子軟體與資訊中心（Centre for Quantum Software and Information）成員。2010 至 2012 年間，他在英國劍橋大學擔任博士後研究員。更早之前，他於日本擔任日本科技振興機構（Japan Science and Technology Agency, JST）資助之 ERATO-SORST 量子計算與資訊計畫的研究科學家，並同時掛名於東京大學計算機科學系。2014 至 2018 年間，他曾獲得澳洲研究委員會（ARC）未來學者獎（Future Fellowship）。"
+           data-speaker-experience-en="Dr. Ming-Hsiu Hsieh has served as Director of the Quantum Computing Research Center at Foxconn Research Institute since January 2021. Prior to this position, he was an Associate Professor at the University of Technology Sydney from 2014 to 2020, where he was also a member of the Centre for Quantum Software and Information. From 2010 to 2012, he worked as a postdoctoral research fellow at the University of Cambridge in the United Kingdom. Earlier in his career, he served as a research scientist for the ERATO-SORST Quantum Computing and Information Project funded by the Japan Science and Technology Agency, while holding an affiliation with the Department of Computer Science at the University of Tokyo. He was awarded the Australian Research Council Future Fellowship from 2014 to 2018."
+           data-event-title="臺灣 × 全球科技人才大鏈結"
+           data-event-title-en="Bridging Global Innovation and Exceptional Talent">
+        <div class="speaker-info">
+          <div class="speaker-name-card">
+            <span class="lang-zh">謝明修</span>
+            <span class="lang-en" style="display: none;">Ming-Hsiu Hsieh</span>
+          </div>
+          <div class="speaker-title-card">
+            <span class="lang-zh">・鴻海研究院量子計算研究所所長</span>
+            <span class="lang-en" style="display: none;">・Director, Institute for Quantum Computing, Hon Hai Research Institute</span>
+          </div>
+          <div class="speaker-experience-preview">
+            <span class="lang-zh">謝明修博士自 2021 年 1 月起擔任鴻海研究院量子計算研究所所長。此前，他於 2014 至 2020 年間任教於澳洲雪梨科技大學，擔任副教授，並為該校量子軟體與資訊中心成員...< 繼續閱讀 ></span>
+            <span class="lang-en" style="display: none;">Dr. Ming-Hsiu Hsieh has served as Director of the Quantum Computing Research Center at Foxconn Research Institute since January 2021. Prior to this position, he was an Associate Professor at the University of Technology Sydney...< 繼續閱讀 ></span>
+          </div>
+        </div>
+        <img class="speaker-photo-card" src="assets/img/speaker-謝明修.png" alt="謝明修">
+      </div>
+
+      <div class="speaker-card speaker-clickable"
+           data-speaker-name="王志光"
+           data-speaker-name-en="Chih-Kuang Wang"
+           data-speaker-title="高雄醫學大學骨科學研究中心副主任"
+           data-speaker-title-en="Professor, Department of Medicinal and Applied Chemistry, Kaohsiung Medical University<br>Director of Industry-Academia Collaboration<br>Deputy Director, Orthopedic Research Center"
+           data-speaker-education="• 成功大學 材料科學暨工程學系博士<br>• 成功大學 材料科學暨工程學系碩士<br>• 逢甲大學 材料科學暨工程學系學士"
+           data-speaker-education-en="• Ph.D. in Materials Science and Engineering, National Cheng Kung University<br>• M.S. in Materials Science and Engineering, National Cheng Kung University<br>• B.S. in Materials Science and Engineering, Feng Chia University"
+           data-speaker-experience="王志光教授曾任高雄醫學大學產學營運處創新育成中心主任、產學組組長，以及生命科學院綜合組組長，並早年於工業技術研究院工業材料研究所擔任研究員。他專精於骨與軟骨組織工程、生物陶瓷 3D 列印、藥物傳遞系統及再生醫學材料，成果獲多項專利與國家新創獎肯定，並指導團隊成立新創公司，推動產學合作與臨床應用轉譯，致力於以創新醫材造福人類健康。"
+           data-speaker-experience-en="Prof. Wang has served as Director of the Innovation Incubation Center, Division Chief of Industry-Academia Collaboration, and Section Chief at Kaohsiung Medical University, as well as Researcher at the Industrial Technology Research Institute. His expertise covers bone and cartilage tissue engineering, 3D bioceramic printing, drug delivery systems, and regenerative biomaterials. Recognized with multiple patents and National Innovation Awards, he has led teams to establish startups and promote technology transfer, advancing translational medicine and innovative biomedical applications."
+           data-event-title="臺灣 × 全球科技人才大鏈結"
+           data-event-title-en="Bridging Global Innovation and Exceptional Talent">
+        <div class="speaker-info">
+          <div class="speaker-name-card">
+            <span class="lang-zh">王志光</span>
+            <span class="lang-en" style="display: none;">Chih-Kuang Wang</span>
+          </div>
+          <div class="speaker-title-card">
+            <span class="lang-zh">・高雄醫學大學骨科學研究中心副主任</span>
+            <span class="lang-en" style="display: none;">・Professor, Department of Medicinal and Applied Chemistry, Kaohsiung Medical University<br>・Director of Industry-Academia Collaboration<br>・Deputy Director, Orthopedic Research Center</span>
+          </div>
+          <div class="speaker-experience-preview">
+            <span class="lang-zh">王志光教授曾任高雄醫學大學產學營運處創新育成中心主任、產學組組長，以及生命科學院綜合組組長，並早年於工業技術研究院工業材料研究所擔任研究員。專精於骨與軟骨組織工程...< 繼續閱讀 ></span>
+            <span class="lang-en" style="display: none;">Prof. Wang has served as Director of the Innovation Incubation Center, Division Chief of Industry-Academia Collaboration, and Section Chief at Kaohsiung Medical University, as well as Researcher at the Industrial Technology Research Institute...< 繼續閱讀 ></span>
+          </div>
+        </div>
+        <img class="speaker-photo-card" src="assets/img/speaker-王志光.png" alt="王志光">
+      </div>
+
+      <div class="speaker-card speaker-clickable"
+           data-speaker-name="許惠民"
+           data-speaker-name-en="William Sheu"
+           data-speaker-title="華碩電腦北美策略與夥伴關係副總裁"
+           data-speaker-title-en="Vice President, North America Strategy and Partnerships, ASUS Computer"
+           data-speaker-education="• 美國加州大學洛杉磯分校 工程學碩士"
+           data-speaker-education-en="• M.S. in Engineering, University of California, Los Angeles"
+           data-speaker-experience="William Sheu許副總裁透過策略投資、夥伴關係建立，以及在機器學習、物聯網和雲端技術方面的技術探索，推動產品創新和營運效率提升，擁有15年領導和高階主管職位經驗，具備優秀的人員管理和專案管理技能，在交付複雜大規模高可用性架構和系統方面擁有紮實經驗。"
+           data-speaker-experience-en="Vice President William Sheu drive product innovation and operation efficiency with strategic investment, partnership engagement, and technology scouting in machine learning, IoT, and cloud. Has 15 years of experience in leadership and executive role with strong people and project management skills. Solid experience in delivering complicated large scale high availability architecture and system."
+           data-event-title="臺灣 × 全球科技人才大鏈結"
+           data-event-title-en="Bridging Global Innovation and Exceptional Talent">
+        <div class="speaker-info">
+          <div class="speaker-name-card">
+            <span class="lang-zh">許惠民</span>
+            <span class="lang-en" style="display: none;">William Sheu</span>
+          </div>
+          <div class="speaker-title-card">
+            <span class="lang-zh">・華碩電腦北美策略與夥伴關係副總裁</span>
+            <span class="lang-en" style="display: none;">・Vice President, North America Strategy and Partnerships, ASUS Computer</span>
+          </div>
+          <div class="speaker-experience-preview">
+            <span class="lang-zh">William Sheu許副總裁透過策略投資、夥伴關係建立，以及在機器學習、物聯網和雲端技術方面的技術探索，推動產品創新和營運效率提升，擁有15年領導和高階主管職位經驗...< 繼續閱讀 ></span>
+            <span class="lang-en" style="display: none;">Vice President William Sheu drive product innovation and operation efficiency with strategic investment, partnership engagement, and technology scouting in machine learning, IoT, and cloud...< 繼續閱讀 ></span>
+          </div>
+        </div>
+        <img class="speaker-photo-card" src="assets/img/speaker-許惠民.png" alt="許惠民">
+      </div>
+
+      <div class="speaker-card speaker-clickable"
+           data-speaker-name="林冠宇"
+           data-speaker-name-en="Kuan-Yu Lin"
+           data-speaker-title="史丹佛大學化學工程博士後研究員"
+           data-speaker-title-en="Postdoctoral Research Fellow, Department of Chemical Engineering, Stanford University"
+           data-speaker-education="• 國立臺灣科技大學化學工程博士"
+           data-speaker-education-en="• Ph.D. in Chemical Engineering, National Taiwan University of Science and Technology"
+           data-speaker-experience="林冠宇博士目前在史丹佛大學化學工程系擔任博士後研究員，研究專長為使用密度泛函理論（DFT）計算、分子動力學（MD）模擬與電池材料的建模來探討電化學，鋰金屬電池（LMBs）和鋅離子水系電池（AZIBs）的相關議題。近期研究重點在探討鋰金屬負極表面的電解液分解機制，透過調控溶劑化結構，促進形成穩定且具功能性的固態電解質介面（SEI）。此外，也針對不同官能基溶劑以及離子配位環境對界面反應機制與SEI組成的影響進行系統性研究。透過理論模擬與實驗合作的結合，期望能提供微觀角度的見解，作為開發高安全性與高性能電池材料的設計依據。"
+           data-speaker-experience-en="Dr Kuan-Yu Lin, a postdoctoral researcher in the Department of Chemical Engineering at Stanford University, specializing in electrochemistry and lithium metal batteries (LMBs), with expertise in DFT calculations, molecular dynamics (MD) simulations, and computational modeling. My research focuses on the electrochemical decomposition of electrolytes on Li-metal anodes, aiming to tailor solvation structures to promote the formation of favorable SEI components. Recently, I have been investigating how specific solvent–ion coordination environments influence interfacial reaction pathways and SEI composition. By integrating theoretical simulations with experimental collaboration, my work provides molecular-level insights to support the design of safer and more efficient battery materials."
+           data-event-title="臺灣 × 全球科技人才大鏈結"
+           data-event-title-en="Bridging Global Innovation and Exceptional Talent">
+        <div class="speaker-info">
+          <div class="speaker-name-card">
+            <span class="lang-zh">林冠宇</span>
+            <span class="lang-en" style="display: none;">Kuan-Yu Lin</span>
+          </div>
+          <div class="speaker-title-card">
+            <span class="lang-zh">・史丹佛大學化學工程博士後研究員</span>
+            <span class="lang-en" style="display: none;">・Postdoctoral Research Fellow, Department of Chemical Engineering, Stanford University</span>
+          </div>
+          <div class="speaker-experience-preview">
+            <span class="lang-zh">林冠宇博士目前在史丹佛大學化學工程系擔任博士後研究員，研究專長為使用密度泛函理論（DFT）計算、分子動力學（MD）模擬與電池材料的建模來探討電化學，鋰金屬電池和鋅離子水系電池的相關議題...< 繼續閱讀 ></span>
+            <span class="lang-en" style="display: none;">Dr Kuan-Yu Lin, a postdoctoral researcher in the Department of Chemical Engineering at Stanford University, specializing in electrochemistry and lithium metal batteries (LMBs), with expertise in DFT calculations...< 繼續閱讀 ></span>
+          </div>
+        </div>
+        <img class="speaker-photo-card" src="assets/img/speaker-林冠宇.png" alt="林冠宇">
+      </div>
+
+      <div class="speaker-card speaker-clickable"
+           data-speaker-name="林哲民"
+           data-speaker-name-en="Che-Min Lin"
+           data-speaker-title="史丹佛大學應用物理博士後研究員"
+           data-speaker-title-en="Postdoctoral Research Fellow in Applied Physics, Stanford University"
+           data-speaker-education="• 國立中山大學 物理學博士<br>• 國立中山大學 物理學學士"
+           data-speaker-education-en="• Ph.D. in Physics, National Sun Yat-sen University<br>• B.S. in Physics, National Sun Yat-sen University"
+           data-speaker-experience="林哲民博士專長是理論與計算物理，致力於設計具有多重功能的量子材料。利用電腦與數學模型，預測哪些材料在極小尺度下，會展現出想要的特性，如：可導電的表面、可切換的磁性、或用電場就能改變材料的性質。簡單來說，我的研究就是用科學思維和模擬技術，讓材料在被做出來之前，就能知道它值不值得做。可大幅減少開發成本並加快創新步伐。目前已經成功被實驗驗證，包括：<br>1. 全世界少數同時具備拓樸特性與反鐵磁性的材料，有潛力用於低功耗運算；<br>2. 只靠一塊材料本身，就能產生自旋閥效應，為自旋元件開啟全新設計可能；<br>3. 可以用電場切換拓樸狀態與極化方向的材料，未來有望應用在記憶體與邊緣運算晶片中。"
+           data-speaker-experience-en="Dr. Che-Min Lin, a theoretical physicist working at the intersection of quantum materials,computation, and real-world functionality. My research focuses on designing materials that can do more than one job at once：conduct electricity on the surface while insulating inside, switch magnetism on and off, or remember electric states without power. They're materials we can predict, simulate, and in many cases, already build. In simple terms, I use mathematics and computational tools to predict how a material will behave before it's even made. This greatly reduces trial-and-error in the lab and helps industry partners identify what's truly worth pursuing. Some of the materials I've proposed have already been confirmed in experiments, such as: 1. One of the first magnetic topological materials with strong spin-orbit coupling, promising for ultra-low-power electronics； 2. A single-kagome-structure material that acts as its own spin valve, enabling magnetic memory without multilayer engineering； 3. A bilayer quantum material where electric fields can switch both topology and polarization, useful for future reconfigurable mrmory devices."
+           data-event-title="臺灣 × 全球科技人才大鏈結"
+           data-event-title-en="Bridging Global Innovation and Exceptional Talent">
+        <div class="speaker-info">
+          <div class="speaker-name-card">
+            <span class="lang-zh">林哲民</span>
+            <span class="lang-en" style="display: none;">Che-Min Lin</span>
+          </div>
+          <div class="speaker-title-card">
+            <span class="lang-zh">・史丹佛大學應用物理博士後研究員</span>
+            <span class="lang-en" style="display: none;">・Postdoctoral Research Fellow in Applied Physics, Stanford University</span>
+          </div>
+          <div class="speaker-experience-preview">
+            <span class="lang-zh">林哲民博士專長是理論與計算物理，致力於設計具有多重功能的量子材料。利用電腦與數學模型，預測哪些材料在極小尺度下，會展現出想要的特性，如：可導電的表面、可切換的磁性...< 繼續閱讀 ></span>
+            <span class="lang-en" style="display: none;">Dr. Che-Min Lin, a theoretical physicist working at the intersection of quantum materials,computation, and real-world functionality. My research focuses on designing materials that can do more than one job at once...< 繼續閱讀 ></span>
+          </div>
+        </div>
+        <img class="speaker-photo-card" src="assets/img/speaker-林哲民.png" alt="林哲民">
+      </div>
+
+      <div class="speaker-card speaker-clickable"
+           data-speaker-name="李泓邦"
+           data-speaker-name-en="Hung-Pang Lee"
+           data-speaker-title="史丹佛大學生物工程與骨科系博後研究員"
+           data-speaker-title-en="Postdoctoral Research Fellow in Orthopedic Surgery and Bioengineering, Stanford University"
+           data-speaker-education="• 德克薩斯農工大學 生物醫學工程學博士<br>• 成功大學 生物醫學工程學碩士<br>• 成功大學 生物醫學工程學學士"
+           data-speaker-education-en="• Ph.D. in Biomedical Engineering, Texas A&M University<br>• M.S. in Biomedical Engineering, National Cheng Kung University<br>• B.S. in Biomedical Engineering, National Cheng Kung University"
+           data-speaker-experience="李泓邦博士現任史丹佛大學 Fan Yang 實驗室博士後研究員，主要專注於推進 3D 生物列印於骨軟骨組織工程的應用。在此跨領域研究環境中，他積極投入於複雜組織結構的先進製造方法開發，特別針對骨與軟骨交界的再生挑戰。他的研究涵蓋創新生物材料與精準生物列印技術，最終目標是提升組織再生的效率與效果。"
+           data-speaker-experience-en="Dr. Hung-Pang Lee currently in a postdoctoral position at the Fan Yang Lab, where my primary focus lies in advancing the field of 3D bioprinting for osteochondral tissue engineering. Within this dynamic research environment, actively involved in developing cutting-edge methodologies to fabricate complex tissue structures, specifically aiming at the intersection of bone and cartilage. Research pursuits extend to exploring innovative biomaterials and precise bioprinting techniques, with the ultimate goal of enhancing tissue regeneration capabilities."
+           data-event-title="臺灣 × 全球科技人才大鏈結"
+           data-event-title-en="Bridging Global Innovation and Exceptional Talent">
+        <div class="speaker-info">
+          <div class="speaker-name-card">
+            <span class="lang-zh">李泓邦</span>
+            <span class="lang-en" style="display: none;">Hung-Pang Lee</span>
+          </div>
+          <div class="speaker-title-card">
+            <span class="lang-zh">・史丹佛大學生物工程與骨科系博後研究員</span>
+            <span class="lang-en" style="display: none;">・Postdoctoral Research Fellow in Orthopedic Surgery and Bioengineering, Stanford University</span>
+          </div>
+          <div class="speaker-experience-preview">
+            <span class="lang-zh">李泓邦博士現任史丹佛大學 Fan Yang 實驗室博士後研究員，主要專注於推進 3D 生物列印於骨軟骨組織工程的應用。在此跨領域研究環境中，他積極投入於複雜組織結構的先進製造方法開發...< 繼續閱讀 ></span>
+            <span class="lang-en" style="display: none;">Dr. Hung-Pang Lee currently in a postdoctoral position at the Fan Yang Lab, where my primary focus lies in advancing the field of 3D bioprinting for osteochondral tissue engineering...< 繼續閱讀 ></span>
+          </div>
+        </div>
+        <img class="speaker-photo-card" src="assets/img/speaker-李泓邦.png" alt="李泓邦">
       </div>
     </div>
 
-    <h2 id="s4-about" class="section-title">活動簡介｜About</h2>
+    <h2 id="s4-about" class="section-title about-section">
+      <span class="lang-zh">活動簡介｜About</span>
+      <span class="lang-en" style="display: none;">About</span>
+    </h2>
     <div class="lang-zh">
       <p>半導體是全球戰略科技的核心動能，人工智慧、量子計算與新材料的快速突破，正重塑世界科技競局。</p>
       <p>作為系列論壇的壓軸場次，本活動將鏈結臺、美、日、韓的產學研領袖與史丹佛博士後研究人才，共同探討<span class="highlight-text">半導體、量子、材料創新與跨領域應用</span>的最新趨勢，並交流<span class="highlight-text">人才循環、國際合作與技術轉譯</span>的實務策略。</p>
@@ -3820,124 +4313,134 @@ strong {
           
           <div class="schedule-row">
             <div class="time-cell">08:30 - 09:00</div>
-            <div class="content-cell">報到與入場</div>
+            <div class="content-cell">報到與開場</div>
           </div>
           
           <div class="schedule-row">
             <div class="time-cell">09:00 - 09:05</div>
             <div class="content-cell">
-              歡迎暨開幕致詞
+              貴賓致詞
               <ul>
-                <li>黃錫瑜 <span class="title">/ 國研院科政中心主任</span></li>
-                <li>貴賓致詞：吳誠文 <span class="title">/ 國科會主委</span></li>
+                <li>李旺龍 <span class="title">/ 國科會科教發展及國際合作處處長</span></li>
               </ul>
             </div>
           </div>
           
           <div class="schedule-row">
             <div class="time-cell">09:05 - 09:10</div>
-            <div class="content-cell"><span class="lang-zh">大合照</span></div>
+            <div class="content-cell">
+              歡迎暨開幕致詞
+              <ul>
+                <li>黃錫瑜 <span class="title">/ 國研院科政中心主任</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="schedule-row section-header">
+            <div class="content-cell" style="display: flex; width: 100%; background: rgba(255, 255, 255, 0.1); color: white; text-align: center; justify-content: center; align-items: center; font-weight: 600; padding: 15px 20px;">場次一：利用先進半導體塑造人工智慧生態系及未來</div>
           </div>
           
           <div class="schedule-row">
             <div class="time-cell">09:10 - 10:10</div>
             <div class="content-cell">
-              <span class="lang-zh">半導體策略</span>
-              <ul>
-                <li><span class="role-tag lang-zh">引言人</span><br><span class="lang-zh">黃錫瑜</span> <span class="title lang-zh">/ 國研院科政中心主任</span></li>
-                <li><span class="role-tag lang-zh">專題演講人I</span><br><span class="lang-zh">許惠民</span> <span class="title lang-zh">/ 華碩北美策略與夥伴關係副總裁</span></li>
-                <li><span class="role-tag lang-zh">專題演講人II</span><br><span class="lang-zh">日本或韓國智庫領域專家</span></li>
+              <span class="role-tag">上半場引言人</span>
+              <ul style="margin-top: 8px;">
+                <li>黃錫瑜 <span class="title">/ 國研院科政中心主任</span></li>
+              </ul>
+              【半導體產業】
+              <ul style="margin-top: 8px;">
+                <li><span class="role-tag">專題演講人I</span><br>許惠民 <span class="title">/ 華碩北美策略與夥伴關係副總裁</span></li>
+                <li><span class="role-tag">專題演講人II</span><br>日本或韓國智庫領域專家</li>
               </ul>
             </div>
           </div>
           
           <div class="schedule-row">
             <div class="time-cell">10:10 - 10:30</div>
-            <div class="content-cell"><span class="lang-zh">中場休息</span></div>
+            <div class="content-cell">中場休息</div>
           </div>
           
           <div class="schedule-row">
             <div class="time-cell">10:30 - 11:20</div>
             <div class="content-cell">
-              <span class="lang-zh">量子技術</span>
+              【量子技術】
               <ul>
-                <li><span class="role-tag lang-zh">專題演講人III</span><br><span class="lang-zh">林哲民</span> <span class="title lang-zh">/ 史丹佛大學應用物理系博後</span><br><em class="lang-zh">拓樸材料啟動未來：從半導體瓶頸到量子科技契機- 解密下一代電子材料的關鍵角色</em></li>
-                <li><span class="role-tag lang-zh">專題演講人IV</span><br><span class="lang-zh">謝明修</span> <span class="title lang-zh">/ 鴻海研究院量子計算研究所所長</span></li>
+                <li><span class="role-tag">專題演講III</span><br>林哲民 <span class="title">/ 史丹佛大學應用物理系博後</span><br><em>拓樸材料啟動未來：從半導體瓶頸到量子科技契機- 解密下一代電子材料的關鍵角色</em></li>
+                <li><span class="role-tag">專題演講IV</span><br>謝明修 <span class="title">/ 鴻海研究院量子計算研究所所長</span></li>
               </ul>
             </div>
-          </div>
-          
-          <div class="schedule-row section-header">
-            <div class="content-cell" style="display: flex; width: 100%; background: rgba(255, 255, 255, 0.1); color: white; text-align: center; justify-content: center; align-items: center;"><span class="lang-zh">場次一：利用先進半導體推進人工智慧生態及未來</span></div>
           </div>
           
           <div class="schedule-row">
             <div class="time-cell">11:20 - 12:00</div>
             <div class="content-cell">
-              <span class="role-tag lang-zh">主持人</span>
+              <span class="role-tag">主持人</span>
               <ul style="margin-top: 8px;">
-                <li><span class="lang-zh">黃錫瑜</span> <span class="title lang-zh">/ 國研院科政中心主任</span></li>
+                <li>黃錫瑜 <span class="title">/ 國研院科政中心主任</span></li>
               </ul>
-              <span class="role-tag lang-zh">與談人</span>
+              <span class="role-tag">與談人</span>
               <ul style="margin-top: 8px;">
-                <li><span class="lang-zh">許惠民</span> <span class="title lang-zh">/ 華碩北美策略與夥伴關係副總裁</span></li>
-                <li><span class="lang-zh">林哲民</span> <span class="title lang-zh">/ 史丹佛大學應用物理系博後</span></li>
-                <li><span class="lang-zh">謝明修</span> <span class="title lang-zh">/ 鴻海研究院量子計算研究所所長</span></li>
-                <li><span class="lang-zh">日本或韓國智庫領域專家</span></li>
+                <li>許惠民 <span class="title">/ 華碩北美策略與夥伴關係副總裁</span></li>
+                <li>林哲民 <span class="title">/ 史丹佛大學應用物理系博後</span></li>
+                <li>謝明修 <span class="title">/ 鴻海研究院量子計算研究所所長</span></li>
+                <li>日本或韓國智庫領域專家</li>
               </ul>
             </div>
           </div>
           
           <div class="schedule-row">
             <div class="time-cell">12:00 - 14:00</div>
-            <div class="content-cell"><span class="lang-zh">午餐時間</span></div>
+            <div class="content-cell">午餐時間</div>
+          </div>
+
+          <div class="schedule-row section-header">
+            <div class="content-cell" style="display: flex; width: 100%; background: rgba(255, 255, 255, 0.1); color: white; text-align: center; justify-content: center; align-items: center; font-weight: 600; padding: 15px 20px;">場次二：從生醫到能源材料，跨領域創新如何塑造台灣的全球競爭力</div>
           </div>
           
           <div class="schedule-row">
             <div class="time-cell">14:00 - 15:00</div>
             <div class="content-cell">
-              <span class="lang-zh">生物工程技術</span>
-              <ul>
-                <li><span class="role-tag lang-zh">引言人</span><br><span class="lang-zh">李旺龍</span> <span class="title lang-zh">/ 國科會科教發展及國際合作處長</span></li>
-                <li><span class="role-tag lang-zh">專題演講人I</span><br><span class="lang-zh">王志光</span> <span class="title lang-zh">/ 高雄醫學大學骨科學研究中心副主任</span><br><em class="lang-zh">醫材醫材市場的創新挑戰：3D生物關反骨模型材料的技術發展、臨床應用、市場機遇、新創潛在挑戰</em></li>
-                <li><span class="role-tag lang-zh">專題演講人II</span><br><span class="lang-zh">李泓邦</span> <span class="title lang-zh">/ 史丹佛大學生物工程與骨科系博後</span></li>
+              <span class="role-tag">下半場引言人</span>
+              <ul style="margin-top: 8px;">
+                <li>李旺龍 <span class="title">/ 國科會科教發展及國際合作處長</span></li>
+              </ul>
+              【生物工程技術】
+              <ul style="margin-top: 8px;">
+                <li><span class="role-tag">專題演講I</span><br>王志光 <span class="title">/ 高雄醫學大學骨科學研究中心副主任</span><br><em>骨科醫材市場的關鍵拼圖：3D生物陶瓷骨移植醫材的技術突破、臨床應用、市場機遇、新創潛在挑戰</em></li>
+                <li><span class="role-tag">專題演講II</span><br>李泓邦 <span class="title">/ 史丹佛大學生物工程與骨科博後</span><br><em>3D生醫列印再定義：軟硬組織界面修復的創新解方</em></li>
               </ul>
             </div>
           </div>
           
           <div class="schedule-row">
             <div class="time-cell">15:00 - 15:10</div>
-            <div class="content-cell"><span class="lang-zh">中場休息</span></div>
+            <div class="content-cell">中場休息</div>
           </div>
           
           <div class="schedule-row">
             <div class="time-cell">15:10 - 16:00</div>
             <div class="content-cell">
-              <span class="lang-zh">先進材料與綠能</span>
+              【先進材料與綠能】
               <ul>
-                <li><span class="role-tag lang-zh">專題演講人III</span><br><span class="lang-zh">日本或韓國智庫領域專家</span></li>
-                <li><span class="role-tag lang-zh">專題演講人IV</span><br><span class="lang-zh">林冠宇</span> <span class="title lang-zh">/ 史丹佛大學化工系博後</span><br><em class="lang-zh">電池池材料精密：看不見的環境如何影響學家你的手機電池動</em></li>
+                <li><span class="role-tag">專題演講III</span><br>日本或韓國智庫領域專家</li>
+                <li><span class="role-tag">專題演講IV</span><br>林冠宇 <span class="title">/ 史丹佛大學化工系博後</span><br><em>鋰電池的祕密：看不見的界面如何影響你的手機與電動車</em></li>
               </ul>
             </div>
-          </div>
-          
-          <div class="schedule-row section-header">
-            <div class="content-cell" style="display: flex; width: 100%; background: rgba(255, 255, 255, 0.1); color: white; text-align: center; justify-content: center; align-items: center; font-weight: 600; padding: 15px 20px;"><span class="lang-zh">場次二：從生醫材料到能源材料，跨領域創新如何翻轉台灣的全球競爭力</span></div>
           </div>
           
           <div class="schedule-row">
             <div class="time-cell">16:00 - 16:30</div>
             <div class="content-cell">
-              <span class="role-tag lang-zh">主持人</span>
+              <span class="role-tag">主持人</span>
               <ul style="margin-top: 8px;">
-                <li><span class="lang-zh">李旺龍</span> <span class="title lang-zh">/ 國科會科教發展及國際合作處長</span></li>
+                <li>李旺龍 <span class="title">/ 國科會科教發展及國際合作處處長</span></li>
               </ul>
-              <span class="role-tag lang-zh">與談人</span>
+              <span class="role-tag">與談人</span>
               <ul style="margin-top: 8px;">
-                <li><span class="lang-zh">王志光</span> <span class="title lang-zh">/ 高雄醫學大學骨科學研究中心副主任</span></li>
-                <li><span class="lang-zh">李泓邦</span> <span class="title lang-zh">/ 史丹佛大學生物工程與骨科系博後</span></li>
-                <li><span class="lang-zh">林冠宇</span> <span class="title lang-zh">/ 史丹佛大學化工系博後</span></li>
-                <li><span class="lang-zh">日本或韓國智庫領域專家</span></li>
+                <li>王志光 <span class="title">/ 高雄醫學大學骨科學研究中心副主任</span></li>
+                <li>李泓邦 <span class="title">/ 史丹佛大學生物工程與骨科博後</span></li>
+                <li>林冠宇 <span class="title">/ 史丹佛大學化工系博後</span></li>
+                <li>日本或韓國智庫領域專家</li>
               </ul>
             </div>
           </div>
@@ -5418,6 +5921,127 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('顯示精彩回顧區塊'); // 調試信息
       }
     });
+  });
+});
+</script>
+
+<script>
+/* 講師彈出視窗功能 */
+document.addEventListener('DOMContentLoaded', function() {
+  // 創建彈出視窗HTML
+  const modalHTML = `
+    <div class="speaker-modal-overlay" id="speakerModal">
+      <div class="speaker-modal">
+        <div class="modal-header">
+          <div class="modal-event-title" id="modalEventTitle"></div>
+          <button class="modal-close" id="modalClose">×</button>
+        </div>
+        <div class="modal-content">
+          <!-- 上方經歷區域 - 全寬 -->
+          <div class="experience-section">
+            <div class="bio-text" id="modalExperience"></div>
+          </div>
+          
+          <!-- 下方資訊區域 - 左側資訊 + 右側照片 -->
+          <div class="speaker-info-row">
+            <div class="modal-left">
+              <div class="speaker-name-modal" id="modalSpeakerName"></div>
+              <div class="speaker-title-modal" id="modalSpeakerTitle"></div>
+              <div class="divider"></div>
+              <div class="education-section">
+                <div class="experience-list" id="modalEducation"></div>
+              </div>
+            </div>
+            <div class="modal-right">
+              <img class="modal-photo" id="modalPhoto" src="" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  // 將彈出視窗添加到body
+  document.body.insertAdjacentHTML('beforeend', modalHTML);
+  
+  const modal = document.getElementById('speakerModal');
+  const modalClose = document.getElementById('modalClose');
+  
+  // 為所有可點擊的講師照片和卡片添加事件監聽器
+  document.querySelectorAll('.speaker-clickable').forEach(element => {
+    element.style.cursor = 'pointer';
+    element.addEventListener('click', function() {
+      // 檢查當前語言設定
+      const currentLang = document.querySelector('.language-toggle-track').getAttribute('data-active');
+      const isEnglish = currentLang === 'en';
+      
+      // 獲取講師資料（根據語言選擇對應的資料）
+      const speakerName = isEnglish ? 
+        (this.getAttribute('data-speaker-name-en') || this.getAttribute('data-speaker-name')) :
+        this.getAttribute('data-speaker-name');
+      
+      const speakerTitle = isEnglish ?
+        (this.getAttribute('data-speaker-title-en') || this.getAttribute('data-speaker-title')) :
+        this.getAttribute('data-speaker-title');
+      
+      const speakerEducation = isEnglish ?
+        (this.getAttribute('data-speaker-education-en') || this.getAttribute('data-speaker-education')) :
+        this.getAttribute('data-speaker-education');
+      
+      const speakerExperience = isEnglish ?
+        (this.getAttribute('data-speaker-experience-en') || this.getAttribute('data-speaker-experience')) :
+        this.getAttribute('data-speaker-experience');
+      
+      const eventTitle = isEnglish ?
+        (this.getAttribute('data-event-title-en') || this.getAttribute('data-event-title')) :
+        this.getAttribute('data-event-title');
+      
+      // 如果是照片，取照片的src；如果是卡片，取卡片內照片的src
+      let photoSrc;
+      if (this.tagName === 'IMG') {
+        photoSrc = this.src;
+      } else {
+        const photo = this.querySelector('.speaker-photo-card') || this.querySelector('.photo');
+        photoSrc = photo ? photo.src : '';
+      }
+      
+      // 填充彈出視窗內容
+      document.getElementById('modalEventTitle').textContent = eventTitle;
+      document.getElementById('modalSpeakerName').textContent = speakerName;
+      document.getElementById('modalSpeakerTitle').innerHTML = speakerTitle;
+      document.getElementById('modalEducation').innerHTML = speakerEducation;
+      document.getElementById('modalExperience').innerHTML = speakerExperience;
+      document.getElementById('modalPhoto').src = photoSrc;
+      document.getElementById('modalPhoto').alt = speakerName;
+      
+      // 顯示彈出視窗
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden'; // 防止背景滾動
+      document.body.classList.add('modal-open'); // 添加模態視窗狀態類別
+    });
+  });
+  
+  // 關閉彈出視窗
+  function closeModal() {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // 恢復背景滾動
+    document.body.classList.remove('modal-open'); // 移除模態視窗狀態類別
+  }
+  
+  modalClose.addEventListener('click', closeModal);
+  
+  // 點擊背景關閉彈出視窗
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+  
+  // ESC鍵關閉彈出視窗
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal.style.display === 'flex') {
+      closeModal();
+    }
   });
 });
 </script>
