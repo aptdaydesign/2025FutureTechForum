@@ -8,10 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Montserrat:wght@500&display=swap" rel="stylesheet">
 
 <style>
-/* ===== 字型（Akrobat） ===== */
-@font-face{ font-family:'Akrobat'; src:url('assets/fonts/Akrobat-Regular.otf') format('opentype'); font-weight:400; font-style:normal; font-display:swap; }
-@font-face{ font-family:'Akrobat'; src:url('assets/fonts/Akrobat-SemiBold.otf') format('opentype'); font-weight:500; font-style:normal; font-display:swap; }
-
 /* ===== 基礎 ===== */
 html,body{ margin:0; background:#000; color:#fff; overflow-x:hidden; }
 html{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,"PingFang TC","Heiti TC",sans-serif; scroll-behavior: smooth; }
@@ -107,7 +103,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 .bar-item[aria-current="true"]{ --c1:var(--tab-active); --c2:#a71858; animation:gradFlow 3s ease-in-out infinite alternate; }
 @keyframes gradFlow{ from{background-position:0% 50%} to{background-position:100% 50%} }
 .bar-arrow{ font-size:clamp(18px, 2.2vw, 28px); line-height:1; display:inline-block; animation:arrowOsc .8s ease-in-out infinite alternate; }
-.bar-date{  font-family:"Akrobat","Noto Sans TC",sans-serif; font-weight:500; font-size:clamp(20px, 2.4vw, 32px); letter-spacing:.025em; white-space:nowrap; }
+.bar-date{  font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif; font-weight:500; font-size:clamp(20px, 2.4vw, 32px); letter-spacing:.025em; white-space:nowrap; }
 @keyframes arrowOsc{ from{transform:translateX(-3px)} to{transform:translateX(3px)} }
 
 /* ===== 活動資訊（含與 HERO 的黑→藍銜接） ===== */
@@ -149,7 +145,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
   color:#ddd;
   margin-top:5px;
   margin-bottom:0;
-  font-family:"Akrobat","Noto Sans TC",sans-serif;
+  font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
 }
 
 /* 內容主標 */
@@ -175,7 +171,7 @@ section:not(.event-info) h2 {
   padding: 0 20px;
   font-size: clamp(24px,2.2vw,36px);
   font-weight: 600;
-  font-family: 'Akrobat-SemiBold', 'Noto Sans TC', Arial, sans-serif;
+  font-family: "Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
   box-sizing: border-box;
 }
 
@@ -331,7 +327,7 @@ section:not(.event-info) h2 {
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-family: "Akrobat", "Noto Sans TC", sans-serif;
+  font-family: "Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
 }
 
 .lang-btn:hover {
@@ -671,8 +667,8 @@ section:not(.event-info) h2 {
 }
 
 .action-btn .btn-icon {
-  width: 18px;
-  height: 18px;
+  width: 32px;
+  height: 32px;
   fill: currentColor;
   flex-shrink: 0;
 }
@@ -721,8 +717,8 @@ section:not(.event-info) h2 {
   }
   
   .action-btn .btn-icon {
-    width: 16px;
-    height: 16px;
+    width: 32px;
+    height: 32px;
   }
 }
 
@@ -1752,6 +1748,25 @@ strong {
   border-bottom: 2px solid rgba(255, 255, 255, 0.2);
 }
 
+/* 支援三欄表格的header */
+.schedule-header.three-column {
+  grid-template-columns: 180px 1fr 1fr;
+}
+
+/* 分欄內容樣式 */
+.content-col-split {
+  padding: 16px 12px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #fff;
+  text-align: center;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.content-col-split:last-child {
+  border-right: none;
+}
+
 .schedule-header > div {
   padding: 16px 12px;
   font-weight: 600;
@@ -1771,6 +1786,102 @@ strong {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* 支援三欄表格的row */
+.schedule-row.three-column {
+  grid-template-columns: 180px 1fr 1fr;
+}
+
+/* 分欄內容cell樣式 */
+.content-cell-split {
+  padding: 16px 20px;
+  line-height: 1.6;
+  color: #cfd6e6;
+  font-weight: 500;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.content-cell-split:last-child {
+  border-right: none;
+}
+
+/* 合併欄位樣式 */
+.content-cell-merged {
+  grid-column: span 2;
+  padding: 16px 20px;
+  line-height: 1.6;
+  color: #cfd6e6;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Table樣式 */
+.agenda-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: transparent;
+  table-layout: fixed;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.agenda-table th {
+  padding: 16px 12px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #fff;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.agenda-table th:first-child {
+  width: 180px;
+}
+
+/* 只有不是第一欄的格子畫左邊界，rowspan 也不會斷線 */
+.agenda-table th + th {
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.agenda-table td {
+  padding: 12px 16px;
+  line-height: 1.4;
+  color: #cfd6e6;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  vertical-align: middle;
+  font-family: inherit;
+  letter-spacing: 0;
+  word-spacing: 0;
+}
+
+/* 只有不是第一欄的格子畫左邊界 */
+.agenda-table td + td {
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 第一欄（時間）統一樣式 */
+.agenda-table .time-cell {
+  width: 180px;
+  font-weight: 600;
+  font-size: 18px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+  text-align: center;
+  white-space: nowrap;
+  padding: 16px 12px;
+  font-family: "Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+}
+
+.agenda-table .content-cell-split {
+  font-weight: 500;
+  text-align: center;
+}
+
+.agenda-table .content-cell-merged {
+  text-align: center;
+  font-weight: 500;
+}
+
 .schedule-row:last-child {
   border-bottom: none;
 }
@@ -1779,12 +1890,12 @@ strong {
   background: rgba(255, 255, 255, 0.06);
 }
 
-.time-cell {
+.schedule-row .time-cell {
   padding: 16px 12px;
   text-align: center;
-  font-family: "Akrobat", "Noto Sans TC", sans-serif;
+  font-family: "Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
   font-weight: 600;
-  font-size: 22px;
+  font-size: 18px;
   color: #fff;
   border-right: 1px solid rgba(255, 255, 255, 0.1);
   background: rgba(255, 255, 255, 0.03);
@@ -2394,12 +2505,14 @@ strong {
     </a>
   </button>
   
-  <!-- 下載按鈕 -->
+  <!-- 下載按鈕 - 暫時取消 -->
+  <!--
   <a href="#" class="download-btn" onclick="return false;" title="下載檔案" aria-label="下載">
     <svg viewBox="0 0 24 24" class="icon">
       <path d="M12 3v11m0 0l4-4m-4 4l-4-4M5 18h14v3H5z" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </a>
+  -->
   
   <!-- 回到頂部按鈕 -->
   <a href="#" class="scroll-top-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" title="回到頂部" aria-label="回到頂部">
@@ -2466,8 +2579,8 @@ strong {
               <span class="lang-en" style="display: none;">Time</span>
             </div>
             <div>
-              <span class="lang-zh">加州時間｜2025 年 9 月 25 日（四）17:00 至 19:00<br>臺灣時間｜2025 年 9 月 26 日（五）8:00 至 10:00</span>
-              <span class="lang-en" style="display: none;">California Time | September 25th, 2025, 17:00 – 19:00<br>Taiwan Time | September 26th, 2025, 8:00 – 10:00</span>
+              <span class="lang-zh">美國時間｜2025 年 9 月 25 日（四）15:30 至 17:45<br>臺灣時間｜2025 年 9 月 26 日（五）07:30 至 09:45</span>
+              <span class="lang-en" style="display: none;">California Time | September 25th, 2025, 15:30 – 17:45<br>Taiwan Time | September 26th, 2025, 07:30 – 09:45</span>
             </div>
           </div>
           <div class="topic-row place">
@@ -2558,7 +2671,7 @@ strong {
             <div class="meta">
               <div class="name lang-zh">David Horsley</div>
               <div class="name lang-en" style="display: none;">David Horsley</div>
-              <div class="title-chip lang-zh">TDK Invensense 新興感測器事業部 技術長<br>加州大學戴維斯分校機械與航太工程學系教授<br>加州大學柏克萊分校兼任教授</div>
+              <div class="title-chip lang-zh">TDK Invensense 新興感測器事業部 技術長<br>美國加州大學戴維斯分校機械與航太工程學系教授<br>美國加州大學柏克萊分校兼任教授</div>
               <div class="title-chip lang-en" style="display: none;">CTO, Emerging Sensors Business Unit, TDK Invensense<br>Professor, UC Davis<br>Adjunct Professor, UC Berkeley</div>
             </div>
             <div class="bio-card">
@@ -2654,7 +2767,7 @@ strong {
       <div class="time-toggle-track">
         <div class="time-toggle-slider"></div>
         <button class="time-option active" data-timezone="california">
-          <span class="lang-zh">加州時間</span>
+          <span class="lang-zh">美國時間</span>
           <span class="lang-en" style="display: none;">California Time</span>
         </button>
         <button class="time-option" data-timezone="taiwan">
@@ -2667,7 +2780,7 @@ strong {
     <div class="schedule-table">
       <div class="schedule-header">
         <div class="time-col">
-          <span class="california-time-zh" style="display: none;">加州時間</span>
+          <span class="california-time-zh" style="display: none;">美國時間</span>
           <span class="california-time-en" style="display: none;">California Time</span>
           <span class="taiwan-time-zh">台灣時間</span>
           <span class="taiwan-time-en" style="display: none;">Taiwan Time</span>
@@ -2680,8 +2793,8 @@ strong {
       
       <div class="schedule-row">
         <div class="time-cell">
-          <span class="california-time">4:30 – 5:00 PM</span>
-          <span class="taiwan-time" style="display: none;">7:30 – 8:00 AM</span>
+          <span class="california-time">16:30 – 17:00</span>
+          <span class="taiwan-time" style="display: none;">7:30 – 8:00</span>
         </div>
         <div class="content-cell">
           <span class="lang-zh">報到與入場</span>
@@ -2691,22 +2804,22 @@ strong {
       
       <div class="schedule-row">
         <div class="time-cell">
-          <span class="california-time">5:00 – 5:05 PM</span>
-          <span class="taiwan-time" style="display: none;">8:00 – 8:05 AM</span>
+          <span class="california-time">17:00 – 17:05</span>
+          <span class="taiwan-time" style="display: none;">8:00 – 8:05</span>
         </div>
         <div class="content-cell">
           <div class="lang-zh">
-            開場致詞
+            開場與歡迎致詞
             <ul>
-              <li>吳誠文 主委 <span class="title">/ 國科會</span></li>
-              <li>黃錫瑜 主任 <span class="title">/ 國研院科政中心</span></li>
+              <li>黃漢森 <span class="title">/ Taiwan ST Hub執行委員暨Willard R. 和Inez Kerr Bell工程學院教授</span></li>
+              <li>黃錫瑜 <span class="title">/ 國研院科政中心主任</span></li>
             </ul>
           </div>
           <div class="lang-en" style="display: none;">
-            Opening Remarks
+            Opening Remarks & Welcome Address
             <ul>
-              <li>Cheng-Wen Wu, Chairman <span class="title">/ NSTC</span></li>
-              <li>Sy-Yen Kuo, Director <span class="title">/ NARL STPI</span></li>
+              <li>Han-Sen Huang <span class="title">/ Taiwan ST Hub Executive Committee & Willard R. and Inez Kerr Bell Professor of Engineering</span></li>
+              <li>Sy-Yen Huang <span class="title">/ Director, NARL STPI</span></li>
             </ul>
           </div>
         </div>
@@ -2714,94 +2827,91 @@ strong {
       
       <div class="schedule-row">
         <div class="time-cell">
-          <span class="california-time">5:05 – 5:20 PM</span>
-          <span class="taiwan-time" style="display: none;">8:05 – 8:20 AM</span>
+          <span class="california-time">17:05 – 17:15</span>
+          <span class="taiwan-time" style="display: none;">8:05 – 8:15</span>
         </div>
         <div class="content-cell">
           <div class="lang-zh">
-            專題演講：未來半導體人才
+            【台積電觀點】<br>
+            <span style="font-style: italic; opacity: 0.7; font-size: 0.9em; font-weight: 300;">所需人才與實務需求分享</span>
             <ul>
-              <li>David Horsley 教授 <span class="title">/ 加州大學戴維斯分校</span></li>
+              <li><span class="role-tag">主講者</span><span style="font-size: 0.8em;"> (台積電五大事業群經理)</span><br>Chun-Yu Lin <span class="title">/ 人資部經理，《走進台積電: 公司概況與文化》</span></li>
+              <li>Tzung-Hua Lin <span class="title">/ 研發部經理，《研發組織概述》</span></li>
+              <li>Steve Wang <span class="title">/ 設計技術平台經理，《設計與技術平台概述》</span></li>
+              <li>待定 <span class="title">/ 營運部經理，《最佳營運實務》</span></li>
+              <li>Wenping Shen <span class="title">/ 資訊部經理，《台積電IT－數位卓越》</span></li>
             </ul>
           </div>
           <div class="lang-en" style="display: none;">
-            Keynote Speech: Future Semiconductor Talent
+            【TSMC Perspective】<br>
+            <span style="font-style: italic; opacity: 0.7; font-size: 0.9em; font-weight: 300;">Talent Requirements and Practical Needs Sharing</span>
             <ul>
+              <li><span class="role-tag">主講者</span><span style="font-size: 0.8em;"> (Five TSMC Business Group Managers)</span><br>Chun-Yu Lin <span class="title">/ HR Manager, "Introduction to TSMC: Company Overview & Culture"</span></li>
+              <li>Tzung-Hua Lin <span class="title">/ R&D Manager, "R&D Organization Overview"</span></li>
+              <li>Steve Wang <span class="title">/ Design Technology Platform Manager, "Design & Technology Platform Overview"</span></li>
+              <li>TBD <span class="title">/ Operations Manager, "Best Operational Practices"</span></li>
+              <li>Wen-Ping Shen <span class="title">/ IT Manager, "TSMC IT - Digital Excellence"</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <div class="schedule-row">
+        <div class="time-cell">
+          <span class="california-time">17:15 – 17:30</span>
+          <span class="taiwan-time" style="display: none;">8:15 – 8:30</span>
+        </div>
+        <div class="content-cell">
+          <span class="lang-zh">茶敘短暫休息</span>
+          <span class="lang-en" style="display: none;">Tea Break</span>
+        </div>
+      </div>
+      
+      <div class="schedule-row">
+        <div class="time-cell">
+          <span class="california-time">17:30 – 17:50</span>
+          <span class="taiwan-time" style="display: none;">8:30 – 8:50</span>
+        </div>
+        <div class="content-cell">
+          <div class="lang-zh">
+            【專題演講】<br>
+            <span style="font-style: italic; opacity: 0.7; font-size: 0.9em; font-weight: 300;">未來半導體人才</span>
+            <ul>
+              <li><span class="role-tag">主講者</span><br>David Horsley <span class="title">/ 加州大學戴維斯分校教授</span></li>
+            </ul>
+          </div>
+          <div class="lang-en" style="display: none;">
+            【Keynote Speech】<br>
+            <span style="font-style: italic; opacity: 0.7; font-size: 0.9em; font-weight: 300;">Future Semiconductor Talent</span>
+            <ul>
+              <li><span class="role-tag">Keynote Speaker</span><br>Professor David Horsley <span class="title">/ UC Davis</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <div class="schedule-row">
+        <div class="time-cell">
+          <span class="california-time">17:50 – 18:05</span>
+          <span class="taiwan-time" style="display: none;">8:50 – 9:05</span>
+        </div>
+        <div class="content-cell">
+          <div class="lang-zh">
+            【綜合座談Q&A】
+            <ul>
+              <li><span class="role-tag">主持人</span><br>朱宸佐 <span class="title">/ 史丹佛大學法學院客座資深研究員</span></li>
+              <li><span class="role-tag">與談人</span><span style="font-size: 0.8em;"> (台積電2位業務單位經理)</span><br>黃漢森 <span class="title">/ 台積電首席科學家</span></li>
+              <li>David Horsley <span class="title">/ 加州大學戴維斯分校教授</span></li>
+            </ul>
+          </div>
+          <div class="lang-en" style="display: none;">
+            【Panel Discussion Q&A】
+            <ul>
+              <li><span class="role-tag">Moderator</span><br>Wesley Chu <span class="title">/ Visiting Senior Research Fellow, Stanford Law School</span></li>
+              <li><span class="role-tag">Panelists</span><span style="font-size: 0.8em;"> (2 TSMC Business Unit Managers)</span><br>Han-Sen Huang <span class="title">/ TSMC Chief Scientist</span></li>
               <li>Professor David Horsley <span class="title">/ UC Davis</span></li>
             </ul>
           </div>
-        </div>
-      </div>
-      
-      <div class="schedule-row">
-        <div class="time-cell">
-          <span class="california-time">5:20 – 5:35 PM</span>
-          <span class="taiwan-time" style="display: none;">8:20 – 8:35 AM</span>
-        </div>
-        <div class="content-cell">
-          <div class="lang-zh">
-            專題演講．講者邀請中
-            <ul>
-              <li>美國應材公司</li>
-            </ul>
-          </div>
-          <div class="lang-en" style="display: none;">
-            Keynote Speech · Speaker TBA
-            <ul>
-              <li>Applied Materials USA</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      
-      <div class="schedule-row">
-        <div class="time-cell">
-          <span class="california-time">5:35 – 6:35 PM</span>
-          <span class="taiwan-time" style="display: none;">8:35 – 9:35 AM</span>
-        </div>
-        <div class="content-cell">
-          <div class="lang-zh">
-            台積電觀點：所需人才與實務需求分享
-            <ul>
-              <li>沈文冰 副處長 <span class="title">/ 智慧應用整合處</span></li>
-              <li>Tzung-Hua Lin <span class="title">/ R&D Manager</span></li>
-              <li>Steve Wang <span class="title">/ Design Technology Platforms Manager</span></li>
-              <li>Chun-Yu Lin <span class="title">/ HR Manager</span></li>
-              <li>TBC <span class="title">/ Operation Manager</span></li>
-            </ul>
-          </div>
-          <div class="lang-en" style="display: none;">
-            TSMC Perspective: Talent Needs & Practical Requirements
-            <ul>
-              <li>Wen-Ping Shen, Deputy Director <span class="title">/ Intelligent Applications & Integration</span></li>
-              <li>Tzung-Hua Lin <span class="title">/ R&D Manager</span></li>
-              <li>Steve Wang <span class="title">/ Design Technology Platforms Manager</span></li>
-              <li>Chun-Yu Lin <span class="title">/ HR Manager</span></li>
-              <li>TBC <span class="title">/ Operation Manager</span></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      
-      <div class="schedule-row">
-        <div class="time-cell">
-          <span class="california-time">6:35 – 6:45 PM</span>
-          <span class="taiwan-time" style="display: none;">9:35 – 9:45 AM</span>
-        </div>
-        <div class="content-cell">
-          <span class="lang-zh">現場問答</span>
-          <span class="lang-en" style="display: none;">Q&A Session</span>
-        </div>
-      </div>
-      
-      <div class="schedule-row">
-        <div class="time-cell">
-          <span class="california-time">6:45 – 8:00 PM</span>
-          <span class="taiwan-time" style="display: none;">9:45 – 11:00 AM</span>
-        </div>
-        <div class="content-cell">
-          <span class="lang-zh">茶會暨交流（僅限現場參與者）</span>
-          <span class="lang-en" style="display: none;">Networking Reception (On-site attendees only)</span>
         </div>
       </div>
     </div>
@@ -3022,7 +3132,7 @@ strong {
         <div class="content-cell">
           AI 的模型與運算技術的演變
           <ul>
-            <li>黃錫霖 <span class="title">/ 千逢科技股份有限公司執行長</span></li>
+            <li><span class="role-tag">主講者</span><br>黃錫霖 <span class="title">/ 千逢科技股份有限公司執行長</span></li>
           </ul>
         </div>
       </div>
@@ -3030,9 +3140,10 @@ strong {
       <div class="schedule-row">
         <div class="time-cell">11:05 – 11:35</div>
         <div class="content-cell">
-          技術分享：從自旋到拓樸的材料革新
+          【專題演講】<br>
+          <span style="font-style: italic; opacity: 0.7; font-size: 0.9em; font-weight: 300;">從自旋到拓樸： 時代新材料如何驅動邊緣運算革新</span>
           <ul>
-            <li>林哲民 <span class="title">/ 美國史丹佛大學應用物理系博士</span></li>
+            <li><span class="role-tag">主講者</span><br>林哲民 <span class="title">/ 美國史丹佛大學應用物理系博士</span></li>
           </ul>
         </div>
       </div>
@@ -3040,8 +3151,8 @@ strong {
       <div class="schedule-row">
         <div class="time-cell">11:35 – 12:05</div>
         <div class="content-cell">
-          綜合座談：從學術到產業，邊緣運算應用場域的實務與挑戰
-          <br><br>
+          【綜合座談】<br>
+          <span style="font-style: italic; opacity: 0.7; font-size: 0.9em; font-weight: 300;">從學術到產業，邊緣運算應用場域的關鍵實務與挑戰</span><br>
           <span class="role-tag">主持人</span>
           <ul style="margin-top: 8px;">
             <li>黃錫瑜 <span class="title">/ 國研院科政中心主任</span></li>
@@ -3051,14 +3162,6 @@ strong {
             <li>黃錫霖 <span class="title">/ 千逢科技股份有限公司執行長</span></li>
             <li>林哲民 <span class="title">/ 美國史丹佛大學應用物理博後</span></li>
           </ul>
-        </div>
-      </div>
-      
-      <div class="schedule-row">
-        <div class="time-cell">12:05 – 12:30</div>
-        <div class="content-cell">
-          <strong>餐盒分享</strong><br>
-          <span style="font-weight: normal;">會後貴賓午宴席</span>
         </div>
       </div>
     </div>
@@ -3179,7 +3282,7 @@ strong {
           </div>
           <div class="topic-row">
             <div class="pill">形式</div>
-            <div>實體會場：免費報名，即日起至額滿為止</div>
+            <div>實體會場：免費（採審核制）<br>*本場活動為2天全日活動，無法單獨報名。<br>論壇期間將提供午餐及全天茶水，誠摯邀請您全程參與</div>
           </div>
         </div>
       </div>
@@ -3238,93 +3341,80 @@ strong {
     <h2 id="s3-agenda" class="section-title">活動議程｜Agenda</h2>
     
     <div class="schedule-table">
-      <div class="schedule-header">
-        <div class="time-col">時間</div>
-        <div class="content-col">活動內容</div>
-      </div>
-      
-      <div class="schedule-row">
-        <div class="time-cell">09:00 - 09:10</div>
-        <div class="content-cell">
-          <strong>報到與開場</strong>
-          <ul>
-            <li>工作坊簡介、講師介紹、學員自我介紹</li>
-          </ul>
-        </div>
-      </div>
-      
-      <div class="schedule-row">
-        <div class="time-cell">09:10 - 09:15</div>
-        <div class="content-cell">
-          <strong>貴賓致詞</strong>
-          <ul>
-            <li>黃錫瑜 <span class="title">/ 國研院科政中心主任</span></li>
-          </ul>
-        </div>
-      </div>
-      
-      <div class="schedule-row">
-        <div class="time-cell">09:15 - 10:30</div>
-        <div class="content-cell">
-          <strong>單元一：AI 工具在政策分析中的應用趨勢</strong>
-          <ul>
-            <li>政策資料的類型與挑戰</li>
-            <li>AI 在文本、數據與圖像處理的角色</li>
-            <li>介紹常用工具（ChatGPT、Claude、Power BI + Copilot、Polis、Tableau AI、Kumu.ai 等）</li>
-          </ul>
-        </div>
-      </div>
-      
-      <div class="schedule-row">
-        <div class="time-cell">10:30 - 10:45</div>
-        <div class="content-cell"><strong>茶敘與交流</strong></div>
-      </div>
-      
-      <div class="schedule-row">
-        <div class="time-cell">10:45 - 12:00</div>
-        <div class="content-cell">
-          <strong>單元二：AI 資料視覺化與動態圖表實作</strong>
-          <ul>
-            <li>研究資料如何視覺化（含時間序列、分區圖、互動圖）</li>
-            <li>使用 Power BI/ Tableau AI 實作研究數據儀表板</li>
-            <li>快速建立 AI 驅動的互動圖表與故事版（Storytelling Dashboard）</li>
-          </ul>
-        </div>
-      </div>
-      
-      <div class="schedule-row">
-        <div class="time-cell">12:00 - 13:00</div>
-        <div class="content-cell"><strong>午餐與自由討論</strong></div>
-      </div>
-      
-      <div class="schedule-row">
-        <div class="time-cell">13:00 - 14:30</div>
-        <div class="content-cell">
-          <strong>單元三：縱貫資料分析的策略與工具應用</strong>
-          <ul>
-            <li>什麼是縱貫資料（panel / longitudinal data）？</li>
-            <li>追蹤大數據資料庫變化的 AI 工具應用（如：R/Python 套件、LlamaIndex 結合向量資料庫等）</li>
-            <li>案例分析：不同地區/時間的長期追蹤資料整理與分析</li>
-          </ul>
-        </div>
-      </div>
-      
-      <div class="schedule-row">
-        <div class="time-cell">14:30 - 14:45</div>
-        <div class="content-cell"><strong>短暫休息</strong></div>
-      </div>
-      
-      <div class="schedule-row">
-        <div class="time-cell">14:45 - 16:00</div>
-        <div class="content-cell">
-          <strong>單元四：小組實作與成果簡報</strong>
-          <ul>
-            <li>小組選擇一組縱貫資料主題（可提供 2–3 套開放資料集）</li>
-            <li>使用 AI 工具進行視覺化或縱貫分析</li>
-            <li>簡短報告成果、AI 工具使用心得分享</li>
-          </ul>
-        </div>
-      </div>
+      <table class="agenda-table">
+        <thead>
+          <tr>
+            <th class="time-col">時間</th>
+            <th class="content-col-split">11月21日(五)</th>
+            <th class="content-col-split">11月24日(一)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="time-cell">9:00-9:10</td>
+            <td class="content-cell-split">報到與入場</td>
+            <td class="content-cell-split" rowspan="2">報到與開場</td>
+          </tr>
+          
+          <tr>
+            <td class="time-cell">9:10-9:15</td>
+            <td class="content-cell-split">
+              開場與歡迎致詞<br>
+              黃錫瑜 <span class="title">/ 國研院科政中心主任</span>
+            </td>
+            <!-- 這裡的第三列由上一行的rowspan覆蓋 -->
+          </tr>
+          
+          <tr>
+            <td class="time-cell">9:15-10:30</td>
+            <td class="content-cell-merged" colspan="2">
+              單元一：AI 工具在政策分析中的應用趨勢
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="time-cell">10:30-10:45</td>
+            <td class="content-cell-merged" colspan="2">
+              茶敘與交流
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="time-cell">10:45-12:00</td>
+            <td class="content-cell-merged" colspan="2">
+              單元二：AI 資料視覺化與動態圖表實作
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="time-cell">12:00-13:00</td>
+            <td class="content-cell-merged" colspan="2">
+              午餐與自由討論
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="time-cell">13:00-14:30</td>
+            <td class="content-cell-merged" colspan="2">
+              單元三：縱貫資料分析的策略與工具應用
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="time-cell">14:30-14:45</td>
+            <td class="content-cell-merged" colspan="2">
+              短暫休息
+            </td>
+          </tr>
+          
+          <tr>
+            <td class="time-cell">14:45-16:00</td>
+            <td class="content-cell-merged" colspan="2">
+              單元四：小組實作與成果簡報
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     <!-- 注意事項區域 -->
@@ -3461,12 +3551,27 @@ strong {
                 <span class="lang-en" style="display: none;">Cheng-Wen Wu</span>
               </div>
               <div class="title-chip">
-                <span class="lang-zh">國科會主委<br>加州大學聖塔芭芭拉電機工程博士</span>
-                <span class="lang-en" style="display: none;">NSTC Minister<br>UC Santa Barbara EE PhD</span>
+                <span class="lang-zh">國科會主委</span>
+                <span class="lang-en" style="display: none;">NSTC Minister</span>
               </div>
             </div>
             <div class="bio-card">
-              <div class="bio-desc"></div>
+              <div class="bio-desc">
+                <span class="lang-zh">
+                  <strong>學歷</strong><br>
+                  • 美國加州大學聖塔芭芭拉分校 電子與計算機工程系碩士、博士<br>
+                  • 國立臺灣大學 電機工程學系學士<br><br>
+                  <strong>經歷</strong><br>
+                  吳誠文主任委員曾任國立清華大學副教授、教授，並陸續擔任清華大學計算機中心主任、電機系主任、電機資訊學院院長、副校長等職。其後任工研院系統晶片科技中心主任、資訊與通訊研究所所長、工研院南分院執行長、副總及首席技術專家。亦曾擔任成功大學副校長、南臺科技大學校長與國家運動科學中心董事長，具豐富學術與行政領導經歷。自2024年5月起兼任行政院政務委員及國科會主任委員
+                </span>
+                <span class="lang-en" style="display: none;">
+                  <strong>Education</strong><br>
+                  • M.S. & Ph.D. in Electronic and Computer Engineering, University of California, Santa Barbara<br>
+                  • B.S. in Electrical Engineering, National Taiwan University<br><br>
+                  <strong>Career Summary</strong><br>
+                  Dr. Cheng-Wen Wu previously served as Assistant Professor and Professor at National Tsing Hua University, where he also held leadership roles including Director of the Computer Center, Chair of the Department of Electrical Engineering, Dean of the College of Electrical and Computer Engineering, and Vice President. He later served at ITRI as Director of the System-on-Chip Technology Center, Director of the Institute of Communications and Information Systems, and Executive roles including SVP and Chief Technical Expert. He also held leadership positions at National Cheng Kung University and Southern Taiwan University of Science and Technology, and served as Chairman of the National Sports Science Center. He assumed his current role as NSTC Chairperson and Minister without Portfolio in May 2024
+                </span>
+              </div>
             </div>
           </div>
           <div class="speaker">
@@ -3477,12 +3582,27 @@ strong {
                 <span class="lang-en" style="display: none;">Wang-Long Li</span>
               </div>
               <div class="title-chip">
-                <span class="lang-zh">國科會科教發展及國際合作處處長<br>成功大學機械博士</span>
-                <span class="lang-en" style="display: none;">NSTC Director<br>NCKU Mechanical Engineering PhD</span>
+                <span class="lang-zh">國科會科教發展及國際合作處處長</span>
+                <span class="lang-en" style="display: none;">NSTC Director</span>
               </div>
             </div>
             <div class="bio-card">
-              <div class="bio-desc"></div>
+              <div class="bio-desc">
+                <span class="lang-zh">
+                  <strong>學歷</strong><br>
+                  • 國立成功大學 機械工程系博士<br>
+                  • 國立成功大學 機械工程系碩士<br>
+                  • 國立成功大學 機械工程系學士<br><br>
+                  <strong>經歷</strong><br>
+                  李旺龍處長曾任高雄應用科技大學副教授、教授、兼系主任，其後在國立成功大學擔任奈微所副教授、教授、兼代理所長及微奈米中心組長。亦擔任雲嘉南區域教學資源中心秘書與主任，以及成功大學教務處教學發展中心主任、副教務長等職務，歷練豐富，現任國科會科教處處長，推動學術國際合作與科教發展。
+                </span>
+                <span class="lang-en" style="display: none;">
+                  <strong>Education</strong><br>
+                  • B.S., M.S., and Ph.D. in Mechanical Engineering, National Cheng Kung University<br><br>
+                  <strong>Career Summary</strong><br>
+                  Dr. Wang‑Long Li served as faculty at National Kaohsiung University of Applied Sciences (as Associate Professor, Professor, and Department Chair), and later at National Cheng Kung University including roles as Associate Professor and Professor in the Institute of Applied Mechanics (with additional responsibilities as Acting Director and Head of the Micronanotechnology Center). He also held administrative roles in the regional teaching resource center and served in academic affairs leadership at NCKU. He currently leads the Department of International Cooperation and Science Education at NSTC, advancing national science education and international collaboration
+                </span>
+              </div>
             </div>
           </div>
           <div class="speaker">
@@ -3578,7 +3698,7 @@ strong {
             <div class="bio-card">
               <div class="bio-desc">
                 <strong class="lang-zh">學歷</strong><strong class="lang-en" style="display: none;">Education</strong><br>
-                <span class="lang-zh">• 加州大學洛杉磯分校 工程學碩士</span>
+                <span class="lang-zh">• 美國加州大學洛杉磯分校 工程學碩士</span>
                 <span class="lang-en" style="display: none;">• Master of Engineering, University of California, Los Angeles</span><br><br>
                 <strong class="lang-zh">經歷</strong><strong class="lang-en" style="display: none;">Career Summary</strong><br>
                 <span class="lang-zh">William Sheu許副總裁透過策略投資、夥伴關係建立，以及在機器學習、物聯網和雲端技術方面的技術探索，推動產品創新和營運效率提升，擁有15年領導和高階主管職位經驗，具備優秀的人員管理和專案管理技能，在交付複雜大規模高可用性架構和系統方面擁有紮實經驗。</span>
@@ -4107,24 +4227,18 @@ strong {
         <!-- 活動一 -->
         <div class="highlight-card">
           <div class="card-left">
-            <div class="event-date">9/25<span style="font-size: 0.6em;">（加州）</span> 9/26<span style="font-size: 0.6em;">（臺灣）</span></div>
+            <div class="event-date">9月25日<span style="font-size: 0.6em;">（美國）</span> 9月26日<span style="font-size: 0.6em;">（臺灣）</span></div>
             <div class="event-title-zh">未來半導體人才趨勢論壇：產學對話</div>
             <div class="event-title-en">Empowering the Future of Semiconductor：Bridging Industry and Academia</div>
           </div>
           <div class="card-right">
             <button class="action-btn video-btn">
-              <svg class="btn-icon" viewBox="0 0 24 24" width="24" height="24">
-                <polygon points="5,3 19,12 5,21"/>
-              </svg>
+              <img class="btn-icon" src="assets/img/svg-youtube.svg" alt="" width="50" height="50">
               回顧影片
             </button>
             <button class="action-btn video-btn">
-              <svg class="btn-icon" viewBox="0 0 24 24" width="24" height="24">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                <polyline points="7,10 12,15 17,10"/>
-                <line x1="12" y1="15" x2="12" y2="3"/>
-              </svg>
-              影像下載
+              <img class="btn-icon" src="assets/img/svg-download.svg" alt="" width="50" height="50">
+              精彩照片
             </button>
           </div>
         </div>
@@ -4132,24 +4246,18 @@ strong {
         <!-- 活動二 -->
         <div class="highlight-card">
           <div class="card-left">
-            <div class="event-date">10/14</div>
+            <div class="event-date">10月14日</div>
             <div class="event-title-zh">大語言模型運算需求之 Edge AI 晶片設計與實踐經驗</div>
             <div class="event-title-en">Powering the Future of Large Language Models with Edge AI Chips</div>
           </div>
           <div class="card-right">
             <button class="action-btn video-btn">
-              <svg class="btn-icon" viewBox="0 0 24 24" width="24" height="24">
-                <polygon points="5,3 19,12 5,21"/>
-              </svg>
+              <img class="btn-icon" src="assets/img/svg-youtube.svg" alt="" width="50" height="50">
               回顧影片
             </button>
             <button class="action-btn video-btn">
-              <svg class="btn-icon" viewBox="0 0 24 24" width="24" height="24">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                <polyline points="7,10 12,15 17,10"/>
-                <line x1="12" y1="15" x2="12" y2="3"/>
-              </svg>
-              影像下載
+              <img class="btn-icon" src="assets/img/svg-download.svg" alt="" width="50" height="50">
+              精彩照片
             </button>
           </div>
         </div>
@@ -4157,23 +4265,17 @@ strong {
         <!-- 活動三 -->
         <div class="highlight-card">
           <div class="card-left">
-            <div class="event-date">11/21、11/24</div>
+            <div class="event-date">11月21日、11月24日</div>
             <div class="event-title-zh">系列創新人才培育工作坊<br>數據驅動的政策洞察：統計分析與AI工具應用</div>
           </div>
           <div class="card-right">
             <button class="action-btn video-btn">
-              <svg class="btn-icon" viewBox="0 0 24 24" width="24" height="24">
-                <polygon points="5,3 19,12 5,21"/>
-              </svg>
+              <img class="btn-icon" src="assets/img/svg-youtube.svg" alt="" width="50" height="50">
               回顧影片
             </button>
             <button class="action-btn video-btn">
-              <svg class="btn-icon" viewBox="0 0 24 24" width="24" height="24">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                <polyline points="7,10 12,15 17,10"/>
-                <line x1="12" y1="15" x2="12" y2="3"/>
-              </svg>
-              影像下載
+              <img class="btn-icon" src="assets/img/svg-download.svg" alt="" width="50" height="50">
+              精彩照片
             </button>
           </div>
         </div>
@@ -4181,24 +4283,18 @@ strong {
         <!-- 活動四 -->
         <div class="highlight-card">
           <div class="card-left">
-            <div class="event-date">12/15</div>
+            <div class="event-date">12月15日</div>
             <div class="event-title-zh">臺灣 × 全球科技人才大鏈結</div>
             <div class="event-title-en">Bridging Global Innovation and Exceptional Talent</div>
           </div>
           <div class="card-right">
             <button class="action-btn video-btn">
-              <svg class="btn-icon" viewBox="0 0 24 24" width="24" height="24">
-                <polygon points="5,3 19,12 5,21"/>
-              </svg>
+              <img class="btn-icon" src="assets/img/svg-youtube.svg" alt="" width="50" height="50">
               回顧影片
             </button>
             <button class="action-btn video-btn">
-              <svg class="btn-icon" viewBox="0 0 24 24" width="24" height="24">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                <polyline points="7,10 12,15 17,10"/>
-                <line x1="12" y1="15" x2="12" y2="3"/>
-              </svg>
-              影像下載
+              <img class="btn-icon" src="assets/img/svg-download.svg" alt="" width="50" height="50">
+              精彩照片
             </button>
           </div>
         </div>
