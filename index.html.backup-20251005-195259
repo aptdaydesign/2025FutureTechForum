@@ -5169,9 +5169,9 @@ strong {
 <!-- ===== HERO&#x53F3;&#x4E0A;&#x89D2;&#x61F8;&#x6D6E;&#x6A6B;&#x5411;&#x8868;&#x55AE;&#xFF08;&#x5713;&#x89D2;&#x78E8;&#x7802;&#x73BB;&#x7483;&#x8CEA;&#x611F;&#xFF0C;&#x6ED1;&#x904E;logo&#x5F8C;&#x6D6E;&#x73FE;&#xFF09; ===== -->
 <div id="floatingTabBar" class="floating-tab-bar">
   <ul>
-    <li><a href="#s2-speakers">&#x4EAE;&#x9EDE;&#x8B1B;&#x8005;</a></li>
-    <li><a href="#s2-about">&#x6D3B;&#x52D5;&#x7C21;&#x4ECB;</a></li>
-    <li><a href="#s2-agenda">&#x6D3B;&#x52D5;&#x8B70;&#x7A0B;</a></li>
+    <li><a href="#speakers">&#x4EAE;&#x9EDE;&#x8B1B;&#x8005;</a></li>
+    <li><a href="#about">&#x6D3B;&#x52D5;&#x7C21;&#x4ECB;</a></li>
+    <li><a href="#agenda">&#x6D3B;&#x52D5;&#x8B70;&#x7A0B;</a></li>
     <li><a href="#" data-event="highlights">&#x7CBE;&#x5F69;&#x56DE;&#x9867;</a></li>
   </ul>
 </div>
@@ -5454,8 +5454,8 @@ updateFloatingOffset();
 window.addEventListener('resize', updateFloatingOffset);
 document.addEventListener('DOMContentLoaded', () => {
   updateFloatingOffset();
-  // &#x521D;&#x59CB;&#x5316;&#x6D6E;&#x52D5;&#x8868;&#x55AE;&#x9328;&#x9EDE;&#xFF08;&#x9810;&#x8A2D;s2&#x6D3B;&#x52D5;&#xFF09;
-  updateFloatingMenuAnchors('s2');
+  // &#x521D;&#x59CB;&#x5316;&#x6D6E;&#x52D5;&#x8868;&#x55AE;&#x9328;&#x9EDE;&#xFF08;&#x9810;&#x8A2D;&#x7B2C;&#x4E00;&#x5834;&#xFF09;
+  updateFloatingMenuAnchors('s1');
 });
 
 // &#x6DFB;&#x52A0;&#x6E2C;&#x91CF;&#x529F;&#x80FD;
