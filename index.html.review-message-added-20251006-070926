@@ -5949,17 +5949,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /* &#x7CBE;&#x5F69;&#x56DE;&#x9867;&#x6309;&#x9215;&#x529F;&#x80FD; */
 document.addEventListener('DOMContentLoaded', function() {
-  // 統一處理所有回顧按鈕（包括影片與照片）
+  // &#x7D71;&#x4E00;&#x8655;&#x7406;&#x6240;&#x6709;&#x56DE;&#x9867;&#x6309;&#x9215;&#xFF08;&#x5305;&#x62EC;&#x5F71;&#x7247;&#x8207;&#x7167;&#x7247;&#xFF09;
   document.querySelectorAll('.video-btn').forEach(btn => {
     btn.addEventListener('click', function() {
-      alert('相關影音資訊將於活動後上傳，敬請期待');
+      alert('&#x76F8;&#x95DC;&#x5F71;&#x97F3;&#x8CC7;&#x8A0A;&#x5C07;&#x65BC;&#x6D3B;&#x52D5;&#x5F8C;&#x4E0A;&#x50B3;&#xFF0C;&#x656C;&#x8ACB;&#x671F;&#x5F85;');
     });
   });
 
-  // 影像下載按鈕功能
+  // &#x4FDD;&#x7559;&#x539F;&#x6709;&#x7684;download-btn&#x529F;&#x80FD;&#xFF08;&#x5982;&#x679C;&#x6709;&#x7684;&#x8A71;&#xFF09;
   document.querySelectorAll('.download-btn').forEach(btn => {
     btn.addEventListener('click', function() {
-      alert('相關影音資訊將於活動後上傳，敬請期待');
+      alert('&#x76F8;&#x95DC;&#x5F71;&#x97F3;&#x8CC7;&#x8A0A;&#x5C07;&#x65BC;&#x6D3B;&#x52D5;&#x5F8C;&#x4E0A;&#x50B3;&#xFF0C;&#x656C;&#x8ACB;&#x671F;&#x5F85;');
     });
   });
 
