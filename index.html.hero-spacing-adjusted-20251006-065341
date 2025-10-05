@@ -79,9 +79,9 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 .hero-img{ position:absolute; max-width:100%; height:auto; pointer-events:none; user-select:none; opacity:1; z-index: 2; }
 
 /* \4E09 \5F35 \5716 \FF08 \4EE5  1920\00D7 860 \6A19 \5B9A \FF09  */
-.hero-logo{     top:calc( 60/860*100%); left:calc(210/1920*100%); width:calc(496/1920*100%); animation:slideInLeft 1s ease-out forwards .2s; } /* 縮小20%: 620 -> 496 */
-.hero-title{    top:calc(280/860*100%); left:calc(210/1920*100%); width:calc(940/1920*100%); animation:slideInUp   1s ease-out forwards .6s; } /* 往上移20px: 300->280 */
-.hero-subtitle{ top:calc(640/860*100%); left:calc(210/1920*100%); width:calc(1500/1920*100%); animation:slideInUp   1s ease-out forwards 1s; }
+.hero-logo{     top:calc( 40/860*100%); left:calc(210/1920*100%); width:calc(496/1920*100%); animation:slideInLeft 1s ease-out forwards .2s; } /* 往上移20px: 60->40 */
+.hero-title{    top:calc(250/860*100%); left:calc(210/1920*100%); width:calc(940/1920*100%); animation:slideInUp   1s ease-out forwards .6s; } /* 往上移50px，間距210px */
+.hero-subtitle{ top:calc(540/860*100%); left:calc(210/1920*100%); width:calc(1500/1920*100%); animation:slideInUp   1s ease-out forwards 1s; } /* 往上移100px，間距290px */
 
 @keyframes slideInLeft{ from{ transform:translateX(-50px); opacity:0 } to{ transform:translateX(0); opacity:1 } }
 @keyframes slideInUp  { from{ transform:translateY(40px); opacity:0 } to{ transform:translateY(0);  opacity:1 } }

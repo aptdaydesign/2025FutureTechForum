@@ -80,7 +80,7 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 
 /* \4E09 \5F35 \5716 \FF08 \4EE5  1920\00D7 860 \6A19 \5B9A \FF09  */
 .hero-logo{     top:calc( 60/860*100%); left:calc(210/1920*100%); width:calc(496/1920*100%); animation:slideInLeft 1s ease-out forwards .2s; } /* 縮小20%: 620 -> 496 */
-.hero-title{    top:calc(280/860*100%); left:calc(210/1920*100%); width:calc(940/1920*100%); animation:slideInUp   1s ease-out forwards .6s; } /* 往上移20px: 300->280 */
+.hero-title{    top:calc(300/860*100%); left:calc(210/1920*100%); width:calc(752/1920*100%); animation:slideInUp   1s ease-out forwards .6s; } /* 縮小20%: 940 -> 752 */
 .hero-subtitle{ top:calc(640/860*100%); left:calc(210/1920*100%); width:calc(1500/1920*100%); animation:slideInUp   1s ease-out forwards 1s; }
 
 @keyframes slideInLeft{ from{ transform:translateX(-50px); opacity:0 } to{ transform:translateX(0); opacity:1 } }
@@ -1316,8 +1316,7 @@ strong {
   .hero-subtitle{ 
     top:56vw; /* \5F80 \4E0B \79FB \FF1A \5F9E  52vw \6539 \70BA  56vw */
     left:var(--edge); 
-    width: calc(100vw - (var(--edge) * 2)) !important; /* \8207 \6D3B \52D5 \9078 \55AE \5B8C \5168 \7B49 \5BEC  */
-    max-width: calc(100vw - (var(--edge) * 2)) !important;
+    width:68vw; /* \8ABF \6574 \70BA  68vw */
     content: url("assets/img/hero-subtitle-m.svg"); /* \624B \6A5F \7248 \4F7F \7528 \5C08 \7528 \5716 \7247  */
   }
 
@@ -1333,22 +1332,13 @@ strong {
   .topic-wrap{ margin:8px auto 12px; }
   .topic-badge{ 
     margin-top:12px; 
-    max-width: calc(100vw - (var(--edge) * 2)) !important; /* \4F7F \7528 \8207 hero-subtitle\7B49 \5BEC \7684 \8A08 \7B97  */
-    width: auto !important; /* \8B93 \5BEC \5EA6 \6839 \64DA \5167 \5BB9 \8ABF \6574  */
-    margin-left: auto !important;
-    margin-right: auto !important;
+    max-width: calc(100vw - 40px); /* \8207  2\00D7 2 \9078 \55AE \540C \5BEC \FF1A \6263 \9664 \5DE6 \53F3  20px \908A \8DDD  */
+    width: 100%;
     box-sizing: border-box;
-    padding: 20px 24px; /* \6E1B \5C11 padding\907F \514D \8D85 \51FA  */
-    min-width: auto; /* \79FB \9664 \6700 \5C0F \5BEC \5EA6 \9650 \5236  */
   }
   .topic-badge .topic-en{ margin-top:4px }
 
   /* \65E5 \671F \9078 \55AE  - \820A \898F \5247 \5DF2 \79FB \9664 \FF0C \4F7F \7528 \6700 \5F8C \7684 \4FEE \6B63 \7248 \672C  */
-  .event-bar {
-    left: var(--edge) !important; /* \8207 hero-subtitle\5DE6 \5C0D \9F4A  */
-    width: calc(100vw - (var(--edge) * 2)) !important; /* \8207 hero-subtitle\5B8C \5168 \7B49 \5BEC  */
-    right: auto !important;
-  }
   .event-bar .bar{
     grid-template-columns: repeat(3, 1fr); /* 3\5217 \55AE \884C \4F48 \5C40  */
     gap: clamp(4px, 1.1vw, 8px); /* \9069 \7576 \9593 \8DDD  */
