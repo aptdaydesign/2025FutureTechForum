@@ -3227,13 +3227,21 @@ strong {
   width: 105px;
   height: 105px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
   animation: rotate 20s linear infinite;
-  box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+  background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+}
+
+/* 當顯示精彩回顧時的紫色背景 */
+[data-event="highlights"] .button__circle {
+  background: linear-gradient(135deg, #6B46C1 0%, #9F7AEA 100%);
+}
+
+/* 當顯示立即報名時的橘色背景 */
+[data-event="signup"] .button__circle {
+  background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
 }
 
 .button__finger {
@@ -3242,11 +3250,6 @@ strong {
   /* \79FB \9664 \6FFE \93E1 \6548 \679C \FF0C \76F4 \63A5 \4F7F \7528  SVG \7684 \539F \59CB \8272 \5F69  */
   /* \53CD \5411 \65CB \8F49 \62B5 \6D88 \7236 \5143 \7D20 \7684 \65CB \8F49 \6548 \679C  */
   animation: counterRotate 20s linear infinite;
-}
-
-.button:hover .button__circle {
-  transform: scale(1.1);
-  box-shadow: 0 6px 30px rgba(255, 107, 53, 0.5);
 }
 
 .button__text {
@@ -3415,20 +3418,6 @@ strong {
   opacity: 1;
 }
 
-.scroll-top-btn:hover {
-  background: rgba(255,255,255,0.15);
-  border-color: rgba(255,255,255,0.3);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(0,0,0,.3);
-}
-
-.download-btn:hover {
-  background: rgba(255,255,255,0.15);
-  border-color: rgba(255,255,255,0.3);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(0,0,0,.3);
-}
-
 /* \6309 \58D3 \56DE \994B  - \4F7F \7528  filter \800C \975E  opacity\FF0C \907F \514D \6BDB \73BB \7483 \9583 \720D  */
 .download-btn.pressed, .scroll-top-btn.pressed{
   filter: brightness(0.8);
@@ -3444,38 +3433,9 @@ strong {
 }
 
 /* \79FB \9664 \4E0D \518D \9700 \8981 \7684 \507D \5143 \7D20 \52D5 \756B  */
-.download-btn:hover img {
-  transform: scale(1.1);
-}
 
 /* \53EA \5728 \6709 \771F \6B63 \6ED1 \9F20 \7684 \88DD \7F6E \555F \7528  hover \52D5 \756B  */
-@media (hover: hover) and (pointer: fine) {
-  .scroll-top-btn:hover { 
-    background: rgba(255,255,255,0.15);
-    border-color: rgba(255,255,255,0.3);
-    transform: translateY(-2px);
-    box-shadow: 0 12px 40px rgba(0,0,0,.3);
-  }
-  .download-btn:hover { 
-    background: rgba(255,255,255,0.15);
-    border-color: rgba(255,255,255,0.3);
-    transform: translateY(-2px);
-    box-shadow: 0 12px 40px rgba(0,0,0,.3);
-  }
-  /* SVG\5716 \793A \4E0D \9700 \8981 \507D \5143 \7D20 \52D5 \756B  */
-}
-
-/* \89F8 \63A7 \88DD \7F6E \FF1A \5B8C \5168 \7981 \7528  hover \52D5 \756B \FF0C \907F \514D \9EDE \4E86 \5C31 \5361 \4F4F  */
-@media (hover: none) and (pointer: coarse) {
-  .scroll-top-btn:hover,
-  .download-btn:hover {
-    background: var(--glass-bg, rgba(255,255,255,.08));
-    border-color: var(--glass-bd, rgba(255,255,255,.18));
-    transform: none !important; /* \79FB \9664 \5411 \4E0A \79FB \52D5 \6548 \679C  */
-    box-shadow: 0 8px 32px rgba(0,0,0,.22);
-  }
-  /* SVG\5716 \793A \4E0D \9700 \8981 \507D \5143 \7D20 \52D5 \756B  */
-}
+/* SVG\5716 \793A \4E0D \9700 \8981 \507D \5143 \7D20 \52D5 \756B  */
 
 @media (max-width: 768px) {
   .floating-circular-btn {
@@ -3693,18 +3653,18 @@ strong {
 <!-- ===== &#x5713;&#x5F62;&#x6F02;&#x6D6E;&#x6309;&#x9215; ===== -->
 <div class="floating-circular-btn" id="floatingBtn">
   <button class="button">
-    <a href="#" onclick="window.open('https://payment.niar.org.tw/Register/bb83615563b6e68efb448a068b745344', '_blank'); return false;">
+    <a href="#" data-event="highlights">
       <p class="button__text">
-        <span>&#x7ACB;</span>
-        <span>&#x5373;</span>
-        <span>&#x5831;</span>
-        <span>&#x540D;</span>
+        <span>&#x7CBE;</span>
+        <span>&#x5F69;</span>
+        <span>&#x56DE;</span>
+        <span>&#x9867;</span>
         <span>&#x3000;</span>
         <span>&#x3000;</span>
-        <span>&#x7ACB;</span>
-        <span>&#x5373;</span>
-        <span>&#x5831;</span>
-        <span>&#x540D;</span>
+        <span>&#x7CBE;</span>
+        <span>&#x5F69;</span>
+        <span>&#x56DE;</span>
+        <span>&#x9867;</span>
         <span>&#x3000;</span>
         <span>&#x3000;</span>
       </p>
@@ -3746,8 +3706,8 @@ strong {
       <button type="button" class="bar-item" data-id="s2">
         <span class="bar-date bar-session"><span class="bar-arrow">&#x2B95;</span> &#x7CFB;&#x5217;&#x8AD6;&#x58C7; &#x278B;</span>
       </button>
-      <button type="button" class="bar-item" data-id="s3">
-        <span class="bar-date bar-session"><span class="bar-arrow">&#x2B95;</span> &#x7CFB;&#x5217;&#x8AD6;&#x58C7; &#x278C;</span>
+      <button type="button" class="bar-item" data-id="s3" disabled style="background: rgba(128,128,128,0.5); cursor: default; pointer-events: none;">
+        <span class="bar-date bar-session" style="color: rgba(255,255,255,0.7);"><span class="bar-arrow" style="opacity: 0.7;">&#x2B95;</span> &#x64C7;&#x65E5;&#x516C;&#x544A;</span>
       </button>
     </div>
   </nav>
@@ -4054,265 +4014,13 @@ strong {
   </div>
 </section>
 
-<!-- &#x7B2C;&#x4E09;&#x5834;&#x6D3B;&#x52D5;&#x8CC7;&#x8A0A; -->
-<section class="event-info" id="s3-info" style="display: none;">
+<!-- &#x6D3B;&#x52D5;&#x4E8C; -->
+<section class="event-info" id="activity-2" style="display: none;">
   <div class="inner">
     <div class="topic-wrap">
       <div class="topic-badge">
-        &#x7CFB;&#x5217;&#x5275;&#x65B0;&#x4EBA;&#x624D;&#x57F9;&#x80B2;&#x5DE5;&#x4F5C;&#x574A;<br>&#x6578;&#x64DA;&#x9A45;&#x52D5;&#x7684;&#x653F;&#x7B56;&#x6D1E;&#x5BDF;&#xFF1A;&#x7D71;&#x8A08;&#x5206;&#x6790;&#x8207;AI&#x5DE5;&#x5177;&#x61C9;&#x7528;
-      </div>
-
-      <div class="topic-rows">
-        <div class="topic-rows-inner">
-          <div class="topic-row">
-            <div class="pill">&#x6642;&#x9593;</div>
-            <div>2025 &#x5E74; 12 &#x6708; 19 &#x65E5;&#xFF08;&#x4E94;&#xFF09;9:00 &#x81F3; 16:00<br>2025 &#x5E74; 12 &#x6708; 22 &#x65E5;&#xFF08;&#x4E00;&#xFF09;9:00 &#x81F3; 16:00</div>
-          </div>
-          <div class="topic-row place">
-            <div class="pill">&#x5730;&#x9EDE;</div>
-            <div>BR6 &#x79D1;&#x6280;&#x5927;&#x6A13; &#x4E2D;&#x6559;&#x5BA4;<br>&#x53F0;&#x5317;&#x5E02;&#x5FA9;&#x8208;&#x5357;&#x8DEF;&#x4E8C;&#x6BB5; 237 &#x865F; 4 &#x6A13;</div>
-          </div>
-          <div class="topic-row">
-            <div class="pill">&#x5F62;&#x5F0F;</div>
-            <div>&#x5BE6;&#x9AD4;&#x6703;&#x5834;&#xFF1A;&#x514D;&#x8CBB;&#xFF08;&#x63A1;&#x5BE9;&#x6838;&#x5236;&#xFF09;<br>*&#x672C;&#x5834;&#x6D3B;&#x52D5;&#x70BA; 2 &#x5929;&#x5168;&#x65E5;&#x6D3B;&#x52D5;&#xFF0C;&#x7121;&#x6CD5;&#x55AE;&#x7368;&#x5831;&#x540D;&#x3002;<br>&#x8AD6;&#x58C7;&#x671F;&#x9593;&#x5C07;&#x63D0;&#x4F9B;&#x5348;&#x9910;&#x53CA;&#x5168;&#x5929;&#x8336;&#x6C34;&#xFF0C;&#x8AA0;&#x646F;&#x9080;&#x8ACB;&#x60A8;&#x5168;&#x7A0B;&#x53C3;&#x8207;</div>
-          </div>
-        </div>
-      </div>
-      
-      <h2 id="s3-speakers" class="section-title">
-        <span class="lang-zh">&#x4EAE;&#x9EDE;&#x8B1B;&#x8005;&#xFF5C;Featured Speakers</span>
-        <span class="lang-en" style="display: none;">Featured Speakers</span>
-      </h2>
-    </div>
-
-    <!-- speakers: 2 speakers, new card layout -->
-    <div class="speakers-section">
-      <div class="speaker-card speaker-clickable"
-           data-speaker-name="&#x9EC3;&#x932B;&#x745C;"
-           data-speaker-name-en="Shi-Yu Huang"
-           data-speaker-title="&#x570B;&#x7814;&#x9662;&#x79D1;&#x6280;&#x653F;&#x7B56;&#x7814;&#x7A76;&#x8207;&#x8CC7;&#x8A0A;&#x4E2D;&#x5FC3; &#x4E3B;&#x4EFB;<br>&#x570B;&#x7ACB;&#x6E05;&#x83EF;&#x5927;&#x5B78;&#x96FB;&#x6A5F;&#x5DE5;&#x7A0B;&#x5B78;&#x7CFB; &#x6559;&#x6388;"
-           data-speaker-title-en="Director, Science and Technology Policy Research and Information Center, NARL<br>Professor, Department of Electrical Engineering, National Tsing Hua University"
-           data-speaker-education="&#x30FB; &#x7F8E;&#x570B;&#x52A0;&#x5DDE;&#x5927;&#x5B78;&#x8056;&#x5854;&#x82AD;&#x82AD;&#x62C9;&#x5206;&#x6821; &#x96FB;&#x6A5F;&#x8207;&#x8A08;&#x7B97;&#x6A5F;&#x5DE5;&#x7A0B;&#x535A;&#x58EB;<br>&#x30FB; &#x570B;&#x7ACB;&#x53F0;&#x7063;&#x5927;&#x5B78; &#x96FB;&#x6A5F;&#x5DE5;&#x7A0B;&#x5B78;&#x7CFB;&#x78A9;&#x58EB;<br>&#x30FB; &#x570B;&#x7ACB;&#x53F0;&#x7063;&#x5927;&#x5B78; &#x96FB;&#x6A5F;&#x5DE5;&#x7A0B;&#x5B78;&#x7CFB;&#x5B78;&#x58EB;"
-           data-speaker-education-en="&#x2022; Ph.D. in Electrical and Computer Engineering, University of California, Santa Barbara<br>&#x2022; M.S. in Electrical Engineering, National Taiwan University<br>&#x2022; B.S. in Electrical Engineering, National Taiwan University"
-           data-speaker-experience="&#x9EC3;&#x932B;&#x745C;&#x6559;&#x6388;&#x66FE;&#x4EFB;&#x8077;&#x65BC;&#x7F8E;&#x570B;&#x77FD;&#x8C37;&#x570B;&#x6C11;&#x534A;&#x5C0E;&#x9AD4;&#x8207;&#x4E16;&#x5927;&#x7A4D;&#x9AD4;&#x96FB;&#x8DEF;&#xFF08;&#x5F8C;&#x4F75;&#x5165;&#x53F0;&#x7A4D;&#x96FB;&#xFF09;&#xFF0C;1999 &#x5E74;&#x8D77;&#x65BC;&#x6E05;&#x83EF;&#x5927;&#x5B78;&#x4EFB;&#x6559;&#xFF0C;&#x4E26;&#x5148;&#x5F8C;&#x64D4;&#x4EFB;&#x6E05;&#x83EF;&#x5927;&#x5B78;&#x7A4D;&#x9AD4;&#x96FB;&#x8DEF;&#x8A2D;&#x8A08;&#x6280;&#x8853;&#x4E2D;&#x5FC3;&#x4E3B;&#x4EFB;&#x3001;&#x5275;&#x65B0;&#x80B2;&#x6210;&#x4E2D;&#x5FC3;&#x4E3B;&#x4EFB;&#x3001;&#x5357;&#x53F0;&#x79D1;&#x6280;&#x5927;&#x5B78;&#x526F;&#x6821;&#x9577;&#x7B49;&#x8077;&#x52D9;&#xFF0C;&#x4EA6;&#x5171;&#x540C;&#x5275;&#x7ACB;&#x5146;&#x5FC3;&#x79D1;&#x6280;&#x3002;&#x5C08;&#x7CBE;&#x65BC;&#x7A4D;&#x9AD4;&#x96FB;&#x8DEF;&#x8A2D;&#x8A08;&#x3001;&#x81EA;&#x52D5;&#x5316;&#x8207;&#x6E2C;&#x8A66;&#xFF0C;&#x81F4;&#x529B;&#x65BC;&#x7814;&#x767C;&#x9AD8;&#x53EF;&#x9760;&#x5EA6;&#x8207;&#x9577;&#x58FD;&#x547D;&#x7684;&#x300C;&#x6C38;&#x4FDD;&#x5B89;&#x5EB7;&#x6676;&#x7247;&#x300D;&#xFF0C;&#x63A8;&#x52D5;&#x53F0;&#x7063;&#x534A;&#x5C0E;&#x9AD4;&#x5275;&#x65B0;&#x3002;"
-           data-speaker-experience-en="Director General Huang worked at National Semiconductor Corp. in Silicon Valley and at Worldwide Semiconductor Manufacturing Corp. (later merged with TSMC) before joining NTHU in 1999. He has served as Director of the IC Design Technology Center, Director of the Innovation Incubation Center, and Vice President of Southern Taiwan University of Science and Technology. His research integrates IC design, design automation, and testing, with the vision of developing highly reliable and long-lasting ICs to support emerging mission-critical applications."
-           data-event-title="&#x7CFB;&#x5217;&#x5275;&#x65B0;&#x4EBA;&#x624D;&#x57F9;&#x80B2;&#x5DE5;&#x4F5C;&#x574A;&#xFF5C;&#x6578;&#x64DA;&#x9A45;&#x52D5;&#x7684;&#x653F;&#x7B56;&#x6D1E;&#x5BDF;&#xFF1A;&#x7D71;&#x8A08;&#x5206;&#x6790;&#x8207;AI&#x5DE5;&#x5177;&#x61C9;&#x7528;">
-        <img class="speaker-photo-card" src="assets/img/speaker-ShiYu-Huang.png" alt="&#x9EC3;&#x932B;&#x745C;">
-        <div class="speaker-info">
-          <div class="speaker-name-card">
-            <span class="lang-zh">&#x9EC3;&#x932B;&#x745C;</span>
-            <span class="lang-en" style="display: none;">Shi-Yu Huang</span>
-          </div>
-          <div class="speaker-title-card">
-            <span class="lang-zh">&#x570B;&#x7814;&#x9662;&#x79D1;&#x6280;&#x653F;&#x7B56;&#x7814;&#x7A76;&#x8207;&#x8CC7;&#x8A0A;&#x4E2D;&#x5FC3; &#x4E3B;&#x4EFB;<br>&#x570B;&#x7ACB;&#x6E05;&#x83EF;&#x5927;&#x5B78;&#x96FB;&#x6A5F;&#x5DE5;&#x7A0B;&#x5B78;&#x7CFB; &#x6559;&#x6388;</span>
-            <span class="lang-en" style="display: none;">&#x30FB;Director, Science and Technology Policy Research and Information Center, NARL<br>&#x30FB;Professor, Department of Electrical Engineering, National Tsing Hua University</span>
-          </div>
-          <div class="speaker-experience-preview">
-            <span class="lang-zh">&#x9EC3;&#x932B;&#x745C;&#x6559;&#x6388;&#x66FE;&#x4EFB;&#x8077;&#x65BC;&#x7F8E;&#x570B;&#x77FD;&#x8C37;&#x570B;&#x6C11;&#x534A;&#x5C0E;&#x9AD4;&#x8207;&#x4E16;&#x5927;&#x7A4D;&#x9AD4;&#x96FB;&#x8DEF;&#xFF08;&#x5F8C;&#x4F75;&#x5165;&#x53F0;&#x7A4D;&#x96FB;&#xFF09;&#xFF0C;1999 &#x5E74;&#x8D77;&#x65BC;&#x6E05;&#x83EF;&#x5927;&#x5B78;&#x4EFB;&#x6559;&#xFF0C;&#x4E26;&#x5148;&#x5F8C;&#x64D4;&#x4EFB;&#x6E05;&#x83EF;&#x5927;&#x5B78;&#x7A4D;&#x9AD4;&#x96FB;&#x8DEF;&#x8A2D;&#x8A08;&#x6280;&#x8853;&#x4E2D;&#x5FC3;&#x4E3B;&#x4EFB;&#x3001;&#x5275;&#x65B0;&#x80B2;&#x6210;&#x4E2D;&#x5FC3;&#x4E3B;&#x4EFB;&#x3001;&#x5357;&#x53F0;&#x79D1;&#x6280;&#x5927;&#x5B78;&#x526F;&#x6821;&#x9577;&#x7B49;&#x8077;&#x52D9;</span>
-            <span class="lang-en" style="display: none;">Professor Shi-Yu Huang previously worked at National Semiconductor and Avant! Corporation (later acquired by Cadence) in Silicon Valley. Since 1999, he has been teaching at National Tsing Hua University and has served as Director of the IC Design Technology Center</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="speaker-card speaker-clickable"
-           data-speaker-name="&#x90B1;&#x7693;&#x653F;"
-           data-speaker-name-en="Haw-Jeng Chiou"
-           data-speaker-title="&#x53F0;&#x7063;&#x7D71;&#x8A08;&#x65B9;&#x6CD5;&#x5B78;&#x5B78;&#x6703; &#x7406;&#x4E8B;&#x9577;"
-           data-speaker-title-en="Chairman, Chinese Statistical Association<br>Ph.D. in Psychometrics, University of Southern California"
-           data-speaker-education="&#x2022; &#x7F8E;&#x570B;&#x5357;&#x52A0;&#x5DDE;&#x5927;&#x5B78; &#x5FC3;&#x7406;&#x8A08;&#x91CF;&#x5B78;&#x535A;&#x58EB;"
-           data-speaker-education-en="&#x2022; Ph.D. in Psychometrics, University of Southern California"
-           data-speaker-experience="&#x90B1;&#x7693;&#x653F;&#x535A;&#x58EB;&#x70BA;&#x4E2D;&#x83EF;&#x6C11;&#x570B;&#x7D71;&#x8A08;&#x5B78;&#x6703;&#x7406;&#x4E8B;&#x9577;&#xFF0C;&#x5C08;&#x7CBE;&#x65BC;&#x7D71;&#x8A08;&#x5B78;&#x3001;&#x5FC3;&#x7406;&#x8A08;&#x91CF;&#x5B78;&#x53CA;&#x8CC7;&#x6599;&#x79D1;&#x5B78;&#x9818;&#x57DF;&#xFF0C;&#x5728;&#x5B78;&#x8853;&#x7814;&#x7A76;&#x8207;&#x5BE6;&#x52D9;&#x61C9;&#x7528;&#x65B9;&#x9762;&#x5177;&#x6709;&#x8C50;&#x5BCC;&#x7D93;&#x9A57;&#x3002;"
-           data-speaker-experience-en="Dr. Haw-Jeng Chiou serves as Chairman of the Chinese Statistical Association, specializing in statistics, psychometrics, and data science with extensive experience in both academic research and practical applications."
-           data-event-title="&#x7CFB;&#x5217;&#x5275;&#x65B0;&#x4EBA;&#x624D;&#x57F9;&#x80B2;&#x5DE5;&#x4F5C;&#x574A;&#xFF5C;&#x6578;&#x64DA;&#x9A45;&#x52D5;&#x7684;&#x653F;&#x7B56;&#x6D1E;&#x5BDF;&#xFF1A;&#x7D71;&#x8A08;&#x5206;&#x6790;&#x8207;AI&#x5DE5;&#x5177;&#x61C9;&#x7528;">
-        <img class="speaker-photo-card" src="assets/img/speaker-Hawjeng-Chiou.png" alt="&#x90B1;&#x7693;&#x653F;">
-        <div class="speaker-info">
-          <div class="speaker-name-card">
-            <span class="lang-zh">&#x90B1;&#x7693;&#x653F;</span>
-            <span class="lang-en" style="display: none;">Haw-Jeng Chiou</span>
-          </div>
-          <div class="speaker-title-card">
-            <span class="lang-zh">&#x53F0;&#x7063;&#x7D71;&#x8A08;&#x65B9;&#x6CD5;&#x5B78;&#x5B78;&#x6703; &#x7406;&#x4E8B;&#x9577;</span>
-            <span class="lang-en" style="display: none;">&#x30FB;Chairman, Chinese Statistical Association<br>&#x30FB;Ph.D. in Psychometrics, University of Southern California</span>
-          </div>
-          <div class="speaker-experience-preview">
-            <span class="lang-zh">&#x90B1;&#x7693;&#x653F;&#x535A;&#x58EB;&#x70BA;&#x4E2D;&#x83EF;&#x6C11;&#x570B;&#x7D71;&#x8A08;&#x5B78;&#x6703;&#x7406;&#x4E8B;&#x9577;&#xFF0C;&#x5C08;&#x7CBE;&#x65BC;&#x7D71;&#x8A08;&#x5B78;&#x3001;&#x5FC3;&#x7406;&#x8A08;&#x91CF;&#x5B78;&#x53CA;&#x8CC7;&#x6599;&#x79D1;&#x5B78;&#x9818;&#x57DF;&#xFF0C;&#x5728;&#x5B78;&#x8853;&#x7814;&#x7A76;&#x8207;&#x5BE6;&#x52D9;&#x61C9;&#x7528;&#x65B9;&#x9762;&#x5177;&#x6709;&#x8C50;&#x5BCC;&#x7D93;&#x9A57;&#x3002;</span>
-            <span class="lang-en" style="display: none;">Dr. Haw-Jeng Chiou serves as Chairman of the Chinese Statistical Association, specializing in statistics, psychometrics, and data science with extensive experience in both academic research and practical applications.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <h2 id="s3-about" class="section-title about-section">
-      <span class="lang-zh">&#x6D3B;&#x52D5;&#x7C21;&#x4ECB;&#xFF5C;About</span>
-      <span class="lang-en" style="display: none;">About</span>
-    </h2>
-    <p>&#x5728;&#x6578;&#x64DA;&#x7206;&#x70B8;&#x8207; AI &#x6280;&#x8853;&#x5FEB;&#x901F;&#x6F14;&#x9032;&#x7684;&#x6642;&#x4EE3;&#xFF0C;&#x5982;&#x4F55;&#x5C07;&#x5927;&#x6578;&#x64DA;&#x8F49;&#x5316;&#x70BA;&#x653F;&#x7B56;&#x6D1E;&#x5BDF;&#x8207;&#x6C7A;&#x7B56;&#x652F;&#x6301;&#xFF0C;&#x662F;&#x7522;&#x5B98;&#x5B78;&#x7814;&#x7684;&#x5171;&#x540C;&#x6311;&#x6230;&#x3002;</p>
-    <p>&#x672C;&#x5DE5;&#x4F5C;&#x574A;&#x4EE5;<span class="highlight-text">&#x300C;&#x5BE6;&#x52D9;&#x793A;&#x7BC4; + &#x5206;&#x7D44;&#x6F14;&#x7DF4;&#x300D;</span>&#x70BA;&#x6838;&#x5FC3;&#xFF0C;&#x9080;&#x8ACB;&#x7D71;&#x8A08;&#x5B78;&#x6703;&#x8207; AI &#x6280;&#x8853;&#x5C08;&#x5BB6;&#xFF0C;&#x5E36;&#x9818;&#x5B78;&#x54E1;&#x638C;&#x63E1;&#x7D71;&#x8A08;&#x5206;&#x6790;&#x3001;AI &#x8CC7;&#x6599;&#x8996;&#x89BA;&#x5316;&#x3001;&#x7E31;&#x8CAB;&#x6578;&#x64DA;&#x8FFD;&#x8E64;&#x7B49;&#x6838;&#x5FC3;&#x6280;&#x80FD;&#xFF0C;&#x4E26;&#x5BE6;&#x969B;&#x64CD;&#x4F5C; ChatGPT&#x3001;Power BI&#x3001;Tableau AI&#x3001;Kumu.ai &#x7B49;&#x5DE5;&#x5177;&#x3002;</p>
-    <p>&#x5B78;&#x54E1;&#x5C07;&#x900F;&#x904E;&#x5169;&#x5929;&#x7684;&#x8A13;&#x7DF4;&#xFF0C;&#x5F9E;&#x6848;&#x4F8B;&#x5230;&#x5BE6;&#x4F5C;&#xFF0C;&#x5F37;&#x5316;<span class="highlight-text">&#x6578;&#x64DA;&#x9A45;&#x52D5;&#x7684;&#x653F;&#x7B56;&#x7814;&#x7A76;&#x80FD;&#x529B;</span>&#xFF0C;&#x4E26;&#x4FC3;&#x9032;&#x8DE8;&#x9818;&#x57DF;&#x4EA4;&#x6D41;&#x5408;&#x4F5C;&#x3002;</p>
-
-    <h2 id="s3-topics" class="section-title">
-      <span class="lang-zh">&#x4E3B;&#x8981;&#x8B70;&#x984C;&#xFF5C;Key Topics</span>
-      <span class="lang-en" style="display: none;">Key Topics</span>
-    </h2>
-    <ul style="line-height: 1.8; margin: 20px 0;">
-      <li><strong>&#x653F;&#x7B56;&#x5206;&#x6790;&#x4E2D;&#x7684; AI &#x5DE5;&#x5177;&#x61C9;&#x7528;&#xFF1A;</strong>&#x89E3;&#x6790;&#x6587;&#x672C;&#x3001;&#x6578;&#x64DA;&#x8207;&#x5716;&#x50CF;&#x8655;&#x7406;&#xFF0C;&#x793A;&#x7BC4;&#x524D;&#x6CBF;&#x5DE5;&#x5177;&#x7684;&#x61C9;&#x7528;&#x60C5;&#x5883;</li>
-      <li><strong>AI &#x8CC7;&#x6599;&#x8996;&#x89BA;&#x5316;&#x8207;&#x52D5;&#x614B;&#x5100;&#x8868;&#x677F;&#xFF1A;</strong>&#x624B;&#x628A;&#x624B;&#x5BE6;&#x4F5C;&#xFF0C;&#x5FEB;&#x901F;&#x5EFA;&#x7ACB;&#x4E92;&#x52D5;&#x5716;&#x8868;&#x8207;&#x7814;&#x7A76;&#x6545;&#x4E8B;&#x7248;</li>
-      <li><strong>&#x7E31;&#x8CAB;&#x8CC7;&#x6599;&#x5206;&#x6790;&#x7684;&#x7B56;&#x7565;&#xFF1A;</strong>&#x638C;&#x63E1;&#x8DE8;&#x6642;&#x9593;&#x3001;&#x8DE8;&#x5730;&#x5340;&#x6578;&#x64DA;&#x7684;&#x8FFD;&#x8E64;&#x8207;&#x6BD4;&#x5C0D;&#xFF0C;&#x7406;&#x89E3;&#x653F;&#x7B56;&#x9577;&#x671F;&#x6548;&#x61C9;</li>
-      <li><strong>&#x5206;&#x7D44;&#x5BE6;&#x4F5C;&#x8207;&#x6210;&#x679C;&#x767C;&#x8868;&#xFF1A;</strong>&#x5B78;&#x54E1;&#x5206;&#x7D44;&#x61C9;&#x7528; AI &#x5DE5;&#x5177;&#xFF0C;&#x5F9E;&#x8CC7;&#x6599;&#x6574;&#x7406;&#x5230;&#x8996;&#x89BA;&#x5316;&#xFF0C;&#x5B8C;&#x6210;&#x6210;&#x679C;&#x7C21;&#x5831;</li>
-    </ul>
-    
-    <h2 id="s3-agenda" class="section-title">&#x6D3B;&#x52D5;&#x8B70;&#x7A0B;&#xFF5C;Agenda</h2>
-    
-    <div class="schedule-table">
-      <table class="agenda-table">
-        <thead>
-          <tr>
-            <th class="time-col">&#x6642;&#x9593;</th>
-            <th class="content-col-split">2025 &#x5E74; 12 &#x6708; 19 &#x65E5;&#xFF08;&#x4E94;&#xFF09;</th>
-            <th class="content-col-split">2025 &#x5E74; 12 &#x6708; 22 &#x65E5;&#xFF08;&#x4E00;&#xFF09;</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="time-cell">9:00-9:10</td>
-            <td class="content-cell-split">&#x5831;&#x5230;&#x8207;&#x5165;&#x5834;</td>
-            <td class="content-cell-split" rowspan="2">&#x5831;&#x5230;&#x8207;&#x958B;&#x5834;</td>
-          </tr>
-          
-          <tr>
-            <td class="time-cell">9:10-9:15</td>
-            <td class="content-cell-split">
-              &#x958B;&#x5834;&#x8207;&#x6B61;&#x8FCE;&#x81F4;&#x8A5E;<br>
-              &#x9EC3;&#x932B;&#x745C; <span class="title">/ &#x570B;&#x7814;&#x9662;&#x79D1;&#x653F;&#x4E2D;&#x5FC3;&#x4E3B;&#x4EFB;</span>
-            </td>
-            <!-- &#x9019;&#x88E1;&#x7684;&#x7B2C;&#x4E09;&#x5217;&#x7531;&#x4E0A;&#x4E00;&#x884C;&#x7684;rowspan&#x8986;&#x84CB; -->
-          </tr>
-          
-          <tr>
-            <td class="time-cell">9:15-10:30</td>
-            <td class="content-cell-merged" colspan="2">
-              &#x55AE;&#x5143;&#x4E00;&#xFF1A;AI &#x5DE5;&#x5177;&#x5728;&#x653F;&#x7B56;&#x5206;&#x6790;&#x4E2D;&#x7684;&#x61C9;&#x7528;&#x8DA8;&#x52E2;
-            </td>
-          </tr>
-          
-          <tr>
-            <td class="time-cell">10:30-10:45</td>
-            <td class="content-cell-merged" colspan="2">
-              &#x8336;&#x6558;&#x8207;&#x4EA4;&#x6D41;
-            </td>
-          </tr>
-          
-          <tr>
-            <td class="time-cell">10:45-12:00</td>
-            <td class="content-cell-merged" colspan="2">
-              &#x55AE;&#x5143;&#x4E8C;&#xFF1A;AI &#x8CC7;&#x6599;&#x8996;&#x89BA;&#x5316;&#x8207;&#x52D5;&#x614B;&#x5716;&#x8868;&#x5BE6;&#x4F5C;
-            </td>
-          </tr>
-          
-          <tr>
-            <td class="time-cell">12:00-13:00</td>
-            <td class="content-cell-merged" colspan="2">
-              &#x5348;&#x9910;&#x8207;&#x81EA;&#x7531;&#x8A0E;&#x8AD6;
-            </td>
-          </tr>
-          
-          <tr>
-            <td class="time-cell">13:00-14:30</td>
-            <td class="content-cell-merged" colspan="2">
-              &#x55AE;&#x5143;&#x4E09;&#xFF1A;&#x7E31;&#x8CAB;&#x8CC7;&#x6599;&#x5206;&#x6790;&#x7684;&#x7B56;&#x7565;&#x8207;&#x5DE5;&#x5177;&#x61C9;&#x7528;
-            </td>
-          </tr>
-          
-          <tr>
-            <td class="time-cell">14:30-14:45</td>
-            <td class="content-cell-merged" colspan="2">
-              &#x77ED;&#x66AB;&#x4F11;&#x606F;
-            </td>
-          </tr>
-          
-          <tr>
-            <td class="time-cell">14:45-16:00</td>
-            <td class="content-cell-merged" colspan="2">
-              &#x55AE;&#x5143;&#x56DB;&#xFF1A;&#x5C0F;&#x7D44;&#x5BE6;&#x4F5C;&#x8207;&#x6210;&#x679C;&#x7C21;&#x5831;
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- &#x6CE8;&#x610F;&#x4E8B;&#x9805;&#x5340;&#x57DF; -->
-    <div class="notice-section" style="margin-top: 60px;">
-      <h2 class="section-title">&#x6CE8;&#x610F;&#x4E8B;&#x9805;&#xFF5C;Important Notes</h2>
-      
-      <div class="notice-content">
-        <div class="notice-item">
-          <h3>&#x4E00;&#x3001;&#x6D3B;&#x52D5;&#x53C3;&#x52A0;&#x8FA6;&#x6CD5;</h3>
-          <ul>
-            <li>&#x672C;&#x6D3B;&#x52D5;&#x63A1;&#x300C;&#x514D;&#x8CBB;&#x9810;&#x5148;&#x7DDA;&#x4E0A;&#x5831;&#x540D;&#x5236;&#x300D;&#xFF0C;&#x8ACB;&#x78BA;&#x5BE6;&#x7559;&#x4E0B;&#x6B63;&#x78BA;&#x8CC7;&#x6599;&#x3002;<span class="highlight-text">&#x4E3B;&#x8FA6;&#x55AE;&#x4F4D;&#x4FDD;&#x7559;&#x5831;&#x540D;&#x5BE9;&#x6838;&#x6B0A;&#x3002;</span></li>
-            <li>&#x5831;&#x540D;&#x622A;&#x6B62;&#x65E5;&#x8ACB;&#x898B;&#x5831;&#x540D;&#x9801;&#x9762;&#xFF0C;&#x4E3B;&#x8FA6;&#x55AE;&#x4F4D;&#x5F97;&#x8996;&#x5831;&#x540D;&#x72C0;&#x6CC1;&#x8ABF;&#x6574;&#x5831;&#x540D;&#x622A;&#x6B62;&#x6642;&#x9593;&#x3002;</li>
-            <li>&#x5831;&#x540D;&#x5F8C;&#x82E5;&#x7121;&#x6CD5;&#x53C3;&#x52A0;&#xFF0C;&#x8ACB;&#x6307;&#x6D3E;&#x5176;&#x4ED6;&#x4EBA;&#x9078;&#x4E26;&#x63D0;&#x524D;&#x901A;&#x77E5;&#x4E3B;&#x8FA6;&#x55AE;&#x4F4D;&#x3002;</li>
-            <li>&#x672C;&#x6D3B;&#x52D5;&#x63D0;&#x4F9B;&#x8207;&#x6703;&#x8005;&#x767B;&#x9304;<span class="highlight-text">&#x300C;&#x516C;&#x52D9;&#x4EBA;&#x54E1;&#x7D42;&#x751F;&#x5B78;&#x7FD2;&#x6642;&#x6578;&#x3001;&#x7814;&#x7FD2;&#x8B49;&#x660E;&#x300D;</span>&#x670D;&#x52D9;&#x3002;</li>
-          </ul>
-        </div>
-
-        <div class="notice-item">
-          <h3>&#x4E8C;&#x3001;&#x5BE9;&#x6838;&#x8207;&#x901A;&#x77E5;</h3>
-          <ul>
-            <li>&#x7D93;&#x5BE9;&#x6838;&#x901A;&#x904E;&#x8005;&#xFF0C;&#x4E3B;&#x8FA6;&#x55AE;&#x4F4D;&#x5C07;&#x65BC;&#x6D3B;&#x52D5;&#x524D;<span class="highlight-text">&#x4EE5;&#x96FB;&#x5B50;&#x90F5;&#x4EF6;&#x65B9;&#x5F0F;&#x5BC4;&#x9001;&#x300C;&#x51FA;&#x5E2D;&#x901A;&#x77E5;&#x4FE1;&#x300D;</span>&#x81F3;&#x60A8;&#x5831;&#x540D;&#x6642;&#x6240;&#x586B;&#x96FB;&#x5B50;&#x4FE1;&#x7BB1;&#xFF0C;&#x4EE5;&#x4F5C;&#x70BA;&#x5831;&#x5230;&#x6191;&#x8B49;&#x3002;</li>
-            <li>&#x82E5;&#x5831;&#x540D;&#x5BE9;&#x6838;&#x672A;&#x901A;&#x904E;&#xFF0C;&#x5C07;&#x4E0D;&#x53E6;&#x884C;&#x901A;&#x77E5;&#x3002;</li>
-          </ul>
-        </div>
-
-        <div class="notice-item">
-          <h3>&#x4E09;&#x3001;&#x5831;&#x540D;&#x9808;&#x77E5;</h3>
-          <ul>
-            <li>&#x8ACB;&#x52FF;&#x5192;&#x7528;&#x6216;&#x507D;&#x9020;&#x4ED6;&#x4EBA;&#x8EAB;&#x4EFD;&#x9032;&#x884C;&#x5831;&#x540D;&#xFF0C;&#x9055;&#x8005;&#x5C07;&#x4F9D;&#x6CD5;&#x8655;&#x7406;&#x3002;</li>
-            <li>&#x4E3B;&#x8FA6;&#x55AE;&#x4F4D;&#x4FDD;&#x7559;&#x5831;&#x540D;&#x8CC7;&#x683C;&#x4E4B;&#x6700;&#x7D42;&#x89E3;&#x91CB;&#x8207;&#x8B8A;&#x66F4;&#x6B0A;&#x5229;&#xFF0C;&#x6055;&#x4E0D;&#x53E6;&#x884C;&#x901A;&#x77E5;&#x3002;</li>
-          </ul>
-        </div>
-
-        <div class="notice-item">
-          <h3>&#x56DB;&#x3001;&#x53D6;&#x6D88;&#x5831;&#x540D;</h3>
-          <ul>
-            <li>&#x9700;&#x53D6;&#x6D88;&#x5831;&#x540D;&#x8005;&#xFF0C;&#x8ACB;&#x65BC;<span class="highlight-text">&#x6D3B;&#x52D5; 3 &#x65E5;&#x524D;</span>&#x4F86;&#x96FB;&#x6216; Email &#x901A;&#x77E5;&#x3002;&#x6D3B;&#x52D5;&#x7576;&#x65E5;&#x6055;&#x4E0D;&#x63A5;&#x53D7;&#x53D6;&#x6D88;&#xFF0C;&#x4E14;&#x672A;&#x51FA;&#x5E2D;&#x8005;&#x4E0D;&#x63D0;&#x4F9B;&#x6D3B;&#x52D5;&#x7C21;&#x5831;&#x6A94;&#x3002;</li>
-          </ul>
-        </div>
-
-        <div class="notice-item">
-          <h3>&#x4E94;&#x3001;&#x8B1B;&#x7FA9;&#x8207;&#x667A;&#x6167;&#x8CA1;&#x7522;</h3>
-          <ul>
-            <li>&#x6D3B;&#x52D5;&#x7D50;&#x675F;&#x5F8C;&#xFF0C;&#x51E1;&#x5DF2;&#x5B8C;&#x6210;&#x586B;&#x5BEB;&#x6D3B;&#x52D5;&#x6EFF;&#x610F;&#x5EA6;&#x8ABF;&#x67E5;&#x554F;&#x5377;&#x8005;&#xFF0C;&#x4E3B;&#x8FA6;&#x55AE;&#x4F4D;&#x5C07;&#x96FB;&#x5B50;&#x90F5;&#x4EF6;&#x65B9;&#x5F0F;&#x63D0;&#x4F9B;&#x8AD6;&#x58C7;&#x8B70;&#x7A0B;&#x7C21;&#x5831;&#x8B1B;&#x7FA9;&#x3002;&#x60DF;&#x56E0;&#x667A;&#x6167;&#x8CA1;&#x7522;&#x6B0A;&#x4FDD;&#x8B77;&#xFF0C;&#x5018;&#x82E5;&#x5916;&#x90E8;&#x8B1B;&#x5E2B;&#x672A;&#x6388;&#x6B0A;&#x63D0;&#x4F9B;&#xFF0C;&#x8A72;&#x8B1B;&#x5E2B;&#x4E4B;&#x8B1B;&#x7FA9;&#x5C07;&#x4E0D;&#x4E88;&#x63D0;&#x4F9B;&#x4E0B;&#x8F09;&#x3002;</li>
-            <li>&#x70BA;&#x4FDD;&#x8B77;&#x667A;&#x6167;&#x8CA1;&#x7522;&#x6B0A;&#xFF0C;&#x56B4;&#x7981;&#x651D;&#x5F71;&#x53CA;&#x9304;&#x5F71;&#x7B49;&#x884C;&#x70BA;&#x3002;</li>
-          </ul>
-        </div>
-
-        <div class="notice-item">
-          <h3>&#x516D;&#x3001;&#x7279;&#x6B8A;&#x60C5;&#x6CC1;</h3>
-          <ul>
-            <li>&#x4E3B;&#x8FA6;&#x55AE;&#x4F4D;&#x4FDD;&#x7559;&#x4FEE;&#x6539;&#x672C;&#x6D3B;&#x52D5;&#x898F;&#x5247;&#x4E4B;&#x6B0A;&#x5229;&#xFF0C;&#x6BCB;&#x9808;&#x53E6;&#x884C;&#x4F5C;&#x51FA;&#x89E3;&#x91CB;&#x6216;&#x901A;&#x77E5;&#x3002;</li>
-            <li>&#x672C;&#x6B21;&#x6D3B;&#x52D5;&#x82E5;&#x9069;&#x9022;&#x5929;&#x707D;(&#x5730;&#x9707;&#x3001;&#x98B1;&#x98A8;&#x7B49;)&#x4E0D;&#x53EF;&#x6297;&#x62D2;&#x4E4B;&#x56E0;&#x7D20;&#xFF0C;&#x5C07;&#x5EF6;&#x671F;&#x8209;&#x8FA6;&#x6642;&#x9593;&#x53E6;&#x884C;&#x901A;&#x77E5;&#x3002;</li>
-            <li>&#x82E5;&#x56E0;&#x4E0D;&#x53EF;&#x9810;&#x6E2C;&#x4E4B;&#x7A81;&#x767C;&#x56E0;&#x7D20;&#xFF0C;&#x4E3B;&#x8FA6;&#x55AE;&#x4F4D;&#x5F97;&#x4FDD;&#x7559;&#x6D3B;&#x52D5;&#x8B70;&#x7A0B;&#x53CA;&#x8B1B;&#x5E2B;&#x4E4B;&#x8B8A;&#x66F4;&#x6B0A;&#x5229;&#x3002;</li>
-          </ul>
-        </div>
-
-        <!-- &#x500B;&#x4EBA;&#x8CC7;&#x6599;&#x8490;&#x96C6;&#x544A;&#x77E5;&#x8072;&#x660E;&#x6309;&#x9215; -->
-        <div class="privacy-notice" style="text-align: center; margin-top: 40px;">
-          <a href="https://www.stpi.niar.org.tw/public/privacy" target="_blank" class="privacy-btn">
-            &#x570B;&#x7814;&#x9662;&#x79D1;&#x653F;&#x4E2D;&#x5FC3;&#x500B;&#x4EBA;&#x8CC7;&#x6599;&#x8490;&#x96C6;&#x544A;&#x77E5;&#x8072;&#x660E;
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- &#x7B2C;&#x4E8C;&#x5834;&#x6D3B;&#x52D5;&#x8CC7;&#x8A0A; -->
-<section class="event-info" id="s2-info" style="display: none;">
-  <div class="inner">
-    <div class="topic-wrap">
-      <div class="topic-badge">
-        &#x81FA;&#x7063; &#x00D7; &#x5168;&#x7403;&#x79D1;&#x6280;&#x4EBA;&#x624D;&#x5927;&#x93C8;&#x7D50;
-        <div class="topic-en">Bridging Global Innovation and Exceptional Talent</div>
+        鏈結全球與台灣 打造跨域前瞻科技生態系
+        <div class="topic-en">Connecting Taiwan and the World: Building a Cross-disciplinary Frontier Technology Ecosystem</div>
       </div>
 
       <!-- &#x8A9E;&#x8A00;&#x5207;&#x63DB;&#x5668; -->
@@ -4342,8 +4050,8 @@ strong {
               <span class="lang-en" style="display: none;">Venue</span>
             </div>
             <div>
-              <span class="lang-zh">&#x96C6;&#x601D;&#x53F0;&#x5927;&#x6703;&#x8B70;&#x4E2D;&#x5FC3;<br>&#x53F0;&#x5317;&#x5E02;&#x5927;&#x5B89;&#x5340;&#x7F85;&#x65AF;&#x798F;&#x8DEF;&#x56DB;&#x6BB5; 85 &#x865F; B1</span>
-              <span class="lang-en" style="display: none;">The Grand Hall (NTU Convention Center)</span>
+              <span class="lang-zh">&#x96C6;&#x601D;&#x53F0;&#x5927;&#x6703;&#x8B70;&#x4E2D;&#x5FC3; - &#x8607;&#x683C;&#x62C9;&#x5E95;&#x5EF3;<br>&#x53F0;&#x5317;&#x5E02;&#x5927;&#x5B89;&#x5340;&#x7F85;&#x65AF;&#x798F;&#x8DEF;&#x56DB;&#x6BB5; 85 &#x865F; B1</span>
+              <span class="lang-en" style="display: none;">GIS NTU Convention Center - Socrates Room</span>
             </div>
           </div>
           <div class="topic-row">
@@ -4603,7 +4311,7 @@ strong {
            data-speaker-experience-en="Sungho Shin is currently a Senior Researcher at the Korea Institute of Science and Technology Information (KISTI), where he has been engaged in the research and development of science and industry data platforms since 2002. His work focuses on data platform design and development, natural language processing, text mining, and semantic analysis. He is dedicated to applying AI-driven data analytics to support innovation in semiconductor processes and industrial R&D, and he has led multiple government-funded projects centered on data-centric approaches. He has spearheaded the development of semantic data management and knowledge extraction systems, contributing significantly to advancing Korea's capabilities in data science and strategic research analysis."
            data-event-title="&#x81FA;&#x7063; &#x00D7; &#x5168;&#x7403;&#x79D1;&#x6280;&#x4EBA;&#x624D;&#x5927;&#x93C8;&#x7D50;"
            data-event-title-en="Bridging Global Innovation and Exceptional Talent">
-        <img class="speaker-photo-card" src="assets/img/speaker-Sungho-Shin.png" alt="Sungho Shin">
+        <img class="speaker-photo-card" src="assets/img/speaker-SunghoShin.png" alt="Sungho Shin">
         <div class="speaker-info">
           <div class="speaker-name-card">
             <span class="lang-zh">Sungho Shin</span>
@@ -4666,21 +4374,17 @@ strong {
       <div class="lang-zh">
         <div class="schedule-table">
           <div class="schedule-header">
-            <div class="time-col">&#x6642;&#x9593;</div>
-            <div class="content-col">&#x6D3B;&#x52D5;&#x5167;&#x5BB9;</div>
+            <div class="time-col">時間</div>
+            <div class="content-col">活動內容</div>
           </div>
-          
-          <div class="schedule-row">
-            <div class="time-cell">08:30 - 09:00</div>
-            <div class="content-cell">&#x5831;&#x5230;&#x8207;&#x958B;&#x5834;</div>
-          </div>
+
           
           <div class="schedule-row">
             <div class="time-cell">09:00 - 09:05</div>
             <div class="content-cell">
-              &#x8CB4;&#x8CD3;&#x81F4;&#x8A5E;
+              貴賓致詞
               <ul>
-                <li>&#x674E;&#x65FA;&#x9F8D; <span class="title">/ &#x570B;&#x79D1;&#x6703;&#x79D1;&#x6559;&#x767C;&#x5C55;&#x53CA;&#x570B;&#x969B;&#x5408;&#x4F5C;&#x8655;&#x8655;&#x9577;</span></li>
+                <li>李旺龍 <span class="title">/ 國科會科教發展及國際合作處處長</span></li>
               </ul>
             </div>
           </div>
@@ -4746,12 +4450,62 @@ strong {
           </div>
           
           <div class="schedule-row">
-            <div class="time-cell">12:00 - 14:00</div>
-            <div class="content-cell">&#x5348;&#x9910;&#x6642;&#x9593;</div>
+            <div class="time-cell">09:05 - 09:10</div>
+            <div class="content-cell">團體合照</div>
           </div>
 
-          <div class="schedule-row section-header">
-            <div class="content-cell" style="display: flex; width: 100%; background: rgba(255, 255, 255, 0.1); color: white; text-align: center; justify-content: center; align-items: center; font-weight: 600; padding: 15px 20px;">&#x5834;&#x6B21;&#x4E8C;&#xFF1A;&#x5F9E;&#x751F;&#x91AB;&#x5230;&#x80FD;&#x6E90;&#x6750;&#x6599;&#xFF0C;&#x8DE8;&#x9818;&#x57DF;&#x5275;&#x65B0;&#x5982;&#x4F55;&#x5851;&#x9020;&#x53F0;&#x7063;&#x7684;&#x5168;&#x7403;&#x7AF6;&#x722D;&#x529B;</div>
+          <div class="schedule-row">
+            <div class="time-cell">09:10 - 10:10</div>
+            <div class="content-cell">
+              <span class="role-tag">主持人</span>
+              <ul style="margin-top: 12px;">
+                <li>黃錫瑜 <span class="title">/ 國研院科政中心主任</span></li>
+              </ul>
+              【尖端科技】
+              <ul style="margin-top: 12px;">
+                <li><span class="role-tag">主講人</span><br>許惠民 <span class="title">/ 華碩北美策略與夥伴關係副總裁</span></li>
+                <li><span class="role-tag">主講人</span><br>申晟顥 <span class="title">/ 韓國科學技術資訊院 資深研究員</span><br><em>以人工智慧驅動的南韓半導體產業資料平台</em></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="schedule-row">
+            <div class="time-cell">10:10 - 10:30</div>
+            <div class="content-cell">中場休息</div>
+          </div>
+          
+          <div class="schedule-row">
+            <div class="time-cell">10:30 - 11:20</div>
+            <div class="content-cell">
+              【量子運算】
+              <ul>
+                <li><span class="role-tag">主講人</span><br>林哲民 <span class="title">/ 史丹佛大學應用物理系博士後研究員</span><br><em>一種材料，多重功能：從預測到實現</em></li>
+                <li><span class="role-tag">主講人</span><br>謝明修 <span class="title">/ 鴻海研究院量子計算研究所所長</span></li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="schedule-row">
+            <div class="time-cell">11:20 - 12:00</div>
+            <div class="content-cell">
+              【綜合座談】
+              <span class="role-tag">主持人</span>
+              <ul style="margin-top: 12px;">
+                <li>黃錫瑜 <span class="title">/ 國研院科政中心主任</span></li>
+              </ul>
+              <span class="role-tag">與談人</span>
+              <ul style="margin-top: 12px;">
+                <li>許惠民 <span class="title">/ 華碩北美策略與夥伴關係副總裁</span></li>
+                <li>林哲民 <span class="title">/ 史丹佛大學應用物理系博士後研究員</span></li>
+                <li>謝明修 <span class="title">/ 鴻海研究院量子計算研究所所長</span></li>
+                <li>日本或韓國智庫領域專家</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="schedule-row">
+            <div class="time-cell">12:00 - 14:00</div>
+            <div class="content-cell">午餐時間</div>
           </div>
           
           <div class="schedule-row">
@@ -4779,8 +4533,8 @@ strong {
             <div class="content-cell">
               &#x3010;&#x5148;&#x9032;&#x6750;&#x6599;&#x8207;&#x7DA0;&#x80FD;&#x3011;
               <ul>
-                <li><span class="role-tag">&#x5C08;&#x984C;&#x6F14;&#x8B1B;III</span><br>&#x65E5;&#x672C;&#x6216;&#x97D3;&#x570B;&#x667A;&#x5EAB;&#x9818;&#x57DF;&#x5C08;&#x5BB6;</li>
-                <li><span class="role-tag">&#x5C08;&#x984C;&#x6F14;&#x8B1B;IV</span><br>&#x6797;&#x51A0;&#x5B87; <span class="title">/ &#x53F2;&#x4E39;&#x4F5B;&#x5927;&#x5B78;&#x5316;&#x5DE5;&#x7CFB;&#x535A;&#x5F8C;</span><br><em>&#x92F0;&#x96FB;&#x6C60;&#x7684;&#x7955;&#x5BC6;&#xFF1A;&#x770B;&#x4E0D;&#x898B;&#x7684;&#x754C;&#x9762;&#x5982;&#x4F55;&#x5F71;&#x97FF;&#x4F60;&#x7684;&#x624B;&#x6A5F;&#x8207;&#x96FB;&#x52D5;&#x8ECA;</em></li>
+                <li><span class="role-tag">&#x5C08;&#x984C;&#x6F14;&#x8B1B;III</span><br>&#x9685;&#x85CF;&#x5EB7;&#x4E00; <span class="title">/ &#x653F;&#x7B56;&#x7814;&#x7A76;&#x5927;&#x5B78;&#x9662;&#x5927;&#x5B78;&#x653F;&#x7B56;&#x7814;&#x7A76;&#x79D1; &#x6559;&#x6388;</span><br><em>&#x7522;&#x696D;&#x8207;&#x5B78;&#x8853;&#x7814;&#x7A76;&#x53CA;&#x9802;&#x5C16;&#x79D1;&#x5B78;&#x5BB6;&#x7684;&#x5408;&#x4F5C;-&#x908A;&#x5411;&#x5275;&#x65B0;&#x4E4B;&#x8DEF;</em></li>
+                <li><span class="role-tag">&#x5C08;&#x984C;&#x6F14;&#x8B1B;IV</span><br>&#x6797;&#x51A0;&#x5B87; <span class="title">/ &#x53F2;&#x4E39;&#x4F5B;&#x5927;&#x5B78;&#x5316;&#x5DE5;&#x7CFB;&#x535A;&#x58EB;&#x5F8C;&#x7814;&#x7A76;&#x54E1;</span><br><em>&#x92F0;&#x96FB;&#x6C60;&#x7684;&#x7955;&#x5BC6;&#xFF1A;&#x770B;&#x4E0D;&#x898B;&#x7684;&#x754C;&#x9762;&#x5982;&#x4F55;&#x5F71;&#x97FF;&#x4F60;&#x7684;&#x624B;&#x6A5F;&#x8207;&#x96FB;&#x52D5;&#x8ECA;</em></li>
               </ul>
             </div>
           </div>
@@ -4806,39 +4560,40 @@ strong {
       <div class="lang-en" style="display: none;">
         <div class="schedule-table">
           <div class="schedule-header">
-            <div class="time-col">Time</div>
-            <div class="content-col">Content</div>
+            <div class="time-col">時間</div>
+            <div class="content-col">活動內容</div>
           </div>
           
           <div class="schedule-row">
             <div class="time-cell">08:30 - 09:00</div>
-            <div class="content-cell">Registration and Entry</div>
+            <div class="content-cell">報到</div>
           </div>
           
           <div class="schedule-row">
             <div class="time-cell">09:00 - 09:05</div>
-            <div class="content-cell">
-              Welcome / Introductory Remarks
-              <ul>
-                <li>Shi-Yu Huang <span class="title">/ Director General, Science & Technology Policy Research and Information Center</span></li>
-                <li>Minister <span class="title">/ National Science and Technology Council</span></li>
-              </ul>
-            </div>
+            <div class="content-cell">貴賓致詞
+
+李旺龍 / 國科會科教發展及國際合作處處長</div>
           </div>
           
           <div class="schedule-row">
             <div class="time-cell">09:05 - 09:10</div>
-            <div class="content-cell">Group Photo</div>
+            <div class="content-cell">歡迎暨開幕致詞
+
+黃錫瑜 / 國研院科政中心主任</div>
           </div>
           
           <div class="schedule-row">
             <div class="time-cell">09:10 - 10:10</div>
             <div class="content-cell">
-              Semiconductor
+              Leading-edge Technologies
               <ul>
-                <li><span class="role-tag">Host</span><br>Shi-Yu Huang <span class="title">/ Director General, Science & Technology Policy Research and Information Center</span></li>
-                <li><span class="role-tag">Keynote Speaker I</span><br>William Sheu <span class="title">/ Vice President, Strategy and Partnership of ASUS</span></li>
-                <li><span class="role-tag">Keynote Speaker II</span><br>Japanese or Korean Think Tank Expert</li>
+                <li><span class="role-tag">Moderator</span><br>Shih-Yu Huang <span class="title">/ Director of Center for Science and Technology Policy Research, National Applied Research Laboratories</span></li>
+              </ul>
+              <span class="role-tag">Keynote Speakers</span>
+              <ul style="margin-top: 12px;">
+                <li>William Sheu <span class="title">/ Vice President, Strategy and Partnership of ASUS</span></li>
+                <li>SungHo Shin <span class="title">/ Senior Researcher, Korea Institute of Science and Technology Information</span><br><em>A South Korea AI-driven Data Platform for the Semiconductor Sector</em></li>
               </ul>
             </div>
           </div>
@@ -4851,7 +4606,7 @@ strong {
           <div class="schedule-row">
             <div class="time-cell">10:30 - 11:20</div>
             <div class="content-cell">
-              Quantum Technologies
+              Quantum Computing
               <ul>
                 <li><span class="role-tag">Keynote Speaker III</span><br>Che-Min Lin <span class="title">/ Postdoc, Applied Physics of Stanford University</span><br><em>One material, many functions: from prediction to realization</em></li>
                 <li><span class="role-tag">Keynote Speaker IV</span><br>Min-Hsiu Hsieh <span class="title">/ Hon Hai Quantum Computing Research Center</span></li>
@@ -4859,24 +4614,16 @@ strong {
             </div>
           </div>
           
-          <div class="schedule-row section-header">
-            <div class="content-cell" style="display: flex; width: 100%; background: rgba(255, 255, 255, 0.1); color: white; text-align: center; justify-content: center; align-items: center;">Session I: Advancing AI Ecosystem and Future with Advanced Semiconductors</div>
-          </div>
-          
           <div class="schedule-row">
             <div class="time-cell">11:20 - 12:00</div>
             <div class="content-cell">
-              <span class="role-tag">Moderator</span>
-              <ul style="margin-top: 12px;">
-                <li>Shih-Yu Huang <span class="title">/ Director of Center for Science and Technology Policy Research, National Applied Research Laboratories</span></li>
-              </ul>
-              <span class="role-tag">Panelists</span>
-              <ul style="margin-top: 12px;">
-                <li>William Sheu <span class="title">/ Vice President, Strategy and Partnership of ASUS</span></li>
-                <li>Che-Min Lin <span class="title">/ Postdoc, Applied Physics of Stanford University</span></li>
-                <li>Min-Hsiu Hsieh <span class="title">/ Hon Hai Quantum Computing Research Center</span></li>
-                <li>Japanese or Korean Think Tank Expert</li>
-              </ul>
+              貴賓致詞
+              
+              黃錫瑜 / 國研院科政中心主任
+              許惠民 / 華碩北美策略與夥伴關係副總裁
+              林哲民 / 史丹佛大學應用物理系博後
+              謝明修 / 鴻海研究院量子計算研究所所長
+              日本或韓國智庫領域專家
             </div>
           </div>
           
@@ -4884,55 +4631,53 @@ strong {
             <div class="time-cell">12:00 - 14:00</div>
             <div class="content-cell">Lunch Break</div>
           </div>
-          
+
           <div class="schedule-row">
             <div class="time-cell">14:00 - 15:00</div>
             <div class="content-cell">
-              Bioengineering Technology
+              Biomedical Engineering
               <ul>
-                <li><span class="role-tag">Moderator</span><br>Wang-Long Lee <span class="title">/ Director of Science Education Development and International Cooperation, National Science and Technology Council</span></li>
-                <li><span class="role-tag">Keynote Speaker I</span><br>Zhi-Guang Wang <span class="title">/ Associate Director of Orthopedic Research Center, Kaohsiung Medical University</span><br><em>Innovation Challenges in Medical Device Market: Technical Development, Clinical Applications, Market Opportunities, and Startup Potential Challenges of 3D Bioprinted Bone Model Materials</em></li>
-                <li><span class="role-tag">Keynote Speaker II</span><br>Hong-Bang Lee <span class="title">/ Postdoctoral Researcher in Bioengineering and Orthopedic Surgery, Stanford University</span></li>
+                <li><span class="role-tag">Keynote Speaker I</span><br>Chih-Guang Wang <span class="title">/ Vice President, Bone Research Center, Kaohsiung Medical University</span><br><em>Innovation Challenges in Medical Device Market: Technical Development, Clinical Applications, Market Opportunities, and Startup Potential Challenges of 3D Bioprinted Bone Model Materials</em></li>
+                <li><span class="role-tag">Keynote Speaker II</span><br>Yu-Chih Lin <span class="title">/ Postdoctoral Fellow, Department of Bioengineering and Center for Skeletal Medicine, Stanford University</span></li>
               </ul>
             </div>
           </div>
-          
+
           <div class="schedule-row">
             <div class="time-cell">15:00 - 15:10</div>
             <div class="content-cell">Coffee Break</div>
           </div>
-          
+
           <div class="schedule-row">
             <div class="time-cell">15:10 - 16:00</div>
             <div class="content-cell">
               Advanced Materials and Green Energy
               <ul>
-                <li><span class="role-tag">Keynote Speaker III</span><br>Japanese or Korean Think Tank Expert</li>
-                <li><span class="role-tag">Keynote Speaker IV</span><br>Guan-Yu Lin <span class="title">/ Postdoctoral Researcher in Chemical Engineering, Stanford University</span><br><em>Battery Material Precision: How Invisible Environments Affect Your Phone Battery Performance</em></li>
+                <li><span class="role-tag">Keynote Speaker III</span><br>Koichi Sumikura <span class="title">/ Professor, National Graduate Institute for Policy Studies, GRIPS</span><br><em>Industry's Collaboration with Academic Research and Star Scientists toward Innovation</em></li>
+                <li><span class="role-tag">Keynote Speaker IV</span><br>Kuan-Yu Lin <span class="title">/ Postdoctoral Research Fellow in Chemical Engineering, Stanford University</span><br><em>The Secrets of Lithium Batteries: How the Invisible Interface Affects Your Phone and Electric Vehicle</em></li>
               </ul>
             </div>
           </div>
-          
-          <div class="schedule-row section-header">
-            <div class="content-cell" style="display: flex; width: 100%; background: rgba(255, 255, 255, 0.1); color: white; text-align: center; justify-content: center; align-items: center; font-weight: 600; padding: 15px 20px;">Session II: From Biomedical Materials to Energy Materials, How Cross-Field Innovation Transforms Taiwan's Global Competitiveness</div>
-          </div>
-          
+
           <div class="schedule-row">
             <div class="time-cell">16:00 - 16:30</div>
             <div class="content-cell">
+              Panel Discussion
               <span class="role-tag">Moderator</span>
               <ul style="margin-top: 12px;">
                 <li>Wang-Long Lee <span class="title">/ Director of Science Education Development and International Cooperation, National Science and Technology Council</span></li>
               </ul>
               <span class="role-tag">Panelists</span>
               <ul style="margin-top: 12px;">
-                <li>Zhi-Guang Wang <span class="title">/ Associate Director of Orthopedic Research Center, Kaohsiung Medical University</span></li>
-                <li>Hong-Bang Lee <span class="title">/ Postdoctoral Researcher in Bioengineering and Orthopedic Surgery, Stanford University</span></li>
+                <li>Chih-Guang Wang <span class="title">/ Vice President, Bone Research Center, Kaohsiung Medical University</span></li>
+                <li>Yu-Chih Lin <span class="title">/ Postdoctoral Fellow, Department of Bioengineering and Center for Skeletal Medicine, Stanford University</span></li>
                 <li>Guan-Yu Lin <span class="title">/ Postdoctoral Researcher in Chemical Engineering, Stanford University</span></li>
                 <li>Japanese or Korean Think Tank Expert</li>
               </ul>
             </div>
           </div>
+          
+
           </div>
         </div>
 
@@ -4949,7 +4694,7 @@ strong {
             <p style="font-size: 1.1em; color: #cfd6e6; margin-top: 4px;"><img src="assets/img/svg-pin.svg" width="20" height="20" style="display: inline-block; vertical-align: -2px; margin-right: 8px;" alt="location pin">&#x53F0;&#x5317;&#x5E02;&#x5927;&#x5B89;&#x5340;&#x7F85;&#x65AF;&#x798F;&#x8DEF;&#x56DB;&#x6BB5; 85 &#x865F; B1</p>
           </div>
           <div class="lang-en" style="display: none;">
-            <p style="font-size: 1.2em; margin-bottom: 4px; font-weight: 600;">NTU Genius Convention Center</p>
+            <p style="font-size: 1.2em; margin-bottom: 4px; font-weight: 600;">GIS NTU Convention Center - Socrates Room</p>
             <p style="font-size: 1.1em; color: #cfd6e6; margin-top: 4px;"><img src="assets/img/svg-pin.svg" width="20" height="20" style="display: inline-block; vertical-align: -2px; margin-right: 8px;" alt="location pin">No. 85, Section 4, Roosevelt Road, Da'an District, Taipei City, B1</p>
           </div>
         </div>
@@ -5274,6 +5019,55 @@ document.querySelectorAll('.bar-item').forEach(btn=>{
       section.style.display = 'none';
     });
     
+    // &#x6839;&#x64DA;&#x5834;&#x6B21;&#x66F4;&#x65B0;&#x6D6E;&#x52D5;&#x6309;&#x9215;
+    const floatingBtn = document.getElementById('floatingBtn');
+    const floatingBtnLink = floatingBtn?.querySelector('.button a');
+    const floatingBtnText = floatingBtn?.querySelector('.button__text');
+    
+    if (floatingBtn && floatingBtnLink && floatingBtnText) {
+      if (targetId === 's2') {
+        // &#x7B2C;&#x4E8C;&#x5834;&#x6B21;&#xFF1A;&#x7ACB;&#x5373;&#x5831;&#x540D;
+        floatingBtnLink.removeAttribute('data-event');
+        floatingBtnLink.href = 'https://payment.niar.org.tw/Register/30537d647e8364ee951a1a10ece3cc7e';
+        floatingBtnLink.onclick = function(e) {
+          e.preventDefault();
+          window.open(this.href, '_blank');
+          return false;
+        };
+        floatingBtnText.innerHTML = `
+          <span>&#x7ACB;</span>
+          <span>&#x5373;</span>
+          <span>&#x5831;</span>
+          <span>&#x540D;</span>
+          <span>&#x3000;</span>
+          <span>&#x3000;</span>
+          <span>&#x7ACB;</span>
+          <span>&#x5373;</span>
+          <span>&#x5831;</span>
+          <span>&#x540D;</span>
+          <span>&#x3000;</span>
+          <span>&#x3000;</span>`;
+      } else {
+        // &#x5176;&#x4ED6;&#x5834;&#x6B21;&#xFF1A;&#x7CBE;&#x5F69;&#x56DE;&#x9867;
+        floatingBtnLink.href = '#';
+        floatingBtnLink.setAttribute('data-event', 'highlights');
+        floatingBtnLink.onclick = null;
+        floatingBtnText.innerHTML = `
+          <span>&#x7CBE;</span>
+          <span>&#x5F69;</span>
+          <span>&#x56DE;</span>
+          <span>&#x9867;</span>
+          <span>&#x3000;</span>
+          <span>&#x3000;</span>
+          <span>&#x7CBE;</span>
+          <span>&#x5F69;</span>
+          <span>&#x56DE;</span>
+          <span>&#x9867;</span>
+          <span>&#x3000;</span>
+          <span>&#x3000;</span>`;
+      }
+    }
+
     // &#x986F;&#x793A;&#x5C0D;&#x61C9;&#x7684;&#x6D3B;&#x52D5;&#x8CC7;&#x8A0A;
     const targetSection = document.getElementById(`${targetId}-info`);
     console.log('&#x76EE;&#x6A19;&#x5340;&#x584A;:', targetSection); // &#x8ABF;&#x8A66;&#x4FE1;&#x606F;
@@ -6270,15 +6064,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-  // &#x66F4;&#x65B0;&#x5831;&#x540D;&#x9023;&#x7D50;
-  const registerLink = floatingBtn?.querySelector('.button a');
-  if (registerLink) {
-    registerLink.onclick = function(e) {
-      e.preventDefault();
-      window.open('https://payment.niar.org.tw/Register/bb83615563b6e68efb448a068b745344', '_blank');
-      return false;
-    };
-  }
+  // &#x6D6E;&#x52D5;&#x6309;&#x9215;&#x5DF2;&#x6539;&#x70BA;&#x4F7F;&#x7528; data-event="highlights" &#x8655;&#x7406;
 });
 
 /* &#x8A9E;&#x8A00;&#x5207;&#x63DB;&#x529F;&#x80FD; - &#x5DF2;&#x7981;&#x7528;&#xFF0C;&#x7531;&#x65B0;&#x7CFB;&#x7D71;&#x63A7;&#x5236; */
