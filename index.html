@@ -5077,14 +5077,19 @@ strong {
         </div>
       </div>
 
+    </div>
+
+    <h2 id="s3-collaborators" class="section-title">協同講者</h2>
+
+    <!-- collaborator: 1 collaborator without photo -->
+    <div class="speakers-section">
       <div class="speaker-card speaker-clickable"
            data-speaker-name="林碧芳"
            data-speaker-title="台灣統計方法學會 秘書長"
            data-speaker-education="• 國立政治大學 教育系博士"
            data-speaker-experience="林碧芳博士現任台灣統計方法學會秘書長，並在多所大學擔任兼任助理教授，包括國立台灣師範大學師資培育學院、輔仁大學教育領導與科技發展學士學位學程、東吳大學心理學系以及世新大學社會心理學系。她的研究專長領域包括測驗與統計、結構方程模式以及成長模型。林博士在統計方法學及教育測驗領域擁有深厚的實務經驗，致力於推廣正確的統計方法在教育研究中的應用。"
            data-event-title="前瞻系列培訓工作坊：利用AI提升統計決策與實務應用">
-        <img class="speaker-photo-card" src="assets/img/speaker-placeholder.png" alt="林碧芳">
-        <div class="speaker-info">
+        <div class="speaker-info" style="width: 100%;">
           <div class="speaker-name-card">林碧芳</div>
           <div class="speaker-title-card">台灣統計方法學會 秘書長</div>
           <div class="speaker-experience-preview">林碧芳博士現任台灣統計方法學會秘書長，並在多所大學擔任兼任助理教授。她的研究專長領域包括測驗與統計、結構方程模式以及成長模型。</div>
@@ -5093,9 +5098,10 @@ strong {
     </div>
 
     <h2 id="s3-about" class="section-title about-section">工作坊簡介</h2>
-    <p>研究方法與數據分析是現代學術研究與產業決策的核心工具，隨著大數據時代的來臨，正確的統計方法與數據詮釋能力變得比以往任何時候都更加重要。</p>
-    <p>本工作坊為為期兩天的密集式培訓課程，由台灣統計方法學會的領導專家主講，旨在<span class="highlight-text">提升參與者在研究方法設計、數據分析技巧與結果詮釋</span>的實務能力。</p>
-    <p>這是一個理論與實務並重的學習機會，適合研究生、學者及實務工作者參與。</p>
+    <p>本工作坊透過量化研究與統計工具的系統化訓練，協助研究人員強化資料分析與決策能力，並提升資料探索、模式建構與工具操作（SPSS、MPlus、AI）的實務應用技巧。同時，引導學員理解統計方法與人工智慧在決策分析中的互補角色，以更科學化、數據導向的方式提升研究品質與政策推動效能。</p>
+    <p>在資料驅動決策成為政策研究核心的今日，統計分析與 AI 工具的整合已是跨領域研究不可或缺的能力。</p>
+    <p>本次工作坊特別聚焦「<span class="highlight-text">統計推論 × 探索性資料分析 × 迴歸建模 × AI 輔助統計決策</span>」，並由台灣統計方法學會理事長邱盧政教授及秘書長林碧芳教授協同授課。</p>
+    <p>課程以二日密集講授與討論方式進行，帶領學員從研究設計、資料前處理、統計檢定到 AI 輔助決策，完整掌握「從資料到政策洞察」的分析流程，全面強化智庫、學研與法人研究人員在政策研析上的深度與廣度。</p>
 
     <h2 id="s3-agenda" class="section-title">工作坊議程</h2>
 
@@ -6784,8 +6790,17 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('modalSpeakerTitle').innerHTML = speakerTitle;
       document.getElementById('modalEducation').innerHTML = speakerEducation;
       document.getElementById('modalExperience').innerHTML = speakerExperience;
-      document.getElementById('modalPhoto').src = photoSrc;
-      document.getElementById('modalPhoto').alt = speakerName;
+      
+      // &#x8655;&#x7406;&#x7167;&#x7247;&#x986F;&#x793A;
+      const modalPhoto = document.getElementById('modalPhoto');
+      const modalRight = document.querySelector('.modal-right');
+      if (photoSrc && photoSrc !== '') {
+        modalPhoto.src = photoSrc;
+        modalPhoto.alt = speakerName;
+        modalRight.style.display = 'block';
+      } else {
+        modalRight.style.display = 'none';
+      }
       
       // &#x986F;&#x793A;&#x5F48;&#x51FA;&#x8996;&#x7A97;
       modal.style.display = 'flex';
