@@ -232,6 +232,17 @@ section[id], h2[id]{ scroll-margin-top: var(--floating-offset); }
 }
 .bar-item:hover{ background-position:100% 50%; transform:translateY(-1px); }
 .bar-item[aria-current="true"]{ --c1:var(--tab-active); --c2:#a71858; animation:gradFlow 3s ease-in-out infinite alternate; }
+.bar-item:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: linear-gradient(135deg, #666 0%, #444 100%) !important;
+  transform: none !important;
+  box-shadow: 0 4px 10px rgba(0,0,0,.15);
+}
+.bar-item:disabled:hover {
+  background-position: 0% 50% !important;
+  transform: none !important;
+}
 @keyframes gradFlow{ from{background-position:0% 50%} to{background-position:100% 50%} }
 
 /* \684C \9762 \7248 \7BAD \982D \548C \6708 \4EFD \5BB9 \5668  */
@@ -3781,8 +3792,8 @@ strong {
       <button type="button" class="bar-item" data-id="s2" aria-current="true">
         <span class="bar-date bar-session"><span class="bar-arrow">&#x2B95;</span> &#x7CFB;&#x5217;&#x8AD6;&#x58C7; &#x278B;</span>
       </button>
-      <button type="button" class="bar-item" data-id="s3" aria-current="false">
-        <span class="bar-date bar-session"><span class="bar-arrow">&#x2B95;</span> &#x57F9;&#x8A13;&#x5DE5;&#x4F5C;&#x574A;</span>
+      <button type="button" class="bar-item" data-id="s3" aria-current="false" disabled>
+        <span class="bar-date bar-session"><span class="bar-arrow">&#x2B95;</span> &#x5373;&#x5C07;&#x516C;&#x5E03;</span>
       </button>
     </div>
   </nav>
