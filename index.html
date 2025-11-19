@@ -33,7 +33,7 @@
 <meta property="og:locale" content="zh_TW" />
 
 <style>
-/* ===== 本地字體定義 ===== */
+/* ===== &#x672C;&#x5730;&#x5B57;&#x9AD4;&#x5B9A;&#x7FA9; ===== */
 @font-face {
   font-family: 'Noto Sans TC';
   src: url('assets/fonts/NotoSansTC-Light.ttf') format('truetype');
@@ -1357,7 +1357,7 @@ body.modal-open .floating-share {
   box-shadow:none;
 }
 
-/* 照片牆樣式 */
+/* &#x7167;&#x7247;&#x7246;&#x6A23;&#x5F0F; */
 .photo-gallery-modal {
   position: fixed;
   top: 0;
@@ -1438,7 +1438,7 @@ body.modal-open .floating-share {
   object-fit: cover;
 }
 
-/* 單張照片放大視窗 */
+/* &#x55AE;&#x5F35;&#x7167;&#x7247;&#x653E;&#x5927;&#x8996;&#x7A97; */
 .photo-preview-modal {
   position: fixed;
   top: 0;
@@ -1563,12 +1563,12 @@ body.modal-open .floating-share {
 }
 
 .footer-section .inner{
-  max-width:1000px; /* 縮小最大寬度讓內容更集中 */
+  max-width:1000px; /* &#x7E2E;&#x5C0F;&#x6700;&#x5927;&#x5BEC;&#x5EA6;&#x8B93;&#x5167;&#x5BB9;&#x66F4;&#x96C6;&#x4E2D; */
   margin:0 auto;
-  padding:0 32px; /* 調整為與其他區域一致的32px */
+  padding:0 32px; /* &#x8ABF;&#x6574;&#x70BA;&#x8207;&#x5176;&#x4ED6;&#x5340;&#x57DF;&#x4E00;&#x81F4;&#x7684;32px */
   display:grid;
-  grid-template-columns:1fr 1fr; /* 改回兩欄布局：指導單位 | 主辦單位 */
-  gap:60px; /* 進一步縮小間距 */
+  grid-template-columns:1fr 1fr; /* &#x6539;&#x56DE;&#x5169;&#x6B04;&#x5E03;&#x5C40;：&#x6307;&#x5C0E;&#x55AE;&#x4F4D; | &#x4E3B;&#x8FA6;&#x55AE;&#x4F4D; */
+  gap:60px; /* &#x9032;&#x4E00;&#x6B65;&#x7E2E;&#x5C0F;&#x9593;&#x8DDD; */
   align-items:center;
   justify-items:center;
 }
@@ -1591,24 +1591,24 @@ body.modal-open .floating-share {
 
 .footer-logo{
   display:block;
-  height:50px; /* 稍微增加logo高度 */
+  height:50px; /* &#x7A0D;&#x5FAE;&#x589E;&#x52A0;logo&#x9AD8;&#x5EA6; */
   width:auto;
-  max-width:240px; /* 適當的最大寬度 */
+  max-width:240px; /* &#x9069;&#x7576;&#x7684;&#x6700;&#x5927;&#x5BEC;&#x5EA6; */
   object-fit:contain;
 }
 
-/* 多個主辦單位 logo 的容器 */
+/* &#x591A;&#x500B;&#x4E3B;&#x8FA6;&#x55AE;&#x4F4D; logo &#x7684;&#x5BB9;&#x5668; */
 .footer-logos {
   display: flex;
   align-items: center;
-  gap: 20px; /* 兩個主辦單位 logo 之間的間距 */
+  gap: 20px; /* &#x5169;&#x500B;&#x4E3B;&#x8FA6;&#x55AE;&#x4F4D; logo &#x4E4B;&#x9593;&#x7684;&#x9593;&#x8DDD; */
   flex-wrap: wrap;
   justify-content: center;
 }
 
 .footer-logos .footer-logo {
-  max-width: 200px; /* 共同主辦時的 logo 寬度 */
-  height: 45px; /* 稍微縮小高度以適應並排 */
+  max-width: 200px; /* &#x5171;&#x540C;&#x4E3B;&#x8FA6;&#x6642;&#x7684; logo &#x5BEC;&#x5EA6; */
+  height: 45px; /* &#x7A0D;&#x5FAE;&#x7E2E;&#x5C0F;&#x9AD8;&#x5EA6;&#x4EE5;&#x9069;&#x61C9;&#x4E26;&#x6392; */
 }
 
 /* ===== \6BB5 \843D \8207 \5167 \5BB9 \9593 \8DDD \512A \5316  ===== */
@@ -1637,32 +1637,32 @@ strong {
   .event-info .topic-row{ align-items:baseline; }
   .event-info .topic-row > div:last-child{ display:flex; align-items:baseline; min-height:0; }
   
-  /* 地點區域特殊處理 - 允許正常換行 */
+  /* &#x5730;&#x9EDE;&#x5340;&#x57DF;&#x7279;&#x6B8A;&#x8655;&#x7406; - &#x5141;&#x8A31;&#x6B63;&#x5E38;&#x63DB;&#x884C; */
   .event-info .topic-row.place > div:last-child{ 
     display:block; 
     word-break: break-word;
     overflow-wrap: break-word;
-    white-space: normal; /* 允許正常換行 */
+    white-space: normal; /* &#x5141;&#x8A31;&#x6B63;&#x5E38;&#x63DB;&#x884C; */
   }
 }
 
-/* 平板尺寸 footer 調整 */
+/* &#x5E73;&#x677F;&#x5C3A;&#x5BF8; footer &#x8ABF;&#x6574; */
 @media (max-width:900px){
   .footer-section .inner{
-    gap: 30px; /* 平板時進一步縮小間距 */
+    gap: 30px; /* &#x5E73;&#x677F;&#x6642;&#x9032;&#x4E00;&#x6B65;&#x7E2E;&#x5C0F;&#x9593;&#x8DDD; */
   }
   
   .footer-logos {
-    gap: 16px; /* 縮小主辦單位 logo 間距 */
+    gap: 16px; /* &#x7E2E;&#x5C0F;&#x4E3B;&#x8FA6;&#x55AE;&#x4F4D; logo &#x9593;&#x8DDD; */
   }
   
   .footer-logos .footer-logo {
-    max-width: 160px; /* 縮小共同主辦 logo */
+    max-width: 160px; /* &#x7E2E;&#x5C0F;&#x5171;&#x540C;&#x4E3B;&#x8FA6; logo */
     height: 38px;
   }
   
   .footer-logo {
-    max-width: 180px; /* 指導單位 logo */
+    max-width: 180px; /* &#x6307;&#x5C0E;&#x55AE;&#x4F4D; logo */
     height: 42px;
   }
 }
@@ -1844,7 +1844,7 @@ strong {
   }
   
   /* Footer */
-  .footer-section { padding: 40px 0 50px; } /* 調整上下間距 */
+  .footer-section { padding: 40px 0 50px; } /* &#x8ABF;&#x6574;&#x4E0A;&#x4E0B;&#x9593;&#x8DDD; */
   .footer-section .inner{ 
     grid-template-columns:1fr; 
     gap:30px; 
@@ -2013,7 +2013,7 @@ strong {
   }
 }
 
-/* Coming Soon 遮罩樣式 */
+/* Coming Soon &#x906E;&#x7F69;&#x6A23;&#x5F0F; */
 .coming-soon-overlay {
   position: absolute;
   top: 0;
@@ -3059,7 +3059,7 @@ strong {
   vertical-align: middle;
 }
 
-/* 議程表專用：主持人／主講人／與談人膠囊放大、左右圓角，且與上下行距一致 */
+/* &#x8B70;&#x7A0B;&#x8868;&#x5C08;&#x7528;：&#x4E3B;&#x6301;&#x4EBA;／&#x4E3B;&#x8B1B;&#x4EBA;／&#x8207;&#x8AC7;&#x4EBA;&#x81A0;&#x56CA;&#x653E;&#x5927;、&#x5DE6;&#x53F3;&#x5713;&#x89D2;，&#x4E14;&#x8207;&#x4E0A;&#x4E0B;&#x884C;&#x8DDD;&#x4E00;&#x81F4; */
 .schedule-table .role-tag,
 .agenda-table .role-tag,
 .content-cell .role-tag,
@@ -3070,7 +3070,7 @@ strong {
   margin: 0 8px 0 0;    /* &#x53BB;&#x9664;&#x4E0B;&#x908A;&#x8DDD;，&#x53EA;&#x4FDD;&#x7559;&#x53F3;&#x5074;&#x9593;&#x8DDD; */
 }
 
-/* 議程：強制覆蓋所有列表的上間距，包括 inline style */
+/* &#x8B70;&#x7A0B;：&#x5F37;&#x5236;&#x8986;&#x84CB;&#x6240;&#x6709;&#x5217;&#x8868;&#x7684;&#x4E0A;&#x9593;&#x8DDD;，&#x5305;&#x62EC; inline style */
 .schedule-table .content-cell ul[style*="margin-top"],
 .schedule-table .content-cell ul,
 .agenda-table .content-cell ul[style*="margin-top"],
@@ -3078,15 +3078,15 @@ strong {
   margin-top: 8px !important;
 }
 
-/* 議程：統一膠囊與上一句的距離（非列表情境） */
+/* &#x8B70;&#x7A0B;：&#x7D71;&#x4E00;&#x81A0;&#x56CA;&#x8207;&#x4E0A;&#x4E00;&#x53E5;&#x7684;&#x8DDD;&#x96E2;（&#x975E;&#x5217;&#x8868;&#x60C5;&#x5883;） */
 .schedule-table .content-cell > .role-tag,
 .agenda-table .content-cell > .role-tag {
   margin-top: 8px !important;
 }
 
-/* 議程：統一膠囊到下一行（姓名）的距離 - 已移至下方統一處理 */
+/* &#x8B70;&#x7A0B;：&#x7D71;&#x4E00;&#x81A0;&#x56CA;&#x5230;&#x4E0B;&#x4E00;&#x884C;（&#x59D3;&#x540D;）&#x7684;&#x8DDD;&#x96E2; - &#x5DF2;&#x79FB;&#x81F3;&#x4E0B;&#x65B9;&#x7D71;&#x4E00;&#x8655;&#x7406; */
 
-/* 議程表特殊行樣式 */
+/* &#x8B70;&#x7A0B;&#x8868;&#x7279;&#x6B8A;&#x884C;&#x6A23;&#x5F0F; */
 .schedule-row.session-header {
   background: rgba(255, 255, 255, 0.1);
 }
@@ -3320,12 +3320,12 @@ strong {
   background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
 }
 
-/* 當顯示精彩回顧時的紫色背景 */
+/* &#x7576;&#x986F;&#x793A;&#x7CBE;&#x5F69;&#x56DE;&#x9867;&#x6642;&#x7684;&#x7D2B;&#x8272;&#x80CC;&#x666F; */
 [data-event="highlights"] .button__circle {
   background: linear-gradient(135deg, #6B46C1 0%, #9F7AEA 100%);
 }
 
-/* 當顯示立即報名時的橘色背景 */
+/* &#x7576;&#x986F;&#x793A;&#x7ACB;&#x5373;&#x5831;&#x540D;&#x6642;&#x7684;&#x6A58;&#x8272;&#x80CC;&#x666F; */
 [data-event="signup"] .button__circle {
   background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
 }
@@ -3699,15 +3699,15 @@ strong {
   }
 }
 
-/* ===== 統一議程間距：一個規則解決所有問題 ===== */
+/* ===== &#x7D71;&#x4E00;&#x8B70;&#x7A0B;&#x9593;&#x8DDD;：&#x4E00;&#x500B;&#x898F;&#x5247;&#x89E3;&#x6C7A;&#x6240;&#x6709;&#x554F;&#x984C; ===== */
 
-/* 強制所有議程表中的 ul 使用統一間距，覆蓋 inline style */
+/* &#x5F37;&#x5236;&#x6240;&#x6709;&#x8B70;&#x7A0B;&#x8868;&#x4E2D;&#x7684; ul &#x4F7F;&#x7528;&#x7D71;&#x4E00;&#x9593;&#x8DDD;，&#x8986;&#x84CB; inline style */
 .schedule-table .content-cell ul,
 .agenda-table .content-cell ul {
   margin-top: 8px !important;
 }
 
-/* 統一所有 li 項目的間距 */
+/* &#x7D71;&#x4E00;&#x6240;&#x6709; li &#x9805;&#x76EE;&#x7684;&#x9593;&#x8DDD; */
 .schedule-table .content-cell li,
 .agenda-table .content-cell li {
   margin-bottom: 4px !important;
@@ -3718,16 +3718,16 @@ strong {
   margin-bottom: 0 !important;
 }
 
-/* ===== 統一膠囊結構：膠囊在外，後面跟 ul ===== */
+/* ===== &#x7D71;&#x4E00;&#x81A0;&#x56CA;&#x7D50;&#x69CB;：&#x81A0;&#x56CA;&#x5728;&#x5916;，&#x5F8C;&#x9762;&#x8DDF; ul ===== */
 
-/* 所有角色膠囊的統一樣式和間距 */
+/* &#x6240;&#x6709;&#x89D2;&#x8272;&#x81A0;&#x56CA;&#x7684;&#x7D71;&#x4E00;&#x6A23;&#x5F0F;&#x548C;&#x9593;&#x8DDD; */
 .schedule-table .content-cell .role-tag,
 .agenda-table .content-cell .role-tag {
   display: inline-block !important;
   margin-bottom: 6px !important;
 }
 
-/* 膠囊後面的 ul 不需要額外上間距 */
+/* &#x81A0;&#x56CA;&#x5F8C;&#x9762;&#x7684; ul &#x4E0D;&#x9700;&#x8981;&#x984D;&#x5916;&#x4E0A;&#x9593;&#x8DDD; */
 .schedule-table .content-cell .role-tag + ul,
 .agenda-table .content-cell .role-tag + ul {
   margin-top: 0 !important;
@@ -4092,7 +4092,7 @@ strong {
   <div class="inner">
     <div class="topic-wrap">
       <div class="topic-badge">
-        鏈結全球與台灣<br>打造跨域前瞻科技生態系
+        &#x9375;&#x7D50;&#x5168;&#x7403;&#x8207;&#x53F0;&#x7063;<br>&#x6253;&#x9020;&#x8DE8;&#x57DF;&#x524D;&#x77BB;&#x79D1;&#x6280;&#x751F;&#x614B;&#x7CFB;
         <div class="topic-en">Connecting Taiwan and the World:<br>Building a Cross-disciplinary Frontier Technology Ecosystem</div>
       </div>
 
@@ -4113,7 +4113,7 @@ strong {
               <span class="lang-en" style="display: none;">Time</span>
             </div>
             <div>
-              <span class="lang-zh">2025 年 12 月 15 日 (一)</span>
+              <span class="lang-zh">2025 &#x5E74; 12 &#x6708; 15 &#x65E5; (&#x4E00;)</span>
               <span class="lang-en" style="display: none;">Monday, December 15th, 2025</span>
             </div>
           </div>
@@ -4158,7 +4158,7 @@ strong {
            data-speaker-education-en="&#x2022; M.S. in Engineering, University of California, Los Angeles<br>&#x2022; B.S. in Engineering, National Taiwan University"
            data-speaker-experience="William Sheu &#x662F;&#x83EF;&#x78A9;&#x5317;&#x7F8E;&#x7B56;&#x7565;&#x8207;&#x5925;&#x4F34;&#x95DC;&#x4FC2;&#x526F;&#x7E3D;&#x88C1;&#xFF0C;&#x5E38;&#x99D0;&#x820A;&#x91D1;&#x5C71;&#x7063;&#x5340;&#xFF0C;&#x81F4;&#x529B;&#x65BC;&#x63A8;&#x52D5;&#x516C;&#x53F8;&#x5275;&#x65B0;&#x8207;&#x6210;&#x9577;&#x7B56;&#x7565;&#xFF0C;&#x4E26;&#x8207;&#x65B0;&#x5275;&#x4F01;&#x696D;&#x3001;&#x5275;&#x6295;&#x53CA;&#x7522;&#x696D;&#x9818;&#x8896;&#x5EFA;&#x7ACB;&#x6DF1;&#x5177;&#x5F71;&#x97FF;&#x529B;&#x7684;&#x7B56;&#x7565;&#x5408;&#x4F5C;&#x3002;&#x4ED6;&#x63A8;&#x52D5;&#x7522;&#x54C1;&#x5275;&#x65B0;&#x3001;&#x63D0;&#x5347;&#x71DF;&#x904B;&#x6548;&#x7387;&#xFF0C;&#x4E26;&#x52A0;&#x5F37;&#x83EF;&#x78A9;&#x5728;&#x5FEB;&#x901F;&#x767C;&#x5C55;&#x7684;&#x9818;&#x57DF;, &#x5305;&#x62EC;&#x4E0B;&#x4E00;&#x4EE3;&#x904B;&#x7B97;&#x3001;&#x4EBA;&#x5DE5;&#x667A;&#x6167;&#x3001;&#x7269;&#x806F;&#x7DB2;&#x3001;&#x96F2;&#x7AEF;&#x670D;&#x52D9;&#x53CA; ESG, &#x7684;&#x5E02;&#x5834;&#x5730;&#x4F4D;&#x3002;<br>William &#x64C1;&#x6709;&#x8D85;&#x904E; 30 &#x5E74;&#x7684;&#x77FD;&#x8C37;&#x7D93;&#x9A57;&#xFF0C;&#x8077;&#x696D;&#x751F;&#x6DAF;&#x59CB;&#x65BC;&#x696D;&#x754C;&#x9818;&#x5C0E;&#x4F01;&#x696D;&#x6717;&#x8A0A;&#x79D1;&#x6280;&#x548C;&#x7532;&#x9AA8;&#x6587;&#xFF0C;&#x4E4B;&#x5F8C;&#x8F49;&#x578B;&#x5275;&#x696D;&#x3002;&#x4ED6;&#x66FE;&#x5171;&#x540C;&#x5275;&#x7ACB;&#x5167;&#x5BB9;&#x50B3;&#x905E;&#x7DB2;&#x8DEF; (CDN) &#x89E3;&#x6C7A;&#x65B9;&#x6848;&#x9818;&#x57DF;&#x7684;&#x591A;&#x5BB6;&#x4F01;&#x696D;&#xFF0C;&#x4E26;&#x64D4;&#x4EFB;&#x958B;&#x767C;&#x96F2;&#x7AEF;&#x96FB;&#x8996;&#x5E73;&#x53F0;&#x548C; VoIP &#x901A;&#x8A0A;&#x670D;&#x52D9;&#x65B0;&#x5275;&#x516C;&#x53F8;&#x7684;&#x6280;&#x8853;&#x9577;&#x3002;&#x4ED6;&#x64C5;&#x9577;&#x7D50;&#x5408;&#x5927;&#x4F01;&#x696D;&#x7684;&#x5236;&#x5EA6;&#x5316;&#x7BA1;&#x7406;&#x8207;&#x65B0;&#x5275;&#x7684;&#x9748;&#x6D3B;&#x5275;&#x65B0;&#xFF0C;&#x5F15;&#x9818;&#x984A;&#x8986;&#x6027;&#x6280;&#x8853;&#x843D;&#x5730;&#xFF0C;&#x6253;&#x9020;&#x9AD8;&#x5F71;&#x97FF;&#x529B;&#x7684;&#x5408;&#x4F5C;&#x5925;&#x4F34;&#x95DC;&#x4FC2;<br>William &#x5728;&#x7F8E;&#x570B;&#x548C;&#x4E9E;&#x6D32;&#x64C1;&#x6709;&#x8C50;&#x5BCC;&#x7684;&#x8DE8;&#x570B;&#x9818;&#x5C0E;&#x7D93;&#x9A57;&#xFF0C;&#x5728;&#x6587;&#x5316;&#x52D5;&#x614B;&#x3001;&#x570B;&#x969B;&#x5546;&#x696D;&#x5BE6;&#x8E10;&#x4EE5;&#x53CA;&#x8DE8;&#x6642;&#x5340;&#x5206;&#x4F48;&#x5F0F;&#x5718;&#x968A;&#x7BA1;&#x7406;&#x65B9;&#x9762;&#x64C1;&#x6709;&#x6DF1;&#x539A;&#x7684;&#x7D93;&#x9A57;&#x3002;&#x4ED6;&#x7562;&#x696D;&#x65BC;&#x570B;&#x7ACB;&#x53F0;&#x7063;&#x5927;&#x5B78;&#xFF0C;&#x7372;&#x5DE5;&#x7A0B;&#x5B78;&#x58EB;&#x5B78;&#x4F4D;&#xFF0C;&#x4E26;&#x65BC;&#x52A0;&#x5DDE;&#x5927;&#x5B78;&#x6D1B;&#x6749;&#x78EF;&#x5206;&#x6821;&#x53D6;&#x5F97;&#x78A9;&#x58EB;&#x5B78;&#x4F4D;&#x3002;&#x5DE5;&#x4F5C;&#x4E4B;&#x9918;&#xFF0C;William &#x662F;&#x8010;&#x529B;&#x904B;&#x52D5;&#x53CA;&#x6236;&#x5916;&#x6D3B;&#x52D5;&#x611B;&#x597D;&#x8005;&#xFF0C;&#x71B1;&#x8877;&#x53C3;&#x52A0;&#x99AC;&#x62C9;&#x677E;&#x3001;&#x9435;&#x4EBA;&#x4E09;&#x9805;&#x3001;&#x5C71;&#x5730;&#x81EA;&#x884C;&#x8ECA;&#x53CA;&#x6C34;&#x80FA;&#x6F5B;&#x6C34;&#x7B49;&#x904B;&#x52D5;&#x3002;"
            data-speaker-experience-en="William Sheu is the Vice President of Strategy & Partnership at ASUS North America, based in the San Francisco Bay Area. In this role, he spearheads the company's global innovation and growth agenda by building strategic collaborations with startups, venture investors, and industry leaders. William drives product innovation, enhances operational efficiency, and strengthens ASUS's leadership in fast-evolving fields such as next-generation computing, AI, IoT, cloud, and ESG.<br>William has more than 30 years of experience in Silicon Valley, starting his career at industry leaders Lucent Technologies and Oracle before moving into entrepreneurship. He co-founded ventures in Content Delivery Network (CDN) solutions and held CTO roles at startups pioneering cloud TV platforms and VoIP communication services. His ability to bridge the structured discipline of large corporations with the agility of startups has made him instrumental in scaling disruptive technologies and building high-impact partnerships.<br>William brings extensive cross-border leadership experience in the United States and Asia, with deep expertise in cultural dynamics, international business practices, and managing distributed teams across time zones.  He earned his undergraduate engineering degree from National Taiwan University and a master's degree from UCLA. Outside of work, William is an endurance athlete and outdoor enthusiast, frequently taking on marathons, triathlons, mountain biking, and scuba diving."
-           data-event-title="鏈結全球與台灣 打造跨域前瞻科技生態系"
+           data-event-title="&#x9375;&#x7D50;&#x5168;&#x7403;&#x8207;&#x53F0;&#x7063; &#x6253;&#x9020;&#x8DE8;&#x57DF;&#x524D;&#x77BB;&#x79D1;&#x6280;&#x751F;&#x614B;&#x7CFB;"
            data-event-title-en="Connecting Taiwan and the World: Building a Cross-disciplinary Frontier Technology Ecosystem">
         <img class="speaker-photo-card" src="assets/img/speaker-William-Sheu.png" alt="&#x8A31;&#x60E0;&#x6C11;">
         <div class="speaker-info">
@@ -4180,14 +4180,14 @@ strong {
            data-speaker-title-en="Senior Researcher, Korea Institute of Science and Technology Information (KISTI)"
            data-speaker-education="&#x30FB; &#x97D3;&#x570B;&#x79D1;&#x5B78;&#x6280;&#x8853;&#x9662; &#x8CC7;&#x6599;&#x79D1;&#x5B78;&#x535A;&#x58EB;&#x73ED;&#x5019;&#x9078;&#x4EBA;<br>&#x30FB; &#x6176;&#x5317;&#x5927;&#x5B78; &#x7BA1;&#x7406;&#x8CC7;&#x8A0A;&#x7CFB;&#x78A9;&#x58EB;<br>&#x30FB; &#x6176;&#x5317;&#x5927;&#x5B78; &#x7BA1;&#x7406;&#x8CC7;&#x8A0A;&#x7CFB;&#x5B78;&#x58EB;"
            data-speaker-education-en="&#x2022; Ph.D. Candidate (ABD) in Data Science, Korea Advanced Institute of Science and Technology<br>&#x2022; B.S and M.S. in Management Information Systems, Kyung-book National University"
-           data-speaker-experience="申晟顥&#x76EE;&#x524D;&#x64D4;&#x4EFB;&#x97D3;&#x570B;&#x79D1;&#x5B78;&#x6280;&#x8853;&#x8CC7;&#x8A0A;&#x9662;&#xFF08;KISTI&#xFF09;&#x8CC7;&#x6DF1;&#x7814;&#x7A76;&#x54E1;&#xFF0C;&#x81EA; 2002 &#x5E74;&#x8D77;&#x6295;&#x5165;&#x79D1;&#x5B78;&#x8207;&#x7522;&#x696D;&#x9818;&#x57DF;&#x8CC7;&#x6599;&#x5E73;&#x53F0;&#x7684;&#x7814;&#x767C;&#x8207;&#x61C9;&#x7528;&#xFF0C;&#x9577;&#x671F;&#x5C08;&#x6CE8;&#x65BC;&#x8CC7;&#x6599;&#x5E73;&#x53F0;&#x8A2D;&#x8A08;&#x8207;&#x5EFA;&#x69CB;&#x3001;&#x81EA;&#x7136;&#x8A9E;&#x8A00;&#x8655;&#x7406;&#x3001;&#x6587;&#x672C;&#x63A2;&#x52D8;&#x8207;&#x8A9E;&#x610F;&#x5206;&#x6790;&#x7B49;&#x7814;&#x7A76;&#x5DE5;&#x4F5C;&#x3002;&#x4ED6;&#x81F4;&#x529B;&#x65BC;&#x904B;&#x7528;&#x4EBA;&#x5DE5;&#x667A;&#x6167;&#x9A45;&#x52D5;&#x7684;&#x8CC7;&#x6599;&#x5206;&#x6790;&#x65B9;&#x6CD5;&#xFF0C;&#x652F;&#x63F4;&#x534A;&#x5C0E;&#x9AD4;&#x88FD;&#x7A0B;&#x8207;&#x7522;&#x696D;&#x7814;&#x767C;&#x5275;&#x65B0;&#xFF0C;&#x4E26;&#x4E3B;&#x5C0E;&#x591A;&#x9805;&#x4EE5;&#x8CC7;&#x6599;&#x70BA;&#x6838;&#x5FC3;&#x7684;&#x653F;&#x5E9C;&#x5C08;&#x6848;&#xFF0C;&#x63A8;&#x52D5;&#x77E5;&#x8B58;&#x8403;&#x53D6;&#x8207;&#x8A9E;&#x610F;&#x8CC7;&#x6599;&#x7BA1;&#x7406;&#x7CFB;&#x7D71;&#x7684;&#x958B;&#x767C;&#x3002;&#x4ED6;&#x64C5;&#x9577;&#x5C07;&#x5927;&#x898F;&#x6A21;&#x975E;&#x7D50;&#x69CB;&#x5316;&#x8CC7;&#x6599;&#x8F49;&#x5316;&#x70BA;&#x53EF;&#x884C;&#x52D5;&#x7684;&#x6D1E;&#x898B;&#xFF0C;&#x61C9;&#x7528;&#x65BC;&#x79D1;&#x5B78;&#x7814;&#x7A76;&#x8207;&#x7522;&#x696D;&#x5275;&#x65B0;&#x6C7A;&#x7B56;&#x3002;"
+           data-speaker-experience="&#x7533;&#x665F;&#x9865;&#x76EE;&#x524D;&#x64D4;&#x4EFB;&#x97D3;&#x570B;&#x79D1;&#x5B78;&#x6280;&#x8853;&#x8CC7;&#x8A0A;&#x9662;&#xFF08;KISTI&#xFF09;&#x8CC7;&#x6DF1;&#x7814;&#x7A76;&#x54E1;&#xFF0C;&#x81EA; 2002 &#x5E74;&#x8D77;&#x6295;&#x5165;&#x79D1;&#x5B78;&#x8207;&#x7522;&#x696D;&#x9818;&#x57DF;&#x8CC7;&#x6599;&#x5E73;&#x53F0;&#x7684;&#x7814;&#x767C;&#x8207;&#x61C9;&#x7528;&#xFF0C;&#x9577;&#x671F;&#x5C08;&#x6CE8;&#x65BC;&#x8CC7;&#x6599;&#x5E73;&#x53F0;&#x8A2D;&#x8A08;&#x8207;&#x5EFA;&#x69CB;&#x3001;&#x81EA;&#x7136;&#x8A9E;&#x8A00;&#x8655;&#x7406;&#x3001;&#x6587;&#x672C;&#x63A2;&#x52D8;&#x8207;&#x8A9E;&#x610F;&#x5206;&#x6790;&#x7B49;&#x7814;&#x7A76;&#x5DE5;&#x4F5C;&#x3002;&#x4ED6;&#x81F4;&#x529B;&#x65BC;&#x904B;&#x7528;&#x4EBA;&#x5DE5;&#x667A;&#x6167;&#x9A45;&#x52D5;&#x7684;&#x8CC7;&#x6599;&#x5206;&#x6790;&#x65B9;&#x6CD5;&#xFF0C;&#x652F;&#x63F4;&#x534A;&#x5C0E;&#x9AD4;&#x88FD;&#x7A0B;&#x8207;&#x7522;&#x696D;&#x7814;&#x767C;&#x5275;&#x65B0;&#xFF0C;&#x4E26;&#x4E3B;&#x5C0E;&#x591A;&#x9805;&#x4EE5;&#x8CC7;&#x6599;&#x70BA;&#x6838;&#x5FC3;&#x7684;&#x653F;&#x5E9C;&#x5C08;&#x6848;&#xFF0C;&#x63A8;&#x52D5;&#x77E5;&#x8B58;&#x8403;&#x53D6;&#x8207;&#x8A9E;&#x610F;&#x8CC7;&#x6599;&#x7BA1;&#x7406;&#x7CFB;&#x7D71;&#x7684;&#x958B;&#x767C;&#x3002;&#x4ED6;&#x64C5;&#x9577;&#x5C07;&#x5927;&#x898F;&#x6A21;&#x975E;&#x7D50;&#x69CB;&#x5316;&#x8CC7;&#x6599;&#x8F49;&#x5316;&#x70BA;&#x53EF;&#x884C;&#x52D5;&#x7684;&#x6D1E;&#x898B;&#xFF0C;&#x61C9;&#x7528;&#x65BC;&#x79D1;&#x5B78;&#x7814;&#x7A76;&#x8207;&#x7522;&#x696D;&#x5275;&#x65B0;&#x6C7A;&#x7B56;&#x3002;"
            data-speaker-experience-en="Sungho Shin is currently a Senior Researcher at the Korea Institute of Science and Technology Information (KISTI), where he has been engaged in the research and development of science and industry data platforms since 2002. His work focuses on data platform design and development, natural language processing, text mining, and semantic analysis. He is dedicated to applying AI-driven data analytics to support innovation in semiconductor processes and industrial R&D, and he has led multiple government-funded projects centered on data-centric approaches. He has spearheaded the development of semantic data management and knowledge extraction systems, contributing significantly to advancing Korea's capabilities in data science and strategic research analysis.<br><br>His expertise lies in transforming large-scale unstructured data into actionable insights for scientific and industrial domains."
-           data-event-title="鏈結全球與台灣 打造跨域前瞻科技生態系"
+           data-event-title="&#x9375;&#x7D50;&#x5168;&#x7403;&#x8207;&#x53F0;&#x7063; &#x6253;&#x9020;&#x8DE8;&#x57DF;&#x524D;&#x77BB;&#x79D1;&#x6280;&#x751F;&#x614B;&#x7CFB;"
            data-event-title-en="Connecting Taiwan and the World: Building a Cross-disciplinary Frontier Technology Ecosystem">
         <img class="speaker-photo-card" src="assets/img/speaker-SunghoShi.png" alt="Sungho Shin">
         <div class="speaker-info">
           <div class="speaker-name-card">
-            <span class="lang-zh">申晟顥</span>
+            <span class="lang-zh">&#x7533;&#x665F;&#x9865;</span>
             <span class="lang-en" style="display: none;">Sungho Shin</span>
           </div>
           <div class="speaker-title-card">
@@ -4198,24 +4198,24 @@ strong {
       </div>
 
       <div class="speaker-card speaker-clickable"
-           data-speaker-name="隅藏 康一"
+           data-speaker-name="&#x96C5;&#x85CF; &#x5EB7;&#x4E00;"
            data-speaker-name-en="Koichi Sumikura"
-           data-speaker-title="政策研究大學院大學政策研究科 (GRIPS) 教授"
+           data-speaker-title="&#x653F;&#x7B56;&#x7814;&#x7A76;&#x5927;&#x5B78;&#x9662;&#x5927;&#x5B78;&#x653F;&#x7B56;&#x7814;&#x7A76;&#x79D1; (GRIPS) &#x6559;&#x6388;"
            data-speaker-title-en="Professor, National Graduate Institute for Policy Studies, GRIPS"
-           data-speaker-education="東京大學工學系研究科先端學際工學專攻 博士"
+           data-speaker-education="&#x6771;&#x4EAC;&#x5927;&#x5B78;&#x5DE5;&#x5B78;&#x7CFB;&#x7814;&#x7A76;&#x79D1;&#x5148;&#x7AEF;&#x5B78;&#x969B;&#x5DE5;&#x5B78;&#x5C08;&#x653B; &#x535A;&#x58EB;"
            data-speaker-education-en="Ph.D., Department of Advanced Interdisciplinary Studies, Graduate School of Engineering, University of Tokyo"
-           data-speaker-experience="隅藏 康一是政策研究大學（GRIPS）的教授。1998年他以生物工程研究獲得東京大學工學博士學位。1998年4月至2001年9月，他在東京大學尖端科學技術研究中心工作。2001年10月起他加入GRIPS，並擔任日本研究政策與創新管理學會董事。他的主要研究領域包括：(1) 智慧財產權政策；(2) 科學技術與創新政策；(3) 生命科學創新；以及 (4) 學術知識對創新的貢獻。"
+           data-speaker-experience="&#x96C5;&#x85CF; &#x5EB7;&#x4E00;&#x662F;&#x653F;&#x7B56;&#x7814;&#x7A76;&#x5927;&#x5B78;（GRIPS）&#x7684;&#x6559;&#x6388;。1998&#x5E74;&#x4ED6;&#x4EE5;&#x751F;&#x7269;&#x5DE5;&#x7A0B;&#x7814;&#x7A76;&#x7372;&#x5F97;&#x6771;&#x4EAC;&#x5927;&#x5B78;&#x5DE5;&#x5B78;&#x535A;&#x58EB;&#x5B78;&#x4F4D;。1998&#x5E74;4&#x6708;&#x81F3;2001&#x5E74;9&#x6708;，&#x4ED6;&#x5728;&#x6771;&#x4EAC;&#x5927;&#x5B78;&#x5C16;&#x7AEF;&#x79D1;&#x5B78;&#x6280;&#x8853;&#x7814;&#x7A76;&#x4E2D;&#x5FC3;&#x5DE5;&#x4F5C;。2001&#x5E74;10&#x6708;&#x8D77;&#x4ED6;&#x52A0;&#x5165;GRIPS，&#x4E26;&#x64D4;&#x4EFB;&#x65E5;&#x672C;&#x7814;&#x7A76;&#x653F;&#x7B56;&#x8207;&#x5275;&#x65B0;&#x7BA1;&#x7406;&#x5B78;&#x6703;&#x8463;&#x4E8B;。&#x4ED6;&#x7684;&#x4E3B;&#x8981;&#x7814;&#x7A76;&#x9818;&#x57DF;&#x5305;&#x62EC;：(1) &#x667A;&#x6167;&#x8CA1;&#x7522;&#x6B0A;&#x653F;&#x7B56;；(2) &#x79D1;&#x5B78;&#x6280;&#x8853;&#x8207;&#x5275;&#x65B0;&#x653F;&#x7B56;；(3) &#x751F;&#x547D;&#x79D1;&#x5B78;&#x5275;&#x65B0;；&#x4EE5;&#x53CA; (4) &#x5B78;&#x8853;&#x77E5;&#x8B58;&#x5C0D;&#x5275;&#x65B0;&#x7684;&#x8CA2;&#x737B;。"
            data-speaker-experience-en="Koichi Sumikura is Professor at National Graduate Institute for Policy Studies (GRIPS). In 1998 he got a Ph.D. in engineering from the University of Tokyo, for his study on bio-engineering. During April 1998 and September 2001, he had been working for Research Center for Advanced Science and Technology, the University of Tokyo. He has been working for GRIPS since October 2001. He has been a board member of the Japan Society for Research Policy and Innovation Management since 2001. His main field of research is (1) intellectual property policy, (2) science, technology and innovation policy, (3) innovation in life sciences and (4) contribution of academic knowledge to innovation."
-           data-event-title="鏈結全球與台灣 打造跨域前瞻科技生態系"
+           data-event-title="&#x9375;&#x7D50;&#x5168;&#x7403;&#x8207;&#x53F0;&#x7063; &#x6253;&#x9020;&#x8DE8;&#x57DF;&#x524D;&#x77BB;&#x79D1;&#x6280;&#x751F;&#x614B;&#x7CFB;"
            data-event-title-en="Connecting Taiwan and the World: Building a Cross-disciplinary Frontier Technology Ecosystem">
         <img class="speaker-photo-card" src="assets/img/speaker-Koichi-Sumikura.png" alt="Koichi Sumikura">
         <div class="speaker-info">
           <div class="speaker-name-card">
-            <span class="lang-zh">隅藏 康一</span>
+            <span class="lang-zh">&#x96C5;&#x85CF; &#x5EB7;&#x4E00;</span>
             <span class="lang-en" style="display: none;">Koichi Sumikura</span>
           </div>
           <div class="speaker-title-card">
-            <span class="lang-zh">政策研究大學院大學政策研究科 (GRIPS) 教授</span>
+            <span class="lang-zh">&#x653F;&#x7B56;&#x7814;&#x7A76;&#x5927;&#x5B78;&#x9662;&#x5927;&#x5B78;&#x653F;&#x7B56;&#x7814;&#x7A76;&#x79D1; (GRIPS) &#x6559;&#x6388;</span>
             <span class="lang-en" style="display: none;">Professor, National Graduate Institute for Policy Studies, GRIPS</span>
           </div>
         </div>
@@ -4232,7 +4232,7 @@ strong {
            data-speaker-education-en="&#x2022; Ph.D. in Electrical and Information Theory, University of Southern California"
            data-speaker-experience="&#x8B1D;&#x660E;&#x4FEE;&#x535A;&#x58EB;&#x81EA; 2021 &#x5E74; 1 &#x6708;&#x8D77;&#x64D4;&#x4EFB;&#x9D3B;&#x6D77;&#x7814;&#x7A76;&#x9662;&#x91CF;&#x5B50;&#x8A08;&#x7B97;&#x7814;&#x7A76;&#x6240;&#x6240;&#x9577;&#x3002;&#x6B64;&#x524D;&#xFF0C;&#x4ED6;&#x65BC; 2014 &#x81F3; 2020 &#x5E74;&#x9593;&#x4EFB;&#x6559;&#x65BC;&#x6FB3;&#x6D32;&#x96EA;&#x68A8;&#x79D1;&#x6280;&#x5927;&#x5B78;&#xFF08;University of Technology Sydney&#xFF09;&#xFF0C;&#x64D4;&#x4EFB;&#x526F;&#x6559;&#x6388;&#xFF0C;&#x4E26;&#x70BA;&#x8A72;&#x6821;&#x91CF;&#x5B50;&#x8EDF;&#x9AD4;&#x8207;&#x8CC7;&#x8A0A;&#x4E2D;&#x5FC3;&#xFF08;Centre for Quantum Software and Information&#xFF09;&#x6210;&#x54E1;&#x3002;2010 &#x81F3; 2012 &#x5E74;&#x9593;&#xFF0C;&#x4ED6;&#x5728;&#x82F1;&#x570B;&#x528D;&#x6A4B;&#x5927;&#x5B78;&#x64D4;&#x4EFB;&#x535A;&#x58EB;&#x5F8C;&#x7814;&#x7A76;&#x54E1;&#x3002;&#x66F4;&#x65E9;&#x4E4B;&#x524D;&#xFF0C;&#x4ED6;&#x65BC;&#x65E5;&#x672C;&#x64D4;&#x4EFB;&#x65E5;&#x672C;&#x79D1;&#x6280;&#x632F;&#x8208;&#x6A5F;&#x69CB;&#xFF08;Japan Science and Technology Agency, JST&#xFF09;&#x8CC7;&#x52A9;&#x4E4B; ERATO-SORST &#x91CF;&#x5B50;&#x8A08;&#x7B97;&#x8207;&#x8CC7;&#x8A0A;&#x8A08;&#x756B;&#x7684;&#x7814;&#x7A76;&#x79D1;&#x5B78;&#x5BB6;&#xFF0C;&#x4E26;&#x540C;&#x6642;&#x639B;&#x540D;&#x65BC;&#x6771;&#x4EAC;&#x5927;&#x5B78;&#x8A08;&#x7B97;&#x6A5F;&#x79D1;&#x5B78;&#x7CFB;&#x3002;2014 &#x81F3; 2018 &#x5E74;&#x9593;&#xFF0C;&#x4ED6;&#x66FE;&#x7372;&#x5F97;&#x6FB3;&#x6D32;&#x7814;&#x7A76;&#x59D4;&#x54E1;&#x6703;&#xFF08;ARC&#xFF09;&#x672A;&#x4F86;&#x5B78;&#x8005;&#x734E;&#xFF08;Future Fellowship&#xFF09;&#x3002;"
            data-speaker-experience-en="Dr. Ming-Hsiu Hsieh has served as Director of the Quantum Computing Research Center at Foxconn Research Institute since January 2021. Prior to this position, he was an Associate Professor at the University of Technology Sydney from 2012 to 2020, where he was also a member of the Centre for Quantum Software and Information. From 2010 to 2012, he worked as a postdoctoral research fellow at the University of Cambridge in the United Kingdom. Earlier in his career, he served as a research scientist for the ERATO-SORST Quantum Computing and Information Project funded by the Japan Science and Technology Agency, while holding an affiliation with the Department of Computer Science at the University of Tokyo. He was awarded the Australian Research Council Future Fellowship from 2014 to 2018."
-           data-event-title="鏈結全球與台灣 打造跨域前瞻科技生態系"
+           data-event-title="&#x9375;&#x7D50;&#x5168;&#x7403;&#x8207;&#x53F0;&#x7063; &#x6253;&#x9020;&#x8DE8;&#x57DF;&#x524D;&#x77BB;&#x79D1;&#x6280;&#x751F;&#x614B;&#x7CFB;"
            data-event-title-en="Connecting Taiwan and the World: Building a Cross-disciplinary Frontier Technology Ecosystem">
         <img class="speaker-photo-card" src="assets/img/speaker-Ming-Hsiu-Hsieh.png" alt="&#x8B1D;&#x660E;&#x4FEE;">
         <div class="speaker-info">
@@ -4256,7 +4256,7 @@ strong {
            data-speaker-education-en="&#x2022; Ph.D. in Materials Science and Engineering, National Cheng Kung University<br>&#x2022; M.S. in Materials Science and Engineering, National Cheng Kung University<br>&#x2022; B.S. in Materials Science and Engineering, Feng Chia University"
            data-speaker-experience="&#x738B;&#x5FD7;&#x5149;&#x6559;&#x6388;&#x66FE;&#x4EFB;&#x9AD8;&#x96C4;&#x91AB;&#x5B78;&#x5927;&#x5B78;&#x7522;&#x5B78;&#x71DF;&#x904B;&#x8655;&#x5275;&#x65B0;&#x80B2;&#x6210;&#x4E2D;&#x5FC3;&#x4E3B;&#x4EFB;&#x3001;&#x7522;&#x5B78;&#x7D44;&#x7D44;&#x9577;&#xFF0C;&#x4EE5;&#x53CA;&#x751F;&#x547D;&#x79D1;&#x5B78;&#x9662;&#x7D9C;&#x5408;&#x7D44;&#x7D44;&#x9577;&#xFF0C;&#x4E26;&#x65E9;&#x5E74;&#x65BC;&#x5DE5;&#x696D;&#x6280;&#x8853;&#x7814;&#x7A76;&#x9662;&#x5DE5;&#x696D;&#x6750;&#x6599;&#x7814;&#x7A76;&#x6240;&#x64D4;&#x4EFB;&#x7814;&#x7A76;&#x54E1;&#x3002;&#x4ED6;&#x5C08;&#x7CBE;&#x65BC;&#x9AA8;&#x8207;&#x8EDF;&#x9AA8;&#x7D44;&#x7E54;&#x5DE5;&#x7A0B;&#x3001;&#x751F;&#x7269;&#x9676;&#x74F7; 3D &#x5217;&#x5370;&#x3001;&#x85E5;&#x7269;&#x50B3;&#x905E;&#x7CFB;&#x7D71;&#x53CA;&#x518D;&#x751F;&#x91AB;&#x5B78;&#x6750;&#x6599;&#xFF0C;&#x6210;&#x679C;&#x7372;&#x591A;&#x9805;&#x5C08;&#x5229;&#x8207;&#x570B;&#x5BB6;&#x65B0;&#x5275;&#x734E;&#x80AF;&#x5B9A;&#xFF0C;&#x4E26;&#x6307;&#x5C0E;&#x5718;&#x968A;&#x6210;&#x7ACB;&#x65B0;&#x5275;&#x516C;&#x53F8;&#xFF0C;&#x63A8;&#x52D5;&#x7522;&#x5B78;&#x5408;&#x4F5C;&#x8207;&#x81E8;&#x5E8A;&#x61C9;&#x7528;&#x8F49;&#x8B6F;&#xFF0C;&#x81F4;&#x529B;&#x65BC;&#x4EE5;&#x5275;&#x65B0;&#x91AB;&#x6750;&#x9020;&#x798F;&#x4EBA;&#x985E;&#x5065;&#x5EB7;&#x3002;"
            data-speaker-experience-en="Prof. Wang has served as Director of the Innovation Incubation Center, Division Chief of Industry-Academia Collaboration, and Section Chief at Kaohsiung Medical University, as well as Researcher at the Industrial Technology Research Institute. His expertise covers bone and cartilage tissue engineering, 3D bioceramic printing, drug delivery systems, and regenerative biomaterials. Recognized with multiple patents and National Innovation Awards, he has led teams to establish startups and promote technology transfer, advancing translational medicine and innovative biomedical applications."
-           data-event-title="鏈結全球與台灣 打造跨域前瞻科技生態系"
+           data-event-title="&#x9375;&#x7D50;&#x5168;&#x7403;&#x8207;&#x53F0;&#x7063; &#x6253;&#x9020;&#x8DE8;&#x57DF;&#x524D;&#x77BB;&#x79D1;&#x6280;&#x751F;&#x614B;&#x7CFB;"
            data-event-title-en="Connecting Taiwan and the World: Building a Cross-disciplinary Frontier Technology Ecosystem">
         <img class="speaker-photo-card" src="assets/img/speaker-Chih-Kuang-Wang.png" alt="&#x738B;&#x5FD7;&#x5149;">
         <div class="speaker-info">
@@ -4280,7 +4280,7 @@ strong {
            data-speaker-education-en="&#x2022; Ph.D. in Biomedical Engineering, Texas A&M University, TX<br>&#x2022; M.S. in Biomedical Engineering, National Cheng Kung University, Taiwan<br>&#x2022; B.S. in Biomedical Engineering, National Cheng Kung University, Taiwan"
            data-speaker-experience="&#x674E;&#x6CD3;&#x90A6;&#x535A;&#x58EB;&#x66FE;&#x5728;&#x53F2;&#x4E39;&#x4F5B;&#x5927;&#x5B78; Fan Yang &#x5BE6;&#x9A57;&#x5BA4;&#x64D4;&#x4EFB;&#x535A;&#x58EB;&#x5F8C;&#x7814;&#x7A76;&#x54E1;&#xFF0C;&#x4E3B;&#x8981;&#x5C08;&#x6CE8;&#x65BC;&#x63A8;&#x9032; 3D &#x751F;&#x7269;&#x5217;&#x5370;&#x65BC;&#x9AA8;&#x8EDF;&#x9AA8;&#x7D44;&#x7E54;&#x5DE5;&#x7A0B;&#x7684;&#x61C9;&#x7528;&#x3002;&#x5728;&#x6B64;&#x8DE8;&#x9818;&#x57DF;&#x7814;&#x7A76;&#x74B0;&#x5883;&#x4E2D;&#xFF0C;&#x4ED6;&#x7A4D;&#x6975;&#x6295;&#x5165;&#x65BC;&#x8907;&#x96DC;&#x7D44;&#x7E54;&#x7D50;&#x69CB;&#x7684;&#x5148;&#x9032;&#x88FD;&#x9020;&#x65B9;&#x6CD5;&#x958B;&#x767C;&#xFF0C;&#x7279;&#x5225;&#x91DD;&#x5C0D;&#x9AA8;&#x8207;&#x8EDF;&#x9AA8;&#x4EA4;&#x754C;&#x7684;&#x518D;&#x751F;&#x6311;&#x6226;&#x3002;&#x4ED6;&#x7684;&#x7814;&#x7A76;&#x6DB5;&#x84CB;&#x5275;&#x65B0;&#x751F;&#x7269;&#x6750;&#x6599;&#x8207;&#x7CBE;&#x6E96;&#x751F;&#x7269;&#x5217;&#x5370;&#x6280;&#x8853;&#xFF0C;&#x6700;&#x7D42;&#x76EE;&#x6A19;&#x662F;&#x63D0;&#x5347;&#x7D44;&#x7E54;&#x518D;&#x751F;&#x7684;&#x6548;&#x7387;&#x8207;&#x6548;&#x679C;&#x3002;"
            data-speaker-experience-en="Dr. Hung-Pang Lee was previously in a postdoctoral position at the Fan Yang Lab, where his primary focus was on advancing the field of 3D bioprinting for osteochondral tissue engineering. Within this dynamic research environment, he was actively involved in developing cutting-edge methodologies to fabricate complex tissue structures, specifically aiming at the intersection of bone and cartilage. Research pursuits extended to exploring innovative biomaterials and precise bioprinting techniques, with the ultimate goal of enhancing tissue regeneration capabilities."
-           data-event-title="鏈結全球與台灣 打造跨域前瞻科技生態系"
+           data-event-title="&#x9375;&#x7D50;&#x5168;&#x7403;&#x8207;&#x53F0;&#x7063; &#x6253;&#x9020;&#x8DE8;&#x57DF;&#x524D;&#x77BB;&#x79D1;&#x6280;&#x751F;&#x614B;&#x7CFB;"
            data-event-title-en="Connecting Taiwan and the World: Building a Cross-disciplinary Frontier Technology Ecosystem">
         <img class="speaker-photo-card" src="assets/img/speaker-Hung-Pang-Lee.png" alt="&#x674E;&#x6CD3;&#x90A6;">
         <div class="speaker-info">
@@ -4304,7 +4304,7 @@ strong {
            data-speaker-education-en="&#x2022; Ph.D. in Chemical Engineering, National Taiwan University of Science and Technology"
            data-speaker-experience="&#x6797;&#x51A0;&#x5B87;&#x535A;&#x58EB;&#x66FE;&#x5728;&#x53F2;&#x4E39;&#x4F5B;&#x5927;&#x5B78;&#x5316;&#x5B78;&#x5DE5;&#x7A0B;&#x7CFB;&#x64D4;&#x4EFB;&#x535A;&#x58EB;&#x5F8C;&#x7814;&#x7A76;&#x54E1;&#xFF0C;&#x7814;&#x7A76;&#x5C08;&#x9577;&#x70BA;&#x4F7F;&#x7528;&#x5BC6;&#x5EA6;&#x6CDB;&#x51FD;&#x7406;&#x8AD6;&#xFF08;DFT&#xFF09;&#x8A08;&#x7B97;&#x3001;&#x5206;&#x5B50;&#x52D5;&#x529B;&#x5B78;&#xFF08;MD&#xFF09;&#x6A21;&#x64EC;&#x8207;&#x96FB;&#x6C60;&#x6750;&#x6599;&#x7684;&#x5EFA;&#x6A21;&#x4F86;&#x63A2;&#x8A0E;&#x96FB;&#x5316;&#x5B78;&#xFF0C;&#x92F0;&#x91D1;&#x5C6C;&#x96FB;&#x6C60;&#xFF08;LMBs&#xFF09;&#x548C;&#x92C5;&#x96E2;&#x5B50;&#x6C34;&#x7CFB;&#x96FB;&#x6C60;&#xFF08;AZIBs&#xFF09;&#x7684;&#x76F8;&#x95DC;&#x8B70;&#x984C;&#x3002;&#x8FD1;&#x671F;&#x7814;&#x7A76;&#x91CD;&#x9EDE;&#x5728;&#x63A2;&#x8A0E;&#x92F0;&#x91D1;&#x5C6C;&#x8CA0;&#x6975;&#x8868;&#x9762;&#x7684;&#x96FB;&#x89E3;&#x6DB2;&#x5206;&#x89E3;&#x6A5F;&#x5236;&#xFF0C;&#x900F;&#x904E;&#x8ABF;&#x63A7;&#x6EB6;&#x5291;&#x5316;&#x7D50;&#x69CB;&#xFF0C;&#x4FC3;&#x9032;&#x5F62;&#x6210;&#x7A69;&#x5B9A;&#x4E14;&#x5177;&#x529F;&#x80FD;&#x6027;&#x7684;&#x56FA;&#x614B;&#x96FB;&#x89E3;&#x8CEA;&#x4ECB;&#x9762;&#xFF08;SEI&#xFF09;&#x3002;&#x6B64;&#x5916;&#xFF0C;&#x4E5F;&#x91DD;&#x5C0D;&#x4E0D;&#x540C;&#x5B98;&#x80FD;&#x57FA;&#x6EB6;&#x5291;&#x4EE5;&#x53CA;&#x96E2;&#x5B50;&#x914D;&#x4F4D;&#x74B0;&#x5883;&#x5C0D;&#x754C;&#x9762;&#x53CD;&#x61C9;&#x6A5F;&#x5236;&#x8207;SEI&#x7D44;&#x6210;&#x7684;&#x5F71;&#x97FF;&#x9032;&#x884C;&#x7CFB;&#x7D71;&#x6027;&#x7814;&#x7A76;&#x3002;&#x900F;&#x904E;&#x7406;&#x8AD6;&#x6A21;&#x64EC;&#x8207;&#x5BE6;&#x9A57;&#x5408;&#x4F5C;&#x7684;&#x7D50;&#x5408;&#xFF0C;&#x671F;&#x671B;&#x80FD;&#x63D0;&#x4F9B;&#x5FAE;&#x89C0;&#x89D2;&#x5EA6;&#x7684;&#x898B;&#x89E3;&#xFF0C;&#x4F5C;&#x70BA;&#x958B;&#x767C;&#x9AD8;&#x5B89;&#x5168;&#x6027;&#x8207;&#x9AD8;&#x6027;&#x80FD;&#x96FB;&#x6C60;&#x6750;&#x6599;&#x7684;&#x8A2D;&#x8A08;&#x4F9D;&#x64DA;&#x3002;"
            data-speaker-experience-en="Dr. Kuan-Yu Lin was previously a postdoctoral researcher in the Department of Chemical Engineering at Stanford University, where he specialized in electrochemistry and lithium metal batteries (LMBs), with expertise in DFT calculations, molecular dynamics (MD) simulations, and computational modeling. His research focused on the electrochemical decomposition of electrolytes on Li-metal anodes, aiming to tailor solvation structures to promote the formation of favorable SEI components. He investigated how specific solvent–ion coordination environments influence interfacial reaction pathways and SEI composition. By integrating theoretical simulations with experimental collaboration, his work provided molecular-level insights to support the design of safer and more efficient battery materials."
-           data-event-title="鏈結全球與台灣 打造跨域前瞻科技生態系"
+           data-event-title="&#x9375;&#x7D50;&#x5168;&#x7403;&#x8207;&#x53F0;&#x7063; &#x6253;&#x9020;&#x8DE8;&#x57DF;&#x524D;&#x77BB;&#x79D1;&#x6280;&#x751F;&#x614B;&#x7CFB;"
            data-event-title-en="Connecting Taiwan and the World: Building a Cross-disciplinary Frontier Technology Ecosystem">
         <img class="speaker-photo-card" src="assets/img/speaker-Kuan-Yu-Lin.png" alt="&#x6797;&#x51A0;&#x5B87;">
         <div class="speaker-info">
@@ -4328,7 +4328,7 @@ strong {
            data-speaker-education-en="&#x2022; Ph.D. in Physics, National Sun Yat-sen University"
            data-speaker-experience="&#x6797;&#x54F2;&#x6C11;&#x535A;&#x58EB;&#x76EE;&#x524D;&#x5728;&#x53F2;&#x4E39;&#x4F5B;&#x5927;&#x5B78;&#x61C9;&#x7528;&#x7269;&#x7406;&#x7CFB;&#x64D4;&#x4EFB;&#x535A;&#x58EB;&#x5F8C;&#x7814;&#x7A76;&#x54E1;&#xFF0C;&#x662F;&#x5F15;&#x9818;&#x91CF;&#x5B50;&#x6750;&#x6599;&#x8A2D;&#x8A08;&#x5275;&#x65B0;&#x7684;&#x7406;&#x8AD6;&#x8A08;&#x7B97;&#x8207;&#x6A21;&#x64EC;&#x7269;&#x7406;&#x5C08;&#x5BB6;&#xFF0C;&#x64C5;&#x9577;&#x7D50;&#x5408;&#x9AD8;&#x6548;&#x80FD;&#x904B;&#x7B97;&#x3001;&#x7269;&#x7406;&#x6A21;&#x578B;&#x8207;&#x6578;&#x5B78;&#x65B9;&#x6CD5;&#xFF0C;&#x9810;&#x6E2C;&#x6750;&#x6599;&#x5728;&#x539F;&#x5B50;&#x5C3A;&#x5EA6;&#x4E0B;&#x6240;&#x5C55;&#x73FE;&#x7684;&#x524D;&#x6240;&#x672A;&#x898B;&#x7279;&#x6027;&#x3002;&#x4ED6;&#x7684;&#x7814;&#x7A76;&#x8DF3;&#x812B;&#x50B3;&#x7D71;&#x300C;&#x5148;&#x505A;&#x518D;&#x9A57;&#x8B49;&#x300D;&#x7684;&#x8DEF;&#x5F91;&#xFF0C;&#x81F4;&#x529B;&#x65BC;&#x8B93;&#x6750;&#x6599;&#x5728;&#x88AB;&#x88FD;&#x9020;&#x4E4B;&#x524D;&#xFF0C;&#x5C31;&#x80FD;&#x88AB;&#x300C;&#x770B;&#x898B;&#x300D;&#x8207;&#x300C;&#x7406;&#x89E3;&#x300D;&#xFF1A;&#x50CF;&#x662F;&#x64C1;&#x6709;&#x5C0E;&#x96FB;&#x8868;&#x9762;&#x3001;&#x81EA;&#x65CB;&#x63A7;&#x5236;&#x78C1;&#x6027;&#x3001;&#x751A;&#x81F3;&#x80FD;&#x7528;&#x96FB;&#x5834;&#x8ABF;&#x8B8A;&#x96FB;&#x5B50;&#x884C;&#x70BA;&#x7684;&#x672A;&#x4F86;&#x6750;&#x6599;&#x3002;&#x7C21;&#x55AE;&#x4F86;&#x8AAA;&#xFF0C;&#x4ED6;&#x7684;&#x5DE5;&#x4F5C;&#x5C31;&#x662F;&#x7528;&#x7CBE;&#x5BC6;&#x6A21;&#x64EC;&#x8207;&#x79D1;&#x5B78;&#x908F;&#x8F2F;&#xFF0C;&#x5224;&#x65B7;&#x4E00;&#x500B;&#x6750;&#x6599;&#x503C;&#x4E0D;&#x503C;&#x5F97;&#x6295;&#x5165;&#x6642;&#x9593;&#x8207;&#x8CC7;&#x6E90;&#x53BB;&#x958B;&#x767C;&#xFF0C;&#x9019;&#x4E0D;&#x50C5;&#x5927;&#x5E45;&#x964D;&#x4F4E;&#x8A66;&#x932F;&#x6210;&#x672C;&#xFF0C;&#x4E5F;&#x70BA;&#x6750;&#x6599;&#x5275;&#x65B0;&#x6309;&#x4E0B;&#x52A0;&#x901F;&#x9375;&#x3002;&#x4ED6;&#x7684;&#x7814;&#x7A76;&#x5DF2;&#x88AB;&#x591A;&#x9805;&#x5BE6;&#x9A57;&#x6210;&#x529F;&#x9A57;&#x8B49;&#xFF0C;&#x4E26;&#x5E36;&#x4F86;&#x4EE5;&#x4E0B;&#x4E09;&#x9805;&#x5177;&#x6709;&#x5283;&#x6642;&#x4EE3;&#x610F;&#x7FA9;&#x7684;&#x7A81;&#x7834;&#xFF1A;<br>1.&#x767C;&#x73FE;&#x5168;&#x7403;&#x6975;&#x5C11;&#x6578;&#x540C;&#x6642;&#x5177;&#x5099;&#x62D3;&#x6A38;&#x7279;&#x6027;&#x8207;&#x53CD;&#x9435;&#x78C1;&#x5E8F;&#x7684;&#x91CF;&#x5B50;&#x6750;&#x6599;&#xFF0C;&#x70BA;&#x5BE6;&#x73FE;&#x4F4E;&#x529F;&#x8017;&#x3001;&#x81EA;&#x65CB;&#x53EF;&#x63A7;&#x7684;&#x672A;&#x4F86;&#x904B;&#x7B97;&#x5143;&#x4EF6;&#x5960;&#x5B9A;&#x95DC;&#x9375;&#x57FA;&#x790E;&#x3002;<br>2.&#x9996;&#x5EA6;&#x63D0;&#x51FA;&#x300C;&#x55AE;&#x4E00;&#x6750;&#x6599;&#x81EA;&#x65CB;&#x95A5;&#x6548;&#x61C9;&#x300D;&#x7684;&#x8A2D;&#x8A08;&#xFF0C;&#x7121;&#x9808;&#x591A;&#x5C64;&#x5806;&#x758A;&#xFF0C;&#x5373;&#x53EF;&#x555F;&#x52D5;&#x8207;&#x95DC;&#x9589;&#x81EA;&#x65CB;&#x8A0A;&#x865F;&#xFF0C;&#x958B;&#x555F;&#x81EA;&#x65CB;&#x5143;&#x4EF6;&#x4EE5;&#x53CA;&#x78C1;&#x6027;&#x8A18;&#x61B6;&#x9AD4;&#x7684;&#x65B0;&#x6642;&#x4EE3;&#x3002;<br>3.&#x6210;&#x529F;&#x9810;&#x6E2C;&#x53EF;&#x7528;&#x96FB;&#x5834;&#x5207;&#x63DB;&#x62D3;&#x6A38;&#x614B;&#x8207;&#x6975;&#x5316;&#x65B9;&#x5411;&#x7684;&#x6750;&#x6599;&#xFF0C;&#x6709;&#x6F5B;&#x529B;&#x61C9;&#x7528;&#x65BC;&#x4E0B;&#x4E00;&#x4EE3;&#x975E;&#x63EE;&#x767C;&#x6027;&#x8A18;&#x61B6;&#x9AD4;&#x8207;&#x908A;&#x7DE3;&#x904B;&#x7B97;&#x6676;&#x7247;&#xFF0C;&#x7D50;&#x5408;&#x9AD8;&#x901F;&#x8207;&#x7BC0;&#x80FD;&#x65BC;&#x4E00;&#x8EAB;&#x3002;"
            data-speaker-experience-en="Dr. Che-Min Lin is currently a postdoctoral researcher in the Department of Applied Physics at Stanford University, specializing in theoretical and computational physics with a focus on quantum materials design and innovation. His expertise lies in integrating high-performance computing, physical modeling, and mathematical frameworks to predict unprecedented material behaviors at the atomic scale. Departing from the traditional paradigm of \"fabricate first, verify later,\" Dr. Lin aims to visualize and understand materials before they are synthesized: materials that may exhibit exotic properties such as conductive surfaces, switchable magnetism, or electrically tunable quantum states. In essence, his work provides a scientific and computational lens to evaluate whether a material is worth developing, enabling researchers to drastically reduce trial-and-error costs and accelerate materials innovation. His predictions have been experimentally validated and have led to several groundbreaking advances, including: 1.The discovery of one of the world's rare quantum materials that simultaneously hosts topological properties and antiferromagnetic order, paving the way for low-power and spin-controllable computing platforms. 2.The first theoretical proposal of a spin-valve effect within a single material, eliminating the need for complex multilayer structures and opening new directions for spintronic device engineering. 3.The prediction of materials whose topological state and electric polarization can be switched via electric fields, offering a promising platform for next-generation non-volatile memory and edge-computing chips that merge speed with energy efficiency."
-           data-event-title="鏈結全球與台灣 打造跨域前瞻科技生態系"
+           data-event-title="&#x9375;&#x7D50;&#x5168;&#x7403;&#x8207;&#x53F0;&#x7063; &#x6253;&#x9020;&#x8DE8;&#x57DF;&#x524D;&#x77BB;&#x79D1;&#x6280;&#x751F;&#x614B;&#x7CFB;"
            data-event-title-en="Connecting Taiwan and the World: Building a Cross-disciplinary Frontier Technology Ecosystem">
         <img class="speaker-photo-card" src="assets/img/speaker-Che-Min-Lin.png" alt="&#x6797;&#x54F2;&#x6C11;">
         <div class="speaker-info">
@@ -4361,7 +4361,7 @@ strong {
            data-speaker-education-en="&#x2022; Ph.D. in Mechanical Engineering, National Cheng Kung University<br>&#x2022; M.S. in Mechanical Engineering, National Cheng Kung University"
            data-speaker-experience="&#x674E;&#x65FA;&#x9F8D;&#x8655;&#x9577;&#x66FE;&#x4EFB;&#x9AD8;&#x96C4;&#x61C9;&#x7528;&#x79D1;&#x6280;&#x5927;&#x5B78;&#x526F;&#x6559;&#x6388;&#x3001;&#x6559;&#x6388;&#x3001;&#x517C;&#x7CFB;&#x4E3B;&#x4EFB;&#xFF0C;&#x5176;&#x5F8C;&#x5728;&#x570B;&#x7ACB;&#x6210;&#x529F;&#x5927;&#x5B78;&#x64D4;&#x4EFB;&#x5948;&#x5FAE;&#x6240;&#x526F;&#x6559;&#x6388;&#x3001;&#x6559;&#x6388;&#x3001;&#x517C;&#x4EE3;&#x7406;&#x6240;&#x9577;&#x53CA;&#x5FAE;&#x5148;&#x7C73;&#x4E2D;&#x5FC3;&#x7D44;&#x9577;&#x3002;&#x4EA6;&#x64D4;&#x4EFB;&#x96F2;&#x5609;&#x5357;&#x5340;&#x57DF;&#x6559;&#x5B78;&#x8CC7;&#x6E90;&#x4E2D;&#x5FC3;&#x79D8;&#x66F8;&#x8207;&#x4E3B;&#x4EFB;&#xFF0C;&#x4EE5;&#x53CA;&#x6210;&#x529F;&#x5927;&#x5B78;&#x6559;&#x52D9;&#x8655;&#x6559;&#x5B78;&#x767C;&#x5C55;&#x4E2D;&#x5FC3;&#x4E3B;&#x4EFB;&#x3001;&#x526F;&#x6559;&#x52D9;&#x9577;&#x7B49;&#x8077;&#x52D9;&#xFF0C;&#x6B77;&#x7DF4;&#x8C50;&#x5BCC;&#xFF0C;&#x73FE;&#x4EFB;&#x570B;&#x79D1;&#x6703;&#x79D1;&#x6559;&#x8655;&#x8655;&#x9577;&#xFF0C;&#x63A8;&#x52D5;&#x5B78;&#x8853;&#x570B;&#x969B;&#x5408;&#x4F5C;&#x8207;&#x79D1;&#x6559;&#x767C;&#x5C55;&#x3002;"
            data-speaker-experience-en="Dr. Wang-Long Li served as faculty at National Kaohsiung University of Applied Sciences (as Associate Professor, Professor, and Department Chair), and later at National Cheng Kung University including roles as Associate Professor and Professor in the Institute of Applied Mechanics (with additional responsibilities as Acting Director and Head of the Micronanotechnology Center). He also held administrative roles in the regional teaching resource center and served in academic affairs leadership at NCKU. He currently leads the Department of International Cooperation and Science Education at NSTC, advancing national science education and international collaboration."
-           data-event-title="鏈結全球與台灣 打造跨域前瞻科技生態系"
+           data-event-title="&#x9375;&#x7D50;&#x5168;&#x7403;&#x8207;&#x53F0;&#x7063; &#x6253;&#x9020;&#x8DE8;&#x57DF;&#x524D;&#x77BB;&#x79D1;&#x6280;&#x751F;&#x614B;&#x7CFB;"
            data-event-title-en="Connecting Taiwan and the World: Building a Cross-disciplinary Frontier Technology Ecosystem">
         <img class="speaker-photo-card" src="assets/img/speaker-Wang-Long-Li.png" alt="&#x674E;&#x65FA;&#x9F8D;">
         <div class="speaker-info">
@@ -4385,7 +4385,7 @@ strong {
            data-speaker-education-en="&#x2022; Ph.D. in Electrical and Computer Engineering, University of California, Santa Barbara<br>&#x2022; M.S. & B.S. in Electrical Engineering, National Taiwan University"
            data-speaker-experience="&#x9EC3;&#x932B;&#x745C;&#x6559;&#x6388;&#x66FE;&#x4EFB;&#x8077;&#x65BC;&#x7F8E;&#x570B;&#x77FD;&#x8C37;&#x570B;&#x6C11;&#x534A;&#x5C0E;&#x9AD4;&#x8207;&#x4E16;&#x5927;&#x7A4D;&#x9AD4;&#x96FB;&#x8DEF;&#xFF08;&#x5F8C;&#x4F77;&#x5165;&#x53F0;&#x7A4D;&#x96FB;&#xFF09;&#xFF0C;1999 &#x5E74;&#x8D77;&#x65BC;&#x6E05;&#x83EF;&#x5927;&#x5B78;&#x4EFB;&#x6559;&#xFF0C;&#x4E26;&#x5148;&#x5F8C;&#x64D4;&#x4EFB;&#x6E05;&#x83EF;&#x5927;&#x5B78;&#x7A4D;&#x9AD4;&#x96FB;&#x8DEF;&#x8A2D;&#x8A08;&#x6280;&#x8853;&#x4E2D;&#x5FC3;&#x4E3B;&#x4EFB;&#x3001;&#x5275;&#x65B0;&#x80B2;&#x6210;&#x4E2D;&#x5FC3;&#x4E3B;&#x4EFB;&#x3001;&#x5357;&#x53F0;&#x79D1;&#x6280;&#x5927;&#x5B78;&#x526F;&#x6240;&#x9577;&#x7B49;&#x8077;&#x52D9;&#xFF0C;&#x4EA6;&#x5171;&#x540C;&#x5275;&#x7ACB;&#x5146;&#x5FC3;&#x79D1;&#x6280;&#x3002;&#x5C08;&#x7CBE;&#x65BC;&#x7A4D;&#x9AD4;&#x96FB;&#x8DEF;&#x8A2D;&#x8A08;&#x3001;&#x81EA;&#x52D5;&#x5316;&#x8207;&#x6E2C;&#x8A66;&#xFF0C;&#x81F4;&#x529B;&#x65BC;&#x7814;&#x767C;&#x9AD8;&#x53EF;&#x9760;&#x5EA6;&#x8207;&#x9577;&#x58FD;&#x547D;&#x7684;&#x300C;&#x6C38;&#x4FDD;&#x5B89;&#x5EB7;&#x6676;&#x7247;&#x300D;&#xFF0C;&#x63A8;&#x52D5;&#x53F0;&#x7063;&#x534A;&#x5C0E;&#x9AD4;&#x5275;&#x65B0;&#x3002;"
            data-speaker-experience-en="Director General Huang worked at National Semiconductor Corp. in Silicon Valley and at Worldwide Semiconductor Manufacturing Corp. (later merged with TSMC) before joining NTHU in 1999. He has served as Director of the IC Design Technology Center, Director of the Innovation Incubation Center, and Vice President of Southern Taiwan University of Science and Technology. His research integrates IC design, design automation, and testing, with the vision of developing highly reliable and long-lasting ICs to support emerging mission-critical applications."
-           data-event-title="鏈結全球與台灣 打造跨域前瞻科技生態系"
+           data-event-title="&#x9375;&#x7D50;&#x5168;&#x7403;&#x8207;&#x53F0;&#x7063; &#x6253;&#x9020;&#x8DE8;&#x57DF;&#x524D;&#x77BB;&#x79D1;&#x6280;&#x751F;&#x614B;&#x7CFB;"
            data-event-title-en="Connecting Taiwan and the World: Building a Cross-disciplinary Frontier Technology Ecosystem">
         <img class="speaker-photo-card" src="assets/img/speaker-ShiYu-Huang.png" alt="&#x9EC3;&#x932B;&#x745C;">
         <div class="speaker-info">
@@ -4403,22 +4403,22 @@ strong {
       <div class="speaker-card speaker-clickable"
            data-speaker-name="&#x5F35;&#x6021;&#x73B2;"
            data-speaker-name-en="I-Ling Chang"
-           data-speaker-title="國立成功大學機械工程學系 教授"
+           data-speaker-title="&#x570B;&#x7ACB;&#x6210;&#x529F;&#x5927;&#x5B78;&#x6A5F;&#x68B0;&#x5DE5;&#x7A0B;&#x5B78;&#x7CFB; &#x6559;&#x6388;"
            data-speaker-title-en="Professor, Department of Mechanical Engineering, National Cheng Kung University"
-           data-speaker-education="&#x2022; 普渡大學 航空太空系博士"
+           data-speaker-education="&#x2022; &#x666E;&#x6E21;&#x5927;&#x5B78; &#x822A;&#x7A7A;&#x592A;&#x7A7A;&#x7CFB;&#x535A;&#x58EB;"
            data-speaker-education-en="Ph.D., Aeronautics and Astronautics, Purdue University, USA"
-           data-speaker-experience="張怡玲教授於 2021 至 2023 年期間借調至國家科學及技術委員會，擔任駐歐盟兼駐比利時台北代表處科技組科技參事，推動國際科研合作與科技外交，積極拓展臺灣與歐洲的科技鏈結。返國後，回任國立成功大學機械工程學系教授。張教授的研究領域涵蓋 奈米力學、奈米材料分析、聲子晶體與聲學超常材料，近年更專注於奈米熱傳分析與隔音減震設計，致力於將理論研究與應用技術相結合，推動奈米與聲學材料的創新發展。"
+           data-speaker-experience="&#x5F35;&#x6021;&#x73B2;&#x6559;&#x6388;&#x65BC; 2021 &#x81F3; 2023 &#x5E74;&#x671F;&#x9593;&#x501F;&#x8ABF;&#x81F3;&#x570B;&#x5BB6;&#x79D1;&#x5B78;&#x53CA;&#x6280;&#x8853;&#x59D4;&#x54E1;&#x6703;，&#x64D4;&#x4EFB;&#x99D0;&#x6B50;&#x76DF;&#x517C;&#x99D0;&#x6BD4;&#x5229;&#x6642;&#x53F0;&#x5317;&#x4EE3;&#x8868;&#x8655;&#x79D1;&#x6280;&#x7D44;&#x79D1;&#x6280;&#x53C3;&#x4E8B;，&#x63A8;&#x52D5;&#x570B;&#x969B;&#x79D1;&#x7814;&#x5408;&#x4F5C;&#x8207;&#x79D1;&#x6280;&#x5916;&#x4EA4;，&#x7A4D;&#x6975;&#x62D3;&#x5C55;&#x81FA;&#x7063;&#x8207;&#x6B50;&#x6D32;&#x7684;&#x79D1;&#x6280;&#x93C8;&#x7D50;。&#x8FD4;&#x570B;&#x5F8C;，&#x56DE;&#x4EFB;&#x570B;&#x7ACB;&#x6210;&#x529F;&#x5927;&#x5B78;&#x6A5F;&#x68B0;&#x5DE5;&#x7A0B;&#x5B78;&#x7CFB;&#x6559;&#x6388;。&#x5F35;&#x6559;&#x6388;&#x7684;&#x7814;&#x7A76;&#x9818;&#x57DF;&#x6DB5;&#x84CB; &#x5948;&#x7C73;&#x529B;&#x5B78;、&#x5948;&#x7C73;&#x6750;&#x6599;&#x5206;&#x6790;、&#x8072;&#x5B50;&#x6676;&#x9AD4;&#x8207;&#x8072;&#x5B78;&#x8D85;&#x5E38;&#x6750;&#x6599;，&#x8FD1;&#x5E74;&#x66F4;&#x5C08;&#x6CE8;&#x65BC;&#x5948;&#x7C73;&#x71B1;&#x50B3;&#x5206;&#x6790;&#x8207;&#x9694;&#x97F3;&#x6E1B;&#x9707;&#x8A2D;&#x8A08;，&#x81F4;&#x529B;&#x65BC;&#x5C07;&#x7406;&#x8AD6;&#x7814;&#x7A76;&#x8207;&#x61C9;&#x7528;&#x6280;&#x8853;&#x76F8;&#x7D50;&#x5408;，&#x63A8;&#x52D5;&#x5948;&#x7C73;&#x8207;&#x8072;&#x5B78;&#x6750;&#x6599;&#x7684;&#x5275;&#x65B0;&#x767C;&#x5C55;。"
            data-speaker-experience-en="Professor I-Ling Chang is an expert in mechanical engineering, focusing on nanomechanics, phononic crystals, and acoustic metamaterials. From 2021 to 2023, she was seconded to the National Science and Technology Council, serving as Science and Technology Counselor at the Taipei Representative Office in the EU and Belgium, where she promoted international research collaboration and strengthened Taiwan-Europe scientific ties. She currently teaches at National Cheng Kung University, specializing in nanoscale thermal transport and acoustic vibration control."
-           data-event-title="鏈結全球與台灣 打造跨域前瞻科技生態系"
+           data-event-title="&#x9375;&#x7D50;&#x5168;&#x7403;&#x8207;&#x53F0;&#x7063; &#x6253;&#x9020;&#x8DE8;&#x57DF;&#x524D;&#x77BB;&#x79D1;&#x6280;&#x751F;&#x614B;&#x7CFB;"
            data-event-title-en="Connecting Taiwan and the World: Building a Cross-disciplinary Frontier Technology Ecosystem">
-        <img class="speaker-photo-card" src="assets/img/speaker-張怡玲.png" alt="&#x5F35;&#x6021;&#x73B2;">
+        <img class="speaker-photo-card" src="assets/img/speaker-&#x5F35;&#x6021;&#x73B2;.png" alt="&#x5F35;&#x6021;&#x73B2;">
         <div class="speaker-info">
           <div class="speaker-name-card">
             <span class="lang-zh">&#x5F35;&#x6021;&#x73B2;</span>
             <span class="lang-en" style="display: none;">I-Ling Chang</span>
           </div>
           <div class="speaker-title-card">
-            <span class="lang-zh">國立成功大學機械工程學系 教授</span>
+            <span class="lang-zh">&#x570B;&#x7ACB;&#x6210;&#x529F;&#x5927;&#x5B78;&#x6A5F;&#x68B0;&#x5DE5;&#x7A0B;&#x5B78;&#x7CFB; &#x6559;&#x6388;</span>
             <span class="lang-en" style="display: none;">Professor, Department of Mechanical Engineering, National Cheng Kung University</span>
           </div>
         </div>
@@ -4426,13 +4426,13 @@ strong {
     </div>
 
     <h2 id="s2-about" class="section-title about-section">
-      <span class="lang-zh">活動簡介</span>
+      <span class="lang-zh">&#x6D3B;&#x52D5;&#x7C21;&#x4ECB;</span>
       <span class="lang-en" style="display: none;">About</span>
     </h2>
     <div class="lang-zh">
-      <p>半導體是全球戰略科技的核心動能，人工智慧、量子計算與新材料的快速突破，正重塑世界科技競局。</p>
-      <p>作為系列論壇的壓軸場次，本活動將鏈結臺、美、日、韓的產學研領袖與史丹佛博士後研究人才，共同探討<span class="highlight-text">半導體、量子、材料創新與跨領域應用</span>的最新趨勢，並交流<span class="highlight-text">人才循環、國際合作與技術轉譯</span>的實務策略。</p>
-      <p>這不僅是一場知識分享，更是打造臺灣未來科技戰略優勢的重要平台。</p>
+      <p>&#x534A;&#x5C0E;&#x9AD4;&#x662F;&#x5168;&#x7403;&#x6230;&#x7565;&#x79D1;&#x6280;&#x7684;&#x6838;&#x5FC3;&#x52D5;&#x80FD;，&#x4EBA;&#x5DE5;&#x667A;&#x6167;、&#x91CF;&#x5B50;&#x8A08;&#x7B97;&#x8207;&#x65B0;&#x6750;&#x6599;&#x7684;&#x5FEB;&#x901F;&#x7A81;&#x7834;，&#x6B63;&#x91CD;&#x5851;&#x4E16;&#x754C;&#x79D1;&#x6280;&#x7AF6;&#x5C40;。</p>
+      <p>&#x4F5C;&#x70BA;&#x7CFB;&#x5217;&#x8AD6;&#x58C7;&#x7684;&#x58D3;&#x8EF8;&#x5834;&#x6B21;，&#x672C;&#x6D3B;&#x52D5;&#x5C07;&#x93C8;&#x7D50;&#x81FA;、&#x7F8E;、&#x65E5;、&#x97D3;&#x7684;&#x7522;&#x5B78;&#x7814;&#x9818;&#x8896;&#x8207;&#x53F2;&#x4E39;&#x4F5B;&#x535A;&#x58EB;&#x5F8C;&#x7814;&#x7A76;&#x4EBA;&#x624D;，&#x5171;&#x540C;&#x63A2;&#x8A0E;<span class="highlight-text">&#x534A;&#x5C0E;&#x9AD4;、&#x91CF;&#x5B50;、&#x6750;&#x6599;&#x5275;&#x65B0;&#x8207;&#x8DE8;&#x9818;&#x57DF;&#x61C9;&#x7528;</span>&#x7684;&#x6700;&#x65B0;&#x8DA8;&#x52E2;，&#x4E26;&#x4EA4;&#x6D41;<span class="highlight-text">&#x4EBA;&#x624D;&#x5FAA;&#x74B0;、&#x570B;&#x969B;&#x5408;&#x4F5C;&#x8207;&#x6280;&#x8853;&#x8F49;&#x8B6F;</span>&#x7684;&#x5BE6;&#x52D9;&#x7B56;&#x7565;。</p>
+      <p>&#x9019;&#x4E0D;&#x50C5;&#x662F;&#x4E00;&#x5834;&#x77E5;&#x8B58;&#x5206;&#x4EAB;，&#x66F4;&#x662F;&#x6253;&#x9020;&#x81FA;&#x7063;&#x672A;&#x4F86;&#x79D1;&#x6280;&#x6230;&#x7565;&#x512A;&#x52E2;&#x7684;&#x91CD;&#x8981;&#x5E73;&#x53F0;。</p>
     </div>
     <div class="lang-en" style="display: none;">
       <p>Semiconductors are the core engine of global strategic technology, and the rapid breakthroughs in artificial intelligence, quantum computing, and new materials are reshaping the world's technological competition.</p>
@@ -4441,16 +4441,16 @@ strong {
     </div>
 
     <h2 id="s2-topics" class="section-title">
-      <span class="lang-zh">主要議題</span>
+      <span class="lang-zh">&#x4E3B;&#x8981;&#x8B70;&#x984C;</span>
       <span class="lang-en" style="display: none;">Key Topics</span>
     </h2>
     <div class="lang-zh">
       <ul style="line-height: 1.8; margin: 20px 0;">
-        <li><strong>聚焦全球半導體與量子科技趨勢：</strong>洞察材料創新、感測應用與 AI 驅動的新興領域</li>
-        <li><strong>跨國對話，亞洲連線：</strong>邀請臺、美、日、韓科技智庫與產學專家，剖析全球產業脈動</li>
-        <li><strong>博士後人才分享：</strong>國科會補助史丹佛博士後研究員分享矽谷前沿研究與臺灣應用潛力</li>
-        <li><strong>跨界交流：</strong>推動產學協作、商業媒合與導師制度，深化人才循環與國際鏈結</li>
-        <li><strong>政策呼應：</strong>呼應「人工智慧島」願景與量子國家計畫，探索臺灣科技佈局新藍圖</li>
+        <li><strong>&#x805A;&#x7126;&#x5168;&#x7403;&#x534A;&#x5C0E;&#x9AD4;&#x8207;&#x91CF;&#x5B50;&#x79D1;&#x6280;&#x8DA8;&#x52E2;：</strong>&#x6D1E;&#x5BDF;&#x6750;&#x6599;&#x5275;&#x65B0;、&#x611F;&#x6E2C;&#x61C9;&#x7528;&#x8207; AI &#x9A45;&#x52D5;&#x7684;&#x65B0;&#x8208;&#x9818;&#x57DF;</li>
+        <li><strong>&#x8DE8;&#x570B;&#x5C0D;&#x8A71;，&#x4E9E;&#x6D32;&#x9023;&#x7DDA;：</strong>&#x9080;&#x8ACB;&#x81FA;、&#x7F8E;、&#x65E5;、&#x97D3;&#x79D1;&#x6280;&#x667A;&#x5EAB;&#x8207;&#x7522;&#x5B78;&#x5C08;&#x5BB6;，&#x5256;&#x6790;&#x5168;&#x7403;&#x7522;&#x696D;&#x8108;&#x52D5;</li>
+        <li><strong>&#x535A;&#x58EB;&#x5F8C;&#x4EBA;&#x624D;&#x5206;&#x4EAB;：</strong>&#x570B;&#x79D1;&#x6703;&#x88DC;&#x52A9;&#x53F2;&#x4E39;&#x4F5B;&#x535A;&#x58EB;&#x5F8C;&#x7814;&#x7A76;&#x54E1;&#x5206;&#x4EAB;&#x77FD;&#x8C37;&#x524D;&#x6CBF;&#x7814;&#x7A76;&#x8207;&#x81FA;&#x7063;&#x61C9;&#x7528;&#x6F5B;&#x529B;</li>
+        <li><strong>&#x8DE8;&#x754C;&#x4EA4;&#x6D41;：</strong>&#x63A8;&#x52D5;&#x7522;&#x5B78;&#x5354;&#x4F5C;、&#x5546;&#x696D;&#x5A92;&#x5408;&#x8207;&#x5C0E;&#x5E2B;&#x5236;&#x5EA6;，&#x6DF1;&#x5316;&#x4EBA;&#x624D;&#x5FAA;&#x74B0;&#x8207;&#x570B;&#x969B;&#x93C8;&#x7D50;</li>
+        <li><strong>&#x653F;&#x7B56;&#x547C;&#x61C9;：</strong>&#x547C;&#x61C9;「&#x4EBA;&#x5DE5;&#x667A;&#x6167;&#x5CF6;」&#x9858;&#x666F;&#x8207;&#x91CF;&#x5B50;&#x570B;&#x5BB6;&#x8A08;&#x756B;，&#x63A2;&#x7D22;&#x81FA;&#x7063;&#x79D1;&#x6280;&#x4F48;&#x5C40;&#x65B0;&#x85CD;&#x5716;</li>
       </ul>
     </div>
     <div class="lang-en" style="display: none;">
@@ -4463,29 +4463,29 @@ strong {
       </ul>
     </div>
 
-    <!-- 議程表部分 -->
+    <!-- &#x8B70;&#x7A0B;&#x8868;&#x90E8;&#x5206; -->
     <h2 id="s2-agenda" class="section-title">
-      <span class="lang-zh">活動議程</span>
+      <span class="lang-zh">&#x6D3B;&#x52D5;&#x8B70;&#x7A0B;</span>
       <span class="lang-en" style="display: none;">Event Agenda</span>
     </h2>
 
     <div class="schedule-table">
       <div class="schedule-header">
         <div class="time-col">
-          <span class="lang-zh">活動時間</span>
+          <span class="lang-zh">&#x6D3B;&#x52D5;&#x6642;&#x9593;</span>
           <span class="lang-en" style="display: none;">Time</span>
         </div>
         <div class="content-col">
-          <span class="lang-zh">活動內容</span>
+          <span class="lang-zh">&#x6D3B;&#x52D5;&#x5167;&#x5BB9;</span>
           <span class="lang-en" style="display: none;">Agenda</span>
         </div>
       </div>
 
-      <!-- 報到 -->
+      <!-- &#x5831;&#x5230; -->
       <div class="schedule-row">
         <div class="time-cell">09:00 - 09:30</div>
         <div class="content-cell">
-          <span class="lang-zh">報到</span>
+          <span class="lang-zh">&#x5831;&#x5230;</span>
           <span class="lang-en" style="display: none;">Registration</span>
         </div>
       </div>
@@ -4494,25 +4494,25 @@ strong {
         <div class="time-cell">09:30 - 09:35</div>
         <div class="content-cell" style="padding: 0; display: flex; flex-direction: column;">
           <div style="padding: 16px 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
-            <span class="lang-zh">開幕致詞暨合照</span>
+            <span class="lang-zh">&#x958B;&#x5E55;&#x81F4;&#x8A5E;&#x66A8;&#x5408;&#x7167;</span>
             <span class="lang-en" style="display: none;">Remarks and Group Photo</span>
           </div>
           <div style="padding: 16px 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
-            <span class="lang-zh">貴賓致詞：</span>
+            <span class="lang-zh">&#x8CB4;&#x8CD3;&#x81F4;&#x8A5E;：</span>
             <span class="lang-en" style="display: none;">Special Remarks:</span>
             <ul style="margin-top: 12px;">
               <li>
-                <span class="lang-zh">李旺龍 <span class="title">/ 國家科學及技術委員會科教發展及國際合作處 處長</span></span>
+                <span class="lang-zh">&#x674E;&#x65FA;&#x9F8D; <span class="title">/ &#x570B;&#x5BB6;&#x79D1;&#x5B78;&#x53CA;&#x6280;&#x8853;&#x59D4;&#x54E1;&#x6703;&#x79D1;&#x6559;&#x767C;&#x5C55;&#x53CA;&#x570B;&#x969B;&#x5408;&#x4F5C;&#x8655; &#x8655;&#x9577;</span></span>
                 <span class="lang-en" style="display: none;">Wang-Long Li <span class="title">/ Director General, Department of International Cooperation and Science Education, National Science and Technology Council (NSTC)</span></span>
               </li>
             </ul>
           </div>
           <div style="padding: 16px 20px;">
-            <span class="lang-zh">歡迎暨開幕致詞：</span>
+            <span class="lang-zh">&#x6B61;&#x8FCE;&#x66A8;&#x958B;&#x5E55;&#x81F4;&#x8A5E;：</span>
             <span class="lang-en" style="display: none;">Opening Remarks:</span>
             <ul style="margin-top: 12px;">
               <li>
-                <span class="lang-zh">黃錫瑜 <span class="title">/ 財團法人國家實驗研究院科技政策研究與資訊中心 主任</span></span>
+                <span class="lang-zh">&#x9EC3;&#x932B;&#x745C; <span class="title">/ &#x8CA1;&#x5718;&#x6CD5;&#x4EBA;&#x570B;&#x5BB6;&#x5BE6;&#x9A57;&#x7814;&#x7A76;&#x9662;&#x79D1;&#x6280;&#x653F;&#x7B56;&#x7814;&#x7A76;&#x8207;&#x8CC7;&#x8A0A;&#x4E2D;&#x5FC3; &#x4E3B;&#x4EFB;</span></span>
                 <span class="lang-en" style="display: none;">Shi-Yu Huang <span class="title">/ Director General, Science & Technology Policy Research and Information Center (STPI), National Institutes of Applied Research (NIAR)</span></span>
               </li>
             </ul>
@@ -4520,11 +4520,11 @@ strong {
         </div>
       </div>
 
-      <!-- 大合照 -->
+      <!-- &#x5927;&#x5408;&#x7167; -->
       <div class="schedule-row">
         <div class="time-cell">09:35 - 09:40</div>
         <div class="content-cell">
-          <span class="lang-zh">大合照</span>
+          <span class="lang-zh">&#x5927;&#x5408;&#x7167;</span>
           <span class="lang-en" style="display: none;">Group Photo</span>
         </div>
       </div>
@@ -4533,7 +4533,7 @@ strong {
       <div class="schedule-row session-header" style="grid-template-columns: 1fr;">
         <div class="content-cell" style="grid-column: 1 / -1; text-align: center;">
           <strong class="session-title session-title-white">
-            <span class="lang-zh">Session 1 - 人工智慧與半導體</span>
+            <span class="lang-zh">Session 1 - &#x4EBA;&#x5DE5;&#x667A;&#x6167;&#x8207;&#x534A;&#x5C0E;&#x9AD4;</span>
             <span class="lang-en" style="display: none;">Session 1 - AI and Semiconductors</span>
           </strong>
         </div>
@@ -4543,33 +4543,33 @@ strong {
         <div class="time-cell">09:40 - 10:30</div>
         <div class="content-cell" style="padding: 0; display: flex; flex-direction: column;">
           <div style="padding: 16px 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
-            <span class="lang-zh">專題演講 1</span>
+            <span class="lang-zh">&#x5C08;&#x984C;&#x6F14;&#x8B1B; 1</span>
             <span class="lang-en" style="display: none;">Invited Talk 1</span><br>
-            <span class="lang-zh"><span style="font-style: italic; opacity: 0.7; font-size: 0.9em; font-weight: 300;">從邊緣AI到實體AI ─ 台灣的挑戰與機遇</span></span>
+            <span class="lang-zh"><span style="font-style: italic; opacity: 0.7; font-size: 0.9em; font-weight: 300;">&#x5F9E;&#x908A;&#x7DE3;AI&#x5230;&#x5BE6;&#x9AD4;AI ─ &#x53F0;&#x7063;&#x7684;&#x6311;&#x6230;&#x8207;&#x6A5F;&#x9047;</span></span>
             <span class="lang-en" style="display: none;"><span style="font-style: italic; opacity: 0.7; font-size: 0.9em; font-weight: 300;">From Edge AI to Physical AI – The Challenge and Opportunity of Taiwan</span></span><br>
             <span class="role-tag" style="margin-top: 20px; display: inline-block;">
-              <span class="lang-zh">主講者</span>
+              <span class="lang-zh">&#x4E3B;&#x8B1B;&#x8005;</span>
               <span class="lang-en" style="display: none;">Speaker</span>
             </span>
             <ul style="margin-top: 12px;">
               <li>
-                <span class="lang-zh">許惠民 <span class="title">/ 華碩電腦股份有限公司北美策略與合作部門 副總裁</span></span>
+                <span class="lang-zh">&#x8A31;&#x60E0;&#x6C11; <span class="title">/ &#x83EF;&#x78A9;&#x96FB;&#x8166;&#x80A1;&#x4EFD;&#x6709;&#x9650;&#x516C;&#x53F8;&#x5317;&#x7F8E;&#x7B56;&#x7565;&#x8207;&#x5408;&#x4F5C;&#x90E8;&#x9580; &#x526F;&#x7E3D;&#x88C1;</span></span>
                 <span class="lang-en" style="display: none;">William Sheu <span class="title">/ Vice President, Strategy & Partnership, ASUS North America</span></span>
               </li>
             </ul>
           </div>
           <div style="padding: 16px 20px;">
-            <span class="lang-zh">專題演講 2</span>
+            <span class="lang-zh">&#x5C08;&#x984C;&#x6F14;&#x8B1B; 2</span>
             <span class="lang-en" style="display: none;">Invited Talk 2</span><br>
-            <span class="lang-zh"><span style="font-style: italic; opacity: 0.7; font-size: 0.9em; font-weight: 300;">以人工智慧驅動的南韓半導體產業資料平台</span></span>
+            <span class="lang-zh"><span style="font-style: italic; opacity: 0.7; font-size: 0.9em; font-weight: 300;">&#x4EE5;&#x4EBA;&#x5DE5;&#x667A;&#x6167;&#x9A45;&#x52D5;&#x7684;&#x5357;&#x97D3;&#x534A;&#x5C0E;&#x9AD4;&#x7522;&#x696D;&#x8CC7;&#x6599;&#x5E73;&#x53F0;</span></span>
             <span class="lang-en" style="display: none;"><span style="font-style: italic; opacity: 0.7; font-size: 0.9em; font-weight: 300;">An AI-driven Data Platform in the Public Semiconductor Sector of South Korea</span></span><br>
             <span class="role-tag" style="margin-top: 20px; display: inline-block;">
-              <span class="lang-zh">主講者</span>
+              <span class="lang-zh">&#x4E3B;&#x8B1B;&#x8005;</span>
               <span class="lang-en" style="display: none;">Speaker</span>
             </span>
             <ul style="margin-top: 12px;">
               <li>
-                <span class="lang-zh">申晟顥 <span class="title">/ 韓國科學技術資訊院 (KISTI) 資深研究員</span></span>
+                <span class="lang-zh">&#x7533;&#x665F;&#x9865; <span class="title">/ &#x97D3;&#x570B;&#x79D1;&#x5B78;&#x6280;&#x8853;&#x8CC7;&#x8A0A;&#x9662; (KISTI) &#x8CC7;&#x6DF1;&#x7814;&#x7A76;&#x54E1;</span></span>
                 <span class="lang-en" style="display: none;">SungHo Shin <span class="title">/ Senior Researcher, Korea Institute of Science and Technology Information(KISTI), Korea</span></span>
               </li>
             </ul>
@@ -4577,11 +4577,11 @@ strong {
         </div>
       </div>
 
-      <!-- 茶點 -->
+      <!-- &#x8336;&#x9EDE; -->
       <div class="schedule-row break-row">
         <div class="time-cell">10:30 - 10:40</div>
         <div class="content-cell">
-          <span class="lang-zh">茶點及休息時間</span>
+          <span class="lang-zh">&#x8336;&#x9EDE;&#x53CA;&#x4F11;&#x606F;&#x6642;&#x9593;</span>
           <span class="lang-en" style="display: none;">Break Time</span>
         </div>
       </div>
@@ -4590,7 +4590,7 @@ strong {
       <div class="schedule-row session-header" style="grid-template-columns: 1fr;">
         <div class="content-cell" style="grid-column: 1 / -1; text-align: center;">
           <strong class="session-title session-title-white">
-            <span class="lang-zh">Session 2 - 產業創新與策略</span>
+            <span class="lang-zh">Session 2 - &#x7522;&#x696D;&#x5275;&#x65B0;&#x8207;&#x7B56;&#x7565;</span>
             <span class="lang-en" style="display: none;">Session 2 - Industrial Innovation and Strategy</span>
           </strong>
         </div>
@@ -4600,33 +4600,33 @@ strong {
         <div class="time-cell">10:40 - 11:30</div>
         <div class="content-cell" style="padding: 0; display: flex; flex-direction: column;">
           <div style="padding: 16px 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
-            <span class="lang-zh">專題演講 3</span>
+            <span class="lang-zh">&#x5C08;&#x984C;&#x6F14;&#x8B1B; 3</span>
             <span class="lang-en" style="display: none;">Invited Talk 3</span><br>
-            <span class="lang-zh"><span style="font-style: italic; opacity: 0.7; font-size: 0.9em; font-weight: 300;">產業與學術研究及頂尖科學家的合作-邁向創新之路</span></span>
+            <span class="lang-zh"><span style="font-style: italic; opacity: 0.7; font-size: 0.9em; font-weight: 300;">&#x7522;&#x696D;&#x8207;&#x5B78;&#x8853;&#x7814;&#x7A76;&#x53CA;&#x9802;&#x5C16;&#x79D1;&#x5B78;&#x5BB6;&#x7684;&#x5408;&#x4F5C;-&#x9081;&#x5411;&#x5275;&#x65B0;&#x4E4B;&#x8DEF;</span></span>
             <span class="lang-en" style="display: none;"><span style="font-style: italic; opacity: 0.7; font-size: 0.9em; font-weight: 300;">Industry's Collaboration with Academic Research and Star Scientists toward Innovation</span></span><br>
             <span class="role-tag" style="margin-top: 20px; display: inline-block;">
-              <span class="lang-zh">主講者</span>
+              <span class="lang-zh">&#x4E3B;&#x8B1B;&#x8005;</span>
               <span class="lang-en" style="display: none;">Speaker</span>
             </span>
             <ul style="margin-top: 12px;">
               <li>
-                <span class="lang-zh">隅藏康一 <span class="title">/ 政策研究大學院大學政策研究科 (GRIPS) 教授</span></span>
+                <span class="lang-zh">&#x9685;&#x85CF;&#x5EB7;&#x4E00; <span class="title">/ &#x653F;&#x7B56;&#x7814;&#x7A76;&#x5927;&#x5B78;&#x9662;&#x5927;&#x5B78;&#x653F;&#x7B56;&#x7814;&#x7A76;&#x79D1; (GRIPS) &#x6559;&#x6388;</span></span>
                 <span class="lang-en" style="display: none;">Koichi Sumikura <span class="title">/ Professor, National Graduate Institute for Policy Studies (GRIPS), Japan</span></span>
               </li>
             </ul>
           </div>
           <div style="padding: 16px 20px;">
-            <span class="lang-zh">專題演講 4</span>
+            <span class="lang-zh">&#x5C08;&#x984C;&#x6F14;&#x8B1B; 4</span>
             <span class="lang-en" style="display: none;">Invited Talk 4</span><br>
-            <span class="lang-zh"><span style="font-style: italic; opacity: 0.7; font-size: 0.9em; font-weight: 300;">量子計算的機遇與挑戰</span></span>
+            <span class="lang-zh"><span style="font-style: italic; opacity: 0.7; font-size: 0.9em; font-weight: 300;">&#x91CF;&#x5B50;&#x8A08;&#x7B97;&#x7684;&#x6A5F;&#x9047;&#x8207;&#x6311;&#x6230;</span></span>
             <span class="lang-en" style="display: none;"><span style="font-style: italic; opacity: 0.7; font-size: 0.9em; font-weight: 300;">Opportunities and Challenges of Quantum Computing</span></span><br>
             <span class="role-tag" style="margin-top: 20px; display: inline-block;">
-              <span class="lang-zh">主講者</span>
+              <span class="lang-zh">&#x4E3B;&#x8B1B;&#x8005;</span>
               <span class="lang-en" style="display: none;">Speaker</span>
             </span>
             <ul style="margin-top: 12px;">
               <li>
-                <span class="lang-zh">謝明修 <span class="title">/ 鴻海研究院量子計算研究所 所長</span></span>
+                <span class="lang-zh">&#x8B1D;&#x660E;&#x4FEE; <span class="title">/ &#x9D3B;&#x6D77;&#x7814;&#x7A76;&#x9662;&#x91CF;&#x5B50;&#x8A08;&#x7B97;&#x7814;&#x7A76;&#x6240; &#x6240;&#x9577;</span></span>
                 <span class="lang-en" style="display: none;">Min-Hsiu Hsieh <span class="title">/ Director, Institute for Quantum Computing, Hon Hai Research Institute</span></span>
               </li>
             </ul>
@@ -4634,11 +4634,11 @@ strong {
         </div>
       </div>
 
-      <!-- 茶點 -->
+      <!-- &#x8336;&#x9EDE; -->
       <div class="schedule-row break-row">
         <div class="time-cell">11:30 - 11:40</div>
         <div class="content-cell">
-          <span class="lang-zh">茶點及休息時間</span>
+          <span class="lang-zh">&#x8336;&#x9EDE;&#x53CA;&#x4F11;&#x606F;&#x6642;&#x9593;</span>
           <span class="lang-en" style="display: none;">Break Time</span>
         </div>
       </div>
@@ -4657,45 +4657,45 @@ strong {
         <div class="time-cell">11:40 - 12:20</div>
         <div class="content-cell">
           <span class="role-tag">
-            <span class="lang-zh">主持人</span>
+            <span class="lang-zh">&#x4E3B;&#x6301;&#x4EBA;</span>
             <span class="lang-en" style="display: none;">Moderator</span>
           </span>
           <ul style="margin-top: 12px;">
             <li>
-              <span class="lang-zh">黃錫瑜 <span class="title">/ 財團法人國家實驗研究院科技政策研究與資訊中心 主任</span></span>
+              <span class="lang-zh">&#x9EC3;&#x932B;&#x745C; <span class="title">/ &#x8CA1;&#x5718;&#x6CD5;&#x4EBA;&#x570B;&#x5BB6;&#x5BE6;&#x9A57;&#x7814;&#x7A76;&#x9662;&#x79D1;&#x6280;&#x653F;&#x7B56;&#x7814;&#x7A76;&#x8207;&#x8CC7;&#x8A0A;&#x4E2D;&#x5FC3; &#x4E3B;&#x4EFB;</span></span>
               <span class="lang-en" style="display: none;">Shi-Yu Huang <span class="title">/ Director General, Science & Technology Policy Research and Information Center (STPI), National Institutes of Applied Research (NIAR), Taiwan</span></span>
             </li>
           </ul>
           <span class="role-tag">
-            <span class="lang-zh">與談人</span>
+            <span class="lang-zh">&#x8207;&#x8AC7;&#x4EBA;</span>
             <span class="lang-en" style="display: none;">Panelist</span>
           </span>
           <ul style="margin-top: 12px;">
             <li>
-              <span class="lang-zh">申晟顥 <span class="title">/ 韓國科學技術資訊院 (KISTI) 資深研究員</span></span>
+              <span class="lang-zh">&#x7533;&#x665F;&#x9865; <span class="title">/ &#x97D3;&#x570B;&#x79D1;&#x5B78;&#x6280;&#x8853;&#x8CC7;&#x8A0A;&#x9662; (KISTI) &#x8CC7;&#x6DF1;&#x7814;&#x7A76;&#x54E1;</span></span>
               <span class="lang-en" style="display: none;">1. SungHo Shin <span class="title">/ Senior Researcher, Korea Institute of Science and Technology Information (KISTI), Korea</span></span>
             </li>
             <li>
-              <span class="lang-zh">謝明修 <span class="title">/ 鴻海研究院量子計算研究所 所長</span></span>
+              <span class="lang-zh">&#x8B1D;&#x660E;&#x4FEE; <span class="title">/ &#x9D3B;&#x6D77;&#x7814;&#x7A76;&#x9662;&#x91CF;&#x5B50;&#x8A08;&#x7B97;&#x7814;&#x7A76;&#x6240; &#x6240;&#x9577;</span></span>
               <span class="lang-en" style="display: none;">2. Min-Hsiu Hsieh <span class="title">/ Director, Institute for Quantum Computing, Hon Hai Research Institute</span></span>
             </li>
             <li>
-              <span class="lang-zh">隅藏康一 <span class="title">/ 政策研究大學院大學政策研究科 教授</span></span>
+              <span class="lang-zh">&#x9685;&#x85CF;&#x5EB7;&#x4E00; <span class="title">/ &#x653F;&#x7B56;&#x7814;&#x7A76;&#x5927;&#x5B78;&#x9662;&#x5927;&#x5B78;&#x653F;&#x7B56;&#x7814;&#x7A76;&#x79D1; &#x6559;&#x6388;</span></span>
               <span class="lang-en" style="display: none;">3. Koichi Sumikura <span class="title">/ Professor, National Graduate Institute for Policy Studies (GRIPS), Japan</span></span>
             </li>
             <li>
-              <span class="lang-zh">許惠民 <span class="title">/ 華碩電腦股份有限公司北美策略與合作部門 副總裁</span></span>
+              <span class="lang-zh">&#x8A31;&#x60E0;&#x6C11; <span class="title">/ &#x83EF;&#x78A9;&#x96FB;&#x8166;&#x80A1;&#x4EFD;&#x6709;&#x9650;&#x516C;&#x53F8;&#x5317;&#x7F8E;&#x7B56;&#x7565;&#x8207;&#x5408;&#x4F5C;&#x90E8;&#x9580; &#x526F;&#x7E3D;&#x88C1;</span></span>
               <span class="lang-en" style="display: none;">4. William Sheu <span class="title">/ Vice President, Strategy & Partnership, ASUS North America</span></span>
             </li>
           </ul>
         </div>
       </div>
 
-      <!-- 午餐 -->
+      <!-- &#x5348;&#x9910; -->
       <div class="schedule-row lunch-row">
         <div class="time-cell">12:20 - 13:30</div>
         <div class="content-cell">
-          <span class="lang-zh">午餐時間</span>
+          <span class="lang-zh">&#x5348;&#x9910;&#x6642;&#x9593;</span>
           <span class="lang-en" style="display: none;">Lunch Break</span>
         </div>
       </div>
@@ -4704,7 +4704,7 @@ strong {
       <div class="schedule-row session-header" style="grid-template-columns: 1fr;">
         <div class="content-cell" style="grid-column: 1 / -1; text-align: center;">
           <strong class="session-title session-title-white">
-            <span class="lang-zh">Session 3 - 材料與生技應用</span>
+            <span class="lang-zh">Session 3 - &#x6750;&#x6599;&#x8207;&#x751F;&#x6280;&#x61C9;&#x7528;</span>
             <span class="lang-en" style="display: none;">Session 3 - Materials and Biotechnological Applications</span>
           </strong>
         </div>
@@ -4714,49 +4714,49 @@ strong {
         <div class="time-cell">13:30 - 14:45</div>
         <div class="content-cell" style="padding: 0; display: flex; flex-direction: column;">
           <div style="padding: 16px 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
-            <span class="lang-zh">專題演講 5</span>
+            <span class="lang-zh">&#x5C08;&#x984C;&#x6F14;&#x8B1B; 5</span>
             <span class="lang-en" style="display: none;">Invited Talk 5</span><br>
-            <span class="lang-zh"><span style="font-style: italic; opacity: 0.7; font-size: 0.9em; font-weight: 300;">骨科醫材市場的關鍵拼圖：3D生物陶瓷骨移植醫材的技術突破、臨床應用、市場機遇、新創潛在挑戰</span></span>
+            <span class="lang-zh"><span style="font-style: italic; opacity: 0.7; font-size: 0.9em; font-weight: 300;">&#x9AA8;&#x79D1;&#x91AB;&#x6750;&#x5E02;&#x5834;&#x7684;&#x95DC;&#x9375;&#x62FC;&#x5716;：3D&#x751F;&#x7269;&#x9676;&#x74F7;&#x9AA8;&#x79FB;&#x690D;&#x91AB;&#x6750;&#x7684;&#x6280;&#x8853;&#x7A81;&#x7834;、&#x81E8;&#x5E8A;&#x61C9;&#x7528;、&#x5E02;&#x5834;&#x6A5F;&#x9047;、&#x65B0;&#x5275;&#x6F5B;&#x5728;&#x6311;&#x6230;</span></span>
             <span class="lang-en" style="display: none;"><span style="font-style: italic; opacity: 0.7; font-size: 0.9em; font-weight: 300;">Key Building Blocks of the Orthopedic Medical Device Market: Technological Breakthroughs, Clinical Applications, Market Opportunities, and Startup Challenges of 3D Bioceramic Bone Graft Implants</span></span><br>
             <span class="role-tag" style="margin-top: 20px; display: inline-block;">
-              <span class="lang-zh">主講者</span>
+              <span class="lang-zh">&#x4E3B;&#x8B1B;&#x8005;</span>
               <span class="lang-en" style="display: none;">Speaker</span>
             </span>
             <ul style="margin-top: 12px;">
               <li>
-                <span class="lang-zh">王志光 <span class="title">/ 高雄醫學大學醫藥暨應用化學系 教授</span></span>
+                <span class="lang-zh">&#x738B;&#x5FD7;&#x5149; <span class="title">/ &#x9AD8;&#x96C4;&#x91AB;&#x5B78;&#x5927;&#x5B78;&#x91AB;&#x85E5;&#x66A8;&#x61C9;&#x7528;&#x5316;&#x5B78;&#x7CFB; &#x6559;&#x6388;</span></span>
                 <span class="lang-en" style="display: none;">Chih-Kuang Wang <span class="title">/ Professor, Department of Medicinal and Applied Chemistry, Kaohsiung Medical University</span></span>
               </li>
             </ul>
           </div>
           <div style="padding: 16px 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
-            <span class="lang-zh">專題演講 6</span>
+            <span class="lang-zh">&#x5C08;&#x984C;&#x6F14;&#x8B1B; 6</span>
             <span class="lang-en" style="display: none;">Invited Talk 6</span><br>
-            <span class="lang-zh"><span style="font-style: italic; opacity: 0.7; font-size: 0.9em; font-weight: 300;">3D生醫列印再定義：軟硬組織界面修復的創新解方</span></span>
+            <span class="lang-zh"><span style="font-style: italic; opacity: 0.7; font-size: 0.9em; font-weight: 300;">3D&#x751F;&#x91AB;&#x5217;&#x5370;&#x518D;&#x5B9A;&#x7FA9;：&#x8EDF;&#x786C;&#x7D44;&#x7E54;&#x754C;&#x9762;&#x4FEE;&#x5FA9;&#x7684;&#x5275;&#x65B0;&#x89E3;&#x65B9;</span></span>
             <span class="lang-en" style="display: none;"><span style="font-style: italic; opacity: 0.7; font-size: 0.9em; font-weight: 300;">3D Bioprinting Vascularized Bone Using Anisotropic Microgels</span></span><br>
             <span class="role-tag" style="margin-top: 20px; display: inline-block;">
-              <span class="lang-zh">主講者</span>
+              <span class="lang-zh">&#x4E3B;&#x8B1B;&#x8005;</span>
               <span class="lang-en" style="display: none;">Speaker</span>
             </span>
             <ul style="margin-top: 12px;">
               <li>
-                <span class="lang-zh">李泓邦 <span class="title">/ 國立清華大學生物醫學工程研究所 助理教授</span></span>
+                <span class="lang-zh">&#x674E;&#x6CD3;&#x90A6; <span class="title">/ &#x570B;&#x7ACB;&#x6E05;&#x83EF;&#x5927;&#x5B78;&#x751F;&#x7269;&#x91AB;&#x5B78;&#x5DE5;&#x7A0B;&#x7814;&#x7A76;&#x6240; &#x52A9;&#x7406;&#x6559;&#x6388;</span></span>
                 <span class="lang-en" style="display: none;">Hung-Pang Lee <span class="title">/ Assistant Professor, Institute of Biomedical Engineering, National Tsing Hua University</span></span>
               </li>
             </ul>
           </div>
           <div style="padding: 16px 20px;">
-            <span class="lang-zh">專題演講 7</span>
+            <span class="lang-zh">&#x5C08;&#x984C;&#x6F14;&#x8B1B; 7</span>
             <span class="lang-en" style="display: none;">Invited Talk 7</span><br>
-            <span class="lang-zh"><span style="font-style: italic; opacity: 0.7; font-size: 0.9em; font-weight: 300;">鋰電池的秘密：看不見的界面如何影響你的手機與電動車</span></span>
+            <span class="lang-zh"><span style="font-style: italic; opacity: 0.7; font-size: 0.9em; font-weight: 300;">&#x92F0;&#x96FB;&#x6C60;&#x7684;&#x79D8;&#x5BC6;：&#x770B;&#x4E0D;&#x898B;&#x7684;&#x754C;&#x9762;&#x5982;&#x4F55;&#x5F71;&#x97FF;&#x4F60;&#x7684;&#x624B;&#x6A5F;&#x8207;&#x96FB;&#x52D5;&#x8ECA;</span></span>
             <span class="lang-en" style="display: none;"><span style="font-style: italic; opacity: 0.7; font-size: 0.9em; font-weight: 300;">Revealing the Invisible: How Interfacial Mechanisms Govern Lithium Battery Cycling and Stability</span></span><br>
             <span class="role-tag" style="margin-top: 20px; display: inline-block;">
-              <span class="lang-zh">主講者</span>
+              <span class="lang-zh">&#x4E3B;&#x8B1B;&#x8005;</span>
               <span class="lang-en" style="display: none;">Speaker</span>
             </span>
             <ul style="margin-top: 12px;">
               <li>
-                <span class="lang-zh">林冠宇 <span class="title">/ 國立成功大學化學工程系 助理教授</span></span>
+                <span class="lang-zh">&#x6797;&#x51A0;&#x5B87; <span class="title">/ &#x570B;&#x7ACB;&#x6210;&#x529F;&#x5927;&#x5B78;&#x5316;&#x5B78;&#x5DE5;&#x7A0B;&#x7CFB; &#x52A9;&#x7406;&#x6559;&#x6388;</span></span>
                 <span class="lang-en" style="display: none;">Kuan-Yu Lin <span class="title">/ Assistant Professor, Department of Chemical Engineering, National Cheng Kung University</span></span>
               </li>
             </ul>
@@ -4764,11 +4764,11 @@ strong {
         </div>
       </div>
 
-      <!-- 茶點 -->
+      <!-- &#x8336;&#x9EDE; -->
       <div class="schedule-row break-row">
         <div class="time-cell">14:45 - 15:00</div>
         <div class="content-cell">
-          <span class="lang-zh">茶點及休息時間</span>
+          <span class="lang-zh">&#x8336;&#x9EDE;&#x53CA;&#x4F11;&#x606F;&#x6642;&#x9593;</span>
           <span class="lang-en" style="display: none;">Break Time</span>
         </div>
       </div>
@@ -4787,34 +4787,34 @@ strong {
         <div class="time-cell">15:00 - 16:00</div>
         <div class="content-cell">
           <span class="role-tag">
-            <span class="lang-zh">主持人</span>
+            <span class="lang-zh">&#x4E3B;&#x6301;&#x4EBA;</span>
             <span class="lang-en" style="display: none;">Moderator</span>
           </span>
           <ul style="margin-top: 12px;">
             <li>
-              <span class="lang-zh">張怡玲 <span class="title">/ 國立成功大學機械工程學系 教授</span></span>
+              <span class="lang-zh">&#x5F35;&#x6021;&#x73B2; <span class="title">/ &#x570B;&#x7ACB;&#x6210;&#x529F;&#x5927;&#x5B78;&#x6A5F;&#x68B0;&#x5DE5;&#x7A0B;&#x5B78;&#x7CFB; &#x6559;&#x6388;</span></span>
               <span class="lang-en" style="display: none;">I-Ling Chang <span class="title">/ Professor, Department of Mechanical Engineering, National Cheng Kung University</span></span>
             </li>
           </ul>
           <span class="role-tag">
-            <span class="lang-zh">與談人</span>
+            <span class="lang-zh">&#x8207;&#x8AC7;&#x4EBA;</span>
             <span class="lang-en" style="display: none;">Panelists</span>
           </span>
           <ul style="margin-top: 12px;">
             <li>
-              <span class="lang-zh">林哲民 <span class="title">/ 史丹佛大學應用物理系 博士後研究員</span></span>
+              <span class="lang-zh">&#x6797;&#x54F2;&#x6C11; <span class="title">/ &#x53F2;&#x4E39;&#x4F5B;&#x5927;&#x5B78;&#x61C9;&#x7528;&#x7269;&#x7406;&#x7CFB; &#x535A;&#x58EB;&#x5F8C;&#x7814;&#x7A76;&#x54E1;</span></span>
               <span class="lang-en" style="display: none;">1. Che-Min Lin <span class="title">/ Postdoctoral Research Fellow in Applied Physics, Stanford University</span></span>
             </li>
             <li>
-              <span class="lang-zh">林冠宇 <span class="title">/ 國立成功大學化學工程系 助理教授</span></span>
+              <span class="lang-zh">&#x6797;&#x51A0;&#x5B87; <span class="title">/ &#x570B;&#x7ACB;&#x6210;&#x529F;&#x5927;&#x5B78;&#x5316;&#x5B78;&#x5DE5;&#x7A0B;&#x7CFB; &#x52A9;&#x7406;&#x6559;&#x6388;</span></span>
               <span class="lang-en" style="display: none;">2. Kuan-Yu Lin <span class="title">/ Assistant Professor, Department of Chemical Engineering, National Cheng Kung University</span></span>
             </li>
             <li>
-              <span class="lang-zh">李泓邦 <span class="title">/ 國立清華大學生物醫學工程研究所 助理教授</span></span>
+              <span class="lang-zh">&#x674E;&#x6CD3;&#x90A6; <span class="title">/ &#x570B;&#x7ACB;&#x6E05;&#x83EF;&#x5927;&#x5B78;&#x751F;&#x7269;&#x91AB;&#x5B78;&#x5DE5;&#x7A0B;&#x7814;&#x7A76;&#x6240; &#x52A9;&#x7406;&#x6559;&#x6388;</span></span>
               <span class="lang-en" style="display: none;">3. Hung-Pang Lee <span class="title">/ Assistant Professor, Institute of Biomedical Engineering, National Tsing Hua University</span></span>
             </li>
             <li>
-              <span class="lang-zh">王志光 <span class="title">/ 高雄醫學大學醫藥暨應用化學系 教授</span></span>
+              <span class="lang-zh">&#x738B;&#x5FD7;&#x5149; <span class="title">/ &#x9AD8;&#x96C4;&#x91AB;&#x5B78;&#x5927;&#x5B78;&#x91AB;&#x85E5;&#x66A8;&#x61C9;&#x7528;&#x5316;&#x5B78;&#x7CFB; &#x6559;&#x6388;</span></span>
               <span class="lang-en" style="display: none;">4. Chih-Kuang Wang <span class="title">/ Professor, Department of Medicinal and Applied Chemistry, Kaohsiung Medical University</span></span>
             </li>
           </ul>
@@ -4834,7 +4834,7 @@ strong {
           <div class="lang-zh">
             <p style="font-size: 1.2em; margin-bottom: 4px; font-weight: 600;">&#x96C6;&#x601D;&#x53F0;&#x5927;&#x6703;&#x8B70;&#x4E2D;&#x5FC3;</p>
             <p style="font-size: 1.1em; color: #cfd6e6; margin-top: 4px;"><img src="assets/img/svg-pin.svg" width="20" height="20" style="display: inline-block; vertical-align: -2px; margin-right: 8px;" alt="location pin">&#x53F0;&#x5317;&#x5E02;&#x5927;&#x5B89;&#x5340;&#x7F85;&#x65AF;&#x798F;&#x8DEF;&#x56DB;&#x6BB5; 85 &#x865F; B1</p>
-            <p style="font-size: 1.0em; color: #a0a9bf; margin-top: 8px;">捷運公館站2號出口左轉（步行2分鐘）</p>
+            <p style="font-size: 1.0em; color: #a0a9bf; margin-top: 8px;">&#x6377;&#x904B;&#x516C;&#x9928;&#x7AD9;2&#x865F;&#x51FA;&#x53E3;&#x5DE6;&#x8F49;（&#x6B65;&#x884C;2&#x5206;&#x9418;）</p>
           </div>
           <div class="lang-en" style="display: none;">
             <p style="font-size: 1.2em; margin-bottom: 4px; font-weight: 600;">GIS NTU Convention Center - Socrates Room</p>
@@ -4985,13 +4985,13 @@ strong {
   </div>
 </section>
 
-<!-- 系列論壇三 -->
+<!-- &#x7CFB;&#x5217;&#x8AD6;&#x58C7;&#x4E09; -->
 <section class="event-info" id="s3-info" style="display: none;">
   <div class="inner">
     <div class="topic-wrap">
       <div class="topic-badge">
-        前瞻系列培訓工作坊：<br>
-        利用AI提升統計決策與實務應用<br>
+        &#x524D;&#x77BB;&#x7CFB;&#x5217;&#x57F9;&#x8A13;&#x5DE5;&#x4F5C;&#x574A;：<br>
+        &#x5229;&#x7528;AI&#x63D0;&#x5347;&#x7D71;&#x8A08;&#x6C7A;&#x7B56;&#x8207;&#x5BE6;&#x52D9;&#x61C9;&#x7528;<br>
         <span style="font-size: 0.9em; margin-top: 8px; display: block;">Foresight Training Workshop:<br>
         AI-Supported Statistical Decision Making and Practical Application</span>
       </div>
@@ -4999,235 +4999,235 @@ strong {
       <div class="topic-rows">
         <div class="topic-rows-inner">
           <div class="topic-row">
-            <div class="pill">時間</div>
-            <div>2025 年 12 月 19 日（五）、12 月 22 日（一），9:00 至 16:00</div>
+            <div class="pill">&#x6642;&#x9593;</div>
+            <div>2025 &#x5E74; 12 &#x6708; 19 &#x65E5;（&#x4E94;）、12 &#x6708; 22 &#x65E5;（&#x4E00;），9:00 &#x81F3; 16:00</div>
           </div>
           <div class="topic-row place">
-            <div class="pill">地點</div>
-            <div>BR6科技大樓 大教室<br>台北市復興南路二段237號4樓</div>
+            <div class="pill">&#x5730;&#x9EDE;</div>
+            <div>BR6&#x79D1;&#x6280;&#x5927;&#x6A13; &#x5927;&#x6559;&#x5BA4;<br>&#x53F0;&#x5317;&#x5E02;&#x5FA9;&#x8208;&#x5357;&#x8DEF;&#x4E8C;&#x6BB5;237&#x865F;4&#x6A13;</div>
           </div>
           <div class="topic-row">
-            <div class="pill">形式</div>
-            <div>實體會場<br>• 免費報名，即日起至額滿為止</div>
+            <div class="pill">&#x5F62;&#x5F0F;</div>
+            <div>&#x5BE6;&#x9AD4;&#x6703;&#x5834;<br>• &#x514D;&#x8CBB;&#x5831;&#x540D;，&#x5373;&#x65E5;&#x8D77;&#x81F3;&#x984D;&#x6EFF;&#x70BA;&#x6B62;</div>
           </div>
         </div>
       </div>
       
-      <h2 id="s3-speakers" class="section-title">亮點講者</h2>
+      <h2 id="s3-speakers" class="section-title">&#x4EAE;&#x9EDE;&#x8B1B;&#x8005;</h2>
     </div>
 
     <!-- speakers: 2 speakers -->
     <div class="speakers-section">
       <div class="speaker-card speaker-clickable"
-           data-speaker-name="邱皓政"
-           data-speaker-title="台灣統計方法學會 理事長"
-           data-speaker-education="• 美國南加州大學 哲學博士（心理計量學）"
-           data-speaker-experience="邱皓政教授現任台灣統計方法學會理事長，並擔任國立台灣師範大學企業管理學系特聘教授，同時兼任教育心理與輔導學系合聘教授。他曾擔任美國加州大學洛杉磯分校（UCLA）神經醫學研究中心統計分析師，並在師大擔任多項行政職務，包括副總務長、校務研究中心主任、企管系副主任等。在學術服務方面，他擔任多本TSSCI期刊編輯委員，專長領域包括心理測驗學、多變量統計、研究方法、人力資源管理及組織行為。"
-           data-event-title="前瞻系列培訓工作坊：利用AI提升統計決策與實務應用">
-        <img class="speaker-photo-card" src="assets/img/speaker-Hawjeng-Chiou.png" alt="邱皓政">
+           data-speaker-name="&#x90B1;&#x7693;&#x653F;"
+           data-speaker-title="&#x53F0;&#x7063;&#x7D71;&#x8A08;&#x65B9;&#x6CD5;&#x5B78;&#x6703; &#x7406;&#x4E8B;&#x9577;"
+           data-speaker-education="• &#x7F8E;&#x570B;&#x5357;&#x52A0;&#x5DDE;&#x5927;&#x5B78; &#x54F2;&#x5B78;&#x535A;&#x58EB;（&#x5FC3;&#x7406;&#x8A08;&#x91CF;&#x5B78;）"
+           data-speaker-experience="&#x90B1;&#x7693;&#x653F;&#x6559;&#x6388;&#x73FE;&#x4EFB;&#x53F0;&#x7063;&#x7D71;&#x8A08;&#x65B9;&#x6CD5;&#x5B78;&#x6703;&#x7406;&#x4E8B;&#x9577;，&#x4E26;&#x64D4;&#x4EFB;&#x570B;&#x7ACB;&#x53F0;&#x7063;&#x5E2B;&#x7BC4;&#x5927;&#x5B78;&#x4F01;&#x696D;&#x7BA1;&#x7406;&#x5B78;&#x7CFB;&#x7279;&#x8058;&#x6559;&#x6388;，&#x540C;&#x6642;&#x517C;&#x4EFB;&#x6559;&#x80B2;&#x5FC3;&#x7406;&#x8207;&#x8F14;&#x5C0E;&#x5B78;&#x7CFB;&#x5408;&#x8058;&#x6559;&#x6388;。&#x4ED6;&#x66FE;&#x64D4;&#x4EFB;&#x7F8E;&#x570B;&#x52A0;&#x5DDE;&#x5927;&#x5B78;&#x6D1B;&#x6749;&#x78EF;&#x5206;&#x6821;（UCLA）&#x795E;&#x7D93;&#x91AB;&#x5B78;&#x7814;&#x7A76;&#x4E2D;&#x5FC3;&#x7D71;&#x8A08;&#x5206;&#x6790;&#x5E2B;，&#x4E26;&#x5728;&#x5E2B;&#x5927;&#x64D4;&#x4EFB;&#x591A;&#x9805;&#x884C;&#x653F;&#x8077;&#x52D9;，&#x5305;&#x62EC;&#x526F;&#x7E3D;&#x52D9;&#x9577;、&#x6821;&#x52D9;&#x7814;&#x7A76;&#x4E2D;&#x5FC3;&#x4E3B;&#x4EFB;、&#x4F01;&#x7BA1;&#x7CFB;&#x526F;&#x4E3B;&#x4EFB;&#x7B49;。&#x5728;&#x5B78;&#x8853;&#x670D;&#x52D9;&#x65B9;&#x9762;，&#x4ED6;&#x64D4;&#x4EFB;&#x591A;&#x672C;TSSCI&#x671F;&#x520A;&#x7DE8;&#x8F2F;&#x59D4;&#x54E1;，&#x5C08;&#x9577;&#x9818;&#x57DF;&#x5305;&#x62EC;&#x5FC3;&#x7406;&#x6E2C;&#x9A57;&#x5B78;、&#x591A;&#x8B8A;&#x91CF;&#x7D71;&#x8A08;、&#x7814;&#x7A76;&#x65B9;&#x6CD5;、&#x4EBA;&#x529B;&#x8CC7;&#x6E90;&#x7BA1;&#x7406;&#x53CA;&#x7D44;&#x7E54;&#x884C;&#x70BA;。"
+           data-event-title="&#x524D;&#x77BB;&#x7CFB;&#x5217;&#x57F9;&#x8A13;&#x5DE5;&#x4F5C;&#x574A;：&#x5229;&#x7528;AI&#x63D0;&#x5347;&#x7D71;&#x8A08;&#x6C7A;&#x7B56;&#x8207;&#x5BE6;&#x52D9;&#x61C9;&#x7528;">
+        <img class="speaker-photo-card" src="assets/img/speaker-Hawjeng-Chiou.png" alt="&#x90B1;&#x7693;&#x653F;">
         <div class="speaker-info">
-          <div class="speaker-name-card">邱皓政</div>
-          <div class="speaker-title-card">台灣統計方法學會 理事長</div>
+          <div class="speaker-name-card">&#x90B1;&#x7693;&#x653F;</div>
+          <div class="speaker-title-card">&#x53F0;&#x7063;&#x7D71;&#x8A08;&#x65B9;&#x6CD5;&#x5B78;&#x6703; &#x7406;&#x4E8B;&#x9577;</div>
         </div>
       </div>
 
     </div>
 
-    <h2 id="s3-collaborators" class="section-title">協同講者</h2>
+    <h2 id="s3-collaborators" class="section-title">&#x5354;&#x540C;&#x8B1B;&#x8005;</h2>
 
     <!-- collaborator: 1 collaborator without photo -->
     <div class="speakers-section">
       <div class="speaker-card speaker-clickable"
-           data-speaker-name="林碧芳"
-           data-speaker-title="台灣統計方法學會 秘書長"
-           data-speaker-education="• 國立政治大學 教育系博士"
-           data-speaker-experience="林碧芳博士現任台灣統計方法學會秘書長，並在多所大學擔任兼任助理教授，包括國立台灣師範大學師資培育學院、輔仁大學教育領導與科技發展學士學位學程、東吳大學心理學系以及世新大學社會心理學系。她的研究專長領域包括測驗與統計、結構方程模式以及成長模型。林博士在統計方法學及教育測驗領域擁有深厚的實務經驗，致力於推廣正確的統計方法在教育研究中的應用。"
-           data-event-title="前瞻系列培訓工作坊：利用AI提升統計決策與實務應用">
+           data-speaker-name="&#x6797;&#x78A7;&#x82B3;"
+           data-speaker-title="&#x53F0;&#x7063;&#x7D71;&#x8A08;&#x65B9;&#x6CD5;&#x5B78;&#x6703; &#x79D8;&#x66F8;&#x9577;"
+           data-speaker-education="• &#x570B;&#x7ACB;&#x653F;&#x6CBB;&#x5927;&#x5B78; &#x6559;&#x80B2;&#x7CFB;&#x535A;&#x58EB;"
+           data-speaker-experience="&#x6797;&#x78A7;&#x82B3;&#x535A;&#x58EB;&#x73FE;&#x4EFB;&#x53F0;&#x7063;&#x7D71;&#x8A08;&#x65B9;&#x6CD5;&#x5B78;&#x6703;&#x79D8;&#x66F8;&#x9577;，&#x4E26;&#x5728;&#x591A;&#x6240;&#x5927;&#x5B78;&#x64D4;&#x4EFB;&#x517C;&#x4EFB;&#x52A9;&#x7406;&#x6559;&#x6388;，&#x5305;&#x62EC;&#x570B;&#x7ACB;&#x53F0;&#x7063;&#x5E2B;&#x7BC4;&#x5927;&#x5B78;&#x5E2B;&#x8CC7;&#x57F9;&#x80B2;&#x5B78;&#x9662;、&#x8F14;&#x4EC1;&#x5927;&#x5B78;&#x6559;&#x80B2;&#x9818;&#x5C0E;&#x8207;&#x79D1;&#x6280;&#x767C;&#x5C55;&#x5B78;&#x58EB;&#x5B78;&#x4F4D;&#x5B78;&#x7A0B;、&#x6771;&#x5433;&#x5927;&#x5B78;&#x5FC3;&#x7406;&#x5B78;&#x7CFB;&#x4EE5;&#x53CA;&#x4E16;&#x65B0;&#x5927;&#x5B78;&#x793E;&#x6703;&#x5FC3;&#x7406;&#x5B78;&#x7CFB;。&#x5979;&#x7684;&#x7814;&#x7A76;&#x5C08;&#x9577;&#x9818;&#x57DF;&#x5305;&#x62EC;&#x6E2C;&#x9A57;&#x8207;&#x7D71;&#x8A08;、&#x7D50;&#x69CB;&#x65B9;&#x7A0B;&#x6A21;&#x5F0F;&#x4EE5;&#x53CA;&#x6210;&#x9577;&#x6A21;&#x578B;。&#x6797;&#x535A;&#x58EB;&#x5728;&#x7D71;&#x8A08;&#x65B9;&#x6CD5;&#x5B78;&#x53CA;&#x6559;&#x80B2;&#x6E2C;&#x9A57;&#x9818;&#x57DF;&#x64C1;&#x6709;&#x6DF1;&#x539A;&#x7684;&#x5BE6;&#x52D9;&#x7D93;&#x9A57;，&#x81F4;&#x529B;&#x65BC;&#x63A8;&#x5EE3;&#x6B63;&#x78BA;&#x7684;&#x7D71;&#x8A08;&#x65B9;&#x6CD5;&#x5728;&#x6559;&#x80B2;&#x7814;&#x7A76;&#x4E2D;&#x7684;&#x61C9;&#x7528;。"
+           data-event-title="&#x524D;&#x77BB;&#x7CFB;&#x5217;&#x57F9;&#x8A13;&#x5DE5;&#x4F5C;&#x574A;：&#x5229;&#x7528;AI&#x63D0;&#x5347;&#x7D71;&#x8A08;&#x6C7A;&#x7B56;&#x8207;&#x5BE6;&#x52D9;&#x61C9;&#x7528;">
         <div class="speaker-info" style="width: 100%;">
-          <div class="speaker-name-card">林碧芳</div>
-          <div class="speaker-title-card">台灣統計方法學會 秘書長</div>
+          <div class="speaker-name-card">&#x6797;&#x78A7;&#x82B3;</div>
+          <div class="speaker-title-card">&#x53F0;&#x7063;&#x7D71;&#x8A08;&#x65B9;&#x6CD5;&#x5B78;&#x6703; &#x79D8;&#x66F8;&#x9577;</div>
         </div>
       </div>
     </div>
 
-    <h2 id="s3-about" class="section-title about-section">工作坊簡介</h2>
-    <p>本工作坊透過量化研究與統計工具的系統化訓練，協助研究人員強化資料分析與決策能力，並提升資料探索、模式建構與工具操作（SPSS、MPlus、AI）的實務應用技巧。同時，引導學員理解統計方法與人工智慧在決策分析中的互補角色，以更科學化、數據導向的方式提升研究品質與政策推動效能。</p>
-    <p>在資料驅動決策成為政策研究核心的今日，統計分析與 AI 工具的整合已是跨領域研究不可或缺的能力。</p>
-    <p>本次工作坊特別聚焦「<span class="highlight-text">統計推論 × 探索性資料分析 × 迴歸建模 × AI 輔助統計決策</span>」，並由台灣統計方法學會理事長邱盧政教授及秘書長林碧芳教授協同授課。</p>
-    <p>課程以二日密集講授與討論方式進行，帶領學員從研究設計、資料前處理、統計檢定到 AI 輔助決策，完整掌握「從資料到政策洞察」的分析流程，全面強化智庫、學研與法人研究人員在政策研析上的深度與廣度。</p>
+    <h2 id="s3-about" class="section-title about-section">&#x5DE5;&#x4F5C;&#x574A;&#x7C21;&#x4ECB;</h2>
+    <p>&#x672C;&#x5DE5;&#x4F5C;&#x574A;&#x900F;&#x904E;&#x91CF;&#x5316;&#x7814;&#x7A76;&#x8207;&#x7D71;&#x8A08;&#x5DE5;&#x5177;&#x7684;&#x7CFB;&#x7D71;&#x5316;&#x8A13;&#x7DF4;，&#x5354;&#x52A9;&#x7814;&#x7A76;&#x4EBA;&#x54E1;&#x5F37;&#x5316;&#x8CC7;&#x6599;&#x5206;&#x6790;&#x8207;&#x6C7A;&#x7B56;&#x80FD;&#x529B;，&#x4E26;&#x63D0;&#x5347;&#x8CC7;&#x6599;&#x63A2;&#x7D22;、&#x6A21;&#x5F0F;&#x5EFA;&#x69CB;&#x8207;&#x5DE5;&#x5177;&#x64CD;&#x4F5C;（SPSS、MPlus、AI）&#x7684;&#x5BE6;&#x52D9;&#x61C9;&#x7528;&#x6280;&#x5DE7;。&#x540C;&#x6642;，&#x5F15;&#x5C0E;&#x5B78;&#x54E1;&#x7406;&#x89E3;&#x7D71;&#x8A08;&#x65B9;&#x6CD5;&#x8207;&#x4EBA;&#x5DE5;&#x667A;&#x6167;&#x5728;&#x6C7A;&#x7B56;&#x5206;&#x6790;&#x4E2D;&#x7684;&#x4E92;&#x88DC;&#x89D2;&#x8272;，&#x4EE5;&#x66F4;&#x79D1;&#x5B78;&#x5316;、&#x6578;&#x64DA;&#x5C0E;&#x5411;&#x7684;&#x65B9;&#x5F0F;&#x63D0;&#x5347;&#x7814;&#x7A76;&#x54C1;&#x8CEA;&#x8207;&#x653F;&#x7B56;&#x63A8;&#x52D5;&#x6548;&#x80FD;。</p>
+    <p>&#x5728;&#x8CC7;&#x6599;&#x9A45;&#x52D5;&#x6C7A;&#x7B56;&#x6210;&#x70BA;&#x653F;&#x7B56;&#x7814;&#x7A76;&#x6838;&#x5FC3;&#x7684;&#x4ECA;&#x65E5;，&#x7D71;&#x8A08;&#x5206;&#x6790;&#x8207; AI &#x5DE5;&#x5177;&#x7684;&#x6574;&#x5408;&#x5DF2;&#x662F;&#x8DE8;&#x9818;&#x57DF;&#x7814;&#x7A76;&#x4E0D;&#x53EF;&#x6216;&#x7F3A;&#x7684;&#x80FD;&#x529B;。</p>
+    <p>&#x672C;&#x6B21;&#x5DE5;&#x4F5C;&#x574A;&#x7279;&#x5225;&#x805A;&#x7126;「<span class="highlight-text">&#x7D71;&#x8A08;&#x63A8;&#x8AD6; × &#x63A2;&#x7D22;&#x6027;&#x8CC7;&#x6599;&#x5206;&#x6790; × &#x8FF4;&#x6B78;&#x5EFA;&#x6A21; × AI &#x8F14;&#x52A9;&#x7D71;&#x8A08;&#x6C7A;&#x7B56;</span>」，&#x4E26;&#x7531;&#x53F0;&#x7063;&#x7D71;&#x8A08;&#x65B9;&#x6CD5;&#x5B78;&#x6703;&#x7406;&#x4E8B;&#x9577;&#x90B1;&#x76E7;&#x653F;&#x6559;&#x6388;&#x53CA;&#x79D8;&#x66F8;&#x9577;&#x6797;&#x78A7;&#x82B3;&#x6559;&#x6388;&#x5354;&#x540C;&#x6388;&#x8AB2;。</p>
+    <p>&#x8AB2;&#x7A0B;&#x4EE5;&#x4E8C;&#x65E5;&#x5BC6;&#x96C6;&#x8B1B;&#x6388;&#x8207;&#x8A0E;&#x8AD6;&#x65B9;&#x5F0F;&#x9032;&#x884C;，&#x5E36;&#x9818;&#x5B78;&#x54E1;&#x5F9E;&#x7814;&#x7A76;&#x8A2D;&#x8A08;、&#x8CC7;&#x6599;&#x524D;&#x8655;&#x7406;、&#x7D71;&#x8A08;&#x6AA2;&#x5B9A;&#x5230; AI &#x8F14;&#x52A9;&#x6C7A;&#x7B56;，&#x5B8C;&#x6574;&#x638C;&#x63E1;「&#x5F9E;&#x8CC7;&#x6599;&#x5230;&#x653F;&#x7B56;&#x6D1E;&#x5BDF;」&#x7684;&#x5206;&#x6790;&#x6D41;&#x7A0B;，&#x5168;&#x9762;&#x5F37;&#x5316;&#x667A;&#x5EAB;、&#x5B78;&#x7814;&#x8207;&#x6CD5;&#x4EBA;&#x7814;&#x7A76;&#x4EBA;&#x54E1;&#x5728;&#x653F;&#x7B56;&#x7814;&#x6790;&#x4E0A;&#x7684;&#x6DF1;&#x5EA6;&#x8207;&#x5EE3;&#x5EA6;。</p>
 
-    <h2 id="s3-agenda" class="section-title">工作坊議程</h2>
+    <h2 id="s3-agenda" class="section-title">&#x5DE5;&#x4F5C;&#x574A;&#x8B70;&#x7A0B;</h2>
 
-    <!-- 第一天議程 -->
+    <!-- &#x7B2C;&#x4E00;&#x5929;&#x8B70;&#x7A0B; -->
     <div class="schedule-table" style="margin-bottom: 32px;">
       <div class="schedule-header">
-        <div class="time-col">時間</div>
-        <div class="content-col">第一天 12/19 (五)</div>
+        <div class="time-col">&#x6642;&#x9593;</div>
+        <div class="content-col">&#x7B2C;&#x4E00;&#x5929; 12/19 (&#x4E94;)</div>
       </div>
       
       <div class="schedule-row">
         <div class="time-cell">8:30 - 9:00</div>
-        <div class="content-cell">報到</div>
+        <div class="content-cell">&#x5831;&#x5230;</div>
       </div>
       
       <div class="schedule-row">
         <div class="time-cell">9:00 - 10:30</div>
         <div class="content-cell">
-          <strong>Section1 基本概念：量化研究與統計分析</strong>
+          <strong>Section1 &#x57FA;&#x672C;&#x6982;&#x5FF5;：&#x91CF;&#x5316;&#x7814;&#x7A76;&#x8207;&#x7D71;&#x8A08;&#x5206;&#x6790;</strong>
           <ul style="margin-top: 12px;">
-            <li>量化研究的基本概念</li>
-            <li>統計在量化研究中的角色</li>
-            <li>變數的定義與類型</li>
-            <li>變數與統計分析的關係</li>
+            <li>&#x91CF;&#x5316;&#x7814;&#x7A76;&#x7684;&#x57FA;&#x672C;&#x6982;&#x5FF5;</li>
+            <li>&#x7D71;&#x8A08;&#x5728;&#x91CF;&#x5316;&#x7814;&#x7A76;&#x4E2D;&#x7684;&#x89D2;&#x8272;</li>
+            <li>&#x8B8A;&#x6578;&#x7684;&#x5B9A;&#x7FA9;&#x8207;&#x985E;&#x578B;</li>
+            <li>&#x8B8A;&#x6578;&#x8207;&#x7D71;&#x8A08;&#x5206;&#x6790;&#x7684;&#x95DC;&#x4FC2;</li>
           </ul>
         </div>
       </div>
       
       <div class="schedule-row">
         <div class="time-cell">10:30 - 10:40</div>
-        <div class="content-cell">休息</div>
+        <div class="content-cell">&#x4F11;&#x606F;</div>
       </div>
       
       <div class="schedule-row">
         <div class="time-cell">10:40 - 12:00</div>
         <div class="content-cell">
-          <strong>Section2 統計決策分析</strong>
+          <strong>Section2 &#x7D71;&#x8A08;&#x6C7A;&#x7B56;&#x5206;&#x6790;</strong>
           <ul style="margin-top: 12px;">
-            <li>統計檢驗與決策的基本概念</li>
-            <li>統計決策理論</li>
-            <li>抽樣在統計決策的角色</li>
+            <li>&#x7D71;&#x8A08;&#x6AA2;&#x9A57;&#x8207;&#x6C7A;&#x7B56;&#x7684;&#x57FA;&#x672C;&#x6982;&#x5FF5;</li>
+            <li>&#x7D71;&#x8A08;&#x6C7A;&#x7B56;&#x7406;&#x8AD6;</li>
+            <li>&#x62BD;&#x6A23;&#x5728;&#x7D71;&#x8A08;&#x6C7A;&#x7B56;&#x7684;&#x89D2;&#x8272;</li>
           </ul>
         </div>
       </div>
       
       <div class="schedule-row">
         <div class="time-cell">12:00 - 13:00</div>
-        <div class="content-cell">午餐</div>
+        <div class="content-cell">&#x5348;&#x9910;</div>
       </div>
       
       <div class="schedule-row">
         <div class="time-cell">13:00 - 14:30</div>
         <div class="content-cell">
-          <strong>Section3 探索性數據分析：類別資料</strong>
+          <strong>Section3 &#x63A2;&#x7D22;&#x6027;&#x6578;&#x64DA;&#x5206;&#x6790;：&#x985E;&#x5225;&#x8CC7;&#x6599;</strong>
           <ul style="margin-top: 12px;">
-            <li>類別性資料的描述與呈現</li>
-            <li>列聯表的運用</li>
-            <li>複選題分析</li>
-            <li>百分比資料的統計與檢定</li>
+            <li>&#x985E;&#x5225;&#x6027;&#x8CC7;&#x6599;&#x7684;&#x63CF;&#x8FF0;&#x8207;&#x5448;&#x73FE;</li>
+            <li>&#x5217;&#x806F;&#x8868;&#x7684;&#x904B;&#x7528;</li>
+            <li>&#x8907;&#x9078;&#x984C;&#x5206;&#x6790;</li>
+            <li>&#x767E;&#x5206;&#x6BD4;&#x8CC7;&#x6599;&#x7684;&#x7D71;&#x8A08;&#x8207;&#x6AA2;&#x5B9A;</li>
           </ul>
         </div>
       </div>
       
       <div class="schedule-row">
         <div class="time-cell">14:30 - 14:40</div>
-        <div class="content-cell">休息</div>
+        <div class="content-cell">&#x4F11;&#x606F;</div>
       </div>
       
       <div class="schedule-row">
         <div class="time-cell">14:40 - 16:00</div>
         <div class="content-cell">
-          <strong>Section4 探索性數據分析：連續資料</strong>
+          <strong>Section4 &#x63A2;&#x7D22;&#x6027;&#x6578;&#x64DA;&#x5206;&#x6790;：&#x9023;&#x7E8C;&#x8CC7;&#x6599;</strong>
           <ul style="margin-top: 12px;">
-            <li>連續性資料的描述與呈現</li>
-            <li>多維度連續資料的描述與呈現</li>
-            <li>資料的常態性檢查</li>
-            <li>資料轉換與補漏</li>
+            <li>&#x9023;&#x7E8C;&#x6027;&#x8CC7;&#x6599;&#x7684;&#x63CF;&#x8FF0;&#x8207;&#x5448;&#x73FE;</li>
+            <li>&#x591A;&#x7DAD;&#x5EA6;&#x9023;&#x7E8C;&#x8CC7;&#x6599;&#x7684;&#x63CF;&#x8FF0;&#x8207;&#x5448;&#x73FE;</li>
+            <li>&#x8CC7;&#x6599;&#x7684;&#x5E38;&#x614B;&#x6027;&#x6AA2;&#x67E5;</li>
+            <li>&#x8CC7;&#x6599;&#x8F49;&#x63DB;&#x8207;&#x88DC;&#x6F0F;</li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- 第二天議程 -->
+    <!-- &#x7B2C;&#x4E8C;&#x5929;&#x8B70;&#x7A0B; -->
     <div class="schedule-table">
       <div class="schedule-header">
-        <div class="time-col">時間</div>
-        <div class="content-col">第二天 12/22 (一)</div>
+        <div class="time-col">&#x6642;&#x9593;</div>
+        <div class="content-col">&#x7B2C;&#x4E8C;&#x5929; 12/22 (&#x4E00;)</div>
       </div>
       
       <div class="schedule-row">
         <div class="time-cell">8:30 - 9:00</div>
-        <div class="content-cell">報到</div>
+        <div class="content-cell">&#x5831;&#x5230;</div>
       </div>
       
       <div class="schedule-row">
         <div class="time-cell">9:00 - 10:30</div>
         <div class="content-cell">
-          <strong>Section5 統計檢定與決策：單變量模式</strong>
+          <strong>Section5 &#x7D71;&#x8A08;&#x6AA2;&#x5B9A;&#x8207;&#x6C7A;&#x7B56;：&#x55AE;&#x8B8A;&#x91CF;&#x6A21;&#x5F0F;</strong>
           <ul style="margin-top: 12px;">
-            <li>統計假設與檢定的基本概念</li>
-            <li>單一類別變數的檢定：χ²-test</li>
-            <li>單一連續變數的檢定：t-test</li>
+            <li>&#x7D71;&#x8A08;&#x5047;&#x8A2D;&#x8207;&#x6AA2;&#x5B9A;&#x7684;&#x57FA;&#x672C;&#x6982;&#x5FF5;</li>
+            <li>&#x55AE;&#x4E00;&#x985E;&#x5225;&#x8B8A;&#x6578;&#x7684;&#x6AA2;&#x5B9A;：χ²-test</li>
+            <li>&#x55AE;&#x4E00;&#x9023;&#x7E8C;&#x8B8A;&#x6578;&#x7684;&#x6AA2;&#x5B9A;：t-test</li>
           </ul>
         </div>
       </div>
       
       <div class="schedule-row">
         <div class="time-cell">10:30 - 10:40</div>
-        <div class="content-cell">休息</div>
+        <div class="content-cell">&#x4F11;&#x606F;</div>
       </div>
       
       <div class="schedule-row">
         <div class="time-cell">10:40 - 12:00</div>
         <div class="content-cell">
-          <strong>Section6 統計檢定與決策：雙變量模式</strong>
+          <strong>Section6 &#x7D71;&#x8A08;&#x6AA2;&#x5B9A;&#x8207;&#x6C7A;&#x7B56;：&#x96D9;&#x8B8A;&#x91CF;&#x6A21;&#x5F0F;</strong>
           <ul style="margin-top: 12px;">
-            <li>雙重類別變數的檢定</li>
-            <li>雙重連續變數的檢定</li>
-            <li>類別對於連續變數的影響檢定</li>
-            <li>連續對於類別變數的影響檢定</li>
+            <li>&#x96D9;&#x91CD;&#x985E;&#x5225;&#x8B8A;&#x6578;&#x7684;&#x6AA2;&#x5B9A;</li>
+            <li>&#x96D9;&#x91CD;&#x9023;&#x7E8C;&#x8B8A;&#x6578;&#x7684;&#x6AA2;&#x5B9A;</li>
+            <li>&#x985E;&#x5225;&#x5C0D;&#x65BC;&#x9023;&#x7E8C;&#x8B8A;&#x6578;&#x7684;&#x5F71;&#x97FF;&#x6AA2;&#x5B9A;</li>
+            <li>&#x9023;&#x7E8C;&#x5C0D;&#x65BC;&#x985E;&#x5225;&#x8B8A;&#x6578;&#x7684;&#x5F71;&#x97FF;&#x6AA2;&#x5B9A;</li>
           </ul>
         </div>
       </div>
       
       <div class="schedule-row">
         <div class="time-cell">12:00 - 13:00</div>
-        <div class="content-cell">午餐</div>
+        <div class="content-cell">&#x5348;&#x9910;</div>
       </div>
       
       <div class="schedule-row">
         <div class="time-cell">13:00 - 14:30</div>
         <div class="content-cell">
-          <strong>Section7 統計建模：迴歸模式</strong>
+          <strong>Section7 &#x7D71;&#x8A08;&#x5EFA;&#x6A21;：&#x8FF4;&#x6B78;&#x6A21;&#x5F0F;</strong>
           <ul style="margin-top: 12px;">
-            <li>從相關到迴歸</li>
-            <li>迴歸分析的原理</li>
-            <li>迴歸分析的評估</li>
-            <li>從簡單到多元迴歸分析</li>
+            <li>&#x5F9E;&#x76F8;&#x95DC;&#x5230;&#x8FF4;&#x6B78;</li>
+            <li>&#x8FF4;&#x6B78;&#x5206;&#x6790;&#x7684;&#x539F;&#x7406;</li>
+            <li>&#x8FF4;&#x6B78;&#x5206;&#x6790;&#x7684;&#x8A55;&#x4F30;</li>
+            <li>&#x5F9E;&#x7C21;&#x55AE;&#x5230;&#x591A;&#x5143;&#x8FF4;&#x6B78;&#x5206;&#x6790;</li>
           </ul>
         </div>
       </div>
       
       <div class="schedule-row">
         <div class="time-cell">14:30 - 14:40</div>
-        <div class="content-cell">休息</div>
+        <div class="content-cell">&#x4F11;&#x606F;</div>
       </div>
       
       <div class="schedule-row">
         <div class="time-cell">14:40 - 16:00</div>
         <div class="content-cell">
-          <strong>Section8 統計決策分析會中的人類智慧與人工智慧</strong>
+          <strong>Section8 &#x7D71;&#x8A08;&#x6C7A;&#x7B56;&#x5206;&#x6790;&#x6703;&#x4E2D;&#x7684;&#x4EBA;&#x985E;&#x667A;&#x6167;&#x8207;&#x4EBA;&#x5DE5;&#x667A;&#x6167;</strong>
           <ul style="margin-top: 12px;">
-            <li>統計量化研究的優劣對錯</li>
-            <li>人工智慧輔助的統計決策分析</li>
-            <li>人類智慧與人工智慧的對話</li>
-            <li>結語與討論</li>
+            <li>&#x7D71;&#x8A08;&#x91CF;&#x5316;&#x7814;&#x7A76;&#x7684;&#x512A;&#x52A3;&#x5C0D;&#x932F;</li>
+            <li>&#x4EBA;&#x5DE5;&#x667A;&#x6167;&#x8F14;&#x52A9;&#x7684;&#x7D71;&#x8A08;&#x6C7A;&#x7B56;&#x5206;&#x6790;</li>
+            <li>&#x4EBA;&#x985E;&#x667A;&#x6167;&#x8207;&#x4EBA;&#x5DE5;&#x667A;&#x6167;&#x7684;&#x5C0D;&#x8A71;</li>
+            <li>&#x7D50;&#x8A9E;&#x8207;&#x8A0E;&#x8AD6;</li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- 會場位置區域 -->
-    <h2 id="s3-venue" class="section-title">會場位置</h2>
+    <!-- &#x6703;&#x5834;&#x4F4D;&#x7F6E;&#x5340;&#x57DF; -->
+    <h2 id="s3-venue" class="section-title">&#x6703;&#x5834;&#x4F4D;&#x7F6E;</h2>
     <div style="text-align: center; margin: 24px 0;">
       <div style="margin: 20px auto; max-width: 900px;">
         <div style="margin-bottom: 20px;">
-          <p style="font-size: 1.2em; margin-bottom: 4px; font-weight: 600;">BR6科技大樓 大教室</p>
-          <p style="font-size: 1.1em; color: #cfd6e6; margin-top: 4px;"><img src="assets/img/svg-pin.svg" width="20" height="20" style="display: inline-block; vertical-align: -2px; margin-right: 8px;" alt="location pin">台北市復興南路二段237號4樓</p>
+          <p style="font-size: 1.2em; margin-bottom: 4px; font-weight: 600;">BR6&#x79D1;&#x6280;&#x5927;&#x6A13; &#x5927;&#x6559;&#x5BA4;</p>
+          <p style="font-size: 1.1em; color: #cfd6e6; margin-top: 4px;"><img src="assets/img/svg-pin.svg" width="20" height="20" style="display: inline-block; vertical-align: -2px; margin-right: 8px;" alt="location pin">&#x53F0;&#x5317;&#x5E02;&#x5FA9;&#x8208;&#x5357;&#x8DEF;&#x4E8C;&#x6BB5;237&#x865F;4&#x6A13;</p>
         </div>
-        <!-- Google Maps 嵌入地圖 -->
+        <!-- Google Maps &#x5D4C;&#x5165;&#x5730;&#x5716; -->
         <div style="border-radius: 8px; overflow: hidden;">
           <iframe
-            src="https://www.google.com/maps?q=台北市復興南路二段237號4樓&hl=zh-TW&region=TW&z=17&output=embed"
+            src="https://www.google.com/maps?q=&#x53F0;&#x5317;&#x5E02;&#x5FA9;&#x8208;&#x5357;&#x8DEF;&#x4E8C;&#x6BB5;237&#x865F;4&#x6A13;&hl=zh-TW&region=TW&z=17&output=embed"
             width="100%" 
             height="450" 
             style="border:0; border-radius: 8px;" 
@@ -5271,7 +5271,7 @@ strong {
         <div class="highlight-card">
           <div class="card-left">
             <div class="event-date">12 &#x6708; 15 &#x65E5;</div>
-            <div class="event-title-zh">鏈結全球與台灣 打造跨域前瞻科技生態系</div>
+            <div class="event-title-zh">&#x9375;&#x7D50;&#x5168;&#x7403;&#x8207;&#x53F0;&#x7063; &#x6253;&#x9020;&#x8DE8;&#x57DF;&#x524D;&#x77BB;&#x79D1;&#x6280;&#x751F;&#x614B;&#x7CFB;</div>
             <div class="event-title-en">Connecting Taiwan and the World: Building a Cross-disciplinary Frontier Technology Ecosystem</div>
           </div>
           <div class="card-right">
@@ -6719,7 +6719,7 @@ document.addEventListener('DOMContentLoaded', function() {
         (this.getAttribute('data-speaker-experience-en') || this.getAttribute('data-speaker-experience')) :
         this.getAttribute('data-speaker-experience');
       
-      // 特殊處理林哲民的英文經歷（因為HTML屬性長度限制導致截斷）
+      // &#x7279;&#x6B8A;&#x8655;&#x7406;&#x6797;&#x54F2;&#x6C11;&#x7684;&#x82F1;&#x6587;&#x7D93;&#x6B77;（&#x56E0;&#x70BA;HTML&#x5C6C;&#x6027;&#x9577;&#x5EA6;&#x9650;&#x5236;&#x5C0E;&#x81F4;&#x622A;&#x65B7;）
       if (isEnglish && speakerName === 'Che-Min Lin') {
         speakerExperience = `Dr. Che-Min Lin is currently a postdoctoral researcher in the Department of Applied Physics at Stanford University, specializing in theoretical and computational physics with a focus on quantum materials design and innovation. His expertise lies in integrating high-performance computing, physical modeling, and mathematical frameworks to predict unprecedented material behaviors at the atomic scale.<br><br>Departing from the traditional paradigm of "fabricate first, verify later," Dr. Lin aims to visualize and understand materials before they are synthesized: materials that may exhibit exotic properties such as conductive surfaces, switchable magnetism, or electrically tunable quantum states. In essence, his work provides a scientific and computational lens to evaluate whether a material is worth developing, enabling researchers to drastically reduce trial-and-error costs and accelerate materials innovation.<br><br>His predictions have been experimentally validated and have led to several groundbreaking advances, including:<br>1. The discovery of one of the world's rare quantum materials that simultaneously hosts topological properties and antiferromagnetic order, paving the way for low-power and spin-controllable computing platforms.<br>2. The first theoretical proposal of a spin-valve effect within a single material, eliminating the need for complex multilayer structures and opening new directions for spintronic device engineering.<br>3. The prediction of materials whose topological state and electric polarization can be switched via electric fields, offering a promising platform for next-generation non-volatile memory and edge-computing chips that merge speed with energy efficiency.`;
       }
@@ -6787,26 +6787,26 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<!-- 照片牆 Modal -->
+<!-- &#x7167;&#x7247;&#x7246; Modal -->
 <div class="photo-gallery-modal" id="photoGalleryModal">
   <div class="photo-gallery-container">
     <button class="gallery-close-btn">×</button>
     <div class="photo-gallery-grid" id="photoGalleryGrid">
-      <!-- 照片將由 JavaScript 動態添加 -->
+      <!-- &#x7167;&#x7247;&#x5C07;&#x7531; JavaScript &#x52D5;&#x614B;&#x6DFB;&#x52A0; -->
     </div>
   </div>
 </div>
 
-<!-- 單張照片預覽 Modal -->
+<!-- &#x55AE;&#x5F35;&#x7167;&#x7247;&#x9810;&#x89BD; Modal -->
 <div class="photo-preview-modal" id="photoPreviewModal">
   <div class="photo-preview-container">
     <button class="modal-close-btn" onclick="closePhotoPreview()">×</button>
-    <img class="photo-preview-image" id="photoPreviewImage" src="" alt="照片預覽">
+    <img class="photo-preview-image" id="photoPreviewImage" src="" alt="&#x7167;&#x7247;&#x9810;&#x89BD;">
   </div>
 </div>
 
 <script>
-// 照片牆功能
+// &#x7167;&#x7247;&#x7246;&#x529F;&#x80FD;
 function openPhotoGallery() {
   const modal = document.getElementById('photoGalleryModal');
   modal.style.display = 'block';
@@ -6818,11 +6818,11 @@ function closePhotoGallery() {
   const modal = document.getElementById('photoGalleryModal');
   modal.style.display = 'none';
   document.body.style.overflow = '';
-  // 當關閉照片牆時，也關閉任何開啟的照片預覽
+  // &#x7576;&#x95DC;&#x9589;&#x7167;&#x7247;&#x7246;&#x6642;，&#x4E5F;&#x95DC;&#x9589;&#x4EFB;&#x4F55;&#x958B;&#x555F;&#x7684;&#x7167;&#x7247;&#x9810;&#x89BD;
   closePhotoPreview();
 }
 
-// 為關閉按鈕添加點擊事件
+// &#x70BA;&#x95DC;&#x9589;&#x6309;&#x9215;&#x6DFB;&#x52A0;&#x9EDE;&#x64CA;&#x4E8B;&#x4EF6;
 document.querySelector('.gallery-close-btn')?.addEventListener('click', closePhotoGallery);
 
 function openPhotoPreview(imageSrc) {
@@ -6838,7 +6838,7 @@ function closePhotoPreview() {
 }
 
 function getImageUrls(id) {
-  // 依序嘗試三種來源，提高在不同 Workspace/權限設定下的相容性
+  // &#x4F9D;&#x5E8F;&#x5617;&#x8A66;&#x4E09;&#x7A2E;&#x4F86;&#x6E90;，&#x63D0;&#x9AD8;&#x5728;&#x4E0D;&#x540C; Workspace/&#x6B0A;&#x9650;&#x8A2D;&#x5B9A;&#x4E0B;&#x7684;&#x76F8;&#x5BB9;&#x6027;
   return [
     `https://drive.google.com/uc?export=view&id=${id}`,
     `https://drive.google.com/uc?export=download&id=${id}`,
@@ -6854,32 +6854,32 @@ function extractFileId(url) {
 function loadPhotos() {
   const photoGrid = document.getElementById('photoGalleryGrid');
   
-  // 直接使用檔案 ID
+  // &#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x6A94;&#x6848; ID
   const photos = [
-    { id: '1yu7LgYAPJMPB1UT9qDtjEOVNFesYGTnO', caption: '活動照片' },
-    { id: '1EdXtjMZ9P-MGdxK3iUHcwT8lEQb-_uR1', caption: '活動照片' },
-    { id: '11GtZALLTWe_J8TJ6wh2vb9xv62L_sPR-', caption: '活動照片' },
-    { id: '1rBHXAQ2ITB8qJ6ZajMPo-ldY2P958baQ', caption: '活動照片' },
-    { id: '1h_ntamf_8NdBwFFuWaoqod8jp_ZQg1Ub', caption: '活動照片' },
-    { id: '1mnI_kkv5RTMtRo3D52fPf-qv9tEozptl', caption: '活動照片' },
-    { id: '1AZZSz3MNJXwnuggMlPUQuB164wFhExWW', caption: '活動照片' },
-    { id: '1TmBT8AvPuxtf_xNk6Np8IB4O-n_D5t5h', caption: '活動照片' },
-    { id: '1owJY_m4-lDg8roRzmeXF8FUHM7J-wVVr', caption: '活動照片' },
-    { id: '1lONepV0rSjdxolR6OM8GHhiWuyl3JQCT', caption: '活動照片' },
-    { id: '1JloiLtUfatocP5wD_sTKvaWZHAa1EYRc', caption: '活動照片' },
-    { id: '1ZLXTP_qw8HsMtiMNv0KBvLciXQGcacdt', caption: '活動照片' },
-    { id: '1iEr3l6r4QREXuz0WQsvovhHr4p64iooD', caption: '活動照片' },
-    { id: '1qeHiGP5IIEJdyZWrdnDbKGJ4hurM3WGk', caption: '活動照片' },
-    { id: '1YkSq-QC9FYcFK9AlhG8FWrnqulFhc6Bn', caption: '活動照片' },
-    { id: '1CdKlDGMs32x20gOdn0TjWi37pFtFndY4', caption: '活動照片' },
-    { id: '1sPQb8CcvyHdLYQXIi-wPBQXuTxqzzKpH', caption: '活動照片' },
-    { id: '19iPFt2C_-L9tZUYxPv0DHWQwksv84Zq8', caption: '活動照片' },
-    { id: '1m0fMwwxKa5xXtl4mUlwjwUZWs2hEOYUJ', caption: '活動照片' },
-    { id: '1w91aundDSIxEl6B7OJ-qZ0dviSHwLNs6', caption: '活動照片' },
-    { id: '1UJQWfIFnQzNPt1VScS-fod_YjSBqkOpJ', caption: '活動照片' },
-    { id: '1WZkZc1EJh5WimzBuzcbxQqqVzwGI_566', caption: '活動照片' },
-    { id: '1e0e5u39piaWSQH3Ie3VIfjqG4pdaiF5p', caption: '活動照片' },
-    { id: '1x4YGsxinwQwhCMtAE-UOg_OyBaSFOA5e', caption: '活動照片' }
+    { id: '1yu7LgYAPJMPB1UT9qDtjEOVNFesYGTnO', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+    { id: '1EdXtjMZ9P-MGdxK3iUHcwT8lEQb-_uR1', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+    { id: '11GtZALLTWe_J8TJ6wh2vb9xv62L_sPR-', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+    { id: '1rBHXAQ2ITB8qJ6ZajMPo-ldY2P958baQ', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+    { id: '1h_ntamf_8NdBwFFuWaoqod8jp_ZQg1Ub', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+    { id: '1mnI_kkv5RTMtRo3D52fPf-qv9tEozptl', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+    { id: '1AZZSz3MNJXwnuggMlPUQuB164wFhExWW', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+    { id: '1TmBT8AvPuxtf_xNk6Np8IB4O-n_D5t5h', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+    { id: '1owJY_m4-lDg8roRzmeXF8FUHM7J-wVVr', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+    { id: '1lONepV0rSjdxolR6OM8GHhiWuyl3JQCT', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+    { id: '1JloiLtUfatocP5wD_sTKvaWZHAa1EYRc', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+    { id: '1ZLXTP_qw8HsMtiMNv0KBvLciXQGcacdt', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+    { id: '1iEr3l6r4QREXuz0WQsvovhHr4p64iooD', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+    { id: '1qeHiGP5IIEJdyZWrdnDbKGJ4hurM3WGk', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+    { id: '1YkSq-QC9FYcFK9AlhG8FWrnqulFhc6Bn', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+    { id: '1CdKlDGMs32x20gOdn0TjWi37pFtFndY4', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+    { id: '1sPQb8CcvyHdLYQXIi-wPBQXuTxqzzKpH', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+    { id: '19iPFt2C_-L9tZUYxPv0DHWQwksv84Zq8', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+    { id: '1m0fMwwxKa5xXtl4mUlwjwUZWs2hEOYUJ', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+    { id: '1w91aundDSIxEl6B7OJ-qZ0dviSHwLNs6', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+    { id: '1UJQWfIFnQzNPt1VScS-fod_YjSBqkOpJ', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+    { id: '1WZkZc1EJh5WimzBuzcbxQqqVzwGI_566', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+    { id: '1e0e5u39piaWSQH3Ie3VIfjqG4pdaiF5p', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+    { id: '1x4YGsxinwQwhCMtAE-UOg_OyBaSFOA5e', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' }
   ];
 
   photoGrid.innerHTML = '';
@@ -6892,14 +6892,14 @@ function loadPhotos() {
     img.loading = 'lazy';
     img.alt = photo.caption;
     
-    // 點擊開啟預覽
+    // &#x9EDE;&#x64CA;&#x958B;&#x555F;&#x9810;&#x89BD;
     img.onclick = () => {
       if (img.src) {
         openPhotoPreview(img.src);
       }
     };
 
-    // 設定圖片載入機制
+    // &#x8A2D;&#x5B9A;&#x5716;&#x7247;&#x8F09;&#x5165;&#x6A5F;&#x5236;
     const urls = getImageUrls(photo.id);
     let currentUrlIndex = 0;
 
@@ -6910,7 +6910,7 @@ function loadPhotos() {
       }
     }
 
-    // 設定錯誤處理
+    // &#x8A2D;&#x5B9A;&#x932F;&#x8AA4;&#x8655;&#x7406;
     img.onerror = () => {
       console.log(`Failed to load image with URL: ${urls[currentUrlIndex]}`);
       currentUrlIndex++;
@@ -6919,12 +6919,12 @@ function loadPhotos() {
       }
     };
 
-    // 開始載入第一個 URL
+    // &#x958B;&#x59CB;&#x8F09;&#x5165;&#x7B2C;&#x4E00;&#x500B; URL
     tryNextUrl();
     
-    // 修改點擊事件處理
+    // &#x4FEE;&#x6539;&#x9EDE;&#x64CA;&#x4E8B;&#x4EF6;&#x8655;&#x7406;
     photoItem.addEventListener('click', function(e) {
-      e.stopPropagation(); // 防止事件冒泡
+      e.stopPropagation(); // &#x9632;&#x6B62;&#x4E8B;&#x4EF6;&#x5192;&#x6CE1;
       if (img.src) {
         openPhotoPreview(img.src);
       }
@@ -6935,21 +6935,21 @@ function loadPhotos() {
   });
 }
 
-// 點擊照片牆以外的區域關閉
+// &#x9EDE;&#x64CA;&#x7167;&#x7247;&#x7246;&#x4EE5;&#x5916;&#x7684;&#x5340;&#x57DF;&#x95DC;&#x9589;
 document.getElementById('photoGalleryModal').addEventListener('click', function(e) {
   if (e.target === this || e.target.classList.contains('photo-gallery-container')) {
     closePhotoGallery();
   }
 });
 
-// 點擊預覽視窗以外的區域關閉
+// &#x9EDE;&#x64CA;&#x9810;&#x89BD;&#x8996;&#x7A97;&#x4EE5;&#x5916;&#x7684;&#x5340;&#x57DF;&#x95DC;&#x9589;
 document.getElementById('photoPreviewModal').addEventListener('click', function(e) {
   if (e.target === this || e.target.classList.contains('photo-preview-container')) {
     closePhotoPreview();
   }
 });
 
-// ESC 鍵關閉視窗
+// ESC &#x9375;&#x95DC;&#x9589;&#x8996;&#x7A97;
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
     closePhotoGallery();
@@ -6957,9 +6957,9 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
-// 修改精彩照片按鈕點擊事件
+// &#x4FEE;&#x6539;&#x7CBE;&#x5F69;&#x7167;&#x7247;&#x6309;&#x9215;&#x9EDE;&#x64CA;&#x4E8B;&#x4EF6;
 document.addEventListener('DOMContentLoaded', function() {
-  // 找到精彩照片按鈕並綁定點擊事件
+  // &#x627E;&#x5230;&#x7CBE;&#x5F69;&#x7167;&#x7247;&#x6309;&#x9215;&#x4E26;&#x7D81;&#x5B9A;&#x9EDE;&#x64CA;&#x4E8B;&#x4EF6;
   document.querySelectorAll('[data-photo-gallery]').forEach(btn => {
     btn.addEventListener('click', function(e) {
       e.preventDefault();
