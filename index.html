@@ -1567,10 +1567,56 @@ body.modal-open .floating-share {
   margin:0 auto;
   padding:0 32px; /* &#x8ABF;&#x6574;&#x70BA;&#x8207;&#x5176;&#x4ED6;&#x5340;&#x57DF;&#x4E00;&#x81F4;&#x7684;32px */
   display:grid;
-  grid-template-columns:1fr 1fr; /* &#x6539;&#x56DE;&#x5169;&#x6B04;&#x5E03;&#x5C40;：&#x6307;&#x5C0E;&#x55AE;&#x4F4D; | &#x4E3B;&#x8FA6;&#x55AE;&#x4F4D; */
-  gap:60px; /* &#x9032;&#x4E00;&#x6B65;&#x7E2E;&#x5C0F;&#x9593;&#x8DDD; */
+  grid-template-columns:1fr 1fr; /* &#x9810;&#x8A2D;&#x5169;&#x6B04;&#x5E03;&#x5C40; */
+  gap:60px;
   align-items:center;
   justify-items:center;
+}
+
+/* &#x4E3B;&#x9801;&#x9762;footer&#x5C08;&#x7528;&#xFF1A;&#x55AE;&#x6392;&#x81EA;&#x52D5;&#x7E2E;&#x653E;&#x5E03;&#x5C40; */
+.main-footer .inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(6px, 2.5vw, 40px); /* &#x66F4;&#x6FC0;&#x9032;&#x7684;&#x7E2E;&#x5C0F; */
+  flex-wrap: nowrap;
+  width: 100%;
+  max-width: 100%;
+}
+
+.footer-item {
+  display: flex;
+  align-items: center;
+  gap: clamp(3px, 0.8vw, 12px); /* &#x66F4;&#x6FC0;&#x9032;&#x7684;&#x7E2E;&#x5C0F; */
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.footer-label {
+  font-size: clamp(9px, 2vw, 16px); /* &#x66F4;&#x6FC0;&#x9032;&#x7684;&#x5B57;&#x9AD4;&#x7E2E;&#x5C0F; */
+  color: #ffffff;
+  white-space: nowrap;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+/* &#x5354;&#x8FA6;&#x55AE;&#x4F4D;&#x9810;&#x8A2D;&#x96B1;&#x85CF; */
+.footer-item.workshop-only {
+  display: none;
+}
+
+/* &#x5DE5;&#x4F5C;&#x574A;&#x9801;&#x9762;&#x6642;&#x986F;&#x793A;&#x5354;&#x8FA6;&#x55AE;&#x4F4D; */
+body[data-current-section="s3"] .footer-item.workshop-only {
+  display: flex;
+}
+
+/* &#x4E3B;&#x8FA6;&#x55AE;&#x4F4D;&#x7684;&#x5169;&#x500B;logo&#x5BB9;&#x5668; */
+.footer-logos {
+  display: flex;
+  align-items: center;
+  gap: 25px; /* &#x7E2E;&#x5C0F;&#x4E3B;&#x8FA6;logo&#x9593;&#x8DDD; */
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .footer-block{
@@ -1591,10 +1637,17 @@ body.modal-open .floating-share {
 
 .footer-logo{
   display:block;
-  height:50px; /* &#x7A0D;&#x5FAE;&#x589E;&#x52A0;logo&#x9AD8;&#x5EA6; */
+  height: clamp(15px, 3.5vw, 50px); /* &#x97FF;&#x61C9;&#x5F0F;&#x9AD8;&#x5EA6; */
   width:auto;
-  max-width:240px; /* &#x9069;&#x7576;&#x7684;&#x6700;&#x5927;&#x5BEC;&#x5EA6; */
+  max-width: clamp(50px, 12vw, 240px); /* &#x97FF;&#x61C9;&#x5F0F;&#x6700;&#x5927;&#x5BEC;&#x5EA6; */
   object-fit:contain;
+  flex-shrink: 1; /* &#x5141;&#x8A31;&#x7E2E;&#x5C0F; */
+}
+
+/* &#x5354;&#x8FA6;&#x55AE;&#x4F4D;SIG logo&#x7279;&#x5225;&#x8A2D;&#x5B9A; */
+.footer-logo[src*="SIGlogo.svg"] {
+  height: clamp(12px, 2.8vw, 35px); /* &#x97FF;&#x61C9;&#x5F0F;SIG logo&#x9AD8;&#x5EA6; */
+  max-width: clamp(40px, 10vw, 180px); /* &#x97FF;&#x61C9;&#x5F0F;SIG logo&#x5BEC;&#x5EA6; */
 }
 
 /* &#x591A;&#x500B;&#x4E3B;&#x8FA6;&#x55AE;&#x4F4D; logo &#x7684;&#x5BB9;&#x5668; */
@@ -1610,6 +1663,8 @@ body.modal-open .floating-share {
   max-width: 200px; /* &#x5171;&#x540C;&#x4E3B;&#x8FA6;&#x6642;&#x7684; logo &#x5BEC;&#x5EA6; */
   height: 45px; /* &#x7A0D;&#x5FAE;&#x7E2E;&#x5C0F;&#x9AD8;&#x5EA6;&#x4EE5;&#x9069;&#x61C9;&#x4E26;&#x6392; */
 }
+
+
 
 /* ===== \6BB5 \843D \8207 \5167 \5BB9 \9593 \8DDD \512A \5316  ===== */
 .event-info ul, .event-info p, .event-info .speaker-grid, .event-info .ag-grid{ margin-bottom: 0; padding-bottom: 0; }
@@ -1646,30 +1701,50 @@ strong {
   }
 }
 
-/* &#x5E73;&#x677F;&#x5C3A;&#x5BF8; footer &#x8ABF;&#x6574; */
+/* &#x5E73;&#x677F;&#x5C3A;&#x5BF8; footer &#x4F9D;&#x8CF4;clamp&#x81EA;&#x52D5;&#x8ABF;&#x6574; */
 @media (max-width:900px){
   .footer-section .inner{
-    gap: 30px; /* &#x5E73;&#x677F;&#x6642;&#x9032;&#x4E00;&#x6B65;&#x7E2E;&#x5C0F;&#x9593;&#x8DDD; */
+    gap: 30px;
+  }
+  /* &#x4E3B;footer&#x4F7F;&#x7528;clamp&#x81EA;&#x52D5;&#x8ABF;&#x6574;&#xFF0C;&#x4E0D;&#x9700;&#x984D;&#x5916;&#x8A2D;&#x5B9A; */
+}
+
+/* &#x6975;&#x5C0F;&#x87A2;&#x5E55;&#xFF1A;&#x6539;&#x70BA;&#x5782;&#x76F4;&#x6392;&#x5217; */
+@media (max-width: 480px) {
+  .main-footer .inner {
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px 15px;
   }
   
-  .footer-logos {
-    gap: 16px; /* &#x7E2E;&#x5C0F;&#x4E3B;&#x8FA6;&#x55AE;&#x4F4D; logo &#x9593;&#x8DDD; */
+  .footer-item {
+    justify-content: center;
+    gap: 8px;
   }
   
-  .footer-logos .footer-logo {
-    max-width: 160px; /* &#x7E2E;&#x5C0F;&#x5171;&#x540C;&#x4E3B;&#x8FA6; logo */
-    height: 38px;
+  .footer-label {
+    font-size: 14px;
   }
   
   .footer-logo {
-    max-width: 180px; /* &#x6307;&#x5C0E;&#x55AE;&#x4F4D; logo */
-    height: 42px;
+    height: 35px;
+    max-width: 160px;
+  }
+  
+  .footer-logo[src*="SIGlogo.svg"] {
+    height: 28px;
+    max-width: 130px;
   }
 }
 
 @media (max-width:768px){
   /* Hero \624B \6A5F \7248  */
   .hero-wrapper{ aspect-ratio:1920/1800; background-image:url("assets/img/hero-bg-m.jpg"); background-position:center top; }
+  
+  /* &#x4E3B;footer&#x624B;&#x6A5F;&#x7248;&#x4F9D;&#x8CF4;clamp&#x81EA;&#x52D5;&#x8ABF;&#x6574; */
+  .main-footer .inner {
+    padding: 0 15px; /* &#x53EA;&#x9700;&#x8981;padding&#x9632;&#x6B62;&#x8CBC;&#x908A; */
+  }
   
   /* \624B \6A5F \7248 \767C \5149 \7279 \6548 \5C64  */
   .hero-wrapper::before {
@@ -1855,6 +1930,8 @@ strong {
   } 
   .footer-block{ flex-direction:column; gap:20px; text-align:left; align-items:flex-start; } /* \624B \6A5F \7248 \6539 \70BA \7F6E \5DE6 \5C0D \9F4A  */
   .footer-logo{ height:40px; }
+  
+
 }
 
 /* \4E2D \9593 \65B7 \9EDE \8ABF \6574 \FF0C \63D0 \4F9B \66F4 \5E73 \6ED1 \7684 \904E \6E21  */
@@ -4204,7 +4281,7 @@ strong {
            data-speaker-title-en="Professor, National Graduate Institute for Policy Studies, GRIPS"
            data-speaker-education="&#x6771;&#x4EAC;&#x5927;&#x5B78;&#x5DE5;&#x5B78;&#x7CFB;&#x7814;&#x7A76;&#x79D1;&#x5148;&#x7AEF;&#x5B78;&#x969B;&#x5DE5;&#x5B78;&#x5C08;&#x653B; &#x535A;&#x58EB;"
            data-speaker-education-en="Ph.D., Department of Advanced Interdisciplinary Studies, Graduate School of Engineering, University of Tokyo"
-           data-speaker-experience="&#x9685;&#x85CF; &#x5EB7;&#x4E00;&#x662F;&#x653F;&#x7B56;&#x7814;&#x7A76;&#x5927;&#x5B78;（GRIPS）&#x7684;&#x6559;&#x6388;。1998&#x5E74;&#x4ED6;&#x4EE5;&#x751F;&#x7269;&#x5DE5;&#x7A0B;&#x7814;&#x7A76;&#x7372;&#x5F97;&#x6771;&#x4EAC;&#x5927;&#x5B78;&#x5DE5;&#x5B78;&#x535A;&#x58EB;&#x5B78;&#x4F4D;。1998&#x5E74;4&#x6708;&#x81F3;2001&#x5E74;9&#x6708;，&#x4ED6;&#x5728;&#x6771;&#x4EAC;&#x5927;&#x5B78;&#x5C16;&#x7AEF;&#x79D1;&#x5B78;&#x6280;&#x8853;&#x7814;&#x7A76;&#x4E2D;&#x5FC3;&#x5DE5;&#x4F5C;。2001&#x5E74;10&#x6708;&#x8D77;&#x4ED6;&#x52A0;&#x5165;GRIPS，&#x4E26;&#x64D4;&#x4EFB;&#x65E5;&#x672C;&#x7814;&#x7A76;&#x653F;&#x7B56;&#x8207;&#x5275;&#x65B0;&#x7BA1;&#x7406;&#x5B78;&#x6703;&#x8463;&#x4E8B;。&#x4ED6;&#x7684;&#x4E3B;&#x8981;&#x7814;&#x7A76;&#x9818;&#x57DF;&#x5305;&#x62EC;：(1) &#x667A;&#x6167;&#x8CA1;&#x7522;&#x6B0A;&#x653F;&#x7B56;；(2) &#x79D1;&#x5B78;&#x6280;&#x8853;&#x8207;&#x5275;&#x65B0;&#x653F;&#x7B56;；(3) &#x751F;&#x547D;&#x79D1;&#x5B78;&#x5275;&#x65B0;；&#x4EE5;&#x53CA; (4) &#x5B78;&#x8853;&#x77E5;&#x8B58;&#x5C0D;&#x5275;&#x65B0;&#x7684;&#x8CA2;&#x737B;。"
+           data-speaker-experience="&#x9685;&#x85CF; &#x5EB7;&#x4E00;&#x662F;&#x653F;&#x7B56;&#x7814;&#x7A76;&#x5927;&#x5B78;&#xFF08;GRIPS&#xFF09;&#x7684;&#x6559;&#x6388;&#x3002;1998&#x5E74;&#x4ED6;&#x4EE5;&#x751F;&#x7269;&#x5DE5;&#x7A0B;&#x7814;&#x7A76;&#x7372;&#x5F97;&#x6771;&#x4EAC;&#x5927;&#x5B78;&#x5DE5;&#x5B78;&#x535A;&#x58EB;&#x5B78;&#x4F4D;&#x3002;1998&#x5E74;4&#x6708;&#x81F3;2001&#x5E74;9&#x6708;&#xFF0C;&#x4ED6;&#x5728;&#x6771;&#x4EAC;&#x5927;&#x5B78;&#x5C16;&#x7AEF;&#x79D1;&#x5B78;&#x6280;&#x8853;&#x7814;&#x7A76;&#x4E2D;&#x5FC3;&#x5DE5;&#x4F5C;&#x3002;2001&#x5E74;10&#x6708;&#x8D77;&#x4ED6;&#x52A0;&#x5165;GRIPS&#xFF0C;&#x4E26;&#x64D4;&#x4EFB;&#x65E5;&#x672C;&#x7814;&#x7A76;&#x653F;&#x7B56;&#x8207;&#x5275;&#x65B0;&#x7BA1;&#x7406;&#x5B78;&#x6703;&#x8463;&#x4E8B;&#x3002;&#x4ED6;&#x7684;&#x4E3B;&#x8981;&#x7814;&#x7A76;&#x9818;&#x57DF;&#x5305;&#x62EC;&#xFF1A;(1) &#x667A;&#x6167;&#x8CA1;&#x7522;&#x6B0A;&#x653F;&#x7B56;&#xFF1B;(2) &#x79D1;&#x5B78;&#x6280;&#x8853;&#x8207;&#x5275;&#x65B0;&#x653F;&#x7B56;&#xFF1B;(3) &#x751F;&#x547D;&#x79D1;&#x5B78;&#x5275;&#x65B0;&#xFF1B;&#x4EE5;&#x53CA; (4) &#x5B78;&#x8853;&#x77E5;&#x8B58;&#x5C0D;&#x5275;&#x65B0;&#x7684;&#x8CA2;&#x737B;&#x3002;"
            data-speaker-experience-en="Koichi Sumikura is Professor at National Graduate Institute for Policy Studies (GRIPS). In 1998 he got a Ph.D. in engineering from the University of Tokyo, for his study on bio-engineering. During April 1998 and September 2001, he had been working for Research Center for Advanced Science and Technology, the University of Tokyo. He has been working for GRIPS since October 2001. He has been a board member of the Japan Society for Research Policy and Innovation Management since 2001. His main field of research is (1) intellectual property policy, (2) science, technology and innovation policy, (3) innovation in life sciences and (4) contribution of academic knowledge to innovation."
            data-event-title="&#x9375;&#x7D50;&#x5168;&#x7403;&#x8207;&#x53F0;&#x7063; &#x6253;&#x9020;&#x8DE8;&#x57DF;&#x524D;&#x77BB;&#x79D1;&#x6280;&#x751F;&#x614B;&#x7CFB;"
            data-event-title-en="Connecting Taiwan and the World: Building a Cross-disciplinary Frontier Technology Ecosystem">
@@ -4407,7 +4484,7 @@ strong {
            data-speaker-title-en="Professor, Department of Mechanical Engineering, National Cheng Kung University"
            data-speaker-education="&#x2022; &#x666E;&#x6E21;&#x5927;&#x5B78; &#x822A;&#x7A7A;&#x592A;&#x7A7A;&#x7CFB;&#x535A;&#x58EB;"
            data-speaker-education-en="Ph.D., Aeronautics and Astronautics, Purdue University, USA"
-           data-speaker-experience="&#x5F35;&#x6021;&#x73B2;&#x6559;&#x6388;&#x65BC; 2021 &#x81F3; 2023 &#x5E74;&#x671F;&#x9593;&#x501F;&#x8ABF;&#x81F3;&#x570B;&#x5BB6;&#x79D1;&#x5B78;&#x53CA;&#x6280;&#x8853;&#x59D4;&#x54E1;&#x6703;，&#x64D4;&#x4EFB;&#x99D0;&#x6B50;&#x76DF;&#x517C;&#x99D0;&#x6BD4;&#x5229;&#x6642;&#x53F0;&#x5317;&#x4EE3;&#x8868;&#x8655;&#x79D1;&#x6280;&#x7D44;&#x79D1;&#x6280;&#x53C3;&#x4E8B;，&#x63A8;&#x52D5;&#x570B;&#x969B;&#x79D1;&#x7814;&#x5408;&#x4F5C;&#x8207;&#x79D1;&#x6280;&#x5916;&#x4EA4;，&#x7A4D;&#x6975;&#x62D3;&#x5C55;&#x81FA;&#x7063;&#x8207;&#x6B50;&#x6D32;&#x7684;&#x79D1;&#x6280;&#x93C8;&#x7D50;。&#x8FD4;&#x570B;&#x5F8C;，&#x56DE;&#x4EFB;&#x570B;&#x7ACB;&#x6210;&#x529F;&#x5927;&#x5B78;&#x6A5F;&#x68B0;&#x5DE5;&#x7A0B;&#x5B78;&#x7CFB;&#x6559;&#x6388;。&#x5F35;&#x6559;&#x6388;&#x7684;&#x7814;&#x7A76;&#x9818;&#x57DF;&#x6DB5;&#x84CB; &#x5948;&#x7C73;&#x529B;&#x5B78;、&#x5948;&#x7C73;&#x6750;&#x6599;&#x5206;&#x6790;、&#x8072;&#x5B50;&#x6676;&#x9AD4;&#x8207;&#x8072;&#x5B78;&#x8D85;&#x5E38;&#x6750;&#x6599;，&#x8FD1;&#x5E74;&#x66F4;&#x5C08;&#x6CE8;&#x65BC;&#x5948;&#x7C73;&#x71B1;&#x50B3;&#x5206;&#x6790;&#x8207;&#x9694;&#x97F3;&#x6E1B;&#x9707;&#x8A2D;&#x8A08;，&#x81F4;&#x529B;&#x65BC;&#x5C07;&#x7406;&#x8AD6;&#x7814;&#x7A76;&#x8207;&#x61C9;&#x7528;&#x6280;&#x8853;&#x76F8;&#x7D50;&#x5408;，&#x63A8;&#x52D5;&#x5948;&#x7C73;&#x8207;&#x8072;&#x5B78;&#x6750;&#x6599;&#x7684;&#x5275;&#x65B0;&#x767C;&#x5C55;。"
+           data-speaker-experience="&#x5F35;&#x6021;&#x73B2;&#x6559;&#x6388;&#x65BC; 2021 &#x81F3; 2023 &#x5E74;&#x671F;&#x9593;&#x501F;&#x8ABF;&#x81F3;&#x570B;&#x5BB6;&#x79D1;&#x5B78;&#x53CA;&#x6280;&#x8853;&#x59D4;&#x54E1;&#x6703;&#xFF0C;&#x64D4;&#x4EFB;&#x99D0;&#x6B50;&#x76DF;&#x517C;&#x99D0;&#x6BD4;&#x5229;&#x6642;&#x53F0;&#x5317;&#x4EE3;&#x8868;&#x8655;&#x79D1;&#x6280;&#x7D44;&#x79D1;&#x6280;&#x53C3;&#x4E8B;&#xFF0C;&#x63A8;&#x52D5;&#x570B;&#x969B;&#x79D1;&#x7814;&#x5408;&#x4F5C;&#x8207;&#x79D1;&#x6280;&#x5916;&#x4EA4;&#xFF0C;&#x7A4D;&#x6975;&#x62D3;&#x5C55;&#x81FA;&#x7063;&#x8207;&#x6B50;&#x6D32;&#x7684;&#x79D1;&#x6280;&#x93C8;&#x7D50;&#x3002;&#x8FD4;&#x570B;&#x5F8C;&#xFF0C;&#x56DE;&#x4EFB;&#x570B;&#x7ACB;&#x6210;&#x529F;&#x5927;&#x5B78;&#x6A5F;&#x68B0;&#x5DE5;&#x7A0B;&#x5B78;&#x7CFB;&#x6559;&#x6388;&#x3002;&#x5F35;&#x6559;&#x6388;&#x7684;&#x7814;&#x7A76;&#x9818;&#x57DF;&#x6DB5;&#x84CB; &#x5948;&#x7C73;&#x529B;&#x5B78;&#x3001;&#x5948;&#x7C73;&#x6750;&#x6599;&#x5206;&#x6790;&#x3001;&#x8072;&#x5B50;&#x6676;&#x9AD4;&#x8207;&#x8072;&#x5B78;&#x8D85;&#x5E38;&#x6750;&#x6599;&#xFF0C;&#x8FD1;&#x5E74;&#x66F4;&#x5C08;&#x6CE8;&#x65BC;&#x5948;&#x7C73;&#x71B1;&#x50B3;&#x5206;&#x6790;&#x8207;&#x9694;&#x97F3;&#x6E1B;&#x9707;&#x8A2D;&#x8A08;&#xFF0C;&#x81F4;&#x529B;&#x65BC;&#x5C07;&#x7406;&#x8AD6;&#x7814;&#x7A76;&#x8207;&#x61C9;&#x7528;&#x6280;&#x8853;&#x76F8;&#x7D50;&#x5408;&#xFF0C;&#x63A8;&#x52D5;&#x5948;&#x7C73;&#x8207;&#x8072;&#x5B78;&#x6750;&#x6599;&#x7684;&#x5275;&#x65B0;&#x767C;&#x5C55;&#x3002;"
            data-speaker-experience-en="Professor I-Ling Chang is an expert in mechanical engineering, focusing on nanomechanics, phononic crystals, and acoustic metamaterials. From 2021 to 2023, she was seconded to the National Science and Technology Council, serving as Science and Technology Counselor at the Taipei Representative Office in the EU and Belgium, where she promoted international research collaboration and strengthened Taiwan-Europe scientific ties. She currently teaches at National Cheng Kung University, specializing in nanoscale thermal transport and acoustic vibration control."
            data-event-title="&#x9375;&#x7D50;&#x5168;&#x7403;&#x8207;&#x53F0;&#x7063; &#x6253;&#x9020;&#x8DE8;&#x57DF;&#x524D;&#x77BB;&#x79D1;&#x6280;&#x751F;&#x614B;&#x7CFB;"
            data-event-title-en="Connecting Taiwan and the World: Building a Cross-disciplinary Frontier Technology Ecosystem">
@@ -5008,7 +5085,7 @@ strong {
           </div>
           <div class="topic-row">
             <div class="pill">&#x5F62;&#x5F0F;</div>
-            <div>&#x5BE6;&#x9AD4;&#x6703;&#x5834;<br>• &#x514D;&#x8CBB;&#x5831;&#x540D;，&#x5373;&#x65E5;&#x8D77;&#x81F3;&#x984D;&#x6EFF;&#x70BA;&#x6B62;</div>
+            <div>1. &#x5831;&#x540D;&#x9808;&#x77E5;&#xFF1A;&#x56E0;&#x540D;&#x984D;&#x6709;&#x9650;&#xFF0C;&#x7DDA;&#x4E0A;&#x5831;&#x540D;&#x5F8C;&#x7CFB;&#x7D71;&#x5C07;&#x5BC4;&#x51FA;&#x78BA;&#x8A8D;&#x4FE1;&#x4EE5;&#x793A;&#x8CC7;&#x6599;&#x5DF2;&#x9001;&#x51FA;&#x3002;&#x6B63;&#x5F0F;&#x9304;&#x53D6;&#x8207;&#x51FA;&#x5E2D;&#x8CC7;&#x8A0A;&#x5C07;&#x4EE5;&#x5F8C;&#x7E8C;&#x7684;&#x884C;&#x524D;&#x901A;&#x77E5;&#x70BA;&#x6E96;&#x3002;<br>2. &#x5BE6;&#x9AD4;&#x5DE5;&#x4F5C;&#x574A;&#xFF1A;&#x656C;&#x8ACB;&#x81EA;&#x5099;&#x7B46;&#x96FB;&#xFF0C;&#x4E26;&#x65BC;&#x6536;&#x5230;&#x884C;&#x524D;&#x901A;&#x77E5;&#x5F8C;&#x4F9D;&#x6307;&#x793A;&#x5B8C;&#x6210;&#x76F8;&#x95DC;&#x8EDF;&#x9AD4;&#x5B89;&#x88DD;&#x3002;</div>
           </div>
         </div>
       </div>
@@ -5239,38 +5316,6 @@ strong {
       </div>
     </div>
 
-    <!-- &#x4E3B;&#x8FA6;&#x3001;&#x6307;&#x5C0E;&#x53CA;&#x5354;&#x8FA6;&#x55AE;&#x4F4D; -->
-    <h2 id="s3-organizers" class="section-title">&#x4E3B;&#x8FA6;&#x3001;&#x6307;&#x5C0E;&#x53CA;&#x5354;&#x8FA6;&#x55AE;&#x4F4D;</h2>
-    <div class="footer-section" style="background: transparent; padding: 20px 0;">
-      <div class="inner">
-        <!-- &#x6307;&#x5C0E;&#x55AE;&#x4F4D; -->
-        <div class="footer-block">
-          <div class="footer-tag">
-            <span class="lang-zh">&#x6307;&#x5C0E;&#x55AE;&#x4F4D;</span>
-          </div>
-          <img class="footer-logo" src="assets/img/organizer-logo.png" alt="&#x570B;&#x5BB6;&#x79D1;&#x5B78;&#x53CA;&#x6280;&#x8853;&#x59D4;&#x54E1;&#x6703;">
-        </div>
-
-        <!-- &#x4E3B;&#x8FA6;&#x55AE;&#x4F4D; -->
-        <div class="footer-block">
-          <div class="footer-tag">
-            <span class="lang-zh">&#x4E3B;&#x8FA6;&#x55AE;&#x4F4D;</span>
-          </div>
-          <div class="footer-logos">
-            <img class="footer-logo" src="assets/img/partner-logo.png" alt="&#x79D1;&#x6280;&#x653F;&#x7B56;&#x7814;&#x7A76;&#x8207;&#x8CC7;&#x8A0A;&#x4E2D;&#x5FC3;">
-            <img class="footer-logo" src="assets/img/partner-logo2.png" alt="Taiwan Science &amp; Technology Hub">
-          </div>
-        </div>
-
-        <!-- &#x5354;&#x8FA6;&#x55AE;&#x4F4D; -->
-        <div class="footer-block">
-          <div class="footer-tag">
-            <span class="lang-zh">&#x5354;&#x8FA6;&#x55AE;&#x4F4D;</span>
-          </div>
-          <img class="footer-logo" src="assets/img/SIGlogo.svg" alt="&#x5354;&#x8FA6;&#x55AE;&#x4F4D;">
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -5347,25 +5392,25 @@ strong {
   </div>
 </section>
 
-<footer class="footer-section" aria-label="&#x4E3B;&#x8FA6;&#x8207;&#x5354;&#x8FA6;&#x55AE;&#x4F4D;">
+<footer class="footer-section main-footer" aria-label="&#x4E3B;&#x8FA6;&#x3001;&#x6307;&#x5C0E;&#x53CA;&#x5354;&#x8FA6;&#x55AE;&#x4F4D;">
   <div class="inner">
     <!-- &#x6307;&#x5C0E;&#x55AE;&#x4F4D; -->
-    <div class="footer-block">
-      <div class="footer-tag">
-        <span class="lang-zh">&#x6307;&#x5C0E;&#x55AE;&#x4F4D;</span>
-      </div>
+    <div class="footer-item">
+      <span class="footer-label">&#x6307;&#x5C0E;&#x55AE;&#x4F4D;</span>
       <img class="footer-logo" src="assets/img/organizer-logo.png" alt="&#x570B;&#x5BB6;&#x79D1;&#x5B78;&#x53CA;&#x6280;&#x8853;&#x59D4;&#x54E1;&#x6703;">
     </div>
 
     <!-- &#x4E3B;&#x8FA6;&#x55AE;&#x4F4D; -->
-    <div class="footer-block">
-      <div class="footer-tag">
-        <span class="lang-zh">&#x4E3B;&#x8FA6;&#x55AE;&#x4F4D;</span>
-      </div>
-      <div class="footer-logos">
-        <img class="footer-logo" src="assets/img/partner-logo.png" alt="&#x79D1;&#x6280;&#x653F;&#x7B56;&#x7814;&#x7A76;&#x8207;&#x8CC7;&#x8A0A;&#x4E2D;&#x5FC3;">
-        <img class="footer-logo" src="assets/img/partner-logo2.png" alt="Taiwan Science &amp; Technology Hub">
-      </div>
+    <div class="footer-item">
+      <span class="footer-label">&#x4E3B;&#x8FA6;&#x55AE;&#x4F4D;</span>
+      <img class="footer-logo" src="assets/img/partner-logo.png" alt="&#x79D1;&#x6280;&#x653F;&#x7B56;&#x7814;&#x7A76;&#x8207;&#x8CC7;&#x8A0A;&#x4E2D;&#x5FC3;">
+      <img class="footer-logo" src="assets/img/partner-logo2.png" alt="Taiwan Science &amp; Technology Hub">
+    </div>
+
+    <!-- &#x5354;&#x8FA6;&#x55AE;&#x4F4D; - &#x53EA;&#x5728;&#x5DE5;&#x4F5C;&#x574A;&#x986F;&#x793A; -->
+    <div class="footer-item workshop-only">
+      <span class="footer-label">&#x5354;&#x8FA6;&#x55AE;&#x4F4D;</span>
+      <img class="footer-logo" src="assets/img/SIGlogo.svg" alt="&#x5354;&#x8FA6;&#x55AE;&#x4F4D;">
     </div>
   </div>
 </footer>
@@ -5520,6 +5565,9 @@ document.querySelectorAll('.bar-item').forEach(btn=>{
     if (targetSection) {
       targetSection.style.display = 'block';
       console.log('&#x986F;&#x793A;&#x5340;&#x584A;:', targetId + '-info'); // &#x8ABF;&#x8A66;&#x4FE1;&#x606F;
+      
+      // &#x8A2D;&#x5B9A;&#x7576;&#x524D;&#x6D3B;&#x52D5;&#xFF0C;&#x7528;&#x65BC;&#x63A7;&#x5236;footer&#x986F;&#x793A;
+      document.body.setAttribute('data-current-section', targetId);
       
       // &#x66F4;&#x65B0;&#x6D6E;&#x52D5;&#x8868;&#x55AE;&#x7684;&#x9328;&#x9EDE;
       updateFloatingMenuAnchors(targetId);
@@ -5740,6 +5788,9 @@ document.addEventListener('DOMContentLoaded', () => {
   updateFloatingOffset();
   // &#x521D;&#x59CB;&#x5316;&#x6D6E;&#x52D5;&#x8868;&#x55AE;&#x9328;&#x9EDE;&#xFF08;&#x9810;&#x8A2D; s2 &#x6D3B;&#x52D5;&#xFF09;
   updateFloatingMenuAnchors('s2');
+  
+  // &#x8A2D;&#x5B9A;&#x9810;&#x8A2D;&#x6D3B;&#x52D5;&#x70BA; s2&#xFF0C;&#x7528;&#x65BC;&#x63A7;&#x5236;footer&#x986F;&#x793A;
+  document.body.setAttribute('data-current-section', 's2');
   
   // &#x521D;&#x59CB;&#x5316;&#x6D6E;&#x52D5;&#x6309;&#x9215;&#x70BA; Activity 2 &#x7684;&#x72C0;&#x614B;&#xFF08;&#x7ACB;&#x5373;&#x5831;&#x540D;&#xFF09;
   const floatingBtn = document.getElementById('floatingBtn');
