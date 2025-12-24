@@ -5085,7 +5085,7 @@ strong {
           </div>
           <div class="topic-row">
             <div class="pill">&#x5F62;&#x5F0F;</div>
-            <div>&#x2460; &#x5831;&#x540D;&#x9808;&#x77E5;&#xFF1A;&#x56E0;&#x540D;&#x984D;&#x6709;&#x9650;&#xFF0C;&#x7DDA;&#x4E0A;&#x5831;&#x540D;&#x5F8C;&#x7CFB;&#x7D71;&#x5C07;&#x5BC4;&#x51FA;&#x78BA;&#x8A8D;&#x4FE1;&#x4EE5;&#x793A;&#x8CC7;&#x6599;&#x5DF2;&#x9001;&#x51FA;&#x3002;&#x6B63;&#x5F0F;&#x9304;&#x53D6;&#x8207;&#x51FA;&#x5E2D;&#x8CC7;&#x8A0A;&#x5C07;&#x4EE5;&#x5F8C;&#x7E8C;&#x7684;&#x884C;&#x524D;&#x901A;&#x77E5;&#x70BA;&#x6E96;&#x3002;<br>&#x2461; &#x5BE6;&#x9AD4;&#x5DE5;&#x4F5C;&#x574A;&#xFF1A;&#x656C;&#x8ACB;&#x81EA;&#x5099;&#x7B46;&#x96FB;&#xFF0C;&#x4E26;&#x65BC;&#x6536;&#x5230;&#x884C;&#x524D;&#x901A;&#x77E5;&#x5F8C;&#x4F9D;&#x6307;&#x793A;&#x5B8C;&#x6210;&#x76F8;&#x95DC;&#x8EDF;&#x9AD4;&#x5B89;&#x88DD;&#x3002;</div>
+            <div>&#x2460; &#x5831;&#x540D;&#x9808;&#x77E5;&#xFF1A;&#x56E0;&#x540D;&#x984D;&#x6709;&#x9650;&#xFF0C;&#x7DDA;&#x4E0A;&#x5831;&#x540D;&#x5F8C;&#x7CFB;&#x7D71;&#x5C07;&#x5BC4;&#x51FA;&#x78BA;&#x8A8D;&#x4FE1;&#x4EE5;&#x793A;&#x8CC7;&#x6599;&#x5DF2;&#x9001;&#x51FA;&#x3002;<br>&#x6B63;&#x5F0F;&#x9304;&#x53D6;&#x8207;&#x51FA;&#x5E2D;&#x8CC7;&#x8A0A;&#x5C07;&#x4EE5;&#x5F8C;&#x7E8C;&#x7684;&#x884C;&#x524D;&#x901A;&#x77E5;&#x70BA;&#x6E96;&#x3002;<br>&#x2461; &#x5BE6;&#x9AD4;&#x5DE5;&#x4F5C;&#x574A;&#xFF1A;&#x656C;&#x8ACB;&#x81EA;&#x5099;&#x7B46;&#x96FB;&#xFF0C;&#x4E26;&#x65BC;&#x6536;&#x5230;&#x884C;&#x524D;&#x901A;&#x77E5;&#x5F8C;&#x4F9D;&#x6307;&#x793A;&#x5B8C;&#x6210;&#x76F8;&#x95DC;&#x8EDF;&#x9AD4;&#x5B89;&#x88DD;&#x3002;</div>
           </div>
         </div>
       </div>
@@ -5353,17 +5353,10 @@ strong {
             <div class="event-title-en">Connecting Taiwan and the World: Building a Cross-disciplinary Frontier Technology Ecosystem</div>
           </div>
           <div class="card-right">
-            <button class="action-btn video-btn" disabled>
-              <img class="btn-icon" src="assets/img/svg-youtube.svg" alt="" width="50" height="50">
-              &#x56DE;&#x9867;&#x5F71;&#x7247;
-            </button>
-            <button class="action-btn video-btn" disabled>
+            <button class="action-btn" data-photo-gallery="1215">
               <img class="btn-icon" src="assets/img/svg-download.svg" alt="" width="50" height="50">
               &#x7CBE;&#x5F69;&#x7167;&#x7247;
             </button>
-          </div>
-          <div class="coming-soon-overlay">
-            <div class="coming-soon-text">Coming Soon</div>
           </div>
         </div>
 
@@ -5492,71 +5485,23 @@ document.querySelectorAll('.bar-item').forEach(btn=>{
     const floatingBtnText = floatingBtn?.querySelector('.button__text');
     
     if (floatingBtn && floatingBtnLink && floatingBtnText) {
-      if (targetId === 's2') {
-        // &#x7B2C;&#x4E8C;&#x5834;&#x6B21;&#xFF1A;&#x7ACB;&#x5373;&#x5831;&#x540D;
-        floatingBtnLink.removeAttribute('data-event');
-        floatingBtnLink.href = 'https://payment.niar.org.tw/Register/30537d647e8364ee951a1a10ece3cc7e';
-        floatingBtnLink.onclick = function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          window.open(this.href, '_blank');
-          return false;
-        };
-        floatingBtnText.innerHTML = `
-          <span>&#x7ACB;</span>
-          <span>&#x5373;</span>
-          <span>&#x5831;</span>
-          <span>&#x540D;</span>
-          <span>&#x3000;</span>
-          <span>&#x3000;</span>
-          <span>&#x7ACB;</span>
-          <span>&#x5373;</span>
-          <span>&#x5831;</span>
-          <span>&#x540D;</span>
-          <span>&#x3000;</span>
-          <span>&#x3000;</span>`;
-      } else if (targetId === 's3') {
-        // &#x7B2C;&#x4E09;&#x5834;&#x6B21;&#xFF1A;&#x7ACB;&#x5373;&#x5831;&#x540D;
-        floatingBtnLink.removeAttribute('data-event');
-        floatingBtnLink.href = 'https://payment.niar.org.tw/Register/f7376fa5dddb4fff187c51bd4e9fc16f';
-        floatingBtnLink.onclick = function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          window.open(this.href, '_blank');
-          return false;
-        };
-        floatingBtnText.innerHTML = `
-          <span>&#x7ACB;</span>
-          <span>&#x5373;</span>
-          <span>&#x5831;</span>
-          <span>&#x540D;</span>
-          <span>&#x3000;</span>
-          <span>&#x3000;</span>
-          <span>&#x7ACB;</span>
-          <span>&#x5373;</span>
-          <span>&#x5831;</span>
-          <span>&#x540D;</span>
-          <span>&#x3000;</span>
-          <span>&#x3000;</span>`;
-      } else {
-        // &#x5176;&#x4ED6;&#x5834;&#x6B21;&#xFF1A;&#x7CBE;&#x5F69;&#x56DE;&#x9867;
-        floatingBtnLink.href = '#';
-        floatingBtnLink.setAttribute('data-event', 'highlights');
-        floatingBtnLink.onclick = null;
-        floatingBtnText.innerHTML = `
-          <span>&#x7CBE;</span>
-          <span>&#x5F69;</span>
-          <span>&#x56DE;</span>
-          <span>&#x9867;</span>
-          <span>&#x3000;</span>
-          <span>&#x3000;</span>
-          <span>&#x7CBE;</span>
-          <span>&#x5F69;</span>
-          <span>&#x56DE;</span>
-          <span>&#x9867;</span>
-          <span>&#x3000;</span>
-          <span>&#x3000;</span>`;
-      }
+      // &#x6240;&#x6709;&#x6D3B;&#x52D5;&#x90FD;&#x5DF2;&#x7D50;&#x675F;&#xFF0C;&#x7D71;&#x4E00;&#x986F;&#x793A;&#x7CBE;&#x5F69;&#x56DE;&#x9867;
+      floatingBtnLink.href = '#';
+      floatingBtnLink.setAttribute('data-event', 'highlights');
+      floatingBtnLink.onclick = null;
+      floatingBtnText.innerHTML = `
+        <span>&#x7CBE;</span>
+        <span>&#x5F69;</span>
+        <span>&#x56DE;</span>
+        <span>&#x9867;</span>
+        <span>&#x3000;</span>
+        <span>&#x3000;</span>
+        <span>&#x7CBE;</span>
+        <span>&#x5F69;</span>
+        <span>&#x56DE;</span>
+        <span>&#x9867;</span>
+        <span>&#x3000;</span>
+        <span>&#x3000;</span>`;
     }
 
     // &#x986F;&#x793A;&#x5C0D;&#x61C9;&#x7684;&#x6D3B;&#x52D5;&#x8CC7;&#x8A0A;
@@ -5792,31 +5737,26 @@ document.addEventListener('DOMContentLoaded', () => {
   // &#x8A2D;&#x5B9A;&#x9810;&#x8A2D;&#x6D3B;&#x52D5;&#x70BA; s2&#xFF0C;&#x7528;&#x65BC;&#x63A7;&#x5236;footer&#x986F;&#x793A;
   document.body.setAttribute('data-current-section', 's2');
   
-  // &#x521D;&#x59CB;&#x5316;&#x6D6E;&#x52D5;&#x6309;&#x9215;&#x70BA; Activity 2 &#x7684;&#x72C0;&#x614B;&#xFF08;&#x7ACB;&#x5373;&#x5831;&#x540D;&#xFF09;
+  // &#x6240;&#x6709;&#x6D3B;&#x52D5;&#x5DF2;&#x7D50;&#x675F;&#xFF0C;&#x521D;&#x59CB;&#x5316;&#x6D6E;&#x52D5;&#x6309;&#x9215;&#x70BA;&#x7CBE;&#x5F69;&#x56DE;&#x9867;
   const floatingBtn = document.getElementById('floatingBtn');
   const floatingBtnLink = floatingBtn?.querySelector('.button a');
   const floatingBtnText = floatingBtn?.querySelector('.button__text');
   
   if (floatingBtn && floatingBtnLink && floatingBtnText) {
-    floatingBtnLink.removeAttribute('data-event');
-    floatingBtnLink.href = 'https://payment.niar.org.tw/Register/30537d647e8364ee951a1a10ece3cc7e';
-    floatingBtnLink.onclick = function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      window.open(this.href, '_blank');
-      return false;
-    };
+    floatingBtnLink.href = '#';
+    floatingBtnLink.setAttribute('data-event', 'highlights');
+    floatingBtnLink.onclick = null;
     floatingBtnText.innerHTML = `
-      <span>&#x7ACB;</span>
-      <span>&#x5373;</span>
-      <span>&#x5831;</span>
-      <span>&#x540D;</span>
+      <span>&#x7CBE;</span>
+      <span>&#x5F69;</span>
+      <span>&#x56DE;</span>
+      <span>&#x9867;</span>
       <span>&#x3000;</span>
       <span>&#x3000;</span>
-      <span>&#x7ACB;</span>
-      <span>&#x5373;</span>
-      <span>&#x5831;</span>
-      <span>&#x540D;</span>
+      <span>&#x7CBE;</span>
+      <span>&#x5F69;</span>
+      <span>&#x56DE;</span>
+      <span>&#x9867;</span>
       <span>&#x3000;</span>
       <span>&#x3000;</span>`;
   }
@@ -6891,11 +6831,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <script>
 // &#x7167;&#x7247;&#x7246;&#x529F;&#x80FD;
-function openPhotoGallery() {
+function openPhotoGallery(eventId = '1014') {
   const modal = document.getElementById('photoGalleryModal');
   modal.style.display = 'block';
   document.body.style.overflow = 'hidden';
-  loadPhotos();
+  loadPhotos(eventId);
 }
 
 function closePhotoGallery() {
@@ -6935,36 +6875,75 @@ function extractFileId(url) {
   return match ? match[1] : null;
 }
 
-function loadPhotos() {
+function loadPhotos(eventId = '1014') {
   const photoGrid = document.getElementById('photoGalleryGrid');
   
-  // &#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x6A94;&#x6848; ID
-  const photos = [
-    { id: '1yu7LgYAPJMPB1UT9qDtjEOVNFesYGTnO', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
-    { id: '1EdXtjMZ9P-MGdxK3iUHcwT8lEQb-_uR1', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
-    { id: '11GtZALLTWe_J8TJ6wh2vb9xv62L_sPR-', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
-    { id: '1rBHXAQ2ITB8qJ6ZajMPo-ldY2P958baQ', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
-    { id: '1h_ntamf_8NdBwFFuWaoqod8jp_ZQg1Ub', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
-    { id: '1mnI_kkv5RTMtRo3D52fPf-qv9tEozptl', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
-    { id: '1AZZSz3MNJXwnuggMlPUQuB164wFhExWW', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
-    { id: '1TmBT8AvPuxtf_xNk6Np8IB4O-n_D5t5h', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
-    { id: '1owJY_m4-lDg8roRzmeXF8FUHM7J-wVVr', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
-    { id: '1lONepV0rSjdxolR6OM8GHhiWuyl3JQCT', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
-    { id: '1JloiLtUfatocP5wD_sTKvaWZHAa1EYRc', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
-    { id: '1ZLXTP_qw8HsMtiMNv0KBvLciXQGcacdt', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
-    { id: '1iEr3l6r4QREXuz0WQsvovhHr4p64iooD', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
-    { id: '1qeHiGP5IIEJdyZWrdnDbKGJ4hurM3WGk', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
-    { id: '1YkSq-QC9FYcFK9AlhG8FWrnqulFhc6Bn', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
-    { id: '1CdKlDGMs32x20gOdn0TjWi37pFtFndY4', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
-    { id: '1sPQb8CcvyHdLYQXIi-wPBQXuTxqzzKpH', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
-    { id: '19iPFt2C_-L9tZUYxPv0DHWQwksv84Zq8', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
-    { id: '1m0fMwwxKa5xXtl4mUlwjwUZWs2hEOYUJ', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
-    { id: '1w91aundDSIxEl6B7OJ-qZ0dviSHwLNs6', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
-    { id: '1UJQWfIFnQzNPt1VScS-fod_YjSBqkOpJ', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
-    { id: '1WZkZc1EJh5WimzBuzcbxQqqVzwGI_566', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
-    { id: '1e0e5u39piaWSQH3Ie3VIfjqG4pdaiF5p', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
-    { id: '1x4YGsxinwQwhCMtAE-UOg_OyBaSFOA5e', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' }
-  ];
+  // 不同活動的照片集
+  const photoSets = {
+    '1014': [
+      { id: '1yu7LgYAPJMPB1UT9qDtjEOVNFesYGTnO', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1EdXtjMZ9P-MGdxK3iUHcwT8lEQb-_uR1', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '11GtZALLTWe_J8TJ6wh2vb9xv62L_sPR-', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1rBHXAQ2ITB8qJ6ZajMPo-ldY2P958baQ', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1h_ntamf_8NdBwFFuWaoqod8jp_ZQg1Ub', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1mnI_kkv5RTMtRo3D52fPf-qv9tEozptl', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1AZZSz3MNJXwnuggMlPUQuB164wFhExWW', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1TmBT8AvPuxtf_xNk6Np8IB4O-n_D5t5h', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1owJY_m4-lDg8roRzmeXF8FUHM7J-wVVr', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1lONepV0rSjdxolR6OM8GHhiWuyl3JQCT', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1JloiLtUfatocP5wD_sTKvaWZHAa1EYRc', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1ZLXTP_qw8HsMtiMNv0KBvLciXQGcacdt', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1iEr3l6r4QREXuz0WQsvovhHr4p64iooD', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1qeHiGP5IIEJdyZWrdnDbKGJ4hurM3WGk', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1YkSq-QC9FYcFK9AlhG8FWrnqulFhc6Bn', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1CdKlDGMs32x20gOdn0TjWi37pFtFndY4', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1sPQb8CcvyHdLYQXIi-wPBQXuTxqzzKpH', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '19iPFt2C_-L9tZUYxPv0DHWQwksv84Zq8', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1m0fMwwxKa5xXtl4mUlwjwUZWs2hEOYUJ', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1w91aundDSIxEl6B7OJ-qZ0dviSHwLNs6', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1UJQWfIFnQzNPt1VScS-fod_YjSBqkOpJ', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1WZkZc1EJh5WimzBuzcbxQqqVzwGI_566', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1e0e5u39piaWSQH3Ie3VIfjqG4pdaiF5p', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1x4YGsxinwQwhCMtAE-UOg_OyBaSFOA5e', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' }
+    ],
+    '1215': [
+      { id: '1KP8N5BaWqe90NT-O8zfHt44CXkaO6I5I', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1i16cgwbaWc2tKkLjbsfzLsCsfdW_lf-p', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '12PSF3yNSqKEJwypaVMb3ND7AuoMU5IM2', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '19SYZgVh1U7SBdyG6RGTnSrcjJP-BX-To', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1ec-8ZEACR3RkmKMihZMVr4aSe0zd9fKW', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1z3TNFcIbT3peGq71UtT0Mx9_0569xzYl', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1jo1ZtKr9u0IUzSGfhOGFbvWu1hIL1mxE', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '19mrRcOssp78j-qqqimpx5H5-5TcjfCly', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1fLgKsqqbRAY_ExkYwoJViW0RQn_HMDo9', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1BhPTlN4Pp5TKSiKPcwwjfhqyGbF7jtKV', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1nWsxwjHxBCj12dysLzgf192RNumB8zMS', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1AwR0SJqHp5rd2hEBKEHV9CxYOpX0IxQY', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '12nyxLdGiJsh3yJH25xzkJbkPbwYkU1Hf', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1zCpRQVcnOt65hrRsoOxF0Oi1d7NdFBtB', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '17qDgGlATfpakJWhLx8TSudNaw9MNgnkK', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1unJ4d5MO0ytsTQ442tn496He1hDdiVTk', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1BKLjBe1FDsXA-plWO1UCyRvmVv3o6fHp', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1bjDYjjGJNktS9j_PuyTBP9W8NfnnZOde', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1tK-zuytUacjm7P59dXbbqAbw9tNoeNr-', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1G2wM_Rh8mjdQEJirm6DTNCARL_UcgJXr', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '13fPldLZyVrwffgkkpfx6Jxxv-b5S7Yxl', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1DHxiaPW2-GNPKW1P14x2Sv1EVIAUJVWO', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1Xwx3AGO3ieUh158o9QGY_UhBnWvfvJdN', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1pyOlclXNzwhYFz-lRVTVWyPGoB_5k3tY', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1IZE6wlZJrEjqXbaF_y-R0UjNqhFtIkfP', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1P2UxOfaprQiG46a9_2c0xcn7fAY5h6am', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1e1cBonM4bXNLor1AIxWMO8XIHx_Taec0', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1_VuEo8LidgdncaXDU8tsqt5Bw-_mBJAy', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1aKq010SkWpFk1Eto5ZHLLJlKeuImukz8', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1CLSK5mnEbtro_cWTb1QsRcH58epQh3ik', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1uo4XO-8sruo0aki2a6qp5rFWqaYz2WWi', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '13p64jdmDBi4YDL6wRJXh02BnX3z7lOlQ', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' },
+      { id: '1bhFH0gXl2IxPFRXstyCqnLLBXopKsDVA', caption: '&#x6D3B;&#x52D5;&#x7167;&#x7247;' }
+    ]
+  };
+  
+  const photos = photoSets[eventId] || photoSets['1014'];
 
   photoGrid.innerHTML = '';
   photos.forEach(photo => {
@@ -7047,7 +7026,8 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('[data-photo-gallery]').forEach(btn => {
     btn.addEventListener('click', function(e) {
       e.preventDefault();
-      openPhotoGallery();
+      const eventId = this.getAttribute('data-photo-gallery') || '1014';
+      openPhotoGallery(eventId);
     });
   });
 });
